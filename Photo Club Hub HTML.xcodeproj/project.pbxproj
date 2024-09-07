@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D08D84272C8C8A0B0069D0CE /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08D84262C8C8A0B0069D0CE /* Ignite */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D08D84272C8C8A0B0069D0CE /* Ignite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +71,7 @@
 			);
 			name = "Photo Club Hub HTML";
 			packageProductDependencies = (
+				D08D84262C8C8A0B0069D0CE /* Ignite */,
 			);
 			productName = "Photo Club Hub HTML";
 			productReference = D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */;
@@ -95,6 +101,9 @@
 			);
 			mainGroup = D0E06C072C8C5ABC0025734B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D08D84252C8C8A0B0069D0CE /* XCRemoteSwiftPackageReference "Ignite" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D0E06C112C8C5ABC0025734B /* Products */;
 			projectDirPath = "";
@@ -344,6 +353,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D08D84252C8C8A0B0069D0CE /* XCRemoteSwiftPackageReference "Ignite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/Ignite";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D08D84262C8C8A0B0069D0CE /* Ignite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D08D84252C8C8A0B0069D0CE /* XCRemoteSwiftPackageReference "Ignite" */;
+			productName = Ignite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D0E06C082C8C5ABC0025734B /* Project object */;
 }
