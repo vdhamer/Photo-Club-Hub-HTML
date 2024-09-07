@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D08D84272C8C8A0B0069D0CE /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08D84262C8C8A0B0069D0CE /* Ignite */; };
+		D08D84272C8C8A0B0069D0CE /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08D84262C8C8A0B0069D0CE /* Ignite */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -299,7 +299,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-HTML";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -327,7 +327,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-HTML";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Ignite
 
 @main
 struct PhotoClubHubHtmlApp: App {

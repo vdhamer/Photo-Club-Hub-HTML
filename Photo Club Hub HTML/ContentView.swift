@@ -29,9 +29,12 @@ struct ContentView: View {
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem {
+                ToolbarItemGroup(placement: .automatic) {
                     Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
+                    }
+                    Button(action: MemberSite().publishSite) { // load and publish Ignite static site
+                        Label("Run Ignite", systemImage: "flame")
                     }
                 }
             }
