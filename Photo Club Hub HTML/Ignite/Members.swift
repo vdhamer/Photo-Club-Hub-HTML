@@ -116,18 +116,18 @@ struct Members: StaticPage {
                       portfolio: "http://www.vdhamer.com/fgDeGender/Miep_Franssen/",
                       thumbnailSuffix: "2023_untitled_shoot_001-2-Enhanced-SR.jpg")
 
-            memberRow(givenName: "Peter", infixName: "de", familyName: "Wit",
-                      start: "2022-10-30", fotobond: 1620107,
-                      website: "https://www.flickr.com/photos/150047808@N08/albums",
-                      portfolio: "http://www.vdhamer.com/fgDeGender/Peter_de_Wit/",
-                      thumbnailSuffix: "EXPO_2024_03_-_Eindhoven_NL_-_30Hx54B_-_1920x1080.jpg")
-
             memberRow(givenName: "Peter", infixName: "van den", familyName: "Hamer",
                       start: "2024-01-01", fotobond: 1620110,
                       role: "Admin",
                       website: "https://glass.photo/vdhamer",
                       portfolio: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/",
                       thumbnailSuffix: "2023_Cornwall_R5_618-Edit-2.jpg")
+
+            memberRow(givenName: "Peter", infixName: "de", familyName: "Wit",
+                      start: "2022-10-30", fotobond: 1620107,
+                      website: "https://www.flickr.com/photos/150047808@N08/albums",
+                      portfolio: "http://www.vdhamer.com/fgDeGender/Peter_de_Wit/",
+                      thumbnailSuffix: "EXPO_2024_03_-_Eindhoven_NL_-_30Hx54B_-_1920x1080.jpg")
 
             memberRow(givenName: "Piet", infixName: "van der", familyName: "Putten",
                       start: "2008-04-01", fotobond: 1620076,
