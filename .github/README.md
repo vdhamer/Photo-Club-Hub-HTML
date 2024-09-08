@@ -69,23 +69,23 @@ I solved this with a conbination of hover text (showing "joined on Jan 1st 2010"
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[stable-version]: https://img.shields.io/github/v/release/vdhamer/Photo-Club-Hub?style=plastic&color=violet
-[version-url]: https://github.com/vdhamer/Photo-Club-Hub/releases
+[stable-version]: https://img.shields.io/github/v/release/vdhamer/Photo-Club-Hub-HTML?style=plastic&color=violet
+[version-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/releases
 
-[contributors-shield]: https://img.shields.io/github/contributors/vdhamer/Photo-Club-Hub?style=plastic
-[contributors-url]: https://github.com/vdhamer/Photo-Club-Hub/graphs/contributors
+[contributors-shield]: https://img.shields.io/github/contributors/vdhamer/Photo-Club-Hub-HTML?style=plastic
+[contributors-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/graphs/contributors
 
-[forks-shield]: https://img.shields.io/github/forks/vdhamer/Photo-Club-Hub?style=plastic&color=teal
-[forks-url]: https://github.com/vdhamer/Photo-Club-Hub/network/members
+[forks-shield]: https://img.shields.io/github/forks/vdhamer/Photo-Club-Hub-HTML?style=plastic&color=teal
+[forks-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/network/members
 
-[stars-shield]: https://img.shields.io/github/stars/vdhamer/Photo-Club-Hub?style=plastic
-[stars-url]: https://github.com/vdhamer/Photo-Club-Hub/stargazers
+[stars-shield]: https://img.shields.io/github/stars/vdhamer/Photo-Club-Hub-HTML?style=plastic
+[stars-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/stargazers
 
-[issues-shield]: https://img.shields.io/github/issues/vdhamer/Photo-Club-Hub?style=plastic
-[issues-url]: https://github.com/vdhamer/Photo-Club-Hub/issues
+[issues-shield]: https://img.shields.io/github/issues/vdhamer/Photo-Club-Hub-HTML?style=plastic
+[issues-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/issues
 
-[discussions-shield]: https://img.shields.io/github/discussions/vdhamer/Photo-Club-Hub?style=plastic?color=orange
-[discussions-url]: https://github.com/vdhamer/Photo-Club-Hub/discussions
+[discussions-shield]: https://img.shields.io/github/discussions/vdhamer/Photo-Club-Hub-HTML?style=plastic?color=orange
+[discussions-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/discussions
 
-[license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub?style=plastic
-[license-url]: https://github.com/vdhamer/Photo-Club-Hub/blob/main/.github/LICENSE.md
+[license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub-HTML?style=plastic
+[license-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/.github/LICENSE.md
