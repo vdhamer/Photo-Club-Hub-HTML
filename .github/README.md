@@ -1,3 +1,15 @@
+<div id="top"></div>
+
+[![Version][stable-version]][version-url]
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![Discussions][discussions-shield]][discussions-url]
+[![MIT License][license-shield]][license-url]
+
+![Sample output website](images/Screenshot_Ignite.png "Sample output website")
+
 # Photo-Club-Hub-HTML
 
 This MacOS app is a companion to the iOS app vdhamer/Photo-Club-Hub.
@@ -52,3 +64,28 @@ I solved this with a conbination of hover text (showing "joined on Jan 1st 2010"
 - [ ] provide a UI by which the user can select a club for which to generate a local site.
 - [ ] possibly generate a static site that can serve as index of supported clubs.
 - [ ] possibly create one or more editor apps for managing the content in the JSON files
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[stable-version]: https://img.shields.io/github/v/release/vdhamer/Photo-Club-Hub?style=plastic&color=violet
+[version-url]: https://github.com/vdhamer/Photo-Club-Hub/releases
+
+[contributors-shield]: https://img.shields.io/github/contributors/vdhamer/Photo-Club-Hub?style=plastic
+[contributors-url]: https://github.com/vdhamer/Photo-Club-Hub/graphs/contributors
+
+[forks-shield]: https://img.shields.io/github/forks/vdhamer/Photo-Club-Hub?style=plastic&color=teal
+[forks-url]: https://github.com/vdhamer/Photo-Club-Hub/network/members
+
+[stars-shield]: https://img.shields.io/github/stars/vdhamer/Photo-Club-Hub?style=plastic
+[stars-url]: https://github.com/vdhamer/Photo-Club-Hub/stargazers
+
+[issues-shield]: https://img.shields.io/github/issues/vdhamer/Photo-Club-Hub?style=plastic
+[issues-url]: https://github.com/vdhamer/Photo-Club-Hub/issues
+
+[discussions-shield]: https://img.shields.io/github/discussions/vdhamer/Photo-Club-Hub?style=plastic?color=orange
+[discussions-url]: https://github.com/vdhamer/Photo-Club-Hub/discussions
+
+[license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub?style=plastic
+[license-url]: https://github.com/vdhamer/Photo-Club-Hub/blob/main/.github/LICENSE.md
