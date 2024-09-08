@@ -8,9 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		D08D84272C8C8A0B0069D0CE /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08D84262C8C8A0B0069D0CE /* Ignite */; settings = {ATTRIBUTES = (Required, ); }; };
+		D0D9F8142C8DE2E700FE030A /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D0D9F8122C8DE2E700FE030A /* LICENSE */; };
+		D0D9F81C2C8DE36400FE030A /* Screenshot_Ignite.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D0D9F8122C8DE2E700FE030A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot_Ignite.png; sourceTree = "<group>"; };
+		D0D9F81E2C8DE3A600FE030A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D0D9F8222C8DE45500FE030A /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -34,9 +40,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D0D9F8172C8DE36400FE030A /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		D0D9F81A2C8DE36400FE030A /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				D0D9F8222C8DE45500FE030A /* LICENSE.md */,
+				D0D9F81E2C8DE3A600FE030A /* README.md */,
+				D0D9F8172C8DE36400FE030A /* images */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
+				D0D9F81A2C8DE36400FE030A /* .github */,
+				D0D9F8122C8DE2E700FE030A /* LICENSE */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 				D0E06C112C8C5ABC0025734B /* Products */,
 			);
@@ -119,6 +145,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0D9F8142C8DE2E700FE030A /* LICENSE in Resources */,
+				D0D9F81C2C8DE36400FE030A /* Screenshot_Ignite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
