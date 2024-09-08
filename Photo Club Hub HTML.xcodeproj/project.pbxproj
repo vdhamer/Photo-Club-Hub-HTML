@@ -14,7 +14,26 @@
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D0D9F7D32C8DD55D00FE030A /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				images/Screenshot_Ignite.png,
+				README.md,
+			);
+			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D0D9F7CB2C8DD48D00FE030A /* .github */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D0D9F7D32C8DD55D00FE030A /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
 		D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Photo Club Hub HTML";
@@ -37,6 +56,7 @@
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
+				D0D9F7CB2C8DD48D00FE030A /* .github */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 				D0E06C112C8C5ABC0025734B /* Products */,
 			);
@@ -67,6 +87,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				D0D9F7CB2C8DD48D00FE030A /* .github */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 			);
 			name = "Photo Club Hub HTML";
