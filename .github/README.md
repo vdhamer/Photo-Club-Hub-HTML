@@ -26,17 +26,25 @@ This data forms a hierarchy with three levels:
  
 This concept is comparable to a mini version of the hierarchy of distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate addresses on the Internet: 
-the app has one `root.level1.json` entry point that leads it to clubs which have `level2.json` membership links that
-in turn point to the actual portfolios.
+the app has one `root.level1.json` entry point that leads it to clubs which have `level2.json` membership lists under their 
+own control that in turn point to the actual portfolios which can be managed by the club or by the individual photographers.
 
-This MacOS app will at some point use the `root.level1.json` file to find a relevant `club.level2.json` file, and convert the latter into a static website.
+This MacOS app will at some point use the `root.level1.json` file to find a relevant `club.level2.json` file,
+and convert the latter into a static website.
 That website (or subsite) provides an alternative to the iOS app for users on other platforms.
 SwiftUI is used for the user interface: end users will only reequire minimal software skills.
 CoreData is used as a cache to ensure that the UI displays data immediately without having to wait for background updates.
 
 ## Comparison to iOS app
 
-TODO: add corresponding screenshots, and maybe table containing feature comparison.
+TODO: add side-to-side comparison screenshots.
+
+|   | iOS App  | Website |
+| ----------- | ----------- | ------- |
+| Runs on       | iOS, iPadOS   | any browser        |
+| List of clubs | yes       | not yet        |
+| List of club members | yes | yes |
+| Member porfolios | yes | yes |
 
 ## Static sites and Ignite
 
