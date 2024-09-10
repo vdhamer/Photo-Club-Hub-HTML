@@ -42,7 +42,8 @@ TODO: add side-to-side comparison screenshots.
 | Variant  | iOS App  | Website |
 | ----------- | ----------- | ------- |
 | Runs on       | iOS, iPadOS, (MacOS) | all major browsers |
-| List of clubs | yes       | not yet        |
+| Mobile friendly | yes | yes |
+| List of clubs | yes       | no*        |
 | List of club members | yes | yes |
 | Member portfolios | yes | yes |
 | Portfolio autoplay | yes | yes |
@@ -50,6 +51,10 @@ TODO: add side-to-side comparison screenshots.
 | Maps showing clubs | yes | no |
 | Photo musea | yes | not yet |
 | Search | yes | no |
+| Supported languages | 2 | 1 |
+| Show membership years | no* | yes |
+
+* = may be support in the future.
 
 ## Static sites and Ignite
 
