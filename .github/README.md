@@ -39,12 +39,15 @@ CoreData is used as a cache to ensure that the UI displays data immediately with
 
 TODO: add side-to-side comparison screenshots.
 
-|   | iOS App  | Website |
+| Variant  | iOS App  | Website |
 | ----------- | ----------- | ------- |
-| Runs on       | iOS, iPadOS   | any browser        |
+| Runs on       | iOS, iPadOS, (MacOS) | all major browsers |
 | List of clubs | yes       | not yet        |
 | List of club members | yes | yes |
 | Member porfolios | yes | yes |
+| Content updates | when club updates its data |
+| Maps showing clubs | yes | no yet |
+| Photo musea | yes | not yet |
 
 ## Static sites and Ignite
 
