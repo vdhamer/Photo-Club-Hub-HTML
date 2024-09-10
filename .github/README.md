@@ -44,10 +44,12 @@ TODO: add side-to-side comparison screenshots.
 | Runs on       | iOS, iPadOS, (MacOS) | all major browsers |
 | List of clubs | yes       | not yet        |
 | List of club members | yes | yes |
-| Member porfolios | yes | yes |
-| Content updates | when club updates its data |
-| Maps showing clubs | yes | no yet |
+| Member portfolios | yes | yes |
+| Portfolio autoplay | yes | yes |
+| Content updates | when club updates its data | when club updates its data |
+| Maps showing clubs | yes | no |
 | Photo musea | yes | not yet |
+| Search | yes | no |
 
 ## Static sites and Ignite
 
