@@ -51,8 +51,9 @@ TODO: add side-to-side comparison screenshots.
 | Maps showing clubs | yes | no |
 | Photo musea | yes | not yet |
 | Search | yes | no |
-| Supported languages | 2 | 1 |
+| Supported languages | 2 | 1* |
 | Show membership years | no* | yes |
+| Can work offline | partly | no |
 
 * = may be support in the future.
 
