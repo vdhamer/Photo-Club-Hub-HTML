@@ -20,7 +20,7 @@ This data forms a hierarchy with three levels:
 
 1. central root list of (dozens/hundreds/thousands of) participating clubs,
 2. local lists with (dozens of) members per club), and
-3. local portfolios with the actual (dozens) of selected images per member.
+3. local portfolios with the actual (dozens of) selected images per member.
 
 > The idea is to provide a centralized access to view images that are managed by the various clubs.
  
