@@ -49,7 +49,7 @@ TODO: add side-to-side comparison screenshots.
 | Portfolio autoplay | yes | yes |
 | Content updates | when club updates its data | when club updates its data |
 | Maps showing clubs | yes | no |
-| Photo musea | yes | not yet |
+| Photo musea | yes | not* |
 | Search | yes | no |
 | Supported languages | 2 | 1* |
 | Show membership years | no* | yes |
