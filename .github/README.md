@@ -55,7 +55,7 @@ TODO: add side-to-side comparison screenshots.
 | Show membership years | no* | yes |
 | Can work offline | partly | no |
 
-* = may be improved or supported in the future.
+* = might be improved or supported in the future.
 
 ## Static sites and Ignite
 
