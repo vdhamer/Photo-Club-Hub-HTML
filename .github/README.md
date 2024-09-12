@@ -80,6 +80,21 @@ two different targets on two different platforms.
 Despite having code overlap, they are currently split into two repos to lower the barrier to contribute on either.
 Until that code is factored out into a package, it will require some manual effort to keep the two in sync.
 
+## Will 3 hierarchy levels be enough?
+
+For now there are only a handful of pilot clubs involved. 
+A hundred clubs at <1 kB each can be supported with a single file, especially when loaded in the background.
+
+To split up the level1.json file we _could_ allow the root.level1.json file to contain URL links to additional level1.json files.
+This could, for example, allow the root file to support a path like root/Netherlands or root/Japan/Tokio.
+This might allow a user to indicate whether or not to load data from Japan.
+
+The extra level(s) of hierarchy should match the way the data and responsibilities are organized:
+essentially the tree structure forms a chain of trust. 
+A "rogue" or just non-club site will only be reachable if there is a chain of valid links between the default root and that site.
+Thus a site with questionable content (500 images of someone's business lunches) can thus be isolated by breaking one of the links.
+But it would conceivably still be reachable from an alternative URL (path like lunchClubs/Berlin).
+
 ## Roadmap
 
 - [ ] Fix the code (requested help from the team behind twostraws/Ignite) so that the rendering works.
