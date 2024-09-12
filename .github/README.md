@@ -14,26 +14,27 @@
 
 This MacOS app is a companion to the iOS app vdhamer/Photo-Club-Hub.
 It generates static HTML websites using [twostraws/ignite](https://github.com/twostraws/ignite).
-The target domain is photo clubs that want to show curated work by their members online.
+The app is for photo clubs that want to display curated work by their members online.
 
-This data forms a hierarchy with three levels: 
+The data for this forms a 3-level hierarchy: 
 
-1. central root list of (dozens/hundreds/thousands of) participating clubs,
+1. a central root list of (dozens/hundreds/thousands? of) participating clubs,
 2. local lists with (dozens of) members per club), and
-3. local portfolios with the actual (dozens of) selected images per member.
+3. local portfolios with (dozens of) selected images per member.
 
-> The idea is to provide a centralized access to view images that are managed by the various clubs.
+> The idea is to provide a centralized portal to view images managed by the individual clubs.
  
-This concept is comparable to a mini version of the hierarchy of distributed
+This concept is roughly comparable to the hierarchy of distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate addresses on the Internet: 
-the app has one `root.level1.json` entry point that leads it to clubs which have `level2.json` membership lists under their 
-own control that in turn point to the actual portfolios which can be managed by the club or by the individual photographers.
+the app has one `root.level1.json` entrance that points the way to to clubs which have `level2.json` membership lists under their 
+own control. These in turn point to the actual portfolios of images managed by the club or even by the individual photographers.
 
-This MacOS app will at some point use the `root.level1.json` file to find a relevant `club.level2.json` file,
-and convert the latter into a static website.
-That website (or subsite) provides an alternative to the iOS app for users on other platforms.
-SwiftUI is used for the user interface: end users will only reequire minimal software skills.
-CoreData is used as a cache to ensure that the UI displays data immediately without having to wait for background updates.
+This MacOS app will use the `root.level1.json` file to find a relevant `club.level2.json` file,
+and (in contrast to the iOS app) convert the latter into a static website or subsite.
+That website serves as an alternative viewing option for users on other platforms like Android or Windows.
+
+Inside the MacOS app the SwiftUI framework is used for the user interface and
+CoreData is used to cache the JSON data. This ensures that the UI can be populated immediately while updating is done in the background.
 
 ## Comparison to iOS app
 
