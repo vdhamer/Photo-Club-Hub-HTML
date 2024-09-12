@@ -59,8 +59,8 @@ TODO: add side-to-side comparison screenshots.
 
 ## Static sites and Ignite
 
-This app runs on MacOS because it generates a directory with a few files and subdirectories (CSS, Javascript, image assets).
-These are generated on a Mac and then copied over to a club's server via e.g. FTP or maybe a Wordpress plug-in.
+This app runs on MacOS because it generates a local directory with a few files and a few subdirectories (CSS, Javascript, image assets).
+These are then copied over to a club's existing server via e.g. FTP or maybe a Wordpress plug-in. Technically the files only need to be hosted on an HTTP server.
 
 The data being displayed on the individual HTML sites may get updated 5-20 times per year.
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
@@ -71,6 +71,13 @@ This should be a lot easier and more robust than having a backend that dynamical
 **Ignite** allows developers to write a fixed tool in Swift 
 that defines the content of the static website without having to code HTML/CSS/Javascript.
 It just generates these from a declarative higher-level description that resembles data more than it resembles code..
+
+## Why separate repo's?
+
+From a purely technical perspective, Photo Club Hub and Photo Club HTML could be implemented as one repository with
+two different targets on two different platforms.
+Despite hving code overlap, they are currently split to lower the barrier to contribute on either.
+Until that code is factored out into a package, it will require some manual effort to keep the two in sync.
 
 ## Roadmap
 
