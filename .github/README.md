@@ -76,7 +76,7 @@ It just generates these from a declarative higher-level description that resembl
 
 From a purely technical perspective, Photo Club Hub and Photo Club HTML could be implemented as one repository with
 two different targets on two different platforms.
-Despite hving code overlap, they are currently split to lower the barrier to contribute on either.
+Despite hving code overlap, they are currently split into two repos to lower the barrier to contribute on either.
 Until that code is factored out into a package, it will require some manual effort to keep the two in sync.
 
 ## Roadmap
