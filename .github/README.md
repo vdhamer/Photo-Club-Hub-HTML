@@ -39,7 +39,7 @@ CoreData is used as a cache to ensure that the UI displays data immediately with
 
 TODO: add side-to-side comparison screenshots.
 
-| Variant  | iOS App  | Website |
+| Variant  | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | ----------- | ------- |
 | Runs on       | iOS, iPadOS, (MacOS) | all major browsers |
 | Mobile friendly | yes | yes |
