@@ -52,7 +52,7 @@ TODO: add side-to-side comparison screenshots.
 | Maps showing clubs | yes | no |
 | Photo musea listed | yes | no* |
 | Search | yes | no |
-| Supported languages | 2 | 1* |
+| Supported languages | English, Dutch* | Dutch* |
 | Can work offline | partly | no |
 
  * = might be improved or supported in the future.
