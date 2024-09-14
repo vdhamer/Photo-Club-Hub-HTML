@@ -12,46 +12,88 @@
 
 # Photo-Club-Hub-HTML
 
-This MacOS app is a companion to the iOS app vdhamer/Photo-Club-Hub.
-It generates static HTML websites using [twostraws/ignite](https://github.com/twostraws/ignite).
-The target domain is photo clubs that want to show curated work by their members online.
+This MacOS app is a companion to the iOS app [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub).
+The HTML app generates static websites using [twostraws/ignite](https://github.com/twostraws/ignite).
+Both apps are for photo clubs that want to display curated work by their members online.
 
-This data forms a hierarchy with three levels: 
+The input data driving these apps this forms a 3-level hierarchy: 
 
-1. central root list of (dozens/hundreds/thousands of) participating clubs,
+1. a central list with (dozens/hundreds/thousands? of) participating clubs,
 2. local lists with (dozens of) members per club), and
-3. local portfolios with the actual (dozens) of selected images per member.
+3. local portfolios with (dozens of) selected images per member.
 
-> The idea is to provide a centralized access to view images that are managed by the various clubs.
+> The idea is to provide a centralized portal to view images managed by the individual clubs.
  
-This concept is comparable to a mini version of the hierarchy of distributed
-[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate addresses on the Internet: 
-the app has one `root.level1.json` entry point that leads it to clubs which have `level2.json` membership links that
-in turn point to the actual portfolios.
+This concept is roughly comparable to the hierarchy of the distributed
+[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate address strings into numerical IP addresses: 
+the app has one `root.level1.json` entrance that points the way to to clubs which have optional `level2.json` membership lists.
+These in turn optionally point to the image portfolios as managed by the clubs or even by the members themselves.
 
-This MacOS app will at some point use the `root.level1.json` file to find a relevant `club.level2.json` file, and convert the latter into a static website.
-That website (or subsite) provides an alternative to the iOS app for users on other platforms.
-SwiftUI is used for the user interface: end users will only reequire minimal software skills.
-CoreData is used as a cache to ensure that the UI displays data immediately without having to wait for background updates.
+This MacOS app will (roadmap item) use the `root.level1.json` file to find a relevant `level2.json` file,
+and (in contrast to the iOS app) convert the latter into a static website or subsite.
+That website serves as an alternative option for users to view the images on other platforms like Android or Windows.
+
+Inside the MacOS app the SwiftUI framework is used for the user interface and
+CoreData is used to locally store the JSON data. This ensures that the UI can be rendered while updating is done in the background.
 
 ## Comparison to iOS app
 
-TODO: add corresponding screenshots, and maybe table containing feature comparison.
+TODO: add side-to-side comparison screenshots.
+
+| Variant  | Photo Club Hub | Photo Club Hub HTML |
+| ----------- | ----------- | ------- |
+| Runs on | iOS, iPadOS, (MacOS) | all major browsers |
+| Mobile friendly | yes | yes |
+| List of clubs | yes | no* |
+| List of club members | yes | yes |
+| Member portfolios | yes | yes |
+| Portfolio autoplay | yes | yes |
+| Content updated | when club updates its data | when club updates its data |
+| Maps showing clubs | yes | no |
+| Photo musea listed | yes | no* |
+| Search | yes | no |
+| Supported languages | English, Dutch* | Dutch* |
+| Can work offline | partly | no |
+
+ * = might be improved or supported in the future.
 
 ## Static sites and Ignite
 
-This app runs on MacOS because it generates a directory with a few files and subdirectories (CSS, Javascript, image assets).
-These are generated on a Mac and then copied over to a club's server via e.g. FTP or maybe a Wordpress plug-in.
+This app runs on MacOS because it generates a local directory with a few files and a few subdirectories (CSS, Javascript, image assets).
+These are then copied over to a club's existing server via e.g. FTP or possibly a Wordpress plug-in.
+Technically the files simply need to be hosted on an HTTP server.
 
-The data being displayed on the individual HTML sites may get updated 5-20 times per year.
+The data being displayed on the individual HTML sites may get updated say 10 times per year.
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
-it is best to generate static web sites. 
+it is best to generate _static_ web sites. 
 This limits the technical hasstle to uploading a file to a directory and associated useername/password.
-This should be a lot easier and more robust than having a backend that dynamically generates a site on demand.
+This should be easier and more robust than having a backend that dynamically generates a site on demand.
 
-**Ignite** allows developers to write a fixed tool in Swift 
-that defines the content of the static website without having to code HTML/CSS/Javascript.
-It just generates these from a declarative higher-level description that resembles data more than it resembles code..
+**Ignite** allows us to create a tool in pure Swift 
+that generates the content of the static website without having to code HTML/CSS/Javascript.
+Swift is essentially a declarative higher-level description (`Result Builder`) that resembles data more than it resembles code.
+
+## Why separate repo's?
+
+From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository with
+two relatively different targets that happen to be on two different platforms.
+Despite having code overlap, they are for now split into two repos to lower the barrier to contribute on either.
+Until the common code is factored out into a package, it will require some manual effort to keep the two in sync.
+
+## Will 3 hierarchy levels be enough?
+
+Initially there are only a handful of pilot clubs involved. 
+A hundred clubs at <1 kB each can be supported with a single file, especially when loaded in the background.
+
+To split up the `level1.json` file we _could_ allow the `root.level1.json` file to contain URL links to additional level1.json files.
+This could, for example, allow the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
+This would allow a user to choose whether or not to load data for particular branches in the tree.
+
+Such extra level(s) of hierarchy should match the way the data and responsibilities are organized:
+essentially the tree structure forms a chain of trust. 
+A "rogue" or just non-club site will only be reachable if there is a chain of valid links between the default root and that site.
+Thus a site with questionable content (say `my cat photos`) can thus be isolated by breaking one of the links.
+But it would conceivably still be reachable from an alternative URL (path like cats_and_more_cats/Berlin).
 
 ## Roadmap
 
