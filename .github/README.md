@@ -38,7 +38,7 @@ CoreData is used to locally store the JSON data. This ensures that the UI can be
 
 ## Comparison to iOS app
 
-TODO: add side-to-side comparison screenshots.
+TODO: add side-by-side comparison screenshots.
 
 | Variant  | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | ----------- | ------- |
