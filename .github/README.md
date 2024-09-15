@@ -55,7 +55,7 @@ TODO: add side-by-side comparison screenshots.
 | Supported languages | English, Dutch* | Dutch* |
 | Can work offline | partly | no |
 
- * = might be improved or supported in the future.
+ * = _might be improved or supported in the future_
 
 ## Static sites and Ignite
 
