@@ -34,7 +34,7 @@ and (in contrast to the iOS app) convert the latter into a static website or sub
 That website serves as an alternative option for users to view the images on devices running Android, Windows, MacOS, Linux, etc.
 
 Inside the app's source code, the SwiftUI user interface framework is (read: will be) used and
-CoreData is used to locally store the JSON data. This ensures that the UI can be rendered while updating is done in the background.
+CoreData is planned to temporarily store the retrieved data.
 
 ## Comparison to iOS app
 
