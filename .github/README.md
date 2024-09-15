@@ -31,7 +31,7 @@ These in turn optionally point to the image portfolios as managed by the clubs o
 
 This MacOS app will (roadmap item) use the `root.level1.json` file to find a relevant `level2.json` file,
 and (in contrast to the iOS app) convert the latter into a static website or subsite.
-That website serves as an alternative option for users to view the images on other platforms like Android or Windows.
+That website serves as an alternative option for users to view the images on platforms like Android or Windows.
 
 Inside the MacOS app the SwiftUI framework is used for the user interface and
 CoreData is used to locally store the JSON data. This ensures that the UI can be rendered while updating is done in the background.
