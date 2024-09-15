@@ -7,7 +7,6 @@
 [![Issues][issues-shield]][issues-url]
 [![Discussions][discussions-shield]][discussions-url]
 [![MIT License][license-shield]][license-url]
-![GitHub](https://img.shields.io/github/license/vdhamer/Photo Club Hub HTML)
 ![Swift](https://img.shields.io/badge/-Swift-FA7343?style=plastic&logo=swift&logoColor=white)
 
 ![Sample output website](images/Screenshot_Ignite.png "Sample output website")
