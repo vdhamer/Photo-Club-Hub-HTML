@@ -22,7 +22,7 @@ The input data driving these apps this forms a 3-level hierarchy:
 2. local lists with (dozens of) members per club, and
 3. local portfolios with (dozens of) selected images per member.
 
-> The idea is to provide a centralized portal to view images managed by the individual clubs.
+> The idea is to provide a _central_ portal to view images managed _locally_ by the individual clubs.
  
 This concept is roughly comparable to the hierarchy of the distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate address strings into numerical IP addresses: 
