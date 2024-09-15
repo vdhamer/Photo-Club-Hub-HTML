@@ -19,7 +19,7 @@ Both apps are for photo clubs that want to display curated work by their members
 The input data driving these apps this forms a 3-level hierarchy: 
 
 1. a central list with (dozens/hundreds/thousands? of) participating clubs,
-2. local lists with (dozens of) members per club), and
+2. local lists with (dozens of) members per club, and
 3. local portfolios with (dozens of) selected images per member.
 
 > The idea is to provide a centralized portal to view images managed by the individual clubs.
