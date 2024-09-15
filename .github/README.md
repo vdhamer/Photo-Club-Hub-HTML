@@ -77,8 +77,9 @@ Swift is essentially a declarative higher-level description (`Result Builder`) t
 
 From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository with
 two relatively different targets that happen to be on two different platforms.
-Despite having code overlap, they are for now split into two repos to lower the barrier to contribute on either.
-Until the common code is factored out into a package, it will require some manual effort to keep the two in sync.
+
+Despite having code overlap, they are - for now - split into two repos to lower the barrier to contribute to either.
+Until the common code is factored out into a package, it will require some extra effort to keep the two in sync.
 
 ## Will 3 hierarchy levels be enough?
 
@@ -89,7 +90,7 @@ To split up the `level1.json` file we _could_ allow the `root.level1.json` file 
 This could, for example, allow the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
 This would allow a user to choose whether or not to load data for particular branches in the tree.
 
-Such extra level(s) of hierarchy should match the way the data and responsibilities are organized:
+Such extra level(s) of hierarchy should match the way the data and responsibilities are organized: 
 essentially the tree structure forms a chain of trust. 
 A "rogue" or just non-club site will only be reachable if there is a chain of valid links between the default root and that site.
 Thus a site with questionable content (say `my cat photos`) can thus be isolated by breaking one of the links.
@@ -97,7 +98,7 @@ But it would conceivably still be reachable from an alternative URL (path like c
 
 ## Roadmap
 
-- [ ] Fix the code (requested help from the team behind twostraws/Ignite) so that the rendering works.
+- [x] Fix the code (requested help from the team behind twostraws/Ignite) so that the rendering works.
 - [ ] Load the membership list from a .level2.json file. Currently the app contains a copy of some of the data.
 - [ ] provide a UI by which the user can select a club for which to generate a local site.
 - [ ] localize the UI to support English (EN) and Dutch (NL),
