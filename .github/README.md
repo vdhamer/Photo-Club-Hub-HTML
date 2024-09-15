@@ -26,7 +26,7 @@ The input data driving these apps this forms a 3-level hierarchy:
  
 This concept is roughly comparable to the hierarchy of the distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate address strings into numerical IP addresses: 
-the app has one `root.level1.json` entrance that points the way to to clubs which have optional `level2.json` membership lists.
+the app has one `root.level1.json` entrance that points the way to clubs which have optional `level2.json` membership lists.
 These in turn optionally point to the image portfolios as managed by the clubs or even by the members themselves.
 
 This MacOS app will (roadmap item) use the `root.level1.json` file to find a relevant `level2.json` file,
