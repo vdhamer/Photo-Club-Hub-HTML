@@ -124,7 +124,7 @@ But it would conceivably still be reachable from an alternative URL (path like c
 [issues-shield]: https://img.shields.io/github/issues/vdhamer/Photo-Club-Hub-HTML?style=plastic
 [issues-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/issues
 
-[discussions-shield]: https://img.shields.io/github/discussions/vdhamer/Photo-Club-Hub-HTML?style=plastic?color=orange
+[discussions-shield]: https://img.shields.io/github/discussions/vdhamer/Photo-Club-Hub-HTML?style=plastic&color=orange
 [discussions-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/discussions
 
 [license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub?style=plastic 
