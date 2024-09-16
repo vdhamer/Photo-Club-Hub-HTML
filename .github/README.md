@@ -41,7 +41,7 @@ CoreData is planned to temporarily store the retrieved data.
 TODO: add side-by-side comparison screenshots.
 
 | Variant  | Photo Club Hub | Photo Club Hub HTML |
-| ----------- | ----------- | ------- |
+| ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS) | all major browsers |
 | Mobile friendly | yes | yes |
 | List of clubs | yes | no* |
