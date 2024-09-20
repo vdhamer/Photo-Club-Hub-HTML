@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D05271202C8F9A2B00B2950F /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D052711F2C8F9A2B00B2950F /* Ignite */; };
+		D014A99C2C9DC50200ED412D /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		D05271222C8F9AE700B2950F /* Ignite in Resources */ = {isa = PBXBuildFile; fileRef = D05271212C8F9AE700B2950F /* Ignite */; };
 		D0D9F81C2C8DE36400FE030A /* Screenshot_Ignite.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */; };
 /* End PBXBuildFile section */
@@ -33,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D05271202C8F9A2B00B2950F /* Ignite in Frameworks */,
+				D014A99C2C9DC50200ED412D /* Ignite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 			);
 			name = "Photo Club Hub HTML";
 			packageProductDependencies = (
-				D052711F2C8F9A2B00B2950F /* Ignite */,
+				D014A99B2C9DC50200ED412D /* Ignite */,
 			);
 			productName = "Photo Club Hub HTML";
 			productReference = D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */;
@@ -128,7 +128,7 @@
 			mainGroup = D0E06C072C8C5ABC0025734B;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				D052711E2C8F9A2B00B2950F /* XCRemoteSwiftPackageReference "Ignite" */,
+				D014A99A2C9DC50200ED412D /* XCLocalSwiftPackageReference "../../Ignite" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D0E06C112C8C5ABC0025734B /* Products */;
@@ -219,6 +219,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -245,6 +246,8 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -282,6 +285,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -300,6 +304,8 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -312,6 +318,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Photo Club Hub HTML/Preview Content\"";
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -340,6 +347,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Photo Club Hub HTML/Preview Content\"";
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -382,21 +390,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		D052711E2C8F9A2B00B2950F /* XCRemoteSwiftPackageReference "Ignite" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/vdhamer/Ignite";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		D014A99A2C9DC50200ED412D /* XCLocalSwiftPackageReference "../../Ignite" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../Ignite;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D052711F2C8F9A2B00B2950F /* Ignite */ = {
+		D014A99B2C9DC50200ED412D /* Ignite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D052711E2C8F9A2B00B2950F /* XCRemoteSwiftPackageReference "Ignite" */;
 			productName = Ignite;
 		};
 /* End XCSwiftPackageProductDependency section */

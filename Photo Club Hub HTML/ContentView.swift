@@ -33,7 +33,18 @@ struct ContentView: View {
                     Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
                     }
-                    Button(action: MemberSite().publishSite) { // load and publish Ignite static site
+
+                    Button {
+                        let memberSite = MemberSite() // load data
+
+                        Task(priority: .userInitiated) {
+                            do {
+                                try await memberSite.publish() // generate HTML
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    } label: {
                         Label("Run Ignite", systemImage: "flame")
                     }
                 }

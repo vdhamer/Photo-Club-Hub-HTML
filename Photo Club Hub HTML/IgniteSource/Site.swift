@@ -18,18 +18,18 @@ struct MemberSite: @preconcurrency Site {
     var homePage = Members() // actual loading of page content
     var theme = MyTheme()
 
-    func publishSite() {
-        Task {
-            await asyncPublishSite()
-        }
-    }
-
-    private func asyncPublishSite() async {
-        do {
-            try await publish()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
+//    func publishSite() { TODO
+//        Task(priority: .userInitiated) { // different priority than .high causes Task to create a new thread
+//            await asyncPublishSite()
+//        }
+//    }
+//
+//    private func asyncPublishSite() async {
+//        do {
+//            try await publish()
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//    }
 
 }
