@@ -19,29 +19,29 @@ Both apps are for photo clubs that want to display curated work by their members
 The input data driving these apps this forms a 3-level hierarchy: 
 
 1. a central list with (dozens/hundreds/thousands? of) participating clubs,
-2. local lists with (dozens of) members per club), and
+2. local lists with (dozens of) members per club, and
 3. local portfolios with (dozens of) selected images per member.
 
-> The idea is to provide a centralized portal to view images managed by the individual clubs.
+> The idea is to provide a _central_ portal to view images managed _locally_ by the individual clubs.
  
 This concept is roughly comparable to the hierarchy of the distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate address strings into numerical IP addresses: 
-the app has one `root.level1.json` entrance that points the way to to clubs which have optional `level2.json` membership lists.
-These in turn optionally point to the image portfolios as managed by the clubs or even by the members themselves.
+the app has one `root.level1.json` entrance that points the way to clubs which have optional `level2.json` membership lists.
+These in turn optionally points to the image portfolios as managed by the clubs or even by the members themselves.
 
 This MacOS app will (roadmap item) use the `root.level1.json` file to find a relevant `level2.json` file,
 and (in contrast to the iOS app) convert the latter into a static website or subsite.
-That website serves as an alternative option for users to view the images on other platforms like Android or Windows.
+That website serves as an alternative option for users to view the images on devices running Android, Windows, MacOS, Linux, etc.
 
-Inside the MacOS app the SwiftUI framework is used for the user interface and
-CoreData is used to locally store the JSON data. This ensures that the UI can be rendered while updating is done in the background.
+Inside the app's source code, the SwiftUI user interface framework is (read: will be) used and
+CoreData is planned to temporarily store the retrieved data.
 
 ## Comparison to iOS app
 
 TODO: add side-by-side comparison screenshots.
 
 | Variant  | Photo Club Hub | Photo Club Hub HTML |
-| ----------- | ----------- | ------- |
+| ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS) | all major browsers |
 | Mobile friendly | yes | yes |
 | List of clubs | yes | no* |
@@ -55,7 +55,7 @@ TODO: add side-by-side comparison screenshots.
 | Supported languages | English, Dutch* | Dutch* |
 | Can work offline | partly | no |
 
- * = might be improved or supported in the future.
+ * = _might be improved or supported in the future_
 
 ## Static sites and Ignite
 
@@ -77,8 +77,9 @@ Swift is essentially a declarative higher-level description (`Result Builder`) t
 
 From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository with
 two relatively different targets that happen to be on two different platforms.
-Despite having code overlap, they are for now split into two repos to lower the barrier to contribute on either.
-Until the common code is factored out into a package, it will require some manual effort to keep the two in sync.
+
+Despite having code overlap, they are - for now - split into two repos to lower the barrier to contribute to either.
+Until the common code is factored out into a package, it will require some extra effort to keep the two in sync.
 
 ## Will 3 hierarchy levels be enough?
 
@@ -89,7 +90,7 @@ To split up the `level1.json` file we _could_ allow the `root.level1.json` file 
 This could, for example, allow the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
 This would allow a user to choose whether or not to load data for particular branches in the tree.
 
-Such extra level(s) of hierarchy should match the way the data and responsibilities are organized:
+Such extra level(s) of hierarchy should match the way the data and responsibilities are organized: 
 essentially the tree structure forms a chain of trust. 
 A "rogue" or just non-club site will only be reachable if there is a chain of valid links between the default root and that site.
 Thus a site with questionable content (say `my cat photos`) can thus be isolated by breaking one of the links.
@@ -97,7 +98,7 @@ But it would conceivably still be reachable from an alternative URL (path like c
 
 ## Roadmap
 
-- [ ] Fix the code (requested help from the team behind twostraws/Ignite) so that the rendering works.
+- [x] Fix the code (PR to twostraws/Ignite) so that the rendering works when Ignite is added as a regular Swift package.
 - [ ] Load the membership list from a .level2.json file. Currently the app contains a copy of some of the data.
 - [ ] provide a UI by which the user can select a club for which to generate a local site.
 - [ ] localize the UI to support English (EN) and Dutch (NL),
@@ -123,8 +124,8 @@ But it would conceivably still be reachable from an alternative URL (path like c
 [issues-shield]: https://img.shields.io/github/issues/vdhamer/Photo-Club-Hub-HTML?style=plastic
 [issues-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/issues
 
-[discussions-shield]: https://img.shields.io/github/discussions/vdhamer/Photo-Club-Hub-HTML?style=plastic?color=orange
+[discussions-shield]: https://img.shields.io/github/discussions/vdhamer/Photo-Club-Hub-HTML?style=plastic&color=orange
 [discussions-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/discussions
 
-[license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub-HTML?style=plastic
+[license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub?style=plastic 
 [license-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/.github/LICENSE.md
