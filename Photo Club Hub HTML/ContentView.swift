@@ -29,10 +29,7 @@ struct ContentView: View {
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItemGroup(placement: .automatic) {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                ToolbarItemGroup(placement: .primaryAction) {
 
                     Button {
                         let memberSite = MemberSite() // load data
@@ -47,6 +44,11 @@ struct ContentView: View {
                     } label: {
                         Label("Run Ignite", systemImage: "flame")
                     }
+
+                    Button(action: addItem) {
+                        Label("Add Item", systemImage: "plus")
+                    }
+
                 }
             }
             Text("Select an item")
