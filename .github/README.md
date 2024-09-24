@@ -51,6 +51,7 @@ TODO: add side-by-side comparison screenshots.
 | Search | yes | no |
 | Supported languages | English, Dutch* | Dutch* |
 | Can work offline | partly | no |
+| Available via | App Store, Github | Github* |
 
  * = _might be improved or supported in the future_
 
