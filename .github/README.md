@@ -134,4 +134,4 @@ But it would conceivably still be reachable from an alternative URL (path like c
 [discussions-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/discussions
 
 [license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub-HTML?style=plastic 
-[license-url]: https://github.com/vdhamer/Photo-Club-Hub/blob/main/.github/LICENSE.md
+[license-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/.github/LICENSE.md
