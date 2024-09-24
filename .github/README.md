@@ -26,15 +26,12 @@ The input data driving these apps forms a 3-level hierarchy:
  
 This concept is roughly comparable to the hierarchy of the distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate readable internet addresses  into IP addresses: 
-the app has one `root.level1.json` entrance that points the way to clubs which have optional `level2.json` membership lists.
-These in turn optionally points to the image portfolios as managed by the clubs or even by the members themselves.
+the app has one `root.level1.json` entry point that can forward the viewer to clubs with `level2.json` membership lists.
+These in turn allows you to view the image portfolios as managed by the clubs.
 
-This MacOS app will (roadmap item) use the `root.level1.json` file to find a relevant `level2.json` file,
-and (in contrast to the iOS app) convert the latter into a static website or subsite.
-That website serves as an alternative option for users to view the images on devices running Android, Windows, MacOS, Linux, etc.
-
-Inside the app's source code, the SwiftUI user interface framework is (read: will be) used and
-CoreData is planned to temporarily store the retrieved data.
+This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
+and (in contrast to the iOS app) convert the latter into a static HTML website or subsite.
+That website serves as an alternative for users to view the images on devices running Android, Windows, MacOS, etc.
 
 ## Comparison to iOS app
 
@@ -56,6 +53,16 @@ TODO: add side-by-side comparison screenshots.
 | Can work offline | partly | no |
 
  * = _might be improved or supported in the future_
+
+## Used technologies
+
+| ----------------- | ------------------------------- |
+| Technology        | purpose / role.                 |
+| ----------------- | ------------------------------- |
+| twostraws/Ignite  | website generator               |
+| SwiftUI           | UI framework                    |
+| CoreData          | data storage framework          |
+| SwiftyJson.       | JSON parsing                    |            
 
 ## Static sites and Ignite
 
