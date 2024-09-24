@@ -56,12 +56,12 @@ TODO: add side-by-side comparison screenshots.
 
 ## Used technologies
 
-| Technology        | Description                 |
-| ----------------- | --------------------------- |
-| twostraws/Ignite  | website generator           |
-| SwiftUI           | UI framework                |
-| CoreData          | data storage framework      |
-| SwiftyJson.       | JSON parsing                |            
+| Technology           | Description                 |
+| -------------------- | --------------------------- |
+| twostraws/Ignite     | website generator           |
+| Apple SwiftUI        | UI framework                |
+| Apple CoreData       | data storage framework      |
+| SwiftyJSON/SwifyJSON | JSON parsing                |            
 
 ## Static sites and Ignite
 
