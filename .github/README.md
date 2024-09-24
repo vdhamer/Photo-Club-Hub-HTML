@@ -16,7 +16,7 @@ This MacOS app generates static websites using [twostraws/ignite](https://github
 It is a companion to the iOS app [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub).
 Both apps allow photography clubs to display curated images by their club members online.
 
-The input data driving these apps this forms a 3-level hierarchy: 
+The input data driving these apps forms a 3-level hierarchy: 
 
 1. a central list with (dozens/hundreds/thousands? of) participating clubs,
 2. local lists with (dozens of) members per club, and
