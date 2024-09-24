@@ -12,8 +12,8 @@
 
 # Photo-Club-Hub-HTML
 
-This MacOS app is a companion to the iOS app [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub).
 The HTML app generates static websites using [twostraws/ignite](https://github.com/twostraws/ignite).
+This MacOS app is a companion to the iOS app [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub).
 Both apps are for photo clubs that want to display curated work by their members online.
 
 The input data driving these apps this forms a 3-level hierarchy: 
