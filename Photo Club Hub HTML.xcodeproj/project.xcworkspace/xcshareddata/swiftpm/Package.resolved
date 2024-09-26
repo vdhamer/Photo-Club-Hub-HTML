@@ -1,6 +1,15 @@
 {
-  "originHash" : "6d42dc271732d05f2d2b33aef32c14a84635ff177756318ba526413d6801dba4",
+  "originHash" : "19657d5fc7c498ef9292b8c8799535e0f3bdb9c45eed94a2b7ec346cc7ac17d6",
   "pins" : [
+    {
+      "identity" : "ignite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twostraws/Ignite",
+      "state" : {
+        "branch" : "main",
+        "revision" : "02c14aefbd93b8cb31c27515c8104336c80d9d36"
+      }
+    },
     {
       "identity" : "swift-argument-parser",
       "kind" : "remoteSourceControl",
@@ -25,7 +34,7 @@
       "location" : "https://github.com/swiftlang/swift-markdown.git",
       "state" : {
         "branch" : "main",
-        "revision" : "2829eefc2e4f8ee7270b8e8d3e5757b98fe06b6c"
+        "revision" : "7530dfe833d8d7e222c3306bd3fa4c9153e23fb9"
       }
     }
   ],
