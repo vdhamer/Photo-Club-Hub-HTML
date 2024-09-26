@@ -45,9 +45,9 @@ struct ContentView: View {
                         Label("Run Ignite", systemImage: "flame")
                     }
 
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+//                    Button(action: addItem) {
+//                        Label("Add Item", systemImage: "plus")
+//                    }
 
                 }
             }
