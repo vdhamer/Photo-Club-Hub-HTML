@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @State private var selectedItemNr: Int? // starts counting at zero
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -17,7 +18,7 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     var body: some View {
-        NavigationView {
+        NavigationSplitView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
@@ -28,31 +29,37 @@ struct ContentView: View {
                 }
                 .onDelete(perform: deleteItems)
             }
-            .toolbar {
-                ToolbarItemGroup(placement: .primaryAction) {
+        } detail: {
+            if let selectedItemNr {
+                Text(items[selectedItemNr], formatter: itemFormatter)
+            } else {
+                Text("Select an item")
+            }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
 
-                    Button {
-                        let memberSite = MemberSite() // load data
+                Button {
+                    let memberSite = MemberSite() // load data
 
-                        Task(priority: .userInitiated) {
-                            do {
-                                try await memberSite.publish() // generate HTML
-                            } catch {
-                                print(error.localizedDescription)
-                            }
+                    Task(priority: .userInitiated) {
+                        do {
+                            try await memberSite.publish() // generate HTML
+                        } catch {
+                            print(error.localizedDescription)
                         }
-                    } label: {
-                        Label("Run Ignite", systemImage: "flame")
                     }
+                } label: {
+                    Label("Run Ignite", systemImage: "flame")
+                }
 
 //                    Button(action: addItem) {
 //                        Label("Add Item", systemImage: "plus")
 //                    }
 
-                }
             }
-            Text("Select an item")
         }
+//        Text("Select an item")
     }
 
     private func addItem() {
