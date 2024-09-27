@@ -36,6 +36,9 @@ struct ContentView: View {
                 Text("Select an item")
             }
         }
+        .onAppear {
+            NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
+        }
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
@@ -59,7 +62,6 @@ struct ContentView: View {
 
             }
         }
-//        Text("Select an item")
     }
 
     private func addItem() {
