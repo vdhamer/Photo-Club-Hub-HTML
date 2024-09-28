@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @State private var selectedItemNr: Int? // starts counting at zero
+    @State private var selectedRow: Int? // starts counting at zero
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -19,19 +19,17 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+            List(items, id: \.uuid) { item in // is timestamp precise to mSeconds so there are no duplicates?
+                NavigationLink {
+                    Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                } label: {
+                    Text(item.timestamp!, formatter: itemFormatter)
                 }
-                .onDelete(perform: deleteItems)
             }
+
         } detail: {
-            if let selectedItemNr {
-                Text(items[selectedItemNr], formatter: itemFormatter)
+            if let selectedRow {
+                Text(items[selectedRow], formatter: itemFormatter)
             } else {
                 Text("Select an item")
             }
@@ -39,6 +37,8 @@ struct ContentView: View {
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
         }
+        .frame(minWidth: 480, minHeight: 290)
+        .padding()
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
@@ -56,7 +56,7 @@ struct ContentView: View {
                     Label("Run Ignite", systemImage: "flame")
                 }
 
-              Button(action: addItem) { Label("Add Item", systemImage: "plus") }
+                Button(action: addItem) { Label("Add Item", systemImage: "plus") }
 
             }
         }
@@ -66,6 +66,7 @@ struct ContentView: View {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
+            newItem.uuid = UUID()
 
             do {
                 try viewContext.save()

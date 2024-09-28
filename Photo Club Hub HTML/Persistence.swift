@@ -17,6 +17,7 @@ struct PersistenceController {
         for _ in 0..<10 {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
+            newItem.uuid = UUID()
         }
         do {
             try viewContext.save()
