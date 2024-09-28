@@ -26,10 +26,9 @@ struct ContentView: View {
                     Text(item.timestamp!, formatter: itemFormatter)
                 }
             }
-
         } detail: {
             if let selectedRow {
-                Text(items[selectedRow], formatter: itemFormatter)
+                Text("Selected: \(items[selectedRow].timestamp!, formatter: itemFormatter)") // TODO is this ever shown?
             } else {
                 Text("Select an item")
             }
@@ -57,7 +56,6 @@ struct ContentView: View {
                 }
 
                 Button(action: addItem) { Label("Add Item", systemImage: "plus") }
-
             }
         }
     }
