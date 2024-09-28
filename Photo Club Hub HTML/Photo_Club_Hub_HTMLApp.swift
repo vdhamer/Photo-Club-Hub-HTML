@@ -17,5 +17,12 @@ struct PhotoClubHubHtmlApp: App {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
+        .commands {
+            CommandGroup(replacing: .newItem) { }
+            CommandGroup(replacing: .undoRedo) { }
+            CommandGroup(replacing: .pasteboard) { }
+            CommandGroup(replacing: .help) { }
+            CommandGroup(replacing: .systemServices) { }
+        }
     }
 }
