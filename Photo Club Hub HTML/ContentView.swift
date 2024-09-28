@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @State private var selectedRow: Int? // starts counting at zero
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
@@ -17,9 +18,9 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
 
     var body: some View {
-        NavigationView {
+        NavigationSplitView {
             List {
-                ForEach(items) { item in
+                ForEach(items, id: \.uuid) { item in
                     NavigationLink {
                         Text("Item at \(item.timestamp!, formatter: itemFormatter)")
                     } label: {
@@ -28,30 +29,37 @@ struct ContentView: View {
                 }
                 .onDelete(perform: deleteItems)
             }
-            .toolbar {
-                ToolbarItemGroup(placement: .primaryAction) {
-
-                    Button {
-                        let memberSite = MemberSite() // load data
-
-                        Task(priority: .userInitiated) {
-                            do {
-                                try await memberSite.publish() // generate HTML
-                            } catch {
-                                print(error.localizedDescription)
-                            }
-                        }
-                    } label: {
-                        Label("Run Ignite", systemImage: "flame")
-                    }
-
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-
-                }
+        } detail: {
+            if let selectedRow {
+                Text("Selected: \(items[selectedRow].timestamp!, formatter: itemFormatter)") // TODO is this ever shown?
+            } else {
+                Text("Select an item")
             }
-            Text("Select an item")
+        }
+        .onAppear {
+            NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
+        }
+        .frame(minWidth: 480, minHeight: 290)
+        .padding()
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
+
+                Button {
+                    let memberSite = MemberSite() // load data
+
+                    Task(priority: .userInitiated) {
+                        do {
+                            try await memberSite.publish() // generate HTML
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                } label: {
+                    Label("Run Ignite", systemImage: "flame")
+                }
+
+                Button(action: addItem) { Label("Add Item", systemImage: "plus") }
+            }
         }
     }
 
@@ -59,6 +67,7 @@ struct ContentView: View {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
+            newItem.uuid = UUID()
 
             do {
                 try viewContext.save()
