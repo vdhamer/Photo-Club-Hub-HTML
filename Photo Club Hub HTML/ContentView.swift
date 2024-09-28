@@ -19,12 +19,15 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            List(items, id: \.uuid) { item in // is timestamp precise to mSeconds so there are no duplicates?
-                NavigationLink {
-                    Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                } label: {
-                    Text(item.timestamp!, formatter: itemFormatter)
+            List {
+                ForEach(items, id: \.uuid) { item in
+                    NavigationLink {
+                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                    } label: {
+                        Text(item.timestamp!, formatter: itemFormatter)
+                    }
                 }
+                .onDelete(perform: deleteItems)
             }
         } detail: {
             if let selectedRow {

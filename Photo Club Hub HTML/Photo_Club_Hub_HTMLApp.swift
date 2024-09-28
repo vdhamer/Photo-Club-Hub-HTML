@@ -20,7 +20,7 @@ struct PhotoClubHubHtmlApp: App {
         .commands {
             CommandGroup(replacing: .newItem) { }
             CommandGroup(replacing: .undoRedo) { }
-            CommandGroup(replacing: .pasteboard) { }
+//            CommandGroup(replacing: .pasteboard) { }
             CommandGroup(replacing: .help) { }
             CommandGroup(replacing: .systemServices) { }
         }
