@@ -22,6 +22,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			explicitFileTypes = {
+				Photo_Club_Hub_HTML.xcdatamodeld/Photo_Club_Hub_HTML.xcdatamodel = wrapper.xcdatamodel;
+			};
 			path = "Photo Club Hub HTML";
 			sourceTree = "<group>";
 		};
