@@ -13,7 +13,7 @@ struct PhotoClubHubHtmlApp: App {
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
-        WindowGroup {
+        Window("Photo Club Hub HTML", id: "mainWindow") {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
