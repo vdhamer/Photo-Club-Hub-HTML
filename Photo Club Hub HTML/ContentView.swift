@@ -22,7 +22,7 @@ struct ContentView: View {
             List {
                 ForEach(items, id: \.uuid) { item in
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+                        Text("Item at \(item.timestamp!, formatter: itemFormatter)") // displayed
                     } label: {
                         Text(item.timestamp!, formatter: itemFormatter)
                     }
@@ -31,9 +31,9 @@ struct ContentView: View {
             }
         } detail: {
             if let selectedRow {
-                Text("Selected: \(items[selectedRow].timestamp!, formatter: itemFormatter)") // TODO is this ever shown?
+                Text("Selected: \(items[selectedRow].timestamp!, formatter: itemFormatter)") // not displayed?
             } else {
-                Text("Select an item")
+                Text("Select an item") // displayed
             }
         }
         .onAppear {
