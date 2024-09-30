@@ -12,12 +12,12 @@ struct PersistenceController {
 
     @MainActor
     static let preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-            newItem.uuid = UUID()
+        let controller = PersistenceController(inMemory: true)
+        let viewContext = controller.container.viewContext
+        for counter in 0..<10 {
+            let newClub = Organization(context: viewContext)
+            newClub.fullName_ = "Organization \(counter)"
+            newClub.town_ = "MyTown"
         }
         do {
             try viewContext.save()
@@ -28,18 +28,27 @@ struct PersistenceController {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-        return result
+        return controller
     }()
 
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Photo_Club_Hub_HTML")
+        container = NSPersistentContainer(name: "Photo_Club_Hub")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
+
+        // https://beckyhansmeyer.com/tag/core-data/ and https://developer.apple.com/videos/play/wwdc2021/10017
+        guard let description = container.persistentStoreDescriptions.first else {
+            ifDebugFatalError("###\(#function): Failed to retrieve a persistent store description.")
+            return
+        }
+        description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+
         // swiftlint:disable:next unused_closure_parameter
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use
@@ -55,7 +64,7 @@ struct PersistenceController {
                  */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }

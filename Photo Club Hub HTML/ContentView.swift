@@ -9,33 +9,31 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @State private var selectedRow: Int? // starts counting at zero
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
+        predicate: NSPredicate(value: true), // doesn't do anything yet (should filter on Clubs)
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var clubs: FetchedResults<Organization>
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items, id: \.uuid) { item in
+                ForEach(clubs, id: \.self) { club in // .fullName_ is not always unique
                     NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)") // displayed
+                        Text(club.fullName_ ?? "No name")
                     } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
+                        Text(club.fullName_ ?? "No name")
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteClubs)
             }
+            .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 300)
         } detail: {
-            if let selectedRow {
-                Text("Selected: \(items[selectedRow].timestamp!, formatter: itemFormatter)") // not displayed?
-            } else {
-                Text("Select an item") // displayed
-            }
+            Text("Please select a club") // displayed
         }
+        .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
         }
@@ -58,16 +56,19 @@ struct ContentView: View {
                     Label("Run Ignite", systemImage: "flame")
                 }
 
-                Button(action: addItem) { Label("Add Item", systemImage: "plus") }
+                Button(action: addClub) { Label("Add Club", systemImage: "plus") }
             }
         }
     }
 
-    private func addItem() {
+    private func addClub() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-            newItem.uuid = UUID()
+            let newClub = Organization(context: viewContext)
+            let organizationType: String = newClub.organizationType_?.organizationTypeName_ ?? "Unknown"
+            let twoDigits = clubs.last?.fullName_?.prefix(15).suffix(2) ?? "?"
+            let maxTwoDigits: Int = Int(twoDigits) ?? 0
+            let nextNumberAsString: String = numberFormatter.string(from: NSNumber(value: maxTwoDigits+1)) ?? "?"
+            newClub.fullName_ = "Organization \(nextNumberAsString) of type \(organizationType)"
 
             do {
                 try viewContext.save()
@@ -81,9 +82,12 @@ struct ContentView: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteClubs(at offsets: IndexSet) {
         withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
+            for index in offsets { // probably only one
+                let club = clubs[index]
+                viewContext.delete(club)
+            }
 
             do {
                 try viewContext.save()
@@ -96,14 +100,17 @@ struct ContentView: View {
             }
         }
     }
+
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+
+        formatter.numberStyle = .decimal
+        formatter.minimumIntegerDigits = 2
+        formatter.maximumFractionDigits = 0
+
+        return formatter
+    }()
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 #Preview {
     ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
