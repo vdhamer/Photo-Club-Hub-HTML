@@ -17,6 +17,24 @@ struct ContentView: View {
         animation: .default)
     private var clubs: FetchedResults<Organization>
 
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \OrganizationType.organizationTypeName_, ascending: true)],
+        predicate: NSPredicate(value: true), // doesn't do anything yet (should filter on Clubs)
+        animation: .default)
+    private var organizationTypes: FetchedResults<OrganizationType>
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Photographer.familyName_, ascending: true)],
+        predicate: NSPredicate(value: true), // doesn't do anything yet (should filter on Clubs)
+        animation: .default)
+    private var photographers: FetchedResults<Photographer>
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)],
+        predicate: NSPredicate(value: true), // doesn't do anything yet (should filter on Clubs)
+        animation: .default)
+    private var members: FetchedResults<MemberPortfolio>
+
     var body: some View {
         NavigationSplitView {
             List {
@@ -28,6 +46,11 @@ struct ContentView: View {
                     }
                 }
                 .onDelete(perform: deleteClubs)
+                Divider()
+                Text("\(clubs.count) organizations")
+                Text("\(organizationTypes.count) organizationTypes")
+                Text("\(photographers.count) photographers")
+                Text("\(members.count) members")
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 300)
         } detail: {
