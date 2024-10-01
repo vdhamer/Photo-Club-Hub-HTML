@@ -74,7 +74,7 @@ Technically the files simply need to be hosted on an HTTP server.
 The data being displayed on the individual HTML sites may get updated say 10 times per year.
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
 it is best to generate _static_ web sites. 
-This limits the technical hasstle to uploading a file to a directory and associated useername/password.
+This limits the technical hasstle to uploading a file to a directory and associated username/password.
 This should be easier and more robust than having a backend that dynamically generates a site on demand.
 
 **Ignite** allows us to create a tool in pure Swift 
