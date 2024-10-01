@@ -25,7 +25,7 @@ The input data driving these apps forms a 3-level hierarchy:
 > The idea is to provide a _central_ portal to view images managed _locally_ by the individual clubs.
  
 This concept is roughly comparable to the hierarchy of the distributed
-[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate readable internet addresses  into IP addresses: 
+[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate readable internet addresses into numeric addresses: 
 the app has one `root.level1.json` entry point that can forward the viewer to clubs with `level2.json` membership lists.
 These in turn allows you to view the image portfolios as managed by the clubs.
 
