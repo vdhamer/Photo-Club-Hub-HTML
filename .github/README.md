@@ -31,7 +31,8 @@ These lead the viewer to image portfolios as managed by the clubs.
 
 This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
 and (in contrast to the iOS app) convert the latter into a static HTML website or subsite.
-That website serves as an alternative for users to view the images on devices running Android, Windows, MacOS, etc.
+That website serves as an alternative for the `Photo Club Hub` iOS app: 
+it allows users to view the images on devices running Android, Windows, MacOS, etc.
 
 ## Comparison to iOS app
 
