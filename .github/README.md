@@ -34,7 +34,7 @@ and (in contrast to the iOS app) convert the latter into a static HTML website o
 That website serves as an alternative for the `Photo Club Hub` iOS app: 
 it allows users to view the images on devices running Android, Windows, MacOS, etc.
 
-## Comparison to iOS app
+## Comparing both apps
 
 TODO: add side-by-side comparison screenshots.
 
