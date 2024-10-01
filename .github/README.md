@@ -24,10 +24,10 @@ The input data driving these apps forms a 3-level hierarchy:
 
 > The idea is to provide a _central_ portal to view images managed _locally_ by the individual clubs.
  
-This concept is roughly comparable to the hierarchy of the distributed
+This concept similar to the hierarchy of distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate readable internet addresses into numeric addresses: 
-the app has one `root.level1.json` entry point that can forward the viewer to clubs with `level2.json` membership lists.
-These in turn allows you to view the image portfolios as managed by the clubs.
+this app has one entry point (a filed named `root.level1.json`) that can forward the viewer to clubs with membership lists (`level2.json` files).
+These lead the viewer to image portfolios as managed by the clubs.
 
 This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
 and (in contrast to the iOS app) convert the latter into a static HTML website or subsite.
