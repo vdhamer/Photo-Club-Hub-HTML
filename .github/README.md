@@ -14,26 +14,27 @@
 
 This MacOS app generates static websites using [twostraws/ignite](https://github.com/twostraws/ignite).
 It is a companion to the iOS app [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub).
-Both apps allow photography clubs to display curated images by their club members online.
+Both apps allow photography clubs to display photos made by club members online.
 
 The input data driving these apps forms a 3-level hierarchy: 
 
-1. a central list with (dozens/hundreds/thousands? of) participating clubs,
+1. a central list with (dozens/hundreds/thousands of) participating clubs,
 2. local lists, each containing (dozens of) members per club, and
 3. local portfolios with (dozens of) selected images per club member.
 
 > The idea is to provide a _central_ portal to view images managed _locally_ by the individual clubs.
  
-This concept is roughly comparable to the hierarchy of the distributed
-[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate readable internet addresses  into IP addresses: 
-the app has one `root.level1.json` entry point that can forward the viewer to clubs with `level2.json` membership lists.
-These in turn allows you to view the image portfolios as managed by the clubs.
+This concept similar to the hierarchy of distributed
+[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate readable internet addresses into numeric addresses: 
+this app has one entry point (a filed named `root.level1.json`) that can forward the viewer to clubs with membership lists (`level2.json` files).
+These lead the viewer to image portfolios as managed by the clubs.
 
 This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
 and (in contrast to the iOS app) convert the latter into a static HTML website or subsite.
-That website serves as an alternative for users to view the images on devices running Android, Windows, MacOS, etc.
+That website serves as an alternative for the `Photo Club Hub` iOS app: 
+it allows users to view the images on devices running Android, Windows, MacOS, etc.
 
-## Comparison to iOS app
+## Comparing both apps
 
 TODO: add side-by-side comparison screenshots.
 
@@ -66,15 +67,15 @@ TODO: add side-by-side comparison screenshots.
 
 ## Static sites and Ignite
 
-This app runs on MacOS because it generates a local directory with a few files and a few subdirectories (CSS, Javascript, image assets).
-These are then copied over to a club's existing server via e.g. FTP or possibly a Wordpress plug-in.
-Technically the files simply need to be hosted on an HTTP server.
+This app runs on MacOS and generates a local directory with a few files and subdirectories (CSS, Javascript, image assets).
+These are then copied over to a club's existing server via e.g. FTP.
+Technically the files simply need to be hosted on an HTTP server such as a site running WordPress.
 
-The data being displayed on the individual HTML sites may get updated say 10 times per year.
+The data being displayed on the individual HTML sites can get updated say 10 times per year.
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
-it is best to generate _static_ web sites. 
-This limits the technical hasstle to uploading a file to a directory and associated useername/password.
-This should be easier and more robust than having a backend that dynamically generates a site on demand.
+it is best to generate _static_ web sites.
+This limits the hasstle to uploading a file to a directory and associated username/password.
+This should be easier and more robust than having custom server software that generates web pages on demand.
 
 **Ignite** allows us to create a tool in pure Swift 
 that generates the content of the static website without having to code HTML/CSS/Javascript.
