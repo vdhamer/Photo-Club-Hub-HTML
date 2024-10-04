@@ -15,6 +15,7 @@ struct ContentView: View {
                                                argumentArray: [OrganizationTypeEnum.club.rawValue])
     static let allPredicate = NSPredicate(format: "TRUEPREDICATE")
     static let nonePredicate = NSPredicate(format: "FALSEPREDICATE")
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
         predicate: allPredicate,
