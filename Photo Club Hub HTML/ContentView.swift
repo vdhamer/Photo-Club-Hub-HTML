@@ -51,12 +51,13 @@ struct ContentView: View {
                 }
                 .onDelete(perform: deleteClubs)
                 Divider()
-                Text("\(clubs.count) organizations")
-                Text("\(organizationTypes.count) organizationTypes")
-                Text("\(photographers.count) photographers")
-                Text("\(members.count) members")
+                Text("Stats").font(.subheadline)
+                Text("   ◼ \(clubs.count) organizations")
+                Text("   ◼ \(organizationTypes.count) organizationTypes")
+                Text("   ◼ \(photographers.count) photographers")
+                Text("   ◼ \(members.count) members")
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 300)
+            .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 600)
         } detail: {
             Text("Please select a club") // displayed
         }
