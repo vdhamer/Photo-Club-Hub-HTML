@@ -86,12 +86,20 @@ struct ContentView: View {
 
     private func addClub() {
         withAnimation {
-            let newClub = Organization(context: viewContext)
-            let organizationType: String = newClub.organizationType_?.organizationTypeName_ ?? "Unknown"
-            let twoDigits = clubs.last?.fullName_?.prefix(15).suffix(2) ?? "?"
-            let maxTwoDigits: Int = Int(twoDigits) ?? 0
-            let nextNumberAsString: String = numberFormatter.string(from: NSNumber(value: maxTwoDigits+1)) ?? "?"
-            newClub.fullName_ = "Organization \(nextNumberAsString) of type \(organizationType)"
+            let club = Organization(context: viewContext)
+            let newCount = UserDefaults.standard.integer(forKey: "clubCounter") + 1
+            UserDefaults.standard.set(newCount, forKey: "clubCounter")
+
+            let random: Bool = .random() // 50% club, 50% museum
+            club.organizationType_ = OrganizationType.findCreateUpdate(context: viewContext,
+                                                                       organizationTypeName: random ? "museum" : "club")
+
+            club.town_ = "Eindhoven"
+            club.fullName_ = """
+                             Organization \(newCount) \
+                             (\(club.town_!)) \
+                             of type \(club.organizationType_!.organizationTypeName.capitalized)
+                             """
 
             do {
                 try viewContext.save()
