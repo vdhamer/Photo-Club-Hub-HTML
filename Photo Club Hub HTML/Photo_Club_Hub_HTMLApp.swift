@@ -12,6 +12,10 @@ import Ignite
 struct PhotoClubHubHtmlApp: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+        OrganizationType.initConstants() // creates records for club, museum, and unknown
+    }
+
     var body: some Scene {
         Window("Photo Club Hub HTML", id: "mainWindow") {
             ContentView()
