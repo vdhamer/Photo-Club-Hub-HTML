@@ -11,9 +11,13 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
+    static let clubOnlyPredicate = NSPredicate(format: "organizationType_.organizationTypeName_= %@",
+                                               argumentArray: [OrganizationTypeEnum.club.rawValue])
+    static let allPredicate = NSPredicate(format: "TRUEPREDICATE")
+    static let nonePredicate = NSPredicate(format: "FALSEPREDICATE")
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
-        predicate: NSPredicate(value: true), // doesn't do anything yet (should filter on Clubs)
+        predicate: allPredicate,
         animation: .default)
     private var clubs: FetchedResults<Organization>
 
