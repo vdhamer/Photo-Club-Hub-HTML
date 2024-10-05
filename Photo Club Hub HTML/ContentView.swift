@@ -92,20 +92,24 @@ struct ContentView: View {
 
     private func addClub() {
         withAnimation {
-            let club = Organization(context: viewContext)
             let newCount = UserDefaults.standard.integer(forKey: "clubCounter") + 1
             UserDefaults.standard.set(newCount, forKey: "clubCounter")
 
-            let random: Bool = .random() // 50% club, 50% museum
-            club.organizationType_ = OrganizationType.findCreateUpdate(context: viewContext,
-                                                                       organizationTypeName: random ? "museum" : "club")
+            let organizationTypeEnum: OrganizationTypeEnum = OrganizationTypeEnum.randomClubMuseumUnknown()
+            let town = "Eindhoven"
+            let fullName = """
+                           Organization \(newCount) \
+                           (\(town)) \
+                           of type \(organizationTypeEnum.rawValue.capitalized)
+                           """
+            let organizationID = OrganizationID(fullName: fullName, town: town)
+            let organizationIdPlus = OrganizationIdPlus(id: organizationID, nickname: town)
 
-            club.town_ = "Eindhoven"
-            club.fullName_ = """
-                             Organization \(newCount) \
-                             (\(club.town_!)) \
-                             of type \(club.organizationType_!.organizationTypeName.capitalized)
-                             """
+            _ = Organization.findCreateUpdate(context: viewContext, // can be foreground of background context
+                                              organizationTypeEnum: organizationTypeEnum,
+                                              idPlus: organizationIdPlus,
+                                              optionalFields: OrganizationOptionalFields()
+                                             )
 
             do {
                 try viewContext.save()

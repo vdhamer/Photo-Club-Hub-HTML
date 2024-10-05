@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D00E56842CA60D44007F50BB /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D00E56832CA60D44007F50BB /* Ignite */; };
 		D014A99C2C9DC50200ED412D /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
+		D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D065BD692CB08B7600346F66 /* SwiftyJSON */; };
 		D0D9F81C2C8DE36400FE030A /* Screenshot_Ignite.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */,
 				D00E56842CA60D44007F50BB /* Ignite in Frameworks */,
 				D014A99C2C9DC50200ED412D /* Ignite in Frameworks */,
 			);
@@ -98,6 +100,7 @@
 			packageProductDependencies = (
 				D014A99B2C9DC50200ED412D /* Ignite */,
 				D00E56832CA60D44007F50BB /* Ignite */,
+				D065BD692CB08B7600346F66 /* SwiftyJSON */,
 			);
 			productName = "Photo Club Hub HTML";
 			productReference = D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */;
@@ -129,6 +132,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D00E56822CA60D44007F50BB /* XCRemoteSwiftPackageReference "Ignite" */,
+				D065BD682CB08B7600346F66 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D0E06C112C8C5ABC0025734B /* Products */;
@@ -398,6 +402,14 @@
 				kind = branch;
 			};
 		};
+		D065BD682CB08B7600346F66 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -409,6 +421,11 @@
 		D014A99B2C9DC50200ED412D /* Ignite */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Ignite;
+		};
+		D065BD692CB08B7600346F66 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D065BD682CB08B7600346F66 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
