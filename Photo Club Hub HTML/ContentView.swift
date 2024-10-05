@@ -11,6 +11,8 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
+    // MARK: - Core Data fetch requests
+
     static let clubOnlyPredicate = NSPredicate(format: "organizationType_.organizationTypeName_= %@",
                                                argumentArray: [OrganizationTypeEnum.club.rawValue])
     static let allPredicate = NSPredicate(format: "TRUEPREDICATE")
@@ -40,24 +42,30 @@ struct ContentView: View {
         animation: .default)
     private var members: FetchedResults<MemberPortfolio>
 
+    // MARK: - Body of ContentView
+
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(clubs, id: \.self) { club in // .fullName_ is not always unique
                     NavigationLink {
-                        Text(club.fullName_ ?? "No name")
+                        Text("""
+                             \(club.organizationType.organizationTypeName.capitalized) \
+                             \(club.fullName) (\(club.town))
+                             """)
                     } label: {
-                        Text(club.fullName_ ?? "No name")
+                        Text(club.fullName)
                     }
                 }
                 .onDelete(perform: deleteClubs)
                 Divider()
-                Text("Stats").font(.subheadline)
+                Text("Statistics").font(.headline)
                 Text("   ◼ \(clubs.count) organizations")
                 Text("   ◼ \(organizationTypes.count) organizationTypes")
                 Text("   ◼ \(photographers.count) photographers")
                 Text("   ◼ \(members.count) members")
             }
+            .padding(.top)
             .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 600)
         } detail: {
             Text("Please select a club") // displayed
@@ -85,7 +93,37 @@ struct ContentView: View {
                     Label("Run Ignite", systemImage: "flame")
                 }
 
-                Button(action: addClub) { Label("Add Club", systemImage: "plus") }
+                Button(action: addClub, label: {
+                    Label("Add Club", systemImage: "plus")
+                })
+            }
+        }
+    }
+
+    // MARK: - add and delete clubs
+
+    public static func addFGdeGender() {
+        withAnimation {
+            let context = PersistenceController.shared.container.viewContext // foreground only for now
+            let newCount = UserDefaults.standard.integer(forKey: "clubCounter") + 1
+            UserDefaults.standard.set(newCount, forKey: "clubCounter")
+
+            let organizationIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
+                                                        town: "Eindhoven",
+                                                        nickname: "FGdeGender")
+
+            _ = Organization.findCreateUpdate(context: context, // foreground
+                                              organizationTypeEnum: OrganizationTypeEnum.club,
+                                              idPlus: organizationIdPlus,
+                                              optionalFields: OrganizationOptionalFields())
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use
+                // this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
@@ -97,11 +135,7 @@ struct ContentView: View {
 
             let organizationTypeEnum: OrganizationTypeEnum = OrganizationTypeEnum.randomClubMuseumUnknown()
             let town = "Eindhoven"
-            let fullName = """
-                           Organization \(newCount) \
-                           (\(town)) \
-                           of type \(organizationTypeEnum.rawValue.capitalized)
-                           """
+            let fullName = "Org #\(newCount)"
             let organizationID = OrganizationID(fullName: fullName, town: town)
             let organizationIdPlus = OrganizationIdPlus(id: organizationID, nickname: town)
 
@@ -142,15 +176,6 @@ struct ContentView: View {
         }
     }
 
-    private let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-
-        formatter.numberStyle = .decimal
-        formatter.minimumIntegerDigits = 2
-        formatter.maximumFractionDigits = 0
-
-        return formatter
-    }()
 }
 
 #Preview {

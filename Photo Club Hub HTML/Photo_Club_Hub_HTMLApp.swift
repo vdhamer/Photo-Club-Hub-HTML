@@ -14,6 +14,7 @@ struct PhotoClubHubHtmlApp: App {
 
     init() {
         OrganizationType.initConstants() // creates records for club, museum, and unknown
+        ContentView.addFGdeGender()
     }
 
     var body: some Scene {
