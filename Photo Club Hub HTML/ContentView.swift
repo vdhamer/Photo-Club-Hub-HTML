@@ -78,6 +78,7 @@ struct ContentView: View {
         }
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
+            addTestMembers()
         }
         .frame(minWidth: 480, minHeight: 290)
         .padding()
@@ -105,9 +106,34 @@ struct ContentView: View {
         }
     }
 
-    // MARK: - add and delete clubs
+    // MARK: - add and delete clubs and members
 
-    public static func addFGdeGender() {
+    func addTestMembers() {
+        let fgDeGender = ContentView.addFGdeGender()
+
+        let hansKrüsemann = PersonName(givenName: "Hans", infixName: "", familyName: "Krüsemann")
+        _ = Photographer.findCreateUpdate(context: viewContext,
+                                          personName: hansKrüsemann,
+                                          organization: fgDeGender,
+                                          optionalFields: PhotographerOptionalFields())
+
+        let jelleVanDeVoort = PersonName(givenName: "Jelle", infixName: "van de", familyName: "Voort")
+        _ = Photographer.findCreateUpdate(context: viewContext,
+                                          personName: jelleVanDeVoort,
+                                          organization: fgDeGender,
+                                          optionalFields: PhotographerOptionalFields())
+
+        let peterVanDenHamer = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
+        _ = Photographer.findCreateUpdate(context: viewContext,
+                                          personName: peterVanDenHamer,
+                                          organization: fgDeGender,
+                                          optionalFields: PhotographerOptionalFields(
+                                            photographerWebsite: URL(string: "https://glass.photo/vdhamer")
+                                          )
+        )
+    }
+
+    public static func addFGdeGender() -> Organization {
         withAnimation {
             let context = PersistenceController.shared.container.viewContext // foreground only for now
             let newCount = UserDefaults.standard.integer(forKey: "clubCounter") + 1
@@ -117,12 +143,13 @@ struct ContentView: View {
                                                         town: "Eindhoven",
                                                         nickname: "FGdeGender")
 
-            _ = Organization.findCreateUpdate(context: context, // foreground
-                                              organizationTypeEnum: OrganizationTypeEnum.club,
-                                              idPlus: organizationIdPlus,
-                                              optionalFields: OrganizationOptionalFields())
+            let fgDeGender = Organization.findCreateUpdate(context: context, // foreground
+                                                           organizationTypeEnum: OrganizationTypeEnum.club,
+                                                           idPlus: organizationIdPlus,
+                                                           optionalFields: OrganizationOptionalFields())
             do {
                 try context.save()
+                return fgDeGender
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use
