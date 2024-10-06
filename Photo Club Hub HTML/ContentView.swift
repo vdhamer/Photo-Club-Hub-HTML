@@ -45,32 +45,37 @@ struct ContentView: View {
     // MARK: - Body of ContentView
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(clubs, id: \.self) { club in // .fullName_ is not always unique
-                    NavigationLink {
-                        Text("""
+        VStack(alignment: .leading) {
+            NavigationSplitView {
+                List {
+                    ForEach(clubs, id: \.self) { club in // .fullName_ is not always unique
+                        NavigationLink {
+                            Text("""
                              \(club.organizationType.organizationTypeName.capitalized) \
                              \(club.fullName) (\(club.town))
                              """)
-                    } label: {
-                        Text(club.fullName)
+                        } label: {
+                            Text(club.fullName)
+                        }
                     }
+                    .onDelete(perform: deleteClubs)
                 }
-                .onDelete(perform: deleteClubs)
-                Divider()
-                Text("Statistics").font(.headline)
+                .padding(.top)
+                .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 600)
+            } detail: {
+                Text("Please select a club") // displayed
+            }
+            .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
+            Divider()
+            HStack(alignment: .center) {
+                Text("Statistics:").font(.headline)
                 Text("   ◼ \(clubs.count) organizations")
                 Text("   ◼ \(organizationTypes.count) organizationTypes")
                 Text("   ◼ \(photographers.count) photographers")
                 Text("   ◼ \(members.count) members")
             }
-            .padding(.top)
-            .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 600)
-        } detail: {
-            Text("Please select a club") // displayed
+            .frame(height: 10)
         }
-        .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
         }
