@@ -113,23 +113,56 @@ struct ContentView: View {
     func addTestMembers() {
         let fgDeGender = ContentView.addFGdeGender()
 
-        let hansKrüsemann = PersonName(givenName: "Hans", infixName: "", familyName: "Krüsemann")
-        _ = Photographer.findCreateUpdate(context: viewContext,
-                                          personName: hansKrüsemann,
-                                          optionalFields: PhotographerOptionalFields())
+        let hansKrüsemannPN = PersonName(givenName: "Hans", infixName: "", familyName: "Krüsemann")
+        let hansKrüsemannPho = Photographer.findCreateUpdate(context: viewContext,
+                                                  personName: hansKrüsemannPN,
+                                                  optionalFields: PhotographerOptionalFields())
+        let hansKrüsemannOpt = MemberOptionalFields(
+            level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Hans_Krusemann/"),
+            memberRolesAndStatus: MemberRolesAndStatus(role: [ .admin: true ], status: [:]),
+            fotobondNumber: 1620090,
+            membershipStartDate: "2016-04-01".extractDate(),
+            membershipEndDate: nil)
+        let hansKrüsemannMem = MemberPortfolio.findCreateUpdate(bgContext: viewContext,
+                                                                organization: fgDeGender,
+                                                                photographer: hansKrüsemannPho,
+                                                                optionalFields: hansKrüsemannOpt)
+        hansKrüsemannMem.refreshFirstImage()
 
-        let jelleVanDeVoort = PersonName(givenName: "Jelle", infixName: "van de", familyName: "Voort")
-        _ = Photographer.findCreateUpdate(context: viewContext,
-                                          personName: jelleVanDeVoort,
-                                          optionalFields: PhotographerOptionalFields())
+        let jelleVanDeVoortPN = PersonName(givenName: "Jelle", infixName: "van de", familyName: "Voort")
+        let jelleVanDeVoortPho = Photographer.findCreateUpdate(context: viewContext,
+                                                  personName: jelleVanDeVoortPN,
+                                                  optionalFields: PhotographerOptionalFields())
+        let jelleVanDeVoortOpt = MemberOptionalFields(
+            level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Jelle_van_de_Voort/"),
+            memberRolesAndStatus: MemberRolesAndStatus(role: [ .chairman: true ], status: [:]),
+            fotobondNumber: 1620103,
+            membershipStartDate: "2020-01-01".extractDate(),
+            membershipEndDate: nil)
+        let jelleVanDeVoortMem = MemberPortfolio.findCreateUpdate(bgContext: viewContext,
+                                                                organization: fgDeGender,
+                                                                photographer: jelleVanDeVoortPho,
+                                                                optionalFields: jelleVanDeVoortOpt)
+        jelleVanDeVoortMem.refreshFirstImage()
 
-        let peterVanDenHamer = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
-        _ = Photographer.findCreateUpdate(context: viewContext,
-                                          personName: peterVanDenHamer,
-                                          optionalFields: PhotographerOptionalFields(
-                                            photographerWebsite: URL(string: "https://glass.photo/vdhamer")
-                                          )
-        )
+        let peterVanDenHamerPN = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
+        let peterVanDenHamerPho = Photographer.findCreateUpdate(context: viewContext,
+                                                  personName: peterVanDenHamerPN,
+                                                  optionalFields: PhotographerOptionalFields(
+                                                    bornDT: "1957-10-18".extractDate(),
+                                                    photographerWebsite: URL(string: "https://glass.photo/vdhamer")
+                                                  ))
+        let peterVanDenHamerOpt = MemberOptionalFields(
+            level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/"),
+            memberRolesAndStatus: MemberRolesAndStatus(role: [ .admin: true ], status: [:]),
+            fotobondNumber: 1620110,
+            membershipStartDate: "2024-01-01".extractDate(),
+            membershipEndDate: nil)
+        let peterVanDenHamerMem = MemberPortfolio.findCreateUpdate(bgContext: viewContext,
+                                                                organization: fgDeGender,
+                                                                photographer: peterVanDenHamerPho,
+                                                                optionalFields: peterVanDenHamerOpt)
+        peterVanDenHamerMem.refreshFirstImage()
     }
 
     public static func addFGdeGender() -> Organization {
