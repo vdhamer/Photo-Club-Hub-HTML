@@ -116,19 +116,16 @@ struct ContentView: View {
         let hansKrüsemann = PersonName(givenName: "Hans", infixName: "", familyName: "Krüsemann")
         _ = Photographer.findCreateUpdate(context: viewContext,
                                           personName: hansKrüsemann,
-                                          organization: fgDeGender,
                                           optionalFields: PhotographerOptionalFields())
 
         let jelleVanDeVoort = PersonName(givenName: "Jelle", infixName: "van de", familyName: "Voort")
         _ = Photographer.findCreateUpdate(context: viewContext,
                                           personName: jelleVanDeVoort,
-                                          organization: fgDeGender,
                                           optionalFields: PhotographerOptionalFields())
 
         let peterVanDenHamer = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
         _ = Photographer.findCreateUpdate(context: viewContext,
                                           personName: peterVanDenHamer,
-                                          organization: fgDeGender,
                                           optionalFields: PhotographerOptionalFields(
                                             photographerWebsite: URL(string: "https://glass.photo/vdhamer")
                                           )
