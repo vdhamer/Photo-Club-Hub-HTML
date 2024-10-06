@@ -56,6 +56,7 @@ struct ContentView: View {
                              """)
                         } label: {
                             Text(club.fullName)
+                                .font(.headline)
                         }
                     }
                     .onDelete(perform: deleteClubs)
@@ -68,13 +69,14 @@ struct ContentView: View {
             .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
             Divider()
             HStack(alignment: .center) {
-                Text("Statistics:").font(.headline)
+                Text("Loaded records:").font(.headline)
                 Text("   ◼ \(clubs.count) organizations")
                 Text("   ◼ \(organizationTypes.count) organizationTypes")
                 Text("   ◼ \(photographers.count) photographers")
                 Text("   ◼ \(members.count) members")
             }
-            .frame(height: 10)
+            .foregroundStyle(.secondary)
+            .frame(height: 5)
         }
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
