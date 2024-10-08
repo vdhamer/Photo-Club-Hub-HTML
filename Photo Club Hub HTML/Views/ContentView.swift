@@ -22,25 +22,31 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    private var clubs: FetchedResults<Organization>
+    private var allOrganizations: FetchedResults<Organization>
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
+        predicate: clubOnlyPredicate,
+        animation: .default)
+    private var allClubs: FetchedResults<Organization>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \OrganizationType.organizationTypeName_, ascending: true)],
-        predicate: NSPredicate(value: true), // doesn't do anything yet (should filter on Clubs)
+        predicate: allPredicate,
         animation: .default)
     private var organizationTypes: FetchedResults<OrganizationType>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Photographer.familyName_, ascending: true)],
-        predicate: NSPredicate(value: true), // doesn't do anything yet (should filter on Clubs)
+        predicate: allPredicate,
         animation: .default)
-    private var photographers: FetchedResults<Photographer>
+    private var allPhotographers: FetchedResults<Photographer>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)],
-        predicate: NSPredicate(value: true), // doesn't do anything yet (should filter on Clubs)
+        predicate: allPredicate, // there is a variant of this FetchRequest in MembershipView.swift
         animation: .default)
-    private var members: FetchedResults<MemberPortfolio>
+    private var allMembers: FetchedResults<MemberPortfolio>
 
     // MARK: - Body of ContentView
 
@@ -48,12 +54,9 @@ struct ContentView: View {
         VStack(alignment: .leading) {
             NavigationSplitView {
                 List {
-                    ForEach(clubs, id: \.self) { club in // .fullName_ is not always unique
+                    ForEach(allClubs, id: \.self) { club in // .fullName_ is not always unique
                         NavigationLink {
-                            Text("""
-                             \(club.organizationType.organizationTypeName.capitalized) \
-                             \(club.fullName) (\(club.town))
-                             """)
+                            MembershipView(club: club)
                         } label: {
                             Text(club.fullName)
                                 .font(.headline)
@@ -70,10 +73,11 @@ struct ContentView: View {
             Divider()
             HStack(alignment: .center) {
                 Text("Loaded records:").font(.headline)
-                Text("   ◼ \(clubs.count) organizations")
                 Text("   ◼ \(organizationTypes.count) organizationTypes")
-                Text("   ◼ \(photographers.count) photographers")
-                Text("   ◼ \(members.count) members")
+                Text("   ◼ \(allOrganizations.count) organizations")
+                Text("   ◼ \(allClubs.count) clubs")
+                Text("   ◼ \(allPhotographers.count) photographers")
+                Text("   ◼ \(allMembers.count) club members")
             }
             .foregroundStyle(.secondary)
             .frame(height: 5)
@@ -201,7 +205,7 @@ struct ContentView: View {
             let town = "Eindhoven"
             let fullName = "Org #\(newCount)"
             let organizationID = OrganizationID(fullName: fullName, town: town)
-            let organizationIdPlus = OrganizationIdPlus(id: organizationID, nickname: town)
+            let organizationIdPlus = OrganizationIdPlus(id: organizationID, nickname: "Nickname#\(newCount)")
 
             _ = Organization.findCreateUpdate(context: viewContext, // can be foreground of background context
                                               organizationTypeEnum: organizationTypeEnum,
@@ -224,7 +228,7 @@ struct ContentView: View {
     private func deleteClubs(at offsets: IndexSet) {
         withAnimation {
             for index in offsets { // probably only one
-                let club = clubs[index]
+                let club = allClubs[index]
                 viewContext.delete(club)
             }
 
