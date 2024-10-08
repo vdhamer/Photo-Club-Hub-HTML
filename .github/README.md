@@ -111,7 +111,7 @@ But it would conceivably still be reachable from an alternative URL (path like c
 
 ## Roadmap
 
-- [x] Fix the code (PR to twostraws/Ignite) so that the rendering works when Ignite is added as a regular Swift package.
+- [x] Fix the code (accepted PR for twostraws/Ignite) so that the rendering works when Ignite is added as a regular Swift package.
 - [ ] Load the membership list from a .level2.json file. Currently the app contains a copy of some of the data.
 - [ ] provide a UI by which the user can select a club for which to generate a local site.
 - [ ] localize the UI to support English (EN) and Dutch (NL),
