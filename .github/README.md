@@ -55,7 +55,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Search | yes | using browser's search |
 | App UI language | English, Dutch* | English |
 | Website language | N/A | Dutch* |
-| Can work offline | partly | no |
+| Can work offline | with reduced features | no |
 | Available via | App Store, Github | Github* |
 
  * = _might be improved or supported in the future_
