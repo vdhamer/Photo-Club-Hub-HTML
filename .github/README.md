@@ -62,7 +62,7 @@ TODO: add side-by-side comparison screenshots.
 | -------------------- | --------------------------- |
 | [twostraws/Ignite](https://github.com/twostraws/ignite.git) | website generator |
 | Apple SwiftUI | UI framework |
-| Apple CoreData | data storage framework |
+| [Apple's Core Data](https://developer.apple.com/documentation/coredata) | data storage framework |
 | [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing                |            
 
 ## Static sites and Ignite
