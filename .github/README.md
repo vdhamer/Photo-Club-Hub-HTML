@@ -43,7 +43,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Variant  | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS) | all major browsers |
-| Mobile friendly | yes | yes |
+| Mobile friendly || yes |
 | List of clubs | yes | no* |
 | List of club members | yes | yes |
 | Former club members | yes | yes |
