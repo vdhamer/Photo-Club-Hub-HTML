@@ -46,6 +46,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Mobile friendly | yes | yes |
 | List of clubs | yes | no* |
 | List of club members | yes | yes |
+| Former club members | yes | yes |
 | Member portfolios | yes | yes |
 | Linkable member portfolios | no | yes |
 | Portfolio autoplay | yes | yes |
