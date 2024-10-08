@@ -74,7 +74,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 
 This app runs on MacOS and generates a local directory with a few files and subdirectories (CSS, Javascript, image assets).
 These are then copied over to a club's existing server via e.g. FTP.
-Technically the files simply need to be hosted on an HTTP server such as a site running WordPress.
+Technically the files simply need to be hosted on an HTTP server such as a club's existing WordPress site.
 
 The data being displayed on the individual HTML sites can get updated say 10 times per year.
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
