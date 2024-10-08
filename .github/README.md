@@ -53,7 +53,8 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Maps showing clubs | yes | no |
 | Photo musea listed | yes | no* |
 | Search | yes | using browser's search |
-| Supported languages | English, Dutch* | Dutch* |
+| App UI language | English, Dutch* | English |
+| Website language | N/A | Dutch* |
 | Can work offline | partly | no |
 | Available via | App Store, Github | Github* |
 
