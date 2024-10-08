@@ -60,10 +60,10 @@ TODO: add side-by-side comparison screenshots.
 
 | Technology           | Description                 |
 | -------------------- | --------------------------- |
-| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | website generator |
-| Apple SwiftUI | UI framework |
-| [Apple's Core Data](https://developer.apple.com/documentation/coredata) | data storage framework |
-| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing                |            
+| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator |
+| [SwiftUI](https://developer.apple.com/documentation/coredata) | UI framework |
+| [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework |
+| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing |            
 
 ## Static sites and Ignite
 
