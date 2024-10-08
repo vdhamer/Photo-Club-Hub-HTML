@@ -24,19 +24,21 @@ The input data driving these apps forms a 3-level hierarchy:
 
 > The idea is to provide a _central_ portal to view images managed _locally_ by the individual clubs.
  
-This concept similar to the hierarchy of distributed
-[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate readable internet addresses into numeric addresses: 
-this app has one entry point (a filed named `root.level1.json`) that can forward the viewer to clubs with membership lists (`level2.json` files).
-These lead the viewer to image portfolios as managed by the clubs.
+This concept is comparable to the hierarchy of distributed
+[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate textual internet addresses
+into numeric internet addresses: this app has one entry point (a filed named `root.level1.json`) 
+that can forward the viewer to clubs with membership lists (`level2.json` files).
+These lead the viewer to image portfolios as managed by the photo clubs.
 
 This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
-and (in contrast to the iOS app) convert the latter into a static HTML website or subsite.
-That website serves as an alternative for the `Photo Club Hub` iOS app: 
-it allows users to view the images on devices running Android, Windows, MacOS, etc.
+and (in contrast to the iOS app) convert the latter into a static HTML pages for a new or existing website.
 
 ## Comparing both apps
 
 TODO: add side-by-side comparison screenshots.
+
+This website generator serves as an alternative for the `Photo Club Hub` iOS app: 
+it allows users to view the images on devices running Android, Windows, MacOS, etc.
 
 | Variant  | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | :-----------: | :-------: |
@@ -46,7 +48,7 @@ TODO: add side-by-side comparison screenshots.
 | List of club members | yes | yes |
 | Member portfolios | yes | yes |
 | Portfolio autoplay | yes | yes |
-| Content updated | when club updates its data | when club updates its data |
+| Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | yes | no |
 | Photo musea listed | yes | no* |
 | Search | yes | no |
