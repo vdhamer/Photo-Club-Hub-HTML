@@ -18,7 +18,7 @@ Both apps allow photography clubs to display photos made by club members.
 
 The input data driving these apps forms a 3-level hierarchy: 
 
-1. a central list with (dozens/hundreds/thousands of) participating clubs,
+1. a central list with (hundreds of) participating clubs,
 2. local lists, each containing (dozens of) members per club, and
 3. local portfolios with (dozens of) selected images per club member.
 
