@@ -52,7 +52,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Portfolio autoplay | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | yes | no |
-| Photo musea listed | yes | no* |
+| Photo museums listed | yes | no* |
 | Search | yes | using browser's search |
 | App UI language | English, Dutch* | English |
 | Website language | N/A | Dutch* |
