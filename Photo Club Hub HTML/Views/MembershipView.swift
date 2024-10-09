@@ -12,29 +12,35 @@ import CoreData
 struct MembershipView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    static let allPredicate = NSPredicate(format: "TRUEPREDICATE")
-    private var specificClubPredicate = allPredicate // temporary value, gets overwritten within init()
-    static private var club = Organization() // temporary value overwritten by explicit init()
-
-    init(club: Organization) {
-        MembershipView.club = club
-        self.specificClubPredicate = NSPredicate(format: "self = %@",
-                                                 argumentArray: [club])
-    }
+    private var specificClubPredicate = NSPredicate(format: "TRUEPREDICATE") // value gets overwritten within init()
+    @State static var club = Organization() // temporary value overwritten by explicit init()
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)],
-        predicate: allPredicate, /* NSPredicate(format: ".organization_ = %@",
-                               argumentArray: [club]), */
+        predicate: NSPredicate(format: "TRUEPREDICATE"),
+//        predicate: NSPredicate(format: "organization_ = %@",
+//                               argumentArray: [_club]),
         animation: .default)
-    private var singleClubsMembers: FetchedResults<MemberPortfolio>
+    var clubMembers: FetchedResults<MemberPortfolio>
+
+    init(getClub: () -> Organization) {
+        MembershipView.club = getClub()
+    }
 
     var body: some View {
-        Text(MembershipView.club.fullName)
-            .font(.headline)
+        List {
+            if clubMembers.isEmpty {
+//                Text("Club \(MembershipView.club.fullNameTown) has no members.") TODO
+                Text("Club has no members.")
+            } else {
+                ForEach(clubMembers, id: \.self) { member in
+                    Text("\(member.photographer_?.givenName_ ?? "given name?")")
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    MembershipView(club: ContentView.addFGdeGender())
+    MembershipView(getClub: ContentView.addFGdeGender)
 }
