@@ -44,7 +44,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
 | Mobile friendly | yes | yes |
-| List of clubs | YES | NO* |
+| List of clubs | __YES__ | __NO__* |
 | List of club members | yes | yes |
 | Former club members | yes | yes |
 | Member portfolios | yes | yes |
