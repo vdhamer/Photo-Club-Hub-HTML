@@ -53,7 +53,6 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | __YES__ | __NO__ |
 | Photo museums listed | __YES__ | __NO__* |
-| Search | yes | using browser's search |
 | App UI language | English, __Dutch__* | English |
 | Website language | N/A | __Dutch__* |
 | Can work offline | __with reduced features__ | __NO__ |
