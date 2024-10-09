@@ -48,16 +48,16 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | List of club members | yes | yes |
 | Former club members | yes | yes |
 | Member portfolios | yes | yes |
-| Linkable member portfolios | NO | YES |
+| Linkable member portfolios | __NO__ | __YES__ |
 | Portfolio autoplay | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
-| Maps showing clubs | YES | NO |
-| Photo museums listed | YES | NO* |
+| Maps showing clubs | __YES__ | __NO__ |
+| Photo museums listed | __YES__ | __NO__* |
 | Search | yes | using browser's search |
-| App UI language | English, DUTCH* | English |
-| Website language | N/A | Dutch* |
-| Can work offline | with reduced features | NO |
-| Available via | APP STORE, Github | Github* |
+| App UI language | English, __Dutch__* | English |
+| Website language | N/A | __Dutch__* |
+| Can work offline | __with reduced features__ | __NO__ |
+| Available via | __App Store__, Github | Github* |
 
  * = _might be improved or supported in the future_
 
