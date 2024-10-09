@@ -54,9 +54,9 @@ struct ContentView: View {
         VStack(alignment: .leading) {
             NavigationSplitView {
                 List {
-                    ForEach(allClubs, id: \.self) { club in // .fullName_ is not always unique
+                    ForEach(allClubs, id: \.self) { club in
                         NavigationLink {
-                            MembershipView(club: club)
+                            MembershipView(getClub: { club })
                         } label: {
                             Text(club.fullName)
                                 .font(.headline)
@@ -74,8 +74,8 @@ struct ContentView: View {
             HStack(alignment: .center) {
                 Text("Loaded records:").font(.headline)
                 Text("   ◼ \(organizationTypes.count) organizationTypes")
-                Text("   ◼ \(allOrganizations.count) organizations")
                 Text("   ◼ \(allClubs.count) clubs")
+                Text("   ◼ \(allOrganizations.count-allClubs.count) other organizations")
                 Text("   ◼ \(allPhotographers.count) photographers")
                 Text("   ◼ \(allMembers.count) club members")
             }
@@ -84,7 +84,8 @@ struct ContentView: View {
         }
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
-            addTestMembers()
+            addTestMembersDeGender()
+            addTestMembersWaalre()
         }
         .frame(minWidth: 480, minHeight: 290)
         .padding()
@@ -114,7 +115,7 @@ struct ContentView: View {
 
     // MARK: - add and delete clubs and members
 
-    func addTestMembers() {
+    func addTestMembersDeGender() {
         let fgDeGender = ContentView.addFGdeGender()
 
         let hansKrüsemannPN = PersonName(givenName: "Hans", infixName: "", familyName: "Krüsemann")
@@ -172,8 +173,6 @@ struct ContentView: View {
     public static func addFGdeGender() -> Organization {
         withAnimation {
             let context = PersistenceController.shared.container.viewContext // foreground only for now
-            let newCount = UserDefaults.standard.integer(forKey: "clubCounter") + 1
-            UserDefaults.standard.set(newCount, forKey: "clubCounter")
 
             let organizationIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
                                                         town: "Eindhoven",
@@ -186,6 +185,54 @@ struct ContentView: View {
             do {
                 try context.save()
                 return fgDeGender
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use
+                // this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+
+    func addTestMembersWaalre() {
+        let fgDeGender = ContentView.addFGWaalre()
+
+        let peterVanDenHamerPN = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
+        let peterVanDenHamerPho = Photographer.findCreateUpdate(context: viewContext,
+                                                  personName: peterVanDenHamerPN,
+                                                  optionalFields: PhotographerOptionalFields(
+                                                    bornDT: "1957-10-18".extractDate(),
+                                                    photographerWebsite: URL(string: "https://glass.photo/vdhamer")
+                                                  ))
+        let peterVanDenHamerOpt = MemberOptionalFields(
+            level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/"),
+            memberRolesAndStatus: MemberRolesAndStatus(role: [ .admin: true ], status: [:]),
+            fotobondNumber: 1620110,
+            membershipStartDate: "2024-01-01".extractDate(),
+            membershipEndDate: nil)
+        let peterVanDenHamerMem = MemberPortfolio.findCreateUpdate(bgContext: viewContext,
+                                                                organization: fgDeGender,
+                                                                photographer: peterVanDenHamerPho,
+                                                                optionalFields: peterVanDenHamerOpt)
+        peterVanDenHamerMem.refreshFirstImage()
+    }
+
+    public static func addFGWaalre() -> Organization {
+        withAnimation {
+            let context = PersistenceController.shared.container.viewContext // foreground only for now
+
+            let organizationIdPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre",
+                                                        town: "Waalre",
+                                                        nickname: "FGWaalre")
+
+            let fgWaalre = Organization.findCreateUpdate(context: context, // foreground
+                                                           organizationTypeEnum: OrganizationTypeEnum.club,
+                                                           idPlus: organizationIdPlus,
+                                                           optionalFields: OrganizationOptionalFields())
+            do {
+                try context.save()
+                return fgWaalre
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use
