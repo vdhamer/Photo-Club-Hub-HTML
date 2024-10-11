@@ -105,8 +105,10 @@ This would allow a user to choose whether or not to load data for particular bra
 Such extra level(s) of hierarchy should match the way the data and responsibilities are organized: 
 essentially the tree structure forms a chain of trust. 
 A "rogue" or just non-club site will only be reachable if there is a chain of valid links between the default root and that site.
-Thus a site with questionable content (say `my cat photos`) can thus be isolated by breaking one of the links.
-But it would conceivably still be reachable from an alternative URL (path like cats_and_more_cats/Berlin).
+Thus a site with questionable content (say `my cat photos`) can thus be isolated by removing a link.
+But it would still be reachable using its URL (path like `cats_and_more_cats/Berlin`).
+This is not a problem as long as sites stick to the select/select2/viewImages hierarchy. 
+It might even be supported as a feature in both apps (the iOS viewer and the MacOS generator).
 
 ## Roadmap
 
