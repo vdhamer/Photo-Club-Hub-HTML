@@ -72,12 +72,12 @@ struct ContentView: View {
             .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
             Divider()
             HStack(alignment: .center) {
-                Text("Loaded records:").font(.headline)
-                Text("   ◼ \(organizationTypes.count) organizationTypes")
-                Text("   ◼ \(allClubs.count) clubs")
-                Text("   ◼ \(allOrganizations.count-allClubs.count) other organizations")
-                Text("   ◼ \(allPhotographers.count) photographers")
-                Text("   ◼ \(allMembers.count) club memberships")
+                Text("Database content:").font(.headline)
+                Text("◼ \(organizationTypes.count) organizationTypes")
+                Text("◼ \(allClubs.count) clubs")
+                Text("◼ \(allOrganizations.count-allClubs.count) other organizations")
+                Text("◼ \(allPhotographers.count) photographers")
+                Text("◼ \(allMembers.count) club memberships")
             }
             .foregroundStyle(.secondary)
             .frame(height: 5)
