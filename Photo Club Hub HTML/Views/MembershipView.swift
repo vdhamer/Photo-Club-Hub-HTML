@@ -30,8 +30,7 @@ struct MembershipView: View {
     var body: some View {
         List {
             if clubMembers.isEmpty {
-//                Text("Club \(MembershipView.club.fullNameTown) has no members.") TODO
-                Text("Club has no members.")
+                Text("There are no known members for \(MembershipView.club.fullName).")
             } else {
                 ForEach(clubMembers, id: \.self) { member in
                     Text("\(member.photographer_?.givenName_ ?? "given name?")")
