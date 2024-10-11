@@ -44,15 +44,15 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
 | Mobile friendly | yes | yes |
-| Lists clubs | yes | __NO__* |
-| Lists photo museums | yes | __NO__* |
+| Lists clubs | yes | -* |
+| Lists photo museums | yes | -* |
 | Lists current club members | yes | yes |
 | Lists former club members | yes | yes |
 | Displays member portfolios | yes | yes |
-| Linkable member portfolios | __NO__ | yes |
+| Linkable member portfolios | - | yes |
 | Portfolio autoplay | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
-| Maps showing clubs | yes | __NO__ |
+| Maps showing clubs | yes | - |
 | Languages | English, Dutch* | Dutch* |
 | Data caching | yes | yes |
 | Available via | App Store, Github | URL, Github |
