@@ -40,23 +40,22 @@ and (in contrast to the iOS app) convert the latter into a static HTML pages tha
 This website generator serves as an alternative for the `Photo Club Hub` iOS app: 
 it allows users to view the images on devices running Android, Windows, MacOS, etc.
 
-| Variant  | Photo Club Hub | Photo Club Hub HTML |
+| | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
 | Mobile friendly | yes | yes |
-| List of clubs | __YES__ | __NO__* |
-| List of club members | yes | yes |
-| Former club members | yes | yes |
-| Member portfolios | yes | yes |
-| Linkable member portfolios | __NO__ | __YES__ |
+| Lists clubs | yes | -* |
+| Lists photo museums | yes | -* |
+| Lists current club members | yes | yes |
+| Lists former club members | yes | yes |
+| Displays member portfolios | yes | yes |
+| Linkable member portfolios | - | yes |
 | Portfolio autoplay | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
-| Maps showing clubs | __YES__ | __NO__ |
-| Photo museums listed | __YES__ | __NO__* |
-| App UI language | English, __Dutch__* | English |
-| Website language | N/A | __Dutch__* |
-| Can work offline | __with reduced features__ | __NO__ |
-| Available via | __App Store__, Github | __URL__, Github |
+| Maps showing clubs | yes | - |
+| Languages | English, Dutch* | Dutch* |
+| Data caching | yes | yes |
+| Available via | App Store, Github | URL, Github |
 
  * = _might be improved or supported in the future_
 
