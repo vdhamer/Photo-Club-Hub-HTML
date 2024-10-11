@@ -26,7 +26,7 @@ The input data driving these apps forms a 3-level hierarchy:
  
 This concept is comparable to the hierarchy of distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate textual internet addresses
-into numeric internet addresses: this app has one entry point (a filed named `root.level1.json`) 
+into numeric internet addresses: this app has one entry point (a file named `root.level1.json`) 
 that can forward the viewer to clubs with membership lists (`level2.json` files).
 These lead the viewer to image portfolios as managed by the photo clubs.
 
