@@ -110,12 +110,12 @@ But it would conceivably still be reachable from an alternative URL (path like c
 
 ## Roadmap
 
-- [x] Fix the code (accepted PR for twostraws/Ignite) so that the rendering works when Ignite is added as a regular Swift package.
-- [ ] Load the membership list from a .level2.json file. Currently the app contains a copy of some of the data.
+- [x] Fix the Ignite code (accepted PR for twostraws/Ignite) so that Ignite can be imported as a regular Swift package.
+- [ ] Load the membership list from a .level2.json file. Currently the app contains a hardcoded partial copy of this data.
 - [ ] provide a UI by which the user can select a club for which to generate a local site.
-- [ ] localize the UI to support English (EN) and Dutch (NL),
-- [ ] possibly generate a static site that can serve as index of supported clubs.
-- [ ] possibly create one or more editor apps for managing the content in the JSON files
+- [ ] localize the app's UI to support at least English and Dutch (for now there isn't much of a UI),
+- [ ] generate a static site that can serve as index of supported clubs (Level 1 data).
+It would be nice to create apps for data entry and data editing (rather than editing JSON files), but these would be a separate repo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
