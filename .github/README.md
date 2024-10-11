@@ -16,17 +16,17 @@ This MacOS app generates static websites using [twostraws/ignite](https://github
 It is a companion to the [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub) iOS/iPadOS app.
 Both apps allow photography clubs to display photos made by club members.
 
-The input data driving these apps forms a 3-level hierarchy: 
+> The idea is to provide a _central_ portal to view images that are managed _locally_ by the individual clubs.
+
+This calls for a 3-level data hierarchy: 
 
 1. a central list with (someday hundreds of) participating clubs,
 2. local lists, each containing (dozens of) members per club, and
 3. local portfolios with (dozens of) selected images per club member.
-
-> The idea is to provide a _central_ portal to view images that are managed _locally_ by the individual clubs.
  
 This concept is comparable to the hierarchy of distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate textual internet addresses
-into numeric internet addresses: this app has one entry point (a file named `root.level1.json`) 
+into numeric internet addresses: there is one entry point (a file named `root.level1.json`) 
 that can forward the viewer to clubs with membership lists (`level2.json` files).
 These lead the viewer to image portfolios that are managed by the photo clubs.
 
