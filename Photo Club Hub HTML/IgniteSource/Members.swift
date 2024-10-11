@@ -63,7 +63,7 @@ struct Members: StaticPage {
             memberRow(givenName: "Gert", infixName: "du", familyName: "Bois",
                       start: "2015-01-01", fotobond: 1620087,
                       portfolio: "http://www.vdhamer.com/fgDeGender/Gert_du_Bois/",
-                      thumbnailSuffix: "2023_untitled shoot_002.jpg")
+                      thumbnailSuffix: "2024_GertDuBois_002.jpg")
 
             memberRow(givenName: "Hans", infixName: "van", familyName: "Gorp",
                       start: "1995-01-01", fotobond: 1620029,
