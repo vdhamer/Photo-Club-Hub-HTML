@@ -40,7 +40,7 @@ and (in contrast to the iOS app) convert the latter into a static HTML pages tha
 This website generator serves as an alternative for the `Photo Club Hub` iOS app: 
 it allows users to view the images on devices running Android, Windows, MacOS, etc.
 
-| Variant  | Photo Club Hub | Photo Club Hub HTML |
+| | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
 | Mobile friendly | yes | yes |
