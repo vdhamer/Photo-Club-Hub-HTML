@@ -11,6 +11,7 @@
 		D014A99C2C9DC50200ED412D /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D065BD692CB08B7600346F66 /* SwiftyJSON */; };
 		D0D9F81C2C8DE36400FE030A /* Screenshot_Ignite.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */; };
+		D0F3B6132CB9B951008C9F26 /* Screenshot_comparison.png in Resources */ = {isa = PBXBuildFile; fileRef = D0F3B6122CB9B951008C9F26 /* Screenshot_comparison.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,8 @@
 		D0D9F81E2C8DE3A600FE030A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D0D9F8222C8DE45500FE030A /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0F3B6112CB9B940008C9F26 /* Screenshot_comparison.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Screenshot_comparison.psd; sourceTree = "<group>"; };
+		D0F3B6122CB9B951008C9F26 /* Screenshot_comparison.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot_comparison.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -45,6 +48,8 @@
 		D0D9F8172C8DE36400FE030A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D0F3B6112CB9B940008C9F26 /* Screenshot_comparison.psd */,
+				D0F3B6122CB9B951008C9F26 /* Screenshot_comparison.png */,
 				D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */,
 			);
 			path = images;
@@ -149,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F3B6132CB9B951008C9F26 /* Screenshot_comparison.png in Resources */,
 				D0D9F81C2C8DE36400FE030A /* Screenshot_Ignite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

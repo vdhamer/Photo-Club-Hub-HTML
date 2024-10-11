@@ -20,10 +20,9 @@ extension MemberPortfolio { // findCreateUpdate() records in Member table
                                  optionalFields: MemberOptionalFields
                                 ) -> MemberPortfolio {
 
-        let predicateFormat: String = "organization_ = %@ AND photographer_ = %@" // avoid localization
+        let predicateFormat: String = "organization_ = %@ AND photographer_ = %@" // avoid localization of query string
         let predicate = NSPredicate(format: predicateFormat,
-                                    argumentArray: [organization, photographer]
-                                   )
+                                    argumentArray: [organization, photographer])
         let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
         fetchRequest.predicate = predicate
         let memberPortfolios: [MemberPortfolio] = (try? bgContext.fetch(fetchRequest)) ?? [] // nil = absolute failure

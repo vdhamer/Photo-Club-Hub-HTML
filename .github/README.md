@@ -35,7 +35,7 @@ and (in contrast to the iOS app) convert the latter into a static HTML pages tha
 
 ## Comparing both apps
 
-TODO: add side-by-side comparison screenshots.
+![App versus HTML comparison](images/Screenshot_comparison.png "side-by-side screenshots")
 
 This website generator serves as an alternative for the `Photo Club Hub` iOS app: 
 it allows users to view the images on devices running Android, Windows, MacOS, etc.
