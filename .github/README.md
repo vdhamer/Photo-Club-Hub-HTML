@@ -96,7 +96,7 @@ Until the common code is factored out into a package, it will require some extra
 ## Will 3 hierarchy levels be enough?
 
 Initially there are only a handful of pilot clubs involved. 
-A hundred clubs at <1 kB each can be supported with a single file, especially when loaded in the background.
+A hundred clubs at <1 kB each can be supported with a single `Level 1` file, especially when loaded in the background.
 
 To split up the `level1.json` file we _could_ allow the `root.level1.json` file to contain URL links to additional level1.json files.
 This could, for example, allow the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
