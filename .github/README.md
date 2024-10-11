@@ -115,7 +115,7 @@ But it would conceivably still be reachable from an alternative URL (path like c
 - [ ] provide a UI by which the user can select a club for which to generate a local site.
 - [ ] localize the app's UI to support at least English and Dutch (for now there isn't much of a UI),
 - [ ] generate a static site that can serve as index of supported clubs (Level 1 data).
-It would be nice to create apps for data entry and data editing (rather than editing JSON files), but these would be a separate repo.
+It would be nice to have an app for data enty/editing (rather than editing JSON files), but these would be a separate repo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
