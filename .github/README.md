@@ -13,46 +13,50 @@
 # Photo-Club-Hub-HTML
 
 This MacOS app generates static websites using [twostraws/ignite](https://github.com/twostraws/ignite).
-It is a companion to the iOS app [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub).
-Both apps allow photography clubs to display photos made by club members online.
+It is a companion to the [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub) iOS/iPadOS app.
+Both apps allow photography clubs to display photos made by club members.
 
-The input data driving these apps forms a 3-level hierarchy: 
+> The idea is to provide a _central_ portal to view images that are managed _locally_ by the individual clubs.
 
-1. a central list with (dozens/hundreds/thousands of) participating clubs,
+This calls for a 3-level data hierarchy: 
+
+1. a central list with (someday hundreds of) participating clubs,
 2. local lists, each containing (dozens of) members per club, and
 3. local portfolios with (dozens of) selected images per club member.
-
-> The idea is to provide a _central_ portal to view images managed _locally_ by the individual clubs.
  
-This concept similar to the hierarchy of distributed
-[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate readable internet addresses into numeric addresses: 
-this app has one entry point (a filed named `root.level1.json`) that can forward the viewer to clubs with membership lists (`level2.json` files).
-These lead the viewer to image portfolios as managed by the clubs.
+This concept is comparable to the hierarchy of distributed
+[Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate textual internet addresses
+into numeric internet addresses: there is one entry point (a file named `root.level1.json`) 
+that can forward the viewer to clubs with membership lists (`level2.json` files).
+These lead the viewer to image portfolios that are managed by the photo clubs.
 
 This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
-and (in contrast to the iOS app) convert the latter into a static HTML website or subsite.
-That website serves as an alternative for the `Photo Club Hub` iOS app: 
-it allows users to view the images on devices running Android, Windows, MacOS, etc.
+and (in contrast to the iOS app) convert the latter into a static HTML pages that can be incorporated into a website.
 
 ## Comparing both apps
 
 TODO: add side-by-side comparison screenshots.
 
+This website generator serves as an alternative for the `Photo Club Hub` iOS app: 
+it allows users to view the images on devices running Android, Windows, MacOS, etc.
+
 | Variant  | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | :-----------: | :-------: |
-| Runs on | iOS, iPadOS, (MacOS) | all major browsers |
+| Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
 | Mobile friendly | yes | yes |
-| List of clubs | yes | no* |
+| List of clubs | __YES__ | __NO__* |
 | List of club members | yes | yes |
+| Former club members | yes | yes |
 | Member portfolios | yes | yes |
+| Linkable member portfolios | __NO__ | __YES__ |
 | Portfolio autoplay | yes | yes |
-| Content updated | when club updates its data | when club updates its data |
-| Maps showing clubs | yes | no |
-| Photo musea listed | yes | no* |
-| Search | yes | no |
-| Supported languages | English, Dutch* | Dutch* |
-| Can work offline | partly | no |
-| Available via | App Store, Github | Github* |
+| Content updated | whenever club updates its data | whenever club updates its data |
+| Maps showing clubs | __YES__ | __NO__ |
+| Photo museums listed | __YES__ | __NO__* |
+| App UI language | English, __Dutch__* | English |
+| Website language | N/A | __Dutch__* |
+| Can work offline | __with reduced features__ | __NO__ |
+| Available via | __App Store__, Github | __URL__, Github |
 
  * = _might be improved or supported in the future_
 
@@ -60,16 +64,16 @@ TODO: add side-by-side comparison screenshots.
 
 | Technology           | Description                 |
 | -------------------- | --------------------------- |
-| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | website generator |
-| Apple SwiftUI | UI framework |
-| Apple CoreData | data storage framework |
-| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing                |            
+| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator |
+| [SwiftUI](https://developer.apple.com/documentation/coredata) | UI framework |
+| [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework |
+| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing |            
 
 ## Static sites and Ignite
 
 This app runs on MacOS and generates a local directory with a few files and subdirectories (CSS, Javascript, image assets).
 These are then copied over to a club's existing server via e.g. FTP.
-Technically the files simply need to be hosted on an HTTP server such as a site running WordPress.
+Technically the files simply need to be hosted on an HTTP server such as a club's existing WordPress site.
 
 The data being displayed on the individual HTML sites can get updated say 10 times per year.
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
@@ -92,7 +96,7 @@ Until the common code is factored out into a package, it will require some extra
 ## Will 3 hierarchy levels be enough?
 
 Initially there are only a handful of pilot clubs involved. 
-A hundred clubs at <1 kB each can be supported with a single file, especially when loaded in the background.
+A hundred clubs at <1 kB each can be supported with a single `Level 1` file, especially when loaded in the background.
 
 To split up the `level1.json` file we _could_ allow the `root.level1.json` file to contain URL links to additional level1.json files.
 This could, for example, allow the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
@@ -101,17 +105,20 @@ This would allow a user to choose whether or not to load data for particular bra
 Such extra level(s) of hierarchy should match the way the data and responsibilities are organized: 
 essentially the tree structure forms a chain of trust. 
 A "rogue" or just non-club site will only be reachable if there is a chain of valid links between the default root and that site.
-Thus a site with questionable content (say `my cat photos`) can thus be isolated by breaking one of the links.
-But it would conceivably still be reachable from an alternative URL (path like cats_and_more_cats/Berlin).
+Thus a site with questionable content (say `my cat photos`) can thus be isolated by removing a link.
+But it would still be reachable using its URL (path like `cats_and_more_cats/Berlin`).
+This is not a problem as long as sites stick to the select/select2/viewImages hierarchy. 
+It might even be supported as a feature in both apps (the iOS viewer and the MacOS generator).
 
 ## Roadmap
 
-- [x] Fix the code (PR to twostraws/Ignite) so that the rendering works when Ignite is added as a regular Swift package.
-- [ ] Load the membership list from a .level2.json file. Currently the app contains a copy of some of the data.
+- [x] Fix the Ignite code (accepted PR for twostraws/Ignite) so that Ignite can be imported as a regular Swift package.
+- [ ] Load the membership list from a .level2.json file. Currently the app contains a hardcoded partial copy of this data.
 - [ ] provide a UI by which the user can select a club for which to generate a local site.
-- [ ] localize the UI to support English (EN) and Dutch (NL),
-- [ ] possibly generate a static site that can serve as index of supported clubs.
-- [ ] possibly create one or more editor apps for managing the content in the JSON files
+- [ ] localize the app's UI to support at least English and Dutch (for now there isn't much of a UI),
+- [ ] generate a static site that can serve as index of supported clubs (Level 1 data).
+
+It would be nice to have an app for data enty/editing (rather than editing JSON files), but these would be a separate repo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
