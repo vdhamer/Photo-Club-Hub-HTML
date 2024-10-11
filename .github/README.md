@@ -31,7 +31,7 @@ that can forward the viewer to clubs with membership lists (`level2.json` files)
 These lead the viewer to image portfolios that are managed by the photo clubs.
 
 This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
-and (in contrast to the iOS app) convert the latter into a static HTML pages for a new or existing website.
+and (in contrast to the iOS app) convert the latter into a static HTML pages that can be incorporated into a website.
 
 ## Comparing both apps
 
