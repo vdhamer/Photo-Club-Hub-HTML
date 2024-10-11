@@ -77,7 +77,7 @@ struct ContentView: View {
                 Text("   ◼ \(allClubs.count) clubs")
                 Text("   ◼ \(allOrganizations.count-allClubs.count) other organizations")
                 Text("   ◼ \(allPhotographers.count) photographers")
-                Text("   ◼ \(allMembers.count) club members")
+                Text("   ◼ \(allMembers.count) club memberships")
             }
             .foregroundStyle(.secondary)
             .frame(height: 5)
