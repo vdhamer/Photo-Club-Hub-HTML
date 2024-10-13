@@ -33,10 +33,22 @@ struct MembershipView: View {
                 Text("There are no known members for \(MembershipView.club.fullName).")
             } else {
                 ForEach(clubMembers, id: \.self) { member in
-                    Text("\(member.photographer_?.givenName_ ?? "given name?")")
+                    Text("""
+                         \(member.photographer_?.givenName_ ?? "given name?") \
+                         \(infix(content: member.photographer_?.infixName))\
+                         \(member.photographer_?.familyName_ ?? "family name?") \
+                         (\(member.organization_?.fullName ?? "club name?"))
+                         """)
                 }
             }
         }
+    }
+
+    private func infix(content: String?) -> String {
+        if let content {
+            return content + " "
+        }
+        return ""
     }
 }
 
