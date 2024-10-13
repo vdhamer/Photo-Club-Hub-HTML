@@ -50,7 +50,7 @@ struct Members: StaticPage {
 
             memberRow(givenName: "Eric", infixName: "van de", familyName: "Ven",
                       start: "2022-12-01", fotobond: 1620109,
-                      website: "https://www.ericvandeven.com/",
+                      website: "https://www.ericvdven.nl",
                       portfolio: "http://www.vdhamer.com/fgDeGender/Eric_van_de_Ven/",
                       thumbnailSuffix: "4-9_2.jpg")
 
