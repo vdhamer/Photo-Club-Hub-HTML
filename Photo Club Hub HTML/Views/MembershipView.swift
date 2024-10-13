@@ -20,6 +20,8 @@ struct MembershipView: View {
         predicate: NSPredicate(format: "TRUEPREDICATE"),
 //        predicate: NSPredicate(format: "organization_ = %@",
 //                               argumentArray: [_club]),
+//        predicate: NSPredicate(format: "fotobondNumber = %@",
+//                               argumentArray: [12345]),
         animation: .default)
     var clubMembers: FetchedResults<MemberPortfolio>
 
