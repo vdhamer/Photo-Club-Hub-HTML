@@ -13,11 +13,12 @@ struct MembershipView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     private var specificClubPredicate = NSPredicate(format: "TRUEPREDICATE") // value gets overwritten within init()
-    @State static var club = Organization() // temporary value overwritten by explicit init()
+    @State static var club: Organization! // Optional! to avoid having to assign it using a designated initializer
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)],
-        predicate: NSPredicate(format: "TRUEPREDICATE"),
+//        predicate: NSPredicate(format: "TRUEPREDICATE"),
+        predicate: NSPredicate(format: "FALSEPREDICATE"),
 //        predicate: NSPredicate(format: "organization_ = %@",
 //                               argumentArray: [_club]),
 //        predicate: NSPredicate(format: "fotobondNumber = %@",
