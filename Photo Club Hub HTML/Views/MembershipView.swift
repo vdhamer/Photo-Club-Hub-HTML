@@ -8,32 +8,32 @@
 import SwiftUI
 import CoreData
 
-@MainActor
 struct MembershipView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     private var specificClubPredicate = NSPredicate(format: "TRUEPREDICATE") // value gets overwritten within init()
-    @State static var club: Organization! // Optional! to avoid having to assign it using a designated initializer
+    @State var club: Organization? // Optional to avoid having to assign it a value using designated initializer
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)],
 //        predicate: NSPredicate(format: "TRUEPREDICATE"),
-        predicate: NSPredicate(format: "FALSEPREDICATE"),
+//        predicate: NSPredicate(format: "FALSEPREDICATE"),
 //        predicate: NSPredicate(format: "organization_ = %@",
-//                               argumentArray: [_club]),
-//        predicate: NSPredicate(format: "fotobondNumber = %@",
-//                               argumentArray: [12345]),
+//                               argumentArray: [club]), // cannot access club in property initializer
+        predicate: NSPredicate(format: "fotobondNumber = %@",
+                               argumentArray: [1620103]),
+//        predicate: specificClubPredicate  // cannot access spedificClubPredicate in property initializer
         animation: .default)
     var clubMembers: FetchedResults<MemberPortfolio>
 
-    init(getClub: () -> Organization) {
-        MembershipView.club = getClub()
+    init(club: Organization) {
+        self.club = club
     }
 
     var body: some View {
         List {
             if clubMembers.isEmpty {
-                Text("There are no known members for \(MembershipView.club.fullName).")
+                Text("There are no known members for \(club?.fullName ?? "club <nil>").")
             } else {
                 ForEach(clubMembers, id: \.self) { member in
                     Text("""
@@ -55,6 +55,6 @@ struct MembershipView: View {
     }
 }
 
-#Preview {
-    MembershipView(getClub: ContentView.addFGdeGender)
-}
+// #Preview { // TODO
+//    MembershipView(club: ContentView.addFGdeGender)
+// }
