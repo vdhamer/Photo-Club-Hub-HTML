@@ -82,8 +82,9 @@ extension MemberPortfolio { // findCreateUpdate() records in Member table
         let changed6 = updateIfChangedOptional(update: &self.featuredImageThumbnail,
                                                with: optionalFields.featuredImageThumbnail)
         let changed7 = updateIfChanged(update: &self.removeMember, with: removeMember)
-        needsSaving = changed1 || changed2 || changed3 ||
-                      changed4 || changed5 || changed6 || changed7 // forces execution of updateIfChanged()
+        let changed8 = updateIfChanged(update: &self.fotobondNumber, with: optionalFields.fotobondNumber)
+        needsSaving = changed1 || changed2 || changed3 || changed4 ||
+                      changed5 || changed6 || changed7 || changed8 // forces execution of updateIfChanged()
 
         if needsSaving && Settings.extraCoreDataSaves {
             do {
@@ -112,6 +113,17 @@ extension MemberPortfolio { // findCreateUpdate() records in Member table
                                     Changed latest thumbnail for \(photographer.fullNameFirstLast) \
                                     to \(optionalFields.featuredImageThumbnail?.lastPathComponent ??
                                     "<noLatestThumbnail>")
+                                    """)}
+                if changed7 { print("""
+                                    \(organization.fullNameTown): \
+                                    Changed removeMember flag for \(photographer.fullNameFirstLast) \
+                                    to \(removeMember) ??
+                                    "<noLatestRemoveMember>")
+                                    """)}
+                if changed8 { print("""
+                                    \(organization.fullNameTown): \
+                                    Changed latest fotobondNumber for \(photographer.fullNameFirstLast) \
+                                    to \(optionalFields.fotobondNumber ?? 0)
                                     """)}
             } catch {
                 ifDebugFatalError("Update failed for member \(photographer.fullNameFirstLast) " +

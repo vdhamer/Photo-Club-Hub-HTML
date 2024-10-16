@@ -56,7 +56,7 @@ struct ContentView: View {
                 List {
                     ForEach(allClubs, id: \.self) { club in
                         NavigationLink {
-                            MembershipView(getClub: { club })
+                            MembershipView(club: club)
                         } label: {
                             Text(club.fullName)
                                 .font(.headline)
