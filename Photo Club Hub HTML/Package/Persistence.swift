@@ -33,11 +33,11 @@ struct PersistenceController {
 
     let container: NSPersistentContainer
 
-    init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Photo_Club_Hub")
-        if inMemory {
-            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        }
+	init(inMemory: Bool = false) {
+		container = NSPersistentContainer(name: "Photo_Club_Hub") // name of .xcdatamodel
+		if inMemory {
+			container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+		}
 
         // https://beckyhansmeyer.com/tag/core-data/ and https://developer.apple.com/videos/play/wwdc2021/10017
         guard let description = container.persistentStoreDescriptions.first else {
@@ -48,7 +48,7 @@ struct PersistenceController {
         description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
 
         // swiftlint:disable:next unused_closure_parameter
-        container.loadPersistentStores { storeDescription, error in
+        container.loadPersistentStores { storeDescription, error in // storeDescription is not used
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use
