@@ -10,20 +10,33 @@
 		D014A99C2C9DC50200ED412D /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D065BD692CB08B7600346F66 /* SwiftyJSON */; };
 		D08191FA2CBADF760034D19E /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
-		D0D9F81C2C8DE36400FE030A /* Screenshot_Ignite.png in Resources */ = {isa = PBXBuildFile; fileRef = D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */; };
-		D0F3B6132CB9B951008C9F26 /* Screenshot_comparison.png in Resources */ = {isa = PBXBuildFile; fileRef = D0F3B6122CB9B951008C9F26 /* Screenshot_comparison.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot_Ignite.png; sourceTree = "<group>"; };
-		D0D9F81E2C8DE3A600FE030A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D0D9F8222C8DE45500FE030A /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0F3B6112CB9B940008C9F26 /* Screenshot_comparison.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = Screenshot_comparison.psd; sourceTree = "<group>"; };
-		D0F3B6122CB9B951008C9F26 /* Screenshot_comparison.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshot_comparison.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D0B9D5012CC443D900B1541C /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				images/Screenshot_comparison.psd,
+				LICENSE.md,
+				README.md,
+			);
+			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		D0B9D4FE2CC443D900B1541C /* .github */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D0B9D5012CC443D900B1541C /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
 		D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Photo Club Hub HTML";
@@ -45,30 +58,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D0D9F8172C8DE36400FE030A /* images */ = {
-			isa = PBXGroup;
-			children = (
-				D0F3B6112CB9B940008C9F26 /* Screenshot_comparison.psd */,
-				D0F3B6122CB9B951008C9F26 /* Screenshot_comparison.png */,
-				D0D9F8162C8DE36400FE030A /* Screenshot_Ignite.png */,
-			);
-			path = images;
-			sourceTree = "<group>";
-		};
-		D0D9F81A2C8DE36400FE030A /* .github */ = {
-			isa = PBXGroup;
-			children = (
-				D0D9F8222C8DE45500FE030A /* LICENSE.md */,
-				D0D9F81E2C8DE3A600FE030A /* README.md */,
-				D0D9F8172C8DE36400FE030A /* images */,
-			);
-			path = .github;
-			sourceTree = "<group>";
-		};
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
-				D0D9F81A2C8DE36400FE030A /* .github */,
+				D0B9D4FE2CC443D900B1541C /* .github */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 				D0E06C112C8C5ABC0025734B /* Products */,
 			);
@@ -99,6 +92,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				D0B9D4FE2CC443D900B1541C /* .github */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 			);
 			name = "Photo Club Hub HTML";
@@ -154,8 +148,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0F3B6132CB9B951008C9F26 /* Screenshot_comparison.png in Resources */,
-				D0D9F81C2C8DE36400FE030A /* Screenshot_Ignite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
