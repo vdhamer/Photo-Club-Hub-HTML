@@ -11,7 +11,7 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    // MARK: - Core Data fetch requests
+    // MARK: - @FetchRequests to get list of Clubs
 
     static let clubOnlyPredicate = NSPredicate(format: "organizationType_.organizationTypeName_= %@",
                                                argumentArray: [OrganizationTypeEnum.club.rawValue])
@@ -34,7 +34,9 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \OrganizationType.organizationTypeName_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    private var organizationTypes: FetchedResults<OrganizationType>
+    private var allOrganizationTypes: FetchedResults<OrganizationType>
+
+    // MARK: - @FetchRequests to get overall statistics for status line
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Photographer.familyName_, ascending: true)],
@@ -73,7 +75,7 @@ struct ContentView: View {
             Divider()
             HStack(alignment: .center) {
                 Text("Database content:").font(.headline)
-                Text("◼ \(organizationTypes.count) organizationTypes")
+                Text("◼ \(allOrganizationTypes.count) organizationTypes")
                 Text("◼ \(allClubs.count) clubs")
                 Text("◼ \(allOrganizations.count-allClubs.count) other organizations")
                 Text("◼ \(allPhotographers.count) photographers")
@@ -84,8 +86,8 @@ struct ContentView: View {
         }
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
-            addTestMembersDeGender()
-            addTestMembersWaalre()
+            _ = Organization.addHardcodedFgDeGender(context: viewContext)
+            _ = Organization.addHardcodedFgWaalre(context: viewContext)
         }
         .frame(minWidth: 480, minHeight: 290)
         .padding()
@@ -113,139 +115,9 @@ struct ContentView: View {
         }
     }
 
-    // MARK: - add and delete clubs and members
-
-    func addTestMembersDeGender() {
-        let fgDeGender = ContentView.addFGdeGender()
-
-        let hansKrüsemannPN = PersonName(givenName: "Hans", infixName: "", familyName: "Krüsemann")
-        let hansKrüsemannPho = Photographer.findCreateUpdate(context: viewContext,
-                                                  personName: hansKrüsemannPN,
-                                                  optionalFields: PhotographerOptionalFields())
-        let hansKrüsemannOpt = MemberOptionalFields(
-            level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Hans_Krusemann/"),
-            memberRolesAndStatus: MemberRolesAndStatus(role: [ .admin: true ], status: [:]),
-            fotobondNumber: 1620090,
-            membershipStartDate: "2016-04-01".extractDate(),
-            membershipEndDate: nil)
-        let hansKrüsemannMem = MemberPortfolio.findCreateUpdate(bgContext: viewContext,
-                                                                organization: fgDeGender,
-                                                                photographer: hansKrüsemannPho,
-                                                                optionalFields: hansKrüsemannOpt)
-        hansKrüsemannMem.refreshFirstImage()
-
-        let jelleVanDeVoortPN = PersonName(givenName: "Jelle", infixName: "van de", familyName: "Voort")
-        let jelleVanDeVoortPho = Photographer.findCreateUpdate(context: viewContext,
-                                                  personName: jelleVanDeVoortPN,
-                                                  optionalFields: PhotographerOptionalFields())
-        let jelleVanDeVoortOpt = MemberOptionalFields(
-            level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Jelle_van_de_Voort/"),
-            memberRolesAndStatus: MemberRolesAndStatus(role: [ .chairman: true ], status: [:]),
-            fotobondNumber: 1620103,
-            membershipStartDate: "2020-01-01".extractDate(),
-            membershipEndDate: nil)
-        let jelleVanDeVoortMem = MemberPortfolio.findCreateUpdate(bgContext: viewContext,
-                                                                organization: fgDeGender,
-                                                                photographer: jelleVanDeVoortPho,
-                                                                optionalFields: jelleVanDeVoortOpt)
-        jelleVanDeVoortMem.refreshFirstImage()
-
-        let peterVanDenHamerPN = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
-        let peterVanDenHamerPho = Photographer.findCreateUpdate(context: viewContext,
-                                                  personName: peterVanDenHamerPN,
-                                                  optionalFields: PhotographerOptionalFields(
-                                                    bornDT: "1957-10-18".extractDate(),
-                                                    photographerWebsite: URL(string: "https://glass.photo/vdhamer")
-                                                  ))
-        let peterVanDenHamerOpt = MemberOptionalFields(
-            level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/"),
-            memberRolesAndStatus: MemberRolesAndStatus(role: [ .admin: true ], status: [:]),
-            fotobondNumber: 1620110,
-            membershipStartDate: "2024-01-01".extractDate(),
-            membershipEndDate: nil)
-        let peterVanDenHamerMem = MemberPortfolio.findCreateUpdate(bgContext: viewContext,
-                                                                organization: fgDeGender,
-                                                                photographer: peterVanDenHamerPho,
-                                                                optionalFields: peterVanDenHamerOpt)
-        peterVanDenHamerMem.refreshFirstImage()
-    }
-
-    public static func addFGdeGender() -> Organization {
+    private func addClub() { // when user presses Add Club button
         withAnimation {
-            let context = PersistenceController.shared.container.viewContext // foreground only for now
-
-            let organizationIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
-                                                        town: "Eindhoven",
-                                                        nickname: "FGdeGender")
-
-            let fgDeGender = Organization.findCreateUpdate(context: context, // foreground
-                                                           organizationTypeEnum: OrganizationTypeEnum.club,
-                                                           idPlus: organizationIdPlus,
-                                                           optionalFields: OrganizationOptionalFields())
-            do {
-                try context.save()
-                return fgDeGender
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use
-                // this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    func addTestMembersWaalre() {
-        let fgDeGender = ContentView.addFGWaalre()
-
-        let peterVanDenHamerPN = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
-        let peterVanDenHamerPho = Photographer.findCreateUpdate(context: viewContext,
-                                                  personName: peterVanDenHamerPN,
-                                                  optionalFields: PhotographerOptionalFields(
-                                                    bornDT: "1957-10-18".extractDate(),
-                                                    photographerWebsite: URL(string: "https://glass.photo/vdhamer")
-                                                  ))
-        let peterVanDenHamerOpt = MemberOptionalFields(
-            level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/"),
-            memberRolesAndStatus: MemberRolesAndStatus(role: [ .admin: true ], status: [:]),
-            fotobondNumber: 1620110,
-            membershipStartDate: "2024-01-01".extractDate(),
-            membershipEndDate: nil)
-        let peterVanDenHamerMem = MemberPortfolio.findCreateUpdate(bgContext: viewContext,
-                                                                organization: fgDeGender,
-                                                                photographer: peterVanDenHamerPho,
-                                                                optionalFields: peterVanDenHamerOpt)
-        peterVanDenHamerMem.refreshFirstImage()
-    }
-
-    public static func addFGWaalre() -> Organization {
-        withAnimation {
-            let context = PersistenceController.shared.container.viewContext // foreground only for now
-
-            let organizationIdPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre",
-                                                        town: "Waalre",
-                                                        nickname: "FGWaalre")
-
-            let fgWaalre = Organization.findCreateUpdate(context: context, // foreground
-                                                           organizationTypeEnum: OrganizationTypeEnum.club,
-                                                           idPlus: organizationIdPlus,
-                                                           optionalFields: OrganizationOptionalFields())
-            do {
-                try context.save()
-                return fgWaalre
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use
-                // this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func addClub() {
-        withAnimation {
-            let newCount = UserDefaults.standard.integer(forKey: "clubCounter") + 1
+            let newCount: Int = UserDefaults.standard.integer(forKey: "clubCounter") + 1
             UserDefaults.standard.set(newCount, forKey: "clubCounter")
 
             let organizationTypeEnum: OrganizationTypeEnum = OrganizationTypeEnum.randomClubMuseumUnknown()
@@ -293,6 +165,6 @@ struct ContentView: View {
 
 }
 
-#Preview {
+ #Preview {
     ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-}
+ }
