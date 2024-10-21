@@ -121,7 +121,7 @@ class Level2JsonReader { // normally running on a background thread
             else { return nil } // not a valid URL
 
         // if fetching online works, and is allowed, this has priority over fetching from app bundle
-        if let jsonDataFetchedOnline: String = try? String(contentsOf: url), !useOnlyFile {
+        if let jsonDataFetchedOnline: String = try? String(contentsOf: url, encoding: .utf8), !useOnlyFile {
             guard !jsonDataFetchedOnline.isEmpty else { return nil }
             return jsonDataFetchedOnline // got the requested JSON from an online URL (preferred option)
         }
@@ -137,7 +137,7 @@ class Level2JsonReader { // normally running on a background thread
             } // can't locate file within main app bundle
 
         // get the requested JSON from a file in the main app bundle
-        if let fileData = try? String(contentsOfFile: filePath) {
+        if let fileData = try? String(contentsOfFile: filePath, encoding: .utf8) {
             return fileData.isEmpty ? nil : fileData
         } else {
             // calling fatalError is ok for a compile-time constant (as defined above)

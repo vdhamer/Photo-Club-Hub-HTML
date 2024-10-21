@@ -43,7 +43,7 @@ struct MembershipView: View {
     }
 
     private func infix(content: String?) -> String {
-        if let content {
+        if let content, content.isEmpty==false {
             return content + " "
         }
         return ""
