@@ -34,8 +34,8 @@ struct MembershipView: View {
                     Text("""
                          \(member.photographer_?.givenName_ ?? "given name?") \
                          \(infix(content: member.photographer_?.infixName))\
-                         \(member.photographer_?.familyName_ ?? "family name?") \
-                         (\(member.organization_?.fullName ?? "club name?"))
+                         \(member.photographer_?.familyName_ ?? "family name?")\
+                         \(describeMember(member: member))
                          """)
                 }
             }
@@ -47,6 +47,20 @@ struct MembershipView: View {
             return content + " "
         }
         return ""
+    }
+
+    private func describeMember(member: MemberPortfolio) -> String {
+        if member.isFormerMember {
+            var output = " ("
+            if member.photographer.isDeceased {
+                output += "deceased "
+            }
+            output += "former member"
+            output += ")"
+            return output
+        } else {
+            return ""
+        }
     }
 }
 
