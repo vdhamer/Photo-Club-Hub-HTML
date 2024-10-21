@@ -1,5 +1,5 @@
 //
-//  AddClubs.swift
+//  AddHardcodedClubs.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 19/10/2024.
