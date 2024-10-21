@@ -97,7 +97,7 @@ struct ContentView: View {
                 Button {
                     let memberSite = MemberSite() // load data
 
-                    Task(priority: .userInitiated) {
+                    Task(priority: .userInitiated) { // generate website on background thread
                         do {
                             try await memberSite.publish() // generate HTML
                         } catch {
