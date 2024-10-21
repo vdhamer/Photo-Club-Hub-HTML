@@ -118,9 +118,9 @@ struct ContentView: View {
     private func addClub() { // when user presses Add Club button
         withAnimation {
             let newCount: Int = UserDefaults.standard.integer(forKey: "clubCounter") + 1
-            UserDefaults.standard.set(newCount, forKey: "clubCounter")
+            UserDefaults.standard.set(newCount, forKey: "clubCounter") // increment value stored in User Defaults
 
-            let organizationTypeEnum: OrganizationTypeEnum = OrganizationTypeEnum.randomClubMuseumUnknown()
+            let organizationTypeEnum: OrganizationTypeEnum = OrganizationTypeEnum.club
             let town = "Eindhoven"
             let fullName = "Org #\(newCount)"
             let organizationID = OrganizationID(fullName: fullName, town: town)
