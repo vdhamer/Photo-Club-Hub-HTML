@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D00FBE232CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */; };
 		D014A99C2C9DC50200ED412D /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D065BD692CB08B7600346F66 /* SwiftyJSON */; };
 		D08191FA2CBADF760034D19E /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -61,6 +63,7 @@
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
+				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
 				D0B9D4FE2CC443D900B1541C /* .github */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 				D0E06C112C8C5ABC0025734B /* Products */,
@@ -180,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D00FBE232CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
