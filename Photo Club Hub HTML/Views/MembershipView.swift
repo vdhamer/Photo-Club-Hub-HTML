@@ -37,6 +37,7 @@ struct MembershipView: View {
                          \(member.photographer_?.familyName_ ?? "family name?")\
                          \(describeMember(member: member))
                          """)
+                        .font(.title3)
                 }
             }
         }

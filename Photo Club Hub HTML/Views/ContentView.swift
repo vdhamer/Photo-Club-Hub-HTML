@@ -61,7 +61,7 @@ struct ContentView: View {
                             MembershipView(club: club)
                         } label: {
                             Text(club.fullName)
-                                .font(.headline)
+                                .font(.title2)
                         }
                     }
                     .onDelete(perform: deleteClubs)
