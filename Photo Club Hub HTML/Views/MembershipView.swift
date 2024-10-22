@@ -20,7 +20,7 @@ struct MembershipView: View {
         let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
         let predicate = NSPredicate(format: "organization_ = %@", argumentArray: [club])
         // https://www.youtube.com/watch?v=O4043RVjCGU HackingWithSwift session on dynamic Core Data fetch requests:
-        _fetchRequestClubMembers = FetchRequest<MemberPortfolio>(sortDescriptors: [sortDescriptor1, sortDescriptor2],
+        _fetchRequestClubMembers = FetchRequest<MemberPortfolio>(sortDescriptors: [sortDescriptor2, sortDescriptor1],
                                                                  predicate: predicate,
                                                                  animation: .bouncy(duration: 1))
     }
