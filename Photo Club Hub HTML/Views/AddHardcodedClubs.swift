@@ -12,13 +12,13 @@ extension Organization {
 
      private static func addFGdeGender(context: NSManagedObjectContext) -> Organization {
         withAnimation {
-            let organizationIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
-                                                        town: "Eindhoven",
-                                                        nickname: "FGdeGender")
+            let fgDeGenderIDPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
+                                                      town: "Eindhoven",
+                                                      nickname: "FGdeGender")
 
             let fgDeGender = Organization.findCreateUpdate(context: context, // foreground
                                                            organizationTypeEnum: OrganizationTypeEnum.club,
-                                                           idPlus: organizationIdPlus,
+                                                           idPlus: fgDeGenderIDPlus,
                                                            optionalFields: OrganizationOptionalFields())
             do {
                 try context.save()
