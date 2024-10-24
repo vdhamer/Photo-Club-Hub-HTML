@@ -35,7 +35,7 @@ struct PhotoClubHubHtmlApp: App {
 
 extension PhotoClubHubHtmlApp {
 
-    static func loadClubsAndMembers() {
+    static private func loadClubsAndMembers() {
 
 //        // load list of photo clubs and museums from root.Level1.json file
 //        let level1BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
