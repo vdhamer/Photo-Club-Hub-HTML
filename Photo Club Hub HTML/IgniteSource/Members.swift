@@ -284,23 +284,24 @@ struct Members: StaticPage {
         return Row {
             Column {
                 Group {
-                    Link(
-                        fullName(givenName: givenName, infixName: infixName, familyName: familyName)
-                        , target: "\(portfolio)")
-                    .linkStyle(.hover)
-                    if isDeceased {
-                        Badge("Overleden")
-                            .badgeStyle(.default)
-                            .role(.secondary)
-                            .margin(.leading, 10)
-                    } else {
-                        Badge(role)
-                            .badgeStyle(.subtleBordered)
-                            .role(.success)
-                            .margin(.leading, 10)
-                    }
-                }
-                .horizontalAlignment(.leading)
+                    Text {
+                        Link(
+                            fullName(givenName: givenName, infixName: infixName, familyName: familyName)
+                            , target: "\(portfolio)")
+                        .linkStyle(.hover)
+                        if isDeceased {
+                            Badge("Overleden")
+                                .badgeStyle(.default)
+                                .role(.secondary)
+                                .margin(.leading, 10)
+                        } else {
+                            Badge(role)
+                                .badgeStyle(.subtleBordered)
+                                .role(.success)
+                                .margin(.leading, 10)
+                        }
+                    } .font(.title5)
+                } .horizontalAlignment(.leading)
             } .verticalAlignment(.middle)
 
             Column {
@@ -326,7 +327,7 @@ struct Members: StaticPage {
                     .resizable()
                     .cornerRadius(8)
                     .aspectRatio(.square, contentMode: .fill)
-                    .frame(width: 50)
+                    .frame(width: 80)
                     .style("cursor: pointer")
                     .onClick {
                         CustomAction("window.location.href=\"\(portfolio)\";")
