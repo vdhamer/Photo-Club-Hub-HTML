@@ -18,6 +18,8 @@ struct ContentView: View {
     static let allPredicate = NSPredicate(format: "TRUEPREDICATE")
     static let nonePredicate = NSPredicate(format: "FALSEPREDICATE")
 
+    // MARK: - @FetchRequests to get lists and get counts
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
         predicate: allPredicate,
@@ -35,8 +37,6 @@ struct ContentView: View {
         predicate: allPredicate,
         animation: .default)
     private var allOrganizationTypes: FetchedResults<OrganizationType>
-
-    // MARK: - @FetchRequests to get overall statistics for status line
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Photographer.familyName_, ascending: true)],
