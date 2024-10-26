@@ -95,15 +95,7 @@ struct ContentView: View {
             ToolbarItemGroup(placement: .primaryAction) {
 
                 Button {
-                    let memberSite = MemberSite() // load data
-
-                    Task(priority: .userInitiated) { // generate website on background thread
-                        do {
-                            try await memberSite.publish() // generate HTML
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                    }
+                    generateSite()
                 } label: {
                     Label("Run Ignite", systemImage: "flame")
                 }
@@ -130,7 +122,7 @@ struct ContentView: View {
                                               organizationTypeEnum: organizationTypeEnum,
                                               idPlus: organizationIdPlus,
                                               optionalFields: OrganizationOptionalFields()
-                                             )
+            )
 
             do {
                 try viewContext.save()
@@ -159,6 +151,25 @@ struct ContentView: View {
                 // this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+
+    fileprivate func generateSite() {
+
+        let bgContext = PersistenceController.shared.container.newBackgroundContext()
+        bgContext.name = "Ignite.publishing"
+        bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
+
+        bgContext.performAndWait { // generate website on background thread TODO this is still on the Main thread
+            let memberSite = MemberSite() // load data
+            Task {
+                do {
+                    try await memberSite.publish() // generate HTML
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
         }
     }
