@@ -163,7 +163,7 @@ struct ContentView: View {
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         bgContext.performAndWait { // generate website on background thread TODO this is still on the Main thread
-            let memberSite = MemberSite() // load data
+            let memberSite = MemberSite(moc: bgContext) // load data
             Task {
                 do {
                     try await memberSite.publish() // generate HTML
