@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) fileprivate var viewContext
 
     // MARK: - @FetchRequests to get list of Clubs
 
@@ -24,31 +24,31 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    private var allOrganizations: FetchedResults<Organization>
+    fileprivate var allOrganizations: FetchedResults<Organization>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
         predicate: clubOnlyPredicate,
         animation: .default)
-    private var allClubs: FetchedResults<Organization>
+    fileprivate var allClubs: FetchedResults<Organization>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \OrganizationType.organizationTypeName_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    private var allOrganizationTypes: FetchedResults<OrganizationType>
+    fileprivate var allOrganizationTypes: FetchedResults<OrganizationType>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Photographer.familyName_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    private var allPhotographers: FetchedResults<Photographer>
+    fileprivate var allPhotographers: FetchedResults<Photographer>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)],
         predicate: allPredicate, // there is a variant of this FetchRequest in MembershipView.swift
         animation: .default)
-    private var allMembers: FetchedResults<MemberPortfolio>
+    fileprivate var allMembers: FetchedResults<MemberPortfolio>
 
     // MARK: - Body of ContentView
 
@@ -105,7 +105,7 @@ struct ContentView: View {
         }
     }
 
-    private func addClub() { // when user presses Add Club button
+    fileprivate func addClub() { // when user presses Add Club button
         withAnimation {
             let newCount: Int = UserDefaults.standard.integer(forKey: "clubCounter") + 1
             UserDefaults.standard.set(newCount, forKey: "clubCounter") // increment value stored in User Defaults
@@ -134,7 +134,7 @@ struct ContentView: View {
         }
     }
 
-    private func deleteClubs(at offsets: IndexSet) {
+    fileprivate func deleteClubs(at offsets: IndexSet) {
         withAnimation {
             for index in offsets { // probably only one
                 let club = allClubs[index]

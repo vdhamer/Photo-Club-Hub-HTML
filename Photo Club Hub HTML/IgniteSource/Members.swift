@@ -14,16 +14,16 @@ import CoreData // for ManagedObjectContext
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol?
 
-    private var currentMembersTotalYears: Double = 0 // updated in memberRow()
-    private var currentMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property?
-    private var formerMembersTotalYears: Double = 0 // updated in memberRow()
-    private var formerMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property?
-    private let dateFormatter = DateFormatter()
-    private var currentMembers = Table {} // init to empty table, then fill during init()
-    private var formerMembers = Table {} // same story
+    fileprivate var currentMembersTotalYears: Double = 0 // updated in memberRow()
+    fileprivate var currentMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property?
+    fileprivate var formerMembersTotalYears: Double = 0 // updated in memberRow()
+    fileprivate var formerMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property?
+    fileprivate let dateFormatter = DateFormatter()
+    fileprivate var currentMembers = Table {} // init to empty table, then fill during init()
+    fileprivate var formerMembers = Table {} // same story
 
-    private var moc: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-    private var club: Organization
+    fileprivate var moc: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+    fileprivate var club: Organization
 
     // MARK: - init()
 
@@ -309,17 +309,17 @@ struct Members: StaticPage {
         }
     }
 
-    private mutating func memberRow(givenName: String,
-                                    infixName: String = "",
-                                    familyName: String,
-                                    start: String,
-                                    end: String? = nil, // nil means "still a member",
-                                    fotobond: Int? = nil,
-                                    isDeceased: Bool = false,
-                                    role: String = "",
-                                    website: String = "",
-                                    portfolio: URL?,
-                                    thumbnailSuffix: String) -> Row {
+    fileprivate mutating func memberRow(givenName: String,
+                                        infixName: String = "",
+                                        familyName: String,
+                                        start: String,
+                                        end: String? = nil, // nil means "still a member",
+                                        fotobond: Int? = nil,
+                                        isDeceased: Bool = false,
+                                        role: String = "",
+                                        website: String = "",
+                                        portfolio: URL?,
+                                        thumbnailSuffix: String) -> Row {
         return Row {
             Column {
                 Group {
@@ -376,17 +376,17 @@ struct Members: StaticPage {
         }
     }
 
-    private mutating func memberRow1(givenName: String, // TODO
-                                     infixName: String = "",
-                                     familyName: String,
-                                     start: String,
-                                     end: String? = nil, // nil means "still a member",
-                                     fotobond: Int? = nil,
-                                     isDeceased: Bool = false,
-                                     role: String = "",
-                                     website: String = "",
-                                     portfolio: String,
-                                     thumbnailSuffix: String) -> Row {
+    fileprivate mutating func memberRow1(givenName: String, // TODO
+                                         infixName: String = "",
+                                         familyName: String,
+                                         start: String,
+                                         end: String? = nil, // nil means "still a member",
+                                         fotobond: Int? = nil,
+                                         isDeceased: Bool = false,
+                                         role: String = "",
+                                         website: String = "",
+                                         portfolio: String,
+                                         thumbnailSuffix: String) -> Row {
         return Row {
             Column {
                 Group {
@@ -443,11 +443,11 @@ struct Members: StaticPage {
         }
     }
 
-    private func formatYears(years: Double) -> String {
+    fileprivate func formatYears(years: Double) -> String {
         String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
     }
 
-    private mutating func formatMembershipYears(start: String, end: String?, fotobond: Int) -> Span {
+    fileprivate mutating func formatMembershipYears(start: String, end: String?, fotobond: Int) -> Span {
         let endDate: Date = (end != nil) ? (dateFormatter.date(from: end!) ?? Date.now) : Date.now
         let dateInterval = DateInterval(start: dateFormatter.date(from: start) ?? Date.now, end: endDate)
         let years = dateInterval.duration / (365.25 * 24 * 60 * 60)
@@ -464,9 +464,9 @@ struct Members: StaticPage {
         }
     }
 
-    private func fullName(givenName: String,
-                          infixName: String = "",
-                          familyName: String) -> String {
+    fileprivate func fullName(givenName: String,
+                              infixName: String = "",
+                              familyName: String) -> String {
 
         if infixName.isEmpty {
             return givenName + " " + familyName
@@ -475,7 +475,7 @@ struct Members: StaticPage {
         }
     }
 
-    private func lastPathComponent(fullUrl: String) -> String {
+    fileprivate func lastPathComponent(fullUrl: String) -> String {
         let url = URL(string: fullUrl)
         let lastComponent: String = url?.lastPathComponent ?? "error in lastPathComponent"
         return "/images/\(lastComponent)"

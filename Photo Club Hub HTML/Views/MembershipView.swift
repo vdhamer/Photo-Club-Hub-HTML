@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct MembershipView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) fileprivate var viewContext
 
     @FetchRequest var fetchRequestClubMembers: FetchedResults<MemberPortfolio> // filled during init()
     let club: Organization
@@ -43,14 +43,14 @@ struct MembershipView: View {
         }
     }
 
-    private func infix(content: String?) -> String {
+    fileprivate func infix(content: String?) -> String {
         if let content, content.isEmpty==false {
             return content + " "
         }
         return ""
     }
 
-    private func describeMember(member: MemberPortfolio) -> String {
+    fileprivate func describeMember(member: MemberPortfolio) -> String {
         if member.isFormerMember {
             var output = " ("
             if member.photographer.isDeceased {

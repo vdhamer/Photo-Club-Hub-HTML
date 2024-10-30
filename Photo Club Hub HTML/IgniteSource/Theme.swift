@@ -23,8 +23,7 @@ struct MyTheme: Theme {
     }
 }
 
-private struct UpdatedOnFooter: Component {
-    public init() { }
+struct UpdatedOnFooter: Component { // swiftlint doesn't want this one to be fileprivate, but it could be
 
     public func body(context: PublishingContext) -> [any PageElement] {
         let timezone = TimeZone.current
@@ -37,4 +36,5 @@ private struct UpdatedOnFooter: Component {
         }
         .margin(.top, .small)
     }
+
 }
