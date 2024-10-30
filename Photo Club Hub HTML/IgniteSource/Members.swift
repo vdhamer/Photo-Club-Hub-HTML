@@ -49,7 +49,7 @@ struct Members: StaticPage {
                               fotobond: Int(member.fotobondNumber),
                               portfolio: member.level3URL_,
                               thumbnailSuffix: member.featuredImageThumbnail!.lastPathComponent // TODO !
-                              //                              start: member.membershipStartDate,
+//                            start: member.membershipStartDate
                     )
                 }
             }
@@ -321,7 +321,8 @@ struct Members: StaticPage {
                                         portfolio: URL?,
                                         thumbnailSuffix: String) -> Row {
         return Row {
-            Column {
+
+            Column { // member name and badge for role
                 Group {
                     Text {
                         Link(
@@ -343,11 +344,11 @@ struct Members: StaticPage {
                 } .horizontalAlignment(.leading)
             } .verticalAlignment(.middle)
 
-            Column {
-                formatMembershipYears(start: start, end: end, fotobond: fotobond ?? 1234567)
+            Column { // duration of club membership
+                formatMembershipYears(start: start, end: end, fotobond: fotobond ?? 1234567) // TODO
             } .verticalAlignment(.middle)
 
-            if website.isEmpty {
+            if website.isEmpty { // photographer's optional own website
                 Column { }
             } else {
                 Column {
@@ -360,7 +361,7 @@ struct Members: StaticPage {
                 } .verticalAlignment(.middle)
             }
 
-            Column {
+            Column { // clickable thumbnail of recent work
                 Image(lastPathComponent(fullUrl: portfolio!.absoluteString+"/thumbs/"+thumbnailSuffix), // TODO !
                       description: "clickable link to portfolio")
                     .resizable()
