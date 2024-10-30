@@ -10,7 +10,6 @@
 		D00FBE232CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */; };
 		D014A99C2C9DC50200ED412D /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D065BD692CB08B7600346F66 /* SwiftyJSON */; };
-		D08191FA2CBADF760034D19E /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +52,6 @@
 			files = (
 				D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */,
 				D014A99C2C9DC50200ED412D /* Ignite in Frameworks */,
-				D08191FA2CBADF760034D19E /* Ignite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

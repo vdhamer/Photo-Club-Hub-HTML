@@ -163,9 +163,9 @@ struct Members: StaticPage {
 
             memberRow1(givenName: "Peter", infixName: "de", familyName: "Wit",
                       start: "2022-10-30", fotobond: 1620107,
-                      website: "https://www.flickr.com/photos/150047808@N08/albums",
+                      website: "https://www.flickr.com/people/150047808@N08/",
                       portfolio: "http://www.vdhamer.com/fgDeGender/Peter_de_Wit/",
-                      thumbnailSuffix: "EXPO_2024_03_-_Eindhoven_NL_-_30Hx54B_-_1920x1080.jpg")
+                      thumbnailSuffix: "2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
 
             memberRow1(givenName: "Piet", infixName: "van der", familyName: "Putten",
                       start: "2008-04-01", fotobond: 1620076,
