@@ -346,10 +346,6 @@ struct Members: StaticPage {
                 formatMembershipYears(start: start, end: end, fotobond: fotobond ?? 1234567)
             } .verticalAlignment(.middle)
 
-            Column {
-                Text("Fotobond: \(fotobond!)") // TODO
-            } .verticalAlignment(.middle)
-
             if website.isEmpty {
                 Column { }
             } else {
@@ -364,7 +360,7 @@ struct Members: StaticPage {
             }
 
             Column {
-                Image(lastPathComponent(fullUrl: portfolio!.absoluteString+"/thumb/"+thumbnailSuffix), // TODO !
+                Image(lastPathComponent(fullUrl: portfolio!.absoluteString+"/thumbs/"+thumbnailSuffix), // TODO !
                       description: "clickable link to portfolio")
                     .resizable()
                     .cornerRadius(8)
@@ -395,8 +391,8 @@ struct Members: StaticPage {
                 Group {
                     Text {
                         Link(
-                            fullName(givenName: givenName, infixName: infixName, familyName: familyName)
-                            , target: "\(portfolio)")
+                            fullName(givenName: givenName, infixName: infixName, familyName: familyName),
+                            target: "\(portfolio)")
                         .linkStyle(.hover)
                         if isDeceased {
                             Badge("Overleden")
