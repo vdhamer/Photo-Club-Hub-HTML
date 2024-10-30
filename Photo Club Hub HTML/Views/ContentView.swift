@@ -86,8 +86,6 @@ struct ContentView: View {
         }
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
-            _ = Organization.addHardcodedFgDeGender(context: viewContext)
-            _ = Organization.addHardcodedFgWaalre(context: viewContext)
         }
         .frame(minWidth: 480, minHeight: 290)
         .padding()

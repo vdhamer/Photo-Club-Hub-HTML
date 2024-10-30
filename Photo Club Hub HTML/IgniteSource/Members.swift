@@ -35,7 +35,8 @@ struct Members: StaticPage {
                                     argumentArray: [club, false])
         let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
         fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
+                                                         ascending: true)]
         do {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
