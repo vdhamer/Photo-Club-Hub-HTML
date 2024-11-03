@@ -35,8 +35,11 @@ struct Members: StaticPage {
                                     argumentArray: [club, false])
         let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
         fetchRequest.predicate = predicate
-        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
-                                                         ascending: true)]
+        // match sort order used in MembershipView to generate MembershipView SwiftUI view
+        let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+
         do {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
@@ -46,12 +49,11 @@ struct Members: StaticPage {
                               infixName: member.photographer.infixName,
                               familyName: member.photographer.familyName,
                               start: "2022-11-17", // TODO
+//                            start: member.membershipStartDate TODO
                               fotobond: Int(member.fotobondNumber),
                               portfolio: member.level3URL_,
                               thumbnail: member.featuredImageThumbnail ??
                                          URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
-//                              thumbnailSuffix: member.featuredImageThumbnail!.lastPathComponent // TODO !
-//                            start: member.membershipStartDate
                     )
                 }
             }

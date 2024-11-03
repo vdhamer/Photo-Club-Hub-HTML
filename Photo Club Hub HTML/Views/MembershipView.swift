@@ -16,11 +16,12 @@ struct MembershipView: View {
 
     init(club: Organization) {
         self.club = club
-        let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)
-        let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
+        // match sort order used in Members to generate HTML
+        let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)
         let predicate = NSPredicate(format: "organization_ = %@", argumentArray: [club])
         // https://www.youtube.com/watch?v=O4043RVjCGU HackingWithSwift session on dynamic Core Data fetch requests:
-        _fetchRequestClubMembers = FetchRequest<MemberPortfolio>(sortDescriptors: [sortDescriptor2, sortDescriptor1],
+        _fetchRequestClubMembers = FetchRequest<MemberPortfolio>(sortDescriptors: [sortDescriptor1, sortDescriptor2],
                                                                  predicate: predicate,
                                                                  animation: .bouncy(duration: 1))
     }
