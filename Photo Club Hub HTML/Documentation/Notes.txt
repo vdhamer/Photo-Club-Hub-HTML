@@ -1,0 +1,16 @@
+Q: Where does Thumbnail image for PdW come from?
+
+A: It is stored in Core Data, so it is loaded during the loading of the Level2 JSON file (it reappears when the SQLite database is deleted). Steps to load this:
+
+1. PhotoClubHubHtmlApp App loads this on the main thread at .onAppear
+2. FotogroepDeGenderMembersProvider is called with a new background context genderBackgroundContext
+3. calls FotogroepDeGenderMembersProvider.insertOnlineMemberData(bgContext:)
+4. calls (on background thread) Level2JsonReader(bgContext:urlComponents:club:useOnlyFile)
+5. calls mergeLevel2Json(bgContext:jsonData:club:urlComponents)
+6. reads club section of JSON file
+7. reads individual JSON member sections using "for member in members" where members: [JSON]
+8. Level2JsonReader calls Photographer.findCreateUpdate() to create Photographer is needed
+9. Level2JsonReader calls loadPhotographerAndMemberOptions() to load various fields
+10. LevelJsonReader calls MemberPortfolio.findCreateUpdate() to create/update memberPortfolio record
+11. featuredImage and featuredThumbnail are empty
+12. For this photoclub refreshFirstImage() tries to extract the thumbnail from the config.xml file
