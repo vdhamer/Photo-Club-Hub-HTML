@@ -14,3 +14,13 @@ A: It is stored in Core Data, so it is loaded during the loading of the Level2 J
 10. LevelJsonReader calls MemberPortfolio.findCreateUpdate() to create/update memberPortfolio record
 11. featuredImage and featuredThumbnail are empty
 12. For this photoclub refreshFirstImage() tries to extract the thumbnail from the config.xml file
+
+Q: Where is index.html written to?
+
+1. Pressing ui button calls generateSite() on the main thread
+2. generateSite() creates MemberSite(bgContext) - which is currently still on the main thread
+3. MemberSite looks up (fixed) club in CoreData and creates a StaticPage via Members(context:club:)
+4. Members.init() fills Tables with currentMembers and formerMembers
+5. Member.body(moc:) renders HTML page that includes currentMembers and formerMembers
+6. membersite.publish() uses default string buildDirectoryPath = "Build""
+7. 

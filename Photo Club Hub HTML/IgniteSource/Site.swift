@@ -5,7 +5,6 @@
 //  Created by Peter van den Hamer on 07/09/2024.
 //
 
-import Foundation
 import Ignite // for Site
 
 import SwiftUI // for @State
@@ -23,7 +22,7 @@ struct MemberSite: Site {
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
-        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
+        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven") // TODOD club hardcoded
         let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
         let club: Organization = Organization.findCreateUpdate(context: moc,
                                                                organizationTypeEnum: OrganizationTypeEnum.club,

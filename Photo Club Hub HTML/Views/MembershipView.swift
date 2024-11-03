@@ -36,7 +36,8 @@ struct MembershipView: View {
                          \(member.photographer_?.givenName_ ?? "given name?") \
                          \(infix(content: member.photographer_?.infixName))\
                          \(member.photographer_?.familyName_ ?? "family name?")\
-                         \(describeMember(member: member))
+                         \(describeMember(member: member)) \
+                         (thumbnail: \(member.featuredImageThumbnail!.lastPathComponent))
                          """)
                         .font(.title3)
                 }
