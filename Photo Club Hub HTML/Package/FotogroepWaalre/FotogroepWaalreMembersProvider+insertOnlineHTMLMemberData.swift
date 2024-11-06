@@ -69,7 +69,14 @@ extension FotogroepWaalreMembersProvider {
                 let portfoliosInClub = try bgContext.fetch(fetchRequest)
 
                 for portfolio in portfoliosInClub {
-                    portfolio.refreshFirstImage()
+                    Task {
+                        do {
+                            try await portfolio.refreshFirstImage()
+                        } catch {
+                            // ignore
+                            print("Could not refreshFirstImage for portfolio \(portfolio)")
+                        }
+                    }
                 }
                 try bgContext.save() // persist first images for Fotogroep Waalre
             } catch let error {

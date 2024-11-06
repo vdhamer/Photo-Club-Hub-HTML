@@ -19,6 +19,10 @@ extension MemberPortfolio: Comparable {
 
 }
 
+extension MemberPortfolio: @unchecked Sendable { // TODO
+
+}
+
 extension MemberPortfolio { // expose computed properties (some related to handling optionals)
 
     fileprivate static let emptyPortfolioURL: String = "http://www.vdHamer.com/fgWaalre/Empty_Website/"
@@ -69,7 +73,8 @@ extension MemberPortfolio { // expose computed properties (some related to handl
     var level3URL: URL {
         get {
             if level3URL_ == nil {
-                level3URL_ = URL(string: MemberPortfolio.emptyPortfolioURL)!
+                let string = MemberPortfolio.emptyPortfolioURL
+                level3URL_ = URL(string: string)! // TODO this line crashes sometimes, get rid of ! operator
             }
             return level3URL_!
         }

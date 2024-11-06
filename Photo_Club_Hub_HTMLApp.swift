@@ -37,7 +37,7 @@ extension PhotoClubHubHtmlApp {
 
     static fileprivate func loadClubsAndMembers() {
 
-//        // load list of photo clubs and museums from root.Level1.json file
+//        // load list of photo clubs and museums from root.Level1.json file TODO
 //        let level1BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
 //        level1BackgroundContext.name = "root.level1.json"
 //        level1BackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
@@ -47,7 +47,7 @@ extension PhotoClubHubHtmlApp {
 
         // warning: following clubs rely on Level 1 file for filling in their coordinates
 
-        // load test member(s) of Fotogroep Bellus Imago TODO renable 3 clubs
+        // load test member(s) of Fotogroep Bellus Imago
 //        let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
 //        bellusBackgroundContext.name = "Bellus Imago"
 //        bellusBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
@@ -62,11 +62,11 @@ extension PhotoClubHubHtmlApp {
         _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext)
 
         // load all current/former members of Fotogroep Waalre
-//        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//        waalreBackgroundContext.name = "Fotogroep Waalre"
-//        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
-//        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext)
+        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        waalreBackgroundContext.name = "Fotogroep Waalre"
+        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext)
 
         // load all current members of Fotogroep Anders
 //        let andersBackgroundContext = PersistenceController.shared.container.newBackgroundContext()

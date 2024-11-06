@@ -10,7 +10,7 @@ import RegexBuilder // for OneOrMore, Capture, etc
 
 extension MemberPortfolio {
 
-    func refreshFirstImage() {
+    func refreshFirstImage() async throws {
         let clubsUsingJuiceBox: [OrganizationID] = [ // strings have to be precise ;-)
             OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre"),
             OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
@@ -18,21 +18,42 @@ extension MemberPortfolio {
         guard clubsUsingJuiceBox.contains(organization.id) else { return }
         let organizationTown: String = self.organization.fullNameTown
 
-        if let urlIndex = URL(string: self.level3URL.absoluteString + "config.xml") { // assume JuiceBox Pro
-            ifDebugPrint("\(organizationTown): starting refreshFirstImage() \(urlIndex.absoluteString) in background")
+        if let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") {
+            // assumes JuiceBox Pro is used
+            ifDebugPrint("""
+                         \(organizationTown): starting refreshFirstImage() \
+                         \(urlOfImageIndex.absoluteString) in background
+                         """)
 
-            // swiftlint:disable:next large_tuple
-            var results: (utfContent: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
-            results = URLSession.shared.synchronousDataTask(from: urlIndex)
-            guard results != nil && results!.utfContent != nil else {
-                print("\(organizationTown): ERROR - loading refreshFirstImage() \(urlIndex.absoluteString) failed")
-                return
+            let url = urlOfImageIndex
+//            let url = URL(string: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/config.xml")!
+
+            let xmlContent = try await Loader().UTF8UrlToString(from: url)
+//            print(xmlContent)
+
+            struct Loader {
+                let session = URLSession.shared
+
+                func UTF8UrlToString(from url: URL) async throws -> String {
+
+                    let (data, _) = try await session.data(from: url)
+                    return String(decoding: data, as: UTF8.self)
+
+                }
             }
 
-            let xmlContent = String(data: results!.utfContent! as Data,
-                                    encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!
+//            // swiftlint:disable:next large_tuple TODO
+//            var results: (utfContent: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
+//            results = URLSession.shared.synchronousDataTask(from: urlOfImageIndex)
+//            guard results != nil && results!.utfContent != nil else {
+//                print("\(organizationTown): ERROR - loading refreshFirstImage() \(urlOfImageIndex.absoluteString) failed")
+//                return
+//            }
+//
+//            let xmlContent = String(data: results!.utfContent! as Data,
+//                                    encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!
             parseXMLContent(xmlContent: xmlContent, member: self)
-            ifDebugPrint("\(organizationTown): completed refreshFirstImage() \(urlIndex.absoluteString)")
+            ifDebugPrint("\(organizationTown): completed refreshFirstImage() \(urlOfImageIndex.absoluteString)")
         }
     }
 

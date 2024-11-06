@@ -48,9 +48,9 @@ struct Members: StaticPage {
                     memberRow(givenName: member.photographer.givenName,
                               infixName: member.photographer.infixName,
                               familyName: member.photographer.familyName,
-                              start: "2022-11-17", // TODO
-//                            start: member.membershipStartDate TODO
+                              start: member.membershipStartDate,
                               fotobond: Int(member.fotobondNumber),
+                              website: member.photographer.photographerWebsite,
                               portfolio: member.level3URL_,
                               thumbnail: member.featuredImageThumbnail ??
                                          URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
@@ -136,12 +136,12 @@ struct Members: StaticPage {
     fileprivate mutating func memberRow(givenName: String,
                                         infixName: String = "",
                                         familyName: String,
-                                        start: String,
-                                        end: String? = nil, // nil means "still a member",
+                                        start: Date,
+                                        end: Date? = nil, // nil means "still a member",
                                         fotobond: Int? = nil,
                                         isDeceased: Bool = false,
                                         role: String = "",
-                                        website: String = "",
+                                        website: URL?,
                                         portfolio: URL?,
                                         thumbnail: URL) -> Row {
 
@@ -154,7 +154,7 @@ struct Members: StaticPage {
                     Text {
                         Link(
                             fullName(givenName: givenName, infixName: infixName, familyName: familyName),
-                            target: portfolio!) // TODO !
+                            target: portfolio!) // TODO handle ! operator
                         .linkStyle(.hover)
                         if isDeceased {
                             Badge("Overleden")
@@ -175,16 +175,16 @@ struct Members: StaticPage {
                 formatMembershipYears(start: start, end: end, fotobond: fotobond ?? 1234567) // TODO
             } .verticalAlignment(.middle)
 
-            if website.isEmpty { // photographer's optional own website
+            if website == nil { // photographer's optional own website
                 Column { }
             } else {
                 Column {
                     Span(
-                        Link( "Website", target: website)
+                        Link( "Website", target: website!.absoluteString)
                             .linkStyle(.hover)
                             .role(.default)
                     )
-                    .hint(text: website)
+                    .hint(text: website!.absoluteString)
                 } .verticalAlignment(.middle)
             }
 
@@ -204,11 +204,11 @@ struct Members: StaticPage {
         }
     }
 
-    fileprivate mutating func memberRow1(givenName: String, // TODO
+    fileprivate mutating func memberRow1(givenName: String, // TODO remove memberRow1()
                                          infixName: String = "",
                                          familyName: String,
-                                         start: String,
-                                         end: String? = nil, // nil means "still a member",
+                                         start: Date,
+                                         end: Date? = nil, // nil means "still a member",
                                          fotobond: Int? = nil,
                                          isDeceased: Bool = false,
                                          role: String = "",
@@ -275,19 +275,23 @@ struct Members: StaticPage {
         String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
     }
 
-    fileprivate mutating func formatMembershipYears(start: String, end: String?, fotobond: Int) -> Span {
-        let endDate: Date = (end != nil) ? (dateFormatter.date(from: end!) ?? Date.now) : Date.now
-        let dateInterval = DateInterval(start: dateFormatter.date(from: start) ?? Date.now, end: endDate)
+    fileprivate mutating func formatMembershipYears(start: Date, end: Date?, fotobond: Int) -> Span {
+        let endDate: Date = (end != nil) ? end! : Date.now
+        let dateInterval = DateInterval(start: start, end: endDate)
         let years = dateInterval.duration / (365.25 * 24 * 60 * 60)
         if end == nil {
             currentMembersTotalYears += years
             currentMembersCount += 1
+            let formattedStartDate = dateFormatter.string(from: start)
             return Span(formatYears(years: years))
-                        .hint(text: "Vanaf \(start). Fotobond #\(fotobond).")
+                .hint(text: "Vanaf \(formattedStartDate). Fotobond #\(fotobond).")
         } else {
             formerMembersTotalYears += years
             formerMembersCount += 1
-            return Span("\(start.prefix(4))-\(end!.prefix(4))")
+            let startYear = Calendar.current.dateComponents([.year], from: start).year ?? 2000
+            let endYear = Calendar.current.dateComponents([.year], from: end!).year ?? 2000
+
+            return Span("\(startYear)-\(endYear)")
                    .hint(text: "Vanaf \(start) t/m \(end!) (\(formatYears(years: years)) jaar). Fotobond #\(fotobond).")
         }
     }

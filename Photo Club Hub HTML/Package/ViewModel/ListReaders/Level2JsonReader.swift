@@ -251,7 +251,14 @@ class Level2JsonReader { // normally running on a background thread
                                                                )
             )
         }
-        memberPortfolio.refreshFirstImage()
+        Task {
+            do {
+                try await memberPortfolio.refreshFirstImage()
+            } catch {
+                // ignore
+            }
+        }
+
     }
 
     fileprivate func loadClubOptionals(bgContext: NSManagedObjectContext,
@@ -314,7 +321,7 @@ class Level2JsonReader { // normally running on a background thread
                                               )
                                           )
 
-        // ...while some attributes are at the Photographer as Member of club level
+        // ...while some attributes are at the Photographer-as-Member-of-club level
         return MemberPortfolio.findCreateUpdate(
             bgContext: bgContext,
             organization: club,
