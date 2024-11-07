@@ -66,8 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
-				D0B9D4FE2CC443D900B1541C /* .github */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
+				D0B9D4FE2CC443D900B1541C /* .github */,
 				D0E06C112C8C5ABC0025734B /* Products */,
 			);
 			sourceTree = "<group>";

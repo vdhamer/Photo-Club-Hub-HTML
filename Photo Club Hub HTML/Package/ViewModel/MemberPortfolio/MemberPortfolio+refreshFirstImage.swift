@@ -42,16 +42,6 @@ extension MemberPortfolio {
                 }
             }
 
-//            // swiftlint:disable:next large_tuple TODO
-//            var results: (utfContent: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
-//            results = URLSession.shared.synchronousDataTask(from: urlOfImageIndex)
-//            guard results != nil && results!.utfContent != nil else {
-//                print("\(organizationTown): ERROR - loading refreshFirstImage() \(urlOfImageIndex.absoluteString) failed")
-//                return
-//            }
-//
-//            let xmlContent = String(data: results!.utfContent! as Data,
-//                                    encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!
             parseXMLContent(xmlContent: xmlContent, member: self)
             ifDebugPrint("\(organizationTown): completed refreshFirstImage() \(urlOfImageIndex.absoluteString)")
         }

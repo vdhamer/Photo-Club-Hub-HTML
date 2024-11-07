@@ -50,12 +50,20 @@ struct Members: StaticPage {
                               familyName: member.photographer.familyName,
                               start: member.membershipStartDate,
                               fotobond: Int(member.fotobondNumber),
+                              isDeceased: member.photographer.isDeceased,
+                              roles: member.memberRolesAndStatus,
                               website: member.photographer.photographerWebsite,
                               portfolio: member.level3URL_,
                               thumbnail: member.featuredImageThumbnail ??
                                          URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
                     )
                 }
+            }
+            header: {
+                "Naam"
+                "Jaren lid"
+                "Eigen site"
+                "Portfolio"
             }
         } catch {
             fatalError("Failed to fetch memberPortfolios: \(error)")
@@ -140,7 +148,7 @@ struct Members: StaticPage {
                                         end: Date? = nil, // nil means "still a member",
                                         fotobond: Int? = nil,
                                         isDeceased: Bool = false,
-                                        role: String = "",
+                                        roles: MemberRolesAndStatus = MemberRolesAndStatus(role: [:], status: [:]),
                                         website: URL?,
                                         portfolio: URL?,
                                         thumbnail: URL) -> Row {
@@ -162,7 +170,7 @@ struct Members: StaticPage {
                                 .role(.secondary)
                                 .margin(.leading, 10)
                         } else {
-                            Badge(role)
+                            Badge(describe(roles: roles.role))
                                 .badgeStyle(.subtleBordered)
                                 .role(.success)
                                 .margin(.leading, 10)
@@ -202,6 +210,17 @@ struct Members: StaticPage {
             } .verticalAlignment(.middle)
 
         }
+    }
+
+    fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
+        for role in roles {
+            for definedRole in MemberRole.allCases {
+                if role.key==definedRole && role.value==true {
+                    return definedRole.localizedString().capitalized
+                }
+            }
+        }
+        return ""
     }
 
     fileprivate mutating func memberRow1(givenName: String, // TODO remove memberRow1()
