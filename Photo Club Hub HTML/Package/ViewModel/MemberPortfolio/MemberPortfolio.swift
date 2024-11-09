@@ -19,7 +19,7 @@ extension MemberPortfolio: Comparable {
 
 }
 
-extension MemberPortfolio: @unchecked Sendable { // TODO
+extension MemberPortfolio: @unchecked Sendable { // TODO new
 
 }
 

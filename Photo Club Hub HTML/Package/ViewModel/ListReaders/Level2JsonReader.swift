@@ -55,7 +55,8 @@ import SwiftyJSON // for JSON struct
                      "isViceChairman": false,
                      "isTreasurer": false,
                      "isSecretary": false,
-                     "isAdmin": true
+                     "isAdmin": true,
+                     "isOther": false
                  },
                  "status": {
                      "isDeceased": false,
@@ -251,6 +252,7 @@ class Level2JsonReader { // normally running on a background thread
                                                                )
             )
         }
+        // TODO was memberPortfolio.refreshFirstImage()
         Task {
             do {
                 try await memberPortfolio.refreshFirstImage()
