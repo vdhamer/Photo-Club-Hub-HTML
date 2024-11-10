@@ -72,12 +72,14 @@ extension MemberPortfolio { // expose computed properties (some related to handl
 
     var level3URL: URL {
         get {
-            if level3URL_ == nil {
+            if level3URL_ != nil {
+                return level3URL_!
+            } else {
                 let string = MemberPortfolio.emptyPortfolioURL
                 // following line can crash on initial run of PhCH HTML, ! operator TODO
                 level3URL_ = URL(string: string)!
+                return level3URL_!
             }
-            return level3URL_!
         }
         set {
             level3URL_ = newValue

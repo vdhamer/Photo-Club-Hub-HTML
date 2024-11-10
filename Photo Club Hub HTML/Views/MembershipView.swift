@@ -32,14 +32,16 @@ struct MembershipView: View {
                 Text("Please select a club with members.")
             } else {
                 ForEach(fetchRequestClubMembers, id: \.self) { member in
-                    Text("""
-                         \(member.photographer_?.givenName_ ?? "given name?") \
-                         \(infix(content: member.photographer_?.infixName))\
-                         \(member.photographer_?.familyName_ ?? "family name?")\
-                         \(describeMember(member: member)) \
-                         (thumbnail: \(member.featuredImageThumbnail!.lastPathComponent))
-                         """)
-                        .font(.title3)
+                    HStack {
+                        Text("""
+                             \(member.photographer_?.givenName_ ?? "given name?") \
+                             \(infix(content: member.photographer_?.infixName))\
+                             \(member.photographer_?.familyName_ ?? "family name?")\
+                             \(describeMember(member: member))
+                             """) .font(.title3) .fontWeight(.bold) .lineLimit(1)
+                        Spacer()
+                        Text("\(member.featuredImageThumbnail!.lastPathComponent)") .font(.footnote)
+                    }
                 }
             }
         }
