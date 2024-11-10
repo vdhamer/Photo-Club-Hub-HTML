@@ -37,8 +37,8 @@ extension MemberPortfolio {
                 func UTF8UrlToString(from url: URL) async throws -> String {
 
                     let (data, _) = try await session.data(from: url)
-                    return String(decoding: data, as: UTF8.self)
-
+                    let string: String? = String(data: data, encoding: .utf8)
+                    return string ?? "Could not decode \(url) as UTF8" // not very helpful if you parse this as XML ;-(
                 }
             }
 
