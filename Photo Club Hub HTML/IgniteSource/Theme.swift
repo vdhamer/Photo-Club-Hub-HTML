@@ -28,10 +28,13 @@ struct UpdatedOnFooter: Component { // swiftlint doesn't want this one to be fil
     public func body(context: PublishingContext) -> [any PageElement] {
         let timezone = TimeZone.current
         let timezoneCode = timezone.abbreviation() ?? ""
+        let date: String = Date.now.formatted(date: .abbreviated, time: .shortened)
 
         Alert {
-            Text {
-                "Data was last updated on \(Date.now.formatted(date: .long, time: .shortened)) \(timezoneCode)."
+            Text { // this is Ignite's Text, not SwiftUI's Text
+                String(localized: "Data was last updated on \(date) \(timezoneCode).",
+                       table: "Site",
+                       comment: "Timestamp at bottom of static HTML page showing when page was generate")
             } .horizontalAlignment(.center)
         }
         .margin(.top, .small)

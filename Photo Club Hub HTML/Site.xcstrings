@@ -1,0 +1,261 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld former members" : {
+      "comment" : "Number of former members",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld former members"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld voormalige leden"
+          }
+        }
+      }
+    },
+    "admin" : {
+      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "admin"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "admin"
+          }
+        }
+      }
+    },
+    "Average membership duration is %@ years." : {
+      "comment" : "Table foothote showing average years of membership of all members.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average membership duration is %@ years."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Huidige leden zijn gemiddeld %@ jaar lid."
+          }
+        }
+      }
+    },
+    "chairman" : {
+      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "chairman"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "voorzitter"
+          }
+        }
+      }
+    },
+    "Data was last updated on %@ %@." : {
+      "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Data was last updated on %1$@ %2$@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gegevens bijgewerkt op %1$@."
+          }
+        }
+      }
+    },
+    "Membership" : {
+      "comment" : "HTML table header for years of membership column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Membership"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaren lid"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "comment" : "HTML table header for member's name column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naam"
+          }
+        }
+      }
+    },
+    "other" : {
+      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "other"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bestuurslid"
+          }
+        }
+      }
+    },
+    "Own website" : {
+      "comment" : "HTML table header for member's own website column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Own website"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eigen site"
+          }
+        }
+      }
+    },
+    "Portfolio" : {
+      "comment" : "HTML table header for image linked to member's portfolio.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portfolio"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Portfolio"
+          }
+        }
+      }
+    },
+    "secretary" : {
+      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "secretary"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "secretaris"
+          }
+        }
+      }
+    },
+    "The %lld current members" : {
+      "comment" : "Number of current members",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The %lld current members"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De %lld huidige leden"
+          }
+        }
+      }
+    },
+    "treasurer" : {
+      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "treasurer"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "penningmeester"
+          }
+        }
+      }
+    },
+    "vice-chairman" : {
+      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "vice-chairman"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "vicevoorzitter"
+          }
+        }
+      }
+    },
+    "Web site" : {
+      "comment" : "Clickable link to photographer's web site",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "web site"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "website"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -60,10 +60,14 @@ struct Members: StaticPage {
                 }
             }
             header: {
-                "Naam"
-                "Jaren lid"
-                "Eigen site"
-                "Portfolio"
+                String(localized: "Name",
+                       table: "Site", comment: "HTML table header for member's name column.")
+                String(localized: "Membership",
+                       table: "Site", comment: "HTML table header for years of membership column.")
+                String(localized: "Own website",
+                       table: "Site", comment: "HTML table header for member's own website column.")
+                String(localized: "Portfolio",
+                       table: "Site", comment: "HTML table header for image linked to member's portfolio.")
             }
         } catch {
             fatalError("Failed to fetch memberPortfolios: \(error)")
@@ -77,7 +81,8 @@ struct Members: StaticPage {
         // MARK: - current members
 
         Text {
-            Badge("De \(currentMembersCount) huidige leden")
+            Badge(String(localized: "The \(currentMembersCount) current members",
+                         table: "Site", comment: "Number of current members"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }
@@ -90,13 +95,14 @@ struct Members: StaticPage {
 
         if currentMembersCount > 0 {
             Alert {
-                Text {
+                Text {String(localized:
                     """
-                    Huidige leden zijn gemiddeld \
+                    Average membership duration is \
                     \(formatYears(years: currentMembersTotalYears/Double(currentMembersCount))) \
-                    jaar lid.
-                    """
-                } .horizontalAlignment(.center)
+                    years.
+                    """,
+                    table: "Site", comment: "Table foothote showing average years of membership of all members."
+                )} .horizontalAlignment(.center)
             }
             .margin(.top, .small)
         }
@@ -106,7 +112,8 @@ struct Members: StaticPage {
         // MARK: - former members
 
         Text {
-            Badge("\(formerMembersCount) voormalige leden")
+            Badge(String(localized: "\(formerMembersCount) former members",
+                  table: "Site", comment: "Number of former members"))
                 .badgeStyle(.subtleBordered)
                 .role(.secondary)
         }
@@ -188,7 +195,9 @@ struct Members: StaticPage {
             } else {
                 Column {
                     Span(
-                        Link( "Website", target: website!.absoluteString)
+                        Link( String(localized: "Web site",
+                                     table: "Site", comment: "Clickable link to photographer's web site"),
+                              target: website!.absoluteString)
                             .linkStyle(.hover)
                             .role(.default)
                     )
@@ -266,7 +275,9 @@ struct Members: StaticPage {
             } else {
                 Column {
                     Span(
-                        Link( "Website", target: website)
+                        Link( String(localized: "Web site",
+                                     table: "Site", comment: "Clickable link to photographer's web site"),
+                              target: website)
                             .linkStyle(.hover)
                             .role(.default)
                     )

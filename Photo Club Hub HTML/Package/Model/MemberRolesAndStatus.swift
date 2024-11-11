@@ -21,22 +21,22 @@ enum MemberRole {
     func localizedString() -> String {
         switch self {
         case .admin:
-            return String(localized: "admin",
+            return String(localized: "admin", table: "Site",
                           comment: "Administrative role of member within a club. Used as part of concatenations.")
         case .chairman:
-            return String(localized: "chairman",
+            return String(localized: "chairman", table: "Site",
                           comment: "Administrative role of member within a club. Used as part of concatenations.")
         case .secretary:
-            return String(localized: "secretary",
+            return String(localized: "secretary", table: "Site",
                           comment: "Administrative role of member within a club. Used as part of concatenations.")
         case .treasurer:
-            return String(localized: "treasurer",
+            return String(localized: "treasurer", table: "Site",
                           comment: "Administrative role of member within a club. Used as part of concatenations.")
         case .viceChairman:
-            return String(localized: "vice-chairman",
+            return String(localized: "vice-chairman", table: "Site",
                           comment: "Administrative role of member within a club. Used as part of concatenations.")
         case .other:
-            return String(localized: "other",
+            return String(localized: "other", table: "Site",
                           comment: "Administrative role of member within a club. Used as part of concatenations.")
         }
     }
