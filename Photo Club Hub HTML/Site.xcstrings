@@ -36,7 +36,7 @@
       }
     },
     "Average membership duration is %@ years." : {
-      "comment" : "Table foothote showing average years of membership of all members.",
+      "comment" : "Table footnote showing average years of membership of all members.",
       "localizations" : {
         "en" : {
           "stringUnit" : {

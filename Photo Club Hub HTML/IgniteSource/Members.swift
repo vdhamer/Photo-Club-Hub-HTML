@@ -101,7 +101,7 @@ struct Members: StaticPage {
                     \(formatYears(years: currentMembersTotalYears/Double(currentMembersCount))) \
                     years.
                     """,
-                    table: "Site", comment: "Table foothote showing average years of membership of all members."
+                    table: "Site", comment: "Table footnote showing average years of membership of all members."
                 )} .horizontalAlignment(.center)
             }
             .margin(.top, .small)
