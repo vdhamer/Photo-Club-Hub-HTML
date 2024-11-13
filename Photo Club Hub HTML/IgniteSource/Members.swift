@@ -10,7 +10,6 @@ import CoreData // for ManagedObjectContext
 import SwiftImageReadWrite // for image format conversion
 import AppKit // for CGImage
 
-// swiftlint:disable:next type_body_length
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol?
 
@@ -88,7 +87,7 @@ struct Members: StaticPage {
         }
         .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
 
-        currentMembers // interpret this as an Ignite Table { } that returns [Rows]
+        currentMembers // this is an Ignite Table that renders an array of Ignite Rows
             .tableStyle(.stripedRows)
             .tableBorder(true)
             .horizontalAlignment(.center)
@@ -107,7 +106,7 @@ struct Members: StaticPage {
             .margin(.top, .small)
         }
 
-        Divider() // don't know how to get it darker or in color
+        Divider() // would like it in a darker color
 
         // MARK: - former members
 
@@ -148,6 +147,7 @@ struct Members: StaticPage {
     }
 
     // swiftlint:disable:next function_body_length function_parameter_count
+    // generates an Ignite Row in an Ignite table
     fileprivate mutating func memberRow(givenName: String,
                                         infixName: String = "",
                                         familyName: String,
@@ -170,7 +170,7 @@ struct Members: StaticPage {
                         Link(
                             fullName(givenName: givenName, infixName: infixName, familyName: familyName),
                             target: portfolio!) // TODO handle ! operator
-                        .linkStyle(.hover)
+                            .linkStyle(.hover)
                         if isDeceased {
                             Badge("Overleden")
                                 .badgeStyle(.default)
@@ -199,7 +199,6 @@ struct Members: StaticPage {
                                      table: "Site", comment: "Clickable link to photographer's web site"),
                               target: website!.absoluteString)
                             .linkStyle(.hover)
-                            .role(.default)
                     )
                     .hint(text: website!.absoluteString)
                 } .verticalAlignment(.middle)
