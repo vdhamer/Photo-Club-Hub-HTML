@@ -121,7 +121,7 @@ It might even be supported as a feature in both apps (the iOS viewer and the Mac
 
 - [x] Fix the Ignite code (accepted PR for twostraws/Ignite) so that Ignite can be imported as a regular Swift package.
 - [x] Load the membership list from a .level2.json file. Currently the app contains a hardcoded partial copy of this data.
-- [ ] provide a UI by which the user can select a club for which to generate a local site.
+- [ ] allow the user to select a club for which to generate a local site (currently always _Fotogroep de Gender_).
 - [ ] localize the app's UI to support at least English and Dutch (for now there isn't much of a UI),
 - [ ] generate a static site that can serve as index of supported clubs (Level 1 data).
 
