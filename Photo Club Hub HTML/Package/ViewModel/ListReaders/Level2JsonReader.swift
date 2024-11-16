@@ -252,7 +252,7 @@ class Level2JsonReader { // normally running on a background thread
                                                                )
             )
         }
-        // TODO was memberPortfolio.refreshFirstImage()
+        // memberPortfolio.refreshFirstImage() // TODO reverted back to existing thread
         Task {
             do {
                 try await memberPortfolio.refreshFirstImage()

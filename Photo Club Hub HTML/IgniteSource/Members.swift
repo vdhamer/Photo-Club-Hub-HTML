@@ -146,7 +146,6 @@ struct Members: StaticPage {
         }
     }
 
-    // swiftlint:disable:next function_body_length function_parameter_count
     // generates an Ignite Row in an Ignite table
     fileprivate mutating func memberRow(givenName: String,
                                         infixName: String = "",
