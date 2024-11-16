@@ -9,7 +9,7 @@
 [![MIT License][license-shield]][license-url]
 
 ![Sample output website](images/Screenshot_Ignite.png "Sample output website")
-![Screenshot of MacOS app](images/Screenshot_app.png "Sample output website")
+![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
 
 # Photo-Club-Hub-HTML
 
