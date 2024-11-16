@@ -45,8 +45,8 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
 | Mobile friendly | yes | yes |
-| Lists clubs | yes | -* |
-| Lists photo museums | yes | -* |
+| Lists clubs | yes | -✲ |
+| Lists photo museums | yes | -✲ |
 | Lists current club members | yes | yes |
 | Lists former club members | yes | yes |
 | Displays member portfolios | yes | yes |
@@ -54,11 +54,11 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Portfolio autoplay | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | yes | - |
-| Languages | English, Dutch* | English, Dutch* |
+| Languages | English, Dutch✲ | English, Dutch✲ |
 | Data caching | yes | yes |
 | Available via | App Store, Github | URL, Github |
 
- * = _might be improved or supported in the future_
+ ✲ = _might be improved or supported in the future_
 
 ## Used technologies
 
