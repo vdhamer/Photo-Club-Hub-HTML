@@ -55,18 +55,18 @@ extension PhotoClubHubHtmlApp {
 //        _ = BellusImagoMembersProvider(bgContext: bellusBackgroundContext)
 
         // load member(s) of Fotogroep De Gender
-        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-        genderBackgroundContext.name = "FG de Gender"
-        genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        genderBackgroundContext.automaticallyMergesChangesFromParent = true
-        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext) // TODO
+//        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+//        genderBackgroundContext.name = "FG de Gender"
+//        genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+//        genderBackgroundContext.automaticallyMergesChangesFromParent = true
+//        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext) // TODO
 
         // load all current/former members of Fotogroep Waalre
-//        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//        waalreBackgroundContext.name = "Fotogroep Waalre"
-//        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
-//        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext)
+        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        waalreBackgroundContext.name = "Fotogroep Waalre"
+        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext)
 
         // load all current members of Fotogroep Anders
 //        let andersBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
