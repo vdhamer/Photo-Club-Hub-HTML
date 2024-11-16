@@ -9,7 +9,6 @@
 [![MIT License][license-shield]][license-url]
 
 ![Sample output website](images/Screenshot_Ignite.png "Sample output website")
-![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
 
 # Photo-Club-Hub-HTML
 
@@ -33,6 +32,14 @@ These lead the viewer to image portfolios that are managed by the photo clubs.
 
 This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
 and (in contrast to the iOS app) convert the latter into a static HTML pages that can be incorporated into a website.
+
+## Running the apps
+
+![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
+
+Clicking on the "fire" icon generates the website. For now there is no feedback to the user yet.
+The path to the directory with the new site will resemble `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
+You can use an FTP client like `Filezilla` to copy Build with its subdirectories to your HTTP server (e.g. a WordPress site).
 
 ## Comparing both apps
 
