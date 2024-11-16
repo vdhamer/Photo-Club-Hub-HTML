@@ -54,7 +54,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Portfolio autoplay | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | yes | - |
-| Languages | English, Dutch* | Dutch* |
+| Languages | English, Dutch* | English, Dutch* |
 | Data caching | yes | yes |
 | Available via | App Store, Github | URL, Github |
 
