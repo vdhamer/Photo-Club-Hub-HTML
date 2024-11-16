@@ -92,12 +92,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Membership"
+            "value" : "Years"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Jaren lid"
           }
         }
