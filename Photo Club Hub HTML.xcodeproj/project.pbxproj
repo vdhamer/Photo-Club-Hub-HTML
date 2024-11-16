@@ -11,7 +11,8 @@
 		D014A99C2C9DC50200ED412D /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		D04593FF2CD6850A00A52BFB /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
 		D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */ = {isa = PBXBuildFile; productRef = D04594D12CD6CB5400A52BFB /* SwiftImageReadWrite */; };
-		D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D065BD692CB08B7600346F66 /* SwiftyJSON */; };
+		D09D9C922CE927D00054F87B /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C912CE927D00054F87B /* Ignite */; };
+		D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C942CE928650054F87B /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,8 +54,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D04593FF2CD6850A00A52BFB /* Ignite in Frameworks */,
-				D065BD6A2CB08B7600346F66 /* SwiftyJSON in Frameworks */,
 				D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */,
+				D09D9C922CE927D00054F87B /* Ignite in Frameworks */,
+				D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */,
 				D014A99C2C9DC50200ED412D /* Ignite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,9 +105,10 @@
 			name = "Photo Club Hub HTML";
 			packageProductDependencies = (
 				D014A99B2C9DC50200ED412D /* Ignite */,
-				D065BD692CB08B7600346F66 /* SwiftyJSON */,
 				D08191F92CBADF760034D19E /* Ignite */,
 				D04594D12CD6CB5400A52BFB /* SwiftImageReadWrite */,
+				D09D9C912CE927D00054F87B /* Ignite */,
+				D09D9C942CE928650054F87B /* SwiftyJSON */,
 			);
 			productName = "Photo Club Hub HTML";
 			productReference = D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */;
@@ -137,9 +140,9 @@
 			mainGroup = D0E06C072C8C5ABC0025734B;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				D065BD682CB08B7600346F66 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
-				D08191F82CBADF760034D19E /* XCLocalSwiftPackageReference "../../Ignite" */,
-				D04594D02CD6CB5400A52BFB /* XCLocalSwiftPackageReference "../../SwiftImageReadWrite" */,
+				D04353FC2CE9268800B08C31 /* XCRemoteSwiftPackageReference "SwiftImageReadWrite" */,
+				D09D9C902CE927D00054F87B /* XCLocalSwiftPackageReference "../../Ignite" */,
+				D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D0E06C112C8C5ABC0025734B /* Products */;
@@ -419,18 +422,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		D04594D02CD6CB5400A52BFB /* XCLocalSwiftPackageReference "../../SwiftImageReadWrite" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../SwiftImageReadWrite;
-		};
-		D08191F82CBADF760034D19E /* XCLocalSwiftPackageReference "../../Ignite" */ = {
+		D09D9C902CE927D00054F87B /* XCLocalSwiftPackageReference "../../Ignite" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../Ignite;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D065BD682CB08B7600346F66 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+		D04353FC2CE9268800B08C31 /* XCRemoteSwiftPackageReference "SwiftImageReadWrite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dagronf/SwiftImageReadWrite";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.2;
+			};
+		};
+		D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
 			requirement = {
@@ -449,14 +456,18 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = SwiftImageReadWrite;
 		};
-		D065BD692CB08B7600346F66 /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D065BD682CB08B7600346F66 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
 		D08191F92CBADF760034D19E /* Ignite */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Ignite;
+		};
+		D09D9C912CE927D00054F87B /* Ignite */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Ignite;
+		};
+		D09D9C942CE928650054F87B /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

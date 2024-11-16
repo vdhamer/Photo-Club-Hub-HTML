@@ -1,5 +1,5 @@
 {
-  "originHash" : "7618b08ded0c9b3258a2aa710eaf1df07f5da956529e14c57f233407d9d4b20a",
+  "originHash" : "ba09f5264130c3d688ed7e8476f461eaeb1bb3c53e98ed8a1c61f74b33e60c20",
   "pins" : [
     {
       "identity" : "swift-argument-parser",
@@ -25,7 +25,16 @@
       "location" : "https://github.com/swiftlang/swift-markdown.git",
       "state" : {
         "branch" : "main",
-        "revision" : "90a8e2ec3d814093435b76c5e87917bd81785fd4"
+        "revision" : "93e7a799bf7959e98384443bf64cdee735e7ea03"
+      }
+    },
+    {
+      "identity" : "swiftimagereadwrite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dagronf/SwiftImageReadWrite",
+      "state" : {
+        "revision" : "42ace2412279f18bc264bc306e96b51c36e12a33",
+        "version" : "1.9.2"
       }
     },
     {
