@@ -13,6 +13,7 @@
 		D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */ = {isa = PBXBuildFile; productRef = D04594D12CD6CB5400A52BFB /* SwiftImageReadWrite */; };
 		D09D9C922CE927D00054F87B /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C912CE927D00054F87B /* Ignite */; };
 		D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C942CE928650054F87B /* SwiftyJSON */; };
+		D0AD0DDA2CEBD7B900EFBE87 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0DD92CEBD7B900EFBE87 /* Ignite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 			files = (
 				D04593FF2CD6850A00A52BFB /* Ignite in Frameworks */,
 				D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */,
+				D0AD0DDA2CEBD7B900EFBE87 /* Ignite in Frameworks */,
 				D09D9C922CE927D00054F87B /* Ignite in Frameworks */,
 				D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */,
 				D014A99C2C9DC50200ED412D /* Ignite in Frameworks */,
@@ -109,6 +111,7 @@
 				D04594D12CD6CB5400A52BFB /* SwiftImageReadWrite */,
 				D09D9C912CE927D00054F87B /* Ignite */,
 				D09D9C942CE928650054F87B /* SwiftyJSON */,
+				D0AD0DD92CEBD7B900EFBE87 /* Ignite */,
 			);
 			productName = "Photo Club Hub HTML";
 			productReference = D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */;
@@ -141,8 +144,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D04353FC2CE9268800B08C31 /* XCRemoteSwiftPackageReference "SwiftImageReadWrite" */,
-				D09D9C902CE927D00054F87B /* XCLocalSwiftPackageReference "../../Ignite" */,
 				D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				D0AD0DD82CEBD7B900EFBE87 /* XCLocalSwiftPackageReference "../../Ignite_nov18" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D0E06C112C8C5ABC0025734B /* Products */;
@@ -422,9 +425,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		D09D9C902CE927D00054F87B /* XCLocalSwiftPackageReference "../../Ignite" */ = {
+		D0AD0DD82CEBD7B900EFBE87 /* XCLocalSwiftPackageReference "../../Ignite_nov18" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../Ignite;
+			relativePath = ../../Ignite_nov18;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -468,6 +471,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		D0AD0DD92CEBD7B900EFBE87 /* Ignite */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Ignite;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
