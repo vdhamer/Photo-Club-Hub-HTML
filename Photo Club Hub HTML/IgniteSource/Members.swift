@@ -155,8 +155,8 @@ struct Members: StaticPage {
                                         fotobond: Int? = nil,
                                         isDeceased: Bool = false,
                                         roles: MemberRolesAndStatus = MemberRolesAndStatus(role: [:], status: [:]),
-                                        website: URL?,
-                                        portfolio: URL?,
+                                        website: URL? = nil, // nils are to keep swiftlint happy
+                                        portfolio: URL? = nil,
                                         thumbnail: URL) -> Row {
 
         downloadThumbnailToLocal(downloadURL: thumbnail)
