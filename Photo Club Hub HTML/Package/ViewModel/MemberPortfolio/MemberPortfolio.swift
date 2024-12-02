@@ -38,16 +38,10 @@ extension MemberPortfolio { // expose computed properties (some related to handl
         set { membershipStartDate_ = newValue }
     }
 
-    var membershipEndDate: Date { // non-optional version of membershipEndDate_
-        get {
-            if membershipEndDate_ == nil {
-                return Date.distantFuture
-            } else {
-                return membershipEndDate_!
-            }
-        }
+    var membershipEndDate: Date? { // nil means photographer is still a club member
+        get { return membershipEndDate_ }
         set { membershipEndDate_ = newValue
-            if newValue < Date() && !isFormerMember { // no longer a member
+            if newValue != nil, newValue! < Date() && !isFormerMember { // no longer a member
                 isFormerMember = true
                 ifDebugFatalError("Overruling former membership flag for member \(self.photographer.fullNameFirstLast)")
             }
