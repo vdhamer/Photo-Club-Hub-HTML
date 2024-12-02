@@ -13,13 +13,14 @@ import AppKit // for CGImage
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol?
 
-    fileprivate var currentMembersTotalYears: Double = 0 // updated in memberRow()
-    fileprivate var currentMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property? TODO
-    fileprivate var formerMembersTotalYears: Double = 0 // updated in memberRow()
-    fileprivate var formerMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property? TODO
-    fileprivate let dateFormatter = DateFormatter()
     fileprivate var currentMembers = Table {} // init to empty table, then fill during init()
     fileprivate var formerMembers = Table {} // same story
+    fileprivate var currentMembersTotalYears: Double = 0 // updated in memberRow()
+    fileprivate var formerMembersTotalYears: Double = 0 // updated in memberRow()
+    fileprivate var currentMembersCount: Int = 0 // updated in makeTable()
+    fileprivate var formerMembersCount: Int = 0 // updated in makeTable()
+
+    fileprivate let dateFormatter = DateFormatter()
 
     fileprivate var moc: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
     fileprivate var club: Organization
@@ -29,20 +30,37 @@ struct Members: StaticPage {
     init(moc: NSManagedObjectContext, club: Organization) {
         self.moc = moc
         self.club = club
-        dateFormatter.dateFormat = "yyyy-MM-dd"
 
-        // match sort order used in MembershipView to generate MembershipView SwiftUI view
-        let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
-        let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)
+        currentMembers = makeTable(former: false)
+        formerMembers = makeTable(former: true)
+    }
 
-        let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "organization_ = %@ AND isFormerMember = %@",
-                                             argumentArray: [club, false])
-        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
-
+    private mutating func makeTable(former: Bool) -> Table {
         do {
+            // match sort order used in MembershipView to generate MembershipView SwiftUI view
+            let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
+                                                   ascending: true)
+            let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_,
+                                                   ascending: true)
+            let headerCurrent = String(localized: "Member (years)",
+                                       table: "Site", comment: "HTML table header for years of membership column.")
+            let headerFormer = String(localized: "Member (period)",
+                                      table: "Site", comment: "HTML table header for years of membership column.")
+
+            let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
+            fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+
+            fetchRequest.predicate = NSPredicate(format: "organization_ = %@ AND isFormerMember = %@",
+                                                 argumentArray: [club, former])
             let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
-            currentMembers = Table {
+
+            if former {
+                formerMembersCount = memberPortfolios.count
+            } else {
+                currentMembersCount = memberPortfolios.count
+            }
+
+            return Table {
                 for member in memberPortfolios {
                     memberRow(givenName: member.photographer.givenName,
                               infixName: member.photographer.infixName,
@@ -62,8 +80,7 @@ struct Members: StaticPage {
             header: {
                 String(localized: "Name",
                        table: "Site", comment: "HTML table header for member's name column.")
-                String(localized: "Membership",
-                       table: "Site", comment: "HTML table header for years of membership column.")
+                String(former ? headerFormer : headerCurrent)
                 String(localized: "Own website",
                        table: "Site", comment: "HTML table header for member's own website column.")
                 String(localized: "Portfolio",
@@ -73,40 +90,6 @@ struct Members: StaticPage {
             fatalError("Failed to fetch memberPortfolios: \(error)")
         }
 
-        fetchRequest.predicate = NSPredicate(format: "organization_ = %@ AND isFormerMember = %@",
-                                             argumentArray: [club, true])
-        do {
-            let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
-            formerMembers = Table {
-                for member in memberPortfolios {
-                    memberRow(givenName: member.photographer.givenName,
-                              infixName: member.photographer.infixName,
-                              familyName: member.photographer.familyName,
-                              membershipStartDate: member.membershipStartDate,
-                              membershipEndDate: member.membershipEndDate,
-                              fotobond: Int(member.fotobondNumber),
-                              isDeceased: member.photographer.isDeceased,
-                              roles: member.memberRolesAndStatus,
-                              website: member.photographer.photographerWebsite,
-                              portfolio: member.level3URL_,
-                              thumbnail: member.featuredImageThumbnail ??
-                                         URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
-                    )
-                }
-            }
-            header: {
-                String(localized: "Name",
-                       table: "Site", comment: "HTML table header for member's name column.")
-                String(localized: "Member from-to",
-                       table: "Site", comment: "HTML table header for years of membership column.")
-                String(localized: "Own website",
-                       table: "Site", comment: "HTML table header for member's own website column.")
-                String(localized: "Portfolio",
-                       table: "Site", comment: "HTML table header for image linked to member's portfolio.")
-            }
-        } catch {
-            fatalError("Failed to fetch memberPortfolios: \(error)")
-        }
     }
 
     // MARK: - body()
@@ -173,15 +156,6 @@ struct Members: StaticPage {
         }
     }
 
-    func bestuursRol(row: Int) -> String {
-        let mod = row % 8
-        switch mod {
-        case 0: return "Penningmeester"
-        case 4: return "Voorzitter"
-        default: return ""
-        }
-    }
-
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
     fileprivate mutating func memberRow(givenName: String,
@@ -225,6 +199,7 @@ struct Members: StaticPage {
             Column { // duration of club membership
                 formatMembershipYears(start: membershipStartDate,
                                       end: membershipEndDate,
+                                      isFormer: isFormerMember(roles: roles),
                                       fotobond: fotobond ?? 1234567) // TODO
             } .verticalAlignment(.middle)
 
@@ -258,6 +233,12 @@ struct Members: StaticPage {
         }
     }
 
+//    fileprivate func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
+//        let status: [MemberStatus: Bool?] = roles.status
+//        let isFormer: Bool? = status[MemberStatus.former] ?? false // handle missing entry for .former
+//        return isFormer ?? false // handle isFormer == nil
+//    }
+
     fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
         for role in roles {
             for definedRole in MemberRole.allCases {
@@ -273,19 +254,20 @@ struct Members: StaticPage {
         String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
     }
 
-    fileprivate mutating func formatMembershipYears(start: Date, end: Date?, fotobond: Int) -> Span {
+    fileprivate mutating func formatMembershipYears(start: Date, end: Date?,
+                                                    isFormer: Bool,
+                                                    fotobond: Int) -> Span {
         let endDate: Date = (end != nil) ? end! : Date.now
         let dateInterval = DateInterval(start: start, end: endDate)
         let years = dateInterval.duration / (365.25 * 24 * 60 * 60)
-        if end == nil {
+        if isFormer == false { // first handle current members
             currentMembersTotalYears += years
-            currentMembersCount += 1
+            dateFormatter.dateFormat = "yyyy-MM-dd"
             let formattedStartDate = dateFormatter.string(from: start)
             return Span(formatYears(years: years))
                 .hint(text: "Vanaf \(formattedStartDate). Fotobond #\(fotobond).")
-        } else {
+        } else { // former members
             formerMembersTotalYears += years
-            formerMembersCount += 1
             let startYear = Calendar.current.dateComponents([.year], from: start).year ?? 2000
             let endYear = Calendar.current.dateComponents([.year], from: end!).year ?? 2000
 
@@ -338,4 +320,10 @@ struct Members: StaticPage {
 
     }
 
+}
+
+func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
+    let status: [MemberStatus: Bool?] = roles.status
+    let isFormer: Bool? = status[MemberStatus.former] ?? false // handle missing entry for .former
+    return isFormer ?? false // handle isFormer == nil
 }

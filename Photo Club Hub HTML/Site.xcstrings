@@ -5,15 +5,39 @@
       "comment" : "Number of former members",
       "localizations" : {
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld former members"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "The former member"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld former members"
+                }
+              }
+            }
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld voormalige leden"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Een voormalig lid"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld voormalige leden"
+                }
+              }
+            }
           }
         }
       }
@@ -21,12 +45,6 @@
     "admin" : {
       "comment" : "Administrative role of member within a club. Used as part of concatenations.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "admin"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38,12 +56,6 @@
     "Average membership duration is %@ years." : {
       "comment" : "Table footnote showing average years of membership of all members.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Average membership duration is %@ years."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -55,12 +67,6 @@
     "chairman" : {
       "comment" : "Administrative role of member within a club. Used as part of concatenations.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "chairman"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -72,12 +78,6 @@
     "Data was last updated on %@ %@." : {
       "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Data was last updated on %1$@ %2$@."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86,32 +86,20 @@
         }
       }
     },
-    "Member from-to" : {
+    "Member (period)" : {
       "comment" : "HTML table header for years of membership column.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Member from-to"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lid van-tot"
+            "value" : "Lidmaatschap"
           }
         }
       }
     },
-    "Membership" : {
+    "Member (years)" : {
       "comment" : "HTML table header for years of membership column.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Years"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -123,12 +111,6 @@
     "Name" : {
       "comment" : "HTML table header for member's name column.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Name"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -140,12 +122,6 @@
     "other" : {
       "comment" : "Administrative role of member within a club. Used as part of concatenations.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "other"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -157,12 +133,6 @@
     "Own website" : {
       "comment" : "HTML table header for member's own website column.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Own website"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -174,12 +144,6 @@
     "Portfolio" : {
       "comment" : "HTML table header for image linked to member's portfolio.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Portfolio"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -191,12 +155,6 @@
     "secretary" : {
       "comment" : "Administrative role of member within a club. Used as part of concatenations.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "secretary"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -209,15 +167,39 @@
       "comment" : "Number of current members",
       "localizations" : {
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The %lld current members"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "The %lld current member"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "The %lld current members"
+                }
+              }
+            }
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "De %lld huidige leden"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Het huidig lid"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "De %lld huidige leden"
+                }
+              }
+            }
           }
         }
       }
@@ -225,12 +207,6 @@
     "treasurer" : {
       "comment" : "Administrative role of member within a club. Used as part of concatenations.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "treasurer"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -242,12 +218,6 @@
     "vice-chairman" : {
       "comment" : "Administrative role of member within a club. Used as part of concatenations.",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "vice-chairman"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
