@@ -14,9 +14,9 @@ struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol?
 
     fileprivate var currentMembersTotalYears: Double = 0 // updated in memberRow()
-    fileprivate var currentMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property?
+    fileprivate var currentMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property? TODO
     fileprivate var formerMembersTotalYears: Double = 0 // updated in memberRow()
-    fileprivate var formerMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property?
+    fileprivate var formerMembersCount: Int = 0 // updated in memberRow(). Can this become a computed property? TODO
     fileprivate let dateFormatter = DateFormatter()
     fileprivate var currentMembers = Table {} // init to empty table, then fill during init()
     fileprivate var formerMembers = Table {} // same story
