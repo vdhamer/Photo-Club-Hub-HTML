@@ -29,18 +29,18 @@ struct Members: StaticPage {
     init(moc: NSManagedObjectContext, club: Organization) {
         self.moc = moc
         self.club = club
+        dateFormatter.dateFormat = "yyyy-MM-dd"
 
-        let predicate = NSPredicate(format: "organization_ = %@ AND isFormerMember = %@",
-                                    argumentArray: [club, false])
-        let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
-        fetchRequest.predicate = predicate
         // match sort order used in MembershipView to generate MembershipView SwiftUI view
         let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
         let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)
+
+        let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "organization_ = %@ AND isFormerMember = %@",
+                                             argumentArray: [club, false])
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
 
         do {
-            dateFormatter.dateFormat = "yyyy-MM-dd"
             let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
             currentMembers = Table {
                 for member in memberPortfolios {
@@ -48,6 +48,42 @@ struct Members: StaticPage {
                               infixName: member.photographer.infixName,
                               familyName: member.photographer.familyName,
                               start: member.membershipStartDate,
+                              end: member.membershipEndDate,
+                              fotobond: Int(member.fotobondNumber),
+                              isDeceased: member.photographer.isDeceased,
+                              roles: member.memberRolesAndStatus,
+                              website: member.photographer.photographerWebsite,
+                              portfolio: member.level3URL_,
+                              thumbnail: member.featuredImageThumbnail ??
+                                         URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
+                    )
+                }
+            }
+            header: {
+                String(localized: "Name",
+                       table: "Site", comment: "HTML table header for member's name column.")
+                String(localized: "Membership",
+                       table: "Site", comment: "HTML table header for years of membership column.")
+                String(localized: "Own website",
+                       table: "Site", comment: "HTML table header for member's own website column.")
+                String(localized: "Portfolio",
+                       table: "Site", comment: "HTML table header for image linked to member's portfolio.")
+            }
+        } catch {
+            fatalError("Failed to fetch memberPortfolios: \(error)")
+        }
+
+        fetchRequest.predicate = NSPredicate(format: "organization_ = %@ AND isFormerMember = %@",
+                                             argumentArray: [club, true])
+        do {
+            let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
+            formerMembers = Table {
+                for member in memberPortfolios {
+                    memberRow(givenName: member.photographer.givenName,
+                              infixName: member.photographer.infixName,
+                              familyName: member.photographer.familyName,
+                              start: member.membershipStartDate,
+                              end: member.membershipEndDate,
                               fotobond: Int(member.fotobondNumber),
                               isDeceased: member.photographer.isDeceased,
                               roles: member.memberRolesAndStatus,
