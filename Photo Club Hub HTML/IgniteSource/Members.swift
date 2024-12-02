@@ -97,7 +97,7 @@ struct Members: StaticPage {
             header: {
                 String(localized: "Name",
                        table: "Site", comment: "HTML table header for member's name column.")
-                String(localized: "Membership",
+                String(localized: "Member from-to",
                        table: "Site", comment: "HTML table header for years of membership column.")
                 String(localized: "Own website",
                        table: "Site", comment: "HTML table header for member's own website column.")
