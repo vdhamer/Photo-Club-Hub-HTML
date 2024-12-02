@@ -47,8 +47,8 @@ struct Members: StaticPage {
                     memberRow(givenName: member.photographer.givenName,
                               infixName: member.photographer.infixName,
                               familyName: member.photographer.familyName,
-                              start: member.membershipStartDate,
-                              end: member.membershipEndDate,
+                              membershipStartDate: member.membershipStartDate,
+                              membershipEndDate: member.membershipEndDate,
                               fotobond: Int(member.fotobondNumber),
                               isDeceased: member.photographer.isDeceased,
                               roles: member.memberRolesAndStatus,
@@ -82,8 +82,8 @@ struct Members: StaticPage {
                     memberRow(givenName: member.photographer.givenName,
                               infixName: member.photographer.infixName,
                               familyName: member.photographer.familyName,
-                              start: member.membershipStartDate,
-                              end: member.membershipEndDate,
+                              membershipStartDate: member.membershipStartDate,
+                              membershipEndDate: member.membershipEndDate,
                               fotobond: Int(member.fotobondNumber),
                               isDeceased: member.photographer.isDeceased,
                               roles: member.memberRolesAndStatus,
@@ -183,11 +183,12 @@ struct Members: StaticPage {
     }
 
     // generates an Ignite Row in an Ignite table
+    // swiftlint:disable:next function_body_length
     fileprivate mutating func memberRow(givenName: String,
                                         infixName: String = "",
                                         familyName: String,
-                                        start: Date,
-                                        end: Date? = nil, // nil means "still a member",
+                                        membershipStartDate: Date,
+                                        membershipEndDate: Date? = nil, // nil means "still a member",
                                         fotobond: Int? = nil,
                                         isDeceased: Bool = false,
                                         roles: MemberRolesAndStatus = MemberRolesAndStatus(role: [:], status: [:]),
@@ -222,7 +223,9 @@ struct Members: StaticPage {
             } .verticalAlignment(.middle)
 
             Column { // duration of club membership
-                formatMembershipYears(start: start, end: end, fotobond: fotobond ?? 1234567) // TODO
+                formatMembershipYears(start: membershipStartDate,
+                                      end: membershipEndDate,
+                                      fotobond: fotobond ?? 1234567) // TODO
             } .verticalAlignment(.middle)
 
             if website == nil { // photographer's optional own website
