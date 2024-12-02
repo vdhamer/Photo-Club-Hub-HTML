@@ -162,7 +162,7 @@ struct Members: StaticPage {
                                         infixName: String = "",
                                         familyName: String,
                                         membershipStartDate: Date,
-                                        membershipEndDate: Date? = nil, // nil means "still a member",
+                                        membershipEndDate: Date? = nil, // nil means "still a member"
                                         fotobond: Int? = nil,
                                         isDeceased: Bool = false,
                                         roles: MemberRolesAndStatus = MemberRolesAndStatus(role: [:], status: [:]),
