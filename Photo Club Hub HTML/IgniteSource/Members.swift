@@ -274,7 +274,12 @@ struct Members: StaticPage {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let formattedStartDate = dateFormatter.string(from: start!)
             return Span(formatYears(years: years))
-                .hint(text: "Vanaf \(formattedStartDate). Fotobond #\(fotobond).")
+                .hint(text: String(localized:
+                                   """
+                                   From \(formattedStartDate). Fotobond #\(fotobond).
+                                   """,
+                                   table: "Site",
+                                   comment: "Mouseover hint on cell containing start-end years"))
         } else { // a former member
             formerMembersTotalYears += years
             guard !(end == nil || start == nil) else { return unknown }

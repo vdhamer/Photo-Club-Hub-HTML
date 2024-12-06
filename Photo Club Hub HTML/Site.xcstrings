@@ -97,6 +97,23 @@
         }
       }
     },
+    "From %@. Fotobond #%lld." : {
+      "comment" : "Mouseover hint on cell containing start-end years",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From %1$@. Fotobond (NL) #%2$lld."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vanaf %1$@. Fotobond #%2$lld."
+          }
+        }
+      }
+    },
     "From %lld to %lld (%@ years). Fotobond #%lld." : {
       "comment" : "Mouseover hint on cell containing start-end years",
       "localizations" : {
