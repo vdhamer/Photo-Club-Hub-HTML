@@ -27,14 +27,8 @@ extension MemberPortfolio { // expose computed properties (some related to handl
 
     fileprivate static let emptyPortfolioURL: String = "http://www.vdHamer.com/fgWaalre/Empty_Website/"
 
-    var membershipStartDate: Date { // non-optional version of membershipStartDate_
-        get {
-            if membershipStartDate_ == nil {
-                return Date.distantPast // membership has no known start date
-            } else {
-                return membershipStartDate_!
-            }
-        }
+    var membershipStartDate: Date? {
+        get { return membershipStartDate_ }
         set { membershipStartDate_ = newValue }
     }
 

@@ -22,11 +22,19 @@ struct MemberSite: Site {
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
-        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven") // TODOD club hardcoded
-        let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
+//        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven") // TODOD club hardcoded
+//        let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
+//        let club: Organization = Organization.findCreateUpdate(context: moc,
+//                                                               organizationTypeEnum: OrganizationTypeEnum.club,
+//                                                               idPlus: deGenderIDPlus,
+//                                                               optionalFields: OrganizationOptionalFields())
+
+        titleSuffix = " – Fotogroep Waalre"
+        let waalreID = OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre") // TODOD club hardcoded
+        let waalreIDPlus = OrganizationIdPlus(id: waalreID, nickname: "fgWaalre")
         let club: Organization = Organization.findCreateUpdate(context: moc,
                                                                organizationTypeEnum: OrganizationTypeEnum.club,
-                                                               idPlus: deGenderIDPlus,
+                                                               idPlus: waalreIDPlus,
                                                                optionalFields: OrganizationOptionalFields())
 
         self.moc = moc

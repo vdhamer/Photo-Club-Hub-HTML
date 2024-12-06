@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "[unknown]" : {
+      "comment" : "Shown in member table when start date unavailable",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "[ onbekend ]"
+          }
+        }
+      }
+    },
     "%lld former members" : {
       "comment" : "Number of former members",
       "localizations" : {
@@ -82,6 +93,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gegevens bijgewerkt op %1$@."
+          }
+        }
+      }
+    },
+    "From %lld to %lld (%@ years). Fotobond #%lld." : {
+      "comment" : "Mouseover hint on cell containing start-end years",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "From %1$lld to %2$lld (%3$@ years). Fotobond #%4$lld."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vanaf %1$lld t/m %2$lld (%3$@ jaar). Fotobond #%4$lld."
           }
         }
       }

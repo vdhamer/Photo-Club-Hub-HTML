@@ -137,6 +137,9 @@ struct MemberRolesAndStatus: Equatable {
         // process content of jsonStatus
         if jsonStatus["isDeceased"].exists() {
             status[.deceased] = jsonStatus["isDeceased"].boolValue
+            if status[.deceased] == true {
+                status[.former] = true // deceased members are per definition subset of former members
+            }
         }
         if jsonStatus["isFormerMember"].exists() {
             status[.former] = jsonStatus["isFormerMember"].boolValue

@@ -161,8 +161,8 @@ struct Members: StaticPage {
     fileprivate mutating func memberRow(givenName: String,
                                         infixName: String = "",
                                         familyName: String,
-                                        membershipStartDate: Date,
-                                        membershipEndDate: Date? = nil, // nil means "still a member"
+                                        membershipStartDate: Date?, // nil means app didn't receive a start date
+                                        membershipEndDate: Date? = nil, // nil means photographer is still a member now
                                         fotobond: Int? = nil,
                                         isDeceased: Bool = false,
                                         roles: MemberRolesAndStatus = MemberRolesAndStatus(role: [:], status: [:]),
@@ -254,25 +254,41 @@ struct Members: StaticPage {
         String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
     }
 
-    fileprivate mutating func formatMembershipYears(start: Date, end: Date?,
+    fileprivate mutating func formatMembershipYears(start: Date?, end: Date?,
                                                     isFormer: Bool,
                                                     fotobond: Int) -> Span {
-        let endDate: Date = (end != nil) ? end! : Date.now
-        let dateInterval = DateInterval(start: start, end: endDate)
-        let years = dateInterval.duration / (365.25 * 24 * 60 * 60)
-        if isFormer == false { // first handle current members
+        var years = TimeInterval(0)
+        if start != nil {
+            let end: Date = (end != nil) ? end! : Date.now // optional -> not optional
+            let dateInterval = DateInterval(start: start!, end: end)
+            years = dateInterval.duration / (365.25 * 24 * 60 * 60)
+        }
+
+        let unknown = Span(String(localized: "[unknown]",
+                                  table: "Site",
+                                  comment: "Shown in member table when start date unavailable"))
+        if isFormer == false { // a current member
+            guard start != nil else { return unknown }
+
             currentMembersTotalYears += years
             dateFormatter.dateFormat = "yyyy-MM-dd"
-            let formattedStartDate = dateFormatter.string(from: start)
+            let formattedStartDate = dateFormatter.string(from: start!)
             return Span(formatYears(years: years))
                 .hint(text: "Vanaf \(formattedStartDate). Fotobond #\(fotobond).")
-        } else { // former members
+        } else { // a former member
             formerMembersTotalYears += years
-            let startYear = Calendar.current.dateComponents([.year], from: start).year ?? 2000
-            let endYear = Calendar.current.dateComponents([.year], from: end!).year ?? 2000
-
+            guard !(end == nil || start == nil) else { return unknown }
+            let startYear = Calendar.current.dateComponents([.year], from: start!).year ?? 2000
+            let endYear: Int
+            endYear = Calendar.current.dateComponents([.year], from: end!).year ?? 2000
             return Span("\(startYear)-\(endYear)")
-                   .hint(text: "Vanaf \(start) t/m \(end!) (\(formatYears(years: years)) jaar). Fotobond #\(fotobond).")
+                .hint(text: String(localized:
+                                   """
+                                   From \(startYear) to \(endYear) (\(formatYears(years: years)) years). \
+                                   Fotobond #\(fotobond).
+                                   """,
+                                   table: "Site",
+                                   comment: "Mouseover hint on cell containing start-end years"))
         }
     }
 
