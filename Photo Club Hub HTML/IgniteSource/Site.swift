@@ -13,7 +13,7 @@ import CoreData // for NSManagedObjectContext
 struct MemberSite: Site {
     var name = "Leden"
     var titleSuffix = " – Fotogroep de Gender"
-    var url: URL = URL("https://www.vdhamer.com/fgWaalre") // append /fgDeGender unless running on LocalHost
+    var url: URL = URL("https://www.vdhamer.com") // append "/fgDeGender" unless running on LocalHost
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
     var homePage: Members // actual loading of page content

@@ -26,10 +26,8 @@ extension MemberPortfolio {
                          """)
 
             let url = urlOfImageIndex
-//            let url = URL(string: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/config.xml")!
 
             let xmlContent = try await Loader().UTF8UrlToString(from: url)
-//            print(xmlContent)
 
             struct Loader {
                 let session = URLSession.shared
