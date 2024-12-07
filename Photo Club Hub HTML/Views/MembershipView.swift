@@ -40,7 +40,7 @@ struct MembershipView: View {
                              \(describeMember(member: member))
                              """) .font(.title3) .fontWeight(.bold) .lineLimit(1)
                         Spacer()
-                        Text("\(member.featuredImageThumbnail!.lastPathComponent)")
+                        Text("\(member.featuredImageThumbnail!.path)")
                             .font(.footnote)
                             .lineLimit(1)
                     }

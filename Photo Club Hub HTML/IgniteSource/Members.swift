@@ -327,7 +327,7 @@ struct Members: StaticPage {
             let image: CGImage = try CGImage.load(data: data) // SwiftImageReadWrite package
             let jpegData: Data  = try image.representation.jpeg(scale: 1, compression: 0.65, excludeGPSData: true)
 
-            let lastComponent: String = downloadURL.lastPathComponent
+            let lastComponent: String = downloadURL.lastPathComponent // e.g. "2023_FotogroepWaalre_001.jpg"
             let buildDirectoryString = NSHomeDirectory() // app's home directory for a sandboxed MacOS app
 
             guard let localUrl = URL(string: "file:\(buildDirectoryString)/Build/images/\(lastComponent)") else {
