@@ -45,7 +45,7 @@ extension PhotoClubHubHtmlApp {
 //        _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
 //                             useOnlyFile: false)
 
-        // warning: following clubs rely on Level 1 file for filling in their coordinates
+        // warning: following clubs rely on Level 1 file to provide their geographic coordinates
 
         // load test member(s) of Fotogroep Bellus Imago
 //        let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
@@ -55,11 +55,11 @@ extension PhotoClubHubHtmlApp {
 //        _ = BellusImagoMembersProvider(bgContext: bellusBackgroundContext)
 
         // load member(s) of Fotogroep De Gender
-//        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//        genderBackgroundContext.name = "FG de Gender"
-//        genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//        genderBackgroundContext.automaticallyMergesChangesFromParent = true
-//        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext) // TODO de Gender disabled
+        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        genderBackgroundContext.name = "FG de Gender"
+        genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        genderBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext)
 
         // load all current/former members of Fotogroep Waalre
         let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
