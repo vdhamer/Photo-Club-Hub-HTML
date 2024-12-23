@@ -1,0 +1,37 @@
+Data flow of featured image in Photo Club Hub HTML:
+
+club's level2 file on Github at
+https://raw.githubusercontent.com/vdhamer/Photo-Club-Hub/main/Photo%20Club%20Hub/ViewModel/Lists/fgWaalre.level2.json
+
+Contains 
+"level3URL": "http://www.vdHamer.com/fgWaalre/Aad_Schoenmaker/" and more
+
+====================================================================================
+
+level2.json on GitHub file gets read by level2JsonReader
+passes jsonData to mergeLevel2Json()
+that calls loadMember() in a for-loop, starting alphabetically with Aad Schoenmakers
+that sets local params:
+	featuredImage to nil (because it is not listed in online file)
+	level3URL_ to http://www.vdhamer.com/fgWaalre/Aad_Schoenmakers (as in online file)
+
+====================================================================================
+
+And then, still within for loop, calls refreshFirstImage() on an async thread
+that determines URL of xml file: http://www.vdhamer.com/fgWaalre/Aad_Schoenmakers/config.xml
+For Aad Schoenmakers:
+	featuredImage = http://www.vdhamer.com/fgWaalre/Aad_Schoenmakers/images/2014_ExpoFGWaalre_069.jpg
+	featuredImageThumbnail = http://www.vdhamer.com/fgWaalre/Aad_Schoenmakers/thumbs/2014_ExpoFGWaalre_069.jpg
+The updated data gets committed on the bgContext.
+
+====================================================================================
+
+When generating a memberRow for Ignite, first downloadThumbnailToLocal is called.
+It uses featuredImageThumbnail = http://www.vdhamer.com/fgWaalre/Aad_Schoenmakers/thumbs/2014_ExpoFGWaalre_069.jpg
+It re-encodes the JPG file (of compression 0.65).
+And writes the data to "file:/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build/images/2014_ExpoFGWaalre_069.jpg" in the app's sandbox.
+
+====================================================================================
+
+clearBuildFolder() erases buildDirectory = "file:///Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build"
+generateContent() recreates the content, but how does it handle the Members site?
