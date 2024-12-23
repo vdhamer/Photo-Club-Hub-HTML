@@ -1,13 +1,13 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "[unknown]" : {
+    "-" : {
       "comment" : "Shown in member table when start date unavailable",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "[ onbekend ]"
+            "value" : "-"
           }
         }
       }
@@ -108,7 +108,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Vanaf %1$@. Fotobond #%2$lld."
           }
         }
@@ -137,7 +137,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lidmaatschap"
+            "value" : "Jaren lid"
           }
         }
       }
@@ -245,6 +245,17 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "The listed ex-members were members of this club for, on average, %@ years." : {
+      "comment" : "Footer for former members table",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze ex-leden waren gemiddeld %@ jaar lid."
           }
         }
       }

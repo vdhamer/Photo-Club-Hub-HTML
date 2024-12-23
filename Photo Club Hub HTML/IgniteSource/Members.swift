@@ -111,7 +111,7 @@ struct Members: StaticPage {
             .tableBorder(true)
             .horizontalAlignment(.center)
 
-        if currentMembersCount > 0 {
+        if currentMembersTotalYears > 0 && currentMembersCount > 0 {
             Alert {
                 Text {String(localized:
                     """
@@ -121,6 +121,11 @@ struct Members: StaticPage {
                     """,
                     table: "Site", comment: "Table footnote showing average years of membership of all members."
                 )} .horizontalAlignment(.center)
+            }
+            .margin(.top, .small)
+        } else {
+            Alert {
+                Text { "" }
             }
             .margin(.top, .small)
         }
@@ -142,15 +147,22 @@ struct Members: StaticPage {
             .tableBorder(true)
             .horizontalAlignment(.center)
 
-        if formerMembersCount > 0 {
+        if formerMembersTotalYears > 0 && formerMembersCount > 0 {
             Alert {
-                Text {
+                Text { String(localized:
                     """
-                    De vermeldde ex-leden waren gemiddeld \
+                    The listed ex-members were members of this club for, on average, \
                     \(formatYears(years: formerMembersTotalYears/Double(formerMembersCount))) \
-                    jaar lid.
-                    """
+                    years.
+                    """,
+                    table: "Site",
+                    comment: "Footer for former members table")
                 } .horizontalAlignment(.center)
+            }
+            .margin(.top, .small)
+        } else {
+            Alert {
+                Text { "" }
             }
             .margin(.top, .small)
         }
@@ -264,7 +276,7 @@ struct Members: StaticPage {
             years = dateInterval.duration / (365.25 * 24 * 60 * 60)
         }
 
-        let unknown = Span(String(localized: "[unknown]",
+        let unknown = Span(String(localized: "-",
                                   table: "Site",
                                   comment: "Shown in member table when start date unavailable"))
         if isFormer == false { // a current member
@@ -330,13 +342,13 @@ struct Members: StaticPage {
             let lastComponent: String = downloadURL.lastPathComponent // e.g. "2023_FotogroepWaalre_001.jpg"
             let buildDirectoryString = NSHomeDirectory() // app's home directory for a sandboxed MacOS app
 
-            guard let localUrl = URL(string: "file:\(buildDirectoryString)/Build/images/\(lastComponent)") else {
+            guard let localUrl = URL(string: "file:\(buildDirectoryString)/Assets/images/\(lastComponent)") else {
                 fatalError("Trouble decoding /images/\(lastComponent)")
             }
             try jpegData.write(to: localUrl)
             print("Wrote jpg to \(localUrl)")
         } catch {
-            fatalError("Problem in downloadThunNailToLocal(): \(error)")
+            fatalError("Problem in downloadThumbNailToLocal(): \(error)")
         }
 
     }

@@ -11,37 +11,44 @@ import RegexBuilder // for OneOrMore, Capture, etc
 extension MemberPortfolio {
 
     func refreshFirstImage() async throws {
-        let clubsUsingJuiceBox: [OrganizationID] = [ // strings have to be precise ;-)
+        // does this club use JuicBox Pro xml files?
+        let clubsUsingJuiceBox: [OrganizationID] = [ // careful: ID strings have to be precise
             OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre"),
             OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
         ]
         guard clubsUsingJuiceBox.contains(organization.id) else { return }
-        let organizationTown: String = self.organization.fullNameTown
+        guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
 
-        if let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") {
-            // assumes JuiceBox Pro is used
-            ifDebugPrint("""
-                         \(organizationTown): starting refreshFirstImage() \
-                         \(urlOfImageIndex.absoluteString) in background
-                         """)
+        // assumes JuiceBox Pro is used
+        ifDebugPrint("""
+                     \(self.organization.fullNameTown): starting refreshFirstImage() \
+                     \(urlOfImageIndex.absoluteString) in background
+                     """)
 
-            let url = urlOfImageIndex
+        let url = urlOfImageIndex // just switching to shorter name
 
+        do {
             let xmlContent = try await Loader().UTF8UrlToString(from: url)
+            parseXMLContent(xmlContent: xmlContent, member: self)
+            ifDebugPrint(
+                "\(self.organization.fullNameTown): completed refreshFirstImage() \(urlOfImageIndex.absoluteString)"
+            )
+        } catch {
+            ifDebugFatalError("Failure in UTFUrlToString: \(error)")
+        }
 
-            struct Loader {
-                let session = URLSession.shared
+        struct Loader {
+            let session: URLSession
 
-                func UTF8UrlToString(from url: URL) async throws -> String {
-
-                    let (data, _) = try await session.data(from: url)
-                    let string: String? = String(data: data, encoding: .utf8)
-                    return string ?? "Could not decode \(url) as UTF8" // not very helpful if you parse this as XML ;-(
-                }
+            init() {
+                self.session = URLSession.shared
             }
 
-            parseXMLContent(xmlContent: xmlContent, member: self)
-            ifDebugPrint("\(organizationTown): completed refreshFirstImage() \(urlOfImageIndex.absoluteString)")
+            func UTF8UrlToString(from url: URL) async throws -> String {
+                let (data, _) = try await session.data(from: url)
+                let string: String? = String(data: data, encoding: .utf8)
+                return string ?? "Could not decode \(url) as UTF8" // not very helpful if you parse this as XML ;-(
+            }
         }
     }
 
