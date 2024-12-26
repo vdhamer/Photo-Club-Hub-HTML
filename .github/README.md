@@ -122,11 +122,10 @@ For now this is only possible by a minor change to the source code.
 
 - [x] Fix the Ignite code (accepted PR for twostraws/Ignite) so that Ignite can be imported as a regular Swift package.
 - [x] Load the membership list from a .level2.json file. Currently the app contains a hardcoded partial copy of this data.
-- [x] localize the generated website to support multiple languages (initially English and Dutch),
-- [ ] localize the app's own UI to support at least English and Dutch (currently only English),
-- [ ] allow the user to select a club for which to generate a local site (currently always _Fotogroep de Gender_).
-- [ ] localize the app's UI to support at least English and Dutch (for now there isn't much of a UI),
+- [x] localize the generated website to support multiple languages (initially English and Dutch).
+- [ ] localize the app's UI to support at least English and Dutch (for now there isn't much of a UI).
 - [ ] generate a static site that can serve as index of supported clubs (Level 1 data).
+   - [ ] allow the user to select the club for which to generate the local site (currently hardcoded constant).
 
 It would be nice to have an app for data enty/editing (rather than editing JSON files), but these would be a separate repo.
 
