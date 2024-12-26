@@ -62,7 +62,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Maps showing clubs | yes | - |
 | Languages | English, Dutch✲ | English, Dutch✲ |
 | Data caching | partiall✲ | partially✲ |
-| Concurrency | yes | yes |
+| Concurrent networking | yes | yes |
 | Available via | App Store, Github | URL, Github |
 
  ✲ = _might be improved or supported in the future_
