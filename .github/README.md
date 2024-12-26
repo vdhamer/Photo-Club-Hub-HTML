@@ -18,20 +18,21 @@ Both apps allow photography clubs to display photos made by club members.
 
 > The idea behind both apps is to provide a _central_ portal to view images that are managed _locally_ by the individual clubs.
 
-This calls for a 3-level data hierarchy: 
+This involves using a 3-level data hierarchy: 
 
 1. a central list with (someday hundreds of) participating clubs,
-2. local lists, each containing (dozens of) members per club, and
-3. local portfolios with (dozens of) selected images per club member.
+2. local lists, each containing dozens of members per club, and
+3. local portfolios with dozens of selected images per club member.
  
-This concept is comparable to the hierarchy of distributed
+This approach is comparable to the hierarchy of distributed
 [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System) servers that translate textual internet addresses
-into numeric internet addresses: there is one entry point (a file named `root.level1.json`) 
-that can forward the viewer to clubs with membership lists (`level2.json` files).
-These lead the viewer to image portfolios that are managed by the photo clubs.
+into numeric internet addresses: in our case there is a single entry point (a file named `root.level1.json`) 
+that forward the viewer to membership lists (`level2.json` files) per club.
+These in turn can lead the viewer to portfolios with photos that are managed by the photo clubs.
 
-This MacOS app will (in a later version) use the `root.level1.json` file to find a relevant `level2.json` file,
-and (in contrast to the iOS app) convert the latter into a static HTML pages that can be incorporated into a website.
+The iOS app thus reads the various types of JSON data files and uses these to drive the user interface.
+This MacOS app reads the same JSON data files and converts them into static HTML pages, which can be viewed using a browser. 
+The HTML pages can be stored on an existing (e.g. Wordpress) website and can be accessed via a link.
 
 ## Running the app
 
