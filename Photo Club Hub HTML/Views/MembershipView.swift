@@ -115,7 +115,7 @@ extension Organization {
                                                   optionalFields: PhotographerOptionalFields())
         let hansKrüsemannOpt = MemberOptionalFields(
             level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Hans_Krusemann/"),
-            memberRolesAndStatus: MemberRolesAndStatus(role: [ .admin: true ], status: [:]),
+            memberRolesAndStatus: MemberRolesAndStatus(roles: [ .admin: true ], status: [:]),
             fotobondNumber: 1620090,
             membershipStartDate: "2016-04-01".extractDate(),
             membershipEndDate: nil)
@@ -131,7 +131,7 @@ extension Organization {
                                                   optionalFields: PhotographerOptionalFields())
         let jelleVanDeVoortOpt = MemberOptionalFields(
             level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Jelle_van_de_Voort/"),
-            memberRolesAndStatus: MemberRolesAndStatus(role: [ .chairman: true ], status: [:]),
+            memberRolesAndStatus: MemberRolesAndStatus(roles: [ .chairman: true ], status: [:]),
             fotobondNumber: 1620103,
             membershipStartDate: "2020-01-01".extractDate(),
             membershipEndDate: nil)
@@ -150,7 +150,7 @@ extension Organization {
                                                   ))
         let peterVanDenHamerOpt = MemberOptionalFields(
             level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/"),
-            memberRolesAndStatus: MemberRolesAndStatus(role: [ .admin: true ], status: [:]),
+            memberRolesAndStatus: MemberRolesAndStatus(roles: [ .admin: true ], status: [:]),
             fotobondNumber: 1620110,
             membershipStartDate: "2024-01-01".extractDate(),
             membershipEndDate: nil)

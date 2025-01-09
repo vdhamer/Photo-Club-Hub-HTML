@@ -177,7 +177,7 @@ struct Members: StaticPage {
                                         membershipEndDate: Date? = nil, // nil means photographer is still a member now
                                         fotobond: Int? = nil,
                                         isDeceased: Bool = false,
-                                        roles: MemberRolesAndStatus = MemberRolesAndStatus(role: [:], status: [:]),
+                                        roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
                                         website: URL? = nil, // nils are to keep swiftlint happy
                                         portfolio: URL? = nil,
                                         thumbnail: URL) -> Row {
@@ -199,7 +199,7 @@ struct Members: StaticPage {
                                 .role(.secondary)
                                 .margin(.leading, 10)
                         } else {
-                            Badge(describe(roles: roles.role))
+                            Badge(describe(roles: roles.roles))
                                 .badgeStyle(.subtleBordered)
                                 .role(.success)
                                 .margin(.leading, 10)
