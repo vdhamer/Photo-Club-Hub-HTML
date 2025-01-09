@@ -9,6 +9,7 @@ import Ignite // for Site
 
 import SwiftUI // for @State
 import CoreData // for NSManagedObjectContext
+import CoreLocation // for CLLocationCoordinate2DMake
 
 struct MemberSite: Site {
     var name = "Leden"
@@ -28,6 +29,8 @@ struct MemberSite: Site {
         let club: Organization = Organization.findCreateUpdate(context: moc,
                                                                organizationTypeEnum: OrganizationTypeEnum.club,
                                                                idPlus: deGenderIDPlus,
+                                                               // real coordinates added in fgAnders.level2.json
+                                                               coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                optionalFields: OrganizationOptionalFields())
 
 //        titleSuffix = " – Fotogroep Waalre"
@@ -36,6 +39,8 @@ struct MemberSite: Site {
 //        let club: Organization = Organization.findCreateUpdate(context: moc,
 //                                                               organizationTypeEnum: OrganizationTypeEnum.club,
 //                                                               idPlus: waalreIDPlus,
+//                                                               // real coordinates added in fgAnders.level2.json
+//                                                               coordinates: CLLocationCoordinate2DMake(0, 0),
 //                                                               optionalFields: OrganizationOptionalFields())
 
         self.moc = moc

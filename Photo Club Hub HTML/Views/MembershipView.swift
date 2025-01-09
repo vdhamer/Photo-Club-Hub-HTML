@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import CoreLocation // for CLLocationCoordinate2DMake
 
 struct MembershipView: View {
     @Environment(\.managedObjectContext) fileprivate var viewContext
@@ -90,6 +91,7 @@ extension Organization {
             let fgDeGender = Organization.findCreateUpdate(context: context, // foreground
                                                            organizationTypeEnum: OrganizationTypeEnum.club,
                                                            idPlus: fgDeGenderIDPlus,
+                                                           coordinates: CLLocationCoordinate2DMake(0, 0),
                                                            optionalFields: OrganizationOptionalFields())
             do {
                 try context.save()

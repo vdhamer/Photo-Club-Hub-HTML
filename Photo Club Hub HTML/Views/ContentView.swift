@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import CoreLocation // for CLLocationCoordinate2DMake
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) fileprivate var viewContext
@@ -119,6 +120,10 @@ struct ContentView: View {
             _ = Organization.findCreateUpdate(context: viewContext, // can be foreground of background context
                                               organizationTypeEnum: organizationTypeEnum,
                                               idPlus: organizationIdPlus,
+                                              // real coordinates added in fgAnders.level2.json
+                                              coordinates: CLLocationCoordinate2DMake(
+                                                  Double.random(in: -180...180),
+                                                  Double.random(in: -180...180)),
                                               optionalFields: OrganizationOptionalFields()
             )
 

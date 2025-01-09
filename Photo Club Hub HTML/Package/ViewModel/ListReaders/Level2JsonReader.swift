@@ -185,6 +185,7 @@ class Level2JsonReader { // normally running on a background thread
             _ = Organization.findCreateUpdate(context: bgContext,
                                               organizationTypeEnum: OrganizationTypeEnum.club,
                                               idPlus: idPlus,
+                                              coordinates: CLLocationCoordinate2DMake(0, 0),
                                               optionalFields: OrganizationOptionalFields() // empty
                                              )
         }
@@ -273,9 +274,10 @@ class Level2JsonReader { // normally running on a background thread
         let wikipedia: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "wikipedia")
         let fotobondNumber = jsonOptionals["nlSpecific"]["fotobondNumber"].exists()  ? // id of club
             jsonOptionals["nlSpecific"]["fotobondNumber"].int16Value : nil
-        let coordinates: CLLocationCoordinate2D? = jsonOptionals["coordinates"].exists() ?
+        let coordinates: CLLocationCoordinate2D = jsonOptionals["coordinates"].exists() ?
             CLLocationCoordinate2D(latitude: jsonOptionals["coordinates"]["latitude"].doubleValue,
-                                    longitude: jsonOptionals["coordinates"]["longitude"].doubleValue) : nil
+                                    longitude: jsonOptionals["coordinates"]["longitude"].doubleValue) :
+            CLLocationCoordinate2DMake(0, 0) // for safety: Level 1 file should always contain coordinate fields
         let localizedRemarks: [JSON] = jsonOptionals["remark"].arrayValue // empty array if missing
 
         _ = Organization.findCreateUpdate(context: bgContext,
@@ -283,11 +285,11 @@ class Level2JsonReader { // normally running on a background thread
                                           idPlus: OrganizationIdPlus(id: OrganizationID(fullName: club.fullName,
                                                                                      town: club.town),
                                                                      nickname: club.nickName),
+                                          coordinates: coordinates,
                                           optionalFields: OrganizationOptionalFields(
                                               organizationWebsite: clubWebsite,
                                               wikipedia: wikipedia,
                                               fotobondNumber: fotobondNumber,
-                                              coordinates: coordinates,
                                               localizedRemarks: localizedRemarks
                                               )
         )
@@ -300,6 +302,8 @@ class Level2JsonReader { // normally running on a background thread
         let birthday: String? = jsonOptionals["birthday"].exists() ? jsonOptionals["birthday"].stringValue : nil
 
         let photographerWebsite: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "website")
+        let photographerImage: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "photographerImage")
+
         let featuredImage: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "featuredImage")
         let level3URL: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "level3URL")
 
@@ -319,10 +323,12 @@ class Level2JsonReader { // normally running on a background thread
                                           personName: PersonName(givenName: photographer.givenName,
                                                                  infixName: photographer.infixName,
                                                                  familyName: photographer.familyName),
-                                          isDeceased: memberRolesAndStatus.isDeceased(), // TODO to Phot.OptionalFields?
+                                          // TODO to Phot.OptionalFields? In both source files!
+                                          isDeceased: memberRolesAndStatus.isDeceased(),
                                           optionalFields: PhotographerOptionalFields(
                                               bornDT: birthday?.extractDate(),
-                                              photographerWebsite: photographerWebsite
+                                              photographerWebsite: photographerWebsite,
+                                              photographerImage: photographerImage
                                               )
                                           )
 

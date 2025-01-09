@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23602" systemVersion="24B91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Keyword" syncable="YES">
+        <attribute name="idString" optional="YES" attributeType="String"/>
+        <attribute name="isStandard" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="usage" optional="YES" attributeType="String"/>
+        <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="keyword_" inverseEntity="LocalizedKeyword"/>
+        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerKeyword" inverseName="keyword_" inverseEntity="PhotographerKeyword"/>
+    </entity>
     <entity name="Language" representedClassName="Language" syncable="YES" codeGenerationType="class">
         <attribute name="isoCode_" attributeType="String"/>
-        <attribute name="languageName_" attributeType="String" elementID="name_"/>
+        <attribute name="languageNameEN_" optional="YES" attributeType="String"/>
+        <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="language_" inverseEntity="LocalizedKeyword"/>
         <relationship name="localizedRemarks_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedRemark" inverseName="language_" inverseEntity="LocalizedRemark"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -10,7 +18,24 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="LocalizedRemark" representedClassName="LocalizedRemark" codeGenerationType="class">
+    <entity name="Level0">
+        <userInfo/>
+    </entity>
+    <entity name="Level1">
+        <userInfo/>
+    </entity>
+    <entity name="Level2">
+        <userInfo/>
+    </entity>
+    <entity name="Level3">
+        <userInfo/>
+    </entity>
+    <entity name="LocalizedKeyword" syncable="YES">
+        <attribute name="localizedString" optional="YES" attributeType="String"/>
+        <relationship name="keyword_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="localizedKeywords_" inverseEntity="Keyword"/>
+        <relationship name="language_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="localizedKeywords_" inverseEntity="Language"/>
+    </entity>
+    <entity name="LocalizedRemark" representedClassName="LocalizedRemark" syncable="YES" codeGenerationType="class">
         <attribute name="localizedString" optional="YES" attributeType="String"/>
         <relationship name="language_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="localizedRemarks_" inverseEntity="Language"/>
         <relationship name="organization_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Organization" inverseName="localizedRemarks_" inverseEntity="Organization"/>
@@ -20,7 +45,6 @@
                 <constraint value="organization_"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
-        <userInfo/>
     </entity>
     <entity name="MemberPortfolio" representedClassName="MemberPortfolio" elementID="Member" syncable="YES" codeGenerationType="class">
         <attribute name="featuredImage" optional="YES" attributeType="URI" elementID="latestImage_"/>
@@ -94,6 +118,7 @@
         <attribute name="photographerImage" optional="YES" attributeType="URI"/>
         <attribute name="photographerWebsite" optional="YES" attributeType="URI" elementID="photographerWebsite"/>
         <relationship name="memberships_" toMany="YES" deletionRule="Cascade" destinationEntity="MemberPortfolio" inverseName="photographer_" inverseEntity="MemberPortfolio"/>
+        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerKeyword" inverseName="photographer_" inverseEntity="PhotographerKeyword"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="familyName_"/>
@@ -102,13 +127,29 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <configuration name="Configuration_0">
-        <memberEntity name="Photographer"/>
-        <memberEntity name="MemberPortfolio"/>
-        <memberEntity name="Organization"/>
-    </configuration>
-    <configuration name="Configuration_2">
-        <memberEntity name="LocalizedRemark"/>
+    <entity name="PhotographerKeyword" syncable="YES">
+        <relationship name="keyword_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="photographerKeywords_" inverseEntity="Keyword"/>
+        <relationship name="photographer_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photographer" inverseName="photographerKeywords_" inverseEntity="Photographer"/>
+    </entity>
+    <configuration name="Level0">
         <memberEntity name="Language"/>
+        <memberEntity name="Keyword"/>
+        <memberEntity name="LocalizedKeyword"/>
+        <memberEntity name="OrganizationType"/>
+        <memberEntity name="Level0"/>
+    </configuration>
+    <configuration name="Level1">
+        <memberEntity name="Organization"/>
+        <memberEntity name="LocalizedRemark"/>
+        <memberEntity name="Level1"/>
+    </configuration>
+    <configuration name="Level2">
+        <memberEntity name="MemberPortfolio"/>
+        <memberEntity name="PhotographerKeyword"/>
+        <memberEntity name="Photographer"/>
+        <memberEntity name="Level2"/>
+    </configuration>
+    <configuration name="Level3">
+        <memberEntity name="Level3"/>
     </configuration>
 </model>
