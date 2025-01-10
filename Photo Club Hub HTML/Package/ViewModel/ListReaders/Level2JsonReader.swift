@@ -323,10 +323,9 @@ class Level2JsonReader { // normally running on a background thread
                                           personName: PersonName(givenName: photographer.givenName,
                                                                  infixName: photographer.infixName,
                                                                  familyName: photographer.familyName),
-                                          // TODO to Phot.OptionalFields? In both source files!
-                                          isDeceased: memberRolesAndStatus.isDeceased(),
                                           optionalFields: PhotographerOptionalFields(
                                               bornDT: birthday?.extractDate(),
+                                              isDeceased: memberRolesAndStatus.isDeceased(),
                                               photographerWebsite: photographerWebsite,
                                               photographerImage: photographerImage
                                               )
@@ -342,7 +341,8 @@ class Level2JsonReader { // normally running on a background thread
                 featuredImage: featuredImage,
                 featuredImageThumbnail: featuredImage,
                 level3URL: level3URL, // address of portfolio data for this member
-                memberRolesAndStatus: memberRolesAndStatus,
+                memberRolesAndStatus: cleanRoles(memberRolesAndStatus: memberRolesAndStatus,
+                                                 photographer: photographer),
                 fotobondNumber: fotobondNumber,
                 membershipStartDate: membershipStartDate,
                 membershipEndDate: membershipEndDate
@@ -355,6 +355,21 @@ class Level2JsonReader { // normally running on a background thread
         guard jsonOptionals[key].exists() else { return nil }
         guard let string = jsonOptionals[key].string else { return nil }
         return URL(string: string) // returns nil if the string doesn’t represent a valid URL
+    }
+
+    // for deceased members, clear any role they may have as officer of a photo club
+    fileprivate func cleanRoles(memberRolesAndStatus: MemberRolesAndStatus,
+                                photographer: Photographer) -> MemberRolesAndStatus {
+        guard memberRolesAndStatus.isDeceased() == true else { return memberRolesAndStatus }
+
+        var possiblyCorrectedValue = memberRolesAndStatus
+        for eachRole in MemberRole.allCases where memberRolesAndStatus.roles[eachRole] == true {
+            possiblyCorrectedValue.roles[eachRole] = false
+            ifDebugFatalError("""
+                              Clearing role of \(eachRole) for deceased photographer \(photographer.fullNameFirstLast)
+                              """)
+        }
+        return possiblyCorrectedValue
     }
 
 }
