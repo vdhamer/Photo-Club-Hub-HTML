@@ -10,77 +10,7 @@ import CoreData // for NSManagedObjectContext
 import CoreLocation // for CLLocationCoordinate2D
 import SwiftyJSON // for JSON struct
 
-/* Example of level2.json file with one member but with a complete set of optional fields
- {
-     "club":
-         {
-             "idPlus": {
-                 "town": "Eindhoven",
-                 "fullName": "Fotogroep de Gender",
-                 "nickName": "FG deGender"
-             },
-             "optional": {
-                 "coordinates": {
-                     "latitude": 51.42398,
-                     "longitude": 5.45010
-                 },
-                 "website": "https://www.fcdegender.nl",
-                 "wikipedia": "https://nl.wikipedia.org/wiki/Gender_(beek)",
-                 "level2URL": "https://www.example.com/deGender.level2.json",
-                 "remark": [
-                     {
-                         "language": "EN",
-                         "value": "Note that Fotogroep de Gender is abbreviated fcdegender.nl for historical reasons."
-                     },
-                     {
-                         "language": "NL",
-                         "value": "Opgelet: Fotogroep de Gender heeft als domeinnaam fcdegender.nl (fc = Fotoclub)."
-                     }
-                 ],
-                 "nlSpecific": {
-                     "fotobondNumber": 1620
-                 }
-            }
-         },
-     "members": [
-         {
-             "name": {
-                 "givenName": "Peter",
-                 "infixName": "van den",
-                 "familyName": "Hamer"
-             },
-             "optional": {
-                 "roles": {
-                     "isChairman": false,
-                     "isViceChairman": false,
-                     "isTreasurer": false,
-                     "isSecretary": false,
-                     "isAdmin": true,
-                     "isOther": false
-                 },
-                 "status": {
-                     "isDeceased": false,
-                     "isFormerMember": false,
-                     "isHonoraryMember": false,
-                     "isMentor": false,
-                     "isPropectiveMember": false
-                 },
-                 "birthday": "9999-10-18",
-                 "website": "https://glass.photo/vdhamer",
-                 "photographerImage":
-                     "http://www.vdhamer.com/wp-content/uploads/2022/07/cropped-2006_Norway_276_SSharp1_4.jpg",
-                 "featuredImage": "http://www.vdhamer.com/wp-content/uploads/2023/11/PeterVanDenHamer.jpg",
-                 "level3URL": "https://www.example.com/FG_deGender/Peter_van_den_Hamer.level3.json",
-                 "membershipStartDate: "2024-01-01",
-                 "membershipEndDate: "9999-12-31",
-                 "nlSpecific": {
-                     "fotobondNumber": 1620110
-                 }
-             }
-         }
-     ]
- }
- */
+// see xampleMin.level2.json and xampleMax.level2.json for syntax examples
 
 class Level2JsonReader { // normally running on a background thread
 
@@ -165,12 +95,16 @@ class Level2JsonReader { // normally running on a background thread
             throw MergeError.invalidJsonData("Cannot find idPlus keyword in \(urlComponents.shortName)") }
 
         let jsonIdPlus: JSON = jsonClub["idPlus"]
-        guard jsonIdPlus["town"].stringValue == club.town && jsonIdPlus["fullName"].stringValue == club.fullName else {
-            throw MergeError.mismatchedNameTown("""
-                                                Error: mismatched Name/Town for club \
-                                                \(club.fullNameTown) \
-                                                in \(urlComponents.shortName)
-                                                """) }
+        if !isDebug() {
+            // Only load Level2 files for clubs already listed in a Level1 file.
+            // But skip this checking when in DEBUG mode (=developers).
+            // And, when in RELEASE mode, this aborts mergeLevel2Json with a string printed - which nobody will see.
+            guard jsonIdPlus["town"].stringValue == club.town && jsonIdPlus["fullName"].stringValue == club.fullName
+                else { throw MergeError.mismatchedNameTown("""
+                                                           Error: mismatched Name/Town for club \
+                                                           \(club.fullNameTown) in \(urlComponents.shortName)
+                                                           """) }
+        }
         let idPlus = OrganizationIdPlus(fullName: jsonIdPlus["fullName"].stringValue,
                                         town: jsonIdPlus["town"].stringValue,
                                         nickname: jsonIdPlus["nickName"].stringValue)
@@ -274,6 +208,8 @@ class Level2JsonReader { // normally running on a background thread
         let wikipedia: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "wikipedia")
         let fotobondNumber = jsonOptionals["nlSpecific"]["fotobondNumber"].exists()  ? // id of club
             jsonOptionals["nlSpecific"]["fotobondNumber"].int16Value : nil
+        let contactEmail: String? = jsonOptionals["contactEmail"].exists() ?
+            jsonOptionals["contactEmail"].stringValue : nil
         let coordinates: CLLocationCoordinate2D = jsonOptionals["coordinates"].exists() ?
             CLLocationCoordinate2D(latitude: jsonOptionals["coordinates"]["latitude"].doubleValue,
                                     longitude: jsonOptionals["coordinates"]["longitude"].doubleValue) :
@@ -290,6 +226,7 @@ class Level2JsonReader { // normally running on a background thread
                                               organizationWebsite: clubWebsite,
                                               wikipedia: wikipedia,
                                               fotobondNumber: fotobondNumber,
+                                              contactEmail: contactEmail,
                                               localizedRemarks: localizedRemarks
                                               )
         )
@@ -341,8 +278,7 @@ class Level2JsonReader { // normally running on a background thread
                 featuredImage: featuredImage,
                 featuredImageThumbnail: featuredImage,
                 level3URL: level3URL, // address of portfolio data for this member
-                memberRolesAndStatus: cleanRoles(memberRolesAndStatus: memberRolesAndStatus,
-                                                 photographer: photographer),
+                memberRolesAndStatus: memberRolesAndStatus,
                 fotobondNumber: fotobondNumber,
                 membershipStartDate: membershipStartDate,
                 membershipEndDate: membershipEndDate
@@ -355,21 +291,6 @@ class Level2JsonReader { // normally running on a background thread
         guard jsonOptionals[key].exists() else { return nil }
         guard let string = jsonOptionals[key].string else { return nil }
         return URL(string: string) // returns nil if the string doesn’t represent a valid URL
-    }
-
-    // for deceased members, clear any role they may have as officer of a photo club
-    fileprivate func cleanRoles(memberRolesAndStatus: MemberRolesAndStatus,
-                                photographer: Photographer) -> MemberRolesAndStatus {
-        guard memberRolesAndStatus.isDeceased() == true else { return memberRolesAndStatus }
-
-        var possiblyCorrectedValue = memberRolesAndStatus
-        for eachRole in MemberRole.allCases where memberRolesAndStatus.roles[eachRole] == true {
-            possiblyCorrectedValue.roles[eachRole] = false
-            ifDebugFatalError("""
-                              Clearing role of \(eachRole) for deceased photographer \(photographer.fullNameFirstLast)
-                              """)
-        }
-        return possiblyCorrectedValue
     }
 
 }

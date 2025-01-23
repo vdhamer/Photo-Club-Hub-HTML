@@ -30,7 +30,7 @@ struct MembershipView: View {
     var body: some View {
         List {
             if fetchRequestClubMembers.isEmpty {
-                Text("Please select a club with members.")
+                Text("Please select a club with available membersship data.")
             } else {
                 ForEach(fetchRequestClubMembers, id: \.self) { member in
                     HStack {

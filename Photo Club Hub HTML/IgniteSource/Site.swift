@@ -24,24 +24,24 @@ struct MemberSite: Site {
 
     init(moc: NSManagedObjectContext) {
         titleSuffix = " – Fotogroep de Gender"
-//        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven") // TODOD club hardcoded
-//        let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
-//        let club: Organization = Organization.findCreateUpdate(context: moc,
-//                                                               organizationTypeEnum: OrganizationTypeEnum.club,
-//                                                               idPlus: deGenderIDPlus,
-//                                                               // real coordinates added in fgAnders.level2.json
-//                                                               coordinates: CLLocationCoordinate2DMake(0, 0),
-//                                                               optionalFields: OrganizationOptionalFields())
-
-        titleSuffix = " – Fotogroep Waalre"
-        let waalreID = OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre") // TODOD club hardcoded
-        let waalreIDPlus = OrganizationIdPlus(id: waalreID, nickname: "fgWaalre")
+        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven") // TODOD club hardcoded
+        let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
         let club: Organization = Organization.findCreateUpdate(context: moc,
                                                                organizationTypeEnum: OrganizationTypeEnum.club,
-                                                               idPlus: waalreIDPlus,
+                                                               idPlus: deGenderIDPlus,
                                                                // real coordinates added in fgAnders.level2.json
                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                optionalFields: OrganizationOptionalFields())
+
+//        titleSuffix = " – Fotogroep Waalre"
+//        let waalreID = OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre") // TODOD club hardcoded
+//        let waalreIDPlus = OrganizationIdPlus(id: waalreID, nickname: "fgWaalre")
+//        let club: Organization = Organization.findCreateUpdate(context: moc,
+//                                                               organizationTypeEnum: OrganizationTypeEnum.club,
+//                                                               idPlus: waalreIDPlus,
+//                                                               // real coordinates added in fgAnders.level2.json
+//                                                               coordinates: CLLocationCoordinate2DMake(0, 0),
+//                                                               optionalFields: OrganizationOptionalFields())
 
         self.moc = moc
         self.homePage = Members(moc: moc, club: club)

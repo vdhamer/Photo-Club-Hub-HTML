@@ -191,7 +191,8 @@ struct Members: StaticPage {
                     Text {
                         Link(
                             fullName(givenName: givenName, infixName: infixName, familyName: familyName),
-                            target: portfolio!) // TODO handle ! operator
+                            target: portfolio!
+                        ) // TODO handle ! operator
                             .linkStyle(.hover)
                         if isDeceased {
                             Badge("Overleden")

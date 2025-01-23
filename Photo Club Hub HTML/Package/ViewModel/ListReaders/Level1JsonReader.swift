@@ -13,63 +13,14 @@ import SwiftyJSON // for JSON()
 private let dataSourcePath: String = """
                                      https://raw.githubusercontent.com/\
                                      vdhamer/Photo-Club-Hub/\
-                                     main/\
-                                     Photo%20Club%20Hub/ViewModel/Lists/
+                                     main/JSON/
                                      """
 private let dataSourceFile: String = "root"
 private let fileSubType = "level1" // level1 is part of file name, not the extension
 private let fileType = "json"
 private let organizationTypesToLoad: [OrganizationTypeEnum] = [.club, .museum]
 
-/* Example of a minimal level1.json file
-{
-    "clubs": [
-        {
-            "idPlus": {
-                "town": "Eindhoven",
-                "fullName": "Fotogroep de Gender",
-                "nickName": "FG deGender"
-            },
-            "coordinates": {
-                "latitude": 51.42398,
-                "longitude": 5.45010
-            }
-            "optional": {
-                "website": "https://www.fcdegender.nl",
-                "level2URL": "https://www.example.com/fgDeGender.level2.json"
-                "remark": [
-                    {
-                        "language": "NL",
-                        "value": "In dit museum zijn scenes van het TV programma 'Het Perfecte Plaatje' opgenomen."
-                    }
-                ]
-            }
-        },
-    "museums": [
-        {
-            "idPlus": {
-                "town": "New York",
-                "fullName": "Fotografiska New York",
-                "nickName": "Fotografiska NYC"
-            },
-            "coordinates": {
-                "latitude": 40.739278,
-                "longitude": -73.986722
-            }
-            "optional:" {
-                "website": "https://www.fotografiska.com/nyc/",
-                "wikipedia": "https://en.wikipedia.org/wiki/Fotografiska_New_York",
-                "remark": [
-                    {
-                        "language": "EN",
-                        "value": "Associated with the original Fotografiska Museum in Stockholm"
-                    }
-                ]
-            }
-        }
-    ]
-}
-*/
+// see xampleMin.level1.json and xampleMax.level1.json for syntax examples
 
 class Level1JsonReader {
 
@@ -139,6 +90,7 @@ class Level1JsonReader {
                 let organizationWebsite = URL(string: jsonOrganizationOptionals["website"].stringValue)
                 let wikipedia = URL(string: jsonOrganizationOptionals["wikipedia"].stringValue)
                 let fotobondNumber = jsonOrganizationOptionals["nlSpecific"]["fotobondNumber"].int16Value
+                let contactEmail = jsonOrganizationOptionals["contactEmail"].stringValue
                 let localizedRemarks = jsonOrganizationOptionals["remark"].arrayValue
                 _ = Organization.findCreateUpdate(context: bgContext,
                                                   organizationTypeEnum: organizationTypeEnum,
@@ -148,6 +100,7 @@ class Level1JsonReader {
                                                       organizationWebsite: organizationWebsite,
                                                       wikipedia: wikipedia,
                                                       fotobondNumber: fotobondNumber, // Int16
+                                                      contactEmail: contactEmail,
                                                       localizedRemarks: localizedRemarks)
                                                   )
             }
