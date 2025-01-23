@@ -55,11 +55,11 @@ extension PhotoClubHubHtmlApp {
 //        _ = BellusImagoMembersProvider(bgContext: bellusBackgroundContext)
 
         // load all current/former members of Fotogroep Waalre
-//        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//        waalreBackgroundContext.name = "Fotogroep Waalre"
-//        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
-//        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext)
+        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        waalreBackgroundContext.name = "Fotogroep Waalre"
+        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext)
 
         // load member(s) of Fotogroep De Gender
 //        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()

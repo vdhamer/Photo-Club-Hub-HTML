@@ -1,6 +1,6 @@
 //
 //  Members.swift
-//  Photo Club Hub - Ignite
+//  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 06/09/2024.
 //
