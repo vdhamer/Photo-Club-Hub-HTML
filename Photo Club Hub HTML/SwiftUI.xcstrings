@@ -67,6 +67,17 @@
         }
       }
     },
+    "Can't find any members for club %@" : {
+      "comment" : "Shown when a club with zero known members is selected",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er zijn geen leden bekend voor de club %@"
+          }
+        }
+      }
+    },
     "Database content:" : {
       "comment" : "Label for stats shown at bottom of window",
       "localizations" : {
@@ -107,17 +118,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies één van de clubs in het zijpaneel"
-          }
-        }
-      }
-    },
-    "Please select a club with available membership data." : {
-      "comment" : "Shown if a club with no members is selected",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "De geselecteerde club heeft geen leden."
           }
         }
       }

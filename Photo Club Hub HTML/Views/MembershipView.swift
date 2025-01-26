@@ -30,8 +30,8 @@ struct MembershipView: View {
     var body: some View {
         List {
             if fetchRequestClubMembers.isEmpty {
-                Text(String(localized: "Please select a club with available membership data.", table: "SwiftUI",
-                            comment: "Shown if a club with no members is selected"))
+                Text(String(localized: "Can't find any members for club \(club.fullName)", table: "SwiftUI",
+                            comment: "Shown when a club with zero known members is selected"))
             } else {
                 ForEach(fetchRequestClubMembers, id: \.self) { member in
                     HStack {
