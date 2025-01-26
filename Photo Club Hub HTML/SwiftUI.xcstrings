@@ -1,7 +1,127 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-
+    "◼ %lld club memberships" : {
+      "comment" : "Count of members in database",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld club lidmaatschappen"
+          }
+        }
+      }
+    },
+    "◼ %lld clubs" : {
+      "comment" : "Count of clubs in database Organization table",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld clubs"
+          }
+        }
+      }
+    },
+    "◼ %lld organizationTypes" : {
+      "comment" : "Count of types of organizations in database OrganizationType table",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld soorten organisaties"
+          }
+        }
+      }
+    },
+    "◼ %lld other organizations" : {
+      "comment" : "Count of non-clubs in database Organization table",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld organisaties die geen clubs zijn"
+          }
+        }
+      }
+    },
+    "◼ %lld photographers" : {
+      "comment" : "Count of individuals in database Photographer table",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld fotografen"
+          }
+        }
+      }
+    },
+    "Add Club" : {
+      "comment" : "Button at top of UI",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test club toevoegen"
+          }
+        }
+      }
+    },
+    "Database content:" : {
+      "comment" : "Label for stats shown at bottom of window",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhoud van de interne database:"
+          }
+        }
+      }
+    },
+    "Generate HTML" : {
+      "comment" : "Button at top of UI",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genereer website"
+          }
+        }
+      }
+    },
+    "Photo Club Hub HTML" : {
+      "comment" : "Name of this macOS app",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoclub Hub HTML"
+          }
+        }
+      }
+    },
+    "Please select a club" : {
+      "comment" : "Message displayed when no club is selected",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kies één van de clubs in het zijpaneel"
+          }
+        }
+      }
+    },
+    "Please select a club with available membership data." : {
+      "comment" : "Shown if a club with no members is selected",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De geselecteerde club heeft geen leden."
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }
