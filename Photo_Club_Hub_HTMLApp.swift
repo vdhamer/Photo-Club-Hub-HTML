@@ -17,7 +17,8 @@ struct PhotoClubHubHtmlApp: App {
     }
 
     var body: some Scene {
-        Window("Photo Club Hub HTML", id: "mainWindow") {
+        Window(String(localized: "Photo Club Hub HTML", table: "SwiftUI", comment: "Name of this macOS app"),
+               id: "mainWindow") {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onAppear {

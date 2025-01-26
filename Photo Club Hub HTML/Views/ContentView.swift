@@ -70,17 +70,25 @@ struct ContentView: View {
                 .padding(.top)
                 .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 600)
             } detail: {
-                Text("Please select a club") // displayed
+                Text(String(localized: "Please select a club", table: "SwiftUI",
+                            comment: "Message displayed when no club is selected"))
             }
             .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
             Divider()
             HStack(alignment: .center) {
-                Text("Database content:").font(.headline)
-                Text("◼ \(allOrganizationTypes.count) organizationTypes")
-                Text("◼ \(allClubs.count) clubs")
-                Text("◼ \(allOrganizations.count-allClubs.count) other organizations")
-                Text("◼ \(allPhotographers.count) photographers")
-                Text("◼ \(allMembers.count) club memberships")
+                Text("Database content:", tableName: "SwiftUI",
+                     comment: "Label for stats shown at bottom of window")
+                     .font(.headline)
+                Text("◼ \(allOrganizationTypes.count) organizationTypes", tableName: "SwiftUI",
+                     comment: "Count of types of organizations in database OrganizationType table")
+                Text("◼ \(allClubs.count) clubs", tableName: "SwiftUI",
+                     comment: "Count of clubs in database Organization table")
+                Text("◼ \(allOrganizations.count-allClubs.count) other organizations", tableName: "SwiftUI",
+                     comment: "Count of non-clubs in database Organization table")
+                Text("◼ \(allPhotographers.count) photographers", tableName: "SwiftUI",
+                     comment: "Count of individuals in database Photographer table")
+                Text("◼ \(allMembers.count) club memberships", tableName: "SwiftUI",
+                     comment: "Count of members in database")
             }
             .foregroundStyle(.secondary)
             .frame(height: 5)
@@ -96,11 +104,13 @@ struct ContentView: View {
                 Button {
                     generateSite()
                 } label: {
-                    Label("Run Ignite", systemImage: "flame")
+                    Label(String(localized: "Generate HTML", table: "SwiftUI", comment: "Button at top of UI"),
+                          systemImage: "flame")
                 }
 
                 Button(action: addClub, label: {
-                    Label("Add Club", systemImage: "plus")
+                    Label(String(localized: "Add Club", table: "SwiftUI", comment: "Button at top of UI"),
+                          systemImage: "plus")
                 })
             }
         }
