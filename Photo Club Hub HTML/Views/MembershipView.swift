@@ -35,14 +35,15 @@ struct MembershipView: View {
             } else {
                 ForEach(fetchRequestClubMembers, id: \.self) { member in
                     HStack {
-                        Text("""
+                        Text(verbatim:
+                             """
                              \(member.photographer_?.givenName_ ?? "given name?") \
                              \(infix(content: member.photographer_?.infixName))\
                              \(member.photographer_?.familyName_ ?? "family name?")\
                              \(describeMember(member: member))
                              """) .font(.title3) .fontWeight(.bold) .lineLimit(1)
                         Spacer()
-                        Text("\(member.featuredImageThumbnail!.path)")
+                        Text(verbatim: "\(member.featuredImageThumbnail!.path)")
                             .font(.footnote)
                             .lineLimit(1)
                     }
