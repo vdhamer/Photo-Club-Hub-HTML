@@ -19,25 +19,22 @@ enum MemberRole {
     case other
 
     func localizedString() -> String {
+        let translateComment: StaticString =
+            "Administrative role of member within a club. Used as part of concatenations."
+
         switch self {
         case .admin:
-            return String(localized: "admin", table: "Site",
-                          comment: "Administrative role of member within a club. Used as part of concatenations.")
+            return String(localized: "admin", table: "Site", comment: translateComment)
         case .chairman:
-            return String(localized: "chairman", table: "Site",
-                          comment: "Administrative role of member within a club. Used as part of concatenations.")
+            return String(localized: "chairman", table: "Site", comment: translateComment)
         case .secretary:
-            return String(localized: "secretary", table: "Site",
-                          comment: "Administrative role of member within a club. Used as part of concatenations.")
+            return String(localized: "secretary", table: "Site", comment: translateComment)
         case .treasurer:
-            return String(localized: "treasurer", table: "Site",
-                          comment: "Administrative role of member within a club. Used as part of concatenations.")
+            return String(localized: "treasurer", table: "Site", comment: translateComment)
         case .viceChairman:
-            return String(localized: "vice-chairman", table: "Site",
-                          comment: "Administrative role of member within a club. Used as part of concatenations.")
+            return String(localized: "vice-chairman", table: "Site", comment: translateComment) // used in fgWaalre
         case .other:
-            return String(localized: "other", table: "Site",
-                          comment: "Administrative role of member within a club. Used as part of concatenations.")
+            return String(localized: "other", table: "Site", comment: translateComment) // used in fgDeGender
         }
     }
 }
@@ -138,7 +135,7 @@ struct MemberRolesAndStatus: Equatable {
         if jsonStatus["isDeceased"].exists() {
             status[.deceased] = jsonStatus["isDeceased"].boolValue
             if status[.deceased] == true {
-                status[.former] = true // deceased members are per definition subset of former members
+                status[.former] = true // Deceased members are considered a strict subset of Former members
             }
         }
         if jsonStatus["isFormerMember"].exists() {
