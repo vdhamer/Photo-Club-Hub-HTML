@@ -10,13 +10,14 @@ import RegexBuilder // for OneOrMore, Capture, etc
 
 extension MemberPortfolio {
 
+    private static let clubsUsingJuiceBox: [OrganizationID] = [ // careful: ID strings have to be accurate to match
+        OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre"),
+        OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
+    ]
+
     func refreshFirstImage() async throws {
         // does this club use JuicBox Pro xml files?
-        let clubsUsingJuiceBox: [OrganizationID] = [ // careful: ID strings have to be precise
-            OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre"),
-            OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
-        ]
-        guard clubsUsingJuiceBox.contains(organization.id) else { return }
+        guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
         guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
 
         // assumes JuiceBox Pro is used
