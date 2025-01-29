@@ -64,11 +64,11 @@ extension PhotoClubHubHtmlApp {
 //        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext)
 
         // load member(s) of Fotogroep De Gender
-//        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//        genderBackgroundContext.name = "FG de Gender"
-//        genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//        genderBackgroundContext.automaticallyMergesChangesFromParent = true
-//        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext)
+        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        genderBackgroundContext.name = "FG de Gender"
+        genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        genderBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext)
 
         // load all current members of Fotogroep Anders
 //        let andersBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
