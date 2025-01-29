@@ -4,6 +4,12 @@
     "◼ %lld club memberships" : {
       "comment" : "Count of members in database",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld club memberships"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,12 @@
     "◼ %lld clubs" : {
       "comment" : "Count of clubs in database Organization table",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld clubs"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26,6 +38,12 @@
     "◼ %lld organizationTypes" : {
       "comment" : "Count of types of organizations in database OrganizationType table",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld organizationTypes"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37,6 +55,12 @@
     "◼ %lld other organizations" : {
       "comment" : "Count of non-clubs in database Organization table",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld other organizations"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -48,6 +72,12 @@
     "◼ %lld photographers" : {
       "comment" : "Count of individuals in database Photographer table",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld photographers"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -59,6 +89,12 @@
     "Add Club" : {
       "comment" : "Button at top of UI",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Club"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -70,6 +106,12 @@
     "Can't find any members for club %@" : {
       "comment" : "Shown when a club with zero known members is selected",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can't find any members for club %@"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -81,6 +123,12 @@
     "Database content:" : {
       "comment" : "Label for stats shown at bottom of window",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Database content:"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -92,6 +140,12 @@
     "Generate HTML" : {
       "comment" : "Button at top of UI",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate HTML"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -103,6 +157,12 @@
     "Photo Club Hub HTML" : {
       "comment" : "Name of this macOS app",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Club Hub HTML"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -114,6 +174,12 @@
     "Please select a club" : {
       "comment" : "Message displayed when no club is selected",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please select a club"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
