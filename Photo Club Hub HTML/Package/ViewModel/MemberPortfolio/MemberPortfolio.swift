@@ -19,9 +19,7 @@ extension MemberPortfolio: Comparable {
 
 }
 
-extension MemberPortfolio: @unchecked Sendable { // TODO new Unchecked sendable !!
-
-}
+extension MemberPortfolio: @unchecked Sendable { } // TODO new Unchecked sendable !!
 
 extension MemberPortfolio { // expose computed properties (some related to handling optionals)
 

@@ -189,7 +189,7 @@ class Level2JsonReader { // normally running on a background thread
                                                                )
             )
         }
-        // memberPortfolio.refreshFirstImage() // TODO reverted back to existing thread
+//        memberPortfolio.refreshFirstImage() // TODO reverted back to existing thread
         Task {
             do {
                 try await memberPortfolio.refreshFirstImage() // TODO shouldn't this get the Managed Object Context???
