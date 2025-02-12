@@ -189,15 +189,16 @@ class Level2JsonReader { // normally running on a background thread
                                                                )
             )
         }
-//        memberPortfolio.refreshFirstImage() // TODO reverted back to existing thread
-        Task {
-            do {
-                try await memberPortfolio.refreshFirstImage() // TODO shouldn't this get the Managed Object Context???
-            } catch {
-                let who: String = memberPortfolio.photographer.fullNameFirstLast
-                print("Failed to retrieve first image for memberPortfolio: \(who).")// ignore
-            }
-        }
+        memberPortfolio.refreshFirstImageS() // TODO Synchronous version
+
+//        Task { // TODO Asynchronous version
+//            do {
+//                try await memberPortfolio.refreshFirstImageA() // TODO shouldn't this get the Managed Object Context???
+//            } catch {
+//                let who: String = memberPortfolio.photographer.fullNameFirstLast
+//                print("Failed to retrieve first image for memberPortfolio: \(who).")// ignore
+//            }
+//        }
 
     }
 
