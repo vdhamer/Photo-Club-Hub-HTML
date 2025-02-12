@@ -12,6 +12,8 @@ import AppKit // for CGImage
 
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol?
+    let showFormerMembers: Bool = false // suppresses generating and showing table for former members
+    let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members TODO
 
     fileprivate var currentMembers = Table {} // init to empty table, then fill during init()
     fileprivate var formerMembers = Table {} // same story
@@ -32,7 +34,9 @@ struct Members: StaticPage {
         self.club = club
 
         currentMembers = makeTable(former: false)
-        formerMembers = makeTable(former: true)
+        if showFormerMembers {
+            formerMembers = makeTable(former: true)
+        }
     }
 
     private mutating func makeTable(former: Bool) -> Table {
@@ -134,37 +138,39 @@ struct Members: StaticPage {
 
         // MARK: - former members
 
-        Text {
-            Badge(String(localized: "\(formerMembersCount) former members",
-                  table: "Site", comment: "Number of former members"))
+        if showFormerMembers {
+            Text {
+                Badge(String(localized: "\(formerMembersCount) former members",
+                             table: "Site", comment: "Number of former members"))
                 .badgeStyle(.subtleBordered)
                 .role(.secondary)
-        }
-        .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
+            }
+            .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
 
-        formerMembers
-            .tableStyle(.stripedRows)
-            .tableBorder(true)
-            .horizontalAlignment(.center)
+            formerMembers
+                .tableStyle(.stripedRows)
+                .tableBorder(true)
+                .horizontalAlignment(.center)
 
-        if formerMembersTotalYears > 0 && formerMembersCount > 0 {
-            Alert {
-                Text { String(localized:
+            if formerMembersTotalYears > 0 && formerMembersCount > 0 {
+                Alert {
+                    Text { String(localized:
                     """
                     The listed ex-members were members of this club for, on average, \
                     \(formatYears(years: formerMembersTotalYears/Double(formerMembersCount))) \
                     years.
                     """,
-                    table: "Site",
-                    comment: "Footer for former members table")
-                } .horizontalAlignment(.center)
+                                  table: "Site",
+                                  comment: "Footer for former members table")
+                    } .horizontalAlignment(.center)
+                }
+                .margin(.top, .small)
+            } else {
+                Alert {
+                    Text { "" }
+                }
+                .margin(.top, .small)
             }
-            .margin(.top, .small)
-        } else {
-            Alert {
-                Text { "" }
-            }
-            .margin(.top, .small)
         }
     }
 
@@ -213,7 +219,7 @@ struct Members: StaticPage {
                 formatMembershipYears(start: membershipStartDate,
                                       end: membershipEndDate,
                                       isFormer: isFormerMember(roles: roles),
-                                      fotobond: fotobond ?? 1234567) // TODO
+                                      fotobond: fotobond)
             } .verticalAlignment(.middle)
 
             if website == nil { // photographer's optional own website
@@ -269,12 +275,19 @@ struct Members: StaticPage {
 
     fileprivate mutating func formatMembershipYears(start: Date?, end: Date?,
                                                     isFormer: Bool,
-                                                    fotobond: Int) -> Span {
+                                                    fotobond: Int?) -> Span {
         var years = TimeInterval(0)
         if start != nil {
             let end: Date = (end != nil) ? end! : Date.now // optional -> not optional
             let dateInterval = DateInterval(start: start!, end: end)
             years = dateInterval.duration / (365.25 * 24 * 60 * 60)
+        }
+
+        let fotobondString: String
+        if showFotobondNumber, let fotobond {
+            fotobondString = " Fotobond #\(fotobond)"
+        } else {
+            fotobondString = ""
         }
 
         let unknown = Span(String(localized: "-",
@@ -289,7 +302,7 @@ struct Members: StaticPage {
             return Span(formatYears(years: years))
                 .hint(text: String(localized:
                                    """
-                                   From \(formattedStartDate). Fotobond #\(fotobond).
+                                   From \(formattedStartDate)\(fotobondString)
                                    """,
                                    table: "Site",
                                    comment: "Mouseover hint on cell containing start-end years"))
@@ -302,8 +315,8 @@ struct Members: StaticPage {
             return Span("\(startYear)-\(endYear)")
                 .hint(text: String(localized:
                                    """
-                                   From \(startYear) to \(endYear) (\(formatYears(years: years)) years). \
-                                   Fotobond #\(fotobond).
+                                   From \(startYear) to \(endYear) (\(formatYears(years: years)) years)\
+                                   \(fotobondString)
                                    """,
                                    table: "Site",
                                    comment: "Mouseover hint on cell containing start-end years"))
