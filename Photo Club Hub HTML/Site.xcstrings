@@ -127,36 +127,36 @@
         }
       }
     },
-    "From %@. Fotobond #%lld." : {
-      "comment" : "Mouseover hint on cell containing start-end years",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "From %1$@. Fotobond (NL) #%2$lld."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vanaf %1$@. Fotobond #%2$lld."
-          }
-        }
-      }
-    },
-    "From %lld to %lld (%@ years). Fotobond #%lld." : {
+    "From %@%@" : {
       "comment" : "Mouseover hint on cell containing start-end years",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "From %1$lld to %2$lld (%3$@ years). Fotobond #%4$lld."
+            "value" : "From %1$@%2$@"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vanaf %1$lld t/m %2$lld (%3$@ jaar). Fotobond #%4$lld."
+            "value" : "Vanaf %1$@%2$@"
+          }
+        }
+      }
+    },
+    "From %lld to %lld (%@ years)%@" : {
+      "comment" : "Mouseover hint on cell containing start-end years",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "From %1$lld to %2$lld (%3$@ years)%4$@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vanaf %1$lld t/m %2$lld (%3$@ years)%4$@"
           }
         }
       }
