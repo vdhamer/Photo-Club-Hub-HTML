@@ -11,7 +11,7 @@ struct UrlComponents {
                                 https://raw.githubusercontent.com/\
                                 vdhamer/Photo-Club-Hub/\
                                 main/\
-                                Photo%20Club%20Hub/ViewModel/Lists/
+                                JSON/
                                 """
 
     let dataSourceFile: String // fgDeGender
