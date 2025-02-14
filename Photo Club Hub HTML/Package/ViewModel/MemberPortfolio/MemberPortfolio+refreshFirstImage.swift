@@ -16,7 +16,7 @@ extension MemberPortfolio {
     ]
 
     func refreshFirstImageA() async throws {
-        // does this club use JuicBox Pro xml files?
+        // only applies to clubs using JuiceBox Pro:
         guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
         guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
 
@@ -54,8 +54,8 @@ extension MemberPortfolio {
         }
     }
 
-    func refreshFirstImageS() {         // does this club use JuicBox Pro xml files?
-
+    func refreshFirstImageS() {
+        // only applies to clubs using JuiceBox Pro:
         guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
         guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
 
