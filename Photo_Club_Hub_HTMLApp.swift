@@ -39,6 +39,8 @@ extension PhotoClubHubHtmlApp {
 
     static fileprivate func loadClubsAndMembers() {
 
+        Model.deleteAllCoreDataObjects() // Clear CoreData database for simplicity and to trigger initConstants()
+
         // load list of photo clubs and museums from root.Level1.json file TODO
 //        let level1BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
 //        level1BackgroundContext.name = "root.level1.json"

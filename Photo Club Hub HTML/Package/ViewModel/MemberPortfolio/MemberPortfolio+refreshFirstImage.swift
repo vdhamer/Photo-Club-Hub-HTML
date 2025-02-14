@@ -56,31 +56,31 @@ extension MemberPortfolio {
 
     func refreshFirstImageS() {         // does this club use JuicBox Pro xml files?
 
-    guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
-    guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
+        guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
+        guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
 
-    // assumes JuiceBox Pro is used
-    ifDebugPrint("""
+        // assumes JuiceBox Pro is used
+        ifDebugPrint("""
                  \(self.organization.fullNameTown): starting refreshFirstImage() \
                  \(urlOfImageIndex.absoluteString) in background
                  """)
 
-    // swiftlint:disable:next large_tuple
-    var results: (utfContent: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
-    results = URLSession.shared.synchronousDataTask(from: urlOfImageIndex)
-    guard results != nil && results!.utfContent != nil else {
-        print("""
+        // swiftlint:disable:next large_tuple
+        var results: (utfContent: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
+        results = URLSession.shared.synchronousDataTask(from: urlOfImageIndex)
+        guard results != nil && results!.utfContent != nil else {
+            print("""
               \(organization.fullNameTown): ERROR - \
               loading refreshFirstImage() \(urlOfImageIndex.absoluteString) failed
               """)
-        return
-    }
+            return
+        }
 
-    let xmlContent = String(data: results!.utfContent! as Data,
-                            encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!
-    parseXMLContent(xmlContent: xmlContent, member: self)
-    ifDebugPrint("\(organization.fullNameTown): completed refreshFirstImage() \(urlOfImageIndex.absoluteString)")
-}
+        let xmlContent = String(data: results!.utfContent! as Data,
+                                encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!
+        parseXMLContent(xmlContent: xmlContent, member: self)
+        ifDebugPrint("\(organization.fullNameTown): completed refreshFirstImage() \(urlOfImageIndex.absoluteString)")
+    }
 
     fileprivate func parseXMLContent(xmlContent: String, member: MemberPortfolio) { // sample data
         //    <?xml version="1.0" encoding="UTF-8"?>
