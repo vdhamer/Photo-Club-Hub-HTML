@@ -11,7 +11,7 @@ import SwiftImageReadWrite // for image format conversion
 import AppKit // for CGImage
 
 struct Members: StaticPage {
-    var title = "Leden"  // needed by the StaticPage protocol?
+    var title = "Leden"  // needed by the StaticPage protocol, but how do I localize it?
     let showFormerMembers: Bool = false // suppresses generating and showing table for former members
     let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
@@ -197,8 +197,10 @@ struct Members: StaticPage {
                     Text {
                         Link(
                             fullName(givenName: givenName, infixName: infixName, familyName: familyName),
-                            target: portfolio!
-                        ) // TODO handle ! operator
+                            target: portfolio ??
+                                    URL(string: MemberPortfolio.emptyPortfolioURL) ??
+                                    URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
+                        )
                             .linkStyle(.hover)
                         if isDeceased {
                             Badge("Overleden")
@@ -245,7 +247,10 @@ struct Members: StaticPage {
                     .frame(width: 80)
                     .style("cursor: pointer")
                     .onClick {
-                        CustomAction("window.location.href=\"\(portfolio!)\";") // TODO !
+                        let safeportfolio = portfolio ??
+                                            URL(string: MemberPortfolio.emptyPortfolioURL) ??
+                                            URL(string: "https://www.google.com")!
+                        CustomAction("window.location.href=\"\(safeportfolio)\";")
                     }
             } .verticalAlignment(.middle)
 
@@ -340,7 +345,7 @@ struct Members: StaticPage {
         return "/images/\(lastComponent)"
     }
 
-    fileprivate func downloadThumbnailToLocal(downloadURL: URL) { // TODO make async
+    fileprivate func downloadThumbnailToLocal(downloadURL: URL) { // for now this is synchronous
 
         do {
             // swiftlint:disable:next large_tuple

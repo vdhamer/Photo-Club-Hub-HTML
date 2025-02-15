@@ -175,7 +175,7 @@ struct ContentView: View {
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
-        bgContext.performAndWait { // generate website on background thread TODO this is still on the Main thread
+        bgContext.performAndWait { // generate website
             let memberSite = MemberSite(moc: bgContext) // load data
             Task {
                 do {

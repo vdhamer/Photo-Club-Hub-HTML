@@ -19,11 +19,9 @@ extension MemberPortfolio: Comparable {
 
 }
 
-extension MemberPortfolio: @unchecked Sendable { } // TODO new Unchecked sendable !!
-
 extension MemberPortfolio { // expose computed properties (some related to handling optionals)
 
-    fileprivate static let emptyPortfolioURL: String = "http://www.vdHamer.com/fgWaalre/Empty_Website/"
+    static let emptyPortfolioURL: String = "http://www.vdHamer.com/fgWaalre/Empty_Website/"
 
     var membershipStartDate: Date? {
         get { return membershipStartDate_ }
@@ -62,7 +60,6 @@ extension MemberPortfolio { // expose computed properties (some related to handl
                 return level3URL_!
             } else {
                 let string = MemberPortfolio.emptyPortfolioURL
-                // following line can crash on a run of Photo Club Hub HTML, ! operator TODO urgent issue
                 level3URL_ = URL(string: string)!
                 return level3URL_!
             }
