@@ -41,7 +41,7 @@ extension PhotoClubHubHtmlApp {
 
         Model.deleteAllCoreDataObjects() // Clear CoreData database for simplicity and to trigger initConstants()
 
-        // load list of photo clubs and museums from root.Level1.json file TODO
+        // load list of photo clubs and museums from root.Level1.json file (on GitHub)
         let level1BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
         level1BackgroundContext.name = "root.level1.json"
         level1BackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump

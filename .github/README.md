@@ -63,7 +63,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Languages | English, Dutch✲ | English, Dutch✲ |
 | Data caching | partiall✲ | partially✲ |
 | Concurrent networking | yes | yes |
-| Available via | App Store, Github | URL, Github |
+| Available via | App Store, GitHub | URL, GitHub |
 
  ✲ = _might be improved or supported in the future_
 
