@@ -13,7 +13,7 @@ import AppKit // for CGImage
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol?
     let showFormerMembers: Bool = false // suppresses generating and showing table for former members
-    let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members TODO
+    let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
     fileprivate var currentMembers = Table {} // init to empty table, then fill during init()
     fileprivate var formerMembers = Table {} // same story

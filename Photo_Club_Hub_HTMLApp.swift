@@ -49,7 +49,7 @@ extension PhotoClubHubHtmlApp {
         _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
                              useOnlyFile: false)
 
-        // load all current/former members of Fotogroep Waalre TODO
+        // load all current/former members of Fotogroep Waalre
         let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
         waalreBackgroundContext.name = "Fotogroep Waalre"
         waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
