@@ -42,12 +42,12 @@ extension PhotoClubHubHtmlApp {
         Model.deleteAllCoreDataObjects() // Clear CoreData database for simplicity and to trigger initConstants()
 
         // load list of photo clubs and museums from root.Level1.json file TODO
-//        let level1BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//        level1BackgroundContext.name = "root.level1.json"
-//        level1BackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//        level1BackgroundContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
-//        _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
-//                             useOnlyFile: false)
+        let level1BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        level1BackgroundContext.name = "root.level1.json"
+        level1BackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        level1BackgroundContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
+        _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
+                             useOnlyFile: false)
 
         // load all current/former members of Fotogroep Waalre TODO
         let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
