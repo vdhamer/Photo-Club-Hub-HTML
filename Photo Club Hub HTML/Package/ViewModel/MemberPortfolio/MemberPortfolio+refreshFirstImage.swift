@@ -15,7 +15,7 @@ extension MemberPortfolio {
         OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
     ]
 
-    func refreshFirstImageA() async throws {
+    func refreshFirstImageAsync() async throws { // not used because it doesn't work reliably
         // only applies to clubs using JuiceBox Pro:
         guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
         guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
@@ -54,7 +54,7 @@ extension MemberPortfolio {
         }
     }
 
-    func refreshFirstImageS() {
+    func refreshFirstImageSync() {
         // only applies to clubs using JuiceBox Pro:
         guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
         guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
