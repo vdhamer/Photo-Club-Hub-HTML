@@ -156,7 +156,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vanaf %1$lld t/m %2$lld (%3$@ years)%4$@"
+            "value" : "Vanaf %1$lld t/m %2$lld (%3$@ jaar)%4$@"
           }
         }
       }
