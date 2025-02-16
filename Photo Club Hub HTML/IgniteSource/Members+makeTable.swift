@@ -227,13 +227,14 @@ extension Members {
         let unknown = Span(String(localized: "-",
                                   table: "Site",
                                   comment: "Shown in member table when start date unavailable"))
+
         if isFormer == false { // a current member
             guard start != nil else { return unknown }
 
             currentMembersTotalYears += years
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let formattedStartDate = dateFormatter.string(from: start!)
-            return Span(formatYears(years: years))
+            return Span(formatYears(years))
                 .hint(text: String(localized:
                                    """
                                    From \(formattedStartDate)\(fotobondString)
@@ -242,14 +243,11 @@ extension Members {
                                    comment: "Mouseover hint on cell containing start-end years"))
         } else { // a former member
             formerMembersTotalYears += years
-            guard !(end == nil || start == nil) else { return unknown }
-            let startYear = Calendar.current.dateComponents([.year], from: start!).year ?? 2000
-            let endYear: Int
-            endYear = Calendar.current.dateComponents([.year], from: end!).year ?? 2000
-            return Span("\(startYear)-\(endYear)")
+            guard end != nil && start != nil else { return unknown }
+            return Span("\(toYear(date: start!))-\(toYear(date: end!))")
                 .hint(text: String(localized:
                                    """
-                                   From \(startYear) to \(endYear) (\(formatYears(years: years)) years)\
+                                   From \(toYear(date: start!)) to \(toYear(date: end!)) (\(formatYears(years)) years)\
                                    \(fotobondString)
                                    """,
                                    table: "Site",
@@ -257,8 +255,13 @@ extension Members {
         }
     }
 
-    func formatYears(years: Double) -> String {
+    func formatYears(_ years: Double) -> String {
         String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
+    }
+
+    fileprivate func toYear(date: Date) -> String {
+        dateFormatter.dateFormat = "yyyy"
+        return dateFormatter.string(from: date) // "2020"
     }
 
 }

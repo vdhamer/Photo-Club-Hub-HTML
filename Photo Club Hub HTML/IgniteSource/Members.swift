@@ -63,7 +63,7 @@ struct Members: StaticPage {
                 Text {String(localized:
                     """
                     Average membership duration is \
-                    \(formatYears(years: currentMembersTotalYears/Double(currentMembersCount))) \
+                    \(formatYears(currentMembersTotalYears/Double(currentMembersCount))) \
                     years.
                     """,
                     table: "Site", comment: "Table footnote showing average years of membership of all members."
@@ -100,7 +100,7 @@ struct Members: StaticPage {
                     Text { String(localized:
                     """
                     The listed ex-members were members of this club for, on average, \
-                    \(formatYears(years: formerMembersTotalYears/Double(formerMembersCount))) \
+                    \(formatYears(formerMembersTotalYears/Double(formerMembersCount))) \
                     years.
                     """,
                                   table: "Site",

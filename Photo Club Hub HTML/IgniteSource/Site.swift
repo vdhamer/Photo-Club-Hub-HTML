@@ -13,7 +13,6 @@ import CoreLocation // for CLLocationCoordinate2DMake
 
 struct MemberSite: Site {
     var name = "Leden"
-    var titleSuffix: String
     var url: URL = URL("https://www.vdhamer.com") // append "/fgDeGender" etc when not running on LocalHost
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
@@ -23,8 +22,7 @@ struct MemberSite: Site {
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
-        titleSuffix = " – Fotogroep de Gender"
-        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven") // TODOD club hardcoded
+        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
         let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
         let club: Organization = Organization.findCreateUpdate(context: moc,
                                                                organizationTypeEnum: OrganizationTypeEnum.club,
@@ -33,8 +31,7 @@ struct MemberSite: Site {
                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                optionalFields: OrganizationOptionalFields())
 
-//        titleSuffix = " – Fotogroep Waalre"
-//        let waalreID = OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre") // TODOD club hardcoded
+//        let waalreID = OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre")
 //        let waalreIDPlus = OrganizationIdPlus(id: waalreID, nickname: "fgWaalre")
 //        let club: Organization = Organization.findCreateUpdate(context: moc,
 //                                                               organizationTypeEnum: OrganizationTypeEnum.club,

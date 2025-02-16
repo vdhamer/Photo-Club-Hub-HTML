@@ -127,6 +127,23 @@
         }
       }
     },
+    "From %@ to %@ (%@ years)%@" : {
+      "comment" : "Mouseover hint on cell containing start-end years",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "From %1$@ to %2$@ (%3$@ years)%4$@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lid van %1$@ t/m %2$@ (%3$@ jaar)%4$@"
+          }
+        }
+      }
+    },
     "From %@%@" : {
       "comment" : "Mouseover hint on cell containing start-end years",
       "localizations" : {
@@ -139,24 +156,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vanaf %1$@%2$@"
-          }
-        }
-      }
-    },
-    "From %lld to %lld (%@ years)%@" : {
-      "comment" : "Mouseover hint on cell containing start-end years",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "From %1$lld to %2$lld (%3$@ years)%4$@"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vanaf %1$lld t/m %2$lld (%3$@ jaar)%4$@"
+            "value" : "Lid sedert %1$@%2$@"
           }
         }
       }
