@@ -189,11 +189,11 @@ class Level2JsonReader { // normally running on a background thread
                                                                )
             )
         }
-        memberPortfolio.refreshFirstImageSync() // TODO Synchronous version
+        memberPortfolio.refreshFirstImageSync() // Synchronous version
 
-//        Task { // TODO Asynchronous version crashes due to sending NSManagedObject across thread boundary?
+//        Task { // Asynchronous version crashes due to sending NSManagedObject across thread boundary?
 //            do {
-//                try await memberPortfolio.refreshFirstImageA() // TODO shouldn't this get the Managed Object Context???
+//                try await memberPortfolio.refreshFirstImageA()
 //            } catch {
 //                let who: String = memberPortfolio.photographer.fullNameFirstLast
 //                print("Failed to retrieve first image for memberPortfolio: \(who).")// ignore
