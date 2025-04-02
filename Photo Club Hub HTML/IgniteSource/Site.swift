@@ -13,7 +13,7 @@ import CoreLocation // for CLLocationCoordinate2DMake
 
 struct MemberSite: Site {
     var name = "Leden"
-    var url: URL = URL("https://www.vdhamer.com/fcBellusImago") // append "/fgDeGender" etc unless running on LocalHost
+    var url: URL = URL("https://www.vdhamer.com") // append "/fgDeGender" etc unless running on LocalHost
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
     var homePage: Members // actual loading of page content
