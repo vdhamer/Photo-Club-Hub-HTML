@@ -13,7 +13,7 @@ import CoreLocation // for CLLocationCoordinate2DMake
 
 struct MemberSite: Site {
     var name = "Leden"
-    var url: URL = URL("https://www.vdhamer.com") // append "/fgDeGender" etc when not running on LocalHost
+    var url: URL = URL("https://www.vdhamer.com/fcBellusImago") // append "/fgDeGender" etc unless running on LocalHost
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
     var homePage: Members // actual loading of page content
@@ -22,23 +22,32 @@ struct MemberSite: Site {
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
-        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
-        let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
-        let club: Organization = Organization.findCreateUpdate(context: moc,
-                                                               organizationTypeEnum: OrganizationTypeEnum.club,
-                                                               idPlus: deGenderIDPlus,
-                                                               // real coordinates added in fgAnders.level2.json
-                                                               coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                               optionalFields: OrganizationOptionalFields())
+//        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
+//        let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
+//        let club: Organization = Organization.findCreateUpdate(context: moc,
+//                                                               organizationTypeEnum: OrganizationTypeEnum.club,
+//                                                               idPlus: deGenderIDPlus,
+//                                                               // real coordinates added in xxxxxxx.level2.json
+//                                                               coordinates: CLLocationCoordinate2DMake(0, 0),
+//                                                               optionalFields: OrganizationOptionalFields())
 
 //        let waalreID = OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre")
 //        let waalreIDPlus = OrganizationIdPlus(id: waalreID, nickname: "fgWaalre")
 //        let club: Organization = Organization.findCreateUpdate(context: moc,
 //                                                               organizationTypeEnum: OrganizationTypeEnum.club,
 //                                                               idPlus: waalreIDPlus,
-//                                                               // real coordinates added in fgAnders.level2.json
+//                                                               // real coordinates added in xxxxxxx.level2.json
 //                                                               coordinates: CLLocationCoordinate2DMake(0, 0),
 //                                                               optionalFields: OrganizationOptionalFields())
+
+        let bellusImagoID = OrganizationID(fullName: "Fotoclub Bellus Imago", town: "Veldhoven")
+        let bellusImagoIDPlus = OrganizationIdPlus(id: bellusImagoID, nickname: "fcBellusImago")
+        let club: Organization = Organization.findCreateUpdate(context: moc,
+                                                               organizationTypeEnum: OrganizationTypeEnum.club,
+                                                               idPlus: bellusImagoIDPlus,
+                                                               // real coordinates added in xxxxxxx.level2.json
+                                                               coordinates: CLLocationCoordinate2DMake(0, 0),
+                                                               optionalFields: OrganizationOptionalFields())
 
         self.moc = moc
         self.homePage = Members(moc: moc, club: club)

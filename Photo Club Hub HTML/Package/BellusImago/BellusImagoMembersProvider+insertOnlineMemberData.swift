@@ -8,7 +8,7 @@
 import CoreData // for NSManagedObjectContext
 import CoreLocation // for CLLocationCoordinate2DMake
 
-extension BellusImagoMembersProvider { // fill with some initial hard-coded content
+extension FotoclubBellusImagoMembersProvider { // fill with some initial hard-coded content
 
     func insertOnlineMemberData(bgContext: NSManagedObjectContext) { // runs on a background thread
 

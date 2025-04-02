@@ -7,7 +7,7 @@
 
 import CoreData // for PersistenceController
 
-class BellusImagoMembersProvider {
+class FotoclubBellusImagoMembersProvider {
 
     init(bgContext: NSManagedObjectContext) {
         insertOnlineMemberData(bgContext: bgContext)

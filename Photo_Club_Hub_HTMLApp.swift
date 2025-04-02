@@ -63,5 +63,12 @@ extension PhotoClubHubHtmlApp {
         genderBackgroundContext.automaticallyMergesChangesFromParent = true
         _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext)
 
+        // load member(s) of Fotoclub Bellus Imago
+        let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        bellusBackgroundContext.name = "FC Bellus Imago"
+        bellusBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        bellusBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext)
+
     }
 }
