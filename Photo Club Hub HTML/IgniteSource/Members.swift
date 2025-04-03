@@ -19,7 +19,9 @@ struct Members: StaticPage {
     var currentMembersTotalYears: Double = 0 // updated in memberRow()
     var formerMembersTotalYears: Double = 0 // updated in memberRow()
     fileprivate var currentMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+    fileprivate var currentMembersCountWithStartDate: Int = 0
     fileprivate var formerMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+    fileprivate var formerMembersCountWithStartDate: Int = 0
 
     let dateFormatter = DateFormatter()
 
@@ -32,9 +34,15 @@ struct Members: StaticPage {
         self.moc = moc
         self.club = club
 
-        (currentMembersCount, currentMembers) = makeTable(former: false, moc: moc, club: club)
+        let makeTableResult = makeTable(former: false, moc: moc, club: club)
+        currentMembersCount = makeTableResult.memberCount
+        currentMembers = makeTableResult.table
+        currentMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
         if showFormerMembers {
-            (formerMembersCount, formerMembers) = makeTable(former: true, moc: moc, club: club)
+            let makeTableResult = makeTable(former: false, moc: moc, club: club)
+            formerMembersCount = makeTableResult.memberCount
+            formerMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
+            formerMembers = makeTableResult.table
         }
     }
 
@@ -58,12 +66,12 @@ struct Members: StaticPage {
             .tableBorder(true)
             .horizontalAlignment(.center)
 
-        if currentMembersTotalYears > 0 && currentMembersCount > 0 {
+        if currentMembersTotalYears > 0 && currentMembersCountWithStartDate > 0 {
             Alert {
                 Text {String(localized:
                     """
                     Average membership duration is \
-                    \(formatYears(currentMembersTotalYears/Double(currentMembersCount))) \
+                    \(formatYears(currentMembersTotalYears/Double(currentMembersCountWithStartDate))) \
                     years.
                     """,
                     table: "Site", comment: "Table footnote showing average years of membership of all members."
@@ -100,7 +108,7 @@ struct Members: StaticPage {
                     Text { String(localized:
                     """
                     The listed ex-members were members of this club for, on average, \
-                    \(formatYears(formerMembersTotalYears/Double(formerMembersCount))) \
+                    \(formatYears(formerMembersTotalYears/Double(formerMembersCountWithStartDate))) \
                     years.
                     """,
                                   table: "Site",

@@ -9,6 +9,12 @@ import Ignite // for Table
 import CoreData // for NSSortDescriptor
 import AppKit // for CGImage
 
+struct MakeTableResult {
+    let table: Table
+    let memberCount: Int
+    let memberCountWithStartDate: Int
+}
+
 extension Members {
 
     // former: whether to list former members or current members
@@ -18,7 +24,7 @@ extension Members {
     // return Table: Ignite table containing rendering of requested members
     mutating func makeTable(former: Bool,
                             moc: NSManagedObjectContext,
-                            club: Organization) -> (Int, Table) {
+                            club: Organization) -> MakeTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
             let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
@@ -37,32 +43,36 @@ extension Members {
                                                  argumentArray: [club, former])
             let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
 
-            return (memberPortfolios.count, Table {
-                for member in memberPortfolios {
-                    memberRow(givenName: member.photographer.givenName,
-                              infixName: member.photographer.infixName,
-                              familyName: member.photographer.familyName,
-                              membershipStartDate: member.membershipStartDate,
-                              membershipEndDate: member.membershipEndDate,
-                              fotobond: Int(member.fotobondNumber),
-                              isDeceased: member.photographer.isDeceased,
-                              roles: member.memberRolesAndStatus,
-                              website: member.photographer.photographerWebsite,
-                              portfolio: member.level3URL_,
-                              thumbnail: member.featuredImageThumbnail ??
-                                         URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
-                    )
+            return MakeTableResult(
+                table: Table {
+                    for member in memberPortfolios {
+                        memberRow(givenName: member.photographer.givenName,
+                                  infixName: member.photographer.infixName,
+                                  familyName: member.photographer.familyName,
+                                  membershipStartDate: member.membershipStartDate,
+                                  membershipEndDate: member.membershipEndDate,
+                                  fotobond: Int(member.fotobondNumber),
+                                  isDeceased: member.photographer.isDeceased,
+                                  roles: member.memberRolesAndStatus,
+                                  website: member.photographer.photographerWebsite,
+                                  portfolio: member.level3URL_,
+                                  thumbnail: member.featuredImageThumbnail ??
+                                  URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
+                        )
+                    }
                 }
-            }
-            header: {
-                String(localized: "Name",
-                       table: "Site", comment: "HTML table header for member's name column.")
-                String(former ? headerFormer : headerCurrent)
-                String(localized: "Own website",
-                       table: "Site", comment: "HTML table header for member's own website column.")
-                String(localized: "Portfolio",
-                       table: "Site", comment: "HTML table header for image linked to member's portfolio.")
-            })
+                header: {
+                    String(localized: "Name",
+                           table: "Site", comment: "HTML table header for member's name column.")
+                    String(former ? headerFormer : headerCurrent)
+                    String(localized: "Own website",
+                           table: "Site", comment: "HTML table header for member's own website column.")
+                    String(localized: "Portfolio",
+                           table: "Site", comment: "HTML table header for image linked to member's portfolio.")
+                },
+                memberCount: memberPortfolios.count,
+                memberCountWithStartDate: memberPortfolios.filter { $0.membershipStartDate != nil }.count
+            )
         } catch {
             fatalError("Failed to fetch memberPortfolios: \(error)")
         }
