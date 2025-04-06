@@ -17,6 +17,11 @@ extension Photographer: Comparable {
 
 extension Photographer {
 
+    @available(*, unavailable)
+    convenience init() {
+        fatalError("init() is not available. Use .findCreateUpdate instead.")
+    }
+
 	var memberships: Set<MemberPortfolio> {
 		get { (memberships_ as? Set<MemberPortfolio>) ?? [] }
 		set { memberships_ = newValue as NSSet }
@@ -129,40 +134,46 @@ extension Photographer {
                                    photographer: Photographer,
                                    optionalFields: PhotographerOptionalFields) -> Bool {
 
-		var wasUpdated: Bool = false
-
-        if let isDeceased = optionalFields.isDeceased, photographer.isDeceased != optionalFields.isDeceased {
-            photographer.memberRolesAndStatus.status[.deceased] = isDeceased
-            wasUpdated = true
-        }
-
         // following are fields in PhotographerOptionalFields type
         if optionalFields.bornDT != nil, photographer.bornDT != optionalFields.bornDT {
             photographer.bornDT = optionalFields.bornDT
-            wasUpdated = true
+        }
+
+        if let isDeceased = optionalFields.isDeceased, photographer.isDeceased != optionalFields.isDeceased {
+            photographer.memberRolesAndStatus.status[.deceased] = isDeceased
         }
 
         if let newWebsite = optionalFields.photographerWebsite, photographer.photographerWebsite != newWebsite {
             photographer.photographerWebsite = newWebsite
-            wasUpdated = true
         }
 
         if let newImage = optionalFields.photographerImage, photographer.photographerImage != newImage {
             photographer.photographerImage = newImage
-            wasUpdated = true
         }
 
-        if wasUpdated && Settings.extraCoreDataSaves {
+        for photographerKeywordJSON in optionalFields.photographerKeywords {
+            let photographerKeywordID = photographerKeywordJSON.stringValue
+            let keyword = Keyword.findCreateUpdateUndefStandard(context: bgContext,
+                                                                id: photographerKeywordID,
+                                                                name: [],
+                                                                usage: [])
+            _ = PhotographerKeyword.findCreateUpdate(context: bgContext,
+                                                     photographer: photographer,
+                                                     keyword: keyword)
+        }
+
+        var hasChanges: Bool = bgContext.hasChanges
+        if hasChanges && Settings.extraCoreDataSaves {
 			do {
 				try bgContext.save() // persist updated information about a photographer
+                hasChanges = false // update may be because of earlier update
 			} catch {
                 ifDebugFatalError("Update failed for photographer <\(photographer.fullNameFirstLast)>",
                                   file: #fileID, line: #line) // likely deprecation of #fileID in Swift 6.0
                 // in release mode, if the data cannot be saved, log this and continue.
-                wasUpdated = false
 			}
 		}
-        return wasUpdated
+        return hasChanges
 	}
 
 }

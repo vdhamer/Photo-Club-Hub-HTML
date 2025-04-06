@@ -8,7 +8,7 @@
 import CoreData // needed for NSSet
 import CoreLocation // needed for coordinate translation
 import SwiftUI // for UserInterfaceSizeClass
-// import SwiftyJSON // for JSON type
+// import SwiftyJSON // for JSON struct
 
 extension Organization: Comparable {
 
@@ -19,6 +19,11 @@ extension Organization: Comparable {
 }
 
 extension Organization {
+
+    @available(*, unavailable)
+    convenience init() {
+        fatalError("init() is not available. Use .findCreateUpdate instead.")
+    }
 
     // MARK: - getters and setters
 
@@ -34,12 +39,12 @@ extension Organization {
                 return organizationType_! // organizationType_ cannot be nil at this point
             } else {
                 // something is fundamentally wrong if this happens
-                ifDebugFatalError( "Error because organization is nil", file: #file, line: #line )
+                ifDebugFatalError( "Error because organization is nil", file: #fileID, line: #line )
                 let persistenceController = PersistenceController.shared // for Core Data
                 let viewContext = persistenceController.container.viewContext // requires @MainActor
                 return OrganizationType.findCreateUpdate( // organizationType is CoreData NSManagedObject
                     context: viewContext, // requires @MainActor
-                    organizationTypeName: OrganizationTypeEnum.unknown.rawValue
+                    orgTypeName: OrganizationTypeEnum.unknown.rawValue
                 )
             }
         }
@@ -74,7 +79,7 @@ extension Organization {
         OrganizationID(fullName: self.fullName, town: self.town)
     }
 
-    var nickName: String {
+    var nickname: String {
         get { return nickName_ ?? "Name?" }
         set { nickName_ = newValue }
     }
@@ -132,13 +137,13 @@ extension Organization {
         let currentLangID = Locale.preferredLanguages.first?.split(separator: "-").first?.uppercased() ?? "EN"
 
         // can we find the current language?
-        for localRemark in localizedRemarks where localRemark.language.isoCodeCaps == currentLangID {
+        for localRemark in localizedRemarks where localRemark.language.isoCodeAllCaps == currentLangID {
             if localRemark.localizedString != nil {
                 return localRemark.localizedString!
             }
          }
 
-        for localizedRemark in localizedRemarks where localizedRemark.language.isoCodeCaps == "EN" {
+        for localizedRemark in localizedRemarks where localizedRemark.language.isoCodeAllCaps == "EN" {
             if localizedRemark.localizedString != nil {
                 return localizedRemark.localizedString!
             }
@@ -146,7 +151,7 @@ extension Organization {
 
         // just use any language
         if localizedRemarks.first != nil, localizedRemarks.first!.localizedString != nil {
-            return "\(localizedRemarks.first!.localizedString!) [\(localizedRemarks.first!.language.isoCodeCaps)]"
+            return "\(localizedRemarks.first!.localizedString!) [\(localizedRemarks.first!.language.isoCodeAllCaps)]"
         }
 
         let clubOrMuseum: String = organizationType.organizationTypeName
@@ -158,7 +163,7 @@ extension Organization {
 
 	// Find existing organization or create a new one
 	// Update new or existing organization's attributes
-    static func findCreateUpdate(context: NSManagedObjectContext, // can be foreground of background context
+    static func findCreateUpdate(context: NSManagedObjectContext, // can be foreground or background context
                                  organizationTypeEnum: OrganizationTypeEnum,
                                  idPlus: OrganizationIdPlus,
                                  coordinates: CLLocationCoordinate2D,
@@ -200,6 +205,10 @@ extension Organization {
             let organization = Organization(entity: entity, insertInto: context) // create new Club or Museum
             organization.fullName = idPlus.fullName // first part of ID
             organization.town = idPlus.town // second part of ID
+            // some fancy footwork because organization type info originated from other context
+            let organizationType = OrganizationType.findCreateUpdate(context: context,
+                                                                     orgTypeName: organizationTypeEnum.rawValue)
+            organization.organizationType = organizationType
             print("\(organization.fullNameTown): Will try to fill fields for this new organization")
             _ = organization.update(bgContext: context,
                                     organizationTypeEnum: organizationTypeEnum,
@@ -225,16 +234,8 @@ extension Organization {
 
 		var modified: Bool = false
 
-        // some fancy footwork because organization type info originated from other context
-        let organizationType = OrganizationType.findCreateUpdate(context: bgContext,
-                                                                 organizationTypeName: organizationTypeEnum.rawValue)
-
-        if self.organizationType_ != organizationType {
-            self.organizationType = organizationType
-            modified = true }
-
-        if self.nickName != nickName {
-            self.nickName = nickName
+        if self.nickname != nickName {
+            self.nickname = nickName
             modified = true }
 
         if self.coordinates != coordinates {
@@ -273,6 +274,7 @@ extension Organization {
             if isoCode != nil && localizedRemarkNewValue != nil { // nil could happens if JSON file not schema compliant
                 let language = Language.findCreateUpdate(context: bgContext,
                                                          isoCode: isoCode!) // find or construct the remark's Language
+                // language updates doesn't set modified flag
 
                 let remarkNeedsPersisting: Bool = LocalizedRemark.findCreateUpdate(
                     bgContext: bgContext, // create object
@@ -284,7 +286,7 @@ extension Organization {
             }
         } // end of loop over remark in all provided languages
 
-        if modified {
+        if bgContext.hasChanges {
 			do {
 				try bgContext.save() // persist modifications in PhotoClub record
  			} catch {

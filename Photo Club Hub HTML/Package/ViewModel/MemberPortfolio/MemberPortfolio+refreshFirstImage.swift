@@ -15,8 +15,9 @@ extension MemberPortfolio {
         OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
     ]
 
-    func refreshFirstImageAsync() async throws { // not used because it doesn't work reliably
-        // only applies to clubs using JuiceBox Pro:
+    func refreshFirstImage() {
+    	// does this club use JuicBox Pro xml files?
+
         guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
         guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
 
@@ -26,53 +27,14 @@ extension MemberPortfolio {
                      \(urlOfImageIndex.absoluteString) in background
                      """)
 
-        let url = urlOfImageIndex // just switching to shorter name
-
-        var xmlContent = ""
-        do {
-            xmlContent = try await Loader().UTF8UrlToString(from: url)
-        } catch {
-            ifDebugFatalError("Failure in UTFUrlToString: \(error)")
-        }
-        parseXMLContent(xmlContent: xmlContent, member: self)
-        ifDebugPrint(
-            "\(self.organization.fullNameTown): completed refreshFirstImage() \(urlOfImageIndex.absoluteString)"
-        )
-
-        struct Loader {
-            let session: URLSession
-
-            init() {
-                self.session = URLSession.shared
-            }
-
-            func UTF8UrlToString(from url: URL) async throws -> String {
-                let (data, _) = try await session.data(from: url)
-                let string: String? = String(data: data, encoding: .utf8)
-                return string ?? "Could not decode \(url) as UTF8" // not very helpful if you parse this as XML ;-(
-            }
-        }
-    }
-
-    func refreshFirstImageSync() {
-        // only applies to clubs using JuiceBox Pro:
-        guard MemberPortfolio.clubsUsingJuiceBox.contains(organization.id) else { return }
-        guard let urlOfImageIndex = URL(string: self.level3URL.absoluteString + "config.xml") else { return }
-
-        // assumes JuiceBox Pro is used
-        ifDebugPrint("""
-                 \(self.organization.fullNameTown): starting refreshFirstImage() \
-                 \(urlOfImageIndex.absoluteString) in background
-                 """)
-
         // swiftlint:disable:next large_tuple
         var results: (utfContent: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
         results = URLSession.shared.synchronousDataTask(from: urlOfImageIndex)
         guard results != nil && results!.utfContent != nil else {
             print("""
-              \(organization.fullNameTown): ERROR - \
-              loading refreshFirstImage() \(urlOfImageIndex.absoluteString) failed
-              """)
+                  \(organization.fullNameTown): ERROR - \
+                  loading refreshFirstImage() \(urlOfImageIndex.absoluteString) failed
+                  """)
             return
         }
 

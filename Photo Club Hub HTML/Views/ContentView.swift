@@ -34,12 +34,6 @@ struct ContentView: View {
     fileprivate var allClubs: FetchedResults<Organization>
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \OrganizationType.organizationTypeName_, ascending: true)],
-        predicate: allPredicate,
-        animation: .default)
-    fileprivate var allOrganizationTypes: FetchedResults<OrganizationType>
-
-    @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Photographer.familyName_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
@@ -50,6 +44,18 @@ struct ContentView: View {
         predicate: allPredicate, // there is a variant of this FetchRequest in MembershipView.swift
         animation: .default)
     fileprivate var allMembers: FetchedResults<MemberPortfolio>
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \Keyword.id_, ascending: true)],
+        predicate: allPredicate,
+        animation: .default)
+    fileprivate var allKeywords: FetchedResults<Keyword> // duplicates Keyword.getAll()
+
+    @FetchRequest(
+        sortDescriptors: [],
+        predicate: allPredicate,
+        animation: .default)
+    fileprivate var allPhotographerKeywords: FetchedResults<PhotographerKeyword>
 
     // MARK: - Body of ContentView
 
@@ -76,11 +82,9 @@ struct ContentView: View {
             .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
             Divider()
             HStack(alignment: .center) {
-                Text("Database content:", tableName: "SwiftUI",
+                Text("Records found:", tableName: "SwiftUI",
                      comment: "Label for stats shown at bottom of window")
                      .font(.headline)
-                Text("◼ \(allOrganizationTypes.count) organizationTypes", tableName: "SwiftUI",
-                     comment: "Count of types of organizations in database OrganizationType table")
                 Text("◼ \(allClubs.count) clubs", tableName: "SwiftUI",
                      comment: "Count of clubs in database Organization table")
                 Text("◼ \(allOrganizations.count-allClubs.count) other organizations", tableName: "SwiftUI",
@@ -89,6 +93,10 @@ struct ContentView: View {
                      comment: "Count of individuals in database Photographer table")
                 Text("◼ \(allMembers.count) club memberships", tableName: "SwiftUI",
                      comment: "Count of members in database")
+                Text("◼ \(allKeywords.count) keywords defined", tableName: "SwiftUI",
+                     comment: "Count of keywords in database")
+                Text("◼ \(allPhotographerKeywords.count) keywords usages", tableName: "SwiftUI",
+                     comment: "Count of keyword usages in database")
             }
             .foregroundStyle(.secondary)
             .frame(height: 5)

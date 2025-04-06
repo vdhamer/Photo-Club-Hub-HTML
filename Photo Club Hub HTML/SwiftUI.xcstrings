@@ -35,19 +35,24 @@
         }
       }
     },
-    "◼ %lld organizationTypes" : {
-      "comment" : "Count of types of organizations in database OrganizationType table",
+    "◼ %lld keywords defined" : {
+      "comment" : "Count of keywords in database",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "◼ %lld organizationTypes"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "◼ %lld soorten organisaties"
+            "value" : "◼ %lld trefwoorden"
+          }
+        }
+      }
+    },
+    "◼ %lld keywords usages" : {
+      "comment" : "Count of keyword usages in database",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld trefwoord toekenningen"
           }
         }
       }
@@ -120,23 +125,6 @@
         }
       }
     },
-    "Database content:" : {
-      "comment" : "Label for stats shown at bottom of window",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Database content:"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Inhoud van de interne database:"
-          }
-        }
-      }
-    },
     "Generate HTML" : {
       "comment" : "Button at top of UI",
       "localizations" : {
@@ -184,6 +172,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies één van de clubs in het zijpaneel"
+          }
+        }
+      }
+    },
+    "Records found:" : {
+      "comment" : "Label for stats shown at bottom of window",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Records found:"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gevonden:"
           }
         }
       }

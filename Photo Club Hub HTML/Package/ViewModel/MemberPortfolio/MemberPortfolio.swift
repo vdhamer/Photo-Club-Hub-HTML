@@ -30,8 +30,9 @@ extension MemberPortfolio { // expose computed properties (some related to handl
 
     var membershipEndDate: Date? { // nil means photographer is still a club member
         get { return membershipEndDate_ }
-        set { membershipEndDate_ = newValue
-            if newValue != nil, newValue! < Date() && !isFormerMember { // no longer a member
+        set {
+            membershipEndDate_ = newValue
+            if newValue != nil, newValue! < Date() && isFormerMember == false { // no longer a member
                 isFormerMember = true
                 ifDebugFatalError("Overruling former membership flag for member \(self.photographer.fullNameFirstLast)")
             }
@@ -56,13 +57,11 @@ extension MemberPortfolio { // expose computed properties (some related to handl
 
     var level3URL: URL {
         get {
-            if level3URL_ != nil {
-                return level3URL_!
-            } else {
+            if level3URL_ == nil {
                 let string = MemberPortfolio.emptyPortfolioURL
                 level3URL_ = URL(string: string)!
-                return level3URL_!
             }
+            return level3URL_!
         }
         set {
             level3URL_ = newValue

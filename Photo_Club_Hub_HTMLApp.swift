@@ -53,8 +53,8 @@ extension PhotoClubHubHtmlApp {
         level0BackgroundContext.name = "Level 0 loader"
         level0BackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         level0BackgroundContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
-//        _ = Level0JsonReader(bgContext: level0BackgroundContext, // read root.Level0.json file
-//                             useOnlyFile: false) TODO
+        _ = Level0JsonReader(bgContext: level0BackgroundContext, // read root.Level0.json file
+                             useOnlyFile: false)
 
         // load list of photo clubs and museums from root.Level1.json file
         let level1BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
