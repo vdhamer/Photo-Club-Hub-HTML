@@ -59,23 +59,6 @@
         }
       }
     },
-    "admin" : {
-      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "admin"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "admin"
-          }
-        }
-      }
-    },
     "Average membership duration is %@ years." : {
       "comment" : "Table footnote showing average years of membership of all members.",
       "localizations" : {
@@ -89,23 +72,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Huidige leden zijn gemiddeld %@ jaar lid."
-          }
-        }
-      }
-    },
-    "chairman" : {
-      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "chairman"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "voorzitter"
           }
         }
       }
@@ -212,23 +178,6 @@
         }
       }
     },
-    "other" : {
-      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "other"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "bestuurslid"
-          }
-        }
-      }
-    },
     "Own website" : {
       "comment" : "HTML table header for member's own website column.",
       "localizations" : {
@@ -259,23 +208,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Portfolio"
-          }
-        }
-      }
-    },
-    "secretary" : {
-      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "secretary"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "secretaris"
           }
         }
       }
@@ -334,40 +266,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deze ex-leden waren gemiddeld %@ jaar lid."
-          }
-        }
-      }
-    },
-    "treasurer" : {
-      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "treasurer"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "penningmeester"
-          }
-        }
-      }
-    },
-    "vice-chairman" : {
-      "comment" : "Administrative role of member within a club. Used as part of concatenations.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "vice-chairman"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "vicevoorzitter"
           }
         }
       }
