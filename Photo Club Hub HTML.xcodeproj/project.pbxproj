@@ -19,15 +19,46 @@
 		D0AD0F8D2CEBE0F500EFBE87 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0F8C2CEBE0F500EFBE87 /* Ignite */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D043BFED2DA45CEF007FDE02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0E06C082C8C5ABC0025734B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0E06C0F2C8C5ABC0025734B;
+			remoteInfo = "Photo Club Hub HTML";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
+		D043BFE92DA45CEF007FDE02 /* Photo Club Hub HTMLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Photo Club Hub HTMLTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D043BFF22DA45D3B007FDE02 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTMLTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Package/Tests/KeywordTests.swift,
+				Package/Tests/Level0JsonReaderTest.swift,
+				Package/Tests/Level2JsonReaderTest.swift,
+				Package/Tests/LocalizedKeywordTest.swift,
+				Package/Tests/PhotographerKeywordTest.swift,
+				"Package/Tests/String+containsWordUsingNLPTest.swift",
+				"Package/Tests/String+Random.swift",
+			);
+			target = D043BFE82DA45CEF007FDE02 /* Photo Club Hub HTMLTests */;
+		};
 		D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Package/Tests/KeywordTests.swift,
+				Package/Tests/Level0JsonReaderTest.swift,
+				Package/Tests/Level2JsonReaderTest.swift,
+				Package/Tests/LocalizedKeywordTest.swift,
+				Package/Tests/PhotographerKeywordTest.swift,
+				"Package/Tests/String+containsWordUsingNLPTest.swift",
+				"Package/Tests/String+Random.swift",
 				Package/ViewModel/Model/Photo_Club_Hub_previous.xcdatamodeld,
 				Package/ViewModel/Model/Photo_Club_Hub.xcdatamodeld,
 			);
@@ -57,6 +88,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */,
+				D043BFF22DA45D3B007FDE02 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTMLTests" target */,
 			);
 			path = "Photo Club Hub HTML";
 			sourceTree = "<group>";
@@ -64,6 +96,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D043BFE62DA45CEF007FDE02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0E06C0D2C8C5ABC0025734B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -97,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */,
+				D043BFE92DA45CEF007FDE02 /* Photo Club Hub HTMLTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +144,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D043BFE82DA45CEF007FDE02 /* Photo Club Hub HTMLTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D043BFEF2DA45CEF007FDE02 /* Build configuration list for PBXNativeTarget "Photo Club Hub HTMLTests" */;
+			buildPhases = (
+				D043BFE52DA45CEF007FDE02 /* Sources */,
+				D043BFE62DA45CEF007FDE02 /* Frameworks */,
+				D043BFE72DA45CEF007FDE02 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D043BFEE2DA45CEF007FDE02 /* PBXTargetDependency */,
+			);
+			name = "Photo Club Hub HTMLTests";
+			packageProductDependencies = (
+			);
+			productName = "Photo Club Hub HTMLTests";
+			productReference = D043BFE92DA45CEF007FDE02 /* Photo Club Hub HTMLTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0E06C242C8C5ABD0025734B /* Build configuration list for PBXNativeTarget "Photo Club Hub HTML" */;
@@ -144,9 +204,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1610;
+				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					D043BFE82DA45CEF007FDE02 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = D0E06C0F2C8C5ABC0025734B;
+					};
 					D0E06C0F2C8C5ABC0025734B = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -173,11 +237,19 @@
 			projectRoot = "";
 			targets = (
 				D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */,
+				D043BFE82DA45CEF007FDE02 /* Photo Club Hub HTMLTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D043BFE72DA45CEF007FDE02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0E06C0E2C8C5ABC0025734B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,6 +282,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D043BFE52DA45CEF007FDE02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D0E06C0C2C8C5ABC0025734B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,7 +299,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D043BFEE2DA45CEF007FDE02 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
+			targetProxy = D043BFED2DA45CEF007FDE02 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		D043BFF02DA45CEF007FDE02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YDEWPN9GZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-HTMLTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Photo Club Hub HTML.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Photo Club Hub HTML";
+			};
+			name = Debug;
+		};
+		D043BFF12DA45CEF007FDE02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YDEWPN9GZ6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-HTMLTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Photo Club Hub HTML.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Photo Club Hub HTML";
+			};
+			name = Release;
+		};
 		D0E06C222C8C5ABD0025734B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -424,6 +547,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D043BFEF2DA45CEF007FDE02 /* Build configuration list for PBXNativeTarget "Photo Club Hub HTMLTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D043BFF02DA45CEF007FDE02 /* Debug */,
+				D043BFF12DA45CEF007FDE02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D0E06C0B2C8C5ABC0025734B /* Build configuration list for PBXProject "Photo Club Hub HTML" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
