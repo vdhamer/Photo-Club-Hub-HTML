@@ -28,7 +28,6 @@
 		D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Package/Model/Photo_Club_Hub_previous.xcdatamodeld,
 				Package/ViewModel/Model/Photo_Club_Hub_previous.xcdatamodeld,
 				Package/ViewModel/Model/Photo_Club_Hub.xcdatamodeld,
 			);
