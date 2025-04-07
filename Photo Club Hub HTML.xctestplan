@@ -12,7 +12,13 @@
     "testTimeoutsEnabled" : true
   },
   "testTargets" : [
-
+    {
+      "target" : {
+        "containerPath" : "container:Photo Club Hub HTML.xcodeproj",
+        "identifier" : "D06B8D452DA48F3200547A05",
+        "name" : "Photo Club Hub HTMLTests"
+      }
+    }
   ],
   "version" : 1
 }
