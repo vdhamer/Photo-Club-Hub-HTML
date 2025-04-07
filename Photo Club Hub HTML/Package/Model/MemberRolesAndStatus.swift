@@ -24,17 +24,17 @@ enum MemberRole {
 
         switch self {
         case .admin:
-            return String(localized: "admin", table: "Site", comment: translateComment)
+            return String(localized: "admin", table: "Package", comment: translateComment)
         case .chairman:
-            return String(localized: "chairman", table: "Site", comment: translateComment)
+            return String(localized: "chairman", table: "Package", comment: translateComment)
         case .secretary:
-            return String(localized: "secretary", table: "Site", comment: translateComment)
+            return String(localized: "secretary", table: "Package", comment: translateComment)
         case .treasurer:
-            return String(localized: "treasurer", table: "Site", comment: translateComment)
+            return String(localized: "treasurer", table: "Package", comment: translateComment)
         case .viceChairman:
-            return String(localized: "vice-chairman", table: "Site", comment: translateComment) // used in fgWaalre
+            return String(localized: "vice-chairman", table: "Package", comment: translateComment) // used in fgWaalre
         case .other:
-            return String(localized: "other", table: "Site", comment: translateComment) // used in fgDeGender
+            return String(localized: "other", table: "Package", comment: translateComment) // used in fgDeGender
         }
     }
 }
@@ -147,8 +147,8 @@ struct MemberRolesAndStatus: Equatable {
         if jsonStatus["isMentor"].exists() {
             status[.coach] = jsonStatus["isMentor"].boolValue
         }
-        if jsonStatus["isPropectiveMember"].exists() {
-            status[.prospective] = jsonStatus["isPropectiveMember"].boolValue
+        if jsonStatus["isProspectiveMember"].exists() {
+            status[.prospective] = jsonStatus["isProspectiveMember"].boolValue
         }
 
     }

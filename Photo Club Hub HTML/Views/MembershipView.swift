@@ -125,7 +125,7 @@ extension Organization {
                                                                 organization: fgDeGender,
                                                                 photographer: hansKrüsemannPho,
                                                                 optionalFields: hansKrüsemannOpt)
-        hansKrüsemannMem.refreshFirstImageSync()
+        hansKrüsemannMem.refreshFirstImage()
 
         let jelleVanDeVoortPN = PersonName(givenName: "Jelle", infixName: "van de", familyName: "Voort")
         let jelleVanDeVoortPho = Photographer.findCreateUpdate(context: context,
@@ -141,7 +141,7 @@ extension Organization {
                                                                 organization: fgDeGender,
                                                                 photographer: jelleVanDeVoortPho,
                                                                 optionalFields: jelleVanDeVoortOpt)
-        jelleVanDeVoortMem.refreshFirstImageSync()
+        jelleVanDeVoortMem.refreshFirstImage()
 
         let peterVanDenHamerPN = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
         let peterVanDenHamerPho = Photographer.findCreateUpdate(context: context,
@@ -160,7 +160,7 @@ extension Organization {
                                                                 organization: fgDeGender,
                                                                 photographer: peterVanDenHamerPho,
                                                                 optionalFields: peterVanDenHamerOpt)
-        peterVanDenHamerMem.refreshFirstImageSync()
+        peterVanDenHamerMem.refreshFirstImage()
         return fgDeGender
     }
 

@@ -7,10 +7,12 @@
 
 import SwiftUI
 import Ignite
+import CoreData // for NSManagedObjectContext
 
 @main
 struct PhotoClubHubHtmlApp: App {
-    let persistenceController = PersistenceController.shared
+    static let includeXampleClubs: Bool = true // whether or not to include XmpleMin and XmpleMax clubs
+    static let persistenceController = PersistenceController.shared // for Core Data
 
     init() {
         OrganizationType.initConstants() // creates records for club, museum, and unknown
@@ -20,7 +22,7 @@ struct PhotoClubHubHtmlApp: App {
         Window(String(localized: "Photo Club Hub HTML", table: "SwiftUI", comment: "Name of this macOS app"),
                id: "mainWindow") {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, Self.persistenceController.container.viewContext)
                 .onAppear {
                     Self.loadClubsAndMembers()
                }
@@ -39,15 +41,35 @@ extension PhotoClubHubHtmlApp {
 
     static fileprivate func loadClubsAndMembers() {
 
-        Model.deleteAllCoreDataObjects() // Clear CoreData database for simplicity and to trigger initConstants()
+        let viewContext = persistenceController.container.viewContext // "associated with the main application queue"
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        viewContext.undoManager = nil // nil by default on iOS
+        viewContext.shouldDeleteInaccessibleFaults = true
+        // Clear CoreData database for simplicity and to trigger initConstants()
+        Model.deleteAllCoreDataObjects(context: viewContext)
 
-        // load list of photo clubs and museums from root.Level1.json file (on GitHub)
+        // load list of keywords and languages from root.Level0.json file
+        let level0BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        level0BackgroundContext.name = "Level 0 loader"
+        level0BackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        level0BackgroundContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
+        _ = Level0JsonReader(bgContext: level0BackgroundContext, // read root.Level0.json file
+                             useOnlyFile: false)
+
+        // load list of photo clubs and museums from root.Level1.json file
         let level1BackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-        level1BackgroundContext.name = "root.level1.json"
+        level1BackgroundContext.name = "Level 1 loader"
         level1BackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         level1BackgroundContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
         _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
                              useOnlyFile: false)
+
+        // load test member(s) of Fotogroep De Gender
+        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        genderBackgroundContext.name = "FG de Gender"
+        genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        genderBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext)
 
         // load all current/former members of Fotogroep Waalre
         let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
@@ -56,19 +78,29 @@ extension PhotoClubHubHtmlApp {
         waalreBackgroundContext.automaticallyMergesChangesFromParent = true
         _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext)
 
-        // load member(s) of Fotogroep De Gender
-        let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-        genderBackgroundContext.name = "FG de Gender"
-        genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        genderBackgroundContext.automaticallyMergesChangesFromParent = true
-        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext)
-
-        // load member(s) of Fotoclub Bellus Imago
+        // load all current/former members of Fotoclub Bellus Imago
         let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-        bellusBackgroundContext.name = "FC Bellus Imago"
+        bellusBackgroundContext.name = "Fotoclub Bellus Imago"
         bellusBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bellusBackgroundContext.automaticallyMergesChangesFromParent = true
         _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext)
 
+        if includeXampleClubs {
+
+            // load test member(s) of XampleMin. Club is called XampleMin (rather than ExampleMin) to be at end of list
+            let xampleMinBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+            xampleMinBackgroundContext.name = "XampleMin"
+            xampleMinBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+            xampleMinBackgroundContext.automaticallyMergesChangesFromParent = true
+            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext)
+
+            // load test member(s) of XampleMax. Club is called XampleMax (rather than ExampleMax) to be at end of list
+            let xampleMaxBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+            xampleMaxBackgroundContext.name = "XampleMax"
+            xampleMaxBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+            xampleMaxBackgroundContext.automaticallyMergesChangesFromParent = true
+            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext)
+
+        }
     }
 }

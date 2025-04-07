@@ -10,17 +10,16 @@ struct UrlComponents {
     static let dataSourcePath = """
                                 https://raw.githubusercontent.com/\
                                 vdhamer/Photo-Club-Hub/\
-                                main/\
-                                JSON/
+                                main/JSON/
                                 """
 
-    let dataSourceFile: String // fgDeGender
+    var dataSourceFile: String // fgDeGender, can be overruled when testing
     let fileSubType: String // level2 (part of name)
     let fileType: String // json (actual file system type)
 
     var fullURLstring: String {
         // https://raw.githubusercontent.com/vdhamer/Photo-Club-Hub/main/ +
-        // Photo%20Club%20Hub/ViewModel/Lists/fgDeGender.level2.json
+        // JSON/fgDeGender.level2.json
         return UrlComponents.dataSourcePath+dataSourceFile+"."+fileSubType+"."+fileType
     }
 
@@ -37,10 +36,26 @@ struct UrlComponents {
         fileType: "json"
     )
 
-    // MARK: - Fotogroep Anders
+    // MARK: - Waalre
 
-    static let anders = UrlComponents(
-        dataSourceFile: "fgAnders",
+    static let waalre = UrlComponents(
+        dataSourceFile: "fgWaalre",
+        fileSubType: "level2",
+        fileType: "json"
+    )
+
+    // MARK: - XampleMin
+
+    static let xampleMin = UrlComponents(
+        dataSourceFile: "xampleMin",
+        fileSubType: "level2",
+        fileType: "json"
+    )
+
+    // MARK: - XampleMax
+
+    static let xampleMax = UrlComponents(
+        dataSourceFile: "xampleMax",
         fileSubType: "level2",
         fileType: "json"
     )
@@ -49,14 +64,6 @@ struct UrlComponents {
 
     static let bellusImago = UrlComponents(
         dataSourceFile: "fcBellusImago",
-        fileSubType: "level2",
-        fileType: "json"
-    )
-
-    // MARK: - Waalre
-
-    static let waalre = UrlComponents(
-        dataSourceFile: "fgWaalre",
         fileSubType: "level2",
         fileType: "json"
     )

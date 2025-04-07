@@ -33,7 +33,7 @@ struct UpdatedOnFooter: Component { // swiftlint doesn't want this one to be fil
         Alert {
             Text { // this is Ignite's Text, not SwiftUI's Text
                 String(localized: "Data was last updated on \(date) \(timezoneCode).",
-                       table: "Site",
+                       table: "HTML",
                        comment: "Timestamp at bottom of static HTML page showing when page was generate")
             } .horizontalAlignment(.center)
         }

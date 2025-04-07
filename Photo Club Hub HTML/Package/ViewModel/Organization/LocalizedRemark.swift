@@ -9,7 +9,12 @@ import CoreData // for NSFetchRequest and NSManagedObjectContext
 
 extension LocalizedRemark { // expose computed properties (some related to handling optionals)
 
-    // MARK: - getters (setting is done via init)
+    @available(*, unavailable)
+    convenience init() {
+        fatalError("init() is not available. Use .findCreateUpdate instead.")
+    }
+
+    // MARK: - getters (setting is done via findCreateUpdate)
 
     var organization: Organization { // getter
         if let organization = organization_ {
@@ -45,7 +50,7 @@ extension LocalizedRemark { // expose computed properties (some related to handl
         let localizedRemarks: [LocalizedRemark] = (try? bgContext.fetch(fetchRequest)) ?? [] // nil = absolute failure
         if localizedRemarks.count > 1 { // there is actually a Core Data constraint to prevent this
             ifDebugFatalError("Query returned multiple (\(localizedRemarks.count)) remarks for " +
-                              "\(organization.fullNameTown) for language code \(language.isoCodeCaps)",
+                              "\(organization.fullNameTown) for language code \(language.isoCodeAllCaps)",
                               file: #fileID, line: #line) // likely deprecation of #fileID in Swift 6.0
             // in release mode, log that there are multiple clubs, but continue using the first one.
         }
@@ -64,7 +69,10 @@ extension LocalizedRemark { // expose computed properties (some related to handl
                     try bgContext.save() // persist modifications in PhotoClub record
                 }
             } catch {
-                ifDebugFatalError("Creation of remark failed for \(organization.fullName) in \(language.isoCodeCaps)",
+                ifDebugFatalError("""
+                                  Creation of remark failed for \(organization.fullName) \
+                                  in language \(language.isoCodeAllCaps)
+                                  """,
                                   file: #fileID, line: #line) // likely deprecation of #fileID in Swift 6.0
             }
             return true // something got updated
@@ -77,6 +85,28 @@ extension LocalizedRemark { // expose computed properties (some related to handl
         guard self.localizedString != localizedString else { return false } // nothing to change
         self.localizedString = localizedString // update string
         return true // indicates that there was an update
+    }
+
+    // count total number of objects in CoreData database
+    static func count(context: NSManagedObjectContext) -> Int {
+        var localizedRemarks: [LocalizedRemark]! = []
+
+        context.performAndWait {
+            let fetchRequest: NSFetchRequest<LocalizedRemark> = LocalizedRemark.fetchRequest()
+            let predicateAll = NSPredicate(format: "TRUEPREDICATE")
+            fetchRequest.predicate = predicateAll
+
+            context.perform {
+                do {
+                    localizedRemarks = try context.fetch(fetchRequest)
+                } catch {
+                    ifDebugFatalError("Failed to fetch list of all LocalizedLanguages: \(error)",
+                                      file: #fileID, line: #line)
+                    // on non-Debug version, continue with empty `keywords` array
+                }
+            }
+        }
+        return localizedRemarks.count
     }
 
 }
