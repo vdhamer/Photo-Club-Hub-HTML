@@ -94,9 +94,7 @@ extension Language {
         }
 
         if languages.count > 1 { // there is actually a Core Data constraint to prevent this
-            ifDebugFatalError("Query returned multiple (\(languages.count)) Languages with code \(isoCodeAllCaps)",
-                              file: #fileID, line: #line)
-            // in release mode, log that there are multiple clubs, but continue using the first one.
+            ifDebugPrint("Query returned multiple (\(languages.count)) Languages with code \(isoCodeAllCaps)")
         }
 
         if let language = languages.first { // already exists, so update non-identifying attributes
@@ -135,6 +133,24 @@ extension Language {
                 languages = try context.fetch(fetchRequest)
             } catch {
                 ifDebugFatalError("Failed to fetch Language \(isoCodeAllCaps): \(error)", file: #fileID, line: #line)
+                // on non-Debug version, continue with empty `keywords` array
+            }
+        }
+
+        return languages.count
+    }
+
+    // count number of objects with a given isoCode
+    static func count(context: NSManagedObjectContext) -> Int {
+        var languages: [Language]! = []
+        let fetchRequest: NSFetchRequest<Language> = Language.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "TRUEPREDICATE")
+
+        context.performAndWait {
+            do {
+                languages = try context.fetch(fetchRequest)
+            } catch {
+                ifDebugFatalError("Failed to fetch Languages: \(error)", file: #fileID, line: #line)
                 // on non-Debug version, continue with empty `keywords` array
             }
         }
