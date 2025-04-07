@@ -62,12 +62,12 @@ class Level2JsonReader { // normally running on a background thread
         print("Could not access online file \(url.relativeString).")
         // last chance: fetch json data from app bundle
         guard let filePath: String = Bundle.main.path(forResource: urlComponents.dataSourceFile + "." +
-                                                                   urlComponents.fileSubType,
+                                                      urlComponents.fileSubType,
                                                       ofType: urlComponents.fileType)
-            else {
-                print("Could not access local file \(urlComponents.shortName) either.")
-                return nil
-            } // can't locate file within main app bundle
+        else {
+            ifDebugFatalError("Could not access local file \(urlComponents.shortName).")
+            return nil
+        } // can't locate file within main app bundle
 
         // get the requested JSON from a file in the main app bundle
         if let fileData = try? String(contentsOfFile: filePath, encoding: .utf8) {
@@ -171,7 +171,7 @@ class Level2JsonReader { // normally running on a background thread
                                                             givenName: givenName,
                                                             infixName: infixName, // may be ""
                                                             familyName: familyName),
-                                                         optionalFields: PhotographerOptionalFields()) // updated later
+                                                         optionalFields: PhotographerOptionalFields()) // filled later
 
         let memberPortfolio: MemberPortfolio
         if member["optional"].exists() { // could contain photographerOptionalFields, memberOptionalFields, or both.
@@ -189,17 +189,7 @@ class Level2JsonReader { // normally running on a background thread
                                                                )
             )
         }
-        memberPortfolio.refreshFirstImageSync() // Synchronous version
-
-//        Task { // Asynchronous version crashes due to sending NSManagedObject across thread boundary?
-//            do {
-//                try await memberPortfolio.refreshFirstImageA()
-//            } catch {
-//                let who: String = memberPortfolio.photographer.fullNameFirstLast
-//                print("Failed to retrieve first image for memberPortfolio: \(who).")// ignore
-//            }
-//        }
-
+        memberPortfolio.refreshFirstImage()
     }
 
     fileprivate func loadClubOptionals(bgContext: NSManagedObjectContext,
@@ -221,7 +211,7 @@ class Level2JsonReader { // normally running on a background thread
                                           organizationTypeEnum: OrganizationTypeEnum.club,
                                           idPlus: OrganizationIdPlus(id: OrganizationID(fullName: club.fullName,
                                                                                      town: club.town),
-                                                                     nickname: club.nickName),
+                                                                     nickname: club.nickname),
                                           coordinates: coordinates,
                                           optionalFields: OrganizationOptionalFields(
                                               organizationWebsite: clubWebsite,
@@ -237,24 +227,25 @@ class Level2JsonReader { // normally running on a background thread
                                                         jsonOptionals: JSON,
                                                         photographer: Photographer,
                                                         club: Organization) -> MemberPortfolio {
-        let birthday: String? = jsonOptionals["birthday"].exists() ? jsonOptionals["birthday"].stringValue : nil
-
-        let photographerWebsite: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "website")
-        let photographerImage: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "photographerImage")
-
-        let featuredImage: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "featuredImage")
-        let level3URL: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "level3URL")
 
         let memberRolesAndStatus = MemberRolesAndStatus(jsonRoles: jsonOptionals["roles"],
                                                         jsonStatus: jsonOptionals["status"])
 
-        let fotobondNumber: Int32? = jsonOptionals["nlSpecific"]["fotobondNumber"].exists() ?
-            jsonOptionals["nlSpecific"]["fotobondNumber"].int32Value : nil
+        let birthday: String? = jsonOptionals["birthday"].exists() ? jsonOptionals["birthday"].stringValue : nil
+        let photographerWebsite: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "website")
+        let photographerImage: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "photographerImage")
+        let featuredImage: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "featuredImage")
+        let level3URL: URL? = jsonOptionalsToURL(jsonOptionals: jsonOptionals, key: "level3URL")
 
         let membershipStartDate: Date? = jsonOptionals["membershipStartDate"].exists() ?
             jsonOptionals["membershipStartDate"].stringValue.extractDate() : nil
         let membershipEndDate: Date? = jsonOptionals["membershipEndDate"].exists() ?
             jsonOptionals["membershipEndDate"].stringValue.extractDate() : nil
+
+        let photographerKeywords: [JSON] = jsonOptionals["keywords"].arrayValue
+
+        let fotobondNumber: Int32? = jsonOptionals["nlSpecific"]["fotobondNumber"].exists() ?
+            jsonOptionals["nlSpecific"]["fotobondNumber"].int32Value : nil
 
         // some attributes are at the Photographer level...
         _ = Photographer.findCreateUpdate(context: bgContext,
@@ -265,11 +256,12 @@ class Level2JsonReader { // normally running on a background thread
                                               bornDT: birthday?.extractDate(),
                                               isDeceased: memberRolesAndStatus.isDeceased(),
                                               photographerWebsite: photographerWebsite,
-                                              photographerImage: photographerImage
+                                              photographerImage: photographerImage,
+                                              photographerKeywords: photographerKeywords
                                               )
                                           )
 
-        // ...while some attributes are at the Photographer-as-Member-of-club level
+        // ...while some attributes are at the Photographer-as-Member-of-club level (instead of Photographer level)
         return MemberPortfolio.findCreateUpdate(
             bgContext: bgContext,
             organization: club,
