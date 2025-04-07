@@ -33,6 +33,9 @@
             reference = "container:Photo Club Hub HTML.xctestplan"
             default = "YES">
          </TestPlanReference>
+         <TestPlanReference
+            reference = "container:Photo Club Hub HTML.xctestplan">
+         </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
@@ -40,7 +43,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D043BFE82DA45CEF007FDE02"
+               BlueprintIdentifier = "D06B8D452DA48F3200547A05"
                BuildableName = "Photo Club Hub HTMLTests.xctest"
                BlueprintName = "Photo Club Hub HTMLTests"
                ReferencedContainer = "container:Photo Club Hub HTML.xcodeproj">
