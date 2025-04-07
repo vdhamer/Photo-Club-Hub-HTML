@@ -11,7 +11,7 @@
 		D014A99C2C9DC50200ED412D /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		D04593FF2CD6850A00A52BFB /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
 		D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */ = {isa = PBXBuildFile; productRef = D04594D12CD6CB5400A52BFB /* SwiftImageReadWrite */; };
-		D06B8FAA2DA496B900547A05 /* Photo Club Hub HTML.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = D06B8FA92DA496B900547A05 /* Photo Club Hub HTML.xctestplan */; };
+		D06B8D502DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */; };
 		D09D9C922CE927D00054F87B /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C912CE927D00054F87B /* Ignite */; };
 		D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C942CE928650054F87B /* SwiftyJSON */; };
 		D0AD0DDA2CEBD7B900EFBE87 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0DD92CEBD7B900EFBE87 /* Ignite */; };
@@ -33,7 +33,7 @@
 /* Begin PBXFileReference section */
 		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
 		D06B8D462DA48F3200547A05 /* Photo Club Hub HTMLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Photo Club Hub HTMLTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D06B8FA92DA496B900547A05 /* Photo Club Hub HTML.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Photo Club Hub HTML.xctestplan"; sourceTree = "<group>"; };
+		D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Photo Club Hub HTML.xctestplan"; sourceTree = "<group>"; };
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -53,7 +53,7 @@
 			);
 			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
 		};
-		D06B8FAC2DA496F800547A05 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTMLTests" target */ = {
+		D06B90E22DA4987100547A05 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTMLTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Package/Tests/KeywordTests.swift,
@@ -90,7 +90,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */,
-				D06B8FAC2DA496F800547A05 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTMLTests" target */,
+				D06B90E22DA4987100547A05 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTMLTests" target */,
 			);
 			path = "Photo Club Hub HTML";
 			sourceTree = "<group>";
@@ -127,7 +127,7 @@
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
-				D06B8FA92DA496B900547A05 /* Photo Club Hub HTML.xctestplan */,
+				D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */,
 				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 				D0B9D4FE2CC443D900B1541C /* .github */,
@@ -257,7 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D06B8FAA2DA496B900547A05 /* Photo Club Hub HTML.xctestplan in Resources */,
+				D06B8D502DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
