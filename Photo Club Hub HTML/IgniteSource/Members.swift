@@ -55,7 +55,7 @@ struct Members: StaticPage {
 
         Text {
             Badge(String(localized: "The \(currentMembersCount) current members",
-                         table: "Site", comment: "Number of current members"))
+                         table: "HTML", comment: "Number of current members"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }
@@ -74,7 +74,7 @@ struct Members: StaticPage {
                     \(formatYears(currentMembersTotalYears/Double(currentMembersCountWithStartDate))) \
                     years.
                     """,
-                    table: "Site", comment: "Table footnote showing average years of membership of all members."
+                    table: "HTML", comment: "Table footnote showing average years of membership of all members."
                 )} .horizontalAlignment(.center)
             }
             .margin(.top, .small)
@@ -92,7 +92,7 @@ struct Members: StaticPage {
         if showFormerMembers {
             Text {
                 Badge(String(localized: "\(formerMembersCount) former members",
-                             table: "Site", comment: "Number of former members"))
+                             table: "HTML", comment: "Number of former members"))
                 .badgeStyle(.subtleBordered)
                 .role(.secondary)
             }
@@ -111,7 +111,7 @@ struct Members: StaticPage {
                     \(formatYears(formerMembersTotalYears/Double(formerMembersCountWithStartDate))) \
                     years.
                     """,
-                                  table: "Site",
+                                  table: "HTML",
                                   comment: "Footer for former members table")
                     } .horizontalAlignment(.center)
                 }

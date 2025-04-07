@@ -32,9 +32,9 @@ extension Members {
             let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_,
                                                    ascending: true)
             let headerCurrent = String(localized: "Member (years)",
-                                       table: "Site", comment: "HTML table header for years of membership column.")
+                                       table: "HTML", comment: "HTML table header for years of membership column.")
             let headerFormer = String(localized: "Member (period)",
-                                      table: "Site", comment: "HTML table header for years of membership column.")
+                                      table: "HTML", comment: "HTML table header for years of membership column.")
 
             let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
@@ -63,12 +63,12 @@ extension Members {
                 }
                 header: {
                     String(localized: "Name",
-                           table: "Site", comment: "HTML table header for member's name column.")
+                           table: "HTML", comment: "HTML table header for member's name column.")
                     String(former ? headerFormer : headerCurrent)
                     String(localized: "Own website",
-                           table: "Site", comment: "HTML table header for member's own website column.")
+                           table: "HTML", comment: "HTML table header for member's own website column.")
                     String(localized: "Portfolio",
-                           table: "Site", comment: "HTML table header for image linked to member's portfolio.")
+                           table: "HTML", comment: "HTML table header for image linked to member's portfolio.")
                 },
                 memberCount: memberPortfolios.count,
                 memberCountWithStartDate: memberPortfolios.filter { $0.membershipStartDate != nil }.count
@@ -135,7 +135,7 @@ extension Members {
                 Column {
                     Span(
                         Link( String(localized: "Web site",
-                                     table: "Site", comment: "Clickable link to photographer's web site"),
+                                     table: "HTML", comment: "Clickable link to photographer's web site"),
                               target: website!.absoluteString)
                             .linkStyle(.hover)
                     )
@@ -235,7 +235,7 @@ extension Members {
         }
 
         let unknown = Span(String(localized: "-",
-                                  table: "Site",
+                                  table: "HTML",
                                   comment: "Shown in member table when start date unavailable"))
 
         if isFormer == false { // a current member
@@ -249,7 +249,7 @@ extension Members {
                                    """
                                    From \(formattedStartDate)\(fotobondString)
                                    """,
-                                   table: "Site",
+                                   table: "HTML",
                                    comment: "Mouseover hint on cell containing start-end years"))
         } else { // a former member
             formerMembersTotalYears += years
@@ -260,7 +260,7 @@ extension Members {
                                    From \(toYear(date: start!)) to \(toYear(date: end!)) (\(formatYears(years)) years)\
                                    \(fotobondString)
                                    """,
-                                   table: "Site",
+                                   table: "HTML",
                                    comment: "Mouseover hint on cell containing start-end years"))
         }
     }
