@@ -48,6 +48,8 @@
 				Package/Tests/PhotographerKeywordTest.swift,
 				"Package/Tests/String+containsWordUsingNLPTest.swift",
 				"Package/Tests/String+Random.swift",
+				Package/ViewModel/Model/Photo_Club_Hub_previous.xcdatamodeld,
+				Package/ViewModel/Model/Photo_Club_Hub.xcdatamodeld,
 			);
 			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
 		};
