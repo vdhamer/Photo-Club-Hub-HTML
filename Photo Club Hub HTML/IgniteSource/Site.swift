@@ -14,7 +14,7 @@ import CoreLocation // for CLLocationCoordinate2DMake
 struct MemberSite: Site {
     var name = "Leden"
     // IMPORTANT: append "/fgDeGender" (nickname) to URL string unless running on LocalHost
-    var url: URL = URL("http://www.vdhamer.com")
+    var url: URL = URL("http://www.vdhamer.com/fgWaalre")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
     var homePage: Members // actual loading of page content
@@ -52,7 +52,7 @@ struct MemberSite: Site {
 
         self.moc = moc
 
-        let chosenClubIX: Int = 2  // roundabout way to avoid warnings about unused properties
+        let chosenClubIX: Int = 1  // roundabout way to avoid warnings about unused properties
         let clubs = [club0, club1, club2]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
