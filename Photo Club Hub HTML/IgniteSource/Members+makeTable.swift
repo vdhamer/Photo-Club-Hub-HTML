@@ -144,7 +144,7 @@ extension Members {
             }
 
             Column { // clickable thumbnail of recent work
-                Image(lastPathComponent(fullUrl: portfolio!.absoluteString+"/thumbs/"+thumbnail.lastPathComponent),
+                Image(lastPathComponent(fullUrl: thumbnail.absoluteString), // Ignite prepends /images/
                       description: "clickable link to portfolio")
                     .resizable()
                     .cornerRadius(8)
@@ -196,7 +196,7 @@ extension Members {
             let buildDirectoryString = NSHomeDirectory() // app's home directory for a sandboxed MacOS app
 
             guard let localUrl = URL(string: "file:\(buildDirectoryString)/Assets/images/\(lastComponent)") else {
-                fatalError("Trouble decoding /images/\(lastComponent)")
+                fatalError("Error creating URL for /images/\(lastComponent)")
             }
             try jpegData.write(to: localUrl)
             print("Wrote jpg to \(localUrl)")
