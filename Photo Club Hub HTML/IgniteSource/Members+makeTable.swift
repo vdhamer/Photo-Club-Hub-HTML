@@ -31,10 +31,10 @@ extension Members {
                                                    ascending: true)
             let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_,
                                                    ascending: true)
-            let headerCurrent = String(localized: "Member (years)",
-                                       table: "HTML", comment: "HTML table header for years of membership column.")
-            let headerFormer = String(localized: "Member (period)",
-                                      table: "HTML", comment: "HTML table header for years of membership column.")
+//            let headerCurrent = String(localized: "Member (years)",
+//                                       table: "HTML", comment: "HTML table header for years of membership column.")
+//            let headerFormer = String(localized: "Member (period)",
+//                                      table: "HTML", comment: "HTML table header for years of membership column.")
 
             let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
@@ -61,7 +61,8 @@ extension Members {
                 header: {
                     String(localized: "Name",
                            table: "HTML", comment: "HTML table header for member's name column.")
-                    String(former ? headerFormer : headerCurrent)
+                    String(localized: "Keywords",
+                           table: "HTML", comment: "HTML table header for member's keywords.")
                     String(localized: "Own website",
                            table: "HTML", comment: "HTML table header for member's own website column.")
                     String(localized: "Portfolio",
@@ -114,15 +115,23 @@ extension Members {
                                 .role(.success)
                                 .margin(.leading, 10)
                         }
-                    } .font(.title5)
-                } .horizontalAlignment(.leading)
+                    } .font(.title5) .padding(.none) .margin(0)
+                    Text {
+                        formatMembershipYears(start: membershipStartDate,
+                                              end: membershipEndDate,
+                                              isFormer: isFormerMember(roles: roles),
+                                              fotobond: fotobond)
+                    } .font(.body) .padding(.none) .margin(0)
+                } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
             Column { // duration of club membership
-                formatMembershipYears(start: membershipStartDate,
-                                      end: membershipEndDate,
-                                      isFormer: isFormerMember(roles: roles),
-                                      fotobond: fotobond)
+                let localizedKeywordStrings = PhotographerKeyword.getAll(context: moc, photographer: photographer)
+                for localizedKeywordString in localizedKeywordStrings {
+                    Text(localizedKeywordString)
+                        .padding(.none)
+                        .margin(0)
+                }
             } .verticalAlignment(.middle)
 
             if photographer.photographerWebsite == nil { // photographer's optional own website
@@ -161,7 +170,6 @@ extension Members {
     fileprivate func fullName(givenName: String,
                               infixName: String = "",
                               familyName: String) -> String {
-
         if infixName.isEmpty {
             return givenName + " " + familyName
         } else {

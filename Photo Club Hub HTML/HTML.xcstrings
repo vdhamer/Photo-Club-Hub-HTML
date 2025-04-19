@@ -127,8 +127,20 @@
         }
       }
     },
+    "Keywords" : {
+      "comment" : "HTML table header for member's keywords.",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trefwoorden"
+          }
+        }
+      }
+    },
     "Member (period)" : {
       "comment" : "HTML table header for years of membership column.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -146,6 +158,7 @@
     },
     "Member (years)" : {
       "comment" : "HTML table header for years of membership column.",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
