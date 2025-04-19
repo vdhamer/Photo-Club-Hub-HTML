@@ -117,7 +117,7 @@ extension PhotographerKeyword {
         return modified
     }
 
-    // MARK: - utilities
+    // MARK: - save
 
     static func save(context: NSManagedObjectContext, errorText: String? = nil) {
         if context.hasChanges {
@@ -129,6 +129,8 @@ extension PhotographerKeyword {
             }
         }
     }
+
+    // MARK: - count
 
     // count number of objects with a given id for a given photographer
     static func count(context: NSManagedObjectContext, keywordID: String, photographer: Photographer) -> Int {

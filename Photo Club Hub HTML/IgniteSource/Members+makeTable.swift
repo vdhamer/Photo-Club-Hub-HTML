@@ -46,18 +46,15 @@ extension Members {
             return MakeTableResult(
                 table: Table {
                     for member in memberPortfolios {
-                        memberRow(givenName: member.photographer.givenName,
-                                  infixName: member.photographer.infixName,
-                                  familyName: member.photographer.familyName,
+                        memberRow(moc: moc,
+                                  photographer: member.photographer,
                                   membershipStartDate: member.membershipStartDate,
                                   membershipEndDate: member.membershipEndDate,
                                   fotobond: Int(member.fotobondNumber),
-                                  isDeceased: member.photographer.isDeceased,
                                   roles: member.memberRolesAndStatus,
-                                  website: member.photographer.photographerWebsite,
                                   portfolio: member.level3URL_,
                                   thumbnail: member.featuredImageThumbnail ??
-                                  URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
+                                             URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
                         )
                     }
                 }
@@ -81,15 +78,12 @@ extension Members {
 
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
-    fileprivate mutating func memberRow(givenName: String,
-                                        infixName: String = "",
-                                        familyName: String,
+    fileprivate mutating func memberRow(moc: NSManagedObjectContext,
+                                        photographer: Photographer,
                                         membershipStartDate: Date?, // nil means app didn't receive a start date
                                         membershipEndDate: Date? = nil, // nil means photographer is still a member now
                                         fotobond: Int? = nil,
-                                        isDeceased: Bool = false,
                                         roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
-                                        website: URL? = nil, // nils are to keep swiftlint happy
                                         portfolio: URL? = nil,
                                         thumbnail: URL) -> Row {
 
@@ -101,13 +95,15 @@ extension Members {
                 Group {
                     Text {
                         Link(
-                            fullName(givenName: givenName, infixName: infixName, familyName: familyName),
+                            fullName(givenName: photographer.givenName,
+                                     infixName: photographer.infixName,
+                                     familyName: photographer.familyName),
                             target: portfolio ??
                                     URL(string: MemberPortfolio.emptyPortfolioURL) ??
                                     URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
                         )
                             .linkStyle(.hover)
-                        if isDeceased {
+                        if photographer.isDeceased {
                             Badge("Overleden")
                                 .badgeStyle(.default)
                                 .role(.secondary)
@@ -129,17 +125,17 @@ extension Members {
                                       fotobond: fotobond)
             } .verticalAlignment(.middle)
 
-            if website == nil { // photographer's optional own website
+            if photographer.photographerWebsite == nil { // photographer's optional own website
                 Column { }
             } else {
                 Column {
                     Span(
                         Link( String(localized: "Web site",
                                      table: "HTML", comment: "Clickable link to photographer's web site"),
-                              target: website!.absoluteString)
+                              target: photographer.photographerWebsite!.absoluteString)
                             .linkStyle(.hover)
                     )
-                    .hint(text: website!.absoluteString)
+                    .hint(text: photographer.photographerWebsite!.absoluteString)
                 } .verticalAlignment(.middle)
             }
 
