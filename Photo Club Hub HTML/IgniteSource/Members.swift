@@ -39,7 +39,7 @@ struct Members: StaticPage {
         currentMembers = makeTableResult.table
         currentMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
         if showFormerMembers {
-            let makeTableResult = makeTable(former: false, moc: moc, club: club)
+            let makeTableResult = makeTable(former: true, moc: moc, club: club)
             formerMembersCount = makeTableResult.memberCount
             formerMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
             formerMembers = makeTableResult.table

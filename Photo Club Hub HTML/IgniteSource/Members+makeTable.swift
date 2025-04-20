@@ -31,10 +31,6 @@ extension Members {
                                                    ascending: true)
             let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_,
                                                    ascending: true)
-//            let headerCurrent = String(localized: "Member (years)",
-//                                       table: "HTML", comment: "HTML table header for years of membership column.")
-//            let headerFormer = String(localized: "Member (period)",
-//                                      table: "HTML", comment: "HTML table header for years of membership column.")
 
             let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
@@ -92,7 +88,7 @@ extension Members {
 
         return Row {
 
-            Column { // member name and badge for role
+            Column { // member name and role & status badges
                 Group {
                     Text {
                         Link(
@@ -121,7 +117,7 @@ extension Members {
                                               end: membershipEndDate,
                                               isFormer: isFormerMember(roles: roles),
                                               fotobond: fotobond)
-                    } .font(.body) .padding(.none) .margin(0)
+                    } .font(.body) .padding(.none) .margin(0) .foregroundStyle(.gray)
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
@@ -225,6 +221,7 @@ extension Members {
                                                     isFormer: Bool,
                                                     fotobond: Int?) -> Span {
         var years = TimeInterval(0)
+
         if start != nil {
             let end: Date = (end != nil) ? end! : Date.now // optional -> not optional
             let dateInterval = DateInterval(start: start!, end: end)
@@ -242,23 +239,27 @@ extension Members {
                                   table: "HTML",
                                   comment: "Shown in member table when start date unavailable"))
 
-        if isFormer == false { // a current member
+        if isFormer == false { // if current member, displays "Member for NN.N years"
             guard start != nil else { return unknown }
 
             currentMembersTotalYears += years
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let formattedStartDate = dateFormatter.string(from: start!)
-            return Span(formatYears(years))
+            return Span(String(localized: "Member for past \(formatYears(years)) years",
+                        table: "HTML",
+                        comment: "Membership duration for current members"))
                 .hint(text: String(localized:
                                    """
                                    From \(formattedStartDate)\(fotobondString)
                                    """,
                                    table: "HTML",
                                    comment: "Mouseover hint on cell containing start-end years"))
-        } else { // a former member
+        } else { // if current member, displays "Member from YYYYY to YYYY"
             formerMembersTotalYears += years
             guard end != nil && start != nil else { return unknown }
-            return Span("\(toYear(date: start!))-\(toYear(date: end!))")
+            return Span(String(localized: "Member from \(toYear(date: start!)) to \(toYear(date: end!))",
+                               table: "HTML",
+                               comment: "Membership duration for current members"))
                 .hint(text: String(localized:
                                    """
                                    From \(toYear(date: start!)) to \(toYear(date: end!)) (\(formatYears(years)) years)\

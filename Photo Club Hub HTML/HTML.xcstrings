@@ -130,6 +130,12 @@
     "Keywords" : {
       "comment" : "HTML table header for member's keywords.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keywords"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -138,38 +144,36 @@
         }
       }
     },
-    "Member (period)" : {
-      "comment" : "HTML table header for years of membership column.",
-      "extractionState" : "stale",
+    "Member for past %@ years" : {
+      "comment" : "Membership duration for current members",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Member (period)"
+            "value" : "Member for past %@ years"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jaren lid"
+            "value" : "Lid sedert %@ jaar"
           }
         }
       }
     },
-    "Member (years)" : {
-      "comment" : "HTML table header for years of membership column.",
-      "extractionState" : "stale",
+    "Member from %@ to %@" : {
+      "comment" : "Membership duration for current members",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Member (years)"
+            "state" : "new",
+            "value" : "Member from %1$@ to %2$@"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jaren lid"
+            "value" : "Lid van %1$@ tot %2$@"
           }
         }
       }
