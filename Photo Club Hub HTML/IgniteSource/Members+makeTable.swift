@@ -121,7 +121,7 @@ extension Members {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // duration of club membership
+            Column { // photographer's keywords
                 let localizedKeywordStrings = PhotographerKeyword.getAll(context: moc, photographer: photographer)
                 for localizedKeywordString in localizedKeywordStrings {
                     Text(localizedKeywordString)

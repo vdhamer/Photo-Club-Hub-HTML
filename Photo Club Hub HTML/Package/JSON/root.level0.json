@@ -30,20 +30,6 @@
         },
 
         {
-            "idString": "Experimental",
-            "name": [
-                { "language": "EN", "localizedString": "Experimental" },
-                { "language": "NL", "localizedString": "Experimenteel" }
-            ],
-            "optional": {
-                "usage":  [
-                    { "language": "EN", "localizedString": "Trying out something that is not cliche." },
-                    { "language": "NL", "localizedString": "De gebaande paden verlaten." }
-                ]
-            }
-        },
-
-        {
             "idString": "Black & White",
             "name": [
                 { "language": "EN", "localizedString": "Black & White" },
@@ -67,6 +53,20 @@
                 "usage":  [
                     { "language": "EN", "localizedString": "Images that represent a predetermined idea." },
                     { "language": "NL", "localizedString": "Beelden die een vantevoren gekozen idee uitbeelden." }
+                ]
+            }
+        },
+
+        {
+            "idString": "Experimental",
+            "name": [
+                { "language": "EN", "localizedString": "Experimental" },
+                { "language": "NL", "localizedString": "Experimenteel" }
+            ],
+            "optional": {
+                "usage":  [
+                    { "language": "EN", "localizedString": "Trying out something that is not cliche." },
+                    { "language": "NL", "localizedString": "De gebaande paden verlaten." }
                 ]
             }
         },
