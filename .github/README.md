@@ -67,7 +67,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 
  ✲ = _might be improved or supported in the future_
 
-## Used technologies
+## Technology stack
 
 | Technology           | Description                 |
 | -------------------- | --------------------------- |
