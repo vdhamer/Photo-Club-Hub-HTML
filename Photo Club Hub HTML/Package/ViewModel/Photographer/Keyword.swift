@@ -15,6 +15,8 @@ extension Keyword {
         fatalError("init() is not available. Use .findCreateUpdate instead.")
     }
 
+    // MARK: - getters and setters
+
     // `id` is persisted in CoreData as `id_` but has to be public because it is also used for the Identifiable protocol
     public var id: String {
         get {
@@ -39,7 +41,7 @@ extension Keyword {
                                              isStandard: Bool?, // nil means don't change existing value
                                              name: [JSON], // JSON equivalent of a dictionary with localized names
                                              usage: [JSON]
-                                            ) -> Keyword {
+    ) -> Keyword {
 
         // execute fetchRequest to get keyword object for id=id. Query could return multiple - but shouldn't.
         let fetchRequest: NSFetchRequest<Keyword> = Keyword.fetchRequest()
@@ -95,7 +97,7 @@ extension Keyword {
                                          id: String,
                                          name: [JSON], // array mapping languages to localizedNames
                                          usage: [JSON]
-                                        ) -> Keyword {
+    ) -> Keyword {
         findCreateUpdate(context: context, id: id, isStandard: true, name: name, usage: usage)
     }
 
@@ -105,7 +107,7 @@ extension Keyword {
                                             id: String,
                                             name: [JSON], // array mapping languages to localizedNames
                                             usage: [JSON]
-                                           ) -> Keyword {
+    ) -> Keyword {
         findCreateUpdate(context: context, id: id, isStandard: false, name: name, usage: usage)
     }
 
@@ -115,7 +117,7 @@ extension Keyword {
                                               id: String,
                                               name: [JSON], // array mapping languages to localizedNames
                                               usage: [JSON]
-                                             ) -> Keyword {
+    ) -> Keyword {
         findCreateUpdate(context: context, id: id, isStandard: nil, name: name, usage: usage)
     }
 
@@ -252,6 +254,41 @@ extension Keyword {
         }
 
         return keywords
+    }
+
+    var localizedKeywords: Set<LocalizedKeyword> {
+        (localizedKeywords_ as? Set<LocalizedKeyword>) ?? []
+    }
+
+    // Priority system to choose a Keyword's name in the appropriate language.
+    // The choice depends on the current language settings of the device, and on available translations.
+    var localizedKeyword: String {
+        // don't use Locale.current.language.languageCode because this only returns languages supported by the app
+        // first choice: accomodate user's language preferences according to Apple's Locale API
+        for lang in Locale.preferredLanguages {
+            let langID = lang.split(separator: "-").first?.uppercased() ?? "EN"
+            // now check if one of the user's preferences is available for this Remark
+            for localizedKeyword in localizedKeywords where localizedKeyword.language.isoCodeAllCaps == langID {
+                if localizedKeyword.name != nil {
+                    return localizedKeyword.name!
+                }
+            }
+        }
+
+        // second choice: most people speak English, at least let's pretend that is the case ;-)
+        for localizedKeyword in localizedKeywords where localizedKeyword.language.isoCodeAllCaps == "EN" {
+            if localizedKeyword.name != nil {
+                return localizedKeyword.name!
+            }
+        }
+
+        // third choice: use any translation available for this keyword
+        if localizedKeywords.first != nil, localizedKeywords.first!.name != nil {
+            return "\(localizedKeywords.first!.name!) [\(localizedKeywords.first!.language.isoCodeAllCaps)]"
+        }
+
+        // otherwise display the id used to identify language-independent keywords in Level2.json files
+        return self.id
     }
 
 }

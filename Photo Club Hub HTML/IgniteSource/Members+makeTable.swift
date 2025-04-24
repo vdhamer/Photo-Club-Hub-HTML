@@ -88,7 +88,7 @@ extension Members {
 
         return Row {
 
-            Column { // member name and role & status badges
+            Column { // member's name with any role & status badges
                 Group {
                     Text {
                         Link(
@@ -121,10 +121,10 @@ extension Members {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // duration of club membership
-                let localizedKeywordStrings = PhotographerKeyword.getAll(context: moc, photographer: photographer)
-                for localizedKeywordString in localizedKeywordStrings {
-                    Text(localizedKeywordString)
+            Column { // keywords associated with photographer
+                let photographerKeywords = photographer.photographerKeywords_ as? Set<PhotographerKeyword> ?? []
+                for photographerKeyword in localizeAndSort(set: photographerKeywords) {
+                    Text(photographerKeyword)
                         .padding(.none)
                         .margin(0)
                 }
@@ -161,6 +161,14 @@ extension Members {
             } .verticalAlignment(.middle)
 
         }
+    }
+
+    fileprivate func localizeAndSort(set: Set<PhotographerKeyword>) -> [String] {
+        var result: [String] = []
+        for photographerKeyword in set {
+            result.append(photographerKeyword.keyword_?.localizedKeyword ?? "?")
+        }
+        return result.sorted()
     }
 
     fileprivate func fullName(givenName: String,

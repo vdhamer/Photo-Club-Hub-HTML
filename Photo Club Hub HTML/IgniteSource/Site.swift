@@ -52,7 +52,7 @@ struct MemberSite: Site {
 
         self.moc = moc
 
-        let chosenClubIX: Int = 0  // roundabout way to avoid warnings about unused properties
+        let chosenClubIX: Int = 1  // roundabout way to avoid warnings about unused properties
         let clubs = [club0, club1, club2]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 

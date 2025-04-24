@@ -38,6 +38,12 @@
     "◼ %lld keywords defined" : {
       "comment" : "Count of keywords in database",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld keywords defined"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -49,6 +55,12 @@
     "◼ %lld keywords usages" : {
       "comment" : "Count of keyword usages in database",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld keywords usages"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",

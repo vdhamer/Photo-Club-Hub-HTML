@@ -17,13 +17,13 @@ struct MyTheme: Theme {
                 page.body
 
                 IgniteFooter() // "Created with Ignite"
-                UpdatedOnFooter()
+                TimeUpdatedFooter()
             }
         }
     }
 }
 
-struct UpdatedOnFooter: Component { // swiftlint doesn't want this one to be fileprivate, but it could be
+struct TimeUpdatedFooter: Component { // swiftlint doesn't want this one to be fileprivate, but it could be
 
     public func body(context: PublishingContext) -> [any PageElement] {
         let timezone = TimeZone.current
