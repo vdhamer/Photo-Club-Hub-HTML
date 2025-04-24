@@ -27,12 +27,14 @@ struct Members: StaticPage {
 
     fileprivate var moc: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
     fileprivate var club: Organization
+    fileprivate var clubFullNameTown: String // duplicates info in club, but String is sendable and Organization isn't
 
     // MARK: - init()
 
     init(moc: NSManagedObjectContext, club: Organization) {
         self.moc = moc
         self.club = club
+        self.clubFullNameTown = club.fullNameTown
 
         let makeTableResult = makeTable(former: false, moc: moc, club: club)
         currentMembersCount = makeTableResult.memberCount
@@ -54,8 +56,8 @@ struct Members: StaticPage {
         // MARK: - current members
 
         Text {
-            Badge(String(localized: "The \(currentMembersCount) current members",
-                         table: "HTML", comment: "Number of current members"))
+            Badge(String(localized: "Current members of \(clubFullNameTown)",
+                         table: "HTML", comment: "Title badge at top of HTML page"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }
@@ -69,12 +71,13 @@ struct Members: StaticPage {
         if currentMembersTotalYears > 0 && currentMembersCountWithStartDate > 0 {
             Alert {
                 Text {String(localized:
-                    """
-                    Average membership duration is \
-                    \(formatYears(currentMembersTotalYears/Double(currentMembersCountWithStartDate))) \
-                    years.
-                    """,
-                    table: "HTML", comment: "Table footnote showing average years of membership of all members."
+                             """
+                             Average membership duration for these \(currentMembersCount) club members is \
+                             \(formatYears(currentMembersTotalYears/Double(currentMembersCountWithStartDate))) \
+                             years.
+                             """,
+                             table: "HTML",
+                             comment: "Table footnote showing average years of membership of all members."
                 )} .horizontalAlignment(.center)
             }
             .margin(.top, .small)

@@ -59,19 +59,36 @@
         }
       }
     },
-    "Average membership duration is %@ years." : {
+    "Average membership duration for these %lld club members is %@ years." : {
       "comment" : "Table footnote showing average years of membership of all members.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Average membership duration is %@ years."
+            "value" : "Average membership duration for these %lld club members is %@ years."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Huidige leden zijn gemiddeld %@ jaar lid."
+            "value" : "Deze %lld club leden ware gemiddeld %@ jaren lid."
+          }
+        }
+      }
+    },
+    "Current members of %@" : {
+      "comment" : "Title badge at top of HTML page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current members of %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Huidige leden van %@"
           }
         }
       }
@@ -225,47 +242,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Portfolio"
-          }
-        }
-      }
-    },
-    "The %lld current members" : {
-      "comment" : "Number of current members",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "The %lld current member"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "new",
-                  "value" : "The %lld current members"
-                }
-              }
-            }
-          }
-        },
-        "nl" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Het huidig lid"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "De %lld huidige leden"
-                }
-              }
-            }
           }
         }
       }
