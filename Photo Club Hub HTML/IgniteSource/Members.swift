@@ -14,7 +14,7 @@ struct Members: StaticPage {
     let showFormerMembers: Bool = false // suppresses generating and showing table for former members
     let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
-    fileprivate var currentMembers = Table {} // init to empty table, then fill during init()
+    fileprivate var currentMembers = Table {} // initialite to empty table, then fill during init()
     fileprivate var formerMembers = Table {} // same story
     var currentMembersTotalYears: Double = 0 // updated in memberRow()
     var formerMembersTotalYears: Double = 0 // updated in memberRow()

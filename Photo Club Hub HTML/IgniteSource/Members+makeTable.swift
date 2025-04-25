@@ -42,7 +42,7 @@ extension Members {
             return MakeTableResult(
                 table: Table {
                     for member in memberPortfolios {
-                        memberRow(moc: moc,
+                        makeMemberRow(moc: moc,
                                   photographer: member.photographer,
                                   membershipStartDate: member.membershipStartDate,
                                   membershipEndDate: member.membershipEndDate,
@@ -75,14 +75,14 @@ extension Members {
 
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
-    fileprivate mutating func memberRow(moc: NSManagedObjectContext,
-                                        photographer: Photographer,
-                                        membershipStartDate: Date?, // nil means app didn't receive a start date
-                                        membershipEndDate: Date? = nil, // nil means photographer is still a member now
-                                        fotobond: Int? = nil,
-                                        roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
-                                        portfolio: URL? = nil,
-                                        thumbnail: URL) -> Row {
+    fileprivate mutating func makeMemberRow(moc: NSManagedObjectContext,
+                                            photographer: Photographer,
+                                            membershipStartDate: Date?, // nil means app didn't receive a start date
+                                            membershipEndDate: Date? = nil, // nil means photographer is still a member
+                                            fotobond: Int? = nil,
+                                            roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
+                                            portfolio: URL? = nil,
+                                            thumbnail: URL) -> Row {
 
         downloadThumbnailToLocal(downloadURL: thumbnail)
 
@@ -121,14 +121,8 @@ extension Members {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // keywords associated with photographer
-                let photographerKeywords = photographer.photographerKeywords_ as? Set<PhotographerKeyword> ?? []
-                for photographerKeyword in localizeAndSort(set: photographerKeywords) {
-                    Text(photographerKeyword)
-                        .padding(.none)
-                        .margin(0)
-                }
-            } .verticalAlignment(.middle)
+            Column(items: listPhotographerKeywords)
+                .verticalAlignment(.middle)
 
             if photographer.photographerWebsite == nil { // photographer's optional own website
                 Column { }
@@ -160,6 +154,19 @@ extension Members {
                     }
             } .verticalAlignment(.middle)
 
+        }
+
+        func listPhotographerKeywords() -> [PageElement] { // inside makeMemberRow to allow access to photographer
+            var result = [PageElement]()
+            let photographerKeywords = photographer.photographerKeywords_ as? Set<PhotographerKeyword> ?? []
+            for photographerKeyword in localizeAndSort(set: photographerKeywords) {
+                result.append(Text(photographerKeyword)
+                    .padding(.none)
+                    .margin(0)
+                    .hint(text: "Usage text shown here") // TODO
+                )
+            }
+            return result
         }
     }
 
