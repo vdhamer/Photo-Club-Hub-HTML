@@ -260,35 +260,37 @@ extension Keyword {
         (localizedKeywords_ as? Set<LocalizedKeyword>) ?? []
     }
 
-    // Priority system to choose a Keyword's name in the appropriate language.
-    // The choice depends on the current language settings of the device, and on available translations.
-    var localizedKeyword: String {
+    // Priority system to choose the most appropriate LocalizedKeyword for a given Keyword.
+    // The choice depends on available translations and the current language preferences set on the device.
+    var selectedLocalizedKeyword: LocalizedKeyword {
         // don't use Locale.current.language.languageCode because this only returns languages supported by the app
         // first choice: accomodate user's language preferences according to Apple's Locale API
         for lang in Locale.preferredLanguages {
             let langID = lang.split(separator: "-").first?.uppercased() ?? "EN"
             // now check if one of the user's preferences is available for this Remark
             for localizedKeyword in localizedKeywords where localizedKeyword.language.isoCodeAllCaps == langID {
-                if localizedKeyword.name != nil {
-                    return localizedKeyword.name!
-                }
+                return localizedKeyword
             }
         }
 
         // second choice: most people speak English, at least let's pretend that is the case ;-)
         for localizedKeyword in localizedKeywords where localizedKeyword.language.isoCodeAllCaps == "EN" {
-            if localizedKeyword.name != nil {
-                return localizedKeyword.name!
-            }
+            return localizedKeyword
         }
 
-        // third choice: use any translation available for this keyword
-        if localizedKeywords.first != nil, localizedKeywords.first!.name != nil {
-            return "\(localizedKeywords.first!.name!) [\(localizedKeywords.first!.language.isoCodeAllCaps)]"
+        // third choice: use arbitrary (first) translation available for this keyword
+        if localizedKeywords.first != nil {
+            return localizedKeywords.first!
         }
 
         // otherwise display the id used to identify language-independent keywords in Level2.json files
-        return self.id
+        let viewContext = PersistenceController.shared.container.viewContext // not sure about this
+        return LocalizedKeyword.findCreateUpdate(context: viewContext,
+                                                 keyword: self,
+                                                 language: Language.findCreateUpdate(context: viewContext,
+                                                                                     isoCode: "EN"),
+                                                 localizedName: self.id,
+                                                 localizedUsage: nil)
     }
 
 }
