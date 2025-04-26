@@ -7,13 +7,6 @@
 
 import CoreData // for NSManagedObjectContext
 
-extension LocalizedKeyword: Comparable {
-    public static func < (lhs: LocalizedKeyword, rhs: LocalizedKeyword) -> Bool {
-        guard lhs.name != nil, rhs.name != nil else { return true }
-        return lhs.name! < rhs.name!
-    }
-}
-
 extension LocalizedKeyword {
 
     @available(*, unavailable)

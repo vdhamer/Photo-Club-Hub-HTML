@@ -156,33 +156,49 @@ extension Members {
 
         }
 
-        func listPhotographerKeywords() -> [PageElement] { // inside makeMemberRow to allow access to photographer
+        func listPhotographerKeywords() -> [PageElement] { // defined inside makeMemberRow to get access to photographer
             var result = [PageElement]()
-            let photographerKeywords = photographer.photographerKeywords_ as? Set<PhotographerKeyword> ?? []
-            for localizedKeyword in localizeAndSort(set: photographerKeywords) where localizedKeyword.name != nil {
-                if localizedKeyword.usage != nil {
-                    result.append(Text(localizedKeyword.name!)
+
+            for localizedKeywordResult: LocalizedKeywordResult in localizeAndSort(photographer.photographerKeywords) {
+                let localizedKeywordString: String
+                let localizedKeywordUsage: String? // usage String is optional for a LocalizedKeyword struct
+                // swiftlint:disable:next line_length
+                if localizedKeywordResult.localizedKeyword != nil, localizedKeywordResult.localizedKeyword!.name != nil {
+                    localizedKeywordString = localizedKeywordResult.localizedKeyword!.name!
+                    localizedKeywordUsage = localizedKeywordResult.localizedKeyword!.usage // may be nil
+                } else { // use keyword.id if the keyword has no translations are available
+                    localizedKeywordString = "(" + localizedKeywordResult.id + ")" // "()" indicates unofficial keyword
+                    localizedKeywordUsage = String(localized: "Unofficial keyword. It has no translations yet.", // hint
+                                                   table: "HTML", comment: "Hint for keyword without localization")
+                }
+
+                if localizedKeywordUsage != nil {
+                    result.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
                         .padding(.none)
                         .margin(0)
-                        .hint(text: "\(localizedKeyword.usage!)")
+                        .hint(text: localizedKeywordUsage!)
                     )
-                } else { // no usage string so no hint
-                    result.append(Text(localizedKeyword.name!)
+                } else { // omit hint if there is no usage string provided
+                   result.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
                         .padding(.none)
                         .margin(0)
                     )
                 }
             }
+
             return result
         }
+
     }
 
-    fileprivate func localizeAndSort(set: Set<PhotographerKeyword>) -> [LocalizedKeyword] {
-        var result: [LocalizedKeyword] = []
-        for photographerKeyword in set where photographerKeyword.keyword_ != nil {
-            result.append(photographerKeyword.keyword_!.selectedLocalizedKeyword)
+    fileprivate func localizeAndSort(_ photographerkeywords: Set<PhotographerKeyword>) -> [LocalizedKeywordResult] {
+        var result = [LocalizedKeywordResult]()
+
+        for photographerKeyword in photographerkeywords where photographerKeyword.keyword_ != nil {
+            result.append(photographerKeyword.keyword_!.selectedLocalizedKeyword) // localize
         }
-        return result.sorted()
+
+        return result.sorted() // sort
     }
 
     fileprivate func fullName(givenName: String,

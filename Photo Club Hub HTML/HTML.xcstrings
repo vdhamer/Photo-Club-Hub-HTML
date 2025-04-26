@@ -263,6 +263,23 @@
         }
       }
     },
+    "Unofficial keyword. It has no translations yet." : {
+      "comment" : "Hint for keyword without localization",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unofficial keyword. It has no translations yet."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dit is nog geen officieel trefwoord, en heeft geen vertalingen."
+          }
+        }
+      }
+    },
     "Web site" : {
       "comment" : "Clickable link to photographer's web site",
       "localizations" : {

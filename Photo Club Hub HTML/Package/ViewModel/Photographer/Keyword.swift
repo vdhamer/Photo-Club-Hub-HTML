@@ -262,35 +262,28 @@ extension Keyword {
 
     // Priority system to choose the most appropriate LocalizedKeyword for a given Keyword.
     // The choice depends on available translations and the current language preferences set on the device.
-    var selectedLocalizedKeyword: LocalizedKeyword {
+    var selectedLocalizedKeyword: LocalizedKeywordResult {
         // don't use Locale.current.language.languageCode because this only returns languages supported by the app
         // first choice: accomodate user's language preferences according to Apple's Locale API
         for lang in Locale.preferredLanguages {
             let langID = lang.split(separator: "-").first?.uppercased() ?? "EN"
             // now check if one of the user's preferences is available for this Remark
             for localizedKeyword in localizedKeywords where localizedKeyword.language.isoCodeAllCaps == langID {
-                return localizedKeyword
+                return LocalizedKeywordResult(localizedKeyword: localizedKeyword, id: self.id)
             }
         }
 
         // second choice: most people speak English, at least let's pretend that is the case ;-)
         for localizedKeyword in localizedKeywords where localizedKeyword.language.isoCodeAllCaps == "EN" {
-            return localizedKeyword
+            return LocalizedKeywordResult(localizedKeyword: localizedKeyword, id: self.id)
         }
 
         // third choice: use arbitrary (first) translation available for this keyword
         if localizedKeywords.first != nil {
-            return localizedKeywords.first!
+            return LocalizedKeywordResult(localizedKeyword: localizedKeywords.first!, id: self.id)
         }
 
-        // otherwise display the id used to identify language-independent keywords in Level2.json files
-        let viewContext = PersistenceController.shared.container.viewContext // not sure about this
-        return LocalizedKeyword.findCreateUpdate(context: viewContext,
-                                                 keyword: self,
-                                                 language: Language.findCreateUpdate(context: viewContext,
-                                                                                     isoCode: "EN"),
-                                                 localizedName: self.id,
-                                                 localizedUsage: nil)
+        return LocalizedKeywordResult(localizedKeyword: nil, id: self.id)
     }
 
 }
