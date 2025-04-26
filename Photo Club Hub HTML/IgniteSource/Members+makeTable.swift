@@ -158,21 +158,23 @@ extension Members {
 
         func listPhotographerKeywords() -> [PageElement] { // inside makeMemberRow to allow access to photographer
             var result = [PageElement]()
+
             let photographerKeywords = photographer.photographerKeywords_ as? Set<PhotographerKeyword> ?? []
-            for localizedKeyword in localizeAndSort(set: photographerKeywords) where localizedKeyword.name != nil {
+            for localizedKeyword in localizeAndSort(set: photographerKeywords) {
                 if localizedKeyword.usage != nil {
-                    result.append(Text(localizedKeyword.name!)
+                    result.append(Text(localizedKeyword.name)
                         .padding(.none)
                         .margin(0)
                         .hint(text: "\(localizedKeyword.usage!)")
                     )
                 } else { // no usage string so no hint
-                    result.append(Text(localizedKeyword.name!)
+                    result.append(Text(localizedKeyword.name)
                         .padding(.none)
                         .margin(0)
                     )
                 }
             }
+
             return result
         }
     }
