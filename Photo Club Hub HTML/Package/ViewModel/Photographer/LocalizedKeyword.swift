@@ -7,6 +7,12 @@
 
 import CoreData // for NSManagedObjectContext
 
+extension LocalizedKeyword: Comparable {
+    public static func < (lhs: LocalizedKeyword, rhs: LocalizedKeyword) -> Bool {
+        return lhs.name < rhs.name
+    }
+}
+
 extension LocalizedKeyword {
 
     @available(*, unavailable)
@@ -15,6 +21,19 @@ extension LocalizedKeyword {
     }
 
     // MARK: - getters (setting is done via findCreateUpdate)
+
+    var name: String {
+        get {
+            if let name = name_ {
+                return name
+            } else {
+                fatalError("Error because LocalizedKeyword.name_ is nil") // something is really wrong if this happens
+            }
+        }
+        set {
+            name_ = newValue
+        }
+    }
 
     var keyword: Keyword { // getter
         if let keyword = keyword_ {
@@ -39,8 +58,8 @@ extension LocalizedKeyword {
     static func findCreateUpdate(context: NSManagedObjectContext, // can be foreground or background context
                                  keyword: Keyword,
                                  language: Language,
-                                 localizedName: String?,
-                                 localizedUsage: String?
+                                 localizedName: String?, // nil used if no update to LocalizedKeyword.name is desired
+                                 localizedUsage: String? // mil used if no value of LocalizedKeyword.usage is available
                                 ) -> LocalizedKeyword {
 
         // execute fetchRequest to get keyword object for id=id. Query could return multiple keywords - but shouldn't.
@@ -87,7 +106,9 @@ extension LocalizedKeyword {
         } else {
             let entity = NSEntityDescription.entity(forEntityName: "LocalizedKeyword", in: context)!
             let localizedKeyword = LocalizedKeyword(entity: entity, insertInto: context)
-            localizedKeyword.name = localizedName // immediately set it to a non-nil value
+            if localizedName != nil {
+                localizedKeyword.name = localizedName!
+            }
             localizedKeyword.keyword_ = keyword
             localizedKeyword.language_ = language
             _ = localizedKeyword.update(context: context, localizedName: localizedName, localizedUsage: localizedUsage)
