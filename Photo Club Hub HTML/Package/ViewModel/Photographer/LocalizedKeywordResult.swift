@@ -17,9 +17,7 @@ extension LocalizedKeywordResult: Comparable {
     static func < (lhs: LocalizedKeywordResult, rhs: LocalizedKeywordResult) -> Bool {
         guard lhs.localizedKeyword != nil else { return false } // put untranslateable at end of list
         guard rhs.localizedKeyword != nil else { return true } // put untranslateable at end of list
-        guard lhs.localizedKeyword!.name != nil else {return Bool.random()} // to protect < function. Shouldn't happen.
-        guard rhs.localizedKeyword!.name != nil else {return Bool.random()} // to protect < function. Shouldn't happen.
-        return lhs.localizedKeyword!.name! < rhs.localizedKeyword!.name! // normal sorting
+        return lhs.localizedKeyword!.name < rhs.localizedKeyword!.name // normal sorting
     }
 
 }

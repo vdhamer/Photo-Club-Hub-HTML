@@ -162,9 +162,8 @@ extension Members {
             for localizedKeywordResult: LocalizedKeywordResult in localizeAndSort(photographer.photographerKeywords) {
                 let localizedKeywordString: String
                 let localizedKeywordUsage: String? // usage String is optional for a LocalizedKeyword struct
-                // swiftlint:disable:next line_length
-                if localizedKeywordResult.localizedKeyword != nil, localizedKeywordResult.localizedKeyword!.name != nil {
-                    localizedKeywordString = localizedKeywordResult.localizedKeyword!.name!
+                if localizedKeywordResult.localizedKeyword != nil {
+                    localizedKeywordString = localizedKeywordResult.localizedKeyword!.name
                     localizedKeywordUsage = localizedKeywordResult.localizedKeyword!.usage // may be nil
                 } else { // use keyword.id if the keyword has no translations are available
                     localizedKeywordString = "(" + localizedKeywordResult.id + ")" // "()" indicates unofficial keyword
