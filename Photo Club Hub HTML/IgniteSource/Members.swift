@@ -26,7 +26,7 @@ struct Members: StaticPage {
     let dateFormatter = DateFormatter()
 
     fileprivate var moc: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-    // is code for this moc executed via perform() or performAndWait() ? TODO
+    // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
     fileprivate var club: Organization
     fileprivate var clubFullNameTown: String // duplicates info in club, but String is sendable and Organization isn't
 
