@@ -71,19 +71,15 @@ extension LocalizedKeyword {
         do {
             localizedKeywords = try context.fetch(fetchRequest)
         } catch {
-            ifDebugFatalError("""
-                              Failed to fetch LocalizedKeyword for \(keyword.id) \
-                              in language \(language.isoCodeAllCaps): \(error)
-                              """,
+            ifDebugFatalError("Failed to fetch LocalizedKeyword for \(keyword.id) " +
+                              "in language \(language.isoCodeAllCaps): \(error)",
                               file: #fileID, line: #line) // on non-Debug version, continue with empty `keywords` array
         }
 
         // are there multiple translations of the keyword into the same language? This shouldn't be the case.
         if localizedKeywords.count > 1 { // there is actually a Core Data constraint to prevent this
-            ifDebugFatalError("""
-                              Query returned multiple (\(localizedKeywords.count)) translations \
-                              of Keyword \(keyword.id) into \(language.isoCodeAllCaps)
-                              """,
+            ifDebugFatalError("Query returned multiple (\(localizedKeywords.count)) translations " +
+                              "of Keyword \(keyword.id) into \(language.isoCodeAllCaps)",
                               file: #fileID, line: #line)
             // in release mode, log that there are multiple clubs, but continue using the first one.
         }
@@ -96,10 +92,8 @@ extension LocalizedKeyword {
                       \(language.isoCodeAllCaps) as \(localizedName ?? "nil")
                       """)
                 LocalizedKeyword.save(context: context, errorText:
-                                      """
-                                      Could not update LocalizedKeyword for \"\(localizedKeyword.keyword.id)\" \
-                                      for language \(localizedKeyword.language.isoCodeAllCaps)
-                                      """,
+                                      "Could not update LocalizedKeyword for \"\(localizedKeyword.keyword.id)\" " +
+                                      "for language \(localizedKeyword.language.isoCodeAllCaps)",
                                       if: Settings.extraCoreDataSaves)
             }
             return localizedKeyword
