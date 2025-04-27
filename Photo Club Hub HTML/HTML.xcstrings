@@ -71,7 +71,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze %lld club leden ware gemiddeld %@ jaren lid."
+            "value" : "Deze %lld club leden waren gemiddeld %@ jaren lid."
           }
         }
       }
