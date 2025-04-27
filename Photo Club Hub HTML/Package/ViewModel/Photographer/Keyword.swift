@@ -41,7 +41,7 @@ extension Keyword {
                                              isStandard: Bool?, // nil means don't change existing value
                                              name: [JSON], // JSON equivalent of a dictionary with localized names
                                              usage: [JSON]
-    ) -> Keyword {
+                                            ) -> Keyword {
 
         // execute fetchRequest to get keyword object for id=id. Query could return multiple - but shouldn't.
         let fetchRequest: NSFetchRequest<Keyword> = Keyword.fetchRequest()
@@ -97,7 +97,7 @@ extension Keyword {
                                          id: String,
                                          name: [JSON], // array mapping languages to localizedNames
                                          usage: [JSON]
-    ) -> Keyword {
+                                        ) -> Keyword {
         findCreateUpdate(context: context, id: id, isStandard: true, name: name, usage: usage)
     }
 
@@ -107,7 +107,7 @@ extension Keyword {
                                             id: String,
                                             name: [JSON], // array mapping languages to localizedNames
                                             usage: [JSON]
-    ) -> Keyword {
+                                           ) -> Keyword {
         findCreateUpdate(context: context, id: id, isStandard: false, name: name, usage: usage)
     }
 
@@ -117,7 +117,7 @@ extension Keyword {
                                               id: String,
                                               name: [JSON], // array mapping languages to localizedNames
                                               usage: [JSON]
-    ) -> Keyword {
+                                             ) -> Keyword {
         findCreateUpdate(context: context, id: id, isStandard: nil, name: name, usage: usage)
     }
 

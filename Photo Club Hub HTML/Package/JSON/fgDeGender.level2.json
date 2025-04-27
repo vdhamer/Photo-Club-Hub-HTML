@@ -58,7 +58,8 @@
                 "membershipStartDate": "2022-11-17",
                 "nlSpecific": {
                     "fotobondNumber": 1620108
-                }
+                },
+                "keywords": [ "Travel"]
             }
         },
 
@@ -85,10 +86,12 @@
                 "familyName": "Kars"
             },
             "optional": {
+                "membershipStartDate": "2025-04-14",
                 "level3URL": "http://www.vdhamer.com/fgDeGender/Annet_Kars/",
                 "status": {
-                    "isProspectiveMember": true
-                }
+                    "isProspectiveMember": false
+                },
+                "keywords": [ "Bird" ]
             }
         },
 
@@ -109,7 +112,8 @@
                 "membershipEndDate": "2025-03-31",
                 "nlSpecific": {
                     "fotobondNumber": 1620040
-                }
+                },
+                "keywords": [ "Architecture", "Minimal" ]
             }
         },
 
@@ -124,7 +128,7 @@
                 "website": "https://glass.photo/jerdam",
                 "level3URL": "http://www.vdhamer.com/fgDeGender/Bettina_de_Graaf/",
                 "membershipStartDate": "2024-01-01",
-                "keywords": [ "Portrait", "Street", "Travel" ],
+                "keywords": [ "Portrait", "Street", "Concert" ],
                 "nlSpecific": {
                     "fotobondNumber": 1620111
                 }
@@ -179,7 +183,8 @@
                 "membershipStartDate": "2019-09-22",
                 "nlSpecific": {
                     "fotobondNumber": 1620099
-                }
+                },
+                "keywords": [ "Street" ]
             }
         },
 
@@ -232,7 +237,7 @@
                     "isFormerMember": true
                 },
                 "membershipStartDate": "2015-01-01",
-                "membershipStartDate": "2025-03-31",
+                "membershipEndDate": "2025-03-31",
                 "nlSpecific": {
                     "fotobondNumber": 1620087
                 }
@@ -353,7 +358,7 @@
                     "isOther": false
                 },
                 "membershipStartDate": "2005-01-01",
-                "keywords": [ "Macro", "Panorama" ],
+                "keywords": [ "Macro", "Panorama", "Experimental" ],
                 "nlSpecific": {
                     "fotobondNumber": 1620064
                 }
@@ -399,7 +404,8 @@
                 "membershipEndDate": "2024-12-31",
                 "nlSpecific": {
                     "fotobondNumber": 1620079
-                }
+                },
+                "keywords": [ "Portrait" ]
             }
         },
 
@@ -434,7 +440,8 @@
                 "membershipEndDate": "2024-12-31",
                 "nlSpecific": {
                     "fotobondNumber": 1620008
-                }
+                },
+                "keywords": [ "Experimental", "Postprocessing" ]
             }
         },
 
@@ -558,7 +565,8 @@
                 "membershipStartDate": "2008-04-01",
                 "nlSpecific": {
                     "fotobondNumber": 1620076
-                }
+                },
+                "keywords": [ "Experimental" ]
             }
         },
 
@@ -605,7 +613,8 @@
                 "membershipStartDate": "2017-10-23",
                 "nlSpecific": {
                     "fotobondNumber": 1620093
-                }
+                },
+                "keywords": [ "Conceptual", "Postprocessing" ]
             }
         },
 
@@ -622,7 +631,8 @@
                 "membershipStartDate": "2014-12-01",
                 "nlSpecific": {
                     "fotobondNumber": 1620085
-                }
+                },
+                "keywords": [ "Landscape", "Postprocessing", "Conceptual" ]
             }
         },
 
@@ -653,7 +663,8 @@
                 "membershipStartDate": "1996-01-01",
                 "nlSpecific": {
                     "fotobondNumber": 1620038
-                }
+                },
+                "keywords": [ "Travel" ]
             }
         },
 
@@ -669,7 +680,8 @@
                 "membershipStartDate": "2009-04-01",
                 "nlSpecific": {
                     "fotobondNumber": 1620078
-                }
+                },
+                "keywords": [ "Portrait" ]
             }
         },
 
@@ -680,10 +692,12 @@
                 "familyName": "Kars"
             },
             "optional": {
+                "membershipStartDate": "2025-04-14",
                 "level3URL": "http://www.vdhamer.com/fgDeGender/Willem_Kars/",
                 "status": {
-                    "isProspectiveMember": true
-                }
+                    "isProspectiveMember": false
+                },
+                "keywords": [ "Bird" ]
             }
         },
 
@@ -716,7 +730,7 @@
                     "isTreasurer": true
                 },
                 "membershipStartDate": "2022-10-23",
-                "keywords": [ "Experimental" ],
+                "keywords": [ "Experimental", "Travel" ],
                 "nlSpecific": {
                     "fotobondNumber": 1620105
                 }
