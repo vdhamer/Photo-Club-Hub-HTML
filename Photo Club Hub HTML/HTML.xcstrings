@@ -139,7 +139,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lid sedert %1$@%2$@"
+            "value" : "Lid sinds %1$@%2$@"
           }
         }
       }
@@ -173,7 +173,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lid sedert %@ jaar"
+            "value" : "Lid sinds %@ jaar"
           }
         }
       }
@@ -258,7 +258,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze ex-leden waren gemiddeld %@ jaar lid."
+            "value" : "Deze ex-leden zijn gemiddeld %@ jaar lid."
           }
         }
       }
