@@ -163,10 +163,12 @@ extension Members {
                 let localizedKeywordString: String
                 let localizedKeywordUsage: String? // usage String is optional for a LocalizedKeyword struct
                 if localizedKeywordResult.localizedKeyword != nil {
-                    localizedKeywordString = localizedKeywordResult.localizedKeyword!.name
+                    localizedKeywordString = localizedKeywordResult.localizedKeyword!.name +
+                                             localizedKeywordResult.delimiterToAppend
                     localizedKeywordUsage = localizedKeywordResult.localizedKeyword!.usage // may be nil
                 } else { // use keyword.id if the keyword has no translations are available
-                    localizedKeywordString = "(" + localizedKeywordResult.id + ")" // "()" indicates unofficial keyword
+                    localizedKeywordString = "(" + localizedKeywordResult.id + ")" + // "()" is for unofficial keywords
+                                             localizedKeywordResult.delimiterToAppend
                     localizedKeywordUsage = String(localized: "Unofficial keyword. It has no translations yet.", // hint
                                                    table: "HTML", comment: "Hint for keyword without localization")
                 }
@@ -191,13 +193,31 @@ extension Members {
     }
 
     fileprivate func localizeAndSort(_ photographerkeywords: Set<PhotographerKeyword>) -> [LocalizedKeywordResult] {
-        var result = [LocalizedKeywordResult]()
-
+        // translate keywords to appropriate language and make elements non-optional
+        var result1 = [LocalizedKeywordResult]()
         for photographerKeyword in photographerkeywords where photographerKeyword.keyword_ != nil {
-            result.append(photographerKeyword.keyword_!.selectedLocalizedKeyword) // localize
+            result1.append(photographerKeyword.keyword_!.selectedLocalizedKeyword)
         }
 
-        return result.sorted() // sort
+        // sort based on selected language.  Has some special behavior for keywords without translation
+        let result2: [LocalizedKeywordResult] = result1.sorted()
+        let maxCount2 = result2.count // for ["keywordA", "keywordB", "keywordC"] maxCount is 3
+
+        // insert delimeters where needed
+        var result3: [LocalizedKeywordResult] = [] // start with empty list
+        var count: Int = 0
+        for item in result2 {
+            count += 1
+            if count < maxCount2 { // turn this into ["keywordA,", "keywordB,", "keywordC"]
+                result3.append(item) // accept appending "," to item
+            } else {
+                result3.append(LocalizedKeywordResult(localizedKeyword: item.localizedKeyword,
+                                                                    id: item.id,
+                                                                    delimiterToAppend: ""))
+            }
+        }
+
+        return result3
     }
 
     fileprivate func fullName(givenName: String,
