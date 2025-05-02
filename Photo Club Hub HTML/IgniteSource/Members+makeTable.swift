@@ -159,25 +159,31 @@ extension Members {
         func listPhotographerKeywords() -> [PageElement] { // defined inside makeMemberRow to get access to photographer
             var result = [PageElement]()
 
-            for localizedKeywordResult: LocalizedKeywordResult in localizeAndSort(photographer.photographerKeywords) {
+            for localizedKeywordResult: LocalizedKeywordResult in localizeAndSort(moc: moc,
+                                                                                  photographer.photographerKeywords) {
                 let localizedKeywordString: String
-                let localizedKeywordUsage: String? // usage String is optional for a LocalizedKeyword struct
+                let localizedKeywordHint: String? // usage String is optional for a LocalizedKeyword struct
                 if localizedKeywordResult.localizedKeyword != nil {
                     localizedKeywordString = localizedKeywordResult.localizedKeyword!.name +
                                              localizedKeywordResult.delimiterToAppend
-                    localizedKeywordUsage = localizedKeywordResult.localizedKeyword!.usage // may be nil
+                    localizedKeywordHint = localizedKeywordResult.localizedKeyword!.usage // may be nil
                 } else { // use keyword.id if the keyword has no translations are available
                     localizedKeywordString = "(" + localizedKeywordResult.id + ")" + // "()" is for unofficial keywords
                                              localizedKeywordResult.delimiterToAppend
-                    localizedKeywordUsage = String(localized: "Unofficial keyword. It has no translations yet.", // hint
-                                                   table: "HTML", comment: "Hint for keyword without localization")
+                    if localizedKeywordResult.customHint == nil {
+                        localizedKeywordHint = String(localized: "Unofficial keyword. It has no translations yet.",
+                                                       table: "HTML", comment: "Hint for keyword without localization")
+                    } else {
+                        localizedKeywordHint = localizedKeywordResult.customHint // special overrule of mouseover
+                    }
+
                 }
 
-                if localizedKeywordUsage != nil {
+                if localizedKeywordHint != nil {
                     result.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
                         .padding(.none)
                         .margin(0)
-                        .hint(text: localizedKeywordUsage!)
+                        .hint(text: localizedKeywordHint!)
                     )
                 } else { // omit hint if there is no usage string provided
                    result.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
@@ -192,19 +198,20 @@ extension Members {
 
     }
 
-    fileprivate func localizeAndSort(_ photographerkeywords: Set<PhotographerKeyword>) -> [LocalizedKeywordResult] {
-        // translate keywords to appropriate language and make elements non-optional
+    fileprivate func localizeAndSort(moc: NSManagedObjectContext,
+                                     _ photographerkeywords: Set<PhotographerKeyword>) -> [LocalizedKeywordResult] {
+        // first translate keywords to appropriate language and make elements non-optional
         var result1 = [LocalizedKeywordResult]()
         for photographerKeyword in photographerkeywords where photographerKeyword.keyword_ != nil {
             result1.append(photographerKeyword.keyword_!.selectedLocalizedKeyword)
         }
 
-        // sort based on selected language.  Has some special behavior for keywords without translation
+        // then dsort based on selected language.  Has some special behavior for keywords without translation
         let result2: [LocalizedKeywordResult] = result1.sorted()
         let maxCount2 = result2.count // for ["keywordA", "keywordB", "keywordC"] maxCount is 3
 
         // insert delimeters where needed
-        var result3: [LocalizedKeywordResult] = [] // start with empty list
+        var result3 = [LocalizedKeywordResult]() // start with empty list
         var count: Int = 0
         for item in result2 {
             count += 1
@@ -212,12 +219,43 @@ extension Members {
                 result3.append(item) // accept appending "," to item
             } else {
                 result3.append(LocalizedKeywordResult(localizedKeyword: item.localizedKeyword,
-                                                                    id: item.id,
-                                                                    delimiterToAppend: ""))
+                                                      id: item.id,
+                                                      delimiterToAppend: ""))
             }
         }
 
-        return result3
+        // limit size to 3 displayed keywords
+        if result3.count <= 3 { return result3 } // no clipping needed
+        var result4 = [LocalizedKeywordResult]()
+        for index in 0...2 {
+            result4.append(result3[index]) // copy the (aphabetically) first three LocalizedKeywordResult elements
+        }
+        let moreKeyword = Keyword.findCreateUpdateStandard(context: moc,
+                                                           id: String(localized: "Too many keywords", table: "HTML",
+                                                                      comment: "Shown if photographer has >3 keywords"),
+                                                           name: [],
+                                                           usage: [])
+        let moreLocalizedKeyword: LocalizedKeywordResult = moreKeyword.selectedLocalizedKeyword
+        result4.append(LocalizedKeywordResult(localizedKeyword: moreLocalizedKeyword.localizedKeyword,
+                                              id: moreKeyword.id,
+                                              delimiterToAppend: "", // no comma
+                                              customHint: customHint(localizedKeywordResults: result3)))
+
+        return result4
+    }
+
+    fileprivate func customHint(localizedKeywordResults: [LocalizedKeywordResult]) -> String {
+        var hint: String = ""
+
+        for localizedKeywordResult in localizedKeywordResults {
+            if localizedKeywordResult.localizedKeyword != nil {
+                hint.append(localizedKeywordResult.localizedKeyword!.name + ", ")
+            } else {
+                hint.append(localizedKeywordResult.id + ", ")
+            }
+        }
+
+        return hint.trimmingCharacters(in: CharacterSet(charactersIn: ", "))
     }
 
     fileprivate func fullName(givenName: String,

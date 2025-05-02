@@ -263,6 +263,23 @@
         }
       }
     },
+    "Too many keywords" : {
+      "comment" : "Shown if photographer has >3 keywords",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Too many keywords"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teveel trefwoorden"
+          }
+        }
+      }
+    },
     "Unofficial keyword. It has no translations yet." : {
       "comment" : "Hint for keyword without localization",
       "localizations" : {
