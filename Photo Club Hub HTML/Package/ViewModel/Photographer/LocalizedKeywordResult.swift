@@ -1,6 +1,6 @@
 //
 //  LocalizedKeywordResult.swift
-//  Photo Club Hub HTML
+//  Photo Club Hub HTML (struct currently only used by Photo Club Hub HTML)
 //
 //  Created by Peter van den Hamer on 26/04/2025.
 //
