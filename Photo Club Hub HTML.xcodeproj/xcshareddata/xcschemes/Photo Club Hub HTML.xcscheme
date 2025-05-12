@@ -49,6 +49,17 @@
                ReferencedContainer = "container:Photo Club Hub HTML.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D05E36782DD252C5005697AC"
+               BuildableName = "Photo Club Hub DataTests.xctest"
+               BlueprintName = "Photo Club Hub DataTests"
+               ReferencedContainer = "container:Photo Club Hub HTML.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
