@@ -17,7 +17,7 @@
 		D099D0E12DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C912CE927D00054F87B /* Ignite */; };
 		D099D0E22DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0DD92CEBD7B900EFBE87 /* Ignite */; };
 		D099D0E32DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0EB12CEBDD6A00EFBE87 /* Ignite */; };
-		D099D0E42DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0EB42CEBDE3500EFBE87 /* Ignite */; };
+		D099D0E42DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0EB42CEBDE3500EFBE87 /* Ignite */; settings = {ATTRIBUTES = (Required, ); }; };
 		D09D24EE2DD3FADD00355740 /* Photo Club Hub Data in Frameworks */ = {isa = PBXBuildFile; productRef = D09D24ED2DD3FADD00355740 /* Photo Club Hub Data */; };
 		D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C942CE928650054F87B /* SwiftyJSON */; };
 		D0AD0F8D2CEBE0F500EFBE87 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0F8C2CEBE0F500EFBE87 /* Ignite */; };
@@ -364,6 +364,7 @@
 				D04353FC2CE9268800B08C31 /* XCRemoteSwiftPackageReference "SwiftImageReadWrite" */,
 				D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				D0AD0F8B2CEBE0F500EFBE87 /* XCLocalSwiftPackageReference "../../Ignite" */,
+				D0E1CC9D2DD4D7660031E468 /* XCLocalSwiftPackageReference "../Photo Club Hub/Photo Club Hub Data" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D0E06C112C8C5ABC0025734B /* Products */;
@@ -908,6 +909,10 @@
 		D0AD0F8B2CEBE0F500EFBE87 /* XCLocalSwiftPackageReference "../../Ignite" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../Ignite;
+		};
+		D0E1CC9D2DD4D7660031E468 /* XCLocalSwiftPackageReference "../Photo Club Hub/Photo Club Hub Data" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../Photo Club Hub/Photo Club Hub Data";
 		};
 /* End XCLocalSwiftPackageReference section */
 
