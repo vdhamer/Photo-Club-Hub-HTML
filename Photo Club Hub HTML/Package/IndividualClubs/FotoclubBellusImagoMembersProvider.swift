@@ -7,6 +7,7 @@
 
 import CoreData // for PersistenceController
 import CoreLocation // for CLLocationCoordinate2DMake
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 class FotoclubBellusImagoMembersProvider {
 

@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 extension OrganizationType {
 

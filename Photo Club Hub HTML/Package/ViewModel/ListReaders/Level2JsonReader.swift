@@ -9,6 +9,7 @@
 import CoreData // for NSManagedObjectContext
 import CoreLocation // for CLLocationCoordinate2D
 import SwiftyJSON // for JSON struct
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 // see xampleMin.level2.json and xampleMax.level2.json for syntax examples
 

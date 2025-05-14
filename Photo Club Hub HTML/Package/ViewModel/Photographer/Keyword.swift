@@ -7,6 +7,7 @@
 
 import CoreData // for NSManagedObjectContext
 import SwiftyJSON // for JSON()
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 extension Keyword {
 
