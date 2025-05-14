@@ -6,6 +6,7 @@
 //
 
 import CoreData // for NSFetchRequest and NSManagedObjectContext
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 extension LocalizedRemark { // expose computed properties (some related to handling optionals)
 

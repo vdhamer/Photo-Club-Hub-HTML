@@ -6,6 +6,7 @@
 //
 
 import CoreData // for NSManagedObject
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 @MainActor
 struct Model {

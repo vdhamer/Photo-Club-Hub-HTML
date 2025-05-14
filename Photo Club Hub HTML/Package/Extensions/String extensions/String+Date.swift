@@ -7,6 +7,7 @@
 
 import Foundation // for Date
 import RegexBuilder // for Regex
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 extension String {
 

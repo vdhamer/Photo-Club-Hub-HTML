@@ -8,7 +8,7 @@
 import CoreData // needed for NSSet
 import CoreLocation // needed for coordinate translation
 import SwiftUI // for UserInterfaceSizeClass
-// import SwiftyJSON // for JSON struct
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 extension Organization: Comparable {
 

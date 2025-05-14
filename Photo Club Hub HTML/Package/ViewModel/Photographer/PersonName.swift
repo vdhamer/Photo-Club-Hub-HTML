@@ -6,6 +6,7 @@
 //
 
 import RegexBuilder
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 struct PersonName {
     var fullNameWithParenthesizedRole: String // "John Doe (lid)" or "Jan van Doesburg"

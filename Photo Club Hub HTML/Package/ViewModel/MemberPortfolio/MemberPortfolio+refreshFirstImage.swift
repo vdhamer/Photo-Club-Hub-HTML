@@ -7,6 +7,7 @@
 
 import Foundation // for URL, URLSession, Data
 import RegexBuilder // for OneOrMore, Capture, etc
+import Photo_Club_Hub_Data // for ifDebugPrint()
 
 extension MemberPortfolio {
 
