@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1630"
+   LastUpgradeVersion = "1640"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -54,7 +54,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D05E36782DD252C5005697AC"
+               BlueprintIdentifier = "D05E36A52DD253A7005697AC"
                BuildableName = "Photo Club Hub DataTests.xctest"
                BlueprintName = "Photo Club Hub DataTests"
                ReferencedContainer = "container:Photo Club Hub HTML.xcodeproj">
