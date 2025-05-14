@@ -6,6 +6,7 @@
 //
 
 import CoreData // for NSManagedObjectContext
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 extension LocalizedKeyword: Comparable {
     public static func < (lhs: LocalizedKeyword, rhs: LocalizedKeyword) -> Bool {

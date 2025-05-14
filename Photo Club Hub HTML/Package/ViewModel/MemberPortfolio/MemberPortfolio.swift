@@ -6,6 +6,7 @@
 //
 
 import Foundation // for Date, URL, etc.
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 extension MemberPortfolio: Comparable {
 

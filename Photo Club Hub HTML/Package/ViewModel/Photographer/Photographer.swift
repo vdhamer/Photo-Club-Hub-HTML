@@ -6,6 +6,7 @@
 //
 
 import CoreData // needed for NSSet
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 extension Photographer: Comparable {
 

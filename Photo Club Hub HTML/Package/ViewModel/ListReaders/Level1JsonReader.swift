@@ -8,6 +8,7 @@
 import CoreData // for NSManagedObjectContext
 import CoreLocation // for CLLocationCoordinate2D
 import SwiftyJSON // for JSON struct
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 private let dataSourcePath: String = """
                                      https://raw.githubusercontent.com/\

@@ -8,6 +8,7 @@
 import CoreData // for NSManagedObjectContext
 import RegexBuilder // for Regex struct
 import CoreLocation // for CLLocationCoordinate2DMake
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 class FotogroepWaalreMembersProvider { // WWDC21 Earthquakes also uses a Class here
 

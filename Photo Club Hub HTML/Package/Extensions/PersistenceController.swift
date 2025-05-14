@@ -7,6 +7,7 @@
 
 import CoreData
 import CoreLocation // needed for coordinate translation
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 struct PersistenceController {
 	static let shared = PersistenceController()

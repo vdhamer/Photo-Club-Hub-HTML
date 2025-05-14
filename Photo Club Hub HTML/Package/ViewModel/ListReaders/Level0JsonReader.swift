@@ -7,6 +7,7 @@
 
 import CoreData // for NSManagedObjectContext
 import SwiftyJSON // for JSON struct
+import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 private let dataSourcePath: String = """
                                      https://raw.githubusercontent.com/\
