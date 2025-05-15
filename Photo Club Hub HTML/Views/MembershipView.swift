@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 import CoreLocation // for CLLocationCoordinate2DMake
+import Photo_Club_Hub_Data // for Organization and PersonName
 
 struct MembershipView: View {
     @Environment(\.managedObjectContext) fileprivate var viewContext
@@ -113,8 +114,8 @@ extension Organization {
 
         let hansKrüsemannPN = PersonName(givenName: "Hans", infixName: "", familyName: "Krüsemann")
         let hansKrüsemannPho = Photographer.findCreateUpdate(context: context,
-                                                  personName: hansKrüsemannPN,
-                                                  optionalFields: PhotographerOptionalFields())
+                                                             personName: hansKrüsemannPN,
+                                                             optionalFields: PhotographerOptionalFields())
         let hansKrüsemannOpt = MemberOptionalFields(
             level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Hans_Krusemann/"),
             memberRolesAndStatus: MemberRolesAndStatus(roles: [ .admin: true ], status: [:]),

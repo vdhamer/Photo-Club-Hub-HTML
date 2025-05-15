@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 import CoreLocation // for CLLocationCoordinate2DMake
+import Photo_Club_Hub_Data // for Organization
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) fileprivate var viewContext
@@ -197,6 +198,6 @@ struct ContentView: View {
 
 }
 
- #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
- }
+// #Preview {
+//    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+// }
