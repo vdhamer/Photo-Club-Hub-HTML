@@ -8,7 +8,6 @@
 import CoreData // for NSManagedObjectContext
 import CoreLocation // for CLLocationCoordinate2D
 import SwiftyJSON // for JSON struct
-import Photo_Club_Hub_Data // for ifDebugFatalError()
 
 private let dataSourcePath: String = """
                                      https://raw.githubusercontent.com/\
@@ -22,10 +21,9 @@ private let organizationTypesToLoad: [OrganizationTypeEnum] = [.club, .museum]
 
 // see xampleMin.level1.json and xampleMax.level1.json for syntax examples
 
-class Level1JsonReader {
+public class Level1JsonReader {
 
-    init(bgContext: NSManagedObjectContext,
-         useOnlyFile: Bool = false) {
+    public init(bgContext: NSManagedObjectContext, useOnlyFile: Bool = false) {
 
         bgContext.perform { // switch to supplied background thread
             guard let filePath = Bundle.main.path(forResource: dataSourceFile + "." + fileSubType,
