@@ -74,7 +74,6 @@
 		D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Package/Model/Photo_Club_Hub_unused.xcdatamodeld,
 				Package/Tests/KeywordTests.swift,
 				Package/Tests/Level0JsonReaderTest.swift,
 				Package/Tests/Level2JsonReaderTest.swift,
