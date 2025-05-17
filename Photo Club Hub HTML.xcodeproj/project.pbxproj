@@ -71,9 +71,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D023CD322DD897A500883CB1 /* Exceptions for "Photo Club Hub Data" folder in "Photo Club Hub Data" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Sources/Photo Club Hub Data/JSON/root.level0.json",
+			);
+			target = D05E369D2DD253A7005697AC /* Photo Club Hub Data */;
+		};
 		D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Package/Model/Photo_Club_Hub_unused.xcdatamodeld,
 				Package/Tests/KeywordTests.swift,
 				Package/Tests/Level0JsonReaderTest.swift,
 				Package/Tests/Level2JsonReaderTest.swift,
@@ -112,6 +120,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D05E36722DD252C5005697AC /* Photo Club Hub Data */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D023CD322DD897A500883CB1 /* Exceptions for "Photo Club Hub Data" folder in "Photo Club Hub Data" target */,
+			);
 			path = "Photo Club Hub Data";
 			sourceTree = "<group>";
 		};
@@ -517,12 +528,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4,7";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				XROS_DEPLOYMENT_TARGET = 2.5;
@@ -561,12 +573,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx watchos watchsimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2,3,4,7";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				XROS_DEPLOYMENT_TARGET = 2.5;
