@@ -75,6 +75,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Sources/Photo Club Hub Data/JSON/root.level0.json",
+				"Sources/Photo Club Hub Data/JSON/root.level1.json",
 			);
 			target = D05E369D2DD253A7005697AC /* Photo Club Hub Data */;
 		};
