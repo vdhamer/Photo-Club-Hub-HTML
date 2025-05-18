@@ -126,8 +126,8 @@ For now this is only possible by a minor change to the source code.
 - [x] localize the app's UI to support English and Dutch (for now there isn't too much of a UI).
 - [x] support for the (new, `Level 0`) data that allows photographers to be associated with keywords.
 - [ ] factor out common code between both apps into a Swift Package Manager package (ongoing)
+- [ ] allow the user to select the club for which to generate the local site (currently hardcoded constant).
 - [ ] generate a static site that can serve as index of supported clubs (Level 1 data, currently hardcoded).
-   - [ ] allow the user to select the club for which to generate the local site (currently hardcoded constant).
 
 It would be nice to have an app for data enty/editing (rather than editing JSON files), but these would be a separate repo.
 
