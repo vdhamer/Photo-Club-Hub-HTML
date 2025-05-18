@@ -65,7 +65,7 @@ extension PhotoClubHubHtmlApp {
         _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
                              useOnlyInBundleFile: false)
 
-        // load test member(s) of Fotogroep De Gender
+        // load current/former members of Fotogroep De Gender
         let genderBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
         genderBackgroundContext.name = "FG de Gender"
         genderBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
@@ -73,7 +73,7 @@ extension PhotoClubHubHtmlApp {
         _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext,
                                              useOnlyInBundleFile: false)
 
-        // load all current/former members of Fotogroep Waalre
+        // load current/former members of Fotogroep Waalre
         let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
         waalreBackgroundContext.name = "Fotogroep Waalre"
         waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
@@ -81,7 +81,7 @@ extension PhotoClubHubHtmlApp {
         _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
                                            useOnlyInBundleFile: false)
 
-        // load all current/former members of Fotoclub Bellus Imago
+        // load current/former members of Fotoclub Bellus Imago
         let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
         bellusBackgroundContext.name = "Fotoclub Bellus Imago"
         bellusBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
