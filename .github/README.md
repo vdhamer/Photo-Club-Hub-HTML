@@ -94,11 +94,16 @@ Swift is essentially a declarative higher-level description (`Result Builder`) t
 
 ## Why separate repo's?
 
-From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository with
-two relatively different targets that happen to be on two different platforms.
+From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository
+with two (very) different targets that happen to run on two different platforms.
 
 Despite having code overlap, they are - for now - split into two repos to lower the barrier to contribute to either.
-Until the common code is factored out into a package, it will require some extra effort to keep the two in sync.
+At the moment the common code is being factored out into a package in order to eliminate duplication of large amounts of code.
+This means that there will likely be 3 repositories in GitHub:
+
+- Photo Club Hub (for iOS, interactive browing), 
+- Photo Club Hub (for macOS, for static website generation)
+- Photo Club Hub Data (multi-platform, for loading data into the Core Data database)
 
 ## Will 3 hierarchy levels be enough?
 
