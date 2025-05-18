@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1630"
+   LastUpgradeVersion = "1640"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -46,6 +46,17 @@
                BlueprintIdentifier = "D06B8D452DA48F3200547A05"
                BuildableName = "Photo Club Hub HTMLTests.xctest"
                BlueprintName = "Photo Club Hub HTMLTests"
+               ReferencedContainer = "container:Photo Club Hub HTML.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D05E36A52DD253A7005697AC"
+               BuildableName = "Photo Club Hub DataTests.xctest"
+               BlueprintName = "Photo Club Hub DataTests"
                ReferencedContainer = "container:Photo Club Hub HTML.xcodeproj">
             </BuildableReference>
          </TestableReference>
