@@ -99,10 +99,10 @@ with two (very) different targets that happen to run on two different platforms.
 
 Despite having code overlap, they are - for now - split into two repos to lower the barrier to contribute to either.
 At the moment the common code is being factored out into a package in order to eliminate duplication of large amounts of code.
-This means that there will likely be 3 repositories in GitHub:
+This means that there will soon be _three_ repositories in GitHub:
 
 - Photo Club Hub (for iOS, interactive browing), 
-- Photo Club Hub (for macOS, for static website generation)
+- Photo Club Hub HTML (for macOS, for static website generation)
 - Photo Club Hub Data (multi-platform, for loading data into the Core Data database)
 
 ## Will 3 hierarchy levels be enough?
