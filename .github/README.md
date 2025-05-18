@@ -120,10 +120,11 @@ For now this is only possible by a minor change to the source code.
 
 ## Roadmap
 
-- [ ] Fix the Ignite code (accepted PR for twostraws/Ignite) so that Ignite can be imported as a regular Swift package.
+- [x] Fix the Ignite code (accepted PR for twostraws/Ignite) so that Ignite can be imported as a regular Swift package.
 - [x] Load the membership list from a .level2.json file. Currently the app contains a hardcoded partial copy of this data.
 - [x] localize the generated website to support multiple languages (initially English and Dutch).
 - [x] localize the app's UI to support English and Dutch (for now there isn't too much of a UI).
+- [ ] factor out common code between both apps into a Swift Package Manager package (ongoing)
 - [ ] generate a static site that can serve as index of supported clubs (Level 1 data, currently hardcoded).
    - [ ] allow the user to select the club for which to generate the local site (currently hardcoded constant).
 - [ ] in general, all enhancements to the Photo Club Hub app are potential extensions to this app. 
