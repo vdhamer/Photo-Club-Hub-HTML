@@ -73,37 +73,37 @@ extension PhotoClubHubHtmlApp {
         _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext,
                                              useOnlyInBundleFile: false)
 
-        // load current/former members of Fotogroep Waalre
-        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-        waalreBackgroundContext.name = "Fotogroep Waalre"
-        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
-        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
-                                           useOnlyInBundleFile: false)
+        // load current/former members of Fotogroep Waalre  // TODO renable clubs in Photo_Club_hub_HTMLApp.swift
+//        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+//        waalreBackgroundContext.name = "Fotogroep Waalre"
+//        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+//        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
+//        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
+//                                           useOnlyInBundleFile: false)
 
         // load current/former members of Fotoclub Bellus Imago
-        let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-        bellusBackgroundContext.name = "Fotoclub Bellus Imago"
-        bellusBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        bellusBackgroundContext.automaticallyMergesChangesFromParent = true
-        _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
-                                               useOnlyInBundleFile: false)
+//        let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+//        bellusBackgroundContext.name = "Fotoclub Bellus Imago"
+//        bellusBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+//        bellusBackgroundContext.automaticallyMergesChangesFromParent = true
+//        _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
+//                                               useOnlyInBundleFile: false)
 
         if includeXampleClubs {
 
             // load test member(s) of XampleMin. Club is called XampleMin (rather than ExampleMin) to be at end of list
-            let xampleMinBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-            xampleMinBackgroundContext.name = "XampleMin"
-            xampleMinBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-            xampleMinBackgroundContext.automaticallyMergesChangesFromParent = true
-            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext)
+//            let xampleMinBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+//            xampleMinBackgroundContext.name = "XampleMin"
+//            xampleMinBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+//            xampleMinBackgroundContext.automaticallyMergesChangesFromParent = true
+//            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext)
 
             // load test member(s) of XampleMax. Club is called XampleMax (rather than ExampleMax) to be at end of list
-            let xampleMaxBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-            xampleMaxBackgroundContext.name = "XampleMax"
-            xampleMaxBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-            xampleMaxBackgroundContext.automaticallyMergesChangesFromParent = true
-            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext)
+//            let xampleMaxBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+//            xampleMaxBackgroundContext.name = "XampleMax"
+//            xampleMaxBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+//            xampleMaxBackgroundContext.automaticallyMergesChangesFromParent = true
+//            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext)
 
         }
     }

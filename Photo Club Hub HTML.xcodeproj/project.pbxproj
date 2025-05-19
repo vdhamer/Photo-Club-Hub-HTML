@@ -74,6 +74,7 @@
 		D023CD322DD897A500883CB1 /* Exceptions for "Photo Club Hub Data" folder in "Photo Club Hub Data" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Sources/Photo Club Hub Data/JSON/fgDeGender.level2.json",
 				"Sources/Photo Club Hub Data/JSON/root.level0.json",
 				"Sources/Photo Club Hub Data/JSON/root.level1.json",
 			);
@@ -82,7 +83,6 @@
 		D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Package/Model/Photo_Club_Hub_unused.xcdatamodeld,
 				Package/Tests/KeywordTests.swift,
 				Package/Tests/Level0JsonReaderTest.swift,
 				Package/Tests/Level2JsonReaderTest.swift,
