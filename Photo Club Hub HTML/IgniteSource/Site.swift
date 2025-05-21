@@ -24,8 +24,8 @@ struct MemberSite: Site {
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
-        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
-        let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
+        let deGenderIDPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
+                                                town: "Eindhoven", nickname: "fgDeGender")
         let club0: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
                                                                 idPlus: deGenderIDPlus,
@@ -33,8 +33,8 @@ struct MemberSite: Site {
                                                                 coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                 optionalFields: OrganizationOptionalFields())
 
-        let waalreID = OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre")
-        let waalreIDPlus = OrganizationIdPlus(id: waalreID, nickname: "fgWaalre")
+        let waalreIDPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre",
+                                              town: "Waalre", nickname: "fgWaalre")
         let club1: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
                                                                 idPlus: waalreIDPlus,
@@ -42,8 +42,8 @@ struct MemberSite: Site {
                                                                 coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                 optionalFields: OrganizationOptionalFields())
 
-        let bellusImagoID = OrganizationID(fullName: "Fotoclub Bellus Imago", town: "Veldhoven")
-        let bellusImagoIDPlus = OrganizationIdPlus(id: bellusImagoID, nickname: "fcBellusImago")
+        let bellusImagoIDPlus = OrganizationIdPlus(fullName: "Fotoclub Bellus Imago",
+                                                   town: "Veldhoven", nickname: "fcBellusImago")
         let club2: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
                                                                 idPlus: bellusImagoIDPlus,
@@ -53,7 +53,7 @@ struct MemberSite: Site {
 
         self.moc = moc
 
-        let chosenClubIX: Int = 1  // roundabout way to avoid warnings about unused properties
+        let chosenClubIX: Int = 2  // roundabout way to avoid warnings about unused properties
         let clubs = [club0, club1, club2]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 

@@ -82,16 +82,17 @@ extension PhotoClubHubHtmlApp {
                                            useOnlyInBundleFile: false)
 
         // load current/former members of Fotoclub Bellus Imago
-//        let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//        bellusBackgroundContext.name = "Fotoclub Bellus Imago"
-//        bellusBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//        bellusBackgroundContext.automaticallyMergesChangesFromParent = true
-//        _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
-//                                               useOnlyInBundleFile: false)
+        let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        bellusBackgroundContext.name = "Fotoclub Bellus Imago"
+        bellusBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        bellusBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
+                                               useOnlyInBundleFile: false)
 
         if includeXampleClubs {
 
             // load test member(s) of XampleMin. Club is called XampleMin (rather than ExampleMin) to be at end of list
+// TODO
 //            let xampleMinBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
 //            xampleMinBackgroundContext.name = "XampleMin"
 //            xampleMinBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
