@@ -24,6 +24,7 @@ struct MemberSite: Site {
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
+
         let deGenderIDPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
                                                 town: "Eindhoven", nickname: "fgDeGender")
         let club0: Organization = Organization.findCreateUpdate(context: moc,
@@ -51,12 +52,31 @@ struct MemberSite: Site {
                                                                 coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                 optionalFields: OrganizationOptionalFields())
 
+        let xampleMinIDPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data",
+                                                 town: "Rotterdam", nickname: "XampleMin")
+        let club3: Organization = Organization.findCreateUpdate(context: moc,
+                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+                                                                idPlus: xampleMinIDPlus,
+                                                                // real coordinates added in xxxxxxx.level2.json
+                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
+                                                                optionalFields: OrganizationOptionalFields())
+
+        let xampleMaxIDPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data",
+                                                 town: "Amsterdam", nickname: "XampleMax")
+        let club4: Organization = Organization.findCreateUpdate(context: moc,
+                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+                                                                idPlus: xampleMaxIDPlus,
+                                                                // real coordinates added in xxxxxxx.level2.json
+                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
+                                                                optionalFields: OrganizationOptionalFields())
+
         self.moc = moc
 
-        let chosenClubIX: Int = 2  // roundabout way to avoid warnings about unused properties
-        let clubs = [club0, club1, club2]
+        let chosenClubIX: Int = 3  // roundabout way to avoid SwiftLint warnings about unused properties
+        let clubs = [club0, club1, club2, club3, club4]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
         self.homePage = Members(moc: moc, club: club)
     }
+
 }
