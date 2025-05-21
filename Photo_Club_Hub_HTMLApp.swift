@@ -98,13 +98,12 @@ extension PhotoClubHubHtmlApp {
             xampleMinBackgroundContext.automaticallyMergesChangesFromParent = true
             _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext)
 
-            // TODO uncomment
             // load test member(s) of XampleMax. Club is called XampleMax (rather than ExampleMax) to be at end of list
-//            let xampleMaxBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//            xampleMaxBackgroundContext.name = "XampleMax"
-//            xampleMaxBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//            xampleMaxBackgroundContext.automaticallyMergesChangesFromParent = true
-//            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext)
+            let xampleMaxBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+            xampleMaxBackgroundContext.name = "XampleMax"
+            xampleMaxBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+            xampleMaxBackgroundContext.automaticallyMergesChangesFromParent = true
+            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext)
 
         }
     }

@@ -25,54 +25,54 @@ struct MemberSite: Site {
 
     init(moc: NSManagedObjectContext) {
 
-        let deGenderIDPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
-                                                town: "Eindhoven", nickname: "fgDeGender")
+        let deGenderIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender", town: "Eindhoven",
+                                                nickname: "fgDeGender")
         let club0: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: deGenderIDPlus,
+                                                                idPlus: deGenderIdPlus,
                                                                 // real coordinates added in xxxxxxx.level2.json
                                                                 coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                 optionalFields: OrganizationOptionalFields())
 
-        let waalreIDPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre",
-                                              town: "Waalre", nickname: "fgWaalre")
+        let waalreIdPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre", town: "Waalre",
+                                              nickname: "fgWaalre")
         let club1: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: waalreIDPlus,
+                                                                idPlus: waalreIdPlus,
                                                                 // real coordinates added in xxxxxxx.level2.json
                                                                 coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                 optionalFields: OrganizationOptionalFields())
 
-        let bellusImagoIDPlus = OrganizationIdPlus(fullName: "Fotoclub Bellus Imago",
-                                                   town: "Veldhoven", nickname: "fcBellusImago")
+        let bellusImagoIdPlus = OrganizationIdPlus(fullName: "Fotoclub Bellus Imago", town: "Veldhoven",
+                                                   nickname: "fcBellusImago")
         let club2: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: bellusImagoIDPlus,
+                                                                idPlus: bellusImagoIdPlus,
                                                                 // real coordinates added in xxxxxxx.level2.json
                                                                 coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                 optionalFields: OrganizationOptionalFields())
 
-        let xampleMinIDPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data",
-                                                 town: "Rotterdam", nickname: "XampleMin")
+        let xampleMinIdPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data", town: "Rotterdam",
+                                                 nickname: "XampleMin")
         let club3: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: xampleMinIDPlus,
+                                                                idPlus: xampleMinIdPlus,
                                                                 // real coordinates added in xxxxxxx.level2.json
                                                                 coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                 optionalFields: OrganizationOptionalFields())
 
-        let xampleMaxIDPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data",
-                                                 town: "Amsterdam", nickname: "XampleMax")
+        let xampleMaxIdPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data", town: "Amsterdam",
+                                                 nickname: "XampleMax")
         let club4: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: xampleMaxIDPlus,
+                                                                idPlus: xampleMaxIdPlus,
                                                                 // real coordinates added in xxxxxxx.level2.json
                                                                 coordinates: CLLocationCoordinate2DMake(0, 0),
                                                                 optionalFields: OrganizationOptionalFields())
 
         self.moc = moc
 
-        let chosenClubIX: Int = 3  // roundabout way to avoid SwiftLint warnings about unused properties
+        let chosenClubIX: Int = 4  // roundabout way to avoid SwiftLint warnings about unused properties
         let clubs = [club0, club1, club2, club3, club4]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
