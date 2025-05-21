@@ -75,6 +75,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Sources/Photo Club Hub Data/JSON/fgDeGender.level2.json",
+				"Sources/Photo Club Hub Data/JSON/fgWaalre.level2.json",
 				"Sources/Photo Club Hub Data/JSON/root.level0.json",
 				"Sources/Photo Club Hub Data/JSON/root.level1.json",
 			);

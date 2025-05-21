@@ -73,13 +73,13 @@ extension PhotoClubHubHtmlApp {
         _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext,
                                              useOnlyInBundleFile: false)
 
-        // load current/former members of Fotogroep Waalre  // TODO renable clubs in Photo_Club_hub_HTMLApp.swift
-//        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
-//        waalreBackgroundContext.name = "Fotogroep Waalre"
-//        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-//        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
-//        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
-//                                           useOnlyInBundleFile: false)
+        // load current/former members of Fotogroep Waalre
+        let waalreBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
+        waalreBackgroundContext.name = "Fotogroep Waalre"
+        waalreBackgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        waalreBackgroundContext.automaticallyMergesChangesFromParent = true
+        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
+                                           useOnlyInBundleFile: false)
 
         // load current/former members of Fotoclub Bellus Imago
 //        let bellusBackgroundContext = PersistenceController.shared.container.newBackgroundContext()
