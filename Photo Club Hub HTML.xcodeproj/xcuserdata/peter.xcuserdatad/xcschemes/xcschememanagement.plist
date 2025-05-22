@@ -12,7 +12,11 @@
 		<key>Photo Club Hub HTML.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< Updated upstream
 			<integer>0</integer>
+=======
+			<integer>2</integer>
+>>>>>>> Stashed changes
 		</dict>
 		<key>Playground (Playground).xcscheme</key>
 		<dict>
