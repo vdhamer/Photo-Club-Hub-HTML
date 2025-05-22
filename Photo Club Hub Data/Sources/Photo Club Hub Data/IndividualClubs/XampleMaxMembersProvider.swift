@@ -11,12 +11,13 @@ import CoreLocation // for CLLocationCoordinate2DMake
 public class XampleMaxMembersProvider {
 
     public init(bgContext: NSManagedObjectContext,
+                useOnlyInBundleFile: Bool = false,
                 synchronousWithRandomTown: Bool = false,
                 randomTown: String = "RandomTown") {
 
         if synchronousWithRandomTown {
             bgContext.performAndWait { // ...or execute same block synchronously
-                self.insertOnlineMemberData(bgContext: bgContext, town: randomTown)
+                insertOnlineMemberData(bgContext: bgContext, town: randomTown)
             }
         } else {
             bgContext.perform { // execute block asynchronously...
@@ -27,13 +28,13 @@ public class XampleMaxMembersProvider {
     }
 
     fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext, town: String = "Amsterdam") {
-        let fgIdPlus = OrganizationIdPlus(fullName: "Xample Club Max",
-                                          town: town,
-                                          nickname: "XampleMax")
+        let idPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data",
+                                        town: town,
+                                        nickname: "XampleMax")
 
         let club = Organization.findCreateUpdate(context: bgContext,
                                                  organizationTypeEnum: .club,
-                                                 idPlus: fgIdPlus,
+                                                 idPlus: idPlus,
                                                  // real coordinates added in XampleMax.level2.json
                                                  coordinates: CLLocationCoordinate2DMake(0, 0),
                                                  optionalFields: OrganizationOptionalFields() // empty fields
@@ -41,13 +42,12 @@ public class XampleMaxMembersProvider {
         ifDebugPrint("\(club.fullNameTown): Starting insertOnlineMemberData() in background")
 
         _ = Level2JsonReader(bgContext: bgContext,
-                             urlComponents: UrlComponents.xampleMax,
-                             club: club,
-                             useOnlyFile: false)
+                             organizationIdPlus: idPlus,
+                             useOnlyInBundleFile: false)
         do {
             try bgContext.save()
         } catch {
-            ifDebugFatalError("Failed to save club \(fgIdPlus.nickname)", file: #fileID, line: #line)
+            ifDebugFatalError("Failed to save club \(idPlus.nickname)", file: #fileID, line: #line)
         }
 
     }

@@ -71,6 +71,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D023CD322DD897A500883CB1 /* Exceptions for "Photo Club Hub Data" folder in "Photo Club Hub Data" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Sources/Photo Club Hub Data/JSON/fgDeGender.level2.json",
+				"Sources/Photo Club Hub Data/JSON/fgWaalre.level2.json",
+				"Sources/Photo Club Hub Data/JSON/root.level0.json",
+				"Sources/Photo Club Hub Data/JSON/root.level1.json",
+				"Sources/Photo Club Hub Data/JSON/XampleMax.level2.json",
+				"Sources/Photo Club Hub Data/JSON/XampleMin.level2.json",
+			);
+			target = D05E369D2DD253A7005697AC /* Photo Club Hub Data */;
+		};
 		D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -112,6 +124,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D05E36722DD252C5005697AC /* Photo Club Hub Data */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D023CD322DD897A500883CB1 /* Exceptions for "Photo Club Hub Data" folder in "Photo Club Hub Data" target */,
+			);
 			path = "Photo Club Hub Data";
 			sourceTree = "<group>";
 		};

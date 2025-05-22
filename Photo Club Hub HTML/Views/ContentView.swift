@@ -133,8 +133,8 @@ struct ContentView: View {
             let organizationTypeEnum: OrganizationTypeEnum = OrganizationTypeEnum.club
             let town = "Eindhoven"
             let fullName = "Org #\(newCount)"
-            let organizationID = OrganizationID(fullName: fullName, town: town)
-            let organizationIdPlus = OrganizationIdPlus(id: organizationID, nickname: "Nickname#\(newCount)")
+            let organizationIdPlus = OrganizationIdPlus(fullName: fullName, town: town, // OrganizationID part
+                                                        nickname: "Nickname#\(newCount)")
 
             _ = Organization.findCreateUpdate(context: viewContext, // can be foreground of background context
                                               organizationTypeEnum: organizationTypeEnum,
@@ -198,6 +198,6 @@ struct ContentView: View {
 
 }
 
-// #Preview {
-//    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-// }
+ #Preview {
+    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+ }

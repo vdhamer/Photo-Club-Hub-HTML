@@ -21,7 +21,19 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Photo Club Hub Data",
-            dependencies: ["SwiftyJSON"]
+            dependencies: ["SwiftyJSON"],
+            resources: [
+                // copying can probably also be done with a single copy command at directory level
+                .copy("JSON/root.level0.json"),
+                .copy("JSON/root.level1.json"),
+
+                .copy("JSON/fgDeGender.level2.json"),
+                .copy("JSON/fgWaalre.level2.json"),
+                .copy("JSON/fcBellusImago.level2.json"),
+
+                .copy("JSON/XampleMin.level2.json"),
+                .copy("JSON/XampleMax.level2.json")
+            ]
         ),
         .testTarget(
             name: "Photo Club Hub DataTests",
