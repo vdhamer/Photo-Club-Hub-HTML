@@ -94,11 +94,16 @@ Swift is essentially a declarative higher-level description (`Result Builder`) t
 
 ## Why separate repo's?
 
-From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository with
-two relatively different targets that happen to be on two different platforms.
+From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository
+with two (very) different targets that happen to run on two different platforms.
 
 Despite having code overlap, they are - for now - split into two repos to lower the barrier to contribute to either.
-Until the common code is factored out into a package, it will require some extra effort to keep the two in sync.
+At the moment the common code is being factored out into a package in order to eliminate duplication of large amounts of code.
+This means that there will soon be _three_ repositories in GitHub:
+
+- Photo Club Hub (for iOS, interactive browing), 
+- Photo Club Hub HTML (for macOS, for static website generation)
+- Photo Club Hub Data (multi-platform, for loading data into the Core Data database)
 
 ## Will 3 hierarchy levels be enough?
 
@@ -124,10 +129,10 @@ For now this is only possible by a minor change to the source code.
 - [x] Load the membership list from a .level2.json file. Currently the app contains a hardcoded partial copy of this data.
 - [x] localize the generated website to support multiple languages (initially English and Dutch).
 - [x] localize the app's UI to support English and Dutch (for now there isn't too much of a UI).
+- [x] support for the (new, `Level 0`) data that allows photographers to be associated with keywords.
+- [x] factor out common code between both apps into a Swift Package Manager package (ongoing)
+- [ ] allow the user to select the club for which to generate the local site (currently hardcoded constant).
 - [ ] generate a static site that can serve as index of supported clubs (Level 1 data, currently hardcoded).
-   - [ ] allow the user to select the club for which to generate the local site (currently hardcoded constant).
-- [ ] in general, all enhancements to the Photo Club Hub app are potential extensions to this app. 
-   - [ ] support for the (new, `Level 0`) data that allows photographers to be associated with keywords.
 
 It would be nice to have an app for data enty/editing (rather than editing JSON files), but these would be a separate repo.
 
