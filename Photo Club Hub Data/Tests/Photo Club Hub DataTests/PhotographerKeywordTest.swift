@@ -6,7 +6,7 @@
 //
 
 import Testing
-@testable import Photo_Club_Hub_HTML
+@testable import Photo_Club_Hub_Data
 import CoreData // for NSManagedObjectContext
 
 @MainActor @Suite("Tests the Core Data PhotographerKeyword class") struct PhotographerKeywordTests {

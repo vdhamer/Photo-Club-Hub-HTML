@@ -1,12 +1,12 @@
 //
-//  String+containsWordUsingNLP.swift
+//  String+containsWordUsingNLPTest.swift
 //  Photo Club HubTests
 //
 //  Created by Peter van den Hamer on 22/02/2025.
 //
 
 import Testing
-@testable import Photo_Club_Hub_HTML
+@testable import Photo_Club_Hub_Data
 
 @Suite struct StringContainsWordUsingNLP {
 

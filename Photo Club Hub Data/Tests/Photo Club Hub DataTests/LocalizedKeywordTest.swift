@@ -1,12 +1,12 @@
 //
-//  LocalizedKeyword.swift
+//  LocalizedKeywordTest.swift
 //  Photo Club HubTests
 //
 //  Created by Peter van den Hamer on 23/02/2025.
 //
 
 import Testing
-@testable import Photo_Club_Hub_HTML
+@testable import Photo_Club_Hub_Data
 import CoreData // for NSManagedObjectContext
 
 @MainActor @Suite("Tests the Core Data LocalizedKeyword class") struct LocalizedKeywordTests {

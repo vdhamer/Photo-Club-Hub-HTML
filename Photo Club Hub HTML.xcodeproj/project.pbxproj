@@ -71,32 +71,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Package/Tests/KeywordTests.swift,
-				Package/Tests/Level0JsonReaderTest.swift,
-				Package/Tests/Level2JsonReaderTest.swift,
-				Package/Tests/LocalizedKeywordTest.swift,
-				Package/Tests/PhotographerKeywordTest.swift,
-				"Package/Tests/String+containsWordUsingNLPTest.swift",
-				"Package/Tests/String+Random.swift",
-			);
-			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
-		};
-		D06B90E22DA4987100547A05 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTMLTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Package/Tests/KeywordTests.swift,
-				Package/Tests/Level0JsonReaderTest.swift,
-				Package/Tests/Level2JsonReaderTest.swift,
-				Package/Tests/LocalizedKeywordTest.swift,
-				Package/Tests/PhotographerKeywordTest.swift,
-				"Package/Tests/String+containsWordUsingNLPTest.swift",
-				"Package/Tests/String+Random.swift",
-			);
-			target = D06B8D452DA48F3200547A05 /* Photo Club Hub HTMLTests */;
-		};
 		D0B9D5012CC443D900B1541C /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -130,10 +104,6 @@
 		};
 		D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				D0603B462D61F9DD005E2825 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */,
-				D06B90E22DA4987100547A05 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTMLTests" target */,
-			);
 			path = "Photo Club Hub HTML";
 			sourceTree = "<group>";
 		};
@@ -509,7 +479,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -554,7 +524,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -584,7 +554,7 @@
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-DataTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -607,7 +577,7 @@
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MACOSX_DEPLOYMENT_TARGET = 15.4;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-DataTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

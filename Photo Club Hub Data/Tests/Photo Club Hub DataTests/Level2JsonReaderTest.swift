@@ -6,7 +6,7 @@
 //
 
 import Testing
-@testable import Photo_Club_Hub_HTML
+@testable import Photo_Club_Hub_Data
 import CoreData // for NSManagedObjectContext
 
 @MainActor @Suite("Tests the Level 2 JSON reader") struct Level2JsonReaderTests {
@@ -75,7 +75,7 @@ import CoreData // for NSManagedObjectContext
         let randomTown = String.random(length: 10)
         _ = XampleMaxMembersProvider(bgContext: bgContext, synchronousWithRandomTown: true, randomTown: randomTown)
 
-        let idPlus = OrganizationIdPlus(fullName: "Xample Club Max",
+        let idPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data",
                                         town: randomTown, // unique town to keep this separate from normal loading
                                         nickname: "XampleMax")
 

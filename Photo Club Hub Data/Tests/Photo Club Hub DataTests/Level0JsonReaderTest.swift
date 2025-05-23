@@ -6,7 +6,7 @@
 //
 
 import Testing
-@testable import Photo_Club_Hub_HTML
+@testable import Photo_Club_Hub_Data
 import CoreData // for NSManagedObjectContext
 
 @MainActor @Suite("Tests the Level 0 JSON reader") struct Level0JsonReaderTests {
@@ -31,8 +31,8 @@ import CoreData // for NSManagedObjectContext
         #expect(PhotographerKeyword.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                             useOnlyFile: false,
-                             overrulingDataSourceFile: "empty")
+                             fileName: "empty",
+                             useOnlyInBundleFile: false)
         #expect(Keyword.count(context: bgContext) == 0)
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
         #expect(PhotographerKeyword.count(context: bgContext) == 0)
@@ -53,8 +53,8 @@ import CoreData // for NSManagedObjectContext
 
         bgContext.performAndWait {
             _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                                 useOnlyFile: false,
-                                 overrulingDataSourceFile: "abstractKeyword")
+                                 fileName: "abstractKeyword",
+                                 useOnlyInBundleFile: false)
             try? bgContext.save()
         }
         #expect(Keyword.count(context: bgContext) == 1)
@@ -74,7 +74,8 @@ import CoreData // for NSManagedObjectContext
         #expect(Keyword.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                             useOnlyFile: false)
+                             fileName: "root",
+                             useOnlyInBundleFile: false)
         #expect(Keyword.count(context: bgContext) == 15)
     }
 
@@ -92,8 +93,8 @@ import CoreData // for NSManagedObjectContext
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                             useOnlyFile: false,
-                             overrulingDataSourceFile: "language")
+                             fileName: "language",
+                             useOnlyInBundleFile: false)
 
         #expect(Language.count(context: bgContext, isoCode: "UR") == 1)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
@@ -114,8 +115,8 @@ import CoreData // for NSManagedObjectContext
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                             useOnlyFile: false,
-                             overrulingDataSourceFile: "languages")
+                             fileName: "languages",
+                             useOnlyInBundleFile: false)
 
         #expect(Language.count(context: bgContext, isoCode: "EN") == 1)
         #expect(Language.count(context: bgContext, isoCode: "NL") == 1)
