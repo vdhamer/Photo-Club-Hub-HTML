@@ -29,46 +29,31 @@ struct MemberSite: Site {
                                                 nickname: "fgDeGender")
         let club0: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: deGenderIdPlus,
-                                                                // real coordinates added in xxxxxxx.level2.json
-                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                                optionalFields: OrganizationOptionalFields())
+                                                                idPlus: deGenderIdPlus)
 
         let waalreIdPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre", town: "Waalre",
                                               nickname: "fgWaalre")
         let club1: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: waalreIdPlus,
-                                                                // real coordinates added in xxxxxxx.level2.json
-                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                                optionalFields: OrganizationOptionalFields())
+                                                                idPlus: waalreIdPlus)
 
         let bellusImagoIdPlus = OrganizationIdPlus(fullName: "Fotoclub Bellus Imago", town: "Veldhoven",
                                                    nickname: "fcBellusImago")
         let club2: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: bellusImagoIdPlus,
-                                                                // real coordinates added in xxxxxxx.level2.json
-                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                                optionalFields: OrganizationOptionalFields())
+                                                                idPlus: bellusImagoIdPlus)
 
         let xampleMinIdPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data", town: "Rotterdam",
                                                  nickname: "XampleMin")
         let club3: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: xampleMinIdPlus,
-                                                                // real coordinates added in xxxxxxx.level2.json
-                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                                optionalFields: OrganizationOptionalFields())
+                                                                idPlus: xampleMinIdPlus)
 
         let xampleMaxIdPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data", town: "Amsterdam",
                                                  nickname: "XampleMax")
         let club4: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: xampleMaxIdPlus,
-                                                                // real coordinates added in xxxxxxx.level2.json
-                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                                optionalFields: OrganizationOptionalFields())
+                                                                idPlus: xampleMaxIdPlus)
 
         self.moc = moc
 

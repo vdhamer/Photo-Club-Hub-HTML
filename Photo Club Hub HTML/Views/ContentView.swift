@@ -143,7 +143,7 @@ struct ContentView: View {
                                               coordinates: CLLocationCoordinate2DMake(
                                                   Double.random(in: -180...180),
                                                   Double.random(in: -180...180)),
-                                              optionalFields: OrganizationOptionalFields()
+                                              optionalFields: OrganizationOptionalFields() // empty
             )
 
             do {

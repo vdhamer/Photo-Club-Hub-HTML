@@ -93,9 +93,7 @@ extension Organization {
 
             let fgDeGender = Organization.findCreateUpdate(context: context, // foreground
                                                            organizationTypeEnum: OrganizationTypeEnum.club,
-                                                           idPlus: fgDeGenderIDPlus,
-                                                           coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                           optionalFields: OrganizationOptionalFields())
+                                                           idPlus: fgDeGenderIDPlus)
             do {
                 try context.save()
                 return fgDeGender
