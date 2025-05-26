@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "449CD7D9-90C9-4D39-81CC-5EC3F8A4DA33",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "Photo Club Hub DataTests",
+        "name" : "Photo Club Hub DataTests"
+      }
+    }
+  ],
+  "version" : 1
+}
