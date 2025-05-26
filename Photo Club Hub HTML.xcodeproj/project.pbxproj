@@ -62,6 +62,8 @@
 
 /* Begin PBXFileReference section */
 		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
+		D01F17FC2DE4A279004EFDB7 /* Photo Club Hub DataTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Photo Club Hub DataTests.xctestplan"; path = "Photo Club Hub DataTests/Photo Club Hub DataTests.xctestplan"; sourceTree = "<group>"; };
+		D0534BDA2DE4A2D000AC4A1B /* Photo Club Hub DataTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Photo Club Hub DataTests.xctestplan"; path = "Photo Club Hub DataTests/Photo Club Hub DataTests.xctestplan"; sourceTree = "<group>"; };
 		D05E366A2DD2526C005697AC /* Photo Club Hub Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Photo Club Hub Data"; sourceTree = "<group>"; };
 		D05E369E2DD253A7005697AC /* Photo_Club_Hub_Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Photo_Club_Hub_Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05E36A62DD253A7005697AC /* Photo Club Hub DataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Photo Club Hub DataTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +164,8 @@
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
+				D0534BDA2DE4A2D000AC4A1B /* Photo Club Hub DataTests.xctestplan */,
+				D01F17FC2DE4A279004EFDB7 /* Photo Club Hub DataTests.xctestplan */,
 				D05E366A2DD2526C005697AC /* Photo Club Hub Data */,
 				D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */,
 				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
