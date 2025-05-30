@@ -55,10 +55,16 @@ struct MemberSite: Site {
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
                                                                 idPlus: xampleMaxIdPlus)
 
+        let ericameraIdPlus = OrganizationIdPlus(fullName: "Fotoclub Ericamera", town: "Eindhoven",
+                                                 nickname: "fcEricamera")
+        let club5: Organization = Organization.findCreateUpdate(context: moc,
+                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+                                                                idPlus: ericameraIdPlus)
+
         self.moc = moc
 
-        let chosenClubIX: Int = 1  // roundabout way to avoid SwiftLint warnings about unused properties
-        let clubs = [club0, club1, club2, club3, club4]
+        let chosenClubIX: Int = 5  // roundabout way to avoid SwiftLint warnings about unused properties
+        let clubs = [club0, club1, club2, club3, club4, club5]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
         self.homePage = Members(moc: moc, club: club)
