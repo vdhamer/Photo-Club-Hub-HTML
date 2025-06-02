@@ -14,7 +14,7 @@ import Photo_Club_Hub_Data // for Organization
 
 struct MemberSite: Site {
     var name = "Leden"
-    // IMPORTANT: http://www.vdhamer.com gives localhost result, http://www.vdhamer.com/fgDeGender works on remote site
+    // IMPORTANT: http://www.vdhamer.com gives localhost result, http://www.vdhamer.com works on remote site
     var url: URL = URL("http://www.vdhamer.com")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
@@ -61,10 +61,16 @@ struct MemberSite: Site {
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
                                                                 idPlus: ericameraIdPlus)
 
+        let oirschotIdPlus = OrganizationIdPlus(fullName: "Fotogroep Oirschot", town: "Oirschot",
+                                                nickname: "fgOirschot")
+        let club6: Organization = Organization.findCreateUpdate(context: moc,
+                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+                                                                idPlus: oirschotIdPlus)
+
         self.moc = moc
 
-        let chosenClubIX: Int = 5  // roundabout way to avoid SwiftLint warnings about unused properties
-        let clubs = [club0, club1, club2, club3, club4, club5]
+        let chosenClubIX: Int = 0  // roundabout way to avoid SwiftLint warnings about unused properties
+        let clubs = [club0, club1, club2, club3, club4, club5, club6]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
         self.homePage = Members(moc: moc, club: club)

@@ -59,6 +59,17 @@
         }
       }
     },
+    "Area of expertise" : {
+      "comment" : "HTML table header for member's keywords.",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertisegebied"
+          }
+        }
+      }
+    },
     "Average membership duration for these %lld club members is %@ years." : {
       "comment" : "Table footnote showing average years of membership of all members.",
       "localizations" : {
@@ -140,23 +151,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lid sinds %1$@%2$@"
-          }
-        }
-      }
-    },
-    "Keywords" : {
-      "comment" : "HTML table header for member's keywords.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keywords"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trefwoorden"
           }
         }
       }
@@ -263,36 +257,24 @@
         }
       }
     },
-    "Too many keywords" : {
+    "Too many expertises" : {
       "comment" : "Shown if photographer has >3 keywords",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Too many keywords"
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Teveel trefwoorden"
+            "value" : "Teveel expertises"
           }
         }
       }
     },
-    "Unofficial keyword. It has no translations yet." : {
-      "comment" : "Hint for keyword without localization",
+    "Unofficial expertise. It has no translations yet." : {
+      "comment" : "Hint for expertise without localization",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unofficial keyword. It has no translations yet."
-          }
-        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dit is nog geen officieel trefwoord, en heeft geen vertalingen."
+            "value" : "Dit is nog geen officieel expertise, en heeft geen vertalingen."
           }
         }
       }

@@ -51,12 +51,12 @@ extension PhotoClubHubHtmlApp {
 
         // load list of keywords and languages from root.Level0.json file
         let level0BackgroundContext = makeBgContext(ctxName: "Level 0 loader")
-        _ = Level0JsonReader(bgContext: level0BackgroundContext, useOnlyInBundleFile: false)
+        _ = Level0JsonReader(bgContext: level0BackgroundContext, isInTestBundle: false, useOnlyInBundleFile: false)
 
         // load list of photo clubs and museums from root.Level1.json file
         let level1BackgroundContext = makeBgContext(ctxName: "Level 1 loader")
         _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
-                             useOnlyInBundleFile: false)
+                             isInTestBundle: false, useOnlyInBundleFile: false)
 
         // load current/former members of Fotogroep De Gender
         let genderBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgDeGender")
@@ -72,6 +72,11 @@ extension PhotoClubHubHtmlApp {
         let bellusBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcBellusImago")
         _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
                                                useOnlyInBundleFile: false)
+
+        // load current/former members of Fotogroep Oirschot
+        let oirschotBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgOirschot")
+        _ = FotogroepOirschotMembersProvider(bgContext: oirschotBackgroundContext,
+                                             useOnlyInBundleFile: false)
 
         if includeXampleClubs {
 

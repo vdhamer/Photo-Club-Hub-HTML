@@ -16,6 +16,8 @@ struct MakeTableResult {
     let memberCountWithStartDate: Int
 }
 
+let maxKeywordsPerMember: Int = 2
+
 extension Members {
 
     // former: whether to list former members or current members
@@ -58,7 +60,7 @@ extension Members {
                 header: {
                     String(localized: "Name",
                            table: "HTML", comment: "HTML table header for member's name column.")
-                    String(localized: "Keywords",
+                    String(localized: "Area of expertise",
                            table: "HTML", comment: "HTML table header for member's keywords.")
                     String(localized: "Own website",
                            table: "HTML", comment: "HTML table header for member's own website column.")
@@ -169,11 +171,12 @@ extension Members {
                                              localizedKeywordResult.delimiterToAppend
                     localizedKeywordHint = localizedKeywordResult.localizedKeyword!.usage // may be nil
                 } else { // use keyword.id if the keyword has no translations are available
-                    localizedKeywordString = "(" + localizedKeywordResult.id + ")" + // "()" is for unofficial keywords
+                    localizedKeywordString = "(" + localizedKeywordResult.id + ")" + // "()" is for unofficial expertise
                                              localizedKeywordResult.delimiterToAppend
                     if localizedKeywordResult.customHint == nil {
-                        localizedKeywordHint = String(localized: "Unofficial keyword. It has no translations yet.",
-                                                       table: "HTML", comment: "Hint for keyword without localization")
+                        localizedKeywordHint = String(localized: "Unofficial expertise. It has no translations yet.",
+                                                      table: "HTML",
+                                                      comment: "Hint for expertise without localization")
                     } else {
                         localizedKeywordHint = localizedKeywordResult.customHint // special overrule of mouseover
                     }
@@ -226,13 +229,13 @@ extension Members {
         }
 
         // limit size to 3 displayed keywords
-        if result3.count <= 3 { return result3 } // no clipping needed
+        if result3.count <= maxKeywordsPerMember { return result3 } // no clipping needed
         var result4 = [LocalizedKeywordResult]()
-        for index in 0...2 {
-            result4.append(result3[index]) // copy the (aphabetically) first three LocalizedKeywordResult elements
+        for index in 1...maxKeywordsPerMember {
+            result4.append(result3[index-1]) // copy the (aphabetically) first three LocalizedKeywordResult elements
         }
         let moreKeyword = Keyword.findCreateUpdateStandard(context: moc,
-                                                           id: String(localized: "Too many keywords", table: "HTML",
+                                                           id: String(localized: "Too many expertises", table: "HTML",
                                                                       comment: "Shown if photographer has >3 keywords"),
                                                            name: [],
                                                            usage: [])

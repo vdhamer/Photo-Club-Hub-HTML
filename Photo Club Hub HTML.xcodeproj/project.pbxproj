@@ -81,11 +81,24 @@
 			);
 			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
 		};
+		D0F00CCE2DE4B770002A2E12 /* Exceptions for "Photo Club Hub Data" folder in "Photo Club Hub DataTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Tests/Photo Club Hub DataTests/JSON/abstractKeyword.level0.json",
+				"Tests/Photo Club Hub DataTests/JSON/empty.level0.json",
+				"Tests/Photo Club Hub DataTests/JSON/language.level0.json",
+				"Tests/Photo Club Hub DataTests/JSON/languages.level0.json",
+			);
+			target = D05E36A52DD253A7005697AC /* Photo Club Hub DataTests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D05E36722DD252C5005697AC /* Photo Club Hub Data */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D0F00CCE2DE4B770002A2E12 /* Exceptions for "Photo Club Hub Data" folder in "Photo Club Hub DataTests" target */,
+			);
 			path = "Photo Club Hub Data";
 			sourceTree = "<group>";
 		};
