@@ -4,20 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Photo Club Hub Data.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-<<<<<<< Updated upstream
-			<integer>2</integer>
-=======
-			<integer>1</integer>
-		</dict>
-		<key>Photo Club Hub HTML.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>0</integer>
->>>>>>> Stashed changes
-		</dict>
 		<key>Photo Club Hub HTML.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
