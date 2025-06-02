@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 import CoreLocation // for CLLocationCoordinate2DMake
+import Photo_Club_Hub_Data // for Organization
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) fileprivate var viewContext
@@ -132,8 +133,8 @@ struct ContentView: View {
             let organizationTypeEnum: OrganizationTypeEnum = OrganizationTypeEnum.club
             let town = "Eindhoven"
             let fullName = "Org #\(newCount)"
-            let organizationID = OrganizationID(fullName: fullName, town: town)
-            let organizationIdPlus = OrganizationIdPlus(id: organizationID, nickname: "Nickname#\(newCount)")
+            let organizationIdPlus = OrganizationIdPlus(fullName: fullName, town: town, // OrganizationID part
+                                                        nickname: "Nickname#\(newCount)")
 
             _ = Organization.findCreateUpdate(context: viewContext, // can be foreground of background context
                                               organizationTypeEnum: organizationTypeEnum,
@@ -142,7 +143,7 @@ struct ContentView: View {
                                               coordinates: CLLocationCoordinate2DMake(
                                                   Double.random(in: -180...180),
                                                   Double.random(in: -180...180)),
-                                              optionalFields: OrganizationOptionalFields()
+                                              optionalFields: OrganizationOptionalFields() // empty
             )
 
             do {

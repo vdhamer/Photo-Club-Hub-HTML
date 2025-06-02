@@ -10,10 +10,11 @@ import Ignite // for Site
 import SwiftUI // for @State
 import CoreData // for NSManagedObjectContext
 import CoreLocation // for CLLocationCoordinate2DMake
+import Photo_Club_Hub_Data // for Organization
 
 struct MemberSite: Site {
     var name = "Leden"
-    // IMPORTANT: append "/fgDeGender" (nickname) to URL string unless running on LocalHost
+    // IMPORTANT: http://www.vdhamer.com gives localhost result, http://www.vdhamer.com works on remote site
     var url: URL = URL("http://www.vdhamer.com")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
@@ -23,39 +24,56 @@ struct MemberSite: Site {
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
-        let deGenderID = OrganizationID(fullName: "Fotogroep de Gender", town: "Eindhoven")
-        let deGenderIDPlus = OrganizationIdPlus(id: deGenderID, nickname: "fgDeGender")
+
+        let deGenderIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender", town: "Eindhoven",
+                                                nickname: "fgDeGender")
         let club0: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: deGenderIDPlus,
-                                                                // real coordinates added in xxxxxxx.level2.json
-                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                                optionalFields: OrganizationOptionalFields())
+                                                                idPlus: deGenderIdPlus)
 
-        let waalreID = OrganizationID(fullName: "Fotogroep Waalre", town: "Waalre")
-        let waalreIDPlus = OrganizationIdPlus(id: waalreID, nickname: "fgWaalre")
+        let waalreIdPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre", town: "Waalre",
+                                              nickname: "fgWaalre")
         let club1: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: waalreIDPlus,
-                                                                // real coordinates added in xxxxxxx.level2.json
-                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                                optionalFields: OrganizationOptionalFields())
+                                                                idPlus: waalreIdPlus)
 
-        let bellusImagoID = OrganizationID(fullName: "Fotoclub Bellus Imago", town: "Veldhoven")
-        let bellusImagoIDPlus = OrganizationIdPlus(id: bellusImagoID, nickname: "fcBellusImago")
+        let bellusImagoIdPlus = OrganizationIdPlus(fullName: "Fotoclub Bellus Imago", town: "Veldhoven",
+                                                   nickname: "fcBellusImago")
         let club2: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
-                                                                idPlus: bellusImagoIDPlus,
-                                                                // real coordinates added in xxxxxxx.level2.json
-                                                                coordinates: CLLocationCoordinate2DMake(0, 0),
-                                                                optionalFields: OrganizationOptionalFields())
+                                                                idPlus: bellusImagoIdPlus)
+
+        let xampleMinIdPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data", town: "Rotterdam",
+                                                 nickname: "XampleMin")
+        let club3: Organization = Organization.findCreateUpdate(context: moc,
+                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+                                                                idPlus: xampleMinIdPlus)
+
+        let xampleMaxIdPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data", town: "Amsterdam",
+                                                 nickname: "XampleMax")
+        let club4: Organization = Organization.findCreateUpdate(context: moc,
+                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+                                                                idPlus: xampleMaxIdPlus)
+
+        let ericameraIdPlus = OrganizationIdPlus(fullName: "Fotoclub Ericamera", town: "Eindhoven",
+                                                 nickname: "fcEricamera")
+        let club5: Organization = Organization.findCreateUpdate(context: moc,
+                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+                                                                idPlus: ericameraIdPlus)
+
+        let oirschotIdPlus = OrganizationIdPlus(fullName: "Fotogroep Oirschot", town: "Oirschot",
+                                                nickname: "fgOirschot")
+        let club6: Organization = Organization.findCreateUpdate(context: moc,
+                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+                                                                idPlus: oirschotIdPlus)
 
         self.moc = moc
 
-        let chosenClubIX: Int = 0  // roundabout way to avoid warnings about unused properties
-        let clubs = [club0, club1, club2]
+        let chosenClubIX: Int = 0  // roundabout way to avoid SwiftLint warnings about unused properties
+        let clubs = [club0, club1, club2, club3, club4, club5, club6]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
         self.homePage = Members(moc: moc, club: club)
     }
+
 }
