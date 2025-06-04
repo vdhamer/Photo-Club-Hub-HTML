@@ -94,10 +94,10 @@ struct ContentView: View {
                      comment: "Count of individuals in database Photographer table")
                 Text("◼ \(allMembers.count) club memberships", tableName: "SwiftUI",
                      comment: "Count of members in database")
-                Text("◼ \(allKeywords.count) keywords defined", tableName: "SwiftUI",
-                     comment: "Count of keywords in database")
-                Text("◼ \(allPhotographerKeywords.count) keywords usages", tableName: "SwiftUI",
-                     comment: "Count of keyword usages in database")
+                Text("◼ \(allKeywords.count) expertises defined", tableName: "SwiftUI",
+                     comment: "Count of expertises in database")
+                Text("◼ \(allPhotographerKeywords.count) expertises used", tableName: "SwiftUI",
+                     comment: "Count of expertise usages in database")
             }
             .foregroundStyle(.secondary)
             .frame(height: 5)

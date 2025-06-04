@@ -35,36 +35,36 @@
         }
       }
     },
-    "◼ %lld keywords defined" : {
-      "comment" : "Count of keywords in database",
+    "◼ %lld expertises defined" : {
+      "comment" : "Count of expertises in database",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "◼ %lld keywords defined"
+            "value" : "◼ %lld expertises defined"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "◼ %lld trefwoorden"
+            "value" : "◼ %lld expertise definities"
           }
         }
       }
     },
-    "◼ %lld keywords usages" : {
-      "comment" : "Count of keyword usages in database",
+    "◼ %lld expertises used" : {
+      "comment" : "Count of expertise usages in database",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "◼ %lld keywords usages"
+            "value" : "◼ %lld expertises used"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "◼ %lld trefwoord toekenningen"
+            "value" : "◼ %lld expertise toekenningen"
           }
         }
       }
