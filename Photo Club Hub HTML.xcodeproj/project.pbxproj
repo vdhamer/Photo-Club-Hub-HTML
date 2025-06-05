@@ -74,6 +74,8 @@
 		D0B9D5012CC443D900B1541C /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				images/Screenshot_app.png,
+				images/Screenshot_comparison.png,
 				images/Screenshot_comparison.psd,
 				images/Screenshot_Ignite.png,
 				LICENSE.md,

@@ -14,7 +14,7 @@ import Photo_Club_Hub_Data // for Organization
 
 struct MemberSite: Site {
     var name = "Leden"
-    // IMPORTANT: http://www.vdhamer.com gives localhost result, http://www.vdhamer.com works on remote site
+    // IMPORTANT: http://www.vdhamer.com gives localhost result, http://www.vdhamer.com/fgDeGender works on remote site
     var url: URL = URL("http://www.vdhamer.com")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"

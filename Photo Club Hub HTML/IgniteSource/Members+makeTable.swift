@@ -186,9 +186,10 @@ extension Members {
 
                 if localizedKeywordHint != nil {
                     returnResult.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
-                        .padding(.none)
+                        .padding(.leading, .large)
                         .margin(0)
                         .hint(text: localizedKeywordHint!)
+                        .horizontalAlignment(.leading)
                     )
                 } else { // omit hint if there is no usage string provided
                    returnResult.append(Text(localizedKeywordString) // we can show a normal or warning usage hint

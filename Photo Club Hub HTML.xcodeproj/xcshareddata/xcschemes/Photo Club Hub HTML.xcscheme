@@ -68,7 +68,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       disableMainThreadChecker = "YES"
       disablePerformanceAntipatternChecker = "YES"
-      language = "nl"
+      language = "en"
       region = "NL"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
