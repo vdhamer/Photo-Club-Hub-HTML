@@ -124,7 +124,7 @@ extension Members {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column(items: listPhotographerKeywords)
+            Column(items: listPhotographerExpertises)
                 .verticalAlignment(.middle)
 
             if photographer.photographerWebsite == nil { // photographer's optional own website
@@ -159,20 +159,21 @@ extension Members {
 
         }
 
-        func listPhotographerKeywords() -> [PageElement] { // defined inside makeMemberRow to get access to photographer
-            var result = [PageElement]()
+        func listPhotographerExpertises() -> [PageElement] { // defined inside makeMemberRow to access photographer
+            var returnResult = [PageElement]()
 
-            for localizedKeywordResult: LocalizedKeywordResult in localizeAndSort(moc: moc,
-                                                                                  photographer.photographerKeywords) {
+            for localizedKeywordResult: LocalizedKeywordResult
+                    in localizeSortAndClip(moc: moc,
+                                           photographer.photographerKeywords) {
+
                 let localizedKeywordString: String
                 let localizedKeywordHint: String? // usage String is optional for a LocalizedKeyword struct
+
                 if localizedKeywordResult.localizedKeyword != nil {
-                    localizedKeywordString = localizedKeywordResult.localizedKeyword!.name +
-                                             localizedKeywordResult.delimiterToAppend
+                    localizedKeywordString = "🏵️ " + localizedKeywordResult.localizedKeyword!.name
                     localizedKeywordHint = localizedKeywordResult.localizedKeyword!.usage // may be nil
                 } else { // use keyword.id if the keyword has no translations are available
-                    localizedKeywordString = "(" + localizedKeywordResult.id + ")" + // "()" is for unofficial expertise
-                                             localizedKeywordResult.delimiterToAppend
+                    localizedKeywordString = "🪲 " + localizedKeywordResult.id // for an unstandardized expertise
                     if localizedKeywordResult.customHint == nil {
                         localizedKeywordHint = String(localized: "Unofficial expertise. It has no translations yet.",
                                                       table: "HTML",
@@ -184,26 +185,26 @@ extension Members {
                 }
 
                 if localizedKeywordHint != nil {
-                    result.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
+                    returnResult.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
                         .padding(.none)
                         .margin(0)
                         .hint(text: localizedKeywordHint!)
                     )
                 } else { // omit hint if there is no usage string provided
-                   result.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
+                   returnResult.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
                         .padding(.none)
                         .margin(0)
                     )
                 }
             }
 
-            return result
+            return returnResult
         }
 
     }
 
-    fileprivate func localizeAndSort(moc: NSManagedObjectContext,
-                                     _ photographerkeywords: Set<PhotographerKeyword>) -> [LocalizedKeywordResult] {
+    fileprivate func localizeSortAndClip(moc: NSManagedObjectContext,
+                                         _ photographerkeywords: Set<PhotographerKeyword>) -> [LocalizedKeywordResult] {
         // first translate keywords to appropriate language and make elements non-optional
         var result1 = [LocalizedKeywordResult]()
         for photographerKeyword in photographerkeywords where photographerKeyword.keyword_ != nil {
@@ -222,9 +223,7 @@ extension Members {
             if count < maxCount2 { // turn this into ["keywordA,", "keywordB,", "keywordC"]
                 result3.append(item) // accept appending "," to item
             } else {
-                result3.append(LocalizedKeywordResult(localizedKeyword: item.localizedKeyword,
-                                                      id: item.id,
-                                                      delimiterToAppend: ""))
+                result3.append(LocalizedKeywordResult(localizedKeyword: item.localizedKeyword, id: item.id))
             }
         }
 
@@ -242,7 +241,6 @@ extension Members {
         let moreLocalizedKeyword: LocalizedKeywordResult = moreKeyword.selectedLocalizedKeyword
         result4.append(LocalizedKeywordResult(localizedKeyword: moreLocalizedKeyword.localizedKeyword,
                                               id: moreKeyword.id,
-                                              delimiterToAppend: "", // no comma
                                               customHint: customHint(localizedKeywordResults: result3)))
 
         return result4
@@ -253,13 +251,13 @@ extension Members {
 
         for localizedKeywordResult in localizedKeywordResults {
             if localizedKeywordResult.localizedKeyword != nil {
-                hint.append(localizedKeywordResult.localizedKeyword!.name + ", ")
+                hint.append("🏵️ " + localizedKeywordResult.localizedKeyword!.name + " ")
             } else {
-                hint.append(localizedKeywordResult.id + ", ")
+                hint.append("🪲 " + localizedKeywordResult.id + " ")
             }
         }
 
-        return hint.trimmingCharacters(in: CharacterSet(charactersIn: ", "))
+        return hint.trimmingCharacters(in: CharacterSet(charactersIn: " "))
     }
 
     fileprivate func fullName(givenName: String,
