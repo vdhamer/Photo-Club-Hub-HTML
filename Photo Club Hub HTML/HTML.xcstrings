@@ -59,9 +59,15 @@
         }
       }
     },
-    "Area of expertise" : {
+    "Areas of expertise" : {
       "comment" : "HTML table header for member's keywords.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Areas of expertise"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",

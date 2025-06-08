@@ -60,7 +60,7 @@ extension Members {
                 header: {
                     String(localized: "Name",
                            table: "HTML", comment: "HTML table header for member's name column.")
-                    String(localized: "Area of expertise",
+                    String(localized: "Areas of expertise",
                            table: "HTML", comment: "HTML table header for member's keywords.")
                     String(localized: "Own website",
                            table: "HTML", comment: "HTML table header for member's own website column.")
