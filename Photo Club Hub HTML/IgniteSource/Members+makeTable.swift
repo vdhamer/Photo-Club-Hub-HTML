@@ -170,10 +170,12 @@ extension Members {
                 let localizedKeywordHint: String? // usage String is optional for a LocalizedKeyword struct
 
                 if localizedKeywordResult.localizedKeyword != nil {
-                    localizedKeywordString = "🏵️ " + localizedKeywordResult.localizedKeyword!.name
+                    localizedKeywordString = getIconString(standard: true) + " " +
+                                             localizedKeywordResult.localizedKeyword!.name
                     localizedKeywordHint = localizedKeywordResult.localizedKeyword!.usage // may be nil
                 } else { // use keyword.id if the keyword has no translations are available
-                    localizedKeywordString = "🪲 " + localizedKeywordResult.id // for an unstandardized expertise
+                    localizedKeywordString = getIconString(standard: true) + " " +
+                                             localizedKeywordResult.id // for an unstandardized expertise
                     if localizedKeywordResult.customHint == nil {
                         localizedKeywordHint = String(localized: "Unofficial expertise. It has no translations yet.",
                                                       table: "HTML",
@@ -252,9 +254,9 @@ extension Members {
 
         for localizedKeywordResult in localizedKeywordResults {
             if localizedKeywordResult.localizedKeyword != nil {
-                hint.append("🏵️ " + localizedKeywordResult.localizedKeyword!.name + " ")
+                hint.append(getIconString(standard: true) + " " + localizedKeywordResult.localizedKeyword!.name + " ")
             } else {
-                hint.append("🪲 " + localizedKeywordResult.id + " ")
+                hint.append(getIconString(standard: true) + " " + localizedKeywordResult.id + " ")
             }
         }
 
