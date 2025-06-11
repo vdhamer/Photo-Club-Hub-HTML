@@ -261,6 +261,11 @@ extension Members {
         return hint.trimmingCharacters(in: CharacterSet(charactersIn: " "))
     }
 
+    fileprivate func getIconString(standard: Bool) -> String {
+        let temp = LocalizedExpertiseResultLists(standardList: [], nonstandardList: [])
+        return standard ? temp.standard.icon : temp.nonstandard.icon
+    }
+
     fileprivate func fullName(givenName: String,
                               infixName: String = "",
                               familyName: String) -> String {
