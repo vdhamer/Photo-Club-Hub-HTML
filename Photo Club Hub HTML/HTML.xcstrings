@@ -263,28 +263,6 @@
         }
       }
     },
-    "Too many expertises" : {
-      "comment" : "Shown if photographer has >3 keywords",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Teveel expertises"
-          }
-        }
-      }
-    },
-    "Unofficial expertise. It has no translations yet." : {
-      "comment" : "Hint for expertise without localization",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dit is nog geen officieel expertise, en heeft geen vertalingen."
-          }
-        }
-      }
-    },
     "Web site" : {
       "comment" : "Clickable link to photographer's web site",
       "localizations" : {

@@ -91,6 +91,23 @@
         }
       }
     },
+    "Expertises: %@" : {
+      "comment" : "Hint when providing too many expertises",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertises: %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertises: %@"
+          }
+        }
+      }
+    },
     "external coach" : {
       "comment" : "Relationship status of member within a club. Used in concatenations.",
       "extractionState" : "stale",
@@ -303,6 +320,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "onbekenden"
+          }
+        }
+      }
+    },
+    "Unofficial expertise. It has no translations yet." : {
+      "comment" : "Hint for expertise without localization",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unofficial expertise. It has no translations yet."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dit is nog geen officieel expertise, en heeft geen vertalingen."
           }
         }
       }

@@ -159,94 +159,75 @@ extension Members {
 
         }
 
-        func listPhotographerExpertises() -> [PageElement] { // defined inside makeMemberRow to access photographer
-            var returnResult = [PageElement]()
+        // Returns Ignite PageElement rendering the lists of standard or nonstandard Expertise areas.
+        func generatePageElements(localizedExpertiseResultLists: LocalizedExpertiseResultLists, isStandard: Bool)
+                                  -> PageElement? {
+            let localizedExpertiseResultList = isStandard ? localizedExpertiseResultLists.standard :
+                                                          localizedExpertiseResultLists.nonstandard
+            guard !localizedExpertiseResultList.list.isEmpty else { return nil } // nothing to display
 
-            for localizedKeywordResult: LocalizedKeywordResult
-                    in localizeSortAndClip(moc: moc,
-                                           photographer.photographerKeywords) {
+            var hint: String?
+            var customHint: String = ""
+            var string = localizedExpertiseResultLists.getIconString(standard: isStandard) // line starts with icon
 
-                let localizedKeywordString: String
-                let localizedKeywordHint: String? // usage String is optional for a LocalizedKeyword struct
+            for localizedExpertiseResult in localizedExpertiseResultList.list {
+                string.append(" " + localizedExpertiseResult.name
+                              + localizedExpertiseResult.delimiterToAppend)
+                hint = localizedExpertiseResult.localizedKeyword?.usage
+                customHint = localizedExpertiseResult.customHint ?? ""
+            }
 
-                if localizedKeywordResult.localizedKeyword != nil {
-                    localizedKeywordString = getIconString(standard: true) + " " +
-                                             localizedKeywordResult.localizedKeyword!.name
-                    localizedKeywordHint = localizedKeywordResult.localizedKeyword!.usage // may be nil
-                } else { // use keyword.id if the keyword has no translations are available
-                    localizedKeywordString = getIconString(standard: true) + " " +
-                                             localizedKeywordResult.id // for an unstandardized expertise
-                    if localizedKeywordResult.customHint == nil {
-                        localizedKeywordHint = String(localized: "Unofficial expertise. It has no translations yet.",
-                                                      table: "HTML",
-                                                      comment: "Hint for expertise without localization")
-                    } else {
-                        localizedKeywordHint = localizedKeywordResult.customHint // special overrule of mouseover
-                    }
-
-                }
-
-                if localizedKeywordHint != nil {
-                    returnResult.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
-                        .padding(.leading, .large)
-                        .margin(0)
-                        .hint(text: localizedKeywordHint!)
+            if !isStandard {
+                if hint == nil && customHint == "" {
+                    return Text(string)
                         .horizontalAlignment(.leading)
-                    )
-                } else { // omit hint if there is no usage string provided
-                   returnResult.append(Text(localizedKeywordString) // we can show a normal or warning usage hint
                         .padding(.none)
-                        .margin(0)
-                    )
+                        .margin(5)
+                        .hint(text: String(localized: "Unofficial expertise. It has no translations yet.",
+                                           table: "Package",
+                                           comment: "Hint for expertise without localization"))
+                } else {
+                    return Text(string)
+                        .horizontalAlignment(.leading)
+                        .padding(.none)
+                        .margin(5)
+                        .hint(text: String(localized: "Expertises: \(customHint)",
+                                           table: "Package",
+                                           comment: "Hint when providing too many expertises"))
+                }
+            } else {
+                if hint != nil {
+                    return Text(string)
+                        .horizontalAlignment(.leading)
+                        .padding(.none)
+                        .margin(5)
+                        .hint(text: hint!)
+                } else {
+                    return Text(string)
+                        .horizontalAlignment(.leading)
+                        .padding(.none)
+                        .margin(5)
                 }
             }
-
-            return returnResult
         }
 
-    }
+        func listPhotographerExpertises() -> [PageElement] { // defined inside makeMemberRow to access photographer
+            var pageElements = [PageElement]()
 
-    fileprivate func localizeSortAndClip(moc: NSManagedObjectContext,
-                                         _ photographerkeywords: Set<PhotographerKeyword>) -> [LocalizedKeywordResult] {
-        // first translate keywords to appropriate language and make elements non-optional
-        var result1 = [LocalizedKeywordResult]()
-        for photographerKeyword in photographerkeywords where photographerKeyword.keyword_ != nil {
-            result1.append(photographerKeyword.keyword_!.selectedLocalizedKeyword)
+            let localizedExpertiseResultsLists = LocalizedExpertiseResultLists(moc: moc,
+                                                                               photographer.photographerKeywords)
+
+            let standard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
+                                                isStandard: true)
+            if let standard { pageElements.append(standard) }
+
+            let nonstandard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
+                                                   isStandard: false)
+            if let nonstandard { pageElements.append(nonstandard) }
+
+            return pageElements
         }
 
-        // then dsort based on selected language.  Has some special behavior for keywords without translation
-        let result2: [LocalizedKeywordResult] = result1.sorted()
-        let maxCount2 = result2.count // for ["keywordA", "keywordB", "keywordC"] maxCount is 3
-
-        // insert delimeters where needed
-        var result3 = [LocalizedKeywordResult]() // start with empty list
-        var count: Int = 0
-        for item in result2 {
-            count += 1
-            if count < maxCount2 { // turn this into ["keywordA,", "keywordB,", "keywordC"]
-                result3.append(item) // accept appending "," to item
-            } else {
-                result3.append(LocalizedKeywordResult(localizedKeyword: item.localizedKeyword, id: item.id))
-            }
-        }
-
-        // limit size to 3 displayed keywords
-        if result3.count <= maxKeywordsPerMember { return result3 } // no clipping needed
-        var result4 = [LocalizedKeywordResult]()
-        for index in 1...maxKeywordsPerMember {
-            result4.append(result3[index-1]) // copy the (aphabetically) first three LocalizedKeywordResult elements
-        }
-        let moreKeyword = Keyword.findCreateUpdateStandard(context: moc,
-                                                           id: String(localized: "Too many expertises", table: "HTML",
-                                                                      comment: "Shown if photographer has >3 keywords"),
-                                                           name: [],
-                                                           usage: [])
-        let moreLocalizedKeyword: LocalizedKeywordResult = moreKeyword.selectedLocalizedKeyword
-        result4.append(LocalizedKeywordResult(localizedKeyword: moreLocalizedKeyword.localizedKeyword,
-                                              id: moreKeyword.id,
-                                              customHint: customHint(localizedKeywordResults: result3)))
-
-        return result4
     }
 
     fileprivate func customHint(localizedKeywordResults: [LocalizedKeywordResult]) -> String {
