@@ -150,7 +150,7 @@ extension Photographer {
 
         for photographerKeywordJSON in optionalFields.photographerKeywords {
             let photographerKeywordID = photographerKeywordJSON.stringValue
-            let keyword = Keyword.findCreateUpdateUndefStandard(context: bgContext,
+            let keyword = Expertise.findCreateUpdateUndefStandard(context: bgContext,
                                                                 id: photographerKeywordID,
                                                                 name: [],
                                                                 usage: [])

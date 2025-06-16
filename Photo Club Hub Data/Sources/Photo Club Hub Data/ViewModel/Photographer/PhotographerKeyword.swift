@@ -14,7 +14,7 @@ extension PhotographerKeyword {
         fatalError("init() is not available. Use .findCreateUpdate instead.")
     }
 
-    var keyword: Keyword {
+    var keyword: Expertise {
         get {
             if let keyword = keyword_ {
                 return keyword
@@ -46,7 +46,7 @@ extension PhotographerKeyword {
     // Update existing attributes or fill the new object
     static func findCreateUpdate(context: NSManagedObjectContext, // can be foreground or background context
                                  photographer: Photographer,
-                                 keyword: Keyword
+                                 keyword: Expertise
                                 ) -> PhotographerKeyword {
 
         // execute fetchRequest to get keyword object for id=id. Query could return multiple - but shouldn't.

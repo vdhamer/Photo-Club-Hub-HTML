@@ -54,7 +54,7 @@ public struct LocalizedExpertiseResultLists {
 
         // Step 5. remove delimeter after last element
         if sorted.count > maxKeywordsPerMember { // if list overflows, add a warning
-            let moreKeyword = Keyword.findCreateUpdateNonStandard(
+            let moreKeyword = Expertise.findCreateUpdateNonStandard(
                                         context: moc,
                                         id: String(localized: "Too many expertises",
                                                    table: "Package",

@@ -23,7 +23,7 @@ public struct Model {
             try deleteEntitiesOfOneType("LocalizedRemark", context: context)
             try deleteEntitiesOfOneType("LocalizedKeyword", context: context)
             try deleteEntitiesOfOneType("PhotographerKeyword", context: context)
-            try deleteEntitiesOfOneType("Keyword", context: context)
+            try deleteEntitiesOfOneType("Expertise", context: context)
             try deleteEntitiesOfOneType("Language", context: context)
 
             print(forcedDataRefresh + "was successful.")

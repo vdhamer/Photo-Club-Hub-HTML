@@ -47,10 +47,10 @@ struct ContentView: View {
     fileprivate var allMembers: FetchedResults<MemberPortfolio>
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Keyword.id_, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Expertise.id_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    fileprivate var allKeywords: FetchedResults<Keyword> // duplicates Keyword.getAll()
+    fileprivate var allKeywords: FetchedResults<Expertise> // duplicates Keyword.getAll()
 
     @FetchRequest(
         sortDescriptors: [],

@@ -35,7 +35,7 @@ extension LocalizedKeyword {
         }
     }
 
-    var keyword: Keyword { // getter
+    var keyword: Expertise { // getter
         if let keyword = keyword_ {
             return keyword
         } else {
@@ -56,7 +56,7 @@ extension LocalizedKeyword {
     // Find existing Keyword object or create a new one.
     // Update existing attributes or fill the new object
     static func findCreateUpdate(context: NSManagedObjectContext, // can be foreground or background context
-                                 keyword: Keyword,
+                                 keyword: Expertise,
                                  language: Language,
                                  localizedName: String?, // nil used if no update to LocalizedKeyword.name is desired
                                  localizedUsage: String? // mil used if no value of LocalizedKeyword.usage is available

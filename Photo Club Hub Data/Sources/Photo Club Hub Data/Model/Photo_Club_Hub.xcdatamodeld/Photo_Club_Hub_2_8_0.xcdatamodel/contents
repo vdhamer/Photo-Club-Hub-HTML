@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788" systemVersion="24E263" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Keyword" representedClassName="Keyword" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24233.11" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Expertise" representedClassName="Expertise" elementID="Keyword" syncable="YES" codeGenerationType="class">
         <attribute name="id_" attributeType="String" defaultValueString="ID is missing"/>
         <attribute name="isStandard" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="keyword_" inverseEntity="LocalizedKeyword"/>
@@ -37,7 +37,7 @@
     <entity name="LocalizedKeyword" representedClassName="LocalizedKeyword" syncable="YES" codeGenerationType="class">
         <attribute name="name_" attributeType="String" elementID="name"/>
         <attribute name="usage" optional="YES" attributeType="String"/>
-        <relationship name="keyword_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="localizedKeywords_" inverseEntity="Keyword"/>
+        <relationship name="keyword_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="localizedKeywords_" inverseEntity="Expertise"/>
         <relationship name="language_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="localizedKeywords_" inverseEntity="Language"/>
     </entity>
     <entity name="LocalizedRemark" representedClassName="LocalizedRemark" syncable="YES" codeGenerationType="class">
@@ -134,7 +134,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="PhotographerKeyword" representedClassName="PhotographerKeyword" syncable="YES" codeGenerationType="class">
-        <relationship name="keyword_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Keyword" inverseName="photographerKeywords_" inverseEntity="Keyword"/>
+        <relationship name="keyword_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="photographerKeywords_" inverseEntity="Expertise"/>
         <relationship name="photographer_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photographer" inverseName="photographerKeywords_" inverseEntity="Photographer"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -145,7 +145,7 @@
     </entity>
     <configuration name="Level0">
         <memberEntity name="Language"/>
-        <memberEntity name="Keyword"/>
+        <memberEntity name="Expertise"/>
         <memberEntity name="LocalizedKeyword"/>
         <memberEntity name="OrganizationType"/>
         <memberEntity name="Level0"/>
