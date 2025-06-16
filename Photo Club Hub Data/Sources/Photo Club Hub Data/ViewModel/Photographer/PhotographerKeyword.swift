@@ -16,14 +16,14 @@ extension PhotographerKeyword {
 
     var keyword: Expertise {
         get {
-            if let keyword = keyword_ {
-                return keyword
+            if let expertise = expertise_ {
+                return expertise
             } else {
                 fatalError("Error because keyword is nil") // something is fundamentally wrong if this happens
             }
         }
         set {
-            keyword_ = newValue
+            expertise_ = newValue
         }
     }
 
@@ -51,7 +51,7 @@ extension PhotographerKeyword {
 
         // execute fetchRequest to get keyword object for id=id. Query could return multiple - but shouldn't.
         let fetchRequest: NSFetchRequest<PhotographerKeyword> = PhotographerKeyword.fetchRequest()
-        let predicateFormat: String = "keyword_ = %@ AND photographer_ = %@" // avoid localization of query string
+        let predicateFormat: String = "expertise_ = %@ AND photographer_ = %@" // avoid localization of query string
         fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keyword, photographer])
 
         var photographerKeywords: [PhotographerKeyword]! = []
@@ -135,7 +135,7 @@ extension PhotographerKeyword {
     // count number of objects with a given id for a given photographer
     static func count(context: NSManagedObjectContext, keywordID: String, photographer: Photographer) -> Int {
         let fetchRequest: NSFetchRequest<PhotographerKeyword> = PhotographerKeyword.fetchRequest()
-        let predicateFormat: String = "keyword_.id_ = %@ && photographer_ = %@" // avoid localization
+        let predicateFormat: String = "expertise_.id_ = %@ && photographer_ = %@" // avoid localization
         fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keywordID, photographer])
 
         var photographerKeywords: [PhotographerKeyword]! = []
@@ -160,7 +160,7 @@ extension PhotographerKeyword {
 
         context.performAndWait {
             let fetchRequest: NSFetchRequest<PhotographerKeyword> = PhotographerKeyword.fetchRequest()
-            let predicateFormat: String = "keyword_.id_ = %@" // avoid localization
+            let predicateFormat: String = "expertise_.id_ = %@" // avoid localization
             fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keywordID])
 
             do {

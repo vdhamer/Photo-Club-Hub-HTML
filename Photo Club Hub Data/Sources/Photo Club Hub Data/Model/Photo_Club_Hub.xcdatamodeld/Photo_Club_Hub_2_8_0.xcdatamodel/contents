@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24233.11" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23788.4" systemVersion="24F74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Expertise" representedClassName="Expertise" elementID="Keyword" syncable="YES" codeGenerationType="class">
         <attribute name="id_" attributeType="String" defaultValueString="ID is missing"/>
         <attribute name="isStandard" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="keyword_" inverseEntity="LocalizedKeyword"/>
-        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerKeyword" inverseName="keyword_" inverseEntity="PhotographerKeyword"/>
+        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerKeyword" inverseName="expertise_" inverseEntity="PhotographerKeyword"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id_"/>
@@ -134,11 +134,11 @@
         </uniquenessConstraints>
     </entity>
     <entity name="PhotographerKeyword" representedClassName="PhotographerKeyword" syncable="YES" codeGenerationType="class">
-        <relationship name="keyword_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="photographerKeywords_" inverseEntity="Expertise"/>
+        <relationship name="expertise_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="photographerKeywords_" inverseEntity="Expertise" elementID="keyword_"/>
         <relationship name="photographer_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photographer" inverseName="photographerKeywords_" inverseEntity="Photographer"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
-                <constraint value="keyword_"/>
+                <constraint value="expertise_"/>
                 <constraint value="photographer_"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
