@@ -50,6 +50,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
+| Available via | App Store | URL |
 | Mobile friendly | yes | yes |
 | Lists clubs | yes | -✲ |
 | Lists photo museums | yes | -✲ |
@@ -61,9 +62,9 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | yes | - |
 | Languages | English, Dutch✲ | English, Dutch✲ |
+| Internal database | yes | - |
 | Data caching | partially✲ | partially✲ |
 | Concurrent data fetching | yes | yes |
-| Available via | App Store | URL |
 | Open source | [yes](https://github.com/vdhamer/Photo-Club-Hub) | [yes](https://github.com/vdhamer/Photo-Club-Hub-HTML) |
 
  ✲ = _might be improved or supported in the future_
