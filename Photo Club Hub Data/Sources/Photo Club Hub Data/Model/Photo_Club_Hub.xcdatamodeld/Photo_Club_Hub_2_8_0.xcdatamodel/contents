@@ -4,7 +4,7 @@
         <attribute name="id_" attributeType="String" defaultValueString="ID is missing"/>
         <attribute name="isStandard" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="expertise_" inverseEntity="LocalizedKeyword"/>
-        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerExpertise" inverseName="expertise_" inverseEntity="PhotographerExpertise"/>
+        <relationship name="photographerExpertises_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerExpertise" inverseName="expertise_" inverseEntity="PhotographerExpertise" elementID="photographerKeywords_"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id_"/>
@@ -134,7 +134,7 @@
         </uniquenessConstraints>
     </entity>
     <entity name="PhotographerExpertise" representedClassName="PhotographerExpertise" elementID="PhotographerKeyword" syncable="YES" codeGenerationType="class">
-        <relationship name="expertise_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="photographerKeywords_" inverseEntity="Expertise" elementID="keyword_"/>
+        <relationship name="expertise_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="photographerExpertises_" inverseEntity="Expertise" elementID="keyword_"/>
         <relationship name="photographer_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photographer" inverseName="photographerKeywords_" inverseEntity="Photographer"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
