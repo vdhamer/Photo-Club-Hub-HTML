@@ -3,7 +3,7 @@
     <entity name="Expertise" representedClassName="Expertise" elementID="Keyword" syncable="YES" codeGenerationType="class">
         <attribute name="id_" attributeType="String" defaultValueString="ID is missing"/>
         <attribute name="isStandard" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="keyword_" inverseEntity="LocalizedKeyword"/>
+        <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="expertise_" inverseEntity="LocalizedKeyword"/>
         <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerKeyword" inverseName="expertise_" inverseEntity="PhotographerKeyword"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -37,7 +37,7 @@
     <entity name="LocalizedKeyword" representedClassName="LocalizedKeyword" syncable="YES" codeGenerationType="class">
         <attribute name="name_" attributeType="String" elementID="name"/>
         <attribute name="usage" optional="YES" attributeType="String"/>
-        <relationship name="keyword_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="localizedKeywords_" inverseEntity="Expertise"/>
+        <relationship name="expertise_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="localizedKeywords_" inverseEntity="Expertise" elementID="keyword_"/>
         <relationship name="language_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="localizedKeywords_" inverseEntity="Language"/>
     </entity>
     <entity name="LocalizedRemark" representedClassName="LocalizedRemark" syncable="YES" codeGenerationType="class">

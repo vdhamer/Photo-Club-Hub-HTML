@@ -36,7 +36,7 @@ extension LocalizedKeyword {
     }
 
     var keyword: Expertise { // getter
-        if let keyword = keyword_ {
+        if let keyword = expertise_ {
             return keyword
         } else {
             fatalError("Error because keyword is nil") // something is fundamentally wrong if this happens
@@ -64,7 +64,7 @@ extension LocalizedKeyword {
 
         // execute fetchRequest to get keyword object for id=id. Query could return multiple keywords - but shouldn't.
         let fetchRequest: NSFetchRequest<LocalizedKeyword> = LocalizedKeyword.fetchRequest()
-        let predicateFormat: String = "keyword_ = %@ AND language_ = %@" // avoid localization of query string
+        let predicateFormat: String = "expertise_ = %@ AND language_ = %@" // avoid localization of query string
         fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keyword, language])
 
         var localizedKeywords: [LocalizedKeyword]! = []
@@ -103,7 +103,7 @@ extension LocalizedKeyword {
             if localizedName != nil {
                 localizedKeyword.name = localizedName!
             }
-            localizedKeyword.keyword_ = keyword
+            localizedKeyword.expertise_ = keyword
             localizedKeyword.language_ = language
             _ = localizedKeyword.update(context: context, localizedName: localizedName, localizedUsage: localizedUsage)
             LocalizedKeyword.save(context: context, errorText:
@@ -189,7 +189,7 @@ extension LocalizedKeyword {
         var localizedKeywords: [LocalizedKeyword]! = []
 
         let fetchRequest: NSFetchRequest<LocalizedKeyword> = LocalizedKeyword.fetchRequest()
-        let predicateFormat: String = "keyword_.id_ = %@ && language_.isoCode_ = %@" // avoid localization
+        let predicateFormat: String = "expertise_.id_ = %@ && language_.isoCode_ = %@" // avoid localization
         fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keywordID, languageIsoCode])
 
         context.performAndWait {
