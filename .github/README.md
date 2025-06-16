@@ -50,7 +50,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | :-----------: | :-------: |
 | Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
-| Available via | App Store | URL |
+| Available via | [App Store](https://apps.apple.com/us/app/photo-club-hub/id1178324330) | URLs |
 | Mobile friendly | yes | yes |
 | Lists clubs | yes | -✲ |
 | Lists photo museums | yes | -✲ |
