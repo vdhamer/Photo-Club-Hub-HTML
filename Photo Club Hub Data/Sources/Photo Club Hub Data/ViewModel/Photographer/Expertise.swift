@@ -143,9 +143,9 @@ extension Expertise {
             let language = Language.findCreateUpdate(context: context, isoCode: isoCode)
 
             let localizedString: String = localizedKeyword["localizedString"].string!
-            _ = LocalizedKeyword.findCreateUpdate(context: context,
-                                                  keyword: self, language: language,
-                                                  localizedName: localizedString, localizedUsage: nil)
+            _ = LocalizedExpertise.findCreateUpdate(context: context,
+                                                    keyword: self, language: language,
+                                                    localizedName: localizedString, localizedUsage: nil)
         }
 
         for localizedUsage in usage {
@@ -155,9 +155,9 @@ extension Expertise {
             let language = Language.findCreateUpdate(context: context, isoCode: isoCode)
 
             let localizedDescription: String = localizedUsage["localizedString"].string!
-            _ = LocalizedKeyword.findCreateUpdate(context: context,
-                                                  keyword: self, language: language,
-                                                  localizedName: nil, localizedUsage: localizedDescription)
+            _ = LocalizedExpertise.findCreateUpdate(context: context,
+                                                    keyword: self, language: language,
+                                                    localizedName: nil, localizedUsage: localizedDescription)
 
         }
 
@@ -256,8 +256,8 @@ extension Expertise {
         return keywords
     }
 
-    var localizedKeywords: Set<LocalizedKeyword> {
-        (localizedKeywords_ as? Set<LocalizedKeyword>) ?? []
+    var localizedExpertises: Set<LocalizedExpertise> {
+        (localizedKeywords_ as? Set<LocalizedExpertise>) ?? []
     }
 
     // Priority system to choose the most appropriate LocalizedKeyword for a given Keyword.
@@ -268,19 +268,19 @@ extension Expertise {
         for lang in Locale.preferredLanguages {
             let langID = lang.split(separator: "-").first?.uppercased() ?? "EN"
             // now check if one of the user's preferences is available for this Remark
-            for localizedKeyword in localizedKeywords where localizedKeyword.language.isoCodeAllCaps == langID {
+            for localizedKeyword in localizedExpertises where localizedKeyword.language.isoCodeAllCaps == langID {
                 return LocalizedKeywordResult(localizedKeyword: localizedKeyword, id: self.id)
             }
         }
 
         // second choice: most people speak English, at least let's pretend that is the case ;-)
-        for localizedKeyword in localizedKeywords where localizedKeyword.language.isoCodeAllCaps == "EN" {
+        for localizedKeyword in localizedExpertises where localizedKeyword.language.isoCodeAllCaps == "EN" {
             return LocalizedKeywordResult(localizedKeyword: localizedKeyword, id: self.id)
         }
 
         // third choice: use arbitrary (first) translation available for this keyword
-        if localizedKeywords.first != nil {
-            return LocalizedKeywordResult(localizedKeyword: localizedKeywords.first!, id: self.id)
+        if localizedExpertises.first != nil {
+            return LocalizedKeywordResult(localizedKeyword: localizedExpertises.first!, id: self.id)
         }
 
         return LocalizedKeywordResult(localizedKeyword: nil, id: self.id)

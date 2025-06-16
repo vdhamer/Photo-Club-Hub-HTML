@@ -96,12 +96,12 @@ extension PhotographerExpertise {
             // so far, this class has no other properties to populate
             _ = photographerKeyword.update(context: context)
             if Settings.extraCoreDataSaves {
-                LocalizedKeyword.save(context: context, errorText:
-                                          """
-                                          Could not create PhotographerKeyword for \
-                                          \"\(photographerKeyword.keyword.id)\" \
-                                          for \(photographerKeyword.photographer.fullNameFirstLast)
-                                          """)
+                LocalizedExpertise.save(context: context, errorText:
+                                        """
+                                        Could not create PhotographerKeyword for \
+                                        \"\(photographerKeyword.keyword.id)\" \
+                                        for \(photographerKeyword.photographer.fullNameFirstLast)
+                                        """)
             }
             return photographerKeyword
         }

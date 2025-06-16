@@ -3,7 +3,7 @@
     <entity name="Expertise" representedClassName="Expertise" elementID="Keyword" syncable="YES" codeGenerationType="class">
         <attribute name="id_" attributeType="String" defaultValueString="ID is missing"/>
         <attribute name="isStandard" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="expertise_" inverseEntity="LocalizedKeyword"/>
+        <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedExpertise" inverseName="expertise_" inverseEntity="LocalizedExpertise"/>
         <relationship name="photographerExpertises_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerExpertise" inverseName="expertise_" inverseEntity="PhotographerExpertise" elementID="photographerKeywords_"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -14,7 +14,7 @@
     <entity name="Language" representedClassName="Language" syncable="YES" codeGenerationType="class">
         <attribute name="isoCode_" attributeType="String"/>
         <attribute name="languageNameEN_" optional="YES" attributeType="String"/>
-        <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="language_" inverseEntity="LocalizedKeyword"/>
+        <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedExpertise" inverseName="language_" inverseEntity="LocalizedExpertise"/>
         <relationship name="localizedRemarks_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedRemark" inverseName="language_" inverseEntity="LocalizedRemark"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -34,7 +34,7 @@
     <entity name="Level3">
         <userInfo/>
     </entity>
-    <entity name="LocalizedKeyword" representedClassName="LocalizedKeyword" syncable="YES" codeGenerationType="class">
+    <entity name="LocalizedExpertise" representedClassName="LocalizedExpertise" elementID="LocalizedKeyword" syncable="YES" codeGenerationType="class">
         <attribute name="name_" attributeType="String" elementID="name"/>
         <attribute name="usage" optional="YES" attributeType="String"/>
         <relationship name="expertise_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="localizedKeywords_" inverseEntity="Expertise" elementID="keyword_"/>
@@ -146,7 +146,7 @@
     <configuration name="Level0">
         <memberEntity name="Language"/>
         <memberEntity name="Expertise"/>
-        <memberEntity name="LocalizedKeyword"/>
+        <memberEntity name="LocalizedExpertise"/>
         <memberEntity name="OrganizationType"/>
         <memberEntity name="Level0"/>
     </configuration>

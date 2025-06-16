@@ -27,14 +27,14 @@ import CoreData // for NSManagedObjectContext
 
         Model.deleteCoreDataKeywordsLanguages(context: bgContext)
         #expect(Expertise.count(context: bgContext) == 0)
-        #expect(LocalizedKeyword.count(context: bgContext) == 0)
+        #expect(LocalizedExpertise.count(context: bgContext) == 0)
         #expect(PhotographerExpertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "empty", isInTestBundle: true,
                              useOnlyInBundleFile: false)
         #expect(Expertise.count(context: bgContext) == 0)
-        #expect(LocalizedKeyword.count(context: bgContext) == 0)
+        #expect(LocalizedExpertise.count(context: bgContext) == 0)
         #expect(PhotographerExpertise.count(context: bgContext) == 0)
     }
 
@@ -49,7 +49,7 @@ import CoreData // for NSManagedObjectContext
         Model.deleteCoreDataKeywordsLanguages(context: bgContext)
         #expect(Expertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
         #expect(PhotographerExpertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
-        #expect(LocalizedKeyword.count(context: bgContext) == 0)
+        #expect(LocalizedExpertise.count(context: bgContext) == 0)
 
         bgContext.performAndWait {
             _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
@@ -59,7 +59,7 @@ import CoreData // for NSManagedObjectContext
         }
         #expect(Expertise.count(context: bgContext) == 1)
         #expect(PhotographerExpertise.count(context: bgContext) == 0)
-        #expect(LocalizedKeyword.count(context: bgContext) == 4)
+        #expect(LocalizedExpertise.count(context: bgContext) == 4)
    }
 
     // Read root.level0.json and check for parsing errors.
@@ -90,7 +90,7 @@ import CoreData // for NSManagedObjectContext
         Model.deleteCoreDataKeywordsLanguages(context: bgContext)
         #expect(Language.count(context: bgContext, isoCode: "UR") == 0)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
-        #expect(LocalizedKeyword.count(context: bgContext) == 0)
+        #expect(LocalizedExpertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "language", isInTestBundle: true,
@@ -98,7 +98,7 @@ import CoreData // for NSManagedObjectContext
 
         #expect(Language.count(context: bgContext, isoCode: "UR") == 1)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
-        #expect(LocalizedKeyword.count(context: bgContext) == 0)
+        #expect(LocalizedExpertise.count(context: bgContext) == 0)
     }
 
     // Read language.level0.json.
@@ -112,7 +112,7 @@ import CoreData // for NSManagedObjectContext
         Model.deleteCoreDataKeywordsLanguages(context: bgContext)
         #expect(Language.count(context: bgContext, isoCode: "UR") == 0)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
-        #expect(LocalizedKeyword.count(context: bgContext) == 0)
+        #expect(LocalizedExpertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "languages", isInTestBundle: true,
@@ -129,7 +129,7 @@ import CoreData // for NSManagedObjectContext
         #expect(Language.count(context: bgContext, isoCode: "XX") == 0)
         #expect(Language.count(context: bgContext) == 8)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
-        #expect(LocalizedKeyword.count(context: bgContext) == 0)
+        #expect(LocalizedExpertise.count(context: bgContext) == 0)
     }
 
 }

@@ -1,5 +1,5 @@
 //
-//  LocalizedKeyword.swift
+//  LocalizedExpertise.swift
 //  Photo Club Hub
 //
 //  Created by Peter van den Hamer on 23/02/2025.
@@ -7,13 +7,13 @@
 
 import CoreData // for NSManagedObjectContext
 
-extension LocalizedKeyword: Comparable {
-    public static func < (lhs: LocalizedKeyword, rhs: LocalizedKeyword) -> Bool {
+extension LocalizedExpertise: Comparable {
+    public static func < (lhs: LocalizedExpertise, rhs: LocalizedExpertise) -> Bool {
         return lhs.name < rhs.name
     }
 }
 
-extension LocalizedKeyword {
+extension LocalizedExpertise {
 
     @available(*, unavailable)
     convenience init() {
@@ -60,16 +60,16 @@ extension LocalizedKeyword {
                                  language: Language,
                                  localizedName: String?, // nil used if no update to LocalizedKeyword.name is desired
                                  localizedUsage: String? // mil used if no value of LocalizedKeyword.usage is available
-                                ) -> LocalizedKeyword {
+                                ) -> LocalizedExpertise {
 
         // execute fetchRequest to get keyword object for id=id. Query could return multiple keywords - but shouldn't.
-        let fetchRequest: NSFetchRequest<LocalizedKeyword> = LocalizedKeyword.fetchRequest()
+        let fetchRequest: NSFetchRequest<LocalizedExpertise> = LocalizedExpertise.fetchRequest()
         let predicateFormat: String = "expertise_ = %@ AND language_ = %@" // avoid localization of query string
         fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keyword, language])
 
-        var localizedKeywords: [LocalizedKeyword]! = []
+        var localizedExpertises: [LocalizedExpertise]! = []
         do {
-            localizedKeywords = try context.fetch(fetchRequest)
+            localizedExpertises = try context.fetch(fetchRequest)
         } catch {
             ifDebugFatalError("Failed to fetch LocalizedKeyword for \(keyword.id) " +
                               "in language \(language.isoCodeAllCaps): \(error)",
@@ -77,42 +77,43 @@ extension LocalizedKeyword {
         }
 
         // are there multiple translations of the keyword into the same language? This shouldn't be the case.
-        if localizedKeywords.count > 1 { // there is actually a Core Data constraint to prevent this
-            ifDebugFatalError("Query returned multiple (\(localizedKeywords.count)) translations " +
+        if localizedExpertises.count > 1 { // there is actually a Core Data constraint to prevent this
+            ifDebugFatalError("Query returned multiple (\(localizedExpertises.count)) translations " +
                               "of Keyword \(keyword.id) into \(language.isoCodeAllCaps)",
                               file: #fileID, line: #line)
             // in release mode, log that there are multiple clubs, but continue using the first one.
         }
 
         // if a translation already exists, update non-identifying attributes
-        if let localizedKeyword = localizedKeywords.first {
+        if let localizedKeyword = localizedExpertises.first {
             if localizedKeyword.update(context: context, localizedName: localizedName, localizedUsage: localizedUsage) {
                 print("""
                       Updated translation of keyword \"\(keyword.id)\" into \
                       \(language.isoCodeAllCaps) as \(localizedName ?? "nil")
                       """)
-                LocalizedKeyword.save(context: context, errorText:
-                                      "Could not update LocalizedKeyword for \"\(localizedKeyword.keyword.id)\" " +
-                                      "for language \(localizedKeyword.language.isoCodeAllCaps)",
-                                      if: Settings.extraCoreDataSaves)
+                LocalizedExpertise.save(context: context, errorText:
+                                        "Could not update LocalizedKeyword for \"\(localizedKeyword.keyword.id)\" " +
+                                        "for language \(localizedKeyword.language.isoCodeAllCaps)",
+                                        if: Settings.extraCoreDataSaves)
             }
             return localizedKeyword
         } else {
-            let entity = NSEntityDescription.entity(forEntityName: "LocalizedKeyword", in: context)!
-            let localizedKeyword = LocalizedKeyword(entity: entity, insertInto: context)
+            let entity = NSEntityDescription.entity(forEntityName: "LocalizedExpertise", in: context)!
+            let localizedExpertise = LocalizedExpertise(entity: entity, insertInto: context)
             if localizedName != nil {
-                localizedKeyword.name = localizedName!
+                localizedExpertise.name = localizedName!
             }
-            localizedKeyword.expertise_ = keyword
-            localizedKeyword.language_ = language
-            _ = localizedKeyword.update(context: context, localizedName: localizedName, localizedUsage: localizedUsage)
-            LocalizedKeyword.save(context: context, errorText:
-                                  """
-                                  Could not create LocalizedKeyword for \"\(localizedKeyword.keyword.id)\" \
-                                  for language \(localizedKeyword.language.isoCodeAllCaps)
-                                  """,
-                                  if: Settings.extraCoreDataSaves)
-            return localizedKeyword
+            localizedExpertise.expertise_ = keyword
+            localizedExpertise.language_ = language
+            _ = localizedExpertise.update(context: context,
+                                          localizedName: localizedName, localizedUsage: localizedUsage)
+            LocalizedExpertise.save(context: context, errorText:
+                                    """
+                                    Could not create LocalizedKeyword for \"\(localizedExpertise.keyword.id)\" \
+                                    for language \(localizedExpertise.language.isoCodeAllCaps)
+                                    """,
+                                    if: Settings.extraCoreDataSaves)
+            return localizedExpertise
         }
 
      }
@@ -159,16 +160,16 @@ extension LocalizedKeyword {
                 try context.save()
             } catch {
                 context.rollback()
-                ifDebugFatalError(errorText ?? "Error saving LocalizedKeyword")
+                ifDebugFatalError(errorText ?? "Error saving LocalizedExpertise")
             }
         }
     }
 
     // count total number of objects in CoreData database
     static func count(context: NSManagedObjectContext) -> Int {
-        var localizedKeywords: [LocalizedKeyword]! = []
+        var localizedKeywords: [LocalizedExpertise]! = []
 
-        let fetchRequest: NSFetchRequest<LocalizedKeyword> = LocalizedKeyword.fetchRequest()
+        let fetchRequest: NSFetchRequest<LocalizedExpertise> = LocalizedExpertise.fetchRequest()
         let predicateAll = NSPredicate(format: "TRUEPREDICATE")
         fetchRequest.predicate = predicateAll
 
@@ -186,9 +187,9 @@ extension LocalizedKeyword {
 
     // count number of objects with a given id
     static func count(context: NSManagedObjectContext, keywordID: String, languageIsoCode: String) -> Int {
-        var localizedKeywords: [LocalizedKeyword]! = []
+        var localizedKeywords: [LocalizedExpertise]! = []
 
-        let fetchRequest: NSFetchRequest<LocalizedKeyword> = LocalizedKeyword.fetchRequest()
+        let fetchRequest: NSFetchRequest<LocalizedExpertise> = LocalizedExpertise.fetchRequest()
         let predicateFormat: String = "expertise_.id_ = %@ && language_.isoCode_ = %@" // avoid localization
         fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keywordID, languageIsoCode])
 

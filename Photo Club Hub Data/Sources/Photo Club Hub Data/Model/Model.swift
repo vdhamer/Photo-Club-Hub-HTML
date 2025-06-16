@@ -21,7 +21,7 @@ public struct Model {
 
         do { // order is important to avoid problems with referential integrity
             try deleteEntitiesOfOneType("LocalizedRemark", context: context)
-            try deleteEntitiesOfOneType("LocalizedKeyword", context: context)
+            try deleteEntitiesOfOneType("LocalizedExpertise", context: context)
             try deleteEntitiesOfOneType("PhotographerExpertise", context: context)
             try deleteEntitiesOfOneType("Expertise", context: context)
             try deleteEntitiesOfOneType("Language", context: context)
