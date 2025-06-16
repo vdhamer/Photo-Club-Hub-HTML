@@ -67,6 +67,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       disableMainThreadChecker = "YES"
+      disablePerformanceAntipatternChecker = "YES"
       language = "nl"
       region = "NL"
       launchStyle = "0"
@@ -79,8 +80,7 @@
       showNonLocalizedStrings = "YES"
       viewDebuggingEnabled = "No"
       consoleMode = "0"
-      structuredConsoleMode = "2"
-      disablePerformanceAntipatternChecker = "YES">
+      structuredConsoleMode = "2">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference

@@ -26,7 +26,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.automaticallyMergesChangesFromParent = true
 
         Model.deleteCoreDataKeywordsLanguages(context: bgContext) // This test doesn't have Keywords
-        #expect(Keyword.count(context: bgContext) == 0)
+        #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club XampleMin may already be loaded
         // note that XampleMinMembersProvider runs asynchronously (via bgContext.perform {})
@@ -46,7 +46,7 @@ import CoreData // for NSManagedObjectContext
         fetchRequest.predicate = predicate
         let organizations: [Organization] = (try? context.fetch(fetchRequest)) ?? []
 
-        #expect(Keyword.count(context: bgContext) == 0)
+        #expect(Expertise.count(context: bgContext) == 0)
         #expect(PhotographerKeyword.count(context: bgContext) == 0)  // A club without PhotographerKeywords
 
         #expect(organizations.count == 1)
@@ -68,7 +68,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.automaticallyMergesChangesFromParent = true
 
         Model.deleteCoreDataKeywordsLanguages(context: bgContext) // This test does have Keywords
-        #expect(Keyword.count(context: bgContext) == 0)
+        #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club XampleMax may already be loaded
         // note that XampleMaxMembersProvider runs asynchronously (via bgContext.perform {})
@@ -88,7 +88,7 @@ import CoreData // for NSManagedObjectContext
         fetchRequest.predicate = predicate
         let organizations: [Organization] = (try? context.fetch(fetchRequest)) ?? []
 
-        #expect(Keyword.count(context: bgContext) == 3)
+        #expect(Expertise.count(context: bgContext) == 3)
         #expect(PhotographerKeyword.count(context: bgContext, keywordID: "Landscape") == 1)
 
         #expect(organizations.count == 1)
@@ -139,7 +139,7 @@ import CoreData // for NSManagedObjectContext
             #expect(organizations[0].fotobondNumber == 1620)
         }
 
-        #expect(Keyword.count(context: bgContext) == 21)
+        #expect(Expertise.count(context: bgContext) == 21)
         #expect(PhotographerKeyword.count(context: bgContext, keywordID: "Minimal") == 3)
         #expect(PhotographerKeyword.count(context: bgContext) == 14)
     }
@@ -153,7 +153,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.automaticallyMergesChangesFromParent = true
 
         Model.deleteCoreDataKeywordsLanguages(context: bgContext) // This test does have Keywords
-        #expect(Keyword.count(context: bgContext) == 0)
+        #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club fgDeGender may already be loaded
         // note that fgDeGenderMembersProvider runs asynchronously (via bgContext.perform {})
@@ -161,7 +161,7 @@ import CoreData // for NSManagedObjectContext
         _ = FotogroepDeGenderMembersProvider(bgContext: bgContext,
                                              synchronousWithRandomTown: true,
                                              randomTown: randomTownG)
-        #expect(Keyword.count(context: bgContext) == 21)
+        #expect(Expertise.count(context: bgContext) == 21)
         #expect(PhotographerKeyword.count(context: bgContext) == 14)
 
         let randomTownW = String.random(length: 10)
@@ -169,7 +169,7 @@ import CoreData // for NSManagedObjectContext
                                            synchronousWithRandomTown: true,
                                            randomTown: randomTownW)
 
-        #expect(Keyword.count(context: bgContext) == 21)
+        #expect(Expertise.count(context: bgContext) == 21)
         #expect(PhotographerKeyword.count(context: bgContext) == 42)
     }
 

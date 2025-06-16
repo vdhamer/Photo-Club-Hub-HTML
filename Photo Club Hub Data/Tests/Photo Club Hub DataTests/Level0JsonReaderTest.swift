@@ -26,14 +26,14 @@ import CoreData // for NSManagedObjectContext
         bgContext.automaticallyMergesChangesFromParent = true
 
         Model.deleteCoreDataKeywordsLanguages(context: bgContext)
-        #expect(Keyword.count(context: bgContext) == 0)
+        #expect(Expertise.count(context: bgContext) == 0)
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
         #expect(PhotographerKeyword.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "empty", isInTestBundle: true,
                              useOnlyInBundleFile: false)
-        #expect(Keyword.count(context: bgContext) == 0)
+        #expect(Expertise.count(context: bgContext) == 0)
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
         #expect(PhotographerKeyword.count(context: bgContext) == 0)
     }
@@ -47,7 +47,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.automaticallyMergesChangesFromParent = true
 
         Model.deleteCoreDataKeywordsLanguages(context: bgContext)
-        #expect(Keyword.count(context: bgContext) == 0) // returns 3 instead of zero, why??
+        #expect(Expertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
         #expect(PhotographerKeyword.count(context: bgContext) == 0) // returns 3 instead of zero, why??
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
 
@@ -57,7 +57,7 @@ import CoreData // for NSManagedObjectContext
                                  useOnlyInBundleFile: false)
             try? bgContext.save()
         }
-        #expect(Keyword.count(context: bgContext) == 1)
+        #expect(Expertise.count(context: bgContext) == 1)
         #expect(PhotographerKeyword.count(context: bgContext) == 0)
         #expect(LocalizedKeyword.count(context: bgContext) == 4)
    }
@@ -71,12 +71,12 @@ import CoreData // for NSManagedObjectContext
         bgContext.automaticallyMergesChangesFromParent = true
 
         Model.deleteCoreDataKeywordsLanguages(context: bgContext) // This test doesn't have Keywords
-        #expect(Keyword.count(context: bgContext) == 0)
+        #expect(Expertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "root", isInTestBundle: false,
                              useOnlyInBundleFile: false)
-        #expect(Keyword.count(context: bgContext) == 21)
+        #expect(Expertise.count(context: bgContext) == 21)
     }
 
     // Read language.level0.json.
