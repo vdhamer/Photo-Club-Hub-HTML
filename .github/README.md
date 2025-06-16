@@ -56,13 +56,13 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Lists current club members | yes | yes |
 | Lists former club members | yes | yes |
 | Displays member portfolios | yes | yes |
-| Linkable member portfolios | - | yes |
+| Linkable member portfolios | partially✲ | yes |
 | Portfolio autoplay | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | yes | - |
 | Languages | English, Dutch✲ | English, Dutch✲ |
 | Data caching | partially✲ | partially✲ |
-| Concurrent network fetches | yes | yes |
+| Concurrent data fetching | yes | yes |
 | Available via | App Store, GitHub | URL, GitHub |
 
  ✲ = _might be improved or supported in the future_
