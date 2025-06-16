@@ -56,7 +56,7 @@ struct ContentView: View {
         sortDescriptors: [],
         predicate: allPredicate,
         animation: .default)
-    fileprivate var allPhotographerKeywords: FetchedResults<PhotographerKeyword>
+    fileprivate var allPhotographerKeywords: FetchedResults<PhotographerExpertise>
 
     // MARK: - Body of ContentView
 

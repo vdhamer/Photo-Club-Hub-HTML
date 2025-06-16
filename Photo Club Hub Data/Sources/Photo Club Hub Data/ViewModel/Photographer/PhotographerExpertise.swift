@@ -1,5 +1,5 @@
 //
-//  PhotographerKeyword.swift
+//  PhotographerExpertise.swift
 //  Photo Club Hub
 //
 //  Created by Peter van den Hamer on 23/02/2025.
@@ -7,7 +7,7 @@
 
 import CoreData // for NSManagedObjectContext
 
-extension PhotographerKeyword {
+extension PhotographerExpertise {
 
     @available(*, unavailable)
     convenience init() {
@@ -47,16 +47,16 @@ extension PhotographerKeyword {
     static func findCreateUpdate(context: NSManagedObjectContext, // can be foreground or background context
                                  photographer: Photographer,
                                  keyword: Expertise
-                                ) -> PhotographerKeyword {
+                                ) -> PhotographerExpertise {
 
         // execute fetchRequest to get keyword object for id=id. Query could return multiple - but shouldn't.
-        let fetchRequest: NSFetchRequest<PhotographerKeyword> = PhotographerKeyword.fetchRequest()
+        let fetchRequest: NSFetchRequest<PhotographerExpertise> = PhotographerExpertise.fetchRequest()
         let predicateFormat: String = "expertise_ = %@ AND photographer_ = %@" // avoid localization of query string
         fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keyword, photographer])
 
-        var photographerKeywords: [PhotographerKeyword]! = []
+        var photographerExpertise: [PhotographerExpertise]! = []
         do {
-            photographerKeywords = try context.fetch(fetchRequest) // query database
+            photographerExpertise = try context.fetch(fetchRequest) // query database
         } catch {
             ifDebugFatalError("""
                               Failed to fetch PhotographerKeyword for \"\(keyword.id)\" \
@@ -66,9 +66,9 @@ extension PhotographerKeyword {
         }
 
         // are there multiple copies of the keyword connected to the same photographer? This shouldn't be the case.
-        if photographerKeywords.count > 1 { // there is actually a Core Data constraint to prevent this
+        if photographerExpertise.count > 1 { // there is actually a Core Data constraint to prevent this
             ifDebugFatalError("""
-                              Query returned multiple (\(photographerKeywords.count)) copies \
+                              Query returned multiple (\(photographerExpertise.count)) copies \
                               of Keyword \"\(keyword.id)\" for photographer \(photographer.fullNameFirstLast)
                               """,
                               file: #fileID, line: #line) // likely deprecation of #fileID in Swift 6.0
@@ -76,10 +76,10 @@ extension PhotographerKeyword {
         }
 
         // if a translation already exists, update non-identifying attributes
-        if let photographerKeyword = photographerKeywords.first {
+        if let photographerKeyword = photographerExpertise.first {
             if photographerKeyword.update(context: context) { // actually this class has no non-identifying attributes
                 if Settings.extraCoreDataSaves {
-                    PhotographerKeyword.save(context: context, errorText:
+                    PhotographerExpertise.save(context: context, errorText:
                                           """
                                           Could not update PhotographerKeyword \
                                           for \"\(photographerKeyword.keyword.id)\" \
@@ -89,8 +89,8 @@ extension PhotographerKeyword {
             }
             return photographerKeyword
         } else {
-            let entity = NSEntityDescription.entity(forEntityName: "PhotographerKeyword", in: context)!
-            let photographerKeyword = PhotographerKeyword(entity: entity, insertInto: context)
+            let entity = NSEntityDescription.entity(forEntityName: "PhotographerExpertise", in: context)!
+            let photographerKeyword = PhotographerExpertise(entity: entity, insertInto: context)
             photographerKeyword.keyword = keyword
             photographerKeyword.photographer = photographer
             // so far, this class has no other properties to populate
@@ -125,7 +125,7 @@ extension PhotographerKeyword {
                 try context.save()
             } catch {
                 context.rollback()
-                ifDebugFatalError(errorText ?? "Error saving PhotographerKeyword")
+                ifDebugFatalError(errorText ?? "Error saving PhotographerExpertise")
             }
         }
     }
@@ -134,14 +134,14 @@ extension PhotographerKeyword {
 
     // count number of objects with a given id for a given photographer
     static func count(context: NSManagedObjectContext, keywordID: String, photographer: Photographer) -> Int {
-        let fetchRequest: NSFetchRequest<PhotographerKeyword> = PhotographerKeyword.fetchRequest()
+        let fetchRequest: NSFetchRequest<PhotographerExpertise> = PhotographerExpertise.fetchRequest()
         let predicateFormat: String = "expertise_.id_ = %@ && photographer_ = %@" // avoid localization
         fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keywordID, photographer])
 
-        var photographerKeywords: [PhotographerKeyword]! = []
+        var photographerExpertise: [PhotographerExpertise]! = []
         context.performAndWait {
             do {
-                photographerKeywords = try context.fetch(fetchRequest)
+                photographerExpertise = try context.fetch(fetchRequest)
             } catch {
                 ifDebugFatalError("""
                                   Failed to fetch PhotographerKeyword \"\(keywordID)\" \
@@ -151,20 +151,20 @@ extension PhotographerKeyword {
                 // on non-Debug version, continue with empty `keywords` array
             }
         }
-        return photographerKeywords.count
+        return photographerExpertise.count
     }
 
     // count number of objects with a given id
     static func count(context: NSManagedObjectContext, keywordID: String) -> Int {
-        var photographerKeywords: [PhotographerKeyword]! = []
+        var photographerExpertises: [PhotographerExpertise]! = []
 
         context.performAndWait {
-            let fetchRequest: NSFetchRequest<PhotographerKeyword> = PhotographerKeyword.fetchRequest()
+            let fetchRequest: NSFetchRequest<PhotographerExpertise> = PhotographerExpertise.fetchRequest()
             let predicateFormat: String = "expertise_.id_ = %@" // avoid localization
             fetchRequest.predicate = NSPredicate(format: predicateFormat, argumentArray: [keywordID])
 
             do {
-                photographerKeywords = try context.fetch(fetchRequest)
+                photographerExpertises = try context.fetch(fetchRequest)
             } catch {
                 ifDebugFatalError("""
                                   Failed to fetch PhotographerKeyword \"\(keywordID)\"
@@ -174,21 +174,21 @@ extension PhotographerKeyword {
             }
         }
 
-        return photographerKeywords.count
+        return photographerExpertises.count
     }
 
     // count total number of PhotographerKeyword objects/records
     // there are ways to count without fetching all records, but this func is only used for testing
     static func count(context: NSManagedObjectContext) -> Int {
-        let fetchRequest: NSFetchRequest<PhotographerKeyword> = PhotographerKeyword.fetchRequest()
+        let fetchRequest: NSFetchRequest<PhotographerExpertise> = PhotographerExpertise.fetchRequest()
         let predicateAll = NSPredicate(format: "TRUEPREDICATE")
         fetchRequest.predicate = predicateAll
 
-        var photographerKeywords: [PhotographerKeyword]! = []
+        var photographerExpertises: [PhotographerExpertise]! = []
 
         context.performAndWait {
             do {
-                photographerKeywords = try context.fetch(fetchRequest)
+                photographerExpertises = try context.fetch(fetchRequest)
             } catch {
                 ifDebugFatalError("""
                                   Failed to fetch PhotographerKeywords: \"\(error)\"
@@ -197,7 +197,7 @@ extension PhotographerKeyword {
                 // on non-Debug version, continue with empty `keywords` array
             }
         }
-        return photographerKeywords.count
+        return photographerExpertises.count
     }
 
 }

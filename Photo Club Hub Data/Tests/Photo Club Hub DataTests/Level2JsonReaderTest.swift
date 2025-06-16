@@ -47,7 +47,7 @@ import CoreData // for NSManagedObjectContext
         let organizations: [Organization] = (try? context.fetch(fetchRequest)) ?? []
 
         #expect(Expertise.count(context: bgContext) == 0)
-        #expect(PhotographerKeyword.count(context: bgContext) == 0)  // A club without PhotographerKeywords
+        #expect(PhotographerExpertise.count(context: bgContext) == 0)  // A club without PhotographerKeywords
 
         #expect(organizations.count == 1)
         if organizations.isEmpty == false {
@@ -89,7 +89,7 @@ import CoreData // for NSManagedObjectContext
         let organizations: [Organization] = (try? context.fetch(fetchRequest)) ?? []
 
         #expect(Expertise.count(context: bgContext) == 3)
-        #expect(PhotographerKeyword.count(context: bgContext, keywordID: "Landscape") == 1)
+        #expect(PhotographerExpertise.count(context: bgContext, keywordID: "Landscape") == 1)
 
         #expect(organizations.count == 1)
         if organizations.isEmpty == false {
@@ -140,8 +140,8 @@ import CoreData // for NSManagedObjectContext
         }
 
         #expect(Expertise.count(context: bgContext) == 21)
-        #expect(PhotographerKeyword.count(context: bgContext, keywordID: "Minimal") == 3)
-        #expect(PhotographerKeyword.count(context: bgContext) == 14)
+        #expect(PhotographerExpertise.count(context: bgContext, keywordID: "Minimal") == 3)
+        #expect(PhotographerExpertise.count(context: bgContext) == 14)
     }
 
     // Read and check for keyword merging
@@ -162,7 +162,7 @@ import CoreData // for NSManagedObjectContext
                                              synchronousWithRandomTown: true,
                                              randomTown: randomTownG)
         #expect(Expertise.count(context: bgContext) == 21)
-        #expect(PhotographerKeyword.count(context: bgContext) == 14)
+        #expect(PhotographerExpertise.count(context: bgContext) == 14)
 
         let randomTownW = String.random(length: 10)
         _ = FotogroepWaalreMembersProvider(bgContext: bgContext,
@@ -170,7 +170,7 @@ import CoreData // for NSManagedObjectContext
                                            randomTown: randomTownW)
 
         #expect(Expertise.count(context: bgContext) == 21)
-        #expect(PhotographerKeyword.count(context: bgContext) == 42)
+        #expect(PhotographerExpertise.count(context: bgContext) == 42)
     }
 
 }

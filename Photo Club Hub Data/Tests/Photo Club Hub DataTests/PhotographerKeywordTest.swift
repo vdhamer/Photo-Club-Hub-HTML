@@ -27,7 +27,7 @@ import CoreData // for NSManagedObjectContext
     @Test("Create a random keyword for a random photographer") func addPhotographerKeyword() {
 
         let keywordID = String.random(length: 10).capitalized // internally keyword.id is capitalized
-        let photographerKeyword = PhotographerKeyword.findCreateUpdate(
+        let photographerKeyword = PhotographerExpertise.findCreateUpdate(
             context: context,
             photographer: photographer,
             keyword: Expertise.findCreateUpdateNonStandard(context: context, id: keywordID, name: [], usage: []))
@@ -38,34 +38,34 @@ import CoreData // for NSManagedObjectContext
         #expect(photographerKeyword.photographer.familyName == photographer.familyName)
     }
 
-    @Test("Attempt to create duplicate PhotographerKeyword") func duplicatePhotographerKeyword() {
+    @Test("Attempt to create duplicate PhotographerExpertise") func duplicatePhotographerKeyword() {
 
         let keywordID = String.random(length: 10).capitalized // internally keyword.id is capitalized
-        let photographerKeyword1 = PhotographerKeyword.findCreateUpdate(
+        let photographerExpertise1 = PhotographerExpertise.findCreateUpdate(
             context: context,
             photographer: photographer,
             keyword: Expertise.findCreateUpdateNonStandard(context: context, id: keywordID, name: [], usage: []))
-        #expect(photographerKeyword1.keyword.id == keywordID)
-        #expect(photographerKeyword1.photographer === photographer)
-        #expect(photographerKeyword1.photographer.givenName == photographer.givenName)
-        #expect(photographerKeyword1.photographer.infixName == photographer.infixName)
-        #expect(photographerKeyword1.photographer.familyName == photographer.familyName)
-        PhotographerKeyword.save(context: context)
+        #expect(photographerExpertise1.keyword.id == keywordID)
+        #expect(photographerExpertise1.photographer === photographer)
+        #expect(photographerExpertise1.photographer.givenName == photographer.givenName)
+        #expect(photographerExpertise1.photographer.infixName == photographer.infixName)
+        #expect(photographerExpertise1.photographer.familyName == photographer.familyName)
+        PhotographerExpertise.save(context: context)
 
-        let photographerKeyword2 = PhotographerKeyword.findCreateUpdate(
+        let photographerExpertise2 = PhotographerExpertise.findCreateUpdate(
             context: context,
             photographer: photographer, // same photographer
             keyword: Expertise.findCreateUpdateNonStandard(context: context, id: keywordID,
                                                          name: [], usage: [])) // same keyword
-        #expect(photographerKeyword2.keyword.id == keywordID)
-        #expect(photographerKeyword2.photographer === photographer)
-        #expect(photographerKeyword2.photographer.givenName == photographer.givenName)
-        #expect(photographerKeyword2.photographer.infixName == photographer.infixName)
-        #expect(photographerKeyword2.photographer.familyName == photographer.familyName)
-        PhotographerKeyword.save(context: context)
+        #expect(photographerExpertise2.keyword.id == keywordID)
+        #expect(photographerExpertise2.photographer === photographer)
+        #expect(photographerExpertise2.photographer.givenName == photographer.givenName)
+        #expect(photographerExpertise2.photographer.infixName == photographer.infixName)
+        #expect(photographerExpertise2.photographer.familyName == photographer.familyName)
+        PhotographerExpertise.save(context: context)
 
-        #expect(photographerKeyword1 == photographerKeyword2)
-        #expect(PhotographerKeyword.count(context: context, keywordID: keywordID, photographer: photographer) == 1)
+        #expect(photographerExpertise1 == photographerExpertise2)
+        #expect(PhotographerExpertise.count(context: context, keywordID: keywordID, photographer: photographer) == 1)
     }
 
 }

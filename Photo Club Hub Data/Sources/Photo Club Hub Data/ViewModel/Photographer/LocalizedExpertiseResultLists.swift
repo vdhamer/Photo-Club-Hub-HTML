@@ -20,7 +20,7 @@ public struct LocalizedExpertiseResultLists {
         nonstandard = LocalizedExpertiseResultList(isStandard: false, list: nonstandardList)
     }
 
-    public init(moc: NSManagedObjectContext, _ photographerKeywords: Set<PhotographerKeyword>) {
+    public init(moc: NSManagedObjectContext, _ photographerKeywords: Set<PhotographerExpertise>) {
 
         // Use init(standardList:nonstandardList) to get access to the icons
         var resultLERLs = LocalizedExpertiseResultLists.init(standardList: [], nonstandardList: [])

@@ -4,7 +4,7 @@
         <attribute name="id_" attributeType="String" defaultValueString="ID is missing"/>
         <attribute name="isStandard" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="localizedKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="LocalizedKeyword" inverseName="expertise_" inverseEntity="LocalizedKeyword"/>
-        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerKeyword" inverseName="expertise_" inverseEntity="PhotographerKeyword"/>
+        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerExpertise" inverseName="expertise_" inverseEntity="PhotographerExpertise"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id_"/>
@@ -124,7 +124,7 @@
         <attribute name="photographerImage" optional="YES" attributeType="URI"/>
         <attribute name="photographerWebsite" optional="YES" attributeType="URI" elementID="photographerWebsite"/>
         <relationship name="memberships_" toMany="YES" deletionRule="Cascade" destinationEntity="MemberPortfolio" inverseName="photographer_" inverseEntity="MemberPortfolio"/>
-        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerKeyword" inverseName="photographer_" inverseEntity="PhotographerKeyword"/>
+        <relationship name="photographerKeywords_" toMany="YES" deletionRule="Cascade" destinationEntity="PhotographerExpertise" inverseName="photographer_" inverseEntity="PhotographerExpertise"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="familyName_"/>
@@ -133,7 +133,7 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="PhotographerKeyword" representedClassName="PhotographerKeyword" syncable="YES" codeGenerationType="class">
+    <entity name="PhotographerExpertise" representedClassName="PhotographerExpertise" elementID="PhotographerKeyword" syncable="YES" codeGenerationType="class">
         <relationship name="expertise_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Expertise" inverseName="photographerKeywords_" inverseEntity="Expertise" elementID="keyword_"/>
         <relationship name="photographer_" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photographer" inverseName="photographerKeywords_" inverseEntity="Photographer"/>
         <uniquenessConstraints>
@@ -157,7 +157,7 @@
     </configuration>
     <configuration name="Level2">
         <memberEntity name="MemberPortfolio"/>
-        <memberEntity name="PhotographerKeyword"/>
+        <memberEntity name="PhotographerExpertise"/>
         <memberEntity name="Photographer"/>
         <memberEntity name="Level2"/>
     </configuration>

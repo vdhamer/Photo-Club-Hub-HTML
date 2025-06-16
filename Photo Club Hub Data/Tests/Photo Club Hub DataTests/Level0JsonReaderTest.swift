@@ -28,14 +28,14 @@ import CoreData // for NSManagedObjectContext
         Model.deleteCoreDataKeywordsLanguages(context: bgContext)
         #expect(Expertise.count(context: bgContext) == 0)
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
-        #expect(PhotographerKeyword.count(context: bgContext) == 0)
+        #expect(PhotographerExpertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "empty", isInTestBundle: true,
                              useOnlyInBundleFile: false)
         #expect(Expertise.count(context: bgContext) == 0)
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
-        #expect(PhotographerKeyword.count(context: bgContext) == 0)
+        #expect(PhotographerExpertise.count(context: bgContext) == 0)
     }
 
     // Read abstract.level0.json.
@@ -48,7 +48,7 @@ import CoreData // for NSManagedObjectContext
 
         Model.deleteCoreDataKeywordsLanguages(context: bgContext)
         #expect(Expertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
-        #expect(PhotographerKeyword.count(context: bgContext) == 0) // returns 3 instead of zero, why??
+        #expect(PhotographerExpertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
         #expect(LocalizedKeyword.count(context: bgContext) == 0)
 
         bgContext.performAndWait {
@@ -58,7 +58,7 @@ import CoreData // for NSManagedObjectContext
             try? bgContext.save()
         }
         #expect(Expertise.count(context: bgContext) == 1)
-        #expect(PhotographerKeyword.count(context: bgContext) == 0)
+        #expect(PhotographerExpertise.count(context: bgContext) == 0)
         #expect(LocalizedKeyword.count(context: bgContext) == 4)
    }
 
