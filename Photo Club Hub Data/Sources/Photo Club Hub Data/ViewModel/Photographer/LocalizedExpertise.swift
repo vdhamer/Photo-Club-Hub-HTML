@@ -167,7 +167,7 @@ extension LocalizedExpertise {
 
     // count total number of objects in CoreData database
     static func count(context: NSManagedObjectContext) -> Int {
-        var localizedKeywords: [LocalizedExpertise]! = []
+        var localizedExpertises: [LocalizedExpertise]! = []
 
         let fetchRequest: NSFetchRequest<LocalizedExpertise> = LocalizedExpertise.fetchRequest()
         let predicateAll = NSPredicate(format: "TRUEPREDICATE")
@@ -175,19 +175,19 @@ extension LocalizedExpertise {
 
         context.performAndWait {
             do {
-                localizedKeywords = try context.fetch(fetchRequest)
+                localizedExpertises = try context.fetch(fetchRequest)
             } catch {
-                ifDebugFatalError("Failed to fetch list of all LocalizedKeywords: \(error)",
+                ifDebugFatalError("Failed to fetch list of all LocalizedExpertises: \(error)",
                                   file: #fileID, line: #line)
                 // on non-Debug version, continue with empty `keywords` array
             }
         }
-        return localizedKeywords.count
+        return localizedExpertises.count
     }
 
     // count number of objects with a given id
     static func count(context: NSManagedObjectContext, keywordID: String, languageIsoCode: String) -> Int {
-        var localizedKeywords: [LocalizedExpertise]! = []
+        var localizedExpertises: [LocalizedExpertise]! = []
 
         let fetchRequest: NSFetchRequest<LocalizedExpertise> = LocalizedExpertise.fetchRequest()
         let predicateFormat: String = "expertise_.id_ = %@ && language_.isoCode_ = %@" // avoid localization
@@ -195,14 +195,14 @@ extension LocalizedExpertise {
 
         context.performAndWait {
             do {
-                localizedKeywords = try context.fetch(fetchRequest)
+                localizedExpertises = try context.fetch(fetchRequest)
             } catch {
                 ifDebugFatalError("Failed to fetch LocalizedKeyword \(keywordID) for \(languageIsoCode): \(error)",
                                   file: #fileID, line: #line)
                 // on non-Debug version, continue with empty `keywords` array
             }
         }
-        return localizedKeywords.count
+        return localizedExpertises.count
     }
 
 }

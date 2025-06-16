@@ -257,7 +257,7 @@ extension Expertise {
     }
 
     var localizedExpertises: Set<LocalizedExpertise> {
-        (localizedKeywords_ as? Set<LocalizedExpertise>) ?? []
+        (localizedExpertises_ as? Set<LocalizedExpertise>) ?? []
     }
 
     // Priority system to choose the most appropriate LocalizedKeyword for a given Keyword.
