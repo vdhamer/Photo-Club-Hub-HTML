@@ -63,7 +63,8 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Languages | English, Dutch✲ | English, Dutch✲ |
 | Data caching | partially✲ | partially✲ |
 | Concurrent data fetching | yes | yes |
-| Available via | App Store, GitHub | URL, GitHub |
+| Available via | App Store | URL |
+| Open source | [yes](https://github.com/vdhamer/Photo-Club-Hub) | [yes](https://github.com/vdhamer/Photo-Club-Hub-HTML) |
 
  ✲ = _might be improved or supported in the future_
 
