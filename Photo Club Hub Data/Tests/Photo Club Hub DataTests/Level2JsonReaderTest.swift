@@ -9,7 +9,7 @@ import Testing
 @testable import Photo_Club_Hub_Data
 import CoreData // for NSManagedObjectContext
 
-@MainActor @Suite("Tests the Level 2 JSON reader") struct Level2JsonReaderTests {
+@MainActor @Suite("Tests the Level 2 JSON reader") struct Level2JsonReaderTest {
 
     fileprivate let context: NSManagedObjectContext
 
@@ -25,7 +25,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext) // This test doesn't have Keywords
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext) // This test doesn't have Expertises
         #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club XampleMin may already be loaded
@@ -47,7 +47,7 @@ import CoreData // for NSManagedObjectContext
         let organizations: [Organization] = (try? context.fetch(fetchRequest)) ?? []
 
         #expect(Expertise.count(context: bgContext) == 0)
-        #expect(PhotographerExpertise.count(context: bgContext) == 0)  // A club without PhotographerKeywords
+        #expect(PhotographerExpertise.count(context: bgContext) == 0)  // A club without PhotographerExpertises
 
         #expect(organizations.count == 1)
         if organizations.isEmpty == false {
@@ -67,7 +67,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext) // This test does have Keywords
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext) // This test does have Expertises
         #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club XampleMax may already be loaded
@@ -108,12 +108,12 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
 
         // note that club fgDeGender may already be loaded
         // note that fgDeGenderMembersProvider runs asynchronously (via bgContext.perform {})
         let randomTown = String.random(length: 10)
-        _ = FotogroepDeGenderMembersProvider(bgContext: bgContext, // The club has Keywords
+        _ = FotogroepDeGenderMembersProvider(bgContext: bgContext, // The club has Expertises
                                              synchronousWithRandomTown: true,
                                              randomTown: randomTown)
 
@@ -152,7 +152,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext) // This test does have Keywords
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext) // This test does have Expertises
         #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club fgDeGender may already be loaded

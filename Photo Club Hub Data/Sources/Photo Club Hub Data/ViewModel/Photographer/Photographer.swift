@@ -156,7 +156,7 @@ extension Photographer {
                                                                   usage: [])
             _ = PhotographerExpertise.findCreateUpdate(context: bgContext,
                                                        photographer: photographer,
-                                                       keyword: keyword)
+                                                       expertise: keyword)
         }
 
         var hasChanges: Bool = bgContext.hasChanges

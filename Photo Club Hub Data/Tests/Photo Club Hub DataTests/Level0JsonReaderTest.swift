@@ -9,7 +9,7 @@ import Testing
 @testable import Photo_Club_Hub_Data
 import CoreData // for NSManagedObjectContext
 
-@MainActor @Suite("Tests the Level 0 JSON reader") struct Level0JsonReaderTests {
+@MainActor @Suite("Tests the Level 0 JSON reader") struct Level0JsonReaderTest {
 
     fileprivate let context: NSManagedObjectContext
 
@@ -18,14 +18,14 @@ import CoreData // for NSManagedObjectContext
     }
 
     // Read root.level0.json and check for parsing errors.
-    // Clears all CoreData keywords. Runs on background thread, adding bunch of extra complexity ;-(
+    // Clears all CoreData expertises. Runs on background thread, adding bunch of extra complexity ;-(
     @Test("Parse empty.level0.json") func emptyLevel0Parse() async {
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "EmptyLevel0"
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
         #expect(Expertise.count(context: bgContext) == 0)
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
         #expect(PhotographerExpertise.count(context: bgContext) == 0)
@@ -39,14 +39,14 @@ import CoreData // for NSManagedObjectContext
     }
 
     // Read abstract.level0.json.
-    // Clears all CoreData keywords. Runs on background thread, adding bunch of extra complexity ;-(
+    // Clears all CoreData expertises. Runs on background thread, adding bunch of extra complexity ;-(
     @Test("Parse abstractExpertise.level0.json") func abstractExpertiseLevel0Parse() async {
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "AbstractExpertiseLevel0"
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
         #expect(Expertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
         #expect(PhotographerExpertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
@@ -63,14 +63,14 @@ import CoreData // for NSManagedObjectContext
    }
 
     // Read root.level0.json and check for parsing errors.
-    // Clears all CoreData keywords. Runs on background thread, adding bunch of extra complexity ;-(
+    // Clears all CoreData expertises. Runs on background thread, adding bunch of extra complexity ;-(
     @Test("Parse root.level0.json") func rootLevel0Parse() async {
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "RootLevel0"
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext) // This test doesn't have Keywords
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext) // This test doesn't have Expertises
         #expect(Expertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
@@ -87,7 +87,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
         #expect(Language.count(context: bgContext, isoCode: "UR") == 0)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
@@ -109,7 +109,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataKeywordsLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
         #expect(Language.count(context: bgContext, isoCode: "UR") == 0)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
         #expect(LocalizedExpertise.count(context: bgContext) == 0)

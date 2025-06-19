@@ -28,11 +28,11 @@ public struct LocalizedExpertiseResultLists {
         // Step 1. Translate keywords to appropriate language
         var translated: [LocalizedExpertiseResult] = [] // start with empty array
         for photographerKeyword in photographerKeywords {
-            translated.append(photographerKeyword.keyword.selectedLocalizedKeyword) // choose most suitable language
+            translated.append(photographerKeyword.expertise.selectedLocalizedKeyword) // choose most suitable language
         }
 
         // Step 2. Sort based on selected language.  Has special behavior for keywords without translation
-        let sorted: [LocalizedExpertiseResult] = translated.sorted() // note dedicated LocalizedKeywordResult.<() function
+        let sorted: [LocalizedExpertiseResult] = translated.sorted() // note dedicated LocalizedKeywordResult.<() func
 
         // Step 3. Clip size to maxKeywordsPerMember keywords
         var clipped: [LocalizedExpertiseResult] = [] // start with empty array
