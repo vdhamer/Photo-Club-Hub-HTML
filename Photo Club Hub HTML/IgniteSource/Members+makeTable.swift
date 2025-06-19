@@ -230,7 +230,7 @@ extension Members {
 
     }
 
-    fileprivate func customHint(localizedKeywordResults: [LocalizedKeywordResult]) -> String {
+    fileprivate func customHint(localizedKeywordResults: [LocalizedExpertiseResult]) -> String {
         var hint: String = ""
 
         for localizedKeywordResult in localizedKeywordResults {
