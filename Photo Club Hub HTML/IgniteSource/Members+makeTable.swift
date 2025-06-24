@@ -173,7 +173,7 @@ extension Members {
             for localizedExpertiseResult in localizedExpertiseResultList.list {
                 string.append(" " + localizedExpertiseResult.name
                               + localizedExpertiseResult.delimiterToAppend)
-                hint = localizedExpertiseResult.localizedKeyword?.usage
+                hint = localizedExpertiseResult.localizedExpertise?.usage
                 customHint = localizedExpertiseResult.customHint ?? ""
             }
 
@@ -215,7 +215,7 @@ extension Members {
             var pageElements = [PageElement]()
 
             let localizedExpertiseResultsLists = LocalizedExpertiseResultLists(moc: moc,
-                                                                               photographer.photographerKeywords)
+                                                                               photographer.photographerExpertises)
 
             let standard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
                                                 isStandard: true)
@@ -233,12 +233,13 @@ extension Members {
     fileprivate func customHint(localizedKeywordResults: [LocalizedExpertiseResult]) -> String {
         var hint: String = ""
 
-        for localizedKeywordResult in localizedKeywordResults {
-            if localizedKeywordResult.localizedKeyword != nil {
-                hint.append(getIconString(standard: true) + " " + localizedKeywordResult.localizedKeyword!.name + " ")
+        for localizedExpertiseResult in localizedKeywordResults {
+            if localizedExpertiseResult.localizedExpertise != nil {
+                hint.append(getIconString(standard: true) + " " + localizedExpertiseResult.localizedExpertise!.name)
             } else {
-                hint.append(getIconString(standard: true) + " " + localizedKeywordResult.id + " ")
+                hint.append(getIconString(standard: true) + " " + localizedExpertiseResult.id)
             }
+            hint.append(" ")
         }
 
         return hint.trimmingCharacters(in: CharacterSet(charactersIn: " "))

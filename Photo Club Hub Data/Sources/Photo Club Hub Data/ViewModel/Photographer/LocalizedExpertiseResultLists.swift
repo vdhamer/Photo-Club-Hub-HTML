@@ -7,7 +7,7 @@
 
 import CoreData // for NSManagedObjectContext
 
-let maxKeywordsPerMember: Int = 2
+let maxExpertisesPerMember: Int = 2
 
 // Used to provide the UI with pairs of lists with Exertise records with localized names
 public struct LocalizedExpertiseResultLists {
@@ -20,25 +20,25 @@ public struct LocalizedExpertiseResultLists {
         nonstandard = LocalizedExpertiseResultList(isStandard: false, list: nonstandardList)
     }
 
-    public init(moc: NSManagedObjectContext, _ photographerKeywords: Set<PhotographerExpertise>) {
+    public init(moc: NSManagedObjectContext, _ photographerExpertises: Set<PhotographerExpertise>) {
 
         // Use init(standardList:nonstandardList) to get access to the icons
         var resultLERLs = LocalizedExpertiseResultLists.init(standardList: [], nonstandardList: [])
 
-        // Step 1. Translate keywords to appropriate language
+        // Step 1. Translate expertises to appropriate language
         var translated: [LocalizedExpertiseResult] = [] // start with empty array
-        for photographerKeyword in photographerKeywords {
-            translated.append(photographerKeyword.expertise.selectedLocalizedKeyword) // choose most suitable language
+        for photographerExpertise in photographerExpertises {
+            translated.append(photographerExpertise.expertise.selectedLocalizedExpertise) // choose a suitable language
         }
 
-        // Step 2. Sort based on selected language.  Has special behavior for keywords without translation
-        let sorted: [LocalizedExpertiseResult] = translated.sorted() // note dedicated LocalizedKeywordResult.<() func
+        // Step 2. Sort based on selected language.  Has special behavior for expertises without translation
+        let sorted: [LocalizedExpertiseResult] = translated.sorted() // note dedicated LocalizedExpertiseResult.<() func
 
-        // Step 3. Clip size to maxKeywordsPerMember keywords
+        // Step 3. Clip size to maxExpertisesPerMember Expertises
         var clipped: [LocalizedExpertiseResult] = [] // start with empty array
         if sorted.count > 0 {
-            for index in 0...min(maxKeywordsPerMember-1, sorted.count-1) {
-                clipped.append(sorted[index]) // copy the first few sorted LocalizedKeywordResult elements
+            for index in 0...min(maxExpertisesPerMember-1, sorted.count-1) {
+                clipped.append(sorted[index]) // copy the first few sorted LocalizedExpertiseResult elements
             }
         }
 
@@ -47,25 +47,25 @@ public struct LocalizedExpertiseResultLists {
             if item.isStandard {
                 resultLERLs.standard.list.append(item)
             } else {
-                resultLERLs.nonstandard.list.append(LocalizedExpertiseResult(localizedKeyword: item.localizedKeyword,
-                                                                           id: item.id))
+                resultLERLs.nonstandard.list.append(LocalizedExpertiseResult(localizedExpertise:
+                                                                                item.localizedExpertise, id: item.id))
             }
         }
 
         // Step 5. remove delimeter after last element
-        if sorted.count > maxKeywordsPerMember { // if list overflows, add a warning
-            let moreKeyword = Expertise.findCreateUpdateNonStandard(
-                                        context: moc,
-                                        id: String(localized: "Too many expertises",
-                                                   table: "Package",
-                                                   comment: "Shown when too many expertises are found"),
-                                        name: [],
-                                        usage: [] )
-            let moreLocalizedKeyword: LocalizedExpertiseResult = moreKeyword.selectedLocalizedKeyword
+        if sorted.count > maxExpertisesPerMember { // if list overflows, add a warning
+            let moreExpertise = Expertise.findCreateUpdateNonStandard(
+                                          context: moc,
+                                          id: String(localized: "Too many expertises",
+                                                      table: "Package",
+                                                      comment: "Shown when too many expertises are found"),
+                                          name: [],
+                                          usage: [] )
+            let moreLocalizedExpertise: LocalizedExpertiseResult = moreExpertise.selectedLocalizedExpertise
             resultLERLs.nonstandard.list.append(LocalizedExpertiseResult(
-                                                    localizedKeyword: moreLocalizedKeyword.localizedKeyword,
-                                                    id: moreKeyword.id,
-                                                    customHint: customHint(localizedKeywordResults: sorted))
+                                                    localizedExpertise: moreLocalizedExpertise.localizedExpertise,
+                                                    id: moreExpertise.id,
+                                                    customHint: customHint(localizedExpertiseResults: sorted))
                                                 )
         }
 
@@ -81,15 +81,15 @@ public struct LocalizedExpertiseResultLists {
         self.nonstandard.list = resultLERLs.nonstandard.list
     }
 
-    fileprivate func customHint(localizedKeywordResults: [LocalizedExpertiseResult]) -> String {
+    fileprivate func customHint(localizedExpertiseResults: [LocalizedExpertiseResult]) -> String {
         var hint: String = ""
         let temp = LocalizedExpertiseResultLists(standardList: [], nonstandardList: [])
 
-        for localizedKeywordResult in localizedKeywordResults {
-            if localizedKeywordResult.localizedKeyword != nil {
-                hint.append(temp.standard.icon + " " + localizedKeywordResult.localizedKeyword!.name + " ")
+        for localizedExpertiseResult in localizedExpertiseResults {
+            if localizedExpertiseResult.localizedExpertise != nil {
+                hint.append(temp.standard.icon + " " + localizedExpertiseResult.localizedExpertise!.name + " ")
             } else {
-                hint.append(temp.nonstandard.icon + " " + localizedKeywordResult.id + " ")
+                hint.append(temp.nonstandard.icon + " " + localizedExpertiseResult.id + " ")
             }
         }
 

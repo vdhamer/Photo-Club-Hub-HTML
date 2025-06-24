@@ -22,8 +22,8 @@ extension Photographer {
         fatalError("init() is not available. Use .findCreateUpdate instead.")
     }
 
-    public var photographerKeywords: Set<PhotographerExpertise> {
-        (photographerKeywords_ as? Set<PhotographerExpertise>) ?? []
+    public var photographerExpertises: Set<PhotographerExpertise> {
+        (photographerExpertises_ as? Set<PhotographerExpertise>) ?? []
     }
 
 	var memberships: Set<MemberPortfolio> {
