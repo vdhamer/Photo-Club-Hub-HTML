@@ -73,11 +73,6 @@ extension PhotoClubHubHtmlApp {
         _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
                                                useOnlyInBundleFile: false)
 
-        // load current/former members of Fotogroep Oirschot
-        let oirschotBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgOirschot")
-        _ = FotogroepOirschotMembersProvider(bgContext: oirschotBackgroundContext,
-                                             useOnlyInBundleFile: false)
-
         if includeXampleClubs {
 
             // load test member(s) of XampleMin. Club is called XampleMin (rather than ExampleMin) to be at end of list
@@ -87,6 +82,16 @@ extension PhotoClubHubHtmlApp {
             // load test member(s) of XampleMax. Club is called XampleMax (rather than ExampleMax) to be at end of list
             let xampleMaxBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMax")
             _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext, useOnlyInBundleFile: false)
+
+            // load current/former members of Fotogroep Oirschot
+            let oirschotBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgOirschot")
+            _ = FotogroepOirschotMembersProvider(bgContext: oirschotBackgroundContext,
+                                                 useOnlyInBundleFile: false)
+
+            // load current/former members of Fotogroep Oirschot
+//            let individueelBOBackgroundContext = makeBgContext(ctxName: "Level 2 loader IndividueelBO")
+//            _ = IndividueelBOMembersProvider(bgContext: individueelBOBackgroundContext,
+//                                             useOnlyInBundleFile: false)
 
         }
 

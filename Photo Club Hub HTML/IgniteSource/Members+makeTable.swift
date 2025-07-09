@@ -52,8 +52,7 @@ extension Members {
                                   fotobond: Int(member.fotobondNumber),
                                   roles: member.memberRolesAndStatus,
                                   portfolio: member.level3URL_,
-                                  thumbnail: member.featuredImageThumbnail ??
-                                             URL("http://www.vdhamer.com/2017_GemeentehuisWaalre_5D2_33-Edit.jpg")
+                                  thumbnail: member.featuredImageThumbnail
                         )
                     }
                 }
@@ -173,7 +172,7 @@ extension Members {
             for localizedExpertiseResult in localizedExpertiseResultList.list {
                 string.append(" " + localizedExpertiseResult.name
                               + localizedExpertiseResult.delimiterToAppend)
-                hint = localizedExpertiseResult.localizedKeyword?.usage
+                hint = localizedExpertiseResult.localizedExpertise?.usage
                 customHint = localizedExpertiseResult.customHint ?? ""
             }
 
@@ -215,7 +214,7 @@ extension Members {
             var pageElements = [PageElement]()
 
             let localizedExpertiseResultsLists = LocalizedExpertiseResultLists(moc: moc,
-                                                                               photographer.photographerKeywords)
+                                                                               photographer.photographerExpertises)
 
             let standard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
                                                 isStandard: true)
@@ -230,14 +229,15 @@ extension Members {
 
     }
 
-    fileprivate func customHint(localizedKeywordResults: [LocalizedKeywordResult]) -> String {
+    fileprivate func customHint(localizedExpertiseResults: [LocalizedExpertiseResult]) -> String {
         var hint: String = ""
 
-        for localizedKeywordResult in localizedKeywordResults {
-            if localizedKeywordResult.localizedKeyword != nil {
-                hint.append(getIconString(standard: true) + " " + localizedKeywordResult.localizedKeyword!.name + " ")
+        for localizedExpertiseResult in localizedExpertiseResults {
+            if localizedExpertiseResult.localizedExpertise != nil {
+                hint.append(getIconString(standard: true) + " " +
+                            localizedExpertiseResult.localizedExpertise!.name + " ")
             } else {
-                hint.append(getIconString(standard: true) + " " + localizedKeywordResult.id + " ")
+                hint.append(getIconString(standard: true) + " " + localizedExpertiseResult.id + " ")
             }
         }
 

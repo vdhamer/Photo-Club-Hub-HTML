@@ -73,6 +73,12 @@ struct MemberSite: Site {
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
                                                                 idPlus: dendungenIdPlus)
 
+//        let individueelBOIdPlus = OrganizationIdPlus(fullName: "Individuele Leden Brabant Oost", town: "Eindhoven",
+//                                                 nickname: "IndividueelBO")
+//        let club8: Organization = Organization.findCreateUpdate(context: moc,
+//                                                                organizationTypeEnum: OrganizationTypeEnum.club,
+//                                                                idPlus: individueelBOIdPlus)
+
         self.moc = moc
 
         let chosenClubIX: Int = 0  // roundabout way to avoid SwiftLint warnings about unused properties

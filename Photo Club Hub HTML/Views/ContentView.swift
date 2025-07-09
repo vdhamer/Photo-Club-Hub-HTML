@@ -47,17 +47,16 @@ struct ContentView: View {
     fileprivate var allMembers: FetchedResults<MemberPortfolio>
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Keyword.id_, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \Expertise.id_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    fileprivate var allKeywords: FetchedResults<Keyword> // duplicates Keyword.getAll()
+    fileprivate var allKeywords: FetchedResults<Expertise> // duplicates Expertise.getAll()
 
     @FetchRequest(
         sortDescriptors: [],
         predicate: allPredicate,
         animation: .default)
-    fileprivate var allPhotographerKeywords: FetchedResults<PhotographerKeyword>
-
+    fileprivate var allPhotographerExpertises: FetchedResults<PhotographerExpertise>
     // MARK: - Body of ContentView
 
     var body: some View {
@@ -96,7 +95,7 @@ struct ContentView: View {
                      comment: "Count of members in database")
                 Text("◼ \(allKeywords.count) expertises defined", tableName: "SwiftUI",
                      comment: "Count of expertises in database")
-                Text("◼ \(allPhotographerKeywords.count) expertises used", tableName: "SwiftUI",
+                Text("◼ \(allPhotographerExpertises.count) expertises used", tableName: "SwiftUI",
                      comment: "Count of expertise usages in database")
             }
             .foregroundStyle(.secondary)

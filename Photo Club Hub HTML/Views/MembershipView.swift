@@ -44,7 +44,7 @@ struct MembershipView: View {
                              \(describeMember(member: member))
                              """) .font(.title3) .fontWeight(.bold) .lineLimit(1)
                         Spacer()
-                        Text(verbatim: "\(member.featuredImageThumbnail?.path ?? "No thumbnail")")
+                        Text(verbatim: "\(member.featuredImageThumbnail.path)")
                             .font(.footnote)
                             .lineLimit(1)
                     }
