@@ -89,9 +89,9 @@ extension PhotoClubHubHtmlApp {
                                                  useOnlyInBundleFile: false)
 
             // load current/former members of Fotogroep Oirschot
-//            let individueelBOBackgroundContext = makeBgContext(ctxName: "Level 2 loader IndividueelBO")
-//            _ = IndividueelBOMembersProvider(bgContext: individueelBOBackgroundContext,
-//                                             useOnlyInBundleFile: false)
+            let individueelBOBackgroundContext = makeBgContext(ctxName: "Level 2 loader IndividueelBO")
+            _ = IndividueelBOMembersProvider(bgContext: individueelBOBackgroundContext,
+                                             useOnlyInBundleFile: false)
 
         }
 
