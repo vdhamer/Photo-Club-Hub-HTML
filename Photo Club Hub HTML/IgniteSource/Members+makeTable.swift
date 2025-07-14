@@ -59,7 +59,7 @@ extension Members {
                 header: {
                     String(localized: "Name",
                            table: "HTML", comment: "HTML table header for member's name column.")
-                    String(localized: "Areas of expertise",
+                    String(localized: "Expertise tags",
                            table: "HTML", comment: "HTML table header for member's keywords.")
                     String(localized: "Own website",
                            table: "HTML", comment: "HTML table header for member's own website column.")
@@ -158,7 +158,7 @@ extension Members {
 
         }
 
-        // Returns Ignite PageElement rendering the lists of standard or nonstandard Expertise areas.
+        // Returns Ignite PageElement rendering the lists of official or unoffiical Expertise tags.
         func generatePageElements(localizedExpertiseResultLists: LocalizedExpertiseResultLists, isStandard: Bool)
                                   -> PageElement? {
             let localizedExpertiseResultList = isStandard ? localizedExpertiseResultLists.standard :
