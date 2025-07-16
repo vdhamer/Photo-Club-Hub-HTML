@@ -77,7 +77,7 @@
       }
     },
     "Current members of %@" : {
-      "comment" : "Title badge at top of HTML page",
+      "comment" : "Title badge at top of Members HTML page",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -225,6 +225,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eigen site"
+          }
+        }
+      }
+    },
+    "Photo clubs" : {
+      "comment" : "Title badge at top of Clubs HTML index page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo clubs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoclubs"
           }
         }
       }

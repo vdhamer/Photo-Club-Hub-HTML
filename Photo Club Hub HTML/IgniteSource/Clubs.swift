@@ -1,5 +1,5 @@
 //
-//  Members.swift
+//  Clubs.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 06/09/2024.
@@ -10,9 +10,8 @@ import CoreData // for ManagedObjectContext
 import SwiftImageReadWrite // for image format conversion
 import Photo_Club_Hub_Data // for Organization
 
-struct Members: StaticPage {
-    var title = "Leden"  // needed by the StaticPage protocol, but how do I localize it?
-    let showFormerMembers: Bool = false // suppresses generating and showing table for former members
+struct Clubs: StaticPage {
+    var title = "Clubs"  // needed by the StaticPage protocol, but how do I localize it?
     let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
     fileprivate var currentMembers = Table {} // initialite to empty table, then fill during init()
@@ -38,28 +37,21 @@ struct Members: StaticPage {
         self.club = club
         self.clubFullNameTown = club.fullNameTown
 
-        let makeTableResult = makeMembersTable(former: false, moc: moc, club: club)
+        let makeTableResult = makeClubsTable(former: false, moc: moc, club: club)
         currentMembersCount = makeTableResult.memberCount
         currentMembers = makeTableResult.table
         currentMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
-        if showFormerMembers {
-            let makeTableResult = makeMembersTable(former: true, moc: moc, club: club)
-            formerMembersCount = makeTableResult.memberCount
-            formerMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
-            formerMembers = makeTableResult.table
-        }
     }
 
     // MARK: - body()
 
-    // swiftlint:disable:next function_body_length
     func body(context: PublishingContext) -> [BlockElement] {
 
         // MARK: - current members
 
         Text {
-            Badge(String(localized: "Current members of \(clubFullNameTown)",
-                         table: "HTML", comment: "Title badge at top of Members HTML page"))
+            Badge(String(localized: "Photo clubs",
+                         table: "HTML", comment: "Title badge at top of Clubs HTML index page"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }
@@ -92,48 +84,12 @@ struct Members: StaticPage {
 
         Divider() // would like it in a darker color
 
-        // MARK: - former members
-
-        if showFormerMembers {
-            Text {
-                Badge(String(localized: "\(formerMembersCount) former members",
-                             table: "HTML", comment: "Number of former members"))
-                .badgeStyle(.subtleBordered)
-                .role(.secondary)
-            }
-            .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
-
-            formerMembers
-                .tableStyle(.stripedRows)
-                .tableBorder(true)
-                .horizontalAlignment(.center)
-
-            if formerMembersTotalYears > 0 && formerMembersCount > 0 {
-                Alert {
-                    Text { String(localized:
-                    """
-                    The listed ex-members were members of this club for, on average, \
-                    \(formatYears(formerMembersTotalYears/Double(formerMembersCountWithStartDate))) \
-                    years.
-                    """,
-                                  table: "HTML",
-                                  comment: "Footer for former members table")
-                    } .horizontalAlignment(.center)
-                }
-                .margin(.top, .small)
-            } else {
-                Alert {
-                    Text { "" }
-                }
-                .margin(.top, .small)
-            }
-        }
     }
 
 }
 
-func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
-    let status: [MemberStatus: Bool?] = roles.status
-    let isFormer: Bool? = status[MemberStatus.former] ?? false // handle missing entry for .former
-    return isFormer ?? false // handle isFormer == nil
-}
+// func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
+//     let status: [MemberStatus: Bool?] = roles.status
+//     let isFormer: Bool? = status[MemberStatus.former] ?? false // handle missing entry for .former
+//     return isFormer ?? false // handle isFormer == nil
+// }
