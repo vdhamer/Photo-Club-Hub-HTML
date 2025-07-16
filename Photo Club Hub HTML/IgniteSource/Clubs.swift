@@ -15,13 +15,10 @@ struct Clubs: StaticPage {
     let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
     fileprivate var currentMembers = Table {} // initialite to empty table, then fill during init()
-    fileprivate var formerMembers = Table {} // same story
     var currentMembersTotalYears: Double = 0 // updated in memberRow()
     var formerMembersTotalYears: Double = 0 // updated in memberRow()
     fileprivate var currentMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
     fileprivate var currentMembersCountWithStartDate: Int = 0
-    fileprivate var formerMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
-    fileprivate var formerMembersCountWithStartDate: Int = 0
 
     let dateFormatter = DateFormatter()
 
@@ -37,10 +34,8 @@ struct Clubs: StaticPage {
         self.club = club
         self.clubFullNameTown = club.fullNameTown
 
-        let makeTableResult = makeClubsTable(former: false, moc: moc, club: club)
-        currentMembersCount = makeTableResult.memberCount
-        currentMembers = makeTableResult.table
-        currentMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
+        let makeTableResult = makeClubsTable(moc: moc)
+         currentMembers = makeTableResult.table
     }
 
     // MARK: - body()

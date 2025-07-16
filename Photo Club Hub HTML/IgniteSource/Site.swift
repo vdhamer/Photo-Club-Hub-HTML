@@ -15,7 +15,7 @@ let startInClubs: Bool = true // TODO complete configurability
 
 struct MemberSite: Site {
 
-    let name: String // set during init()
+    var name: String = "Leden" // set during init()
     // IMPORTANT: http://www.vdhamer.com gives localhost result, http://www.vdhamer.com/fgDeGender works on remote site
     var url: URL = URL("http://www.vdhamer.com")
     var builtInIconsEnabled: BootstrapOptions = .none

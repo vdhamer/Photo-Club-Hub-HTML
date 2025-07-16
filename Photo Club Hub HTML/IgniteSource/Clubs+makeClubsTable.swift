@@ -10,10 +10,9 @@ import CoreData // for NSSortDescriptor
 import AppKit // for CGImage
 import Photo_Club_Hub_Data // for Organization
 
-private struct MakeClubsTableResult {
+struct MakeClubsTableResult {
     let table: Table
-    let memberCount: Int
-    let memberCountWithStartDate: Int
+    let clubsCount: Int
 }
 
 extension Clubs {
@@ -23,35 +22,23 @@ extension Clubs {
     // club: for which club are we doing this?
     // return Int: count of returned members (can't directly count size of Ignite Table)
     // return Table: Ignite table containing rendering of requested members
-    mutating func makeClubsTable(former: Bool,
-                                 moc: NSManagedObjectContext,
-                                 club: Organization) -> MakeMembersTableResult {
+    mutating func makeClubsTable(moc: NSManagedObjectContext) -> MakeClubsTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
-            let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
-                                                   ascending: true)
-            let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_,
-                                                   ascending: true)
+            let sortDescriptor = NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)
 
-            let fetchRequest: NSFetchRequest<MemberPortfolio> = MemberPortfolio.fetchRequest()
-            fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+            let fetchRequest: NSFetchRequest<Organization> = Organization.fetchRequest()
+            fetchRequest.sortDescriptors = [sortDescriptor]
 
-            fetchRequest.predicate = NSPredicate(format: "organization_ = %@ AND isFormerMember = %@",
-                                                 argumentArray: [club, former])
-            let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
+            fetchRequest.predicate = NSPredicate(format: "organizationType_ = %@",
+                                                 argumentArray: [OrganizationTypeEnum.club])
+            fetchRequest.predicate = NSPredicate(format: "TRUEPREDICATE")
+            let clubs: [Organization] = try moc.fetch(fetchRequest)
 
-            return MakeMembersTableResult(
+            return MakeClubsTableResult(
                 table: Table {
-                    for member in memberPortfolios {
-                        makeMemberRow(moc: moc,
-                                  photographer: member.photographer,
-                                  membershipStartDate: member.membershipStartDate,
-                                  membershipEndDate: member.membershipEndDate,
-                                  fotobond: Int(member.fotobondNumber),
-                                  roles: member.memberRolesAndStatus,
-                                  portfolio: member.level3URL_,
-                                  thumbnail: member.featuredImageThumbnail
-                        )
+                    for club in clubs {
+                        makeClubRow(moc: moc, club: club)
                     }
                 }
                 header: {
@@ -64,8 +51,7 @@ extension Clubs {
                     String(localized: "Portfolio",
                            table: "HTML", comment: "HTML table header for image linked to member's portfolio.")
                 },
-                memberCount: memberPortfolios.count,
-                memberCountWithStartDate: memberPortfolios.filter { $0.membershipStartDate != nil }.count
+                clubsCount: -1234
             )
         } catch {
             fatalError("Failed to fetch memberPortfolios: \(error)")
@@ -75,16 +61,7 @@ extension Clubs {
 
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
-    fileprivate mutating func makeMemberRow(moc: NSManagedObjectContext,
-                                            photographer: Photographer,
-                                            membershipStartDate: Date?, // nil means app didn't receive a start date
-                                            membershipEndDate: Date? = nil, // nil means photographer is still a member
-                                            fotobond: Int? = nil,
-                                            roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
-                                            portfolio: URL? = nil,
-                                            thumbnail: URL) -> Row {
-
-        downloadThumbnailToLocal(downloadURL: thumbnail)
+    fileprivate mutating func makeClubRow(moc: NSManagedObjectContext, club: Organization) -> Row {
 
         return Row {
 
@@ -92,66 +69,25 @@ extension Clubs {
                 Group {
                     Text {
                         Link(
-                            fullName(givenName: photographer.givenName,
-                                     infixName: photographer.infixName,
-                                     familyName: photographer.familyName),
-                            target: portfolio ??
-                                    URL(string: MemberPortfolio.emptyPortfolioURL) ??
-                                    URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
+                            club.fullNameTown,
+                            target: URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
                         )
                             .linkStyle(.hover)
-                        if photographer.isDeceased {
-                            Badge("Overleden")
+                        if club.fotobondNumber > 0 {
+                            Badge("\(club.fotobondNumber)")
                                 .badgeStyle(.default)
                                 .role(.secondary)
                                 .margin(.leading, 10)
-                        } else {
-                            Badge(describe(roles: roles.roles))
-                                .badgeStyle(.subtleBordered)
-                                .role(.success)
-                                .margin(.leading, 10)
                         }
                     } .font(.title5) .padding(.none) .margin(0)
-                    Text {
-                        formatMembershipYears(start: membershipStartDate,
-                                              end: membershipEndDate,
-                                              isFormer: isFormerMember(roles: roles),
-                                              fotobond: fotobond)
-                    } .font(.body) .padding(.none) .margin(0) .foregroundStyle(.gray)
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column(items: listPhotographerExpertises)
-                .verticalAlignment(.middle)
-
-            if photographer.photographerWebsite == nil { // photographer's optional own website
-                Column { }
-            } else {
-                Column {
-                    Span(
-                        Link( String(localized: "Web site",
-                                     table: "HTML", comment: "Clickable link to photographer's web site"),
-                              target: photographer.photographerWebsite!.absoluteString)
-                            .linkStyle(.hover)
-                    )
-                    .hint(text: photographer.photographerWebsite!.absoluteString)
-                } .verticalAlignment(.middle)
-            }
-
-            Column { // clickable thumbnail of recent work
-                Image(lastPathComponent(fullUrl: thumbnail.absoluteString), // Ignite prepends /images/
-                      description: "clickable link to portfolio")
-                    .resizable()
-                    .cornerRadius(8)
-                    .aspectRatio(.square, contentMode: .fill)
-                    .frame(width: 80)
-                    .style("cursor: pointer")
-                    .onClick {
-                        let safeportfolio = portfolio ??
-                                            URL(string: MemberPortfolio.emptyPortfolioURL) ??
-                                            URL(string: "https://www.google.com")!
-                        CustomAction("window.location.href=\"\(safeportfolio)\";")
-                    }
+            Column {
+                Span(
+                    String("\(club.members.count)")
+                )
+                .hint(text: "foobar3")
             } .verticalAlignment(.middle)
 
         }
@@ -208,23 +144,6 @@ extension Clubs {
             }
         }
 
-        func listPhotographerExpertises() -> [PageElement] { // defined inside makeMemberRow to access photographer
-            var pageElements = [PageElement]()
-
-            let localizedExpertiseResultsLists = LocalizedExpertiseResultLists(moc: moc,
-                                                                               photographer.photographerExpertises)
-
-            let standard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
-                                                isStandard: true)
-            if let standard { pageElements.append(standard) }
-
-            let nonstandard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
-                                                   isStandard: false)
-            if let nonstandard { pageElements.append(nonstandard) }
-
-            return pageElements
-        }
-
     }
 
     fileprivate func customHint(localizedExpertiseResults: [LocalizedExpertiseResult]) -> String {
@@ -261,33 +180,6 @@ extension Clubs {
         let url = URL(string: fullUrl)
         let lastComponent: String = url?.lastPathComponent ?? "error in lastPathComponent"
         return "/images/\(lastComponent)"
-    }
-
-    fileprivate func downloadThumbnailToLocal(downloadURL: URL) { // for now this is synchronous
-
-        do {
-            // swiftlint:disable:next large_tuple
-            var results: (data: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
-            results = URLSession.shared.synchronousDataTask(from: downloadURL)
-            guard let data = results?.data else {
-                fatalError("Problems fetching thumbnail: \(results?.error?.localizedDescription ?? "")")
-            }
-
-            let image: CGImage = try CGImage.load(data: data) // SwiftImageReadWrite package
-            let jpegData: Data  = try image.representation.jpeg(scale: 1, compression: 0.65, excludeGPSData: true)
-
-            let lastComponent: String = downloadURL.lastPathComponent // e.g. "2023_FotogroepWaalre_001.jpg"
-            let buildDirectoryString = NSHomeDirectory() // app's home directory for a sandboxed MacOS app
-
-            guard let localUrl = URL(string: "file:\(buildDirectoryString)/Assets/images/\(lastComponent)") else {
-                fatalError("Error creating URL for /images/\(lastComponent)")
-            }
-            try jpegData.write(to: localUrl)
-            print("Wrote jpg to \(localUrl)")
-        } catch {
-            fatalError("Problem in downloadThumbNailToLocal(): \(error)")
-        }
-
     }
 
     fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
