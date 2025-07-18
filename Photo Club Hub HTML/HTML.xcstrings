@@ -76,6 +76,23 @@
         }
       }
     },
+    "Click for list of members" : {
+      "comment" : "Hint on club name Name column of Clubs table",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click for list of members"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klik hier voor ledenlijst"
+          }
+        }
+      }
+    },
     "Club name" : {
       "comment" : "HTML table header for club name column.",
       "localizations" : {
@@ -93,13 +110,13 @@
         }
       }
     },
-    "Club web site" : {
+    "Club website" : {
       "comment" : "HTML table header for clubs website link.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Club web site"
+            "value" : "Club website"
           }
         },
         "nl" : {
@@ -266,6 +283,12 @@
     "Members" : {
       "comment" : "HTML table header for member count column.",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Members"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -287,6 +310,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Naam"
+          }
+        }
+      }
+    },
+    "Number of current members" : {
+      "comment" : "Hint on numbers in Members column of Clubs table",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Number of current members"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aantal huidige leden"
           }
         }
       }
@@ -321,6 +361,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fotoclubs"
+          }
+        }
+      }
+    },
+    "Photoclub's website" : {
+      "comment" : "Hint on icon in Website column of Clubs table",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photoclub's website"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link naar website van de club"
           }
         }
       }
@@ -376,19 +433,53 @@
         }
       }
     },
-    "Web site" : {
-      "comment" : "Clickable link to photographer's web site",
+    "website" : {
+      "comment" : "Text in cells in club website column",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "web site"
+            "value" : "🌐"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🌐"
+          }
+        }
+      }
+    },
+    "Website" : {
+      "comment" : "Clickable link to photographer's website",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
+          }
+        }
+      }
+    },
+    "Where the club is based" : {
+      "comment" : "Hint text for the town column in the Clubs table",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Where the club is based"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vergaderlocatie van de club"
           }
         }
       }

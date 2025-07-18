@@ -86,7 +86,7 @@ Technically the files simply need to be hosted on an HTTP server such as a club'
 
 The data being displayed on the individual HTML sites can get updated say 10 times per year.
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
-it is best to generate _static_ web sites.
+it is best to generate _static_ websites.
 This limits the hasstle to uploading a file to a directory and associated username/password.
 This should be easier and more robust than having custom server software that generates web pages on demand.
 

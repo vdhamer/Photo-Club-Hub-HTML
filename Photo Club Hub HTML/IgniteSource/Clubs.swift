@@ -82,9 +82,3 @@ struct Clubs: StaticPage {
     }
 
 }
-
-// func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
-//     let status: [MemberStatus: Bool?] = roles.status
-//     let isFormer: Bool? = status[MemberStatus.former] ?? false // handle missing entry for .former
-//     return isFormer ?? false // handle isFormer == nil
-// }

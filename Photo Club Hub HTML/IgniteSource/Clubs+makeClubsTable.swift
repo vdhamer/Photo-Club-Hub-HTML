@@ -49,7 +49,7 @@ extension Clubs {
                            table: "HTML", comment: "HTML table header for club name column.")
                     String(localized: "Members",
                            table: "HTML", comment: "HTML table header for member count column.")
-                    String(localized: "Club web site",
+                    String(localized: "Club website",
                            table: "HTML", comment: "HTML table header for clubs website link.")
                     String(localized: "Fotobond #",
                            table: "HTML", comment: "HTML table header for club's identifier in Fotobond.")
@@ -75,42 +75,57 @@ extension Clubs {
                     Span(
                         String("\(club.town)")
                     )
-                    .hint(text: "Where the club is based")
+                    .hint(text: String(localized: "Where the club is based", table: "HTML",
+                                       comment: "Hint text for the town column in the Clubs table"))
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
             Column { // club name
                 let url: String = "http://www.vdhamer.com/\(club.nickname)"
                 Group {
-                    Text {
-                        if !club.members.isEmpty {
+                    if !club.members.isEmpty {
+                        Text {
                             Link(String(club.fullName),
-                                target: url
+                                 target: url
                             )
-                                .linkStyle(.hover)
-                        } else {
-                            club.fullName
-                        }
-                    } .font(.title5) .padding(.none) .margin(0)
+                            .linkStyle(.hover)
+                        } .font(.title5) .padding(.none) .margin(0)
+                            .hint(text: String(localized: "Click for list of members",
+                                               table: "HTML",
+                                               comment: "Hint on club name Name column of Clubs table"))
+                    } else {
+                        club.fullName
+                    }
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // Membership
+            Column { // member count
+                let url: String = "http://www.vdhamer.com/\(club.nickname)"
                 if !club.members.isEmpty {
                     Span(
-                        String("\(club.members.count)")
+                        Link(String("\(club.members.filter { !$0.isFormerMember }.count)"), target: url)
+                            .linkStyle(.hover)
                     )
-                    .hint(text: "Leden inclusief ex-leden")
-                }
-            }
-
-            Column { // web site
-                if club.organizationWebsite != nil {
-                    Link("web site", target: club.organizationWebsite!)
+                    .hint(text: String(localized: "Number of current members",
+                                       table: "HTML",
+                                       comment: "Hint on numbers in Members column of Clubs table"))
                 }
             } .verticalAlignment(.middle)
 
-            Column { // Fotobond #
+            Column { // website
+                if club.organizationWebsite != nil {
+                    Text {
+                        Link(String(localized: "website", table: "HTML",
+                                    comment: "Text in cells in club website column"),
+                             target: club.organizationWebsite!)
+                        .linkStyle(.hover)
+                        .hint(text: String(localized: "Photoclub's website", table: "HTML",
+                                           comment: "Hint on icon in Website column of Clubs table"))
+                    } .font(.title5) .padding(.none) .margin(0)
+                }
+            } .verticalAlignment(.middle)
+
+            Column { // Fotobond
                 if club.fotobondNumber > 0 {
                     String("\(club.fotobondNumber)")
                         .margin(.leading, 10)
@@ -127,78 +142,6 @@ extension Clubs {
 
         }
 
-        // Returns Ignite PageElement rendering the lists of official or unoffiical Expertise tags.
-        func generatePageElements(localizedExpertiseResultLists: LocalizedExpertiseResultLists, isStandard: Bool)
-                                  -> PageElement? {
-            let localizedExpertiseResultList = isStandard ? localizedExpertiseResultLists.standard :
-                                                          localizedExpertiseResultLists.nonstandard
-            guard !localizedExpertiseResultList.list.isEmpty else { return nil } // nothing to display
-
-            var hint: String?
-            var customHint: String = ""
-            var string = localizedExpertiseResultLists.getIconString(standard: isStandard) // line starts with icon
-
-            for localizedExpertiseResult in localizedExpertiseResultList.list {
-                string.append(" " + localizedExpertiseResult.name
-                              + localizedExpertiseResult.delimiterToAppend)
-                hint = localizedExpertiseResult.localizedExpertise?.usage
-                customHint = localizedExpertiseResult.customHint ?? ""
-            }
-
-            if !isStandard {
-                if hint == nil && customHint == "" {
-                    return Text(string)
-                        .horizontalAlignment(.leading)
-                        .padding(.none)
-                        .margin(5)
-                        .hint(text: String(localized: "Unofficial expertise. It has no translations yet.",
-                                           table: "Package",
-                                           comment: "Hint for expertise without localization"))
-                } else {
-                    return Text(string)
-                        .horizontalAlignment(.leading)
-                        .padding(.none)
-                        .margin(5)
-                        .hint(text: String(localized: "Expertises: \(customHint)",
-                                           table: "Package",
-                                           comment: "Hint when providing too many expertises"))
-                }
-            } else {
-                if hint != nil {
-                    return Text(string)
-                        .horizontalAlignment(.leading)
-                        .padding(.none)
-                        .margin(5)
-                        .hint(text: hint!)
-                } else {
-                    return Text(string)
-                        .horizontalAlignment(.leading)
-                        .padding(.none)
-                        .margin(5)
-                }
-            }
-        }
-
-    }
-
-    fileprivate func customHint(localizedExpertiseResults: [LocalizedExpertiseResult]) -> String {
-        var hint: String = ""
-
-        for localizedExpertiseResult in localizedExpertiseResults {
-            if localizedExpertiseResult.localizedExpertise != nil {
-                hint.append(getIconString(standard: true) + " " +
-                            localizedExpertiseResult.localizedExpertise!.name + " ")
-            } else {
-                hint.append(getIconString(standard: true) + " " + localizedExpertiseResult.id + " ")
-            }
-        }
-
-        return hint.trimmingCharacters(in: CharacterSet(charactersIn: " "))
-    }
-
-    fileprivate func getIconString(standard: Bool) -> String {
-        let temp = LocalizedExpertiseResultLists(standardList: [], nonstandardList: [])
-        return standard ? temp.standard.icon : temp.nonstandard.icon
     }
 
     fileprivate func fullName(givenName: String,
@@ -226,59 +169,6 @@ extension Clubs {
             }
         }
         return ""
-    }
-
-    fileprivate mutating func formatMembershipYears(start: Date?, end: Date?,
-                                                    isFormer: Bool,
-                                                    fotobond: Int?) -> Span {
-        var years = TimeInterval(0)
-
-        if start != nil {
-            let end: Date = (end != nil) ? end! : Date.now // optional -> not optional
-            let dateInterval = DateInterval(start: start!, end: end)
-            years = dateInterval.duration / (365.25 * 24 * 60 * 60)
-        }
-
-        let fotobondString: String
-        if showFotobondNumber, let fotobond {
-            fotobondString = " Fotobond #\(fotobond)"
-        } else {
-            fotobondString = ""
-        }
-
-        let unknown = Span(String(localized: "-",
-                                  table: "HTML",
-                                  comment: "Shown in member table when start date unavailable"))
-
-        if isFormer == false { // if current member, displays "Member for NN.N years"
-            guard start != nil else { return unknown }
-
-            currentMembersTotalYears += years
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let formattedStartDate = dateFormatter.string(from: start!)
-            return Span(String(localized: "Member for past \(formatYears(years)) years",
-                        table: "HTML",
-                        comment: "Membership duration for current members"))
-                .hint(text: String(localized:
-                                   """
-                                   From \(formattedStartDate)\(fotobondString)
-                                   """,
-                                   table: "HTML",
-                                   comment: "Mouseover hint on cell containing start-end years"))
-        } else { // if current member, displays "Member from YYYYY to YYYY"
-            formerMembersTotalYears += years
-            guard end != nil && start != nil else { return unknown }
-            return Span(String(localized: "Member from \(toYear(date: start!)) to \(toYear(date: end!))",
-                               table: "HTML",
-                               comment: "Membership duration for current members"))
-                .hint(text: String(localized:
-                                   """
-                                   From \(toYear(date: start!)) to \(toYear(date: end!)) (\(formatYears(years)) years)\
-                                   \(fotobondString)
-                                   """,
-                                   table: "HTML",
-                                   comment: "Mouseover hint on cell containing start-end years"))
-        }
     }
 
     func formatYears(_ years: Double) -> String {

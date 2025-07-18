@@ -131,8 +131,9 @@ extension Members {
             } else {
                 Column {
                     Span(
-                        Link( String(localized: "Web site",
-                                     table: "HTML", comment: "Clickable link to photographer's web site"),
+                        Link( String(localized: "Website",
+                                     table: "HTML",
+                                     comment: "Clickable link to photographer's website"),
                               target: photographer.photographerWebsite!.absoluteString)
                             .linkStyle(.hover)
                     )
