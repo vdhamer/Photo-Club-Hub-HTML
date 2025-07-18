@@ -10,7 +10,7 @@ import CoreData // for NSSortDescriptor
 import AppKit // for CGImage
 import Photo_Club_Hub_Data // for Organization
 
-struct MakeTableResult {
+struct MakeMembersTableResult {
     let table: Table
     let memberCount: Int
     let memberCountWithStartDate: Int
@@ -25,9 +25,9 @@ extension Members {
     // club: for which club are we doing this?
     // return Int: count of returned members (can't directly count size of Ignite Table)
     // return Table: Ignite table containing rendering of requested members
-    mutating func makeTable(former: Bool,
-                            moc: NSManagedObjectContext,
-                            club: Organization) -> MakeTableResult {
+    mutating func makeMembersTable(former: Bool,
+                                   moc: NSManagedObjectContext,
+                                   club: Organization) -> MakeMembersTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
             let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
@@ -42,7 +42,7 @@ extension Members {
                                                  argumentArray: [club, former])
             let memberPortfolios: [MemberPortfolio] = try moc.fetch(fetchRequest)
 
-            return MakeTableResult(
+            return MakeMembersTableResult(
                 table: Table {
                     for member in memberPortfolios {
                         makeMemberRow(moc: moc,

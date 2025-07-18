@@ -38,12 +38,12 @@ struct Members: StaticPage {
         self.club = club
         self.clubFullNameTown = club.fullNameTown
 
-        let makeTableResult = makeTable(former: false, moc: moc, club: club)
+        let makeTableResult = makeMembersTable(former: false, moc: moc, club: club)
         currentMembersCount = makeTableResult.memberCount
         currentMembers = makeTableResult.table
         currentMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
         if showFormerMembers {
-            let makeTableResult = makeTable(former: true, moc: moc, club: club)
+            let makeTableResult = makeMembersTable(former: true, moc: moc, club: club)
             formerMembersCount = makeTableResult.memberCount
             formerMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
             formerMembers = makeTableResult.table
@@ -59,7 +59,7 @@ struct Members: StaticPage {
 
         Text {
             Badge(String(localized: "Current members of \(clubFullNameTown)",
-                         table: "HTML", comment: "Title badge at top of HTML page"))
+                         table: "HTML", comment: "Title badge at top of Members HTML page"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }
