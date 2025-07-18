@@ -76,6 +76,40 @@
         }
       }
     },
+    "Club name" : {
+      "comment" : "HTML table header for club name column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Club name"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clubnaam"
+          }
+        }
+      }
+    },
+    "Club web site" : {
+      "comment" : "HTML table header for clubs website link.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Club web site"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Club website"
+          }
+        }
+      }
+    },
     "Current members of %@" : {
       "comment" : "Title badge at top of Members HTML page",
       "localizations" : {
@@ -127,6 +161,23 @@
         }
       }
     },
+    "Fotobond #" : {
+      "comment" : "HTML table header for club's identifier in Fotobond.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dutch Fotobond ID"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotobond nr."
+          }
+        }
+      }
+    },
     "From %@ to %@ (%@ years)%@" : {
       "comment" : "Mouseover hint on cell containing start-end years",
       "localizations" : {
@@ -161,6 +212,23 @@
         }
       }
     },
+    "JSON" : {
+      "comment" : "HTML table header for link to JSON input file.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JSON"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JSON"
+          }
+        }
+      }
+    },
     "Member for past %@ years" : {
       "comment" : "Membership duration for current members",
       "localizations" : {
@@ -191,6 +259,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lid van %1$@ tot %2$@"
+          }
+        }
+      }
+    },
+    "Members" : {
+      "comment" : "HTML table header for member count column.",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leden"
           }
         }
       }
@@ -280,6 +359,23 @@
         }
       }
     },
+    "Town" : {
+      "comment" : "HTML table header for town column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Town"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gemeente"
+          }
+        }
+      }
+    },
     "Web site" : {
       "comment" : "Clickable link to photographer's web site",
       "localizations" : {
@@ -292,7 +388,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "website"
+            "value" : "Website"
           }
         }
       }

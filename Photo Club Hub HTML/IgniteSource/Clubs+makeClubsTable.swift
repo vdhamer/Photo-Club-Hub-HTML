@@ -25,14 +25,15 @@ extension Clubs {
     mutating func makeClubsTable(moc: NSManagedObjectContext) -> MakeClubsTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
-            let sortDescriptor = NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)
+            let sortDescriptor1 = NSSortDescriptor(keyPath: \Organization.town_, ascending: true)
+            let sortDescriptor2 = NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)
 
             let fetchRequest: NSFetchRequest<Organization> = Organization.fetchRequest()
-            fetchRequest.sortDescriptors = [sortDescriptor]
+            fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
 
-            fetchRequest.predicate = NSPredicate(format: "organizationType_ = %@",
-                                                 argumentArray: [OrganizationTypeEnum.club])
-            fetchRequest.predicate = NSPredicate(format: "TRUEPREDICATE")
+            fetchRequest.predicate = NSPredicate(format: "organizationType_.organizationTypeName_ = %@",
+                                                 argumentArray: [OrganizationTypeEnum.club.rawValue])
+//            fetchRequest.predicate = NSPredicate(format: "TRUEPREDICATE")
             let clubs: [Organization] = try moc.fetch(fetchRequest)
 
             return MakeClubsTableResult(
@@ -42,14 +43,18 @@ extension Clubs {
                     }
                 }
                 header: {
-                    String(localized: "Name",
-                           table: "HTML", comment: "HTML table header for member's name column.")
-                    String(localized: "Expertise tags",
-                           table: "HTML", comment: "HTML table header for member's keywords.")
-                    String(localized: "Own website",
-                           table: "HTML", comment: "HTML table header for member's own website column.")
-                    String(localized: "Portfolio",
-                           table: "HTML", comment: "HTML table header for image linked to member's portfolio.")
+                    String(localized: "Town",
+                           table: "HTML", comment: "HTML table header for town column.")
+                    String(localized: "Club name",
+                           table: "HTML", comment: "HTML table header for club name column.")
+                    String(localized: "Members",
+                           table: "HTML", comment: "HTML table header for member count column.")
+                    String(localized: "Club web site",
+                           table: "HTML", comment: "HTML table header for clubs website link.")
+                    String(localized: "Fotobond #",
+                           table: "HTML", comment: "HTML table header for club's identifier in Fotobond.")
+                    String(localized: "JSON",
+                           table: "HTML", comment: "HTML table header for link to JSON input file.")
                 },
                 clubsCount: -1234
             )
@@ -65,29 +70,59 @@ extension Clubs {
 
         return Row {
 
-            Column { // member's name with any role & status badges
+            Column { // town
+                Group {
+                    Span(
+                        String("\(club.town)")
+                    )
+                    .hint(text: "Where the club is based")
+                } .horizontalAlignment(.leading) .padding(.none) .margin(0)
+            } .verticalAlignment(.middle)
+
+            Column { // club name
+                let url: String = "http://www.vdhamer.com/\(club.nickname)"
                 Group {
                     Text {
-                        Link(
-                            club.fullNameTown,
-                            target: URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
-                        )
-                            .linkStyle(.hover)
-                        if club.fotobondNumber > 0 {
-                            Badge("\(club.fotobondNumber)")
-                                .badgeStyle(.default)
-                                .role(.secondary)
-                                .margin(.leading, 10)
+                        if !club.members.isEmpty {
+                            Link(String(club.fullName),
+                                target: url
+                            )
+                                .linkStyle(.hover)
+                        } else {
+                            club.fullName
                         }
                     } .font(.title5) .padding(.none) .margin(0)
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column {
-                Span(
-                    String("\(club.members.count)")
-                )
-                .hint(text: "foobar3")
+            Column { // Membership
+                if !club.members.isEmpty {
+                    Span(
+                        String("\(club.members.count)")
+                    )
+                    .hint(text: "Leden inclusief ex-leden")
+                }
+            }
+
+            Column { // web site
+                if club.organizationWebsite != nil {
+                    Link("web site", target: club.organizationWebsite!)
+                }
+            } .verticalAlignment(.middle)
+
+            Column { // Fotobond #
+                if club.fotobondNumber > 0 {
+                    String("\(club.fotobondNumber)")
+                        .margin(.leading, 10)
+                }
+            } .verticalAlignment(.middle)
+
+            Column { // JSON
+                if !club.members.isEmpty {
+                    let url: String =
+                        "https://github.com/vdhamer/Photo-Club-Hub/blob/main/JSON/\(club.nickname).level2.json"
+                    Link(String("json"), target: url)
+                }
             } .verticalAlignment(.middle)
 
         }

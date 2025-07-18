@@ -11,7 +11,7 @@ import SwiftImageReadWrite // for image format conversion
 import Photo_Club_Hub_Data // for Organization
 
 struct Clubs: StaticPage {
-    var title = "Clubs"  // needed by the StaticPage protocol, but how do I localize it?
+    var title = "Fotoclubs"  // needed by the StaticPage protocol, but how do I localize it?
     let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
     fileprivate var currentMembers = Table {} // initialite to empty table, then fill during init()

@@ -45,13 +45,13 @@ struct MemberSite: Site {
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
                                                                 idPlus: bellusImagoIdPlus)
 
-        let xampleMinIdPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data", town: "Rotterdam",
+        let xampleMinIdPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data", town: "Amsterdam",
                                                  nickname: "XampleMin")
         let club3: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
                                                                 idPlus: xampleMinIdPlus)
 
-        let xampleMaxIdPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data", town: "Amsterdam",
+        let xampleMaxIdPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data", town: "Rotterdam",
                                                  nickname: "XampleMax")
         let club4: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: OrganizationTypeEnum.club,
