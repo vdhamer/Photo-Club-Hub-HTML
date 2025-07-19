@@ -75,8 +75,8 @@ extension Clubs {
                     Span(
                         String("\(club.town)")
                     )
-                    .hint(text: String(localized: "Where the club is based", table: "HTML",
-                                       comment: "Hint text for the town column in the Clubs table"))
+//                    .hint(text: String(localized: "Where the club is based", table: "HTML",
+//                                       comment: "Hint text for the town column in the Clubs table"))
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
@@ -90,9 +90,9 @@ extension Clubs {
                             )
                             .linkStyle(.hover)
                         } .font(.title5) .padding(.none) .margin(0)
-                            .hint(text: String(localized: "Click for list of members",
-                                               table: "HTML",
-                                               comment: "Hint on club name Name column of Clubs table"))
+//                            .hint(text: String(localized: "Click for list of members",
+//                                               table: "HTML",
+//                                               comment: "Hint on club name Name column of Clubs table"))
                     } else {
                         club.fullName
                     }
@@ -106,9 +106,9 @@ extension Clubs {
                         Link(String("\(club.members.filter { !$0.isFormerMember }.count)"), target: url)
                             .linkStyle(.hover)
                     )
-                    .hint(text: String(localized: "Number of current members",
-                                       table: "HTML",
-                                       comment: "Hint on numbers in Members column of Clubs table"))
+//                    .hint(text: String(localized: "Number of current members",
+//                                       table: "HTML",
+//                                       comment: "Hint on numbers in Members column of Clubs table"))
                 }
             } .verticalAlignment(.middle)
 
@@ -119,8 +119,8 @@ extension Clubs {
                                     comment: "Text in cells in club website column"),
                              target: club.organizationWebsite!)
                         .linkStyle(.hover)
-                        .hint(text: String(localized: "Photoclub's website", table: "HTML",
-                                           comment: "Hint on icon in Website column of Clubs table"))
+//                        .hint(text: String(localized: "Photoclub's website", table: "HTML",
+//                                           comment: "Hint on icon in Website column of Clubs table"))
                     } .font(.title5) .padding(.none) .margin(0)
                 }
             } .verticalAlignment(.middle)

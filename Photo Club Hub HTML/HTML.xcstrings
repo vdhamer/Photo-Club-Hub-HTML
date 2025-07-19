@@ -78,6 +78,7 @@
     },
     "Click for list of members" : {
       "comment" : "Hint on club name Name column of Clubs table",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -316,6 +317,7 @@
     },
     "Number of current members" : {
       "comment" : "Hint on numbers in Members column of Clubs table",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -367,6 +369,7 @@
     },
     "Photoclub's website" : {
       "comment" : "Hint on icon in Website column of Clubs table",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -469,6 +472,7 @@
     },
     "Where the club is based" : {
       "comment" : "Hint text for the town column in the Clubs table",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
