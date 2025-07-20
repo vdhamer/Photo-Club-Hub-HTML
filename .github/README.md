@@ -8,7 +8,8 @@
 [![Discussions][discussions-shield]][discussions-url]
 [![MIT License][license-shield]][license-url]
 
-![Sample output website](images/Screenshot_Ignite.png "Sample output website")
+![Sample output website](images/Screenshot_clubs.png "Sample list of clubs")
+![Sample output website](images/Screenshot_fcDeGender.png "Sample list of club members")
 
 # Photo-Club-Hub-HTML
 

@@ -75,9 +75,10 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				images/Screenshot_app.png,
+				images/Screenshot_clubs.png,
 				images/Screenshot_comparison.png,
 				images/Screenshot_comparison.psd,
-				images/Screenshot_Ignite.png,
+				images/Screenshot_fcDeGender.png,
 				LICENSE.md,
 				README.md,
 			);
