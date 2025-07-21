@@ -103,7 +103,8 @@ extension Members {
                         )
                             .linkStyle(.hover)
                         if photographer.isDeceased {
-                            Badge("Overleden")
+                            Badge(String(localized: "Deceased", table: "HTML",
+                                         comment: "Badge to indicated a deceased member"))
                                 .badgeStyle(.default)
                                 .role(.secondary)
                                 .margin(.leading, 10)

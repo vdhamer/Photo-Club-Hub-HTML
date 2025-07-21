@@ -162,6 +162,23 @@
         }
       }
     },
+    "Deceased" : {
+      "comment" : "Badge to indicated a deceased member",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deceased"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overleden"
+          }
+        }
+      }
+    },
     "Expertise tags" : {
       "comment" : "HTML table header for member's keywords.",
       "localizations" : {
