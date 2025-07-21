@@ -175,9 +175,4 @@ extension Clubs {
         String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
     }
 
-    fileprivate func toYear(date: Date) -> String {
-        dateFormatter.dateFormat = "yyyy"
-        return dateFormatter.string(from: date) // "2020"
-    }
-
 }

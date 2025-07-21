@@ -11,8 +11,6 @@ import SwiftUI // for @State
 import CoreData // for NSManagedObjectContext
 import Photo_Club_Hub_Data // for Organization
 
-let startInClubs: Bool = false // TODO complete configurability
-
 struct Level2Site: Site {
 
     var name: String = "Leden" // set during init()
@@ -20,13 +18,12 @@ struct Level2Site: Site {
     var url: URL = URL("http://www.vdhamer.com")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
-    let homePage: Members // TODO choose between Members and Clubs
+    let homePage: Members
     var theme = MyTheme()
 
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
-        self.name = startInClubs ? "Clubs" :"Leden"
 
         let deGenderIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender", town: "Eindhoven",
                                                 nickname: "fgDeGender")
@@ -87,7 +84,7 @@ struct Level2Site: Site {
         let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
-        self.homePage = Members(moc: moc, club: club) // TODO choose between Members() and Clubs()
+        self.homePage = Members(moc: moc, club: club)
     }
 
 }
