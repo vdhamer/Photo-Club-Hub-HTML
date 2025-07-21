@@ -109,11 +109,16 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
-                Button {
-                    generateSite()
-                } label: {
-                    Label(String(localized: "Generate HTML", table: "SwiftUI", comment: "Button at top of UI"),
-                          systemImage: "flame")
+                Button(String(localized: "GenLevel1", table: "SwiftUI",
+                             comment: "App button that generates HTML page listing all clubs")) {
+                    print("Generating Level 1")
+                    generateLevel1()
+                }
+
+                Button(String(localized: "GenLevel2", table: "SwiftUI",
+                              comment: "App button that generates HTML page listing all club members")) {
+                    print("Generating Level 2")
+                    generateLevel2()
                 }
 
                 Button(action: addClub, label: {
@@ -176,18 +181,37 @@ struct ContentView: View {
         }
     }
 
-    fileprivate func generateSite() {
+    fileprivate func generateLevel1() { // index with all clubs
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
-        bgContext.name = "Ignite.publishing"
+        bgContext.name = "Level1.publishing"
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         bgContext.performAndWait { // generate website
-            let memberSite = MemberSite(moc: bgContext) // load data
+            let level1Site = Level1Site(moc: bgContext) // load data
             Task {
                 do {
-                    try await memberSite.publish() // generate HTML
+                    try await level1Site.publish() // generate HTML
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    fileprivate func generateLevel2() { // single club
+
+        let bgContext = PersistenceController.shared.container.newBackgroundContext()
+        bgContext.name = "Level2.publishing"
+        bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
+
+        bgContext.performAndWait { // generate website
+            let level2Site = Level2Site(moc: bgContext) // load data
+            Task {
+                do {
+                    try await level2Site.publish() // generate HTML
                 } catch {
                     print(error.localizedDescription)
                 }

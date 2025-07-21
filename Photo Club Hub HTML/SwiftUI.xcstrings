@@ -281,19 +281,36 @@
         }
       }
     },
-    "Generate HTML" : {
-      "comment" : "Button at top of UI",
+    "GenLevel1" : {
+      "comment" : "App button that generates HTML page listing all clubs",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Generate HTML"
+            "value" : "GenLevel1"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Genereer website"
+            "value" : "GenLevel1"
+          }
+        }
+      }
+    },
+    "GenLevel2" : {
+      "comment" : "App button that generates HTML page listing all club members",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GenLevel2"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GenLevel2"
           }
         }
       }

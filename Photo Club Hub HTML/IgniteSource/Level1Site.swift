@@ -1,5 +1,5 @@
 //
-//  Site.swift
+//  Level1Site.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 07/09/2024.
@@ -11,22 +11,19 @@ import SwiftUI // for @State
 import CoreData // for NSManagedObjectContext
 import Photo_Club_Hub_Data // for Organization
 
-let startInClubs: Bool = true // TODO complete configurability
+struct Level1Site: Site {
 
-struct MemberSite: Site {
-
-    var name: String = "Leden" // set during init()
+    var name: String = "Clubs"
     // IMPORTANT: http://www.vdhamer.com gives localhost result, http://www.vdhamer.com/fgDeGender works on remote site
     var url: URL = URL("http://www.vdhamer.com")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
-    let homePage: Clubs // TODO choose between Members and Clubs
+    let homePage: Clubs
     var theme = MyTheme()
 
     var moc: NSManagedObjectContext
 
     init(moc: NSManagedObjectContext) {
-        self.name = startInClubs ? "Clubs" :"Leden"
 
         let deGenderIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender", town: "Eindhoven",
                                                 nickname: "fgDeGender")
@@ -87,7 +84,7 @@ struct MemberSite: Site {
         let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
-        self.homePage = Clubs(moc: moc, club: club) // TODO choose between Members() and Clubs()
+        self.homePage = Clubs(moc: moc, club: club)
     }
 
 }
