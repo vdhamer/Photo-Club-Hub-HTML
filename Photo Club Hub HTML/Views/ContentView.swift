@@ -72,7 +72,7 @@ struct ContentView: View {
                                     .foregroundStyle(.placeholder)
                                     .font(.title2)
                             } else {
-                                Text("\(club.fullName)")
+                                Text("\(club.fullName) (\(club.members.count))")
                                     .font(.title2)
                             }
                         }
