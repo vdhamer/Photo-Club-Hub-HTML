@@ -17,6 +17,8 @@ struct MembershipView: View {
     let club: Organization
 
     init(club: Organization) {
+        // this init() happens when the club gets shown (or almost shown) in the sidebar panel of a NavigationSplitView
+        print("Initialization of club <\(club.fullName)>") // TODO remove print()?
         self.club = club
         // match sort order used in Members to generate HTML
         let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)

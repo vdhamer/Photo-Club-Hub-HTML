@@ -67,8 +67,15 @@ struct ContentView: View {
                         NavigationLink {
                             MembershipView(club: club)
                         } label: {
-                            Text(club.fullName)
-                                .font(.title2)
+                            if club.members.isEmpty {
+                                Text(club.fullName)
+                                    .foregroundStyle(.placeholder)
+                                    .font(.title2)
+                            } else {
+                                Text("\(club.fullName)")
+                                    .font(.title)
+                            }
+
                         }
                     }
                     .onDelete(perform: deleteClubs)
