@@ -73,9 +73,8 @@ struct ContentView: View {
                                     .font(.title2)
                             } else {
                                 Text("\(club.fullName)")
-                                    .font(.title)
+                                    .font(.title2)
                             }
-
                         }
                     }
                     .onDelete(perform: deleteClubs)
