@@ -60,7 +60,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Lists former club members | optionally | yes |
 | Displays member portfolios | yes | yes |
 | Linkable member portfolios | partially✲ | yes |
-| Portfolio autoplay | yes | yes |
+| Autoplay of portfolios | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | yes | - |
 | Languages | English, Dutch✲ | English, Dutch✲ |
