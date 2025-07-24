@@ -19,17 +19,17 @@ Both companion apps allow photography clubs to display photos made by their memb
 
 > The concept behind both apps is to provide a _central_ portal to view images that are managed _locally_ by the individual photo clubs.
 
-This involves using a 3-level data hierarchy: 
+This involves using a 3-level hierarchy of JSON files:
 
 1. a central list with (someday hundreds of) participating clubs,
-2. local lists, each containing dozens of members per club, and
-3. local portfolios with dozens of selected images per club member.
+2. decentral lists, each containing dozens of members per club, and
+3. decentral portfolios with dozens of selected images per club member.
 
-The [iOS app](https://github.com/vdhamer/Photo-Club-Hub) thus reads the various types of JSON data files
-and uses these to drive the user interface on an iOS phone or tables.
-This MacOS app reads the same JSON data files and converts them into HTML pages,
-which can be viewed and traversed using a browser on almost any platform (Android, Windows, MacOS, etc.). 
-The HTML pages can be stored on an existing (e.g. Wordpress) website and can be accessed via a link.
+The [iOS app](https://github.com/vdhamer/Photo-Club-Hub) thus reads the various levels of JSON data files
+and uses these to drive the user interface on an iPhone or iPad.
+This MacOS app reads the same JSON data files and converts them into static HTML pages,
+which can be viewed and traversed using a browser on any platforms (Android, Windows, MacOS, etc.). 
+The generated HTML pages can be easily integrated into an existing (e.g. WordPress) website via links.
 
 Because the HTML pages are static, this app needs to be rerun whenever the displayed data needs updating. 
 
@@ -37,9 +37,10 @@ Because the HTML pages are static, this app needs to be rerun whenever the displ
 
 ![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
 
-Clicking on the "fire" icon generates the website. There is no proper feedback to the user yet.
-The path to the directory with the new site will resemble `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
-You can use an FTP client like `Filezilla` to copy `Build` with its subdirectories to your HTTP server (e.g. a WordPress site).
+Clicking on the buttons at the top generates the website. There is no proper feedback yet to the user.
+The path to the directory with the newly generated pages will resemble
+`/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
+You can use an FTP client like `Filezilla` to copy the `Build` directory and its subdirectories to any HTTP server (e.g. a club's WordPress site).
 
 ## Comparing both apps
 
