@@ -75,7 +75,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 
 | Technology           | Description                 | Source |
 | -------------------- | --------------------------- | ------ |
-| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator | Github |
+| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator | Github (Paul Hudson) |
 | [SwiftUI](https://developer.apple.com/documentation/coredata) | UI framework | Apple |
 | [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework | Apple |
 | [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing | Github |
