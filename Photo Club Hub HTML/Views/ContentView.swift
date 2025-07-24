@@ -119,13 +119,13 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
-                Button(String(localized: "BuildLevel1", table: "SwiftUI",
+                Button(String(localized: "Build Level1", table: "SwiftUI",
                               comment: "App button that generates HTML page listing all clubs")) {
                     print("Generating Level 1")
                     generateLevel1()
                 }
 
-                Button(String(localized: "BuildLevel2", table: "SwiftUI",
+                Button(String(localized: "Build Level2", table: "SwiftUI",
                               comment: "App button that generates HTML page listing all club members")) {
                     print("Generating Level 2")
                     generateLevel2()

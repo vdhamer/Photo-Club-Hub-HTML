@@ -264,36 +264,8 @@
         }
       }
     },
-    "BuildLevel1" : {
-      "comment" : "App button that generates HTML page listing all clubs"
-    },
-    "BuildLevel2" : {
-      "comment" : "App button that generates HTML page listing all club members"
-    },
-    "Can't find any members for %@." : {
-      "comment" : "Shown when a club with zero known members is selected"
-    },
-    "Can't find any members for club %@" : {
-      "comment" : "Shown when a club with zero known members is selected",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Can't find any members for club %@"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Er zijn geen leden bekend voor de club %@"
-          }
-        }
-      }
-    },
-    "BuildLevel1" : {
+    "Build Level1" : {
       "comment" : "App button that generates HTML page listing all clubs",
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -309,9 +281,8 @@
         }
       }
     },
-    "BuildLevel2" : {
+    "Build Level2" : {
       "comment" : "App button that generates HTML page listing all club members",
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -339,7 +310,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Er zijn geen leden bekend voor de club %@."
+            "value" : "Er zijn geen leden bekend voor de club %@"
           }
         }
       }
@@ -357,24 +328,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fotoclub Hub HTML"
-          }
-        }
-      }
-    },
-    "Please select a club in the sidebar." : {
-      "comment" : "Message displayed when no club is selected",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Please select a club in the sidebar."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kies één van de clubs in het zijpaneel om hier de leden te zien."
           }
         }
       }
