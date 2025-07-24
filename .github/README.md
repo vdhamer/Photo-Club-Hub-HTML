@@ -15,21 +15,21 @@
 
 This MacOS app generates static websites using [twostraws/ignite](https://github.com/twostraws/ignite).
 Photo Club Hub HTML is a companion to the [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub) iOS/iPadOS app.
-Both companion apps allow photography clubs to display photos made by club members.
+Both companion apps allow photography clubs to display photos made by their members.
 
-> The idea behind both apps is to provide a _central_ portal to view images that are managed _locally_ by the individual clubs.
+> The concept behind both apps is to provide a _central_ portal to view images that are managed _locally_ by the individual photo clubs.
 
-This involves using a 3-level data hierarchy: 
+This involves using a 3-level hierarchy of JSON files:
 
 1. a central list with (someday hundreds of) participating clubs,
-2. local lists, each containing dozens of members per club, and
-3. local portfolios with dozens of selected images per club member.
+2. decentral lists, each containing dozens of members per club, and
+3. decentral portfolios with dozens of selected images per club member.
 
-The [iOS app](https://github.com/vdhamer/Photo-Club-Hub) thus reads the various types of JSON data files
-and uses these to drive the user interface on an iOS phone or tables.
-This MacOS app reads the same JSON data files and converts them into HTML pages,
-which can be viewed and traversed using a browser on almost any platform (Android, Windows, MacOS, etc.). 
-The HTML pages can be stored on an existing (e.g. Wordpress) website and can be accessed via a link.
+The [iOS app](https://github.com/vdhamer/Photo-Club-Hub) thus reads the various levels of JSON data files
+and uses these to drive the user interface on an iPhone or iPad.
+This MacOS app reads the same JSON data files and converts them into static HTML pages,
+which can be viewed and traversed using a browser on any platforms (Android, Windows, MacOS, etc.). 
+The generated HTML pages can be easily integrated into an existing (e.g. WordPress) website via links.
 
 Because the HTML pages are static, this app needs to be rerun whenever the displayed data needs updating. 
 
@@ -37,9 +37,10 @@ Because the HTML pages are static, this app needs to be rerun whenever the displ
 
 ![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
 
-Clicking on the "fire" icon generates the website. There is no proper feedback to the user yet.
-The path to the directory with the new site will resemble `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
-You can use an FTP client like `Filezilla` to copy `Build` with its subdirectories to your HTTP server (e.g. a WordPress site).
+Clicking on the buttons at the top generates the website. There is no proper feedback yet to the user.
+The path to the directory with the newly generated pages will resemble
+`/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
+You can use an FTP client like `Filezilla` to copy the `Build` directory and its subdirectories to any HTTP server (e.g. a club's WordPress site).
 
 ## Comparing both apps
 
@@ -53,18 +54,18 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
 | Available via | [App Store](https://apps.apple.com/us/app/photo-club-hub/id1178324330) | URLs |
 | Mobile friendly | yes | yes |
-| Lists clubs | yes | -✲ |
+| Lists clubs | yes | yes |
 | Lists photo museums | yes | -✲ |
 | Lists current club members | yes | yes |
-| Lists former club members | yes | yes |
+| Lists former club members | optionally | yes |
 | Displays member portfolios | yes | yes |
 | Linkable member portfolios | partially✲ | yes |
-| Portfolio autoplay | yes | yes |
+| Autoplay of portfolios | yes | yes |
 | Content updated | whenever club updates its data | whenever club updates its data |
 | Maps showing clubs | yes | - |
 | Languages | English, Dutch✲ | English, Dutch✲ |
 | Internal database | yes | - |
-| Data caching | partially✲ | partially |
+| Data caching | partially✲ | by browser |
 | Concurrent data fetching | yes | yes |
 | Open source | [yes](https://github.com/vdhamer/Photo-Club-Hub) | [yes](https://github.com/vdhamer/Photo-Club-Hub-HTML) |
 
@@ -72,12 +73,12 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 
 ## Technology stack
 
-| Technology           | Description                 |
-| -------------------- | --------------------------- |
-| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator |
-| [SwiftUI](https://developer.apple.com/documentation/coredata) | UI framework |
-| [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework |
-| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing |            
+| Technology           | Description                 | Source |
+| -------------------- | --------------------------- | ------ |
+| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator | Github (Paul Hudson) |
+| [SwiftUI](https://developer.apple.com/documentation/coredata) | UI framework | Apple |
+| [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework | Apple |
+| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing | Github |
 
 ## Static sites and Ignite
 
@@ -97,21 +98,22 @@ Swift is essentially a declarative higher-level description (`Result Builder`) t
 
 ## Why separate repo's?
 
-From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository
-with two (very) different targets that happen to run on two different platforms.
+From a technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository
+with two (very) different targets that run on different platforms.
 
-Despite having code overlap, they are - for now - split into two repos to lower the barrier to contribute to either.
-At the moment the common code is being factored out into a package in order to eliminate duplication of large amounts of code.
-This means that there will soon be _three_ repositories in GitHub:
+We chose to split the code into multiple repos to lower the barrier to contribute to either app. That gives up two respos.
+But common code is being factored out into a package in order to eliminate duplication of large amounts of code.
+So there will soon be _three_ repositories in GitHub:
 
 - Photo Club Hub (for iOS, interactive browing), 
-- Photo Club Hub HTML (for macOS, for static website generation)
-- Photo Club Hub Data (multi-platform, for loading data into the Core Data database)
+- Photo Club Hub HTML (for macOS, to generate static websites)
+- Photo Club Hub Data (used by both to merge fresh JSON data into the Core Data database)
 
 ## Will 3 hierarchy levels be enough?
 
 Initially there are only a handful of pilot clubs involved. 
-A hundred clubs at <1 kB each can be supported with a single `Level 1` file, especially when loaded in the background.
+Data for a hundred clubs at <1 kB each can be contained in a single `Level 1` file,
+especially when loaded in the background and cached using Core Data.
 
 To split up the `level1.json` file we _could_ allow the `root.level1.json` file to contain URL links to additional level1.json files.
 This could, for example, allow the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
@@ -133,11 +135,14 @@ For now this is only possible by a minor change to the source code.
 - [x] localize the generated website to support multiple languages (initially English and Dutch).
 - [x] localize the app's UI to support English and Dutch (for now there isn't too much of a UI).
 - [x] support for the (new, `Level 0`) data that allows photographers to be associated with keywords.
-- [x] factor out common code between both apps into a Swift Package Manager package (ongoing)
-- [ ] allow the user to select the club for which to generate the local site (currently hardcoded constant).
+- [x] factor out common code between both apps into a Swift Package Manager package (almost done)
+- [x] allow the user to select the club for which to generate the local site (currently hardcoded constant, almost done).
 - [x] generate a static site that can serve as index of supported clubs (Level 1 data).
+- [ ] search function to find a club by name
+- [ ] generate index page with photographers per expertise
+- [ ] generate all clubs in bulk instead of one club at a time
 
-It would be nice to have an app for data enty/editing (rather than editing JSON files), but these would be a separate repo.
+It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would be another repo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
