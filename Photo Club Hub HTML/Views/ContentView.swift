@@ -59,6 +59,8 @@ struct ContentView: View {
     fileprivate var allPhotographerExpertises: FetchedResults<PhotographerExpertise>
     // MARK: - Body of ContentView
 
+    @State private var selectedClubIds: Set<OrganizationID> = []
+
     var body: some View {
         VStack(alignment: .leading) {
             NavigationSplitView {
@@ -77,20 +79,22 @@ struct ContentView: View {
                             }
                         }
                     }
-                    .onDelete(perform: deleteClubs)
                 }
-                .padding(.top)
-                .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 600)
-            } detail: {
-                Text(String(localized: "Please select a club", table: "SwiftUI",
-                            comment: "Message displayed when no club is selected"))
             }
+
+            detail: {
+                Text(String(localized: "Please select a club in the sidebar.", table: "SwiftUI",
+                            comment: "Message displayed when no club is selected"))
+                .font(.title2)
+            }
+            .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 600)
             .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
+
             Divider()
             HStack(alignment: .center) {
                 Text("Records found:", tableName: "SwiftUI",
                      comment: "Label for stats shown at bottom of window")
-                     .font(.headline)
+                .font(.headline)
                 Text("◼ \(allClubs.count) clubs", tableName: "SwiftUI",
                      comment: "Count of clubs in database Organization table")
                 Text("◼ \(allOrganizations.count-allClubs.count) other organizations", tableName: "SwiftUI",
@@ -107,6 +111,7 @@ struct ContentView: View {
             .foregroundStyle(.secondary)
             .frame(height: 5)
         }
+
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
         }
@@ -115,17 +120,22 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
-                Button(String(localized: "GenLevel1", table: "SwiftUI",
-                             comment: "App button that generates HTML page listing all clubs")) {
+                Button(String(localized: "BuildLevel1", table: "SwiftUI",
+                              comment: "App button that generates HTML page listing all clubs")) {
                     print("Generating Level 1")
                     generateLevel1()
                 }
 
-                Button(String(localized: "GenLevel2", table: "SwiftUI",
+                Button(String(localized: "BuildLevel2", table: "SwiftUI",
                               comment: "App button that generates HTML page listing all club members")) {
                     print("Generating Level 2")
                     generateLevel2()
-                }
+                } .disabled(selectedClubIds.isEmpty ||
+                            Organization.findCreateUpdate(context: viewContext,
+                                                          organizationTypeEnum: OrganizationTypeEnum.club,
+                                                          idPlus: OrganizationIdPlus(
+                                                              id: [OrganizationID](selectedClubIds)[0],
+                                                              nickname: "dummy")).members.isEmpty) // TODO
 
                 Button(action: addClub, label: {
                     Label(String(localized: "Add Club", table: "SwiftUI", comment: "Button at top of UI"),
@@ -155,25 +165,6 @@ struct ContentView: View {
                                                   Double.random(in: -180...180)),
                                               optionalFields: OrganizationOptionalFields() // empty
             )
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use
-                // this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    fileprivate func deleteClubs(at offsets: IndexSet) {
-        withAnimation {
-            for index in offsets { // probably only one
-                let club = allClubs[index]
-                viewContext.delete(club)
-            }
 
             do {
                 try viewContext.save()
@@ -227,6 +218,6 @@ struct ContentView: View {
 
 }
 
-#Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-}
+// #Preview {
+//    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+// }

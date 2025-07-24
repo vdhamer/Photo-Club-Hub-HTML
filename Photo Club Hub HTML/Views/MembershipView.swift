@@ -18,7 +18,6 @@ struct MembershipView: View {
 
     init(club: Organization) {
         // this init() happens when the club gets shown (or almost shown) in the sidebar panel of a NavigationSplitView
-        print("Initialization of club <\(club.fullName)>") // TODO remove print()?
         self.club = club
         // match sort order used in Members to generate HTML
         let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
@@ -33,8 +32,15 @@ struct MembershipView: View {
     var body: some View {
         List {
             if fetchRequestClubMembers.isEmpty {
-                Text(String(localized: "Can't find any members for club \(club.fullName)", table: "SwiftUI",
-                            comment: "Shown when a club with zero known members is selected"))
+                VStack(alignment: .center) {
+                    HStack {
+                        Spacer()
+                        Text(String(localized: "Can't find any members for \(club.fullNameTown).", table: "SwiftUI",
+                                    comment: "Shown when a club with zero known members is selected"))
+                            .font(.title2)
+                        Spacer()
+                    }
+                } .frame(idealHeight: 750) // a bit of a hack to vertically align
             } else {
                 ForEach(fetchRequestClubMembers, id: \.self) { member in
                     HStack {
