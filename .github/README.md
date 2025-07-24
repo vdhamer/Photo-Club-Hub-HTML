@@ -65,7 +65,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Maps showing clubs | yes | - |
 | Languages | English, Dutch✲ | English, Dutch✲ |
 | Internal database | yes | - |
-| Data caching | partially✲ | partially |
+| Data caching | partially✲ | by browser |
 | Concurrent data fetching | yes | yes |
 | Open source | [yes](https://github.com/vdhamer/Photo-Club-Hub) | [yes](https://github.com/vdhamer/Photo-Club-Hub-HTML) |
 
