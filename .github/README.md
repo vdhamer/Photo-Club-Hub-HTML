@@ -98,21 +98,22 @@ Swift is essentially a declarative higher-level description (`Result Builder`) t
 
 ## Why separate repo's?
 
-From a purely technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository
-with two (very) different targets that happen to run on two different platforms.
+From a technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository
+with two (very) different targets that run on different platforms.
 
-Despite having code overlap, they are - for now - split into two repos to lower the barrier to contribute to either.
-At the moment the common code is being factored out into a package in order to eliminate duplication of large amounts of code.
-This means that there will soon be _three_ repositories in GitHub:
+We chose to split the code into multiple repos to lower the barrier to contribute to either app. That gives up two respos.
+But common code is being factored out into a package in order to eliminate duplication of large amounts of code.
+So there will soon be _three_ repositories in GitHub:
 
 - Photo Club Hub (for iOS, interactive browing), 
-- Photo Club Hub HTML (for macOS, for static website generation)
-- Photo Club Hub Data (multi-platform, for loading data into the Core Data database)
+- Photo Club Hub HTML (for macOS, to generate static websites)
+- Photo Club Hub Data (used by both to merge fresh JSON data into the Core Data database)
 
 ## Will 3 hierarchy levels be enough?
 
 Initially there are only a handful of pilot clubs involved. 
-A hundred clubs at <1 kB each can be supported with a single `Level 1` file, especially when loaded in the background.
+Data for a hundred clubs at <1 kB each can be contained in a single `Level 1` file,
+especially when loaded in the background and cached using Core Data.
 
 To split up the `level1.json` file we _could_ allow the `root.level1.json` file to contain URL links to additional level1.json files.
 This could, for example, allow the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
@@ -134,11 +135,11 @@ For now this is only possible by a minor change to the source code.
 - [x] localize the generated website to support multiple languages (initially English and Dutch).
 - [x] localize the app's UI to support English and Dutch (for now there isn't too much of a UI).
 - [x] support for the (new, `Level 0`) data that allows photographers to be associated with keywords.
-- [x] factor out common code between both apps into a Swift Package Manager package (ongoing)
-- [ ] allow the user to select the club for which to generate the local site (currently hardcoded constant).
+- [x] factor out common code between both apps into a Swift Package Manager package (almost done)
+- [x] allow the user to select the club for which to generate the local site (currently hardcoded constant, almost done).
 - [x] generate a static site that can serve as index of supported clubs (Level 1 data).
 
-It would be nice to have an app for data enty/editing (rather than editing JSON files), but these would be a separate repo.
+It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would be another repo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
