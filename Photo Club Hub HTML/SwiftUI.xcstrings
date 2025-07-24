@@ -247,24 +247,6 @@
         }
       }
     },
-    "Add Club" : {
-      "comment" : "Button at top of UI",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Add Club"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Test club toevoegen"
-          }
-        }
-      }
-    },
     "Build Level1" : {
       "comment" : "App button that generates HTML page listing all clubs",
       "localizations" : {
