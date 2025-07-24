@@ -57,7 +57,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Lists clubs | yes | yes |
 | Lists photo museums | yes | -✲ |
 | Lists current club members | yes | yes |
-| Lists former club members | yes | yes |
+| Lists former club members | optionally | yes |
 | Displays member portfolios | yes | yes |
 | Linkable member portfolios | partially✲ | yes |
 | Portfolio autoplay | yes | yes |
