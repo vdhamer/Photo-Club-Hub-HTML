@@ -264,8 +264,18 @@
         }
       }
     },
+    "BuildLevel1" : {
+      "comment" : "App button that generates HTML page listing all clubs"
+    },
+    "BuildLevel2" : {
+      "comment" : "App button that generates HTML page listing all club members"
+    },
+    "Can't find any members for %@." : {
+      "comment" : "Shown when a club with zero known members is selected"
+    },
     "Can't find any members for club %@" : {
       "comment" : "Shown when a club with zero known members is selected",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -283,6 +293,7 @@
     },
     "GenLevel1" : {
       "comment" : "App button that generates HTML page listing all clubs",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -300,6 +311,7 @@
     },
     "GenLevel2" : {
       "comment" : "App button that generates HTML page listing all club members",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -334,6 +346,7 @@
     },
     "Please select a club" : {
       "comment" : "Message displayed when no club is selected",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -348,6 +361,9 @@
           }
         }
       }
+    },
+    "Please select a club in the sidebar." : {
+      "comment" : "Message displayed when no club is selected"
     },
     "Records found:" : {
       "comment" : "Label for stats shown at bottom of window",
