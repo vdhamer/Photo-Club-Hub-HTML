@@ -291,42 +291,6 @@
         }
       }
     },
-    "GenLevel1" : {
-      "comment" : "App button that generates HTML page listing all clubs",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GenLevel1"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GenLevel1"
-          }
-        }
-      }
-    },
-    "GenLevel2" : {
-      "comment" : "App button that generates HTML page listing all club members",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GenLevel2"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GenLevel2"
-          }
-        }
-      }
-    },
     "Photo Club Hub HTML" : {
       "comment" : "Name of this macOS app",
       "localizations" : {
@@ -344,26 +308,22 @@
         }
       }
     },
-    "Please select a club" : {
+    "Please select a club in the sidebar." : {
       "comment" : "Message displayed when no club is selected",
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please select a club"
+            "value" : "Please select a club in the sidebar."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kies één van de clubs in het zijpaneel"
+            "value" : "Kies één van de clubs in het zijpaneel om hier de leden te zien."
           }
         }
       }
-    },
-    "Please select a club in the sidebar." : {
-      "comment" : "Message displayed when no club is selected"
     },
     "Records found:" : {
       "comment" : "Label for stats shown at bottom of window",
