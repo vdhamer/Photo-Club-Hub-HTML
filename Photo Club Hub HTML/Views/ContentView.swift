@@ -134,46 +134,9 @@ struct ContentView: View {
                                                           organizationTypeEnum: OrganizationTypeEnum.club,
                                                           idPlus: OrganizationIdPlus(
                                                               id: [OrganizationID](selectedClubIds)[0],
-                                                              nickname: "dummy")).members.isEmpty) // TODO
+                                                              nickname: "dummy")).members.isEmpty) // TODO fix dummy
 
-                Button(action: addClub, label: {
-                    Label(String(localized: "Add Club", table: "SwiftUI", comment: "Button at top of UI"),
-                          systemImage: "plus")
-                })
-            }
-        }
-    }
-
-    fileprivate func addClub() { // when user presses Add Club button
-        withAnimation {
-            let newCount: Int = UserDefaults.standard.integer(forKey: "clubCounter") + 1
-            UserDefaults.standard.set(newCount, forKey: "clubCounter") // increment value stored in User Defaults
-
-            let organizationTypeEnum: OrganizationTypeEnum = OrganizationTypeEnum.club
-            let town = "Eindhoven"
-            let fullName = "Org #\(newCount)"
-            let organizationIdPlus = OrganizationIdPlus(fullName: fullName, town: town, // OrganizationID part
-                                                        nickname: "Nickname#\(newCount)")
-
-            _ = Organization.findCreateUpdate(context: viewContext, // can be foreground of background context
-                                              organizationTypeEnum: organizationTypeEnum,
-                                              idPlus: organizationIdPlus,
-                                              // real coordinates added in fgAnders.level2.json
-                                              coordinates: CLLocationCoordinate2DMake(
-                                                  Double.random(in: -180...180),
-                                                  Double.random(in: -180...180)),
-                                              optionalFields: OrganizationOptionalFields() // empty
-            )
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use
-                // this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+           }
         }
     }
 

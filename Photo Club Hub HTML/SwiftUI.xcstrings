@@ -249,6 +249,7 @@
     },
     "Add Club" : {
       "comment" : "Button at top of UI",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
