@@ -73,12 +73,12 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 
 ## Technology stack
 
-| Technology           | Description                 |
-| -------------------- | --------------------------- |
-| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator |
-| [SwiftUI](https://developer.apple.com/documentation/coredata) | UI framework |
-| [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework |
-| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing |            
+| Technology           | Description                 | Source |
+| -------------------- | --------------------------- | ------ |
+| [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator | Github |
+| [SwiftUI](https://developer.apple.com/documentation/coredata) | UI framework | Apple |
+| [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework | Apple |
+| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing | Github |
 
 ## Static sites and Ignite
 
