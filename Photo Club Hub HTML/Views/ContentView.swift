@@ -64,19 +64,18 @@ struct ContentView: View {
     var body: some View {
         VStack(alignment: .leading) {
             NavigationSplitView {
-                List {
-                    ForEach(allClubs, id: \.self) { club in
-                        NavigationLink {
-                            MembershipView(club: club)
-                        } label: {
-                            if club.members.isEmpty {
-                                Text(club.fullName)
-                                    .foregroundStyle(.placeholder)
-                                    .font(.title2)
-                            } else {
-                                Text("\(club.fullName) (\(club.members.count))")
-                                    .font(.title2)
-                            }
+                List(allClubs, selection: $selectedClubIds) { club in
+                    //                    ForEach(allClubs, id: \.self) { club in
+                    NavigationLink {
+                        MembershipView(club: club)
+                    } label: {
+                        if club.members.isEmpty {
+                            Text(club.fullName)
+                                .foregroundStyle(.placeholder)
+                                .font(.title2)
+                        } else {
+                            Text("\(club.fullName) (\(club.members.count))")
+                                .font(.title2)
                         }
                     }
                 }
