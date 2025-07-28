@@ -247,36 +247,36 @@
         }
       }
     },
-    "Build Level1" : {
+    "Build Level 1 HTML" : {
       "comment" : "App button that generates HTML page listing all clubs",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Build Level1"
+            "value" : "Build Level 1 HTML"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maak Level1"
+            "value" : "Maak Level 1 HTML"
           }
         }
       }
     },
-    "Build Level2" : {
+    "Build Level 2 HTML" : {
       "comment" : "App button that generates HTML page listing all club members",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Build Level2"
+            "value" : "Build Level 2 HTML"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maak Level2"
+            "value" : "Maak Level 2 HTML"
           }
         }
       }
