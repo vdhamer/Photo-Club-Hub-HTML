@@ -119,24 +119,31 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
-                Button(String(localized: "Build Level1", table: "SwiftUI",
+                Button(String(localized: "Build Level 1 HTML", table: "SwiftUI",
                               comment: "App button that generates HTML page listing all clubs")) {
                     print("Generating Level 1")
                     generateLevel1()
                 }
 
-                Button(String(localized: "Build Level2", table: "SwiftUI",
+                Button(String(localized: "Build Level 2 HTML", table: "SwiftUI",
                               comment: "App button that generates HTML page listing all club members")) {
                     print("Generating Level 2")
                     generateLevel2()
-                } .disabled(selectedClubIds.isEmpty ||
-                            Organization.findCreateUpdate(context: viewContext,
-                                                          organizationTypeEnum: OrganizationTypeEnum.club,
-                                                          idPlus: OrganizationIdPlus(
-                                                              id: [OrganizationID](selectedClubIds)[0],
-                                                              nickname: "dummy")).members.isEmpty) // TODO fix dummy
-
+                } .disabled(selectedClubIds.isEmpty || // no club selected
+                            hasMembers(context: viewContext,  // selected club has no members
+                                       clubID: [OrganizationID](selectedClubIds)[0]) == false)
            }
+        }
+    }
+
+    // find club based on fullNameTown identifier and check if it has members
+    fileprivate func hasMembers(context: NSManagedObjectContext, clubID: OrganizationID) -> Bool {
+        do {
+            let result: Bool
+            try result = Organization.find(context: context, organizationID: clubID).members.isEmpty == false
+            return result
+        } catch {
+            return false // if find(context:organizationID) can't find the club
         }
     }
 
