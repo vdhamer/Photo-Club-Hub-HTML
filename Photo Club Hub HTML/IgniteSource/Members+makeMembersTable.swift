@@ -295,6 +295,7 @@ extension Members {
     }
 
     fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
+        //  actually Apple Intelligence offers a 2-line optimization for the next 6 lines, but is less readable
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {
