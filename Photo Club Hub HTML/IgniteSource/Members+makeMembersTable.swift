@@ -283,11 +283,17 @@ extension Members {
             let lastComponent: String = downloadURL.lastPathComponent // e.g. "2023_FotogroepWaalre_001.jpg"
             let buildDirectoryString = NSHomeDirectory() // app's home directory for a sandboxed MacOS app
 
-            guard let localUrl = URL(string: "file:\(buildDirectoryString)/Assets/images/\(lastComponent)") else {
-                fatalError("Error creating URL for /images/\(lastComponent)")
+            // some extra steps to ensure the Assets/images subdirectory exists
+            let imagesDirectoryString = "file:\(buildDirectoryString)/Assets/images/"
+            guard let imageDirUrl = URL(string: "\(imagesDirectoryString)") else {
+                fatalError("Error creating URL for \(imagesDirectoryString)") }
+            try FileManager.default.createDirectory(at: imageDirUrl, withIntermediateDirectories: true, attributes: nil)
+
+            guard let imageUrl = URL(string: "\(imagesDirectoryString)\(lastComponent)") else {
+                fatalError("Error creating URL for \(imagesDirectoryString)\(lastComponent)")
             }
-            try jpegData.write(to: localUrl)
-            print("Wrote jpg to \(localUrl)")
+            try jpegData.write(to: imageUrl)
+            print("Wrote jpg to \(imageUrl)")
         } catch {
             fatalError("Problem in downloadThumbNailToLocal(): \(error)")
         }
@@ -295,7 +301,7 @@ extension Members {
     }
 
     fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
-        //  actually Apple Intelligence offers a 2-line optimization for the next 6 lines, but is less readable
+        //  Apple Intelligence offers a 2-line optimization for the next 6 lines, but is less readable
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {
