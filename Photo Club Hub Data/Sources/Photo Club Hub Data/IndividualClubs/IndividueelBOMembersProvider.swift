@@ -26,7 +26,7 @@ public class IndividueelBOMembersProvider {
 
     }
 
-    fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext, town: String = "Eindhoven") {
+    fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext, town: String = "Brabant Oost") {
         let idPlus = OrganizationIdPlus(fullName: "Individuele Leden Brabant Oost",
                                         town: town,
                                         nickname: "IndividueelBO")
