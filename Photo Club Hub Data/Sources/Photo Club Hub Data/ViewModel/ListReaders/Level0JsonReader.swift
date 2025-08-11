@@ -31,7 +31,7 @@ public class Level0JsonReader {
                                         fileSelector: FileSelector) {
 
         let fileName: String = fileSelector.fileName
-        ifDebugPrint("\nWill read Level 0 file (\(fileName)) with standard expertises and languages in background.")
+        ifDebugPrint("\nStarting background read of \(fileName).level0.json to get standard Expertises and Languages.")
 
         // hand the data to SwiftyJSON to parse
         let jsonRoot = JSON(parseJSON: jsonData) // get entire JSON file
@@ -62,6 +62,40 @@ public class Level0JsonReader {
         ifDebugPrint("Completed readRootLevel0Json() in background")
     }
 
+    private func parseExpertises(bgContext: NSManagedObjectContext, jsonExpertises: [JSON]) {
+        for jsonExpertise in jsonExpertises {
+            guard jsonExpertise["idString"].exists() else {
+                ifDebugFatalError("JSON Expertise block is missing an idString field", file: #fileID, line: #line)
+                continue  // if idString field doesn't exist, skip the Expertise
+            }
+            let idString = jsonExpertise["idString"].stringValue
+
+            guard jsonExpertise["name"].exists() else {
+                ifDebugFatalError("JSON Expertise doesn't have any localized names", file: #fileID, line: #line)
+                continue  // if name doesn't exist, skip the expertise
+            }
+            let jsonExpertiseNames = jsonExpertise["name"].arrayValue // dictionary of localized names for the expertise
+
+            // Must insist on having at least one language for which jsonExpertise has a localized name
+            guard jsonExpertiseNames.count > 0,
+                  jsonExpertiseNames[0]["language"].exists(),
+                  jsonExpertiseNames[0]["localizedString"].exists() else {
+                ifDebugFatalError("Expertise doesn't have any localized representations", file: #fileID, line: #line)
+                continue  // if it doesn't exist, skip the expertise (note that it even skips the "usage" array)
+            }
+
+            let jsonExpertiseOptionals = jsonExpertise["optional"] // rest will be empty if not found
+            let jsonUsages = jsonExpertiseOptionals["usage"].arrayValue
+
+            // Expertises from the root.level1.json file are by definition Standard
+            let expertise = Expertise.findCreateUpdateStandard(context: bgContext,
+                                                               id: idString,
+                                                               names: jsonExpertiseNames,
+                                                               usages: jsonUsages)
+            print("Expertise <\(expertise.id)> with \(jsonExpertiseNames.count) localized name(s) found")
+        }
+    }
+
     private func parseLanguages(bgContext: NSManagedObjectContext, jsonLanguages: [JSON]) {
         for jsonLanguage in jsonLanguages {
             guard jsonLanguage["isoCode"].exists(),
@@ -79,38 +113,4 @@ public class Level0JsonReader {
             print("Language <\(language.isoCodeAllCaps)> found")
         }
     }
-
-    private func parseExpertises(bgContext: NSManagedObjectContext, jsonExpertises: [JSON]) {
-        for jsonExpertise in jsonExpertises {
-            guard jsonExpertise["idString"].exists() else {
-                ifDebugFatalError("Expertise doesn't have an idString", file: #fileID, line: #line)
-                continue  // if it doesn't exist, skip the expertise
-            }
-            let idString = jsonExpertise["idString"].stringValue
-
-            guard jsonExpertise["name"].exists() else {
-                ifDebugFatalError("Expertise doesn't have localized representations", file: #fileID, line: #line)
-                continue  // if it doesn't exist, skip the expertise
-            }
-            let jsonExpertiseName = jsonExpertise["name"].arrayValue // dictionary of localized names for the expertise
-
-            // we insist on having at least one language for which jsonExpertise has a localized name
-            guard jsonExpertiseName.count > 0,
-                  jsonExpertiseName[0]["language"].exists(),
-                  jsonExpertiseName[0]["localizedString"].exists() else {
-                ifDebugFatalError("Expertise doesn't have any localized representations", file: #fileID, line: #line)
-                continue  // if it doesn't exist, skip the expertise (note that it even skips the "usage" array)
-            }
-
-            let jsonExpertiseOptionals = jsonExpertise["optional"] // rest will be empty if not found
-            let jsonUsage = jsonExpertiseOptionals["usage"].arrayValue
-
-            let expertise = Expertise.findCreateUpdateStandard(context: bgContext,
-                                                               id: idString,
-                                                               name: jsonExpertiseName,
-                                                               usage: jsonUsage)
-            print("Expertise <\(expertise.id)> with \(jsonExpertiseName.count) localized name(s) found")
-        }
-    }
-
 }

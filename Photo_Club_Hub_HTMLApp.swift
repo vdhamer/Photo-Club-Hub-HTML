@@ -14,9 +14,13 @@ import Photo_Club_Hub_Data // for *MemberProvider struct
 struct PhotoClubHubHtmlApp: App {
     static let includeXampleClubs: Bool = true // whether or not to include XmpleMin and XmpleMax clubs
     static let persistenceController = PersistenceController.shared // for Core Data
+    let viewContext = persistenceController.container.viewContext // "associated with the main application queue"
 
     init() {
-        OrganizationType.initConstants() // creates records for club, museum, and unknown
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        viewContext.undoManager = nil // nil by default on iOS
+        viewContext.shouldDeleteInaccessibleFaults = true
+        OrganizationType.initConstants(context: viewContext) // creates records for club, museum, and unknown
     }
 
     var body: some Scene {
@@ -47,7 +51,7 @@ extension PhotoClubHubHtmlApp {
         viewContext.undoManager = nil // nil by default on iOS
         viewContext.shouldDeleteInaccessibleFaults = true
         // Clear CoreData database for simplicity and to trigger initConstants()
-        Model.deleteAllCoreDataObjects(context: viewContext)
+        Model.deleteAllCoreDataObjects(viewContext: viewContext)
 
         // load list of keywords and languages from root.Level0.json file
         let level0BackgroundContext = makeBgContext(ctxName: "Level 0 loader")
