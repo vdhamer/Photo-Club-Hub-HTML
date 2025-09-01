@@ -16,7 +16,14 @@ struct PhotoClubHubHtmlApp: App {
     static let persistenceController = PersistenceController.shared // for Core Data
 
     init() {
-        OrganizationType.initConstants() // creates records for club, museum, and unknown
+        // Core Data settings
+        let persistenceController = PersistenceController.shared // for Core Data
+        let viewContext = persistenceController.container.viewContext // "associated with the main application queue"
+        viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        viewContext.undoManager = nil // nil by default on iOS
+        viewContext.shouldDeleteInaccessibleFaults = true
+
+        OrganizationType.initConstants(context: viewContext) // creates records for club, museum, and unknown
     }
 
     var body: some Scene {
@@ -47,61 +54,61 @@ extension PhotoClubHubHtmlApp {
         viewContext.undoManager = nil // nil by default on iOS
         viewContext.shouldDeleteInaccessibleFaults = true
         // Clear CoreData database for simplicity and to trigger initConstants()
-        Model.deleteAllCoreDataObjects(context: viewContext)
+        Model.deleteAllCoreDataObjects(viewContext: viewContext)
 
         // load list of keywords and languages from root.Level0.json file
         let level0BackgroundContext = makeBgContext(ctxName: "Level 0 loader")
-        _ = Level0JsonReader(bgContext: level0BackgroundContext, isInTestBundle: false, useOnlyInBundleFile: false)
+        _ = Level0JsonReader(bgContext: level0BackgroundContext, isInTestBundle: false, useOnlyFileInBundle: false)
 
         // load list of photo clubs and museums from root.Level1.json file
         let level1BackgroundContext = makeBgContext(ctxName: "Level 1 loader")
         _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
-                             isInTestBundle: false, useOnlyInBundleFile: false)
+                             isInTestBundle: false, useOnlyFileInBundle: false)
 
         // load current/former members of Fotogroep De Gender
         let genderBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgDeGender")
         _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext,
-                                             useOnlyInBundleFile: false)
+                                             useOnlyFileInBundle: false)
 
         // load current/former members of Fotogroep Waalre
         let waalreBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgWaalre")
         _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
-                                           useOnlyInBundleFile: false)
+                                           useOnlyFileInBundle: false)
 
         // load current/former members of Fotoclub Bellus Imago
         let bellusBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcBellusImago")
         _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
-                                               useOnlyInBundleFile: false)
+                                               useOnlyFileInBundle: false)
 
         if includeXampleClubs {
 
             // load test member(s) of XampleMin. Club is called XampleMin (rather than ExampleMin) to be at end of list
             let xampleMinBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMin")
-            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext, useOnlyInBundleFile: false)
+            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext, useOnlyFileInBundle: false)
 
             // load test member(s) of XampleMax. Club is called XampleMax (rather than ExampleMax) to be at end of list
             let xampleMaxBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMax")
-            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext, useOnlyInBundleFile: false)
+            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext, useOnlyFileInBundle: false)
 
             // load current/former members of Fotogroep Oirschot
             let oirschotBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgOirschot")
             _ = FotogroepOirschotMembersProvider(bgContext: oirschotBackgroundContext,
-                                                 useOnlyInBundleFile: false)
+                                                 useOnlyFileInBundle: false)
 
             // load current/former members of Fotogroep Oirschot
             let individueelBOBackgroundContext = makeBgContext(ctxName: "Level 2 loader IndividueelBO")
             _ = IndividueelBOMembersProvider(bgContext: individueelBOBackgroundContext,
-                                             useOnlyInBundleFile: false)
+                                             useOnlyFileInBundle: false)
 
         }
 
         // load current/former members of Fotoclub Ericamera
         let ericameraBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcEricamera")
-        _ = FotoclubEricameraMembersProvider(bgContext: ericameraBackgroundContext, useOnlyInBundleFile: false)
+        _ = FotoclubEricameraMembersProvider(bgContext: ericameraBackgroundContext, useOnlyFileInBundle: false)
 
         // load current/former members of Fotoclub Den Dungen
         let dendungenBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcDenDungen")
-        _ = FotoclubDenDungenMembersProvider(bgContext: dendungenBackgroundContext, useOnlyInBundleFile: false)
+        _ = FotoclubDenDungenMembersProvider(bgContext: dendungenBackgroundContext, useOnlyFileInBundle: false)
 
     }
 

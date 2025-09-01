@@ -9,21 +9,35 @@ import Foundation
 
 struct Settings {
 
-    // Doesn't really work in Photo Club Hub HTML until the version numbers are synchronized
-    static var dataResetPending282b4646: Bool { // stored as a string shown in Settings
-        // returns true until a reset is done
+    @available(*, unavailable)
+    init() {
+        fatalError("init() is not available. Settings only holds a few static computer properties.")
+    }
 
-        if UserDefaults.standard.object(forKey: "dataResetPending282b4646") == nil {
-            UserDefaults.standard.set(true, forKey: "dataResetPending282b4646") // interpret nil as true
-            // following lines remove any old dataResetPending keys from UserDefaults
-            UserDefaults.standard.removeObject(forKey: "dataResetPending280b4644")
-            UserDefaults.standard.removeObject(forKey: "dataResetPending280")
-            UserDefaults.standard.removeObject(forKey: "dataResetPending272")
-            UserDefaults.standard.removeObject(forKey: "dataResetPending")
+    static let userDefaultsKey: String = "dataResetPending283b4649" // must match id of Settings toggle in Root.plist
+    private static let prevUserDefaultsKeys: Set<String> = ["dataResetPending282b4647",
+                                                            "dataResetPending282b4646",
+                                                            "dataResetPending280b4644",
+                                                            "dataResetPending280",
+                                                            "dataResetPending272",
+                                                            "dataResetPending"]
+
+    // Doesn't really work in Photo Club Hub HTML until the version numbers are synchronized
+    static var dataResetPending: Bool { // stored as a string shown in Settings
+        // returns true only when read for the first time
+
+        if UserDefaults.standard.object(forKey: userDefaultsKey) == nil {
+            UserDefaults.standard.set(true, forKey: userDefaultsKey) // if key missing, set value to true
         }
 
-        let prevValue = UserDefaults.standard.bool(forKey: "dataResetPending282b4646") // return whether reset needed
-        UserDefaults.standard.set(false, forKey: "dataResetPending282b4646") // don't trigger a reset at next app launch
+        let prevValue = UserDefaults.standard.bool(forKey: userDefaultsKey) // return whether reset needed
+
+        if prevValue {
+            UserDefaults.standard.set(false, forKey: userDefaultsKey) // return true only once
+            for key in prevUserDefaultsKeys { // also remove all previously used dataResetPending keys from UserDefaults
+                UserDefaults.standard.removeObject(forKey: key) // not important, just a cleanup
+            }
+        }
 
         return prevValue // if true, app will immediately do a data reset
     } // implicit getter only
@@ -46,6 +60,13 @@ struct Settings {
         // Instructs the app whether to load XampleMax.level2.json and XampleMin.level2.json
         // It will typically be used by people creating new level2.json files to see what the example files look like
         UserDefaults.standard.bool(forKey: "loadTestClubs") // if the key is missing, this returns false
+    }
+
+    static var errorOnCoreDataMerge: Bool { // controlled by toggle in Settings
+        // Instructs the app to set CoreData NSManagedObjectContext.mergePolicy to NSMergePolicy.error
+        // This causes the app to stop when a uniqueness constraint violation or a merging issue in encountered.
+        // Setting this Bool to true only does something if the app is in Debug mode. So does nothing for end users.
+        UserDefaults.standard.bool(forKey: "errorOnCoreDataMerge") // if the key is missing, this returns false
     }
 
 }

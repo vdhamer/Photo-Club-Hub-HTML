@@ -25,14 +25,15 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext)
         #expect(Expertise.count(context: bgContext) == 0)
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
         #expect(PhotographerExpertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                             fileName: "empty", isInTestBundle: true,
-                             useOnlyInBundleFile: false)
+                             fileName: "empty",
+                             isInTestBundle: true,
+                             useOnlyFileInBundle: false)
         #expect(Expertise.count(context: bgContext) == 0)
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
         #expect(PhotographerExpertise.count(context: bgContext) == 0)
@@ -46,15 +47,16 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext)
         #expect(Expertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
         #expect(PhotographerExpertise.count(context: bgContext) == 0) // returns 3 instead of zero, why??
 
         bgContext.performAndWait {
             _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                                 fileName: "abstractExpertise", isInTestBundle: true,
-                                 useOnlyInBundleFile: false)
+                                 fileName: "abstractExpertise",
+                                 isInTestBundle: true,
+                                 useOnlyFileInBundle: false)
             try? bgContext.save()
         }
         #expect(Expertise.count(context: bgContext) == 1)
@@ -70,13 +72,14 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext) // This test doesn't have Expertises
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext) // This test doesn't have Expertises
         #expect(Expertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                             fileName: "root", isInTestBundle: false,
-                             useOnlyInBundleFile: false)
-        #expect(Expertise.count(context: bgContext) == 21)
+                             fileName: "root",
+                             isInTestBundle: false, // TODO Should be true because we are testing?
+                             useOnlyFileInBundle: false)
+        #expect(Expertise.count(context: bgContext) == 23)
     }
 
     // Read language.level0.json.
@@ -87,14 +90,15 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext)
         #expect(Language.count(context: bgContext, isoCode: "UR") == 0)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                             fileName: "language", isInTestBundle: true,
-                             useOnlyInBundleFile: false)
+                             fileName: "language",
+                             isInTestBundle: true,
+                             useOnlyFileInBundle: false)
 
         #expect(Language.count(context: bgContext, isoCode: "UR") == 1)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
@@ -109,14 +113,15 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext)
         #expect(Language.count(context: bgContext, isoCode: "UR") == 0)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
 
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
-                             fileName: "languages", isInTestBundle: true,
-                             useOnlyInBundleFile: false)
+                             fileName: "languages",
+                             isInTestBundle: true,
+                             useOnlyFileInBundle: false)
 
         #expect(Language.count(context: bgContext, isoCode: "EN") == 1)
         #expect(Language.count(context: bgContext, isoCode: "NL") == 1)

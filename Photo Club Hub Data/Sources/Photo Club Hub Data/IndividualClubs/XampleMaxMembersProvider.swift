@@ -7,10 +7,10 @@
 
 import CoreData // for PersistenceController
 
-public class XampleMaxMembersProvider {
+final public class XampleMaxMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
-                useOnlyInBundleFile: Bool = false,
+                useOnlyFileInBundle: Bool = false,
                 synchronousWithRandomTown: Bool = false,
                 randomTown: String = "RandomTown") {
 
@@ -39,9 +39,11 @@ public class XampleMaxMembersProvider {
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
                              isInTestBundle: false,
-                             useOnlyInBundleFile: false)
+                             useOnlyFileInBundle: false)
         do {
-            try bgContext.save()
+            if bgContext.hasChanges {
+                try bgContext.save()
+            }
         } catch {
             ifDebugFatalError("Failed to save club \(idPlus.nickname)", file: #fileID, line: #line)
         }

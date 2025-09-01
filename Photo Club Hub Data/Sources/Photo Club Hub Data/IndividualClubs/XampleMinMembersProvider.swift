@@ -7,10 +7,10 @@
 
 import CoreData // for PersistenceController
 
-public class XampleMinMembersProvider {
+final public class XampleMinMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
-                useOnlyInBundleFile: Bool = false,
+                useOnlyFileInBundle: Bool = false,
                 synchronousWithRandomTown: Bool = false,
                 randomTown: String = "RandomTown") {
 
@@ -39,7 +39,7 @@ public class XampleMinMembersProvider {
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
                              isInTestBundle: false,
-                             useOnlyInBundleFile: false)
+                             useOnlyFileInBundle: false)
         do {
             try bgContext.save()
         } catch {

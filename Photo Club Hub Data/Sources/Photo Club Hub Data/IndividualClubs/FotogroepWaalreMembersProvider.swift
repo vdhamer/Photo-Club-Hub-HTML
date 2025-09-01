@@ -8,20 +8,20 @@
 import CoreData // for NSManagedObjectContext
 import RegexBuilder // for Regex struct
 
-public class FotogroepWaalreMembersProvider { // WWDC21 Earthquakes also uses a Class here
+final public class FotogroepWaalreMembersProvider: Sendable { // WWDC21 Earthquakes also uses a Class here
 
     public init(bgContext: NSManagedObjectContext,
-                useOnlyInBundleFile: Bool = false,
+                useOnlyFileInBundle: Bool = false,
                 synchronousWithRandomTown: Bool = false,
                 randomTown: String = "RandomTown") {
 
         if synchronousWithRandomTown {
             bgContext.performAndWait { // execute block synchronously or ...
-                insertOnlineMemberData(bgContext: bgContext, town: randomTown, useOnlyInBundleFile: useOnlyInBundleFile)
+                insertOnlineMemberData(bgContext: bgContext, town: randomTown, useOnlyFileInBundle: useOnlyFileInBundle)
             }
         } else {
             bgContext.perform { // ...execute block asynchronously
-                self.insertOnlineMemberData(bgContext: bgContext, useOnlyInBundleFile: useOnlyInBundleFile)
+                self.insertOnlineMemberData(bgContext: bgContext, useOnlyFileInBundle: useOnlyFileInBundle)
             }
         }
 
@@ -29,7 +29,7 @@ public class FotogroepWaalreMembersProvider { // WWDC21 Earthquakes also uses a 
 
     fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext,
                                             town: String = "Waalre",
-                                            useOnlyInBundleFile: Bool) {
+                                            useOnlyFileInBundle: Bool) {
 
         let idPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre",
                                         town: town,
@@ -44,7 +44,7 @@ public class FotogroepWaalreMembersProvider { // WWDC21 Earthquakes also uses a 
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
                              isInTestBundle: false,
-                             useOnlyInBundleFile: useOnlyInBundleFile)
+                             useOnlyFileInBundle: useOnlyFileInBundle)
 
         do {
             try bgContext.save()

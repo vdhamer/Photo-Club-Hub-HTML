@@ -25,7 +25,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext) // This test doesn't have Expertises
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext) // This test doesn't have Expertises
         #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club XampleMin may already be loaded
@@ -54,7 +54,7 @@ import CoreData // for NSManagedObjectContext
             #expect(organizations[0].organizationType.organizationTypeName == OrganizationTypeEnum.club.rawValue)
             #expect(organizations[0].fullName == idPlus.fullName)
             #expect(organizations[0].town == idPlus.town)
-            #expect(organizations[0].nickname == idPlus.nickname)
+            #expect(organizations[0].nickName == idPlus.nickname)
         }
 
     }
@@ -67,7 +67,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext) // This test does have Expertises
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext) // This test does have Expertises
         #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club XampleMax may already be loaded
@@ -96,7 +96,7 @@ import CoreData // for NSManagedObjectContext
             #expect(organizations[0].organizationType.organizationTypeName == OrganizationTypeEnum.club.rawValue)
             #expect(organizations[0].fullName == idPlus.fullName)
             #expect(organizations[0].town == idPlus.town)
-            #expect(organizations[0].nickname == idPlus.nickname)
+            #expect(organizations[0].nickName == idPlus.nickname)
         }
     }
 
@@ -108,7 +108,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext)
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext)
 
         // note that club fgDeGender may already be loaded
         // note that fgDeGenderMembersProvider runs asynchronously (via bgContext.perform {})
@@ -135,7 +135,7 @@ import CoreData // for NSManagedObjectContext
             #expect(organizations[0].organizationType.organizationTypeName == OrganizationTypeEnum.club.rawValue)
             #expect(organizations[0].fullName == idPlus.fullName)
             #expect(organizations[0].town == idPlus.town)
-            #expect(organizations[0].nickname == idPlus.nickname)
+            #expect(organizations[0].nickName == idPlus.nickname)
             #expect(organizations[0].fotobondNumber == 1620)
         }
 
@@ -152,7 +152,7 @@ import CoreData // for NSManagedObjectContext
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
-        Model.deleteCoreDataExpertisesLanguages(context: bgContext) // This test does have Expertises
+        Model.deleteCoreDataExpertisesAndLanguages(viewContext: bgContext) // This test does have Expertises
         #expect(Expertise.count(context: bgContext) == 0)
 
         // note that club fgDeGender may already be loaded

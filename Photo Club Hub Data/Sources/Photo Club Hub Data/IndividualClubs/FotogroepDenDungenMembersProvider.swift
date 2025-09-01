@@ -7,10 +7,10 @@
 
 import CoreData // for PersistenceController
 
-public class FotoclubDenDungenMembersProvider {
+final public class FotoclubDenDungenMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
-                useOnlyInBundleFile: Bool = true,
+                useOnlyFileInBundle: Bool = true,
                 synchronousWithRandomTown: Bool = false,
                 randomTown: String = "RandomTown") {
 
@@ -40,7 +40,7 @@ public class FotoclubDenDungenMembersProvider {
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
                              isInTestBundle: false,
-                             useOnlyInBundleFile: false)
+                             useOnlyFileInBundle: false)
         do {
             try bgContext.save()
         } catch {

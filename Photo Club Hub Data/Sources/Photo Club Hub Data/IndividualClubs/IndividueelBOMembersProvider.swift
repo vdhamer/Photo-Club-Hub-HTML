@@ -7,10 +7,10 @@
 
 import CoreData // for PersistenceController
 
-public class IndividueelBOMembersProvider {
+final public class IndividueelBOMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
-                useOnlyInBundleFile: Bool = false,
+                useOnlyFileInBundle: Bool = false,
                 synchronousWithRandomTown: Bool = false, // for testing
                 randomTown: String = "RandomTown") { // for testing
 
@@ -26,7 +26,7 @@ public class IndividueelBOMembersProvider {
 
     }
 
-    fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext, town: String = "Eindhoven") {
+    fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext, town: String = "Brabant Oost") {
         let idPlus = OrganizationIdPlus(fullName: "Individuele Leden Brabant Oost",
                                         town: town,
                                         nickname: "IndividueelBO")
@@ -39,7 +39,7 @@ public class IndividueelBOMembersProvider {
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
                              isInTestBundle: false,
-                             useOnlyInBundleFile: false)
+                             useOnlyFileInBundle: false)
         do {
             try bgContext.save()
         } catch {
