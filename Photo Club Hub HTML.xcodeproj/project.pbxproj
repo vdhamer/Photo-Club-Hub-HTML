@@ -165,9 +165,9 @@
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
+				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
 				D05E366A2DD2526C005697AC /* Photo Club Hub Data */,
 				D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */,
-				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 				D0B9D4FE2CC443D900B1541C /* .github */,
 				D05E36722DD252C5005697AC /* Photo Club Hub Data */,
