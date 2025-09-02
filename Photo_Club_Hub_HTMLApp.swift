@@ -82,11 +82,11 @@ extension PhotoClubHubHtmlApp {
 //
 //        if includeXampleClubs {
 //
-//            // load test member(s) of XampleMin. Club is called XampleMin (rather than ExampleMin) to be at end of list
+//            // load test member(s) of XampleMin. Club is called XampleMin (instead of ExampleMin) to be at end of list
 //            let xampleMinBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMin")
 //            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext, useOnlyFileInBundle: false)
 //
-//            // load test member(s) of XampleMax. Club is called XampleMax (rather than ExampleMax) to be at end of list
+//            // load test member(s) of XampleMax. Club is called XampleMax (instead of ExampleMin) to be at end of list
 //            let xampleMaxBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMax")
 //            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext, useOnlyFileInBundle: false)
 //
