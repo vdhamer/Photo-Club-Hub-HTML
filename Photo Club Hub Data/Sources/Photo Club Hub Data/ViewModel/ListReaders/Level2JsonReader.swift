@@ -292,12 +292,14 @@ public class Level2JsonReader { // normally running on a background thread
             return nil // in non-debug software, just skip loading this Level 2 file
         }
 
-        guard idPlus.town == targetIdPlus.town || isBeingTested else { // expected town?
-            ifDebugFatalError("""
-                              Warning: there is a mismatch in town for \(targetIdPlus.fullName): \
-                              the in-file town is \(idPlus.town) but \(targetIdPlus.town) was expected.
-                              """)
-            return nil // in non-debug software, just skip loading this Level 2 file
+        if isBeingTested == false {
+            guard idPlus.town == targetIdPlus.town else { // expected town?
+                ifDebugFatalError("""
+                                  Warning: there is a mismatch for the Town of \(targetIdPlus.fullName): \
+                                  the in-file town is \(idPlus.town) but \(targetIdPlus.town) was expected.
+                                  """)
+                return nil // in non-debug software, just skip loading this Level 2 file
+            }
         }
 
         return idPlus
