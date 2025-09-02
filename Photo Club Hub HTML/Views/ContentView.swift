@@ -76,6 +76,7 @@ struct ContentView: View {
                         } else {
                             Text("\(club.fullName) (\(club.members.count))")
                                 .font(.title2)
+                                .foregroundStyle(.link)
                         }
                     }
                 }

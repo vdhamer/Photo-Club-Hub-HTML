@@ -79,19 +79,19 @@ extension PhotoClubHubHtmlApp {
 //        let bellusBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcBellusImago")
 //        _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
 //                                               useOnlyFileInBundle: false)
-//
-//        if includeXampleClubs {
-//
-//            // load test member(s) of XampleMin. Club is called XampleMin (instead of ExampleMin) to be at end of list
-//            let xampleMinBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMin")
-//            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext, useOnlyFileInBundle: false)
-//
-//            // load test member(s) of XampleMax. Club is called XampleMax (instead of ExampleMin) to be at end of list
-//            let xampleMaxBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMax")
-//            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext, useOnlyFileInBundle: false)
-//
-//        }
-//
+
+        if includeXampleClubs {
+
+            // load test member(s) of XampleMin. Club is called XampleMin (instead of ExampleMin) to be at end of list
+            let xampleMinBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMin")
+            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext, useOnlyFileInBundle: false)
+
+            // load test member(s) of XampleMax. Club is called XampleMax (instead of ExampleMin) to be at end of list
+            let xampleMaxBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMax")
+            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext, useOnlyFileInBundle: false)
+
+        }
+
 //        // load current/former members of Fotogroep Oirschot
 //        let oirschotBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgOirschot")
 //        _ = FotogroepOirschotMembersProvider(bgContext: oirschotBackgroundContext,
