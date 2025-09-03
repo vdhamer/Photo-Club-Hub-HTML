@@ -59,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3715FB292E683FD800203775 /* Photo-Club-Hub-HTML-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Photo-Club-Hub-HTML-Info.plist"; sourceTree = "<group>"; };
 		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
 		D05E366A2DD2526C005697AC /* Photo Club Hub Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Photo Club Hub Data"; sourceTree = "<group>"; };
 		D05E369E2DD253A7005697AC /* Photo_Club_Hub_Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Photo_Club_Hub_Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +156,7 @@
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
+				3715FB292E683FD800203775 /* Photo-Club-Hub-HTML-Info.plist */,
 				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
 				D05E366A2DD2526C005697AC /* Photo Club Hub Data */,
 				D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */,
@@ -368,6 +370,7 @@
 				"else",
 				"  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"",
 				"fi",
+				"",
 				"",
 			);
 		};
