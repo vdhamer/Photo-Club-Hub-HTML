@@ -38,7 +38,7 @@ final public class XampleMaxMembersProvider: Sendable {
 
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
-                             isInTestBundle: false,
+                             isBeingTested: false, // TODO not always false
                              useOnlyFileInBundle: false)
         do {
             if bgContext.hasChanges {

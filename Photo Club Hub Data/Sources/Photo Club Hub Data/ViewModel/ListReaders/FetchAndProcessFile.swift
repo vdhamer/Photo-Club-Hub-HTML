@@ -27,9 +27,9 @@ struct FetchAndProcessFile {
         bgContext.perform { [self] in // run on requested background thread
             let nameWithSubtype = (fileSelector.fileName) + "." + fileSubType // e.g. "root.level0"
 
-            var bundle: Bundle = Bundle.module // overwritten by Test Bundle depending if fileSelector.isInTestBundle
+            var bundle: Bundle = Bundle.module // overwritten by Test Bundle depending if fileSelector.isBeingTested
 
-            if fileSelector.isInTestBundle {
+            if fileSelector.isBeingTested {
                 let testUrl = Bundle.module.bundleURL.deletingLastPathComponent().appending(
                     path: "Photo Club Hub Data_Photo Club Hub DataTests.bundle")
                 let testBundle: Bundle? = Bundle(url: testUrl)

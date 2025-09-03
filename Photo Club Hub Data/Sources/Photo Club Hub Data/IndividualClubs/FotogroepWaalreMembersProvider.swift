@@ -43,7 +43,7 @@ final public class FotogroepWaalreMembersProvider: Sendable { // WWDC21 Earthqua
 
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
-                             isInTestBundle: false,
+                             isBeingTested: false, // TODO not always false
                              useOnlyFileInBundle: useOnlyFileInBundle)
 
         do {

@@ -38,7 +38,7 @@ final public class IndividueelBOMembersProvider: Sendable {
 
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
-                             isInTestBundle: false,
+                             isBeingTested: false, // TODO not always false
                              useOnlyFileInBundle: false)
         do {
             try bgContext.save()

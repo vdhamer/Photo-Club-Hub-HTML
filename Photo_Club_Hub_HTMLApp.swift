@@ -58,27 +58,27 @@ extension PhotoClubHubHtmlApp {
 
         // load list of keywords and languages from root.Level0.json file
         let level0BackgroundContext = makeBgContext(ctxName: "Level 0 loader")
-        _ = Level0JsonReader(bgContext: level0BackgroundContext, isInTestBundle: false, useOnlyFileInBundle: false)
+        _ = Level0JsonReader(bgContext: level0BackgroundContext, isBeingTested: false, useOnlyFileInBundle: false)
 
         // load list of photo clubs and museums from root.Level1.json file
         let level1BackgroundContext = makeBgContext(ctxName: "Level 1 loader")
         _ = Level1JsonReader(bgContext: level1BackgroundContext, // read root.Level1.json file
-                             isInTestBundle: false, useOnlyFileInBundle: false)
+                             isBeingTested: false, useOnlyFileInBundle: false)
 
-//        // load current/former members of Fotogroep De Gender TODO uncomment
-//        let genderBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgDeGender")
-//        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext,
-//                                             useOnlyFileInBundle: false)
-//
-//        // load current/former members of Fotogroep Waalre
-//        let waalreBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgWaalre")
-//        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
-//                                           useOnlyFileInBundle: false)
-//
-//        // load current/former members of Fotoclub Bellus Imago
-//        let bellusBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcBellusImago")
-//        _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
-//                                               useOnlyFileInBundle: false)
+        // load current/former members of Fotogroep De Gender
+        let genderBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgDeGender")
+        _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext,
+                                             useOnlyFileInBundle: false)
+
+        // load current/former members of Fotogroep Waalre
+        let waalreBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgWaalre")
+        _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
+                                           useOnlyFileInBundle: false)
+
+        // load current/former members of Fotoclub Bellus Imago
+        let bellusBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcBellusImago")
+        _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
+                                               useOnlyFileInBundle: false)
 
         if includeXampleClubs {
 
@@ -92,23 +92,23 @@ extension PhotoClubHubHtmlApp {
 
         }
 
-//        // load current/former members of Fotogroep Oirschot
-//        let oirschotBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgOirschot")
-//        _ = FotogroepOirschotMembersProvider(bgContext: oirschotBackgroundContext,
-//                                             useOnlyFileInBundle: false)
-//
-//        // load current/former members of Fotogroep Oirschot
-//        let individueelBOBackgroundContext = makeBgContext(ctxName: "Level 2 loader IndividueelBO")
-//        _ = IndividueelBOMembersProvider(bgContext: individueelBOBackgroundContext,
-//                                         useOnlyFileInBundle: false)
-//
-//        // load current/former members of Fotoclub Ericamera
-//        let ericameraBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcEricamera")
-//        _ = FotoclubEricameraMembersProvider(bgContext: ericameraBackgroundContext, useOnlyFileInBundle: false)
-//
-//        // load current/former members of Fotoclub Den Dungen
-//        let dendungenBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcDenDungen")
-//        _ = FotoclubDenDungenMembersProvider(bgContext: dendungenBackgroundContext, useOnlyFileInBundle: false)
+        // load current/former members of Fotogroep Oirschot
+        let oirschotBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgOirschot")
+        _ = FotogroepOirschotMembersProvider(bgContext: oirschotBackgroundContext,
+                                             useOnlyFileInBundle: false)
+
+        // load current/former members of Fotogroep Oirschot
+        let individueelBOBackgroundContext = makeBgContext(ctxName: "Level 2 loader IndividueelBO")
+        _ = IndividueelBOMembersProvider(bgContext: individueelBOBackgroundContext,
+                                         useOnlyFileInBundle: false)
+
+        // load current/former members of Fotoclub Ericamera
+        let ericameraBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcEricamera")
+        _ = FotoclubEricameraMembersProvider(bgContext: ericameraBackgroundContext, useOnlyFileInBundle: false)
+
+        // load current/former members of Fotoclub Den Dungen
+        let dendungenBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcDenDungen")
+        _ = FotoclubDenDungenMembersProvider(bgContext: dendungenBackgroundContext, useOnlyFileInBundle: false)
 
     }
 

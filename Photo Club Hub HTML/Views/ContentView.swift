@@ -71,11 +71,12 @@ struct ContentView: View {
                     } label: {
                         if club.members.isEmpty {
                             Text(club.fullName)
-                                .foregroundStyle(.placeholder)
+                                .foregroundStyle(.gray) // was .placeholder
                                 .font(.title2)
                         } else {
                             Text("\(club.fullName) (\(club.members.count))")
                                 .font(.title2)
+                                .fontWeight(.bold)
                                 .foregroundStyle(.link)
                         }
                     }
