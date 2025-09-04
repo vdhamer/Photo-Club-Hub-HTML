@@ -10,36 +10,49 @@ import CoreData // for PersistenceController
 final public class IndividueelBOMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
+                isBeingTested: Bool,
                 useOnlyFileInBundle: Bool = false,
-                synchronousWithRandomTown: Bool = false, // for testing
-                randomTown: String = "RandomTown") { // for testing
+                randomTownForTesting: String? = nil) {
 
-        if synchronousWithRandomTown {
-            bgContext.performAndWait { // ...or execute same block synchronously
-                insertOnlineMemberData(bgContext: bgContext, town: randomTown)
+        if isBeingTested {
+            guard let randomTownForTesting else {
+                ifDebugFatalError("Missing randomTownForTesting", file: #file, line: #line)
+                return
+            }
+            bgContext.performAndWait { // execute block synchronously
+                insertOnlineMemberData(bgContext: bgContext,
+                                       isBeingTested: isBeingTested,
+                                       town: randomTownForTesting,
+                                       useOnlyFileInBundle: useOnlyFileInBundle)
             }
         } else {
-            bgContext.perform { // execute block asynchronously...
-                self.insertOnlineMemberData(bgContext: bgContext)
+            bgContext.perform { // ... or execute same block asynchronously
+                self.insertOnlineMemberData(bgContext: bgContext,
+                                            isBeingTested: isBeingTested,
+                                            useOnlyFileInBundle: useOnlyFileInBundle)
             }
         }
 
     }
 
-    fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext, town: String = "Brabant Oost") {
+    fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext,
+                                            isBeingTested: Bool,
+                                            town: String = "Brabant Oost",
+                                            useOnlyFileInBundle: Bool) {
         let idPlus = OrganizationIdPlus(fullName: "Individuele Leden Brabant Oost",
                                         town: town,
                                         nickname: "IndividueelBO")
 
         let club = Organization.findCreateUpdate(context: bgContext,
                                                  organizationTypeEnum: .club,
-                                                 idPlus: idPlus)
+                                                 idPlus: idPlus
+                                                )
         ifDebugPrint("\(club.fullNameTown): Starting insertOnlineMemberData() in background")
 
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
-                             isBeingTested: false, // TODO not always false
-                             useOnlyFileInBundle: false)
+                             isBeingTested: isBeingTested,
+                             useOnlyFileInBundle: useOnlyFileInBundle)
         do {
             try bgContext.save()
         } catch {

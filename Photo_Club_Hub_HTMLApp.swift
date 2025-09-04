@@ -68,47 +68,60 @@ extension PhotoClubHubHtmlApp {
         // load current/former members of Fotogroep De Gender
         let genderBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgDeGender")
         _ = FotogroepDeGenderMembersProvider(bgContext: genderBackgroundContext,
+                                             isBeingTested: false,
                                              useOnlyFileInBundle: false)
 
         // load current/former members of Fotogroep Waalre
         let waalreBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgWaalre")
         _ = FotogroepWaalreMembersProvider(bgContext: waalreBackgroundContext,
+                                           isBeingTested: false,
                                            useOnlyFileInBundle: false)
 
         // load current/former members of Fotoclub Bellus Imago
         let bellusBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcBellusImago")
         _ = FotoclubBellusImagoMembersProvider(bgContext: bellusBackgroundContext,
+                                               isBeingTested: false,
                                                useOnlyFileInBundle: false)
 
         if includeXampleClubs {
 
             // load test member(s) of XampleMin. Club is called XampleMin (instead of ExampleMin) to be at end of list
             let xampleMinBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMin")
-            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext, useOnlyFileInBundle: false)
+            _ = XampleMinMembersProvider(bgContext: xampleMinBackgroundContext,
+                                         isBeingTested: false,
+                                         useOnlyFileInBundle: false)
 
             // load test member(s) of XampleMax. Club is called XampleMax (instead of ExampleMin) to be at end of list
             let xampleMaxBackgroundContext = makeBgContext(ctxName: "Level 2 loader XampleMax")
-            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext, useOnlyFileInBundle: false)
+            _ = XampleMaxMembersProvider(bgContext: xampleMaxBackgroundContext,
+                                         isBeingTested: false,
+                                         useOnlyFileInBundle: false)
 
         }
 
         // load current/former members of Fotogroep Oirschot
         let oirschotBackgroundContext = makeBgContext(ctxName: "Level 2 loader fgOirschot")
         _ = FotogroepOirschotMembersProvider(bgContext: oirschotBackgroundContext,
+                                             isBeingTested: false,
                                              useOnlyFileInBundle: false)
 
         // load current/former members of Fotogroep Oirschot
         let individueelBOBackgroundContext = makeBgContext(ctxName: "Level 2 loader IndividueelBO")
         _ = IndividueelBOMembersProvider(bgContext: individueelBOBackgroundContext,
+                                         isBeingTested: false,
                                          useOnlyFileInBundle: false)
 
         // load current/former members of Fotoclub Ericamera
         let ericameraBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcEricamera")
-        _ = FotoclubEricameraMembersProvider(bgContext: ericameraBackgroundContext, useOnlyFileInBundle: false)
+        _ = FotoclubEricameraMembersProvider(bgContext: ericameraBackgroundContext,
+                                             isBeingTested: false,
+                                             useOnlyFileInBundle: false)
 
         // load current/former members of Fotoclub Den Dungen
         let dendungenBackgroundContext = makeBgContext(ctxName: "Level 2 loader fcDenDungen")
-        _ = FotoclubDenDungenMembersProvider(bgContext: dendungenBackgroundContext, useOnlyFileInBundle: false)
+        _ = FotoclubDenDungenMembersProvider(bgContext: dendungenBackgroundContext,
+                                             isBeingTested: false,
+                                             useOnlyFileInBundle: false)
 
     }
 

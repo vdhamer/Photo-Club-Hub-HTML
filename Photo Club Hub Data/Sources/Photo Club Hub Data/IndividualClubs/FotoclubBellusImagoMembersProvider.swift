@@ -10,23 +10,31 @@ import CoreData // for PersistenceController
 final public class FotoclubBellusImagoMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
+                isBeingTested: Bool,
                 useOnlyFileInBundle: Bool = false,
-                synchronousWithRandomTown: Bool = false,
-                randomTown: String = "RandomTown") {
+                randomTownForTesting: String? = nil) {
 
-        if synchronousWithRandomTown {
+        if isBeingTested {
+            guard let randomTownForTesting else {
+                ifDebugFatalError("Missing randomTownForTesting", file: #file, line: #line)
+                return
+            }
             bgContext.performAndWait { // ...or execute same block synchronously
-                self.insertOnlineMemberData(bgContext: bgContext, town: randomTown)
+                self.insertOnlineMemberData(bgContext: bgContext,
+                                            isBeingTested: isBeingTested,
+                                            town: randomTownForTesting)
             }
         } else {
             bgContext.perform { // execute block asynchronously...
-                self.insertOnlineMemberData(bgContext: bgContext)
+                self.insertOnlineMemberData(bgContext: bgContext, isBeingTested: isBeingTested)
             }
         }
 
     }
 
-    fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext, town: String = "Veldhoven") {
+    fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext,
+                                            isBeingTested: Bool,
+                                            town: String = "Veldhoven") {
         let idPlus = OrganizationIdPlus(fullName: "Fotoclub Bellus Imago",
                                         town: town,
                                         nickname: "fcBellusImago")
@@ -39,7 +47,7 @@ final public class FotoclubBellusImagoMembersProvider: Sendable {
 
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
-                             isBeingTested: false, // TODO not always false
+                             isBeingTested: isBeingTested,
                              useOnlyFileInBundle: false)
         do {
             try bgContext.save()

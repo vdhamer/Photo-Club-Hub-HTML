@@ -11,23 +11,33 @@ import RegexBuilder // for Regex struct
 final public class FotogroepWaalreMembersProvider: Sendable { // WWDC21 Earthquakes also uses a Class here
 
     public init(bgContext: NSManagedObjectContext,
+                isBeingTested: Bool,
                 useOnlyFileInBundle: Bool = false,
-                synchronousWithRandomTown: Bool = false,
-                randomTown: String = "RandomTown") {
+                randomTownForTesting: String? = nil) {
 
-        if synchronousWithRandomTown {
-            bgContext.performAndWait { // execute block synchronously or ...
-                insertOnlineMemberData(bgContext: bgContext, town: randomTown, useOnlyFileInBundle: useOnlyFileInBundle)
+        if isBeingTested {
+            guard let randomTownForTesting else {
+                ifDebugFatalError("Missing randomTownForTesting", file: #file, line: #line)
+                return
+            }
+            bgContext.performAndWait { // execute block synchronously
+                insertOnlineMemberData(bgContext: bgContext,
+                                       isBeingTested: isBeingTested,
+                                       town: randomTownForTesting,
+                                       useOnlyFileInBundle: useOnlyFileInBundle)
             }
         } else {
-            bgContext.perform { // ...execute block asynchronously
-                self.insertOnlineMemberData(bgContext: bgContext, useOnlyFileInBundle: useOnlyFileInBundle)
+            bgContext.perform { // ... or execute same block asynchronously
+                self.insertOnlineMemberData(bgContext: bgContext,
+                                            isBeingTested: isBeingTested,
+                                            useOnlyFileInBundle: useOnlyFileInBundle)
             }
         }
 
     }
 
     fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext,
+                                            isBeingTested: Bool,
                                             town: String = "Waalre",
                                             useOnlyFileInBundle: Bool) {
 
@@ -43,7 +53,7 @@ final public class FotogroepWaalreMembersProvider: Sendable { // WWDC21 Earthqua
 
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
-                             isBeingTested: false, // TODO not always false
+                             isBeingTested: isBeingTested,
                              useOnlyFileInBundle: useOnlyFileInBundle)
 
         do {
