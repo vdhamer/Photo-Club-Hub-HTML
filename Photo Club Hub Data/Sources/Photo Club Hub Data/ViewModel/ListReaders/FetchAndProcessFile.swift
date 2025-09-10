@@ -18,7 +18,7 @@ struct FetchAndProcessFile {
     init(bgContext: NSManagedObjectContext,
          fileSelector: FileSelector,
          fileType: String, fileSubType: String,
-         useOnlyFileInBundle: Bool,
+         useOnlyInBundleFile: Bool,
          isBeingTested: Bool,
          fileContentProcessor: @Sendable @escaping (_ bgContext: NSManagedObjectContext,
                                                     _ jsonData: String,
@@ -56,7 +56,7 @@ struct FetchAndProcessFile {
                                    + "." + fileSubType // ".level2" or ".level1"
                                    + "." + fileType)!, // ".json"
                 fileInBundleURL: fileInBundleURL!, // forced unwrap is safe (due to guard statement above)
-                useOnlyFileInBundle: useOnlyFileInBundle
+                useOnlyInBundleFile: useOnlyInBundleFile
             )
             fileContentProcessor(bgContext, data, fileSelector, isBeingTested)
         }
@@ -65,8 +65,8 @@ struct FetchAndProcessFile {
     // try to fetch the online root.level0.json file, and if that fails fetch it from one of the app's bundles instead
     fileprivate func getData(remoteFileURL: URL,
                              fileInBundleURL: URL,
-                             useOnlyFileInBundle: Bool) -> String {
-        if let urlData = try? String(contentsOf: remoteFileURL, encoding: .utf8), !useOnlyFileInBundle {
+                             useOnlyInBundleFile: Bool) -> String {
+        if let urlData = try? String(contentsOf: remoteFileURL, encoding: .utf8), !useOnlyInBundleFile {
             return urlData
         }
         print("Could not access online file \(remoteFileURL.relativeString). Trying in-app file instead.")

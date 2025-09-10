@@ -11,7 +11,7 @@ final public class IndividueelBOMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
                 isBeingTested: Bool,
-                useOnlyFileInBundle: Bool = false,
+                useOnlyInBundleFile: Bool = false,
                 randomTownForTesting: String? = nil) {
 
         if isBeingTested {
@@ -23,13 +23,13 @@ final public class IndividueelBOMembersProvider: Sendable {
                 insertOnlineMemberData(bgContext: bgContext,
                                        isBeingTested: isBeingTested,
                                        town: randomTownForTesting,
-                                       useOnlyFileInBundle: useOnlyFileInBundle)
+                                       useOnlyInBundleFile: useOnlyInBundleFile)
             }
         } else {
             bgContext.perform { // ... or execute same block asynchronously
                 self.insertOnlineMemberData(bgContext: bgContext,
                                             isBeingTested: isBeingTested,
-                                            useOnlyFileInBundle: useOnlyFileInBundle)
+                                            useOnlyInBundleFile: useOnlyInBundleFile)
             }
         }
 
@@ -38,7 +38,7 @@ final public class IndividueelBOMembersProvider: Sendable {
     fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext,
                                             isBeingTested: Bool,
                                             town: String = "Brabant Oost",
-                                            useOnlyFileInBundle: Bool) {
+                                            useOnlyInBundleFile: Bool) {
         let idPlus = OrganizationIdPlus(fullName: "Individuele Leden Brabant Oost",
                                         town: town,
                                         nickname: "IndividueelBO")
@@ -52,9 +52,11 @@ final public class IndividueelBOMembersProvider: Sendable {
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
                              isBeingTested: isBeingTested,
-                             useOnlyFileInBundle: useOnlyFileInBundle)
+                             useOnlyInBundleFile: useOnlyInBundleFile)
         do {
-            try bgContext.save()
+            if bgContext.hasChanges {
+                try bgContext.save()
+            }
         } catch {
             ifDebugFatalError("Failed to save club \(idPlus.nickname)", file: #fileID, line: #line)
         }

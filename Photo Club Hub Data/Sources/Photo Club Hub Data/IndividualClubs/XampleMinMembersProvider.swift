@@ -11,7 +11,7 @@ final public class XampleMinMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
                 isBeingTested: Bool,
-                useOnlyFileInBundle: Bool,
+                useOnlyInBundleFile: Bool,
                 randomTownForTesting: String? = nil) {
 
         if isBeingTested {
@@ -23,13 +23,13 @@ final public class XampleMinMembersProvider: Sendable {
                 insertOnlineMemberData(bgContext: bgContext,
                                        isBeingTested: isBeingTested,
                                        town: randomTownForTesting,
-                                       useOnlyFileInBundle: useOnlyFileInBundle)
+                                       useOnlyInBundleFile: useOnlyInBundleFile)
             }
         } else {
             bgContext.perform { // ... or execute same block asynchronously
                 self.insertOnlineMemberData(bgContext: bgContext,
                                             isBeingTested: isBeingTested,
-                                            useOnlyFileInBundle: useOnlyFileInBundle)
+                                            useOnlyInBundleFile: useOnlyInBundleFile)
             }
         }
 
@@ -38,7 +38,7 @@ final public class XampleMinMembersProvider: Sendable {
     fileprivate func insertOnlineMemberData(bgContext: NSManagedObjectContext,
                                             isBeingTested: Bool,
                                             town: String = "Amsterdam",
-                                            useOnlyFileInBundle: Bool) {
+                                            useOnlyInBundleFile: Bool) {
         let idPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data",
                                         town: town,
                                         nickname: "XampleMin")
@@ -52,7 +52,7 @@ final public class XampleMinMembersProvider: Sendable {
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
                              isBeingTested: isBeingTested,
-                             useOnlyFileInBundle: useOnlyFileInBundle)
+                             useOnlyInBundleFile: useOnlyInBundleFile)
         do {
             if bgContext.hasChanges {
                 try bgContext.save()

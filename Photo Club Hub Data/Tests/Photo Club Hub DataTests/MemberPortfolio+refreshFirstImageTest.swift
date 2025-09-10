@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  MemberPortfolio+refreshFirstImageTest.swift
 //  Photo Club Hub Data
 //
 //  Created by Peter van den Hamer on 26/05/2025.
@@ -23,7 +23,7 @@ import CoreData // for NSMergePolicy
         let randomTownForTesting = String.random(length: 10)
         _ = XampleMinMembersProvider(bgContext: bgContext,
                                      isBeingTested: true,
-                                     useOnlyFileInBundle: false,
+                                     useOnlyInBundleFile: false,
                                      randomTownForTesting: randomTownForTesting)
 
         let idPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data",

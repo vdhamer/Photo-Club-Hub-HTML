@@ -11,7 +11,7 @@ final public class FotogroepOirschotMembersProvider: Sendable {
 
     public init(bgContext: NSManagedObjectContext,
                 isBeingTested: Bool,
-                useOnlyFileInBundle: Bool = false,
+                useOnlyInBundleFile: Bool = false,
                 randomTownForTesting: String? = nil) {
 
         if isBeingTested {
@@ -26,7 +26,8 @@ final public class FotogroepOirschotMembersProvider: Sendable {
             }
         } else {
             bgContext.perform { // execute block asynchronously...
-                self.insertOnlineMemberData(bgContext: bgContext, isBeingTested: isBeingTested)
+                self.insertOnlineMemberData(bgContext: bgContext,
+					    isBeingTested: isBeingTested)
             }
         }
 
@@ -48,9 +49,11 @@ final public class FotogroepOirschotMembersProvider: Sendable {
         _ = Level2JsonReader(bgContext: bgContext,
                              organizationIdPlus: idPlus,
                              isBeingTested: isBeingTested,
-                             useOnlyFileInBundle: false)
+                             useOnlyInBundleFile: false)
         do {
-            try bgContext.save()
+            if bgContext.hasChanges {
+                try bgContext.save()
+            }
         } catch {
             ifDebugFatalError("Failed to save club \(idPlus.nickname)", file: #fileID, line: #line)
         }

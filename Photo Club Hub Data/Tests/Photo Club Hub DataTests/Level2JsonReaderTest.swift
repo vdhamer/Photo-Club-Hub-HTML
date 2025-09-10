@@ -33,7 +33,7 @@ import CoreData // for NSManagedObjectContext
         let randomTownForTesting = String.random(length: 10)
         _ = XampleMinMembersProvider(bgContext: bgContext,
                                      isBeingTested: true,
-                                     useOnlyFileInBundle: true,
+                                     useOnlyInBundleFile: true,
                                      randomTownForTesting: randomTownForTesting)
 
         let idPlus = OrganizationIdPlus(fullName: "Xample Club Min",
@@ -78,11 +78,11 @@ import CoreData // for NSManagedObjectContext
         let randomTownForTesting = String.random(length: 10)
         _ = XampleMaxMembersProvider(bgContext: bgContext,
                                      isBeingTested: true,
-                                     useOnlyFileInBundle: true,
+                                     useOnlyInBundleFile: true,
                                      randomTownForTesting: randomTownForTesting)
 
         let idPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data",
-                                        town: randomTownForTesting, // town to distinguish this  from normal club data
+                                        town: randomTownForTesting, // town to distinguish this from normal club data
                                         nickname: "XampleMax")
 
         let predicateFormat: String = "town_ = %@" // avoid localization
@@ -121,7 +121,7 @@ import CoreData // for NSManagedObjectContext
         let randomTownForTesting = String.random(length: 10)
         _ = FotogroepDeGenderMembersProvider(bgContext: bgContext, // The club has Expertises
                                              isBeingTested: true,
-                                             useOnlyFileInBundle: true,
+                                             useOnlyInBundleFile: true,
                                              randomTownForTesting: randomTownForTesting)
 
         let predicateFormat: String = "town_ = %@" // avoid localization
@@ -167,7 +167,7 @@ import CoreData // for NSManagedObjectContext
         let randomTownForTestingG = String.random(length: 10)
         _ = FotogroepDeGenderMembersProvider(bgContext: bgContext,
                                              isBeingTested: true,
-                                             useOnlyFileInBundle: true,
+                                             useOnlyInBundleFile: true,
                                              randomTownForTesting: randomTownForTestingG)
         #expect(Expertise.count(context: bgContext) == 21)
         #expect(PhotographerExpertise.count(context: bgContext) == 14)
@@ -175,7 +175,7 @@ import CoreData // for NSManagedObjectContext
         let randomTownForTestingW = String.random(length: 10)
         _ = FotogroepWaalreMembersProvider(bgContext: bgContext,
                                            isBeingTested: true,
-                                           useOnlyFileInBundle: true,
+                                           useOnlyInBundleFile: true,
                                            randomTownForTesting: randomTownForTestingW)
 
         #expect(Expertise.count(context: bgContext) == 21)

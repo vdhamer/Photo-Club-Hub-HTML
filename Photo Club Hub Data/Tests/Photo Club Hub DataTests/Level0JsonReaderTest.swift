@@ -35,7 +35,7 @@ private let isBeingTested = true
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "empty",
                              isBeingTested: isBeingTested,
-                             useOnlyFileInBundle: false)
+                             useOnlyInBundleFile: false)
         #expect(Expertise.count(context: bgContext) == 0)
         #expect(LocalizedExpertise.count(context: bgContext) == 0)
         #expect(PhotographerExpertise.count(context: bgContext) == 0)
@@ -58,7 +58,7 @@ private let isBeingTested = true
             _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                                  fileName: "abstractExpertise",
                                  isBeingTested: isBeingTested,
-                                 useOnlyFileInBundle: false)
+                                 useOnlyInBundleFile: false)
             try? bgContext.save()
         }
         #expect(Expertise.count(context: bgContext) == 1)
@@ -80,7 +80,7 @@ private let isBeingTested = true
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "root",
                              isBeingTested: isBeingTested,
-                             useOnlyFileInBundle: false)
+                             useOnlyInBundleFile: false)
         #expect(Expertise.count(context: bgContext) == 23)
     }
 
@@ -100,7 +100,7 @@ private let isBeingTested = true
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "language",
                              isBeingTested: isBeingTested,
-                             useOnlyFileInBundle: false)
+                             useOnlyInBundleFile: false)
 
         #expect(Language.count(context: bgContext, isoCode: "UR") == 1)
         #expect(LocalizedRemark.count(context: bgContext) == 0)
@@ -123,7 +123,7 @@ private let isBeingTested = true
         _ = Level0JsonReader(bgContext: bgContext, // read root.Level0.json file
                              fileName: "languages",
                              isBeingTested: isBeingTested,
-                             useOnlyFileInBundle: false)
+                             useOnlyInBundleFile: false)
 
         #expect(Language.count(context: bgContext, isoCode: "EN") == 1)
         #expect(Language.count(context: bgContext, isoCode: "NL") == 1)
