@@ -81,7 +81,7 @@ extension Clubs {
             } .verticalAlignment(.middle)
 
             Column { // club name
-                let url: String = "http://www.vdhamer.com/\(club.nickname)"
+                let url: String = "http://www.vdhamer.com/\(club.nickName)"
                 Group {
                     if !club.members.isEmpty {
                         Text {
@@ -100,7 +100,7 @@ extension Clubs {
             } .verticalAlignment(.middle)
 
             Column { // member count
-                let url: String = "http://www.vdhamer.com/\(club.nickname)"
+                let url: String = "http://www.vdhamer.com/\(club.nickName)"
                 if !club.members.isEmpty {
                     Span(
                         Link(String("\(club.members.filter { !$0.isFormerMember }.count)"), target: url)
@@ -135,7 +135,7 @@ extension Clubs {
             Column { // JSON
                 if !club.members.isEmpty {
                     let url: String =
-                        "https://github.com/vdhamer/Photo-Club-Hub/blob/main/JSON/\(club.nickname).level2.json"
+                        "https://github.com/vdhamer/Photo-Club-Hub/blob/main/JSON/\(club.nickName).level2.json"
                     Link(String("json"), target: url)
                 }
             } .verticalAlignment(.middle)

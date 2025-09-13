@@ -295,7 +295,8 @@ extension Members {
             try jpegData.write(to: imageUrl)
             print("Wrote jpg to \(imageUrl)")
         } catch {
-            fatalError("Problem in downloadThumbNailToLocal(): \(error)")
+            ifDebugFatalError("Problem in downloadThumbNailToLocal(\(downloadURL.absoluteString)): \(error)")
+            return
         }
 
     }
