@@ -27,7 +27,7 @@ struct FetchAndProcessFile {
         bgContext.perform { [self] in // run on requested background thread
             let nameWithSubtype = (fileSelector.fileName) + "." + fileSubType // e.g. "root.level0"
 
-            var bundle: Bundle = Bundle.module // overwritten by Test Bundle depending if fileSelector.isBeingTested
+            var bundle: Bundle = Bundle.module // overwritten by Test Bundle if fileSelector.isBeingTested
 
             if fileSelector.isBeingTested {
                 let testUrl = Bundle.module.bundleURL.deletingLastPathComponent().appending(
@@ -40,7 +40,7 @@ struct FetchAndProcessFile {
                                """)
                 }
                 bundle = testBundle!
-           }
+            }
 
             let fileInBundleURL: URL? = bundle.url(forResource: nameWithSubtype, withExtension: fileType)
             guard fileInBundleURL != nil else {
