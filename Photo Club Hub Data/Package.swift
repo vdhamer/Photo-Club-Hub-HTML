@@ -32,10 +32,11 @@ let package = Package(
                 .copy("JSON/fcBellusImago.level2.json"),
                 .copy("JSON/fcEricamera.level2.json"),
                 .copy("JSON/fcDenDungen.level2.json"),
-
-                // following are behind a switch in Photo Club Hub iOS app
                 .copy("JSON/IndividueelBO.level2.json"),
                 .copy("JSON/fgOirschot.level2.json"),
+                .copy("JSON/fkGestel.level2.json"),
+
+                // following are behind a switch in Photo Club Hub iOS app
                 .copy("JSON/XampleMin.level2.json"),
                 .copy("JSON/XampleMax.level2.json")
             ]
