@@ -61,72 +61,72 @@ extension PhotoClubHubHtmlApp {
         Model.deleteAllCoreDataObjects(viewContext: viewContext)
 
         // load list of keywords and languages from root.Level0.json file
-//        _ = Level0JsonReader(
-//            bgContext: makeBgContext(ctxName: "Level 0 loader"),
-//            isBeingTested: isBeingTested,
-//            useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//        // load list of photo clubs and museums from root.Level1.json file
-//        _ = Level1JsonReader(
-//            bgContext: makeBgContext(ctxName: "Level 1 loader"),
-//            isBeingTested: isBeingTested,
-//            useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//        // load current/former members of Fotogroep De Gender
-//        _ = FotogroepDeGenderMembersProvider(
-//            bgContext: makeBgContext(ctxName: "Level 2 loader fgDeGender"),
-//            isBeingTested: isBeingTested,
-//            useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//        // load current/former members of Fotogroep Waalre
-//        _ = FotogroepWaalreMembersProvider(
-//            bgContext: makeBgContext(ctxName: "Level 2 loader fgWaalre"),
-//            isBeingTested: false,
-//            useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//        // load current/former members of Fotoclub Bellus Imago
-//        _ = FotoclubBellusImagoMembersProvider(
-//            bgContext: makeBgContext(ctxName: "Level 2 loader fcBellusImago"),
-//            isBeingTested: isBeingTested,
-//            useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//        if includeXampleClubs {
-//            // load test member(s) of XampleMin. Club is called XampleMin (instead of ExampleMin) to be at end of list
-//            _ = XampleMinMembersProvider(
-//                bgContext: makeBgContext(ctxName: "Level 2 loader XampleMin"),
-//                isBeingTested: isBeingTested,
-//                useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//            // load test member(s) of XampleMax. Club is called XampleMax (instead of ExampleMin) to be at end of list
-//            _ = XampleMaxMembersProvider(
-//                bgContext: makeBgContext(ctxName: "Level 2 loader XampleMax"),
-//                isBeingTested: isBeingTested,
-//                useOnlyInBundleFile: useOnlyInBundleFile)
-//        }
-//
-//        // load current/former members of Fotogroep Oirschot
-//        _ = FotogroepOirschotMembersProvider(
-//            bgContext: makeBgContext(ctxName: "Level 2 loader fgOirschot"),
-//            isBeingTested: isBeingTested,
-//            useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//        // load current/former members of Fotogroep Oirschot
-//        _ = IndividueelBOMembersProvider(
-//            bgContext: makeBgContext(ctxName: "Level 2 loader IndividueelBO"),
-//            isBeingTested: isBeingTested,
-//            useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//        // load current/former members of Fotoclub Ericamera
-//        _ = FotoclubEricameraMembersProvider(
-//            bgContext: makeBgContext(ctxName: "Level 2 loader fcEricamera"),
-//            isBeingTested: isBeingTested,
-//            useOnlyInBundleFile: useOnlyInBundleFile)
-//
-//        // load current/former members of Fotoclub Den Dungen
-//        _ = FotoclubDenDungenMembersProvider(
-//            bgContext: makeBgContext(ctxName: "Level 2 loader fcDenDungen"),
-//            isBeingTested: isBeingTested,
-//            useOnlyInBundleFile: useOnlyInBundleFile) // TODO
+        _ = Level0JsonReader(
+            bgContext: makeBgContext(ctxName: "Level 0 loader"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load list of photo clubs and museums from root.Level1.json file
+        _ = Level1JsonReader(
+            bgContext: makeBgContext(ctxName: "Level 1 loader"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load current/former members of Fotogroep De Gender
+        _ = FotogroepDeGenderMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader fgDeGender"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load current/former members of Fotogroep Waalre
+        _ = FotogroepWaalreMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader fgWaalre"),
+            isBeingTested: false,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load current/former members of Fotoclub Bellus Imago
+        _ = FotoclubBellusImagoMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader fcBellusImago"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        if includeXampleClubs {
+            // load test member(s) of XampleMin. Club is called XampleMin (instead of ExampleMin) to be at end of list
+            _ = XampleMinMembersProvider(
+                bgContext: makeBgContext(ctxName: "Level 2 loader XampleMin"),
+                isBeingTested: isBeingTested,
+                useOnlyInBundleFile: useOnlyInBundleFile)
+
+            // load test member(s) of XampleMax. Club is called XampleMax (instead of ExampleMin) to be at end of list
+            _ = XampleMaxMembersProvider(
+                bgContext: makeBgContext(ctxName: "Level 2 loader XampleMax"),
+                isBeingTested: isBeingTested,
+                useOnlyInBundleFile: useOnlyInBundleFile)
+        }
+
+        // load current/former members of Fotogroep Oirschot
+        _ = FotogroepOirschotMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader fgOirschot"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load current/former members of Fotogroep Oirschot
+        _ = IndividueelBOMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader IndividueelBO"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load current/former members of Fotoclub Ericamera
+        _ = FotoclubEricameraMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader fcEricamera"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load current/former members of Fotoclub Den Dungen
+        _ = FotoclubDenDungenMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader fcDenDungen"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
 
         // load current/former members of Fotokring Sint-Michielsgestel
         _ = FotokringStMichielsgestelMembersProvider(
