@@ -185,7 +185,7 @@ extension Members {
                         .padding(.none)
                         .margin(5)
                         .hint(text: String(localized: "Unofficial expertise. It has no translations yet.",
-                                           table: "Package",
+                                           table: "HTML",
                                            comment: "Hint for expertise without localization"))
                 } else {
                     return Text(string)
@@ -193,7 +193,7 @@ extension Members {
                         .padding(.none)
                         .margin(5)
                         .hint(text: String(localized: "Expertises: \(customHint)",
-                                           table: "Package",
+                                           table: "HTML",
                                            comment: "Hint when providing too many expertises"))
                 }
             } else {

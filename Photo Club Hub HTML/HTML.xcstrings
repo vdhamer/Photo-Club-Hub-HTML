@@ -196,6 +196,9 @@
         }
       }
     },
+    "Expertises: %@" : {
+      "comment" : "Hint when providing too many expertises"
+    },
     "Fotobond #" : {
       "comment" : "HTML table header for club's identifier in Fotobond.",
       "localizations" : {
@@ -452,6 +455,9 @@
           }
         }
       }
+    },
+    "Unofficial expertise. It has no translations yet." : {
+      "comment" : "Hint for expertise without localization"
     },
     "website" : {
       "comment" : "Text in cells in club website column",

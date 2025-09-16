@@ -3,6 +3,7 @@
   "strings" : {
     "Expertises: %@" : {
       "comment" : "Hint when providing too many expertises",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -20,6 +21,7 @@
     },
     "Unofficial expertise. It has no translations yet." : {
       "comment" : "Hint for expertise without localization",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
