@@ -114,7 +114,7 @@ extension Clubs {
             Column { // website
                 if club.organizationWebsite != nil {
                     Text {
-                        Link(String(localized: "website", table: "HTML",
+                        Link(String(localized: "WebsiteSymbol", table: "HTML",
                                     comment: "Text in cells in club website column"),
                              target: club.organizationWebsite!)
                         .linkStyle(.hover)
