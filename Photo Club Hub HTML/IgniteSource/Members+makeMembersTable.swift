@@ -102,17 +102,30 @@ extension Members {
                                     URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
                         )
                             .linkStyle(.hover)
-                        if photographer.isDeceased {
-                            Badge(String(localized: "Deceased", table: "HTML",
-                                         comment: "Badge to indicated a deceased member"))
+                        if roles.status[.deceased] == true {
+                            Badge(MemberStatus.deceased.id)
                                 .badgeStyle(.default)
                                 .role(.secondary)
                                 .margin(.leading, 10)
                         } else {
-                            Badge(describe(roles: roles.roles))
-                                .badgeStyle(.subtleBordered)
-                                .role(.success)
-                                .margin(.leading, 10)
+                            let rolesAndStatus: MemberRolesAndStatus = roles
+                            let statusDict: [MemberStatus: Bool?] = rolesAndStatus.status
+                            let memberStatus: MemberStatus? = getMemberStatus(statusDictionary: statusDict)
+                            if let memberStatus {
+                                Badge(memberStatus.id)
+                                    .badgeStyle(.subtleBordered)
+                                    .role(.success)
+                                    .margin(.leading, 10)
+                            }
+                            let rolesDict: [MemberRole: Bool?] = rolesAndStatus.roles
+                            let memberRole: MemberRole? = getMemberRole(roleDictionary: rolesDict)
+                            if let memberRole {
+                                Badge(memberRole.id)
+                                    .badgeStyle(.subtleBordered)
+                                    .role(.success)
+                                    .margin(.leading, 10)
+                            }
+
                         }
                     } .font(.title5) .padding(.none) .margin(0)
                     Text {
