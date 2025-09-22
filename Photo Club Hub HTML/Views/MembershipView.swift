@@ -35,7 +35,8 @@ struct MembershipView: View {
                 VStack(alignment: .center) {
                     HStack {
                         Spacer()
-                        Text(String(localized: "Can't find any members for \(club.fullNameTown).", table: "SwiftUI",
+                        Text(String(localized: "Can't find any members for \(club.fullNameTown).",
+                                    table: "PhotoClubHubHTMLSwiftUI",
                                     comment: "Shown when a club with zero known members is selected"))
                             .font(.title2)
                         Spacer()
