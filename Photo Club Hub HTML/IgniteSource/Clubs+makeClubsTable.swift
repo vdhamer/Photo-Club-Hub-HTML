@@ -33,7 +33,6 @@ extension Clubs {
 
             fetchRequest.predicate = NSPredicate(format: "organizationType_.organizationTypeName_ = %@",
                                                  argumentArray: [OrganizationTypeEnum.club.rawValue])
-//            fetchRequest.predicate = NSPredicate(format: "TRUEPREDICATE")
             let clubs: [Organization] = try moc.fetch(fetchRequest)
 
             return MakeClubsTableResult(
@@ -164,7 +163,7 @@ extension Clubs {
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {
-                    return definedRole.localizedString().capitalized
+                    return definedRole.localizedString(table: "HTML").capitalized
                 }
             }
         }

@@ -22,7 +22,7 @@ extension Members {
 
     // former: whether to list former members or current members
     // moc: use this CoreData Managed Object Context
-    // club: for which club are we doing this?
+    // club: for which club are we generating this?
     // return Int: count of returned members (can't directly count size of Ignite Table)
     // return Table: Ignite table containing rendering of requested members
     mutating func makeMembersTable(former: Bool,
@@ -56,7 +56,7 @@ extension Members {
                         )
                     }
                 }
-                header: {
+                header: { // header is a second closure for an Ignite Table, and not an extra param in the return type
                     String(localized: "Name",
                            table: "HTML", comment: "HTML table header for member's name column.")
                     String(localized: "Expertise tags",
@@ -158,6 +158,23 @@ extension Members {
                     }
             } .verticalAlignment(.middle)
 
+        }
+
+        func getMemberStatus(statusDictionary: [MemberStatus: Bool?]) -> MemberStatus? {
+            for (status, applicable) in statusDictionary where applicable == true {
+                // don't display .former because it is shown in list containing only formers
+                if status != .former && status != .current {
+                    return status
+                }
+            }
+            return nil
+        }
+
+        func getMemberRole(roleDictionary: [MemberRole: Bool?]) -> MemberRole? {
+            for (role, applicable) in roleDictionary where applicable == true {
+                return role
+            }
+            return nil
         }
 
         // Returns Ignite PageElement rendering the lists of official or unoffiical Expertise tags.
@@ -299,18 +316,6 @@ extension Members {
             return
         }
 
-    }
-
-    fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
-        //  Apple Intelligence offers a 2-line optimization for the next 6 lines, but is less readable
-        for role in roles {
-            for definedRole in MemberRole.allCases {
-                if role.key==definedRole && role.value==true {
-                    return definedRole.localizedString().capitalized
-                }
-            }
-        }
-        return ""
     }
 
     fileprivate mutating func formatMembershipYears(start: Date?, end: Date?,

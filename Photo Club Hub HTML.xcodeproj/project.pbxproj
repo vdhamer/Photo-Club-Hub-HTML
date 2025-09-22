@@ -376,6 +376,9 @@
 				"",
 				"",
 				"",
+				"",
+				"",
+				"",
 			);
 		};
 /* End PBXShellScriptBuildPhase section */
