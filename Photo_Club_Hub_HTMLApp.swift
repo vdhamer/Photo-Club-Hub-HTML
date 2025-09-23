@@ -28,7 +28,7 @@ struct PhotoClubHubHtmlApp: App {
 
     var body: some Scene {
         Window(String(localized: "Photo Club Hub HTML",
-                      table: "PhotoClubHubHTMLSwiftUI",
+                      table: "PhotoClubHubHTML.SwiftUI",
                       comment: "Name of this macOS app"),
                id: "mainWindow") {
             ContentView()
