@@ -58,13 +58,13 @@ extension Members {
                 }
                 header: { // header is a second closure for an Ignite Table, and not an extra param in the return type
                     String(localized: "Name",
-                           table: "HTML", comment: "HTML table header for member's name column.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's name column.")
                     String(localized: "Expertise tags",
-                           table: "HTML", comment: "HTML table header for member's keywords.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's keywords.")
                     String(localized: "Own website",
-                           table: "HTML", comment: "HTML table header for member's own website column.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's own website column.")
                     String(localized: "Portfolio",
-                           table: "HTML", comment: "HTML table header for image linked to member's portfolio.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for image linked to member's portfolio.")
                 },
                 memberCount: memberPortfolios.count,
                 memberCountWithStartDate: memberPortfolios.filter { $0.membershipStartDate != nil }.count
@@ -146,7 +146,7 @@ extension Members {
                 Column {
                     Span(
                         Link( String(localized: "Website",
-                                     table: "HTML",
+                                     table: "PhotoClubHubHTML.Ignite",
                                      comment: "Clickable link to photographer's website"),
                               target: photographer.photographerWebsite!.absoluteString)
                             .linkStyle(.hover)
@@ -215,7 +215,7 @@ extension Members {
                         .padding(.none)
                         .margin(5)
                         .hint(text: String(localized: "Unofficial expertise. It has no translations yet.",
-                                           table: "HTML",
+                                           table: "PhotoClubHubHTML.Ignite",
                                            comment: "Hint for expertise without localization"))
                 } else {
                     return Text(string)
@@ -223,7 +223,7 @@ extension Members {
                         .padding(.none)
                         .margin(5)
                         .hint(text: String(localized: "Expertises: \(customHint)",
-                                           table: "HTML",
+                                           table: "PhotoClubHubHTML.Ignite",
                                            comment: "Hint when providing too many expertises"))
                 }
             } else {
@@ -350,7 +350,7 @@ extension Members {
         }
 
         let unknown = Span(String(localized: "-",
-                                  table: "HTML",
+                                  table: "PhotoClubHubHTML.Ignite",
                                   comment: "Shown in member table when start date unavailable"))
 
         if isFormer == false { // if current member, displays "Member for NN.N years"
@@ -360,26 +360,26 @@ extension Members {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let formattedStartDate = dateFormatter.string(from: start!)
             return Span(String(localized: "Member for past \(formatYears(years)) years",
-                        table: "HTML",
+                        table: "PhotoClubHubHTML.Ignite",
                         comment: "Membership duration for current members"))
                 .hint(text: String(localized:
                                    """
                                    From \(formattedStartDate)\(fotobondString)
                                    """,
-                                   table: "HTML",
+                                   table: "PhotoClubHubHTML.Ignite",
                                    comment: "Mouseover hint on cell containing start-end years"))
         } else { // if current member, displays "Member from YYYYY to YYYY"
             formerMembersTotalYears += years
             guard end != nil && start != nil else { return unknown }
             return Span(String(localized: "Member from \(toYear(date: start!)) to \(toYear(date: end!))",
-                               table: "HTML",
+                               table: "PhotoClubHubHTML.Ignite",
                                comment: "Membership duration for current members"))
                 .hint(text: String(localized:
                                    """
                                    From \(toYear(date: start!)) to \(toYear(date: end!)) (\(formatYears(years)) years)\
                                    \(fotobondString)
                                    """,
-                                   table: "HTML",
+                                   table: "PhotoClubHubHTML.Ignite",
                                    comment: "Mouseover hint on cell containing start-end years"))
         }
     }

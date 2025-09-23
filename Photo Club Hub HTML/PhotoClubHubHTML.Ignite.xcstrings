@@ -424,14 +424,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "This page was last updated on %1$@ %2$@."
+            "state" : "translated",
+            "value" : "This page was last updated on %@ %@."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De inhoud van deze pagina is gegenereerd op  %1$@ %2$@."
+            "value" : "De inhoud van deze pagina is gegenereerd op  %@ %@."
           }
         }
       }
