@@ -145,40 +145,6 @@
         }
       }
     },
-    "Data was last updated on %@ %@." : {
-      "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Data was last updated on %@ %@."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gegevens bijgewerkt op %1$@."
-          }
-        }
-      }
-    },
-    "Deceased" : {
-      "comment" : "Badge to indicated a deceased member",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deceased"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Overleden"
-          }
-        }
-      }
-    },
     "Expertise tags" : {
       "comment" : "HTML table header for member's keywords.",
       "localizations" : {
@@ -197,7 +163,21 @@
       }
     },
     "Expertises: %@" : {
-      "comment" : "Hint when providing too many expertises"
+      "comment" : "Hint when providing too many expertises",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertises: %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertises: %@"
+          }
+        }
+      }
     },
     "Fotobond #" : {
       "comment" : "HTML table header for club's identifier in Fotobond.",
@@ -439,6 +419,23 @@
         }
       }
     },
+    "This page was last updated on %@ %@." : {
+      "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This page was last updated on %1$@ %2$@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De inhoud van deze pagina is gegenereerd op  %1$@ %2$@."
+          }
+        }
+      }
+    },
     "Town" : {
       "comment" : "HTML table header for town column.",
       "localizations" : {
@@ -457,21 +454,18 @@
       }
     },
     "Unofficial expertise. It has no translations yet." : {
-      "comment" : "Hint for expertise without localization"
-    },
-    "website" : {
-      "comment" : "Text in cells in club website column",
+      "comment" : "Hint for expertise without localization",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🌐"
+            "value" : "Unofficial expertise. It has no translations yet."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🌐"
+            "value" : "Niet erkende expertise (heeft geen vertalingen)."
           }
         }
       }
@@ -489,6 +483,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
+          }
+        }
+      }
+    },
+    "WebsiteSymbol" : {
+      "comment" : "Text in cells in club website column",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🌐"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🌐"
           }
         }
       }
