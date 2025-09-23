@@ -33,7 +33,6 @@ extension Clubs {
 
             fetchRequest.predicate = NSPredicate(format: "organizationType_.organizationTypeName_ = %@",
                                                  argumentArray: [OrganizationTypeEnum.club.rawValue])
-//            fetchRequest.predicate = NSPredicate(format: "TRUEPREDICATE")
             let clubs: [Organization] = try moc.fetch(fetchRequest)
 
             return MakeClubsTableResult(
@@ -44,17 +43,17 @@ extension Clubs {
                 }
                 header: {
                     String(localized: "Town",
-                           table: "HTML", comment: "HTML table header for town column.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for town column.")
                     String(localized: "Club name",
-                           table: "HTML", comment: "HTML table header for club name column.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
                     String(localized: "Members",
-                           table: "HTML", comment: "HTML table header for member count column.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member count column.")
                     String(localized: "Club website",
-                           table: "HTML", comment: "HTML table header for clubs website link.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for clubs website link.")
                     String(localized: "Fotobond #",
-                           table: "HTML", comment: "HTML table header for club's identifier in Fotobond.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club's identifier in Fotobond.")
                     String(localized: "JSON",
-                           table: "HTML", comment: "HTML table header for link to JSON input file.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for link to JSON input file.")
                 },
                 clubsCount: -1234
             )
@@ -75,7 +74,7 @@ extension Clubs {
                     Span(
                         String("\(club.town)")
                     )
-//                    .hint(text: String(localized: "Where the club is based", table: "HTML",
+//                    .hint(text: String(localized: "Where the club is based", table: "PhotoClubHubHTML.Ignite",
 //                                       comment: "Hint text for the town column in the Clubs table"))
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
@@ -91,7 +90,7 @@ extension Clubs {
                             .linkStyle(.hover)
                         } .font(.title5) .padding(.none) .margin(0)
 //                            .hint(text: String(localized: "Click for list of members",
-//                                               table: "HTML",
+//                                               table: "PhotoClubHubHTML.Ignite",
 //                                               comment: "Hint on club name Name column of Clubs table"))
                     } else {
                         club.fullName
@@ -107,7 +106,7 @@ extension Clubs {
                             .linkStyle(.hover)
                     )
 //                    .hint(text: String(localized: "Number of current members",
-//                                       table: "HTML",
+//                                       table: "PhotoClubHubHTML.Ignite",
 //                                       comment: "Hint on numbers in Members column of Clubs table"))
                 }
             } .verticalAlignment(.middle)
@@ -115,11 +114,12 @@ extension Clubs {
             Column { // website
                 if club.organizationWebsite != nil {
                     Text {
-                        Link(String(localized: "website", table: "HTML",
+                        Link(String(localized: "WebsiteSymbol",
+                                    table: "PhotoClubHubHTML.Ignite",
                                     comment: "Text in cells in club website column"),
                              target: club.organizationWebsite!)
                         .linkStyle(.hover)
-//                        .hint(text: String(localized: "Photoclub's website", table: "HTML",
+//                        .hint(text: String(localized: "Photoclub's website", table: "PhotoClubHubHTML.Ignite",
 //                                           comment: "Hint on icon in Website column of Clubs table"))
                     } .font(.title5) .padding(.none) .margin(0)
                 }
@@ -164,7 +164,7 @@ extension Clubs {
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {
-                    return definedRole.localizedString().capitalized
+                    return definedRole.localizedString(table: "PhotoClubHubHTML.Ignite").capitalized
                 }
             }
         }

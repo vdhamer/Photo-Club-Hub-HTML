@@ -84,7 +84,8 @@ struct ContentView: View {
             }
 
             detail: {
-                Text(String(localized: "Please select a club in the sidebar.", table: "SwiftUI",
+                Text(String(localized: "Please select a club in the sidebar.",
+                            table: "PhotoClubHubHTML.SwiftUI",
                             comment: "Message displayed when no club is selected"))
                 .font(.title2)
             }
@@ -93,20 +94,27 @@ struct ContentView: View {
 
             Divider()
             HStack(alignment: .center) {
-                Text("Records found:", tableName: "SwiftUI",
+                Text("Records found:",
+                     tableName: "PhotoClubHubHTML.SwiftUI",
                      comment: "Label for stats shown at bottom of window")
                 .font(.headline)
-                Text("◼ \(allClubs.count) clubs", tableName: "SwiftUI",
+                Text("◼ \(allClubs.count) clubs",
+                     tableName: "PhotoClubHubHTML.SwiftUI",
                      comment: "Count of clubs in database Organization table")
-                Text("◼ \(allOrganizations.count-allClubs.count) other organizations", tableName: "SwiftUI",
+                Text("◼ \(allOrganizations.count-allClubs.count) other organizations",
+                     tableName: "PhotoClubHubHTML.SwiftUI",
                      comment: "Count of non-clubs in database Organization table")
-                Text("◼ \(allPhotographers.count) photographers", tableName: "SwiftUI",
+                Text("◼ \(allPhotographers.count) photographers",
+                     tableName: "PhotoClubHubHTML.SwiftUI",
                      comment: "Count of individuals in database Photographer table")
-                Text("◼ \(allMembers.count) club memberships", tableName: "SwiftUI",
+                Text("◼ \(allMembers.count) club memberships",
+                     tableName: "PhotoClubHubHTML.SwiftUI",
                      comment: "Count of members in database")
-                Text("◼ \(allKeywords.count) expertise tags in use", tableName: "SwiftUI",
+                Text("◼ \(allKeywords.count) expertise tags in use",
+                     tableName: "PhotoClubHubHTML.SwiftUI",
                      comment: "Count of expertises known in database")
-                Text("◼ \(allPhotographerExpertises.count) expertise tags assigned", tableName: "SwiftUI",
+                Text("◼ \(allPhotographerExpertises.count) expertise tags assigned",
+                     tableName: "PhotoClubHubHTML.SwiftUI",
                      comment: "Count of how often expertises have been assigned to photographers")
             }
             .foregroundStyle(.secondary)
@@ -121,13 +129,15 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
-                Button(String(localized: "Build Level 1 HTML", table: "SwiftUI",
+                Button(String(localized: "Build Level 1 HTML",
+                              table: "PhotoClubHubHTML.SwiftUI",
                               comment: "App button that generates HTML page listing all clubs")) {
                     print("Generating Level 1")
                     generateLevel1()
                 }
 
-                Button(String(localized: "Build Level 2 HTML", table: "SwiftUI",
+                Button(String(localized: "Build Level 2 HTML",
+                              table: "PhotoClubHubHTML.SwiftUI",
                               comment: "App button that generates HTML page listing all club members")) {
                     print("Generating Level 2")
                     generateLevel2()

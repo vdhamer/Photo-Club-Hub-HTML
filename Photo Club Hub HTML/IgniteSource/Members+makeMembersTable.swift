@@ -22,7 +22,7 @@ extension Members {
 
     // former: whether to list former members or current members
     // moc: use this CoreData Managed Object Context
-    // club: for which club are we doing this?
+    // club: for which club are we generating this?
     // return Int: count of returned members (can't directly count size of Ignite Table)
     // return Table: Ignite table containing rendering of requested members
     mutating func makeMembersTable(former: Bool,
@@ -56,15 +56,15 @@ extension Members {
                         )
                     }
                 }
-                header: {
+                header: { // header is a second closure for an Ignite Table, and not an extra param in the return type
                     String(localized: "Name",
-                           table: "HTML", comment: "HTML table header for member's name column.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's name column.")
                     String(localized: "Expertise tags",
-                           table: "HTML", comment: "HTML table header for member's keywords.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's keywords.")
                     String(localized: "Own website",
-                           table: "HTML", comment: "HTML table header for member's own website column.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's own website column.")
                     String(localized: "Portfolio",
-                           table: "HTML", comment: "HTML table header for image linked to member's portfolio.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for image linked to member's portfolio.")
                 },
                 memberCount: memberPortfolios.count,
                 memberCountWithStartDate: memberPortfolios.filter { $0.membershipStartDate != nil }.count
@@ -102,17 +102,30 @@ extension Members {
                                     URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
                         )
                             .linkStyle(.hover)
-                        if photographer.isDeceased {
-                            Badge(String(localized: "Deceased", table: "HTML",
-                                         comment: "Badge to indicated a deceased member"))
+                        if roles.status[.deceased] == true {
+                            Badge(MemberStatus.deceased.id)
                                 .badgeStyle(.default)
                                 .role(.secondary)
                                 .margin(.leading, 10)
                         } else {
-                            Badge(describe(roles: roles.roles))
-                                .badgeStyle(.subtleBordered)
-                                .role(.success)
-                                .margin(.leading, 10)
+                            let rolesAndStatus: MemberRolesAndStatus = roles
+                            let statusDict: [MemberStatus: Bool?] = rolesAndStatus.status
+                            let memberStatus: MemberStatus? = getMemberStatus(statusDictionary: statusDict)
+                            if let memberStatus {
+                                Badge(memberStatus.id)
+                                    .badgeStyle(.subtleBordered)
+                                    .role(.success)
+                                    .margin(.leading, 10)
+                            }
+                            let rolesDict: [MemberRole: Bool?] = rolesAndStatus.roles
+                            let memberRole: MemberRole? = getMemberRole(roleDictionary: rolesDict)
+                            if let memberRole {
+                                Badge(memberRole.id)
+                                    .badgeStyle(.subtleBordered)
+                                    .role(.success)
+                                    .margin(.leading, 10)
+                            }
+
                         }
                     } .font(.title5) .padding(.none) .margin(0)
                     Text {
@@ -133,7 +146,7 @@ extension Members {
                 Column {
                     Span(
                         Link( String(localized: "Website",
-                                     table: "HTML",
+                                     table: "PhotoClubHubHTML.Ignite",
                                      comment: "Clickable link to photographer's website"),
                               target: photographer.photographerWebsite!.absoluteString)
                             .linkStyle(.hover)
@@ -158,6 +171,23 @@ extension Members {
                     }
             } .verticalAlignment(.middle)
 
+        }
+
+        func getMemberStatus(statusDictionary: [MemberStatus: Bool?]) -> MemberStatus? {
+            for (status, applicable) in statusDictionary where applicable == true {
+                // don't display .former because it is shown in list containing only formers
+                if status != .former && status != .current {
+                    return status
+                }
+            }
+            return nil
+        }
+
+        func getMemberRole(roleDictionary: [MemberRole: Bool?]) -> MemberRole? {
+            for (role, applicable) in roleDictionary where applicable == true {
+                return role
+            }
+            return nil
         }
 
         // Returns Ignite PageElement rendering the lists of official or unoffiical Expertise tags.
@@ -185,7 +215,7 @@ extension Members {
                         .padding(.none)
                         .margin(5)
                         .hint(text: String(localized: "Unofficial expertise. It has no translations yet.",
-                                           table: "HTML",
+                                           table: "PhotoClubHubHTML.Ignite",
                                            comment: "Hint for expertise without localization"))
                 } else {
                     return Text(string)
@@ -193,7 +223,7 @@ extension Members {
                         .padding(.none)
                         .margin(5)
                         .hint(text: String(localized: "Expertises: \(customHint)",
-                                           table: "HTML",
+                                           table: "PhotoClubHubHTML.Ignite",
                                            comment: "Hint when providing too many expertises"))
                 }
             } else {
@@ -301,18 +331,6 @@ extension Members {
 
     }
 
-    fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
-        //  Apple Intelligence offers a 2-line optimization for the next 6 lines, but is less readable
-        for role in roles {
-            for definedRole in MemberRole.allCases {
-                if role.key==definedRole && role.value==true {
-                    return definedRole.localizedString().capitalized
-                }
-            }
-        }
-        return ""
-    }
-
     fileprivate mutating func formatMembershipYears(start: Date?, end: Date?,
                                                     isFormer: Bool,
                                                     fotobond: Int?) -> Span {
@@ -332,7 +350,7 @@ extension Members {
         }
 
         let unknown = Span(String(localized: "-",
-                                  table: "HTML",
+                                  table: "PhotoClubHubHTML.Ignite",
                                   comment: "Shown in member table when start date unavailable"))
 
         if isFormer == false { // if current member, displays "Member for NN.N years"
@@ -342,26 +360,26 @@ extension Members {
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let formattedStartDate = dateFormatter.string(from: start!)
             return Span(String(localized: "Member for past \(formatYears(years)) years",
-                        table: "HTML",
+                        table: "PhotoClubHubHTML.Ignite",
                         comment: "Membership duration for current members"))
                 .hint(text: String(localized:
                                    """
                                    From \(formattedStartDate)\(fotobondString)
                                    """,
-                                   table: "HTML",
+                                   table: "PhotoClubHubHTML.Ignite",
                                    comment: "Mouseover hint on cell containing start-end years"))
         } else { // if current member, displays "Member from YYYYY to YYYY"
             formerMembersTotalYears += years
             guard end != nil && start != nil else { return unknown }
             return Span(String(localized: "Member from \(toYear(date: start!)) to \(toYear(date: end!))",
-                               table: "HTML",
+                               table: "PhotoClubHubHTML.Ignite",
                                comment: "Membership duration for current members"))
                 .hint(text: String(localized:
                                    """
                                    From \(toYear(date: start!)) to \(toYear(date: end!)) (\(formatYears(years)) years)\
                                    \(fotobondString)
                                    """,
-                                   table: "HTML",
+                                   table: "PhotoClubHubHTML.Ignite",
                                    comment: "Mouseover hint on cell containing start-end years"))
         }
     }

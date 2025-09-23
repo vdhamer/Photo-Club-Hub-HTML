@@ -31,7 +31,7 @@ struct Clubs: StaticPage {
 
         Text {
             Badge(String(localized: "Photo clubs",
-                         table: "HTML", comment: "Title badge at top of Clubs HTML index page"))
+                         table: "PhotoClubHubHTML.Ignite", comment: "Title badge at top of Clubs HTML index page"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }

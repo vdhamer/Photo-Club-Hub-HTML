@@ -376,6 +376,11 @@
 				"",
 				"",
 				"",
+				"",
+				"",
+				"",
+				"",
+				"",
 			);
 		};
 /* End PBXShellScriptBuildPhase section */

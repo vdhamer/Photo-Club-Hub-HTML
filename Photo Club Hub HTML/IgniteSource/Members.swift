@@ -12,7 +12,7 @@ import Photo_Club_Hub_Data // for Organization
 
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol, but how do I localize it?
-    let showFormerMembers: Bool = true // suppresses generating and showing table for former members
+    let showFormerMembers: Bool = false // suppresses generating and showing table for former members
     let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
     fileprivate var currentMembers = Table {} // initialite to empty table, then fill during init()
@@ -59,7 +59,7 @@ struct Members: StaticPage {
 
         Text {
             Badge(String(localized: "Current members of \(clubFullNameTown)",
-                         table: "HTML", comment: "Title badge at top of Members HTML page"))
+                         table: "PhotoClubHubHTML.Ignite", comment: "Title badge at top of Members HTML page"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }
@@ -78,7 +78,7 @@ struct Members: StaticPage {
                              \(formatYears(currentMembersTotalYears/Double(currentMembersCountWithStartDate))) \
                              years.
                              """,
-                             table: "HTML",
+                             table: "PhotoClubHubHTML.Ignite",
                              comment: "Table footnote showing average years of membership of all members."
                 )} .horizontalAlignment(.center)
             }
@@ -97,7 +97,7 @@ struct Members: StaticPage {
         if showFormerMembers {
             Text {
                 Badge(String(localized: "\(formerMembersCount) former members",
-                             table: "HTML", comment: "Number of former members"))
+                             table: "PhotoClubHubHTML.Ignite", comment: "Number of former members"))
                 .badgeStyle(.subtleBordered)
                 .role(.secondary)
             }
@@ -116,7 +116,7 @@ struct Members: StaticPage {
                     \(formatYears(formerMembersTotalYears/Double(formerMembersCountWithStartDate))) \
                     years.
                     """,
-                                  table: "HTML",
+                                  table: "PhotoClubHubHTML.Ignite",
                                   comment: "Footer for former members table")
                     } .horizontalAlignment(.center)
                 }
