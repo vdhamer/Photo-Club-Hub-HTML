@@ -16,7 +16,6 @@ struct MyTheme: Theme {
             Body {
                 page.body
 
-                IgniteFooter() // "Created with Ignite"
                 TimeUpdatedFooter()
             }
         }
@@ -32,11 +31,13 @@ struct TimeUpdatedFooter: Component { // swiftlint doesn't want this one to be f
 
         Alert {
             Text { // this is Ignite's Text, not SwiftUI's Text
-                String(localized: "This page was last updated on \(date) \(timezoneCode).",
+                String(localized: "This page was last updated on \(date) \(timezoneCode) using ",
                        table: "PhotoClubHubHTML.Ignite",
                        bundle: .main, // actually the default
                        comment: "Timestamp at bottom of static HTML page showing when page was generate")
-            } .horizontalAlignment(.center)
+                Link("Ignite", target: URL("https://github.com/twostraws/Ignite"))
+            }
+            .horizontalAlignment(.center)
         }
         .margin(.top, .small)
     }
