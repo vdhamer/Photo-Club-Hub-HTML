@@ -11,7 +11,8 @@ extension MemberPortfolio { // computed properties related to roles of members i
         var prefixList = [String]()
         var suffixList = [String]()
         var result: String = ""
-        let andLocalized = String(localized: "and", table: "PhotoClubHubData",
+        let andLocalized = String(localized: "and",
+                                  table: "PhotoClubHubData",
                                   comment: "To generate strings like \"secretary and admin\"")
         let table: String = "PhotoClubHubHTML"
 
