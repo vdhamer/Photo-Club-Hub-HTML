@@ -58,13 +58,17 @@ extension Members {
                 }
                 header: { // header is a second closure for an Ignite Table, and not an extra param in the return type
                     String(localized: "Name",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's name column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for member's name column.")
                     String(localized: "Expertise tags",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's keywords.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for member's keywords.")
                     String(localized: "Own website",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member's own website column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for member's own website column.")
                     String(localized: "Portfolio",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for image linked to member's portfolio.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for image linked to member's portfolio.")
                 },
                 memberCount: memberPortfolios.count,
                 memberCountWithStartDate: memberPortfolios.filter { $0.membershipStartDate != nil }.count

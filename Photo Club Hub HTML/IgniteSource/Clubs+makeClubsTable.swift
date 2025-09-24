@@ -43,17 +43,23 @@ extension Clubs {
                 }
                 header: {
                     String(localized: "Town",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for town column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for town column.")
                     String(localized: "Club name",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for club name column.")
                     String(localized: "Members",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member count column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for member count column.")
                     String(localized: "Club website",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for clubs website link.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for clubs website link.")
                     String(localized: "Fotobond #",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club's identifier in Fotobond.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for club's identifier in Fotobond.")
                     String(localized: "JSON",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for link to JSON input file.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           comment: "HTML table header for link to JSON input file.")
                 },
                 clubsCount: -1234
             )
