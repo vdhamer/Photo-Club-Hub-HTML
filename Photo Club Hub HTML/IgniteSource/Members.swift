@@ -12,7 +12,7 @@ import Photo_Club_Hub_Data // for Organization
 
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol, but how do I localize it?
-    let showFormerMembers: Bool = true // suppresses generating and showing table for former members TODO true > false
+    let showFormerMembers: Bool = false // suppresses generating and showing table for former members
     let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
     fileprivate var currentMembers = Table {} // initialite to empty table, then fill during init()
@@ -144,12 +144,22 @@ struct Members: StaticPage {
 func buttonLinks() -> Text {
 
     Text {
-        Link("Clubs", target: URL("http://www.vdhamer.com/clubs"))
-            .linkStyle(.button)
-            .role(.primary)
-            .buttonSize(.medium)
+        Link("Photo Club Hub HTML",
+             target: URL("https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/.github/README.md"))
+        .linkStyle(.button)
+        .role(.secondary)
+        " "
+        Link("Photo Club Hub",
+             target: URL("https://github.com/vdhamer/Photo-Club-Hub/blob/main/.github/README.md"))
+        .linkStyle(.button)
+        .role(.secondary)
+        " "
+        Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
+                    comment: "Button linking to clubs page"),
+             target: URL("http://www.vdhamer.com/clubs"))
+        .linkStyle(.button)
+        .role(.primary)
     } .horizontalAlignment(.trailing)
-
 }
 
 func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
