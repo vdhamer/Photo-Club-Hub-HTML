@@ -57,7 +57,7 @@ struct Members: StaticPage {
 
         // MARK: - Links
 
-        buttonLinks()
+        navigationBar()
 
         // MARK: - current members
 
@@ -96,8 +96,6 @@ struct Members: StaticPage {
 
         Divider() // would like it in a darker color
 
-        buttonLinks()
-
         // MARK: - former members
 
         if showFormerMembers {
@@ -134,32 +132,44 @@ struct Members: StaticPage {
                 .margin(.top, .small)
             }
 
-            buttonLinks()
         }
 
     }
 
 }
 
-func buttonLinks() -> Text {
+func navigationBar() -> NavigationBar {
+    NavigationBar(
+        logo: Text {
+            String(localized: "Photo Club Hub", table: "PhotoClubHubHTML.Ignite",
+                   comment: "Mentioned at start of navigation bar")
+        },
+        items: {
+            Dropdown("Documentation") {
+                Link("Photo Club Hub HTML",
+                     target: URL("https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/.github/README.md"))
+                    .linkStyle(.button)
+                    .buttonSize(.small)
+                    .role(.secondary)
 
-    Text {
-        Link("Photo Club Hub HTML",
-             target: URL("https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/.github/README.md"))
-        .linkStyle(.button)
-        .role(.secondary)
-        " "
-        Link("Photo Club Hub",
-             target: URL("https://github.com/vdhamer/Photo-Club-Hub/blob/main/.github/README.md"))
-        .linkStyle(.button)
-        .role(.secondary)
-        " "
-        Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
-                    comment: "Button linking to clubs page"),
-             target: URL("http://www.vdhamer.com/clubs"))
-        .linkStyle(.button)
-        .role(.primary)
-    } .horizontalAlignment(.trailing)
+                Link("Photo Club Hub",
+                     target: URL("https://github.com/vdhamer/Photo-Club-Hub/blob/main/.github/README.md"))
+                    .linkStyle(.button)
+                    .buttonSize(.small)
+                    .role(.secondary)
+            }
+
+            Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
+                        comment: "Button linking to clubs page"),
+                 target: URL("http://www.vdhamer.com/clubs"))
+                .linkStyle(.button)
+                .role(.primary)
+        }
+    )
+    .navigationItemAlignment(.trailing)
+    .navigationBarStyle(.light)
+    .position(.fixedBottom)
+    .background(.antiqueWhite)
 }
 
 func isFormerMember(roles: MemberRolesAndStatus) -> Bool {

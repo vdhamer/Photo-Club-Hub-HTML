@@ -350,6 +350,23 @@
         }
       }
     },
+    "Photo Club Hub" : {
+      "comment" : "Mentioned at start of navigation bar",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Club Hub"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoclub Hub"
+          }
+        }
+      }
+    },
     "Photo clubs" : {
       "comment" : "Button linking to clubs page\nTitle badge at top of Clubs HTML index page",
       "localizations" : {
