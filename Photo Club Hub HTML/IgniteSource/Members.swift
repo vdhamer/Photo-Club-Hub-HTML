@@ -55,6 +55,10 @@ struct Members: StaticPage {
     // swiftlint:disable:next function_body_length
     func body(context: PublishingContext) -> [BlockElement] {
 
+        // MARK: - Links
+
+        buttonLinks()
+
         // MARK: - current members
 
         Text {
@@ -92,6 +96,8 @@ struct Members: StaticPage {
 
         Divider() // would like it in a darker color
 
+        buttonLinks()
+
         // MARK: - former members
 
         if showFormerMembers {
@@ -127,8 +133,22 @@ struct Members: StaticPage {
                 }
                 .margin(.top, .small)
             }
+
+            buttonLinks()
         }
+
     }
+
+}
+
+func buttonLinks() -> Text {
+
+    Text {
+        Link("Clubs", target: URL("http://www.vdhamer.com/clubs"))
+            .linkStyle(.button)
+            .role(.primary)
+            .buttonSize(.medium)
+    } .horizontalAlignment(.trailing)
 
 }
 
