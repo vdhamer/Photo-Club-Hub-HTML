@@ -169,7 +169,7 @@ func navigationBar() -> NavigationBar {
     .navigationItemAlignment(.trailing)
     .navigationBarStyle(.light)
     .position(.fixedBottom)
-    .background(.antiqueWhite)
+    .background(.antiqueWhite.opacity(0.75))
 }
 
 func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
