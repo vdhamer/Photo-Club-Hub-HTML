@@ -431,7 +431,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De inhoud van deze pagina is gegenereerd op  %1$@%2$@ m.b.v. "
+            "value" : "De inhoud van deze pagina is gegenereerd op  %1$@ %2$@ m.b.v. "
           }
         }
       }

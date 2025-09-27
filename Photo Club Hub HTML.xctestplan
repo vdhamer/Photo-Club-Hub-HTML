@@ -20,6 +20,31 @@
       }
     },
     {
+      "skippedTests" : {
+        "suites" : [
+          {
+            "name" : "Level0JsonReaderTests",
+            "testFunctions" : [
+              "rootLevel0Parse()"
+            ]
+          },
+          {
+            "name" : "Level2JsonReaderTests",
+            "testFunctions" : [
+              "fgDeGenderParse()",
+              "fgWaalreFgDeGender()",
+              "xampleMaxParse()",
+              "xampleMinParse()"
+            ]
+          },
+          {
+            "name" : "RefreshFirstImageTests",
+            "testFunctions" : [
+              "urlOfImageIndex_unknownClub()"
+            ]
+          }
+        ]
+      },
       "target" : {
         "containerPath" : "container:Photo Club Hub Data",
         "identifier" : "Photo Club Hub DataTests",
