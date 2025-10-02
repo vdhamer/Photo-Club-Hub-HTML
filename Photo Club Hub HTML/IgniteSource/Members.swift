@@ -147,13 +147,21 @@ func navigationBar() -> NavigationBar {
         items: {
             Dropdown("Documentation") {
                 Link("Photo Club Hub HTML",
-                     target: URL("https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/.github/README.md"))
+                     target: URL("""
+                                 https://github.com/vdhamer/\
+                                 Photo-Club-Hub-HTML/blob/main/.github/\
+                                 README.md#photo-club-hub-html"
+                                 """))
                     .linkStyle(.button)
                     .buttonSize(.small)
                     .role(.secondary)
 
                 Link("Photo Club Hub",
-                     target: URL("https://github.com/vdhamer/Photo-Club-Hub/blob/main/.github/README.md"))
+                     target: URL("""
+                                 https://github.com/vdhamer/\
+                                 Photo-Club-Hub/blob/main/.github/\
+                                 README.md#photo-club-hub
+                                 """))
                     .linkStyle(.button)
                     .buttonSize(.small)
                     .role(.secondary)
