@@ -165,10 +165,22 @@ func navigationBar() -> NavigationBar {
                     .linkStyle(.button)
                     .buttonSize(.small)
                     .role(.secondary)
+
+                Link("Ignite package",
+                     target: URL("https://github.com/twostraws/Ignite/blob/main/README.md"))
+                    .linkStyle(.button)
+                    .buttonSize(.small)
+                    .role(.secondary)
             }
 
+            Link(String(localized: "Expertises", table: "PhotoClubHubHTML.Ignite",
+                        comment: "Button linking to Expertise list page"),
+                 target: URL("https://www.fcDeGender.nl/expertises"))
+                .linkStyle(.button)
+                .role(.primary)
+
             Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
-                        comment: "Button linking to clubs page"),
+                        comment: "Button linking to Clubs page"),
                  target: URL("https://www.fcDeGender.nl/clubs"))
                 .linkStyle(.button)
                 .role(.primary)

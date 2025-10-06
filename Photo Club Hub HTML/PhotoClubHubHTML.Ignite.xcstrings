@@ -162,6 +162,17 @@
         }
       }
     },
+    "Expertises" : {
+      "comment" : "Button linking to Expertise list page",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertises"
+          }
+        }
+      }
+    },
     "Expertises: %@" : {
       "comment" : "Hint when providing too many expertises",
       "localizations" : {
@@ -368,7 +379,7 @@
       }
     },
     "Photo clubs" : {
-      "comment" : "Button linking to clubs page\nTitle badge at top of Clubs HTML index page",
+      "comment" : "Button linking to Clubs page\nTitle badge at top of Clubs HTML index page",
       "localizations" : {
         "en" : {
           "stringUnit" : {
