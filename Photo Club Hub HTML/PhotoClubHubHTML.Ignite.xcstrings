@@ -351,7 +351,7 @@
       }
     },
     "Photo Club Hub" : {
-      "comment" : "Mentioned at start of navigation bar",
+      "comment" : "For footer that says 'This page was last updated on ... by ...'\nMentioned at start of navigation bar",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -436,19 +436,19 @@
         }
       }
     },
-    "This page was last updated on %@ %@ using " : {
+    "This page is part of %@ and was last updated on %@ %@." : {
       "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "This page was last updated on %1$@ %2$@ using "
+            "value" : "This page is part of %1$@ and was last updated on %2$@ %3$@."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De inhoud van deze pagina is gegenereerd op  %1$@ %2$@ m.b.v. "
+            "value" : "Deze pagina maakt deel uit van %1$@ en is bijgewerkt tot %2$@ %3$@."
           }
         }
       }

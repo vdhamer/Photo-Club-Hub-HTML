@@ -16,26 +16,27 @@ struct MyTheme: Theme {
             Body {
                 page.body
 
-                TimeUpdatedFooter()
+                FooterText()
             }
         }
     }
 }
 
-struct TimeUpdatedFooter: Component { // swiftlint doesn't want this one to be fileprivate, but it could be
+struct FooterText: Component { // swiftlint doesn't want this one to be fileprivate, but it could be
 
     public func body(context: PublishingContext) -> [any PageElement] {
         let timezone = TimeZone.current
         let timezoneCode = timezone.abbreviation() ?? ""
         let date: String = Date.now.formatted(date: .abbreviated, time: .shortened)
+        let fch = String(localized: "Photo Club Hub", table: "PhotoClubHubHTML.Ignite", bundle: .main,
+                         comment: "For footer that says 'This page was last updated on ... by ...'")
 
         Alert {
             Text { // this is Ignite's Text, not SwiftUI's Text
-                String(localized: "This page was last updated on \(date) \(timezoneCode) using ",
+                String(localized: "This page is part of \(fch) and was last updated on \(date) \(timezoneCode).",
                        table: "PhotoClubHubHTML.Ignite",
                        bundle: .main, // actually the default
                        comment: "Timestamp at bottom of static HTML page showing when page was generate")
-                Link("Ignite", target: URL("https://github.com/twostraws/Ignite"))
             }
             .horizontalAlignment(.center)
         }

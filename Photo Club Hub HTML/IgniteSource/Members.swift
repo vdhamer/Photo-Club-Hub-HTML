@@ -146,16 +146,6 @@ func navigationBar() -> NavigationBar {
         },
         items: {
             Dropdown("Documentation") {
-                Link("Photo Club Hub HTML",
-                     target: URL("""
-                                 https://github.com/vdhamer/\
-                                 Photo-Club-Hub-HTML/blob/main/.github/\
-                                 README.md#photo-club-hub-html"
-                                 """))
-                    .linkStyle(.button)
-                    .buttonSize(.small)
-                    .role(.secondary)
-
                 Link("Photo Club Hub",
                      target: URL("""
                                  https://github.com/vdhamer/\
@@ -165,11 +155,21 @@ func navigationBar() -> NavigationBar {
                     .linkStyle(.button)
                     .buttonSize(.small)
                     .role(.secondary)
+
+                Link("Photo Club Hub HTML",
+                     target: URL("""
+                                 https://github.com/vdhamer/\
+                                 Photo-Club-Hub-HTML/blob/main/.github/\
+                                 README.md#photo-club-hub-html"
+                                 """))
+                    .linkStyle(.button)
+                    .buttonSize(.small)
+                    .role(.secondary)
             }
 
             Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to clubs page"),
-                 target: URL("http://www.vdhamer.com/clubs"))
+                 target: URL("https://www.fcDeGender.nl/clubs"))
                 .linkStyle(.button)
                 .role(.primary)
         }
