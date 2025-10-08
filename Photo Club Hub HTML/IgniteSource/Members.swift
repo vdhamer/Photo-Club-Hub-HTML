@@ -173,6 +173,12 @@ func navigationBar() -> NavigationBar {
                     .role(.secondary)
             }
 
+            Link(String(localized: "Stats", table: "PhotoClubHubHTML.Ignite",
+                        comment: "Button linking to page with statistics"),
+                 target: URL("https://www.fcDeGender.nl/statistics"))
+                .linkStyle(.button)
+                .role(.primary)
+
             Link(String(localized: "Expertises", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to Expertise list page"),
                  target: URL("https://www.fcDeGender.nl/expertises"))

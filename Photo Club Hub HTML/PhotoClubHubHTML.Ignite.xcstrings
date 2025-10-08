@@ -430,6 +430,23 @@
         }
       }
     },
+    "Stats" : {
+      "comment" : "Button linking to page with statistics",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stats"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistieken"
+          }
+        }
+      }
+    },
     "The listed ex-members were members of this club for, on average, %@ years." : {
       "comment" : "Footer for former members table",
       "localizations" : {
