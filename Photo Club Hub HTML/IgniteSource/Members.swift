@@ -145,35 +145,7 @@ func navigationBar() -> NavigationBar {
                    comment: "Mentioned at start of navigation bar")
         },
         items: {
-            Dropdown(String(localized: "Documentation", table: "PhotoClubHubHTML.Ignite",
-                            comment: "Menu item for downdrop with links to documentation")) {
-                Link("Photo Club Hub",
-                     target: URL("""
-                                 https://github.com/vdhamer/\
-                                 Photo-Club-Hub/blob/main/.github/\
-                                 README.md#photo-club-hub
-                                 """))
-                    .linkStyle(.button)
-                    .buttonSize(.small)
-                    .role(.secondary)
-
-                Link("Photo Club Hub HTML",
-                     target: URL("""
-                                 https://github.com/vdhamer/\
-                                 Photo-Club-Hub-HTML/blob/main/.github/\
-                                 README.md#photo-club-hub-html"
-                                 """))
-                    .linkStyle(.button)
-                    .buttonSize(.small)
-                    .role(.secondary)
-
-                Link(String(localized: "IgniteLink", table: "PhotoClubHubHTML.Ignite",
-                            comment: "Menu item for documentation about twostraws/Ignite"),
-                     target: URL("https://swiftpackageindex.com/twostraws/Ignite"))
-                    .linkStyle(.button)
-                    .buttonSize(.small)
-                    .role(.secondary)
-            }
+            documentationDropdown()
 
             Link(String(localized: "Stats", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to page with statistics"),
@@ -184,12 +156,6 @@ func navigationBar() -> NavigationBar {
             Link(String(localized: "Expertises", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to Expertise list page"),
                  target: URL("https://www.fcDeGender.nl/expertises"))
-                .linkStyle(.button)
-                .role(.primary)
-
-            Link(String(localized: "FAQ", table: "PhotoClubHubHTML.Ignite",
-                        comment: "Button linking to Dutch language FAQ for Photo Club Hub"),
-                 target: URL("https://tinyurl.com/fchFAQnl"))
                 .linkStyle(.button)
                 .role(.primary)
 
@@ -204,6 +170,44 @@ func navigationBar() -> NavigationBar {
     .navigationBarStyle(.light)
     .position(.fixedBottom)
     .background(.antiqueWhite.opacity(0.75))
+}
+
+private func documentationDropdown() -> NavigationItem {
+    Dropdown(String(localized: "Documentation", table: "PhotoClubHubHTML.Ignite",
+                    comment: "Menu item for downdrop with links to documentation")) {
+        Link("Photo Club Hub",
+             target: URL("""
+                         https://github.com/vdhamer/\
+                         Photo-Club-Hub/blob/main/.github/\
+                         README.md#photo-club-hub
+                         """))
+            .linkStyle(.button)
+            .buttonSize(.small)
+            .role(.secondary)
+
+        Link("Photo Club Hub HTML",
+             target: URL("""
+                         https://github.com/vdhamer/\
+                         Photo-Club-Hub-HTML/blob/main/.github/\
+                         README.md#photo-club-hub-html"
+                         """))
+            .linkStyle(.button)
+            .buttonSize(.small)
+            .role(.secondary)
+
+        Link(String(localized: "FAQ", table: "PhotoClubHubHTML.Ignite",
+                    comment: "Button linking to Dutch language FAQ for Photo Club Hub"),
+             target: URL("https://tinyurl.com/fchFAQnl"))
+            .linkStyle(.button)
+            .role(.primary)
+
+        Link(String(localized: "IgniteLink", table: "PhotoClubHubHTML.Ignite",
+                    comment: "Menu item for documentation about twostraws/Ignite"),
+             target: URL("https://swiftpackageindex.com/twostraws/Ignite"))
+            .linkStyle(.button)
+            .buttonSize(.small)
+            .role(.secondary)
+    }
 }
 
 func isFormerMember(roles: MemberRolesAndStatus) -> Bool {

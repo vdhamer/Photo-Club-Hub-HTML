@@ -207,6 +207,9 @@
         }
       }
     },
+    "FAQ" : {
+      "comment" : "Button linking to Dutch language FAQ for Photo Club Hub"
+    },
     "Fotobond #" : {
       "comment" : "HTML table header for club's identifier in Fotobond.",
       "localizations" : {
