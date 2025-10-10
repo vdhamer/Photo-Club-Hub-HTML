@@ -163,7 +163,7 @@
       }
     },
     "Expertise tags" : {
-      "comment" : "HTML table header for member's keywords.",
+      "comment" : "HTML table header for member's keywords.\nTitle badge at top of Expertises HTML index page",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -208,7 +208,15 @@
       }
     },
     "FAQ" : {
-      "comment" : "Button linking to Dutch language FAQ for Photo Club Hub"
+      "comment" : "Button linking to Dutch language FAQ for Photo Club Hub",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        }
+      }
     },
     "Fotobond #" : {
       "comment" : "HTML table header for club's identifier in Fotobond.",

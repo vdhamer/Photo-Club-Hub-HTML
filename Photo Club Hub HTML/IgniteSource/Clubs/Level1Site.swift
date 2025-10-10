@@ -7,7 +7,6 @@
 
 import Ignite // for Site
 
-import SwiftUI // for @State
 import CoreData // for NSManagedObjectContext
 import Photo_Club_Hub_Data // for Organization
 

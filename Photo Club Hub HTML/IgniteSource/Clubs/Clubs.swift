@@ -7,8 +7,6 @@
 
 import Ignite // for StaticPage
 import CoreData // for ManagedObjectContext
-import SwiftImageReadWrite // for image format conversion
-import Photo_Club_Hub_Data // for Organization
 
 struct Clubs: StaticPage {
     var title = "Fotoclubs"  // needed by the StaticPage protocol, but how do I localize it?

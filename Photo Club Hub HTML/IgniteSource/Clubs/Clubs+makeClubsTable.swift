@@ -7,7 +7,6 @@
 
 import Ignite // for Table
 import CoreData // for NSSortDescriptor
-import AppKit // for CGImage
 import Photo_Club_Hub_Data // for Organization
 
 struct MakeClubsTableResult {

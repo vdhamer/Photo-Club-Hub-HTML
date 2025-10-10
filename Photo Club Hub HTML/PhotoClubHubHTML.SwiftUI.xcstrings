@@ -247,6 +247,23 @@
         }
       }
     },
+    "Build Level 0 HTML" : {
+      "comment" : "App button that generates HTML page listing all expertises",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build Level 0 HTML"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maak Level 0 HTML"
+          }
+        }
+      }
+    },
     "Build Level 1 HTML" : {
       "comment" : "App button that generates HTML page listing all clubs",
       "localizations" : {

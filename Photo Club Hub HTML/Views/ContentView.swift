@@ -129,6 +129,13 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
+                Button(String(localized: "Build Level 0 HTML",
+                              table: "PhotoClubHubHTML.SwiftUI",
+                              comment: "App button that generates HTML page listing all expertises")) {
+                    print("Generating Level 0")
+                    generateLevel0()
+                }
+
                 Button(String(localized: "Build Level 1 HTML",
                               table: "PhotoClubHubHTML.SwiftUI",
                               comment: "App button that generates HTML page listing all clubs")) {
@@ -156,6 +163,25 @@ struct ContentView: View {
             return result
         } catch {
             return false // if find(context:organizationID) can't find the club
+        }
+    }
+
+    fileprivate func generateLevel0() { // index with all expertises
+
+        let bgContext = PersistenceController.shared.container.newBackgroundContext()
+        bgContext.name = "Level0.publishing"
+        bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
+
+        bgContext.performAndWait { // generate website
+            let level0Site = Level0Site(moc: bgContext) // load data
+            Task {
+                do {
+                    try await level0Site.publish() // generate HTML
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 
@@ -199,6 +225,7 @@ struct ContentView: View {
 
 }
 
-// #Preview {
-//    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-// }
+#Preview("ContentView") {
+    ContentView()
+        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+}
