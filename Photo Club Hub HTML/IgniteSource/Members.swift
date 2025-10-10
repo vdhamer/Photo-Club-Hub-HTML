@@ -145,7 +145,8 @@ func navigationBar() -> NavigationBar {
                    comment: "Mentioned at start of navigation bar")
         },
         items: {
-            Dropdown("Documentation") {
+            Dropdown(String(localized: "Documentation", table: "PhotoClubHubHTML.Ignite",
+                            comment: "Menu item for downdrop with links to documentation")) {
                 Link("Photo Club Hub",
                      target: URL("""
                                  https://github.com/vdhamer/\
@@ -166,8 +167,9 @@ func navigationBar() -> NavigationBar {
                     .buttonSize(.small)
                     .role(.secondary)
 
-                Link("Ignite package",
-                     target: URL("https://github.com/twostraws/Ignite/blob/main/README.md"))
+                Link(String(localized: "IgniteLink", table: "PhotoClubHubHTML.Ignite",
+                            comment: "Menu item for documentation about twostraws/Ignite"),
+                     target: URL("https://swiftpackageindex.com/twostraws/Ignite"))
                     .linkStyle(.button)
                     .buttonSize(.small)
                     .role(.secondary)
@@ -182,6 +184,12 @@ func navigationBar() -> NavigationBar {
             Link(String(localized: "Expertises", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to Expertise list page"),
                  target: URL("https://www.fcDeGender.nl/expertises"))
+                .linkStyle(.button)
+                .role(.primary)
+
+            Link(String(localized: "FAQ", table: "PhotoClubHubHTML.Ignite",
+                        comment: "Button linking to Dutch language FAQ for Photo Club Hub"),
+                 target: URL("https://tinyurl.com/fchFAQnl"))
                 .linkStyle(.button)
                 .role(.primary)
 
