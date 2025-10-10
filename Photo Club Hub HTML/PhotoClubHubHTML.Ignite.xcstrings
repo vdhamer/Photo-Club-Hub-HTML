@@ -182,6 +182,12 @@
     "Expertises" : {
       "comment" : "Button linking to Expertise list page",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertises"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -210,6 +216,12 @@
     "FAQ" : {
       "comment" : "Button linking to Dutch language FAQ for Photo Club Hub",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FAQ"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -269,6 +281,17 @@
         }
       }
     },
+    "Idenfifier" : {
+      "comment" : "HTML table header for town column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identifier"
+          }
+        }
+      }
+    },
     "IgniteLink" : {
       "comment" : "Menu item for documentation about twostraws/Ignite",
       "localizations" : {
@@ -299,6 +322,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "JSON"
+          }
+        }
+      }
+    },
+    "Localized name" : {
+      "comment" : "HTML table header for club name column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English display name"
           }
         }
       }
@@ -556,6 +590,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niet erkende expertise (heeft geen vertalingen)."
+          }
+        }
+      }
+    },
+    "Usage note" : {
+      "comment" : "HTML table header for club name column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschrijving"
           }
         }
       }
