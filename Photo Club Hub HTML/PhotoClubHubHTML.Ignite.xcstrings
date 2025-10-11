@@ -145,6 +145,23 @@
         }
       }
     },
+    "Description" : {
+      "comment" : "HTML table header for club name column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Beschrijving"
+          }
+        }
+      }
+    },
     "Documentation" : {
       "comment" : "Menu item for downdrop with links to documentation",
       "localizations" : {
@@ -289,6 +306,12 @@
             "state" : "translated",
             "value" : "Identifier"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interne benaming"
+          }
         }
       }
     },
@@ -333,6 +356,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "English display name"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nederlandse vertaling"
           }
         }
       }
@@ -590,17 +619,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Niet erkende expertise (heeft geen vertalingen)."
-          }
-        }
-      }
-    },
-    "Usage note" : {
-      "comment" : "HTML table header for club name column.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Beschrijving"
           }
         }
       }

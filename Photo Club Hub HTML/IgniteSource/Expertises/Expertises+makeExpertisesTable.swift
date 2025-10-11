@@ -43,7 +43,7 @@ extension Expertises {
                            table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for town column.")
                     String(localized: "Localized name",
                            table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
-                    String(localized: "Usage note",
+                    String(localized: "Description",
                            table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
                 },
                 expertisesCount: -1234
