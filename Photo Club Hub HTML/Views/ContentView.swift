@@ -89,7 +89,7 @@ struct ContentView: View {
                             comment: "Message displayed when no club is selected"))
                 .font(.title2)
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 300, max: 600)
+            .navigationSplitViewColumnWidth(min: 300, ideal: 400, max: 600)
             .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
 
             Divider()
@@ -124,7 +124,7 @@ struct ContentView: View {
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
         }
-        .frame(minWidth: 480, minHeight: 290)
+        .frame(minWidth: 640, minHeight: 390)
         .padding()
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
