@@ -39,12 +39,12 @@ extension Expertises {
                     }
                 }
                 header: {
-                    String(localized: "Idenfifier",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for town column.")
-                    String(localized: "Localized name",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
+                    String(localized: "Expertise",
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for exertise name column.")
                     String(localized: "Description",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for the description column.")
+                    String(localized: "Idenfifier",
+                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for the ID column.")
                 },
                 expertiseCount: expertises.count
             )
@@ -59,11 +59,12 @@ extension Expertises {
 
         return Row {
 
-            Column { // club name
+            Column { // localized name
                 let url: String = "https://www.fgDeGender.nl/\(expertise.id)"
                 Group {
                     Text {
-                        Link(String(expertise.id),
+                        Link(String(expertise.isStandard ? "\(expertise.selectedLocalizedExpertise.name)" : "N/A")
+                             + String(" (\(PhotographerExpertise.count(context: moc, expertiseID: expertise.id))x)"),
                              target: url
                         )
                         .linkStyle(.hover)
@@ -71,23 +72,19 @@ extension Expertises {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // town
+            Column { // description
                 Group {
                     Span(
-                        String("\(expertise.id)")
+                        String("\(expertise.selectedLocalizedExpertise.localizedExpertise?.usage ?? "N/A")")
                     )
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // club name
-                let url: String = "https://www.fgDeGender.nl/\(expertise.id)"
+            Column { // id
                 Group {
-                    Text {
-                        Link(String(expertise.id),
-                             target: url
-                        )
-                        .linkStyle(.hover)
-                    } .font(.title5) .padding(.none) .margin(0)
+                    Span(
+                        String(expertise.id)
+                    )
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 

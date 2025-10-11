@@ -162,7 +162,7 @@
       }
     },
     "Description" : {
-      "comment" : "HTML table header for club name column.",
+      "comment" : "HTML table header for the description column.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -191,6 +191,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Documentatie"
+          }
+        }
+      }
+    },
+    "Expertise" : {
+      "comment" : "HTML table header for exertise name column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertise"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertise"
           }
         }
       }
@@ -315,7 +332,7 @@
       }
     },
     "Idenfifier" : {
-      "comment" : "HTML table header for town column.",
+      "comment" : "HTML table header for the ID column.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -361,23 +378,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "JSON"
-          }
-        }
-      }
-    },
-    "Localized name" : {
-      "comment" : "HTML table header for club name column.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "English display name"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nederlandse vertaling"
           }
         }
       }

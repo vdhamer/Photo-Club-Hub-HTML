@@ -13,7 +13,7 @@ struct Level0Site: Site {
 
     var name: String = "Expertises"
     // NOTE: http://www.fcDeGender.com works on localhost, http://www.fcDeGender.com/expertises works on remote site
-    var url: URL = URL("http://www.fcDeGender.com")
+    var url: URL = URL("http://www.fcDeGender.com/expertises")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
     let homePage: Expertises

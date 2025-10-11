@@ -54,7 +54,7 @@ struct Expertises: StaticPage {
             .tableBorder(true)
             .horizontalAlignment(.center)
 
-        Text(" ") // didn't get padding() modifier to work
+        Text(".").opacity(0) // didn't get padding() modifier to work
         Divider() // would like it in a darker color
             .padding(.vertical, 20)
 
