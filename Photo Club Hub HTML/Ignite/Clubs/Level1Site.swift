@@ -8,12 +8,11 @@
 import Ignite // for Site
 
 import CoreData // for NSManagedObjectContext
-import Photo_Club_Hub_Data // for Organization
 
 struct Level1Site: Site {
 
     var name: String = "Clubs"
-    // IMPORTANT: http://www.vdhamer.com gives localhost result, http://www.fcDeGender.com/clubs works on remote site
+    // IMPORTANT: http://www.fcDeGender.com gives localhost result, http://www.fcDeGender.com/clubs works on remote site
     var url: URL = URL("http://www.fcDeGender.com/clubs")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"

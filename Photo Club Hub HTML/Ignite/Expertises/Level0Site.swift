@@ -8,7 +8,6 @@
 import Ignite // for Site
 
 import CoreData // for NSManagedObjectContext
-import Photo_Club_Hub_Data // for Organization
 
 struct Level0Site: Site {
 
