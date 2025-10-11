@@ -10,25 +10,27 @@ import CoreData // for ManagedObjectContext
 
 struct Expertises: StaticPage {
     var title = "Fotoclubs"  // needed by the StaticPage protocol, but how do I localize it?
-    let showUnapprovedExpertises: Bool = true // suppresses generating and showing table for unapproved Expertises
+    let showTemporaryExpertises: Bool = true // suppresses generating and showing table for temporary Expertises
 
     fileprivate var approvedExpertisesTable = Table {} // initialite to empty table, then fill during init()
-    fileprivate var unapprovedExpertisesTable = Table {} // initialite to empty table, then fill during init()
     fileprivate var approvedExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
-    fileprivate var unapprovedExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+
+    fileprivate var temporaryExpertisesTable = Table {} // initialite to empty table, then fill during init()
+    fileprivate var temporaryExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
 
     // MARK: - init()
 
     init(moc: NSManagedObjectContext) {
-        let makeTableResult = makeExpertisesTable(approved: true, moc: moc)
-        approvedExpertisesTable = makeTableResult.table
-        approvedExpertiseCount = makeTableResult.expertiseCount
-        if showUnapprovedExpertises {
-            let makeTableResult = makeExpertisesTable(approved: false, moc: moc)
-            unapprovedExpertisesTable = makeTableResult.table
-            unapprovedExpertiseCount = makeTableResult.expertiseCount
+        let makeApprovedTableResult = makeExpertisesTable(approved: true, moc: moc)
+        approvedExpertisesTable = makeApprovedTableResult.table
+        approvedExpertiseCount = makeApprovedTableResult.expertiseCount
+
+        if showTemporaryExpertises {
+            let makeTemporaryTableResult = makeExpertisesTable(approved: false, moc: moc)
+            temporaryExpertisesTable = makeTemporaryTableResult.table
+            temporaryExpertiseCount = makeTemporaryTableResult.expertiseCount
         }
     }
 
@@ -40,36 +42,40 @@ struct Expertises: StaticPage {
 
         Text {
             Badge(String(localized: "\(approvedExpertiseCount) approved expertise tags",
-                         table: "PhotoClubHubHTML.Ignite", comment: "Title badge at top of Expertises HTML index page"))
-                .badgeStyle(.subtleBordered)
-                .role(.success)
+                         table: "PhotoClubHubHTML.Ignite",
+                         comment: "Title badge at top of Expertises HTML index page"))
+            .badgeStyle(.subtleBordered)
+            .role(.success)
         }
         .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
 
-        approvedExpertisesTable // Ignite Table that renders an array of Ignite Rows, each representing an expertise
+        approvedExpertisesTable // Ignite Table where each Ignite Row represents an expertise
             .tableStyle(.stripedRows)
             .tableBorder(true)
             .horizontalAlignment(.center)
 
-        Text(".") // didn't get padding() modifier to work
+        Text(" ") // didn't get padding() modifier to work
         Divider() // would like it in a darker color
             .padding(.vertical, 20)
 
-        // MARK: - unapproved Expertises
+        if showTemporaryExpertises {
+            // MARK: - temporary Expertises
 
-        Text {
-            Badge(String(localized: "\(unapprovedExpertiseCount) unapproved expertise tags",
-                         table: "PhotoClubHubHTML.Ignite", comment: "Title badge at top of Expertises HTML index page"))
+            Text {
+                Badge(String(localized: "\(temporaryExpertiseCount) temporary expertise tags",
+                             table: "PhotoClubHubHTML.Ignite",
+                             comment: "Title badge at top of Expertises HTML index page"))
                 .badgeStyle(.subtleBordered)
                 .role(.info)
+            }
+            .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
+
+            temporaryExpertisesTable // Ignite Table where each Ignite Row represents an expertise
+                .tableStyle(.stripedRows)
+                .tableBorder(true)
+                .horizontalAlignment(.center)
+
         }
-        .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
-
-        approvedExpertisesTable // Ignite Table that renders an array of Ignite Rows, each representing an expertise
-            .tableStyle(.stripedRows)
-            .tableBorder(true)
-            .horizontalAlignment(.center)
-
     }
 
 }

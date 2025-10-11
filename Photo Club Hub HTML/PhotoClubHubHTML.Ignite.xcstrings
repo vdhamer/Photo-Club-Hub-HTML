@@ -76,13 +76,13 @@
         }
       }
     },
-    "%lld unapproved expertise tags" : {
+    "%lld temporary expertise tags" : {
       "comment" : "Title badge at top of Expertises HTML index page",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld unapproved expertise tags"
+            "value" : "%lld temporary expertise tags"
           }
         },
         "nl" : {
@@ -106,24 +106,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deze %lld clubleden zijn gemiddeld %@ jaar lid."
-          }
-        }
-      }
-    },
-    "Click for list of members" : {
-      "comment" : "Hint on club name Name column of Clubs table",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Click for list of members"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Klik hier voor ledenlijst"
           }
         }
       }
@@ -468,24 +450,6 @@
         }
       }
     },
-    "Number of current members" : {
-      "comment" : "Hint on numbers in Members column of Clubs table",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Number of current members"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aantal huidige leden"
-          }
-        }
-      }
-    },
     "Own website" : {
       "comment" : "HTML table header for member's own website column.",
       "localizations" : {
@@ -533,24 +497,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fotoclubs"
-          }
-        }
-      }
-    },
-    "Photoclub's website" : {
-      "comment" : "Hint on icon in Website column of Clubs table",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Photoclub's website"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Link naar website van de club"
           }
         }
       }
@@ -687,24 +633,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "🌐"
-          }
-        }
-      }
-    },
-    "Where the club is based" : {
-      "comment" : "Hint text for the town column in the Clubs table",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Where the club is based"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vergaderlocatie van de club"
           }
         }
       }

@@ -28,8 +28,8 @@ extension Expertises {
             let fetchRequest: NSFetchRequest<Expertise> = Expertise.fetchRequest()
             fetchRequest.sortDescriptors = [sortDescriptor]
 
-            let allPredicate = NSPredicate(format: "TRUEPREDICATE")
-            fetchRequest.predicate = allPredicate
+            fetchRequest.predicate = NSPredicate(format: "isStandard == %@",
+                                                 argumentArray: [NSNumber(value: approved ? 1 : 0)])
             let expertises: [Expertise] = try moc.fetch(fetchRequest)
 
             return MakeExpertisesTableResult(
@@ -46,10 +46,10 @@ extension Expertises {
                     String(localized: "Description",
                            table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
                 },
-                expertiseCount: -1
+                expertiseCount: expertises.count
             )
         } catch {
-            fatalError("Failed to fetch memberPortfolios: \(error)")
+            fatalError("Failed to fetch Expertises: \(error)")
         }
 
     }
