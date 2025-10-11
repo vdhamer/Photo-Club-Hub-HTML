@@ -18,6 +18,23 @@
         }
       }
     },
+    "%lld approved expertise tags" : {
+      "comment" : "Title badge at top of Expertises HTML index page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld approved expertise tags"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld goedgekeurde expertise tags"
+          }
+        }
+      }
+    },
     "%lld former members" : {
       "comment" : "Number of former members",
       "localizations" : {
@@ -55,6 +72,23 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "%lld unapproved expertise tags" : {
+      "comment" : "Title badge at top of Expertises HTML index page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld unapproved expertise tags"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld tijdelijke expertise tags"
           }
         }
       }
@@ -156,7 +190,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Beschrijving"
           }
         }
@@ -180,7 +214,7 @@
       }
     },
     "Expertise tags" : {
-      "comment" : "HTML table header for member's keywords.\nTitle badge at top of Expertises HTML index page",
+      "comment" : "HTML table header for member's keywords.",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -10,32 +10,62 @@ import CoreData // for ManagedObjectContext
 
 struct Expertises: StaticPage {
     var title = "Fotoclubs"  // needed by the StaticPage protocol, but how do I localize it?
+    let showUnapprovedExpertises: Bool = true // suppresses generating and showing table for unapproved Expertises
 
-    fileprivate var expertisesTable = Table {} // initialite to empty table, then fill during init()
+    fileprivate var approvedExpertisesTable = Table {} // initialite to empty table, then fill during init()
+    fileprivate var unapprovedExpertisesTable = Table {} // initialite to empty table, then fill during init()
+    fileprivate var approvedExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+    fileprivate var unapprovedExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
 
     // MARK: - init()
 
     init(moc: NSManagedObjectContext) {
-        expertisesTable = makeExpertisesTable(moc: moc).table
+        let makeTableResult = makeExpertisesTable(approved: true, moc: moc)
+        approvedExpertisesTable = makeTableResult.table
+        approvedExpertiseCount = makeTableResult.expertiseCount
+        if showUnapprovedExpertises {
+            let makeTableResult = makeExpertisesTable(approved: false, moc: moc)
+            unapprovedExpertisesTable = makeTableResult.table
+            unapprovedExpertiseCount = makeTableResult.expertiseCount
+        }
     }
 
     // MARK: - body()
 
     func body(context: PublishingContext) -> [BlockElement] {
 
-        // MARK: - current members
+        // MARK: - approved Expertises
 
         Text {
-            Badge(String(localized: "Expertise tags",
+            Badge(String(localized: "\(approvedExpertiseCount) approved expertise tags",
                          table: "PhotoClubHubHTML.Ignite", comment: "Title badge at top of Expertises HTML index page"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }
         .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
 
-        expertisesTable // this is an Ignite Table that renders an array of Ignite Rows, each representing a club
+        approvedExpertisesTable // Ignite Table that renders an array of Ignite Rows, each representing an expertise
+            .tableStyle(.stripedRows)
+            .tableBorder(true)
+            .horizontalAlignment(.center)
+
+        Text(".") // didn't get padding() modifier to work
+        Divider() // would like it in a darker color
+            .padding(.vertical, 20)
+
+        // MARK: - unapproved Expertises
+
+        Text {
+            Badge(String(localized: "\(unapprovedExpertiseCount) unapproved expertise tags",
+                         table: "PhotoClubHubHTML.Ignite", comment: "Title badge at top of Expertises HTML index page"))
+                .badgeStyle(.subtleBordered)
+                .role(.info)
+        }
+        .font(.title2) .horizontalAlignment(.center) .margin([.top, .bottom], .large)
+
+        approvedExpertisesTable // Ignite Table that renders an array of Ignite Rows, each representing an expertise
             .tableStyle(.stripedRows)
             .tableBorder(true)
             .horizontalAlignment(.center)

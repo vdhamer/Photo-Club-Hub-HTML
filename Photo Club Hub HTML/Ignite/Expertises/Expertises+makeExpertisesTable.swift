@@ -11,7 +11,7 @@ import Photo_Club_Hub_Data // for Expertise
 
 struct MakeExpertisesTableResult {
     let table: Table
-    let expertisesCount: Int
+    let expertiseCount: Int
 }
 
 extension Expertises {
@@ -20,7 +20,7 @@ extension Expertises {
     // expertise: for which expertise are we doing this?
     // return Int: count of returned members (can't directly count size of Ignite Table)
     // return Table: Ignite table containing rendering of requested members
-    mutating func makeExpertisesTable(moc: NSManagedObjectContext) -> MakeExpertisesTableResult {
+    mutating func makeExpertisesTable(approved: Bool, moc: NSManagedObjectContext) -> MakeExpertisesTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
             let sortDescriptor = NSSortDescriptor(keyPath: \Expertise.id_, ascending: true)
@@ -46,7 +46,7 @@ extension Expertises {
                     String(localized: "Description",
                            table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
                 },
-                expertisesCount: -1234
+                expertiseCount: -1
             )
         } catch {
             fatalError("Failed to fetch memberPortfolios: \(error)")
