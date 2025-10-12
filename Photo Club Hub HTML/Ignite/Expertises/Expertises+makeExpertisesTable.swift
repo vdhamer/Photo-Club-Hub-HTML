@@ -75,8 +75,11 @@ extension Expertises {
 
             Column { // description
                 Group {
+                    let unapproved = String(localized: "This expertise tag is not approved yet.",
+                               table: "PhotoClubHubHTML.Ignite",
+                               comment: "Shown for Expertises that are temporary.")
                     Span(
-                        String("\(expertise.selectedLocalizedExpertise.localizedExpertise?.usage ?? "N/A")")
+                        String(expertise.selectedLocalizedExpertise.localizedExpertise?.usage ?? unapproved)
                     )
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)

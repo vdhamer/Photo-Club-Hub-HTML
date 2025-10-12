@@ -552,6 +552,23 @@
         }
       }
     },
+    "This expertise tag is not approved yet." : {
+      "comment" : "Shown for Expertises that are temporary.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This expertise tag is not approved yet."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deze tijdelijke expertise heeft geen beschrijving."
+          }
+        }
+      }
+    },
     "This page is part of %@ and was last updated on %@ %@." : {
       "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
       "localizations" : {
@@ -564,7 +581,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze pagina maakt deel uit van %1$@ en is aangemaakt op %2$@ %3$@."
+            "value" : "Deze pagina uit het %1$@ netwerk is aangemaakt op %2$@ %3$@."
           }
         }
       }
