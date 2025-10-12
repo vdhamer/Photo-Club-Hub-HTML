@@ -22,15 +22,19 @@ extension Expertises {
     // return Table: Ignite table containing rendering of requested members
     mutating func makeExpertisesTable(approved: Bool, moc: NSManagedObjectContext) -> MakeExpertisesTableResult {
         do {
-            // match sort order used in MembershipView to generate MembershipView SwiftUI view
-            let sortDescriptor = NSSortDescriptor(keyPath: \Expertise.id_, ascending: true)
+            // allow coredata
+            let sortDescriptors = approved ? [] : [NSSortDescriptor(keyPath: \Expertise.id_, ascending: true)]
 
             let fetchRequest: NSFetchRequest<Expertise> = Expertise.fetchRequest()
-            fetchRequest.sortDescriptors = [sortDescriptor]
+            fetchRequest.sortDescriptors = sortDescriptors
 
-            fetchRequest.predicate = NSPredicate(format: "isStandard == %@",
-                                                 argumentArray: [NSNumber(value: approved ? 1 : 0)])
-            let expertises: [Expertise] = try moc.fetch(fetchRequest)
+            fetchRequest.predicate = NSPredicate(format: "isStandard == %@", NSNumber(value: approved))
+            var expertises: [Expertise] = try moc.fetch(fetchRequest)
+            if approved { // sort result in memory when there is a translation available
+                expertises.sort { lhs, rhs in
+                    return lhs.selectedLocalizedExpertise.name < rhs.selectedLocalizedExpertise.name
+                }
+            }
 
             return MakeExpertisesTableResult(
                 table: Table {
