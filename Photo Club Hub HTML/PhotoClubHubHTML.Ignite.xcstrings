@@ -564,7 +564,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze pagina maakt deel uit van %1$@ en is bijgewerkt tot %2$@ %3$@."
+            "value" : "Deze pagina maakt deel uit van %1$@ en is aangemaakt op %2$@ %3$@."
           }
         }
       }

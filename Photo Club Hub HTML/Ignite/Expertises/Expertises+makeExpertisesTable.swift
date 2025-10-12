@@ -63,7 +63,8 @@ extension Expertises {
                 let url: String = "https://www.fgDeGender.nl/\(expertise.id)"
                 Group {
                     Text {
-                        Link(String(expertise.isStandard ? "\(expertise.selectedLocalizedExpertise.name)" : "N/A")
+                        Link(String(expertise.isStandard ? "\(expertise.selectedLocalizedExpertise.name)" :
+                                                           String(expertise.id))
                              + String(" (\(PhotographerExpertise.count(context: moc, expertiseID: expertise.id))x)"),
                              target: url
                         )
