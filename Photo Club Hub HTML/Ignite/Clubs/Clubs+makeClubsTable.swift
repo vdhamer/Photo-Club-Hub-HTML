@@ -154,7 +154,7 @@ extension Clubs {
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {
-                    return definedRole.localizedString().capitalized // was table: "PhotoClubHubHTML.Ignite"
+                    return definedRole.localizedString.capitalized // was table: "PhotoClubHubHTML.Ignite"
                 }
             }
         }
