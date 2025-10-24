@@ -14,8 +14,8 @@ import Photo_Club_Hub_Data // for Organization
 struct Level2Site: Site {
 
     var name: String = "Leden" // set during init()
-    // NOTE: http://www.fcDeGender.com gives localhost result, http://www.fcDeGender.com/fgDeGender works on remote site
-    var url: URL = URL("https://www.fcDeGender.nl/clubs")
+    // NOTE: https://www.fcDeGender.nl gives localhost result, https://www.fcDeGender.nl/fgDeGender works on remote site
+    var url: URL = URL("https://www.fcDeGender.nl/XampleMax")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
     let homePage: Members
@@ -99,7 +99,7 @@ struct Level2Site: Site {
 
         self.moc = moc
 
-        let chosenClubIX: Int = 0 // roundabout way to avoid SwiftLint warnings about unused properties
+        let chosenClubIX: Int = 4 // roundabout way to avoid SwiftLint warnings about unused properties
         let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8, club9]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 

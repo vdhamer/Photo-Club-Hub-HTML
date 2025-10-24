@@ -193,15 +193,15 @@ extension Members {
         }
 
         // Returns Ignite PageElement rendering the lists of official or unoffiical Expertise tags.
-        func generatePageElements(localizedExpertiseResultLists: LocalizedExpertiseResultLists, isStandard: Bool)
+        func generatePageElements(localizedExpertiseResultLists: LocalizedExpertiseResultLists, isSupported: Bool)
                                   -> PageElement? {
-            let localizedExpertiseResultList = isStandard ? localizedExpertiseResultLists.standard :
-                                                          localizedExpertiseResultLists.nonstandard
+            let localizedExpertiseResultList = isSupported ? localizedExpertiseResultLists.supported :
+                                                             localizedExpertiseResultLists.temporary
             guard !localizedExpertiseResultList.list.isEmpty else { return nil } // nothing to display
 
             var hint: String?
             var customHint: String = ""
-            var string = localizedExpertiseResultLists.getIconString(standard: isStandard) // line starts with icon
+            var string = localizedExpertiseResultLists.getIconString(isSupported: isSupported) // line starts with icon
 
             for localizedExpertiseResult in localizedExpertiseResultList.list {
                 string.append(" " + localizedExpertiseResult.name
@@ -210,7 +210,7 @@ extension Members {
                 customHint = localizedExpertiseResult.customHint ?? ""
             }
 
-            if !isStandard {
+            if !isSupported {
                 if hint == nil && customHint == "" {
                     return Text(string)
                         .horizontalAlignment(.leading)
@@ -251,11 +251,11 @@ extension Members {
                                                                                photographer.photographerExpertises)
 
             let standard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
-                                                isStandard: true)
+                                                isSupported: true)
             if let standard { pageElements.append(standard) }
 
             let nonstandard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
-                                                   isStandard: false)
+                                                   isSupported: false)
             if let nonstandard { pageElements.append(nonstandard) }
 
             return pageElements
@@ -268,19 +268,19 @@ extension Members {
 
         for localizedExpertiseResult in localizedExpertiseResults {
             if localizedExpertiseResult.localizedExpertise != nil {
-                hint.append(getIconString(standard: true) + " " +
+                hint.append(getIconString(isSupported: true) + " " +
                             localizedExpertiseResult.localizedExpertise!.name + " ")
             } else {
-                hint.append(getIconString(standard: true) + " " + localizedExpertiseResult.id + " ")
+                hint.append(getIconString(isSupported: true) + " " + localizedExpertiseResult.id + " ")
             }
         }
 
         return hint.trimmingCharacters(in: CharacterSet(charactersIn: " "))
     }
 
-    fileprivate func getIconString(standard: Bool) -> String {
-        let temp = LocalizedExpertiseResultLists(standardList: [], nonstandardList: [])
-        return standard ? temp.standard.icon : temp.nonstandard.icon
+    fileprivate func getIconString(isSupported: Bool) -> String {
+        let lerLists = LocalizedExpertiseResultLists(supportedList: [], temporaryList: [])
+        return isSupported ? lerLists.supported.icon : lerLists.temporary.icon
     }
 
     fileprivate func fullName(givenName: String,

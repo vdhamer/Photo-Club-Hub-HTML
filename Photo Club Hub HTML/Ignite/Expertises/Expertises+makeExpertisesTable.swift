@@ -67,8 +67,8 @@ extension Expertises {
                 let url: String = "https://www.fgDeGender.nl/\(expertise.id)"
                 Group {
                     Text {
-                        Link(String(expertise.isStandard ? "\(expertise.selectedLocalizedExpertise.name)" :
-                                                           String(expertise.id))
+                        Link(String(expertise.isSupported ? "\(expertise.selectedLocalizedExpertise.name)" :
+                                                               String(expertise.id))
                              + String(" (\(PhotographerExpertise.count(context: moc, expertiseID: expertise.id))x)"),
                              target: url
                         )
@@ -110,7 +110,7 @@ extension Expertises {
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {
-                    return definedRole.localizedString.capitalized // was table: "PhotoClubHubHTML.Ignite"
+                    return definedRole.displayName.capitalized // was table: "PhotoClubHubHTML.Ignite"
                 }
             }
         }
