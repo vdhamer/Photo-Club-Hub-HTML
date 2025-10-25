@@ -28,7 +28,7 @@ extension Expertises {
             let fetchRequest: NSFetchRequest<Expertise> = Expertise.fetchRequest()
             fetchRequest.sortDescriptors = sortDescriptors
 
-            fetchRequest.predicate = NSPredicate(format: "isStandard == %@", NSNumber(value: approved))
+            fetchRequest.predicate = NSPredicate(format: "isSupported == %@", NSNumber(value: approved))
             var expertises: [Expertise] = try moc.fetch(fetchRequest)
             if approved { // sort result in memory when there is a translation available
                 expertises.sort { lhs, rhs in
