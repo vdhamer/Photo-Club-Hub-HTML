@@ -468,7 +468,7 @@
       }
     },
     "Photo Club Hub" : {
-      "comment" : "For footer that says 'This page was last updated on ... by ...'\nMentioned at start of navigation bar",
+      "comment" : "For footer that says 'This page was last updated on ... by ...'",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -480,6 +480,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fotoclub Hub"
+          }
+        }
+      }
+    },
+    "Photo Club Hub network" : {
+      "comment" : "Mentioned at start of navigation bar",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoclub Hub netwerk"
           }
         }
       }
@@ -581,7 +592,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze pagina uit het %1$@ netwerk is aangemaakt op %2$@ %3$@."
+            "value" : "Deze pagina is deel van het %1$@ netwerk is aangemaakt op %2$@ %3$@."
           }
         }
       }

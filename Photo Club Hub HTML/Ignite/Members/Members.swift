@@ -139,33 +139,36 @@ struct Members: StaticPage {
 }
 
 func navigationBar() -> NavigationBar {
-    NavigationBar(
-        logo: Text {
-            String(localized: "Photo Club Hub", table: "PhotoClubHubHTML.Ignite",
-                   comment: "Mentioned at start of navigation bar")
-        },
-        items: {
+    NavigationBar( logo:
+            String(localized: "Photo Club Hub network", table: "PhotoClubHubHTML.Ignite",
+                   comment: "Mentioned at start of navigation bar")) {
             documentationDropdown()
 
             Link(String(localized: "Stats", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to page with statistics"),
                  target: URL("https://www.fcDeGender.nl/statistics"))
-                .linkStyle(.button)
+                .linkStyle(.default)
                 .role(.primary)
 
             Link(String(localized: "Expertises", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to Expertise list page"),
                  target: URL("https://www.fcDeGender.nl/expertises"))
-                .linkStyle(.button)
+                .linkStyle(.default)
                 .role(.primary)
 
             Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to Clubs page"),
                  target: URL("https://www.fcDeGender.nl/clubs"))
-                .linkStyle(.button)
+                .linkStyle(.default)
                 .role(.primary)
-        }
-    )
+
+            Link(target: String("https://www.fcdegender.nl/clubs/")) {
+//                Image(systemName: "grid", description: "grid")
+                Image("AppIcon")
+            }
+                .linkStyle(.default)
+                .role(.secondary)
+    }
     .navigationItemAlignment(.trailing)
     .navigationBarStyle(.light)
     .position(.fixedBottom)
