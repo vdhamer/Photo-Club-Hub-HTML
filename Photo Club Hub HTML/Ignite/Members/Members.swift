@@ -142,13 +142,19 @@ func navigationBar() -> NavigationBar {
     NavigationBar( logo:
             String(localized: "Photo Club Hub network", table: "PhotoClubHubHTML.Ignite",
                    comment: "Mentioned at start of navigation bar")) {
-            documentationDropdown()
 
-            Link(String(localized: "Stats", table: "PhotoClubHubHTML.Ignite",
-                        comment: "Button linking to page with statistics"),
-                 target: URL("https://www.fcDeGender.nl/statistics"))
-                .linkStyle(.default)
-                .role(.primary)
+            Link(target: String("https://www.fcdegender.nl/clubs/")) {
+                Image("/images/DSC_6217.jpg", description: "App icon")
+                    .resizable()
+                    .frame(width: 20)
+            }
+            .linkStyle(.default)
+
+        Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
+                    comment: "Button linking to Clubs page"),
+             target: URL("https://www.fcDeGender.nl/clubs"))
+            .linkStyle(.default)
+            .role(.primary)
 
             Link(String(localized: "Expertises", table: "PhotoClubHubHTML.Ignite",
                         comment: "Button linking to Expertise list page"),
@@ -156,18 +162,14 @@ func navigationBar() -> NavigationBar {
                 .linkStyle(.default)
                 .role(.primary)
 
-            Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
-                        comment: "Button linking to Clubs page"),
-                 target: URL("https://www.fcDeGender.nl/clubs"))
+            Link(String(localized: "Stats", table: "PhotoClubHubHTML.Ignite",
+                        comment: "Button linking to page with statistics"),
+                 target: URL("https://www.fcDeGender.nl/statistics"))
                 .linkStyle(.default)
                 .role(.primary)
 
-            Link(target: String("https://www.fcdegender.nl/clubs/")) {
-//                Image(systemName: "grid", description: "grid")
-                Image("AppIcon")
-            }
-                .linkStyle(.default)
-                .role(.secondary)
+            documentationDropdown()
+
     }
     .navigationItemAlignment(.trailing)
     .navigationBarStyle(.light)
