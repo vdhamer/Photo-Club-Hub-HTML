@@ -85,7 +85,7 @@ struct Level2Site: Site {
 
         let individueelBOIdPlus = OrganizationIdPlus(fullName: "Individuele Leden Brabant Oost",
                                                      town: "Brabant Oost",
-                                                     nickname: "IndividueelBO")
+                                                     nickname: "IndividueelBO") // TODO fails due to Instagram URL?
         let club8: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
                                                                 idPlus: individueelBOIdPlus)
@@ -99,7 +99,7 @@ struct Level2Site: Site {
 
         self.moc = moc
 
-        let chosenClubIX: Int = 4 // roundabout way to avoid SwiftLint warnings about unused properties
+        let chosenClubIX: Int = 0 // roundabout way to avoid SwiftLint warnings about unused properties
         let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8, club9]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
