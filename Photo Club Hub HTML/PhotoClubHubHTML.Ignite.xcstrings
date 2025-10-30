@@ -580,19 +580,19 @@
         }
       }
     },
-    "This page is part of %@ and was last updated on %@ %@." : {
+    "This page is part of the %1$@ network and was last updated on %2$@ %3$@." : {
       "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "This page is part of %1$@ and was last updated on %2$@ %3$@."
+            "state" : "translated",
+            "value" : "This page is part of the %1$@ network and was last updated on %2$@ %3$@."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze pagina is deel van het %1$@ netwerk is aangemaakt op %2$@ %3$@."
+            "value" : "Deze pagina is onderdeel van het %1$@ netwerk en is gegenereerd op %2$@ %3$@."
           }
         }
       }

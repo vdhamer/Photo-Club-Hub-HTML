@@ -33,7 +33,7 @@ struct FooterText: Component { // swiftlint doesn't want this one to be filepriv
 
         Alert {
             Text { // this is Ignite's Text, not SwiftUI's Text
-                String(localized: "This page is part of \(fch) and was last updated on \(date) \(timezoneCode).",
+                String(localized: "This page is part of the \(fch) network and was last updated on \(date) \(timezoneCode).",
                        table: "PhotoClubHubHTML.Ignite",
                        bundle: .main, // actually the default
                        comment: "Timestamp at bottom of static HTML page showing when page was generate")
