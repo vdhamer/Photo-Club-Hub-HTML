@@ -580,8 +580,20 @@
         }
       }
     },
+    "This page is part of the %@ network and was last updated on %@ %@." : {
+      "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This page is part of the %1$@ network and was last updated on %2$@ %3$@."
+          }
+        }
+      }
+    },
     "This page is part of the %1$@ network and was last updated on %2$@ %3$@." : {
       "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
