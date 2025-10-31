@@ -12,6 +12,6 @@
 - Something puts the required images (and more?) into the Data/Assets folder
     - where is that directory?
       ``/Users/petervandenhamer/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Assets/images``
-    - that directory **IS** filled by copy files from elsewhere: Experiment: remove file and run Ignite app -> file doesn't reappear.
+    - that directory **IS** filled by copy files from elsewhere: Experiment: remove file and run Ignite app -> file reappears.
     - that directory **ISN'T** cleared at the start of a build. Experiment: introduce a new file and run Ignite app -> file doesn't disappear.
     - who copies the code from Data/Assets to Data/Build?? Code that handles FeaturedImages.
