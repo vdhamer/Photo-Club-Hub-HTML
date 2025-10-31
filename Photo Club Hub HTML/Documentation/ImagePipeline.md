@@ -14,4 +14,4 @@
       ``/Users/petervandenhamer/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Assets/images``
     - that directory **IS** filled by copy files from elsewhere: Experiment: remove file and run Ignite app -> file reappears.
     - that directory **ISN'T** cleared at the start of a build. Experiment: introduce a new file and run Ignite app -> file doesn't disappear.
-    - who copies the code from Data/Assets to Data/Build?? Code that handles FeaturedImages.
+    - who copies the code from tbd to Data/Assets?? Code that handles FeaturedImages.
