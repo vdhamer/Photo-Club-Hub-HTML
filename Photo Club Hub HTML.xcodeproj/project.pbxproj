@@ -73,7 +73,7 @@
 		3717AFD42EB425B200F4F897 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Documentation/ImagePipeline.md,
+				Documentation/FeaturedImagePipeline.md,
 			);
 			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
 		};
@@ -380,6 +380,7 @@
 				"else",
 				"  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"",
 				"fi",
+				"",
 				"",
 				"",
 				"",

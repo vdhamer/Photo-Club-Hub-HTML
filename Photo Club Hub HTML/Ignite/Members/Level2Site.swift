@@ -85,7 +85,7 @@ struct Level2Site: Site {
 
         let individueelBOIdPlus = OrganizationIdPlus(fullName: "Individuele Leden Brabant Oost",
                                                      town: "Brabant Oost",
-                                                     nickname: "IndividueelBO") // TODO fails due to Instagram URL?
+                                                     nickname: "IndividueelBO")
         let club8: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
                                                                 idPlus: individueelBOIdPlus)

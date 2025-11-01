@@ -23,4 +23,3 @@ Q: Where is index.html written to?
 4. Members.init() fills Tables with currentMembers and formerMembers
 5. Member.body(moc:) renders HTML page that includes currentMembers and formerMembers
 6. membersite.publish() uses default string buildDirectoryPath = "Build""
-7. 
