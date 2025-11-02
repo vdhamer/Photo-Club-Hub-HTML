@@ -44,6 +44,7 @@ struct FooterText: Component { // swiftlint doesn't want this one to be filepriv
             .horizontalAlignment(.center)
         }
         .margin(.top, .small)
+        .margin(.bottom, .extraLarge)
     }
 
 }
