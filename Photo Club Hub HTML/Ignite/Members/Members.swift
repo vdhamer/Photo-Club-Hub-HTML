@@ -140,22 +140,27 @@ struct Members: StaticPage {
 
 func navigationBar() -> NavigationBar {
     NavigationBar(
-            logo:
-            Link(target: String("https://www.fcdegender.nl/clubs/")) {
+            logo: Button(label: {
                 Image("/images/AppIcon.png", description: "App icon")
                     .resizable()
                     .frame(width: 40)
                     .padding(.trailing, 15)
                 String(localized: "Photo Club Hub network", table: "PhotoClubHubHTML.Ignite",
-                            comment: "Mentioned at start of navigation bar")
-            }
-                .linkStyle(.button)
-    ) {
+                       comment: "Mentioned at start of navigation bar")
+            })
+                .role(.warning)
+                .buttonSize(.small)
+    ) { // items:
 
-        // items:
         Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
                     comment: "Button linking to Clubs page"),
              target: URL("https://www.fcDeGender.nl/clubs"))
+        .linkStyle(.hover)
+        .role(.primary)
+
+        Link(String(localized: "Photo Museums", table: "PhotoClubHubHTML.Ignite",
+                    comment: "Button linking to Museums list page"),
+             target: URL("https://www.fcDeGender.nl/museums"))
         .linkStyle(.hover)
         .role(.primary)
 

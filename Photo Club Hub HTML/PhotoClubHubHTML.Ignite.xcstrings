@@ -487,6 +487,12 @@
     "Photo Club Hub network" : {
       "comment" : "Mentioned at start of navigation bar",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Club Hub network"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -508,6 +514,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fotoclubs"
+          }
+        }
+      }
+    },
+    "Photo Museums" : {
+      "comment" : "Button linking to Museums list page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo museums"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotomusea"
           }
         }
       }
@@ -585,13 +608,13 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "This page is part of the %1$@ network and was last updated on %2$@ %3$@."
+            "state" : "translated",
+            "value" : "This page is part of the %1$@ network and was last updated on  %2$@  %3$@."
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Deze pagina is onderdeel van het %1$@ netwerk en is gegenereerd op %2$@ %3$@."
           }
         }
