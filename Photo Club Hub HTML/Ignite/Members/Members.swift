@@ -148,8 +148,8 @@ func navigationBar() -> NavigationBar {
                 String(localized: "Photo Club Hub network", table: "PhotoClubHubHTML.Ignite",
                        comment: "Mentioned at start of navigation bar")
             })
-                .role(.warning)
-                .buttonSize(.small)
+            .role(.secondary)
+            .buttonSize(.small)
     ) { // items:
 
         Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
