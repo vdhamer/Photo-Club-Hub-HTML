@@ -11,7 +11,7 @@ import CoreLocation // for CLLocationCoordinate2DMake
 import Photo_Club_Hub_Data // for Organization and PersonName
 
 struct MembershipView: View {
-    @Environment(\.managedObjectContext) fileprivate var viewContext
+    @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest var fetchRequestClubMembers: FetchedResults<MemberPortfolio> // filled during init()
     let club: Organization
@@ -62,14 +62,14 @@ struct MembershipView: View {
         }
     }
 
-    fileprivate func infix(content: String?) -> String {
+    private func infix(content: String?) -> String {
         if let content, content.isEmpty==false {
             return content + " "
         }
         return ""
     }
 
-    fileprivate func describeMember(member: MemberPortfolio) -> String {
+    private func describeMember(member: MemberPortfolio) -> String {
         if member.isFormerMember {
             var output = " ("
             if member.photographer.isDeceased {
@@ -94,7 +94,7 @@ struct MembershipView: View {
 
 extension Organization {
 
-     fileprivate static func addFGdeGender(context: NSManagedObjectContext) -> Organization {
+     private static func addFGdeGender(context: NSManagedObjectContext) -> Organization {
         withAnimation {
             let fgDeGenderIDPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
                                                       town: "Eindhoven",
@@ -116,6 +116,7 @@ extension Organization {
         }
     }
 
+    // this func cannot just be private because it is called from the View code
     fileprivate static func addHardcodedFgDeGenderForPreview(context: NSManagedObjectContext) -> Organization {
         let fgDeGender = addFGdeGender(context: context)
 

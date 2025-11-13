@@ -65,7 +65,7 @@ extension Clubs {
 
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
-    fileprivate mutating func makeClubRow(moc: NSManagedObjectContext, club: Organization) -> Row {
+    private mutating func makeClubRow(moc: NSManagedObjectContext, club: Organization) -> Row {
 
         return Row {
 
@@ -134,9 +134,9 @@ extension Clubs {
 
     }
 
-    fileprivate func fullName(givenName: String,
-                              infixName: String = "",
-                              familyName: String) -> String {
+    private func fullName(givenName: String,
+                          infixName: String = "",
+                          familyName: String) -> String {
         if infixName.isEmpty {
             return givenName + " " + familyName
         } else {
@@ -144,13 +144,13 @@ extension Clubs {
         }
     }
 
-    fileprivate func lastPathComponent(fullUrl: String) -> String {
+    private func lastPathComponent(fullUrl: String) -> String {
         let url = URL(string: fullUrl)
         let lastComponent: String = url?.lastPathComponent ?? "error in lastPathComponent"
         return "/images/\(lastComponent)"
     }
 
-    fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
+    private func describe(roles: [MemberRole: Bool?]) -> String {
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {

@@ -15,21 +15,21 @@ struct Members: StaticPage {
     let showFormerMembers: Bool = false // suppresses generating and showing table for former members
     let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
 
-    fileprivate var currentMembers = Table {} // initialite to empty table, then fill during init()
-    fileprivate var formerMembers = Table {} // same story
+    private var currentMembers = Table {} // initialite to empty table, then fill during init()
+    private var formerMembers = Table {} // same story
     var currentMembersTotalYears: Double = 0 // updated in memberRow()
     var formerMembersTotalYears: Double = 0 // updated in memberRow()
-    fileprivate var currentMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
-    fileprivate var currentMembersCountWithStartDate: Int = 0
-    fileprivate var formerMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
-    fileprivate var formerMembersCountWithStartDate: Int = 0
+    private var currentMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+    private var currentMembersCountWithStartDate: Int = 0
+    private var formerMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+    private var formerMembersCountWithStartDate: Int = 0
 
     let dateFormatter = DateFormatter()
 
-    fileprivate var moc: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+    private var moc: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
-    fileprivate var club: Organization
-    fileprivate var clubFullNameTown: String // duplicates info in club, but String is sendable and Organization isn't
+    private var club: Organization
+    private var clubFullNameTown: String // duplicates info in club, but String is sendable and Organization isn't
 
     // MARK: - init()
 

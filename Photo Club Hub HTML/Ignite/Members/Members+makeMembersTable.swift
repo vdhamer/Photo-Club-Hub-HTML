@@ -79,14 +79,14 @@ extension Members {
 
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
-    fileprivate mutating func makeMemberRow(moc: NSManagedObjectContext,
-                                            photographer: Photographer,
-                                            membershipStartDate: Date?, // nil means app didn't receive a start date
-                                            membershipEndDate: Date? = nil, // nil means photographer is still a member
-                                            fotobond: Int? = nil,
-                                            roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
-                                            portfolio: URL? = nil,
-                                            thumbnail: URL) -> Row {
+    private mutating func makeMemberRow(moc: NSManagedObjectContext,
+                                        photographer: Photographer,
+                                        membershipStartDate: Date?, // nil means app didn't receive a start date
+                                        membershipEndDate: Date? = nil, // nil means photographer is still a member
+                                        fotobond: Int? = nil,
+                                        roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
+                                        portfolio: URL? = nil,
+                                        thumbnail: URL) -> Row {
 
         downloadThumbnailToLocal(downloadURL: thumbnail)
 
@@ -263,7 +263,7 @@ extension Members {
 
     }
 
-    fileprivate func customHint(localizedExpertiseResults: [LocalizedExpertiseResult]) -> String {
+    private func customHint(localizedExpertiseResults: [LocalizedExpertiseResult]) -> String {
         var hint: String = ""
 
         for localizedExpertiseResult in localizedExpertiseResults {
@@ -278,14 +278,14 @@ extension Members {
         return hint.trimmingCharacters(in: CharacterSet(charactersIn: " "))
     }
 
-    fileprivate func getIconString(isSupported: Bool) -> String {
+    private func getIconString(isSupported: Bool) -> String {
         let lerLists = LocalizedExpertiseResultLists(supportedList: [], temporaryList: [])
         return isSupported ? lerLists.supported.icon : lerLists.temporary.icon
     }
 
-    fileprivate func fullName(givenName: String,
-                              infixName: String = "",
-                              familyName: String) -> String {
+    private func fullName(givenName: String,
+                          infixName: String = "",
+                          familyName: String) -> String {
         if infixName.isEmpty {
             return givenName + " " + familyName
         } else {
@@ -293,13 +293,13 @@ extension Members {
         }
     }
 
-    fileprivate func lastPathComponent(fullUrl: String) -> String {
+    private func lastPathComponent(fullUrl: String) -> String {
         let url = URL(string: fullUrl)
         let lastComponent: String = url?.lastPathComponent ?? "error in lastPathComponent"
         return "/images/\(lastComponent)"
     }
 
-    fileprivate func downloadThumbnailToLocal(downloadURL: URL) { // for now this is synchronous
+    private func downloadThumbnailToLocal(downloadURL: URL) { // for now this is synchronous
 
         do {
             // swiftlint:disable:next large_tuple
@@ -333,9 +333,9 @@ extension Members {
 
     }
 
-    fileprivate mutating func formatMembershipYears(start: Date?, end: Date?,
-                                                    isFormer: Bool,
-                                                    fotobond: Int?) -> Span {
+    private mutating func formatMembershipYears(start: Date?, end: Date?,
+                                                isFormer: Bool,
+                                                fotobond: Int?) -> Span {
         var years = TimeInterval(0)
 
         if start != nil {
@@ -390,7 +390,7 @@ extension Members {
         String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
     }
 
-    fileprivate func toYear(date: Date) -> String {
+    private func toYear(date: Date) -> String {
         dateFormatter.dateFormat = "yyyy"
         return dateFormatter.string(from: date) // "2020"
     }

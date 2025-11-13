@@ -12,11 +12,11 @@ struct Expertises: StaticPage {
     var title = "Expertises"  // needed by the StaticPage protocol, but how do I localize it?
     let showTemporaryExpertises: Bool = true // suppresses generating and showing table for temporary Expertises
 
-    fileprivate var approvedExpertisesTable = Table {} // initialite to empty table, then fill during init()
-    fileprivate var approvedExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+    private var approvedExpertisesTable = Table {} // initialite to empty table, then fill during init()
+    private var approvedExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
 
-    fileprivate var temporaryExpertisesTable = Table {} // initialite to empty table, then fill during init()
-    fileprivate var temporaryExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+    private var temporaryExpertisesTable = Table {} // initialite to empty table, then fill during init()
+    private var temporaryExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
 

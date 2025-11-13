@@ -11,7 +11,7 @@ import CoreData // for ManagedObjectContext
 struct Clubs: StaticPage {
     var title = "Fotoclubs"  // needed by the StaticPage protocol, but how do I localize it?
 
-    fileprivate var clubsTable = Table {} // initialite to empty table, then fill during init()
+    private var clubsTable = Table {} // initialite to empty table, then fill during init()
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
 

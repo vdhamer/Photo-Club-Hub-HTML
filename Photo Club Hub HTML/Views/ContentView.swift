@@ -11,7 +11,7 @@ import CoreLocation // for CLLocationCoordinate2DMake
 import Photo_Club_Hub_Data // for Organization
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) fileprivate var viewContext
+    @Environment(\.managedObjectContext) private var viewContext
 
     // MARK: - @FetchRequests to get list of Clubs
 
@@ -26,37 +26,37 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    fileprivate var allOrganizations: FetchedResults<Organization>
+    private var allOrganizations: FetchedResults<Organization>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
         predicate: clubOnlyPredicate,
         animation: .default)
-    fileprivate var allClubs: FetchedResults<Organization>
+    private var allClubs: FetchedResults<Organization>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Photographer.familyName_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    fileprivate var allPhotographers: FetchedResults<Photographer>
+    private var allPhotographers: FetchedResults<Photographer>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)],
         predicate: allPredicate, // there is a variant of this FetchRequest in MembershipView.swift
         animation: .default)
-    fileprivate var allMembers: FetchedResults<MemberPortfolio>
+    private var allMembers: FetchedResults<MemberPortfolio>
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Expertise.id_, ascending: true)],
         predicate: allPredicate,
         animation: .default)
-    fileprivate var allKeywords: FetchedResults<Expertise> // duplicates Expertise.getAll()
+    private var allKeywords: FetchedResults<Expertise> // duplicates Expertise.getAll()
 
     @FetchRequest(
         sortDescriptors: [],
         predicate: allPredicate,
         animation: .default)
-    fileprivate var allPhotographerExpertises: FetchedResults<PhotographerExpertise>
+    private var allPhotographerExpertises: FetchedResults<PhotographerExpertise>
     // MARK: - Body of ContentView
 
     @State private var selectedClubIds: Set<OrganizationID> = []
@@ -156,7 +156,7 @@ struct ContentView: View {
     }
 
     // find club based on fullNameTown identifier and check if it has members
-    fileprivate func hasMembers(context: NSManagedObjectContext, clubID: OrganizationID) -> Bool {
+    private func hasMembers(context: NSManagedObjectContext, clubID: OrganizationID) -> Bool {
         do {
             let result: Bool
             try result = Organization.find(context: context, organizationID: clubID).members.isEmpty == false
@@ -166,7 +166,7 @@ struct ContentView: View {
         }
     }
 
-    fileprivate func generateLevel0() { // index with all expertises
+    private func generateLevel0() { // index with all expertises
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level0.publishing"
@@ -185,7 +185,7 @@ struct ContentView: View {
         }
     }
 
-    fileprivate func generateLevel1() { // index with all clubs
+    private func generateLevel1() { // index with all clubs
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level1.publishing"
@@ -204,7 +204,7 @@ struct ContentView: View {
         }
     }
 
-    fileprivate func generateLevel2() { // single club
+    private func generateLevel2() { // single club
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level2.publishing"

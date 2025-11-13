@@ -52,7 +52,7 @@ private let isBeingTested = false // these are being loaded to get the data into
 extension PhotoClubHubHtmlApp {
 
     // swiftlint:disable:next function_body_length
-    static fileprivate func loadClubsAndMembers() {
+    static private func loadClubsAndMembers() {
         let useOnlyInBundleFile: Bool = false
 
         let viewContext = persistenceController.container.viewContext // "associated with the main application queue"

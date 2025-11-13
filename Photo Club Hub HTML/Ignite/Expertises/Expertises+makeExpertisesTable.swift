@@ -59,7 +59,7 @@ extension Expertises {
     }
 
     // generates an Ignite Row in an Ignite table
-    fileprivate mutating func makeExpertiseRow(moc: NSManagedObjectContext, expertise: Expertise) -> Row {
+    private mutating func makeExpertiseRow(moc: NSManagedObjectContext, expertise: Expertise) -> Row {
 
         return Row {
 
@@ -100,13 +100,13 @@ extension Expertises {
 
     }
 
-    fileprivate func lastPathComponent(fullUrl: String) -> String {
+    private func lastPathComponent(fullUrl: String) -> String {
         let url = URL(string: fullUrl)
         let lastComponent: String = url?.lastPathComponent ?? "error in lastPathComponent"
         return "/images/\(lastComponent)"
     }
 
-    fileprivate func describe(roles: [MemberRole: Bool?]) -> String {
+    private func describe(roles: [MemberRole: Bool?]) -> String {
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {

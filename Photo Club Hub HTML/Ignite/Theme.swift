@@ -22,7 +22,7 @@ struct MyTheme: Theme {
     }
 }
 
-struct FooterText: Component { // swiftlint doesn't want this one to be fileprivate, but it could be
+private struct FooterText: Component {
 
     public func body(context: PublishingContext) -> [any PageElement] {
         let timezone = TimeZone.current
