@@ -15,7 +15,7 @@ struct Level2Site: Site {
 
     var name: String = "Leden" // set during init()
     // NOTE: https://www.fcDeGender.nl gives localhost result, https://www.fcDeGender.nl/fgDeGender works on remote site
-    var url: URL = URL("https://www.fcDeGender.nl/fgDeGender")
+    var url: URL = URL("https://www.fcDeGender.nl")
     var builtInIconsEnabled: BootstrapOptions = .localBootstrap
     var author = "Peter van den Hamer"
     let homePage: Members

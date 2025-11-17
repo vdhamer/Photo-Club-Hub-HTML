@@ -105,7 +105,7 @@ extension Members {
                         )
                             .linkStyle(.hover)
                         if roles.status[.deceased] == true {
-                            Badge(MemberStatus.deceased.id)
+                            Badge(MemberStatus.deceased.displayName)
                                 .badgeStyle(.default)
                                 .role(.secondary)
                                 .margin(.leading, 10)
@@ -114,7 +114,7 @@ extension Members {
                             let statusDict: [MemberStatus: Bool?] = rolesAndStatus.status
                             let memberStatus: MemberStatus? = getMemberStatus(statusDictionary: statusDict)
                             if let memberStatus {
-                                Badge(memberStatus.id)
+                                Badge(memberStatus.displayName)
                                     .badgeStyle(.subtleBordered)
                                     .role(.success)
                                     .margin(.leading, 10)
@@ -122,7 +122,7 @@ extension Members {
                             let rolesDict: [MemberRole: Bool?] = rolesAndStatus.roles
                             let memberRole: MemberRole? = getMemberRole(roleDictionary: rolesDict)
                             if let memberRole {
-                                Badge(memberRole.id)
+                                Badge(memberRole.displayName)
                                     .badgeStyle(.subtleBordered)
                                     .role(.success)
                                     .margin(.leading, 10)
