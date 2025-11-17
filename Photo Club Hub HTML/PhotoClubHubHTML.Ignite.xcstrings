@@ -614,7 +614,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Deze pagina is onderdeel van het %1$@ netwerk en is gegenereerd op %2$@ %3$@."
           }
         }
