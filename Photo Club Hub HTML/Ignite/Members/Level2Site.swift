@@ -14,8 +14,8 @@ import Photo_Club_Hub_Data // for Organization
 struct Level2Site: Site {
 
     var name: String = "Leden" // set during init()
-    // NOTE: https://www.fcDeGender.nl gives localhost result, https://www.fcDeGender.nl/fgDeGender works on remote site
-    var url: URL = URL("https://www.fcDeGender.nl")
+    // NOTE: https://www.fcDeGender.nl works for localhost, https://www.fcDeGender.nl/fgDeGender/ works for remote site
+    var url: URL = URL("https://www.fcDeGender.nl/fgDeGender/")
     var builtInIconsEnabled: BootstrapOptions = .localBootstrap
     var author = "Peter van den Hamer"
     let homePage: Members
