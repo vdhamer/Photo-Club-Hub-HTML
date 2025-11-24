@@ -106,9 +106,9 @@ extension Clubs {
             Column { // website
                 if club.organizationWebsite != nil {
                     Text {
-                        Link(String(localized: "WebsiteSymbol",
+                        Link(String(localized: "🌐",
                                     table: "PhotoClubHubHTML.Ignite",
-                                    comment: "Text in cells in club website column"),
+                                    comment: "Unicode globe symbol in cells in club website column"),
                              target: club.organizationWebsite!)
                         .linkStyle(.hover)
                     } .font(.title5) .padding(.none) .margin(0)

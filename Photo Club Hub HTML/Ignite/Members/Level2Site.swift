@@ -15,7 +15,8 @@ struct Level2Site: Site {
 
     var name: String = "Leden" // set during init()
     // NOTE: https://www.fcDeGender.nl works for localhost, https://www.fcDeGender.nl/fgDeGender/ works for remote site
-    var url: URL = URL("https://www.fcDeGender.nl/fgDeGender/")
+    var url: URL = URL("https://www.fcDeGender.nl/XampleMax/")
+//    var url: URL = URL("http://www.vdhamer.com/XampleMax/")
     var builtInIconsEnabled: BootstrapOptions = .localBootstrap
     var author = "Peter van den Hamer"
     let homePage: Members
@@ -99,7 +100,7 @@ struct Level2Site: Site {
 
         self.moc = moc
 
-        let chosenClubIX: Int = 0 // roundabout way to avoid SwiftLint warnings about unused properties
+        let chosenClubIX: Int = 4 // roundabout way to avoid SwiftLint warnings about unused properties
         let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8, club9]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 

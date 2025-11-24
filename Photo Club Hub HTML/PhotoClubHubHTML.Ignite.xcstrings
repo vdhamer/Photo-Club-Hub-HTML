@@ -93,6 +93,23 @@
         }
       }
     },
+    "🌐" : {
+      "comment" : "Unicode globe symbol in cells in club website column",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "&#x1F310;"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "&#x1F310;"
+          }
+        }
+      }
+    },
     "Average membership duration for these %lld club members is %@ years." : {
       "comment" : "Table footnote showing average years of membership of all members.",
       "localizations" : {
@@ -667,23 +684,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website"
-          }
-        }
-      }
-    },
-    "WebsiteSymbol" : {
-      "comment" : "Text in cells in club website column",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🌐"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "🌐"
           }
         }
       }
