@@ -72,7 +72,7 @@ extension Clubs {
             Column { // town
                 Group {
                     Span(
-                        String("\(club.town)")
+                        String("\(club.town)".replacingUTF8Diacritics)
                     )
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
@@ -82,7 +82,7 @@ extension Clubs {
                 Group {
                     if !club.members.isEmpty {
                         Text {
-                            Link(String(club.fullName),
+                            Link(String(club.fullName.replacingUTF8Diacritics),
                                  target: url
                             )
                             .linkStyle(.hover)

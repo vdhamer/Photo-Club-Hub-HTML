@@ -94,11 +94,11 @@ extension Members {
 
             Column { // member's name with any role & status badges
                 Group {
-                    Text {
+                    Text { // Photographer's name and role/status in club
                         Link(
                             fullName(givenName: photographer.givenName,
                                      infixName: photographer.infixName,
-                                     familyName: photographer.familyName),
+                                     familyName: photographer.familyName).replacingUTF8Diacritics,
                             target: portfolio ??
                                     URL(string: MemberPortfolio.emptyPortfolioURL) ??
                                     URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
