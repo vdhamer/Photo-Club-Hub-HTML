@@ -10,17 +10,18 @@ import CoreData // for NSSortDescriptor
 import Photo_Club_Hub_Data // for Organization
 
 struct MakeClubsTableResult {
-    let table: Table
+    let table: Table // Table is an Ignite Table
     let clubsCount: Int
 }
 
 extension Clubs {
 
-    // former: whether to list former members or current members
-    // moc: use this CoreData Managed Object Context
-    // club: for which club are we doing this?
-    // return Int: count of returned members (can't directly count size of Ignite Table)
-    // return Table: Ignite table containing rendering of requested members
+    /// Builds the clubs table from Core Data.
+    ///
+    /// Fetches `Organization` entities of type `.club`, sorted by town and name,
+    /// and returns an Ignite `Table` plus the number of clubs returned.
+    /// - Parameter moc: The Core Data managed object context used for fetching.
+    /// - Returns: `MakeClubsTableResult` containing the rendered table and club count.
     mutating func makeClubsTable(moc: NSManagedObjectContext) -> MakeClubsTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
@@ -67,7 +68,7 @@ extension Clubs {
     // swiftlint:disable:next function_body_length
     private mutating func makeClubRow(moc: NSManagedObjectContext, club: Organization) -> Row {
 
-        return Row {
+        return Row { // Ignite Row
 
             Column { // town
                 Group {
@@ -93,7 +94,7 @@ extension Clubs {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // member count
+            Column { // member count for this club
                 let url: String = "http://www.vdhamer.com/\(club.nickName)"
                 if !club.members.isEmpty {
                     Span(

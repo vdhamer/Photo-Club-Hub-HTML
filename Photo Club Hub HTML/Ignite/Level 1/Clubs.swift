@@ -9,11 +9,12 @@ import Ignite // for StaticPage
 import CoreData // for ManagedObjectContext
 
 /// Static page that lists photo clubs as an HTML table..
-/// Builds this table from Core Data and renders it with Ignite blocks.
+/// Builds this table from Core Data within the init()
+/// and renders it using Ignite blocks when body() is called by Ignite..
 struct Clubs: StaticPage {
     var title = "Fotoclubs"  // needed by the StaticPage protocol, but how do I localize it?
 
-    private var clubsTable = Table {} // initialite to empty table, then fill during init()
+    private var clubsTable = Table {} // initialized as empty Ignite table, that gets filled during init()
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
 
