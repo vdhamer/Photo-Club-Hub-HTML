@@ -87,6 +87,7 @@ extension Clubs {
                                  target: url
                             )
                             .linkStyle(.hover)
+                            .hint(text: url)
                         } .font(.title5) .padding(.none) .margin(0)
                     } else {
                         club.fullName
