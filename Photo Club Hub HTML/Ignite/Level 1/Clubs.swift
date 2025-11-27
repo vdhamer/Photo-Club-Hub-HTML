@@ -8,6 +8,8 @@
 import Ignite // for StaticPage
 import CoreData // for ManagedObjectContext
 
+/// Static page that lists photo clubs as an HTML table..
+/// Builds this table from Core Data and renders it with Ignite blocks.
 struct Clubs: StaticPage {
     var title = "Fotoclubs"  // needed by the StaticPage protocol, but how do I localize it?
 
