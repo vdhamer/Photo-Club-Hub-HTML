@@ -6,9 +6,10 @@
 //
 
 import Ignite // for Site
-
 import CoreData // for NSManagedObjectContext
 
+/// Site configuration for the "Clubs" section (table listing  all Photo Clubs), generated with Ignite.
+/// Defines the base URL, theme, metadata, and the Core Data–backed `Clubs` home page.
 struct Level1Site: Site {
 
     var name: String = "Clubs"
