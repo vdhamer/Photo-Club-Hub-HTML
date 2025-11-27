@@ -112,6 +112,7 @@ extension Clubs {
                                     comment: "Unicode globe symbol in cells in club website column"),
                              target: club.organizationWebsite!)
                         .linkStyle(.hover)
+                        .hint(text: club.organizationWebsite!.absoluteString)
                     } .font(.title5) .padding(.none) .margin(0)
                 }
             } .verticalAlignment(.middle)
