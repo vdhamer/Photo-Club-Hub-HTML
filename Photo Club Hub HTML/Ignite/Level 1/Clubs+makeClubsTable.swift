@@ -79,18 +79,18 @@ extension Clubs {
             } .verticalAlignment(.middle)
 
             Column { // club name
-                let url: String = "http://www.vdhamer.com/\(club.nickName)"
+                let membershipListURL: URL? = club.level2URLDir
                 Group {
-                    if !club.members.isEmpty {
+                    if !club.members.isEmpty, membershipListURL != nil {
                         Text {
                             Link(String(club.fullName.replacingUTF8Diacritics),
-                                 target: url
+                                 target: membershipListURL!
                             )
                             .linkStyle(.hover)
-                            .hint(text: url)
+                            // .hint(text: membershipListURL!.absoluteString) // not robust in old version of Ignite
                         } .font(.title5) .padding(.none) .margin(0)
                     } else {
-                        club.fullName
+                        club.fullName.replacingUTF8Diacritics
                     }
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
@@ -113,7 +113,7 @@ extension Clubs {
                                     comment: "Unicode globe symbol in cells in club website column"),
                              target: club.organizationWebsite!)
                         .linkStyle(.hover)
-                        .hint(text: club.organizationWebsite!.absoluteString)
+                        // .hint(text: club.organizationWebsite!.absoluteString) // not robust in old version of Ignite
                     } .font(.title5) .padding(.none) .margin(0)
                 }
             } .verticalAlignment(.middle)
