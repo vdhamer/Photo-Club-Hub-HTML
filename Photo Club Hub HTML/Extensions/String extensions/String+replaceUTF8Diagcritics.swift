@@ -1,5 +1,5 @@
 //
-//  String+replaceUTF8Diagcritics.swift
+//  String+replaceUTF8Diacritics.swift
 //  Photo Club Hub Data
 //
 //  Created by Peter van den Hamer on 26/11/2025.
