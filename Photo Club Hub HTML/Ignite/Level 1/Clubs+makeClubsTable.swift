@@ -120,7 +120,7 @@ extension Clubs {
 
             Column { // Fotobond
                 if club.fotobondNumber > 0 {
-                    String("\(club.fotobondNumber)")
+                    String(format: "%04d", club.fotobondNumber) // format ensures that 301 is displayed as 0301
                         .margin(.leading, 10)
                 }
             } .verticalAlignment(.middle)

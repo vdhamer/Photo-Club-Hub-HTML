@@ -346,7 +346,7 @@ extension Members {
 
         let fotobondString: String
         if showFotobondNumber, let fotobond {
-            fotobondString = " Fotobond #\(fotobond)"
+            fotobondString = " Fotobond #\(String(format: "%04d", fotobond))" // display 301 as "0301" rather than "301"
         } else {
             fotobondString = ""
         }
