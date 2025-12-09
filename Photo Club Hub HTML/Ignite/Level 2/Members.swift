@@ -13,7 +13,7 @@ import Photo_Club_Hub_Data // for Organization
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol, but how do I localize it?
     let showFormerMembers: Bool = false // suppresses generating and showing table for former members
-    let showFotobondNumber: Bool = false // suppresses showing Fotobond number of members
+    let showFotobondMemberNumber: Bool = false // suppresses showing Fotobond number of members
 
     private var currentMembers = Table {} // initialite to empty table, then fill during init()
     private var formerMembers = Table {} // same story

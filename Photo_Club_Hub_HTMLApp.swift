@@ -59,6 +59,7 @@ extension PhotoClubHubHtmlApp {
         viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         viewContext.undoManager = nil // nil by default on iOS
         viewContext.shouldDeleteInaccessibleFaults = true
+
         // Clear CoreData database for simplicity and to trigger initConstants()
         Model.deleteAllCoreDataObjects(viewContext: viewContext)
 

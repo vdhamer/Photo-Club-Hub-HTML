@@ -49,7 +49,7 @@ extension Members {
                                   photographer: member.photographer,
                                   membershipStartDate: member.membershipStartDate,
                                   membershipEndDate: member.membershipEndDate,
-                                  fotobond: Int(member.fotobondNumber),
+                                  fotobondMemberNumber: member.fotobondMemberNumber,
                                   roles: member.memberRolesAndStatus,
                                   portfolio: member.level3URL_,
                                   thumbnail: member.featuredImageThumbnail
@@ -83,7 +83,7 @@ extension Members {
                                         photographer: Photographer,
                                         membershipStartDate: Date?, // nil means app didn't receive a start date
                                         membershipEndDate: Date? = nil, // nil means photographer is still a member
-                                        fotobond: Int? = nil,
+                                        fotobondMemberNumber: FotobondMemberNumber? = nil,
                                         roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
                                         portfolio: URL? = nil,
                                         thumbnail: URL) -> Row {
@@ -134,7 +134,7 @@ extension Members {
                         formatMembershipYears(start: membershipStartDate,
                                               end: membershipEndDate,
                                               isFormer: isFormerMember(roles: roles),
-                                              fotobond: fotobond)
+                                              fotobondMemberNumber: fotobondMemberNumber)
                     } .font(.body) .padding(.none) .margin(0) .foregroundStyle(.gray)
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
@@ -335,7 +335,7 @@ extension Members {
 
     private mutating func formatMembershipYears(start: Date?, end: Date?,
                                                 isFormer: Bool,
-                                                fotobond: Int?) -> Span {
+                                                fotobondMemberNumber: FotobondMemberNumber?) -> Span {
         var years = TimeInterval(0)
 
         if start != nil {
@@ -345,8 +345,8 @@ extension Members {
         }
 
         let fotobondString: String
-        if showFotobondNumber, let fotobond {
-            fotobondString = " Fotobond #\(String(format: "%04d", fotobond))" // display 301 as "0301" rather than "301"
+        if showFotobondMemberNumber, let fotobondMemberNumber {
+            fotobondString = " Fotobond #\(String(fotobondMemberNumber.display))" // display 301046 as "0301046"
         } else {
             fotobondString = ""
         }

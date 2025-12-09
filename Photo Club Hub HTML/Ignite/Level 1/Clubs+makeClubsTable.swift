@@ -119,11 +119,14 @@ extension Clubs {
             } .verticalAlignment(.middle)
 
             Column { // Fotobond
-                if club.fotobondNumber > 0 {
-                    String(format: "%04d", club.fotobondNumber) // format ensures that 301 is displayed as 0301
-                        .margin(.leading, 10)
+                if let fotobondClubNumber = club.fotobondClubNumber {
+                    String(fotobondClubNumber.display) // Int16 301 is displayed as 0301, nil is displayed as "-"
+                } else {
+                    String("-")
                 }
-            } .verticalAlignment(.middle)
+            }
+                .verticalAlignment(.middle)
+                .margin(.leading, 10)
 
             Column { // JSON
                 if !club.members.isEmpty {

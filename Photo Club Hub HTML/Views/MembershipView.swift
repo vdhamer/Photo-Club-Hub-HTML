@@ -127,7 +127,7 @@ extension Organization {
         let hansKrüsemannOpt = MemberOptionalFields(
             level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Hans_Krusemann/"),
             memberRolesAndStatus: MemberRolesAndStatus(roles: [ .admin: true ], status: [:]),
-            fotobondNumber: 1620090,
+            fotobondMemberNumber: FotobondMemberNumber(id: 1620090),
             membershipStartDate: "2016-04-01".extractDate(),
             membershipEndDate: nil)
         let hansKrüsemannMem = MemberPortfolio.findCreateUpdate(bgContext: context,
@@ -143,7 +143,7 @@ extension Organization {
         let jelleVanDeVoortOpt = MemberOptionalFields(
             level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Jelle_van_de_Voort/"),
             memberRolesAndStatus: MemberRolesAndStatus(roles: [ .chairman: true ], status: [:]),
-            fotobondNumber: 1620103,
+            fotobondMemberNumber: FotobondMemberNumber(id: 1620103),
             membershipStartDate: "2020-01-01".extractDate(),
             membershipEndDate: nil)
         let jelleVanDeVoortMem = MemberPortfolio.findCreateUpdate(bgContext: context,
@@ -162,7 +162,7 @@ extension Organization {
         let peterVanDenHamerOpt = MemberOptionalFields(
             level3URL: URL(string: "http://www.vdhamer.com/fgDeGender/Peter_van_den_Hamer/"),
             memberRolesAndStatus: MemberRolesAndStatus(roles: [ .admin: true ], status: [:]),
-            fotobondNumber: 1620110,
+            fotobondMemberNumber: FotobondMemberNumber(id: 1620110),
             membershipStartDate: "2024-01-01".extractDate(),
             membershipEndDate: nil)
         let peterVanDenHamerMem = MemberPortfolio.findCreateUpdate(bgContext: context,
