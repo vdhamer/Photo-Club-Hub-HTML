@@ -70,6 +70,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3762A7BF2EE9DB1F0047F531 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Tests/Photo Club Hub HTMLTests/FotobondNumbersTest.swift",
+			);
+			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
+		};
 		D0B9D5012CC443D900B1541C /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -106,6 +113,9 @@
 		};
 		D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3762A7BF2EE9DB1F0047F531 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */,
+			);
 			path = "Photo Club Hub HTML";
 			sourceTree = "<group>";
 		};
@@ -297,6 +307,7 @@
 					};
 					D06B8D452DA48F3200547A05 = {
 						CreatedOnToolsVersion = 16.3;
+						LastSwiftMigration = 2620;
 						TestTargetID = D0E06C0F2C8C5ABC0025734B;
 					};
 					D0E06C0F2C8C5ABC0025734B = {
@@ -447,7 +458,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -479,7 +490,7 @@
 				SWIFT_INSTALL_MODULE = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				XROS_DEPLOYMENT_TARGET = 2.5;
@@ -495,7 +506,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -526,7 +537,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_MODULE = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				XROS_DEPLOYMENT_TARGET = 2.5;
@@ -583,6 +594,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
@@ -592,6 +604,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-HTMLTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Photo Club Hub HTML.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Photo Club Hub HTML";
 			};
@@ -601,6 +614,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;

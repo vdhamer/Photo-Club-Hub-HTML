@@ -84,12 +84,12 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: dendungenIdPlus)
 
-        let individueelBOIdPlus = OrganizationIdPlus(fullName: "Individuele Leden Brabant Oost",
+        let persoonlijk16IdPlus = OrganizationIdPlus(fullName: "Persoonlijke Leden Brabant Oost",
                                                      town: "Brabant Oost",
-                                                     nickname: "IndividueelBO")
+                                                     nickname: "Persoonlijk16")
         let club8: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
-                                                                idPlus: individueelBOIdPlus)
+                                                                idPlus: persoonlijk16IdPlus)
 
         let gestelIdPlus = OrganizationIdPlus(fullName: "Fotokring Sint-Michielsgestel",
                                               town: "Sint-Michielsgestel",

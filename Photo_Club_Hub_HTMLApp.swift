@@ -114,8 +114,8 @@ extension PhotoClubHubHtmlApp {
             useOnlyInBundleFile: useOnlyInBundleFile)
 
         // load current/former members of Fotogroep Oirschot
-        _ = IndividueelBOMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader IndividueelBO"),
+        _ = Persoonlijk16MembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk16"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
