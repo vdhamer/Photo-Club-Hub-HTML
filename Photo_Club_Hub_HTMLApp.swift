@@ -113,7 +113,7 @@ extension PhotoClubHubHtmlApp {
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        // load current/former members of Fotogroep Oirschot
+        // load current/former non-club members of afdeling Brabant Oost (16)
         _ = Persoonlijk16MembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk16"),
             isBeingTested: isBeingTested,
@@ -136,6 +136,12 @@ extension PhotoClubHubHtmlApp {
             bgContext: makeBgContext(ctxName: "Level 2 loader fkGestel"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load current/former non-club members of afdeling Brabant Oost (16)
+        _ = Persoonlijk03MembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk03"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: true) // TODO
 
     }
 
