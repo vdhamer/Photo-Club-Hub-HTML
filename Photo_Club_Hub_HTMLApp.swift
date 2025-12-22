@@ -141,7 +141,7 @@ extension PhotoClubHubHtmlApp {
         _ = Persoonlijk03MembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk03"),
             isBeingTested: isBeingTested,
-            useOnlyInBundleFile: true) // TODO
+            useOnlyInBundleFile: useOnlyInBundleFile)
 
     }
 
