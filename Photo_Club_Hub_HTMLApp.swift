@@ -62,18 +62,25 @@ extension PhotoClubHubHtmlApp {
 
         // Clear CoreData database for simplicity and to trigger initConstants()
         Model.deleteAllCoreDataObjects(viewContext: viewContext)
+	
+	// MARK: - Level 0
 
-        // load list of keywords and languages from root.Level0.json file
+        // load list of Expertises and Languages from root.Level0.json file
         _ = Level0JsonReader(
             bgContext: makeBgContext(ctxName: "Level 0 loader"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        // load list of photo clubs and museums from root.Level1.json file
+        // MARK: - Level 1
+	
+	// load list of photo clubs and museums from root.Level1.json file
         _ = Level1JsonReader(
-            bgContext: makeBgContext(ctxName: "Level 1 loader"),
+            bgContext: makeBgContext(ctxName: "Level 1 loader for root"),
+            fileName: "root_",
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // MARK: - Level 2
 
         // load current/former members of Fotogroep De Gender
         _ = FotogroepDeGenderMembersProvider(
@@ -84,7 +91,7 @@ extension PhotoClubHubHtmlApp {
         // load current/former members of Fotogroep Waalre
         _ = FotogroepWaalreMembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader fgWaalre"),
-            isBeingTested: false,
+            isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
         // load current/former members of Fotoclub Bellus Imago
@@ -93,27 +100,25 @@ extension PhotoClubHubHtmlApp {
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        if includeXampleClubs {
-            // load test member(s) of XampleMin. Club is called XampleMin (instead of ExampleMin) to be at end of list
-            _ = XampleMinMembersProvider(
-                bgContext: makeBgContext(ctxName: "Level 2 loader XampleMin"),
-                isBeingTested: isBeingTested,
-                useOnlyInBundleFile: useOnlyInBundleFile)
-
-            // load test member(s) of XampleMax. Club is called XampleMax (instead of ExampleMin) to be at end of list
-            _ = XampleMaxMembersProvider(
-                bgContext: makeBgContext(ctxName: "Level 2 loader XampleMax"),
-                isBeingTested: isBeingTested,
-                useOnlyInBundleFile: useOnlyInBundleFile)
-        }
-
         // load current/former members of Fotogroep Oirschot
         _ = FotogroepOirschotMembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader fgOirschot"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        // load current/former non-club members of afdeling Brabant Oost (16)
+        // load test member(s) of XampleMin. Club name starts with an X in order to be at end of list
+        _ = XampleMinMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader XampleMin"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
+        // load test member(s) of XampleMax. Club name starts with an X in order to be at end of list
+        _ = XampleMaxMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader XampleMax"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+	    
+        // load current/former members of container for Persoonlijke members of Fotobond (in region 16)
         _ = Persoonlijk16MembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk16"),
             isBeingTested: isBeingTested,
@@ -137,7 +142,7 @@ extension PhotoClubHubHtmlApp {
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        // load current/former non-club members of afdeling Brabant Oost (16)
+        // load current/former members of container for Persoonlijke members of Fotobond (in region 03)
         _ = Persoonlijk03MembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk03"),
             isBeingTested: isBeingTested,
