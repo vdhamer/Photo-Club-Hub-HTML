@@ -62,7 +62,7 @@ extension PhotoClubHubHtmlApp {
 
         // Clear CoreData database for simplicity and to trigger initConstants()
         Model.deleteAllCoreDataObjects(viewContext: viewContext)
-	
+
 	// MARK: - Level 0
 
         // load list of Expertises and Languages from root.Level0.json file
@@ -72,7 +72,7 @@ extension PhotoClubHubHtmlApp {
             useOnlyInBundleFile: useOnlyInBundleFile)
 
         // MARK: - Level 1
-	
+
 	// load list of photo clubs and museums from root.Level1.json file
         _ = Level1JsonReader(
             bgContext: makeBgContext(ctxName: "Level 1 loader for root"),
@@ -117,7 +117,7 @@ extension PhotoClubHubHtmlApp {
             bgContext: makeBgContext(ctxName: "Level 2 loader XampleMax"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
-	    
+
         // load current/former members of container for Persoonlijke members of Fotobond (in region 16)
         _ = Persoonlijk16MembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk16"),
