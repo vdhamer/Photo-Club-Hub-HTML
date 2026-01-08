@@ -28,12 +28,16 @@ struct Level2Site: Site {
     // swiftlint:disable:next function_body_length
     init(moc: NSManagedObjectContext) {
 
+        // Mark - 0
+
         let deGenderIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
                                                 town: "Eindhoven",
                                                 nickname: "fgDeGender")
         let club0: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
                                                                 idPlus: deGenderIdPlus)
+
+        // Mark - 1
 
         let waalreIdPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre",
                                               town: "Waalre",
@@ -42,12 +46,16 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: waalreIdPlus)
 
+        // Mark - 2
+
         let bellusImagoIdPlus = OrganizationIdPlus(fullName: "Fotoclub Bellus Imago",
                                                    town: "Veldhoven",
                                                    nickname: "fcBellusImago")
         let club2: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
                                                                 idPlus: bellusImagoIdPlus)
+
+        // Mark - 3
 
         let xampleMinIdPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data",
                                                  town: "Amsterdam",
@@ -56,12 +64,16 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: xampleMinIdPlus)
 
+        // Mark - 4
+
         let xampleMaxIdPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data",
                                                  town: "Rotterdam",
                                                  nickname: "XampleMax")
         let club4: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
                                                                 idPlus: xampleMaxIdPlus)
+
+        // Mark - 5
 
         let ericameraIdPlus = OrganizationIdPlus(fullName: "Fotoclub Ericamera",
                                                  town: "Eindhoven",
@@ -70,12 +82,16 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: ericameraIdPlus)
 
+        // Mark - 6
+
         let oirschotIdPlus = OrganizationIdPlus(fullName: "Fotogroep Oirschot",
                                                 town: "Oirschot",
                                                 nickname: "fgOirschot")
         let club6: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
                                                                 idPlus: oirschotIdPlus)
+
+        // Mark - 7
 
         let dendungenIdPlus = OrganizationIdPlus(fullName: "Fotoclub Den Dungen",
                                                  town: "Den Dungen",
@@ -84,6 +100,8 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: dendungenIdPlus)
 
+        // Mark - 8
+
         let persoonlijk16IdPlus = OrganizationIdPlus(fullName: "Persoonlijke Leden Brabant Oost",
                                                      town: "Brabant Oost",
                                                      nickname: "Persoonlijk16")
@@ -91,12 +109,16 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: persoonlijk16IdPlus)
 
+        // Mark - 9
+
         let gestelIdPlus = OrganizationIdPlus(fullName: "Fotokring Sint-Michielsgestel",
                                               town: "Sint-Michielsgestel",
                                               nickname: "fkGestel")
         let club9: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
                                                                 idPlus: gestelIdPlus)
+
+        // Mark - 10
 
         let persoonlijk03IdPlus = OrganizationIdPlus(fullName: "Persoonlijke Leden Drenthe - Vechtdal",
                                                      town: "Drenthe - Vechtdal",

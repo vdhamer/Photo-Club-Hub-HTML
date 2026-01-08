@@ -141,7 +141,7 @@ struct Members: StaticPage {
 func navigationBar() -> NavigationBar {
     NavigationBar(
             logo: Button(label: {
-                Image("/images/AppIcon.png", description: "App icon")
+                Image("/images/AppIcon/AppIcon.png", description: "App icon")
                     .resizable()
                     .frame(width: 40)
                     .padding(.trailing, 15)
