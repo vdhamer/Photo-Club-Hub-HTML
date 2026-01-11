@@ -28,7 +28,7 @@ struct Level2Site: Site {
     // swiftlint:disable:next function_body_length
     init(moc: NSManagedObjectContext) {
 
-        // Mark - 0
+        // MARK: - Club 0
 
         let deGenderIdPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
                                                 town: "Eindhoven",
@@ -37,7 +37,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: deGenderIdPlus)
 
-        // Mark - 1
+        // MARK: - Club 1
 
         let waalreIdPlus = OrganizationIdPlus(fullName: "Fotogroep Waalre",
                                               town: "Waalre",
@@ -46,7 +46,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: waalreIdPlus)
 
-        // Mark - 2
+        // MARK: - Club 2
 
         let bellusImagoIdPlus = OrganizationIdPlus(fullName: "Fotoclub Bellus Imago",
                                                    town: "Veldhoven",
@@ -55,7 +55,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: bellusImagoIdPlus)
 
-        // Mark - 3
+        // MARK: - Club 3
 
         let xampleMinIdPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data",
                                                  town: "Amsterdam",
@@ -64,7 +64,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: xampleMinIdPlus)
 
-        // Mark - 4
+        // MARK: - Club 4
 
         let xampleMaxIdPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data",
                                                  town: "Rotterdam",
@@ -73,7 +73,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: xampleMaxIdPlus)
 
-        // Mark - 5
+        // MARK: - Club 5
 
         let ericameraIdPlus = OrganizationIdPlus(fullName: "Fotoclub Ericamera",
                                                  town: "Eindhoven",
@@ -82,7 +82,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: ericameraIdPlus)
 
-        // Mark - 6
+        // MARK: - Club 6
 
         let oirschotIdPlus = OrganizationIdPlus(fullName: "Fotogroep Oirschot",
                                                 town: "Oirschot",
@@ -91,7 +91,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: oirschotIdPlus)
 
-        // Mark - 7
+        // MARK: - Club 7
 
         let dendungenIdPlus = OrganizationIdPlus(fullName: "Fotoclub Den Dungen",
                                                  town: "Den Dungen",
@@ -100,7 +100,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: dendungenIdPlus)
 
-        // Mark - 8
+        // MARK: - Club 8
 
         let persoonlijk16IdPlus = OrganizationIdPlus(fullName: "Persoonlijke Leden Brabant Oost",
                                                      town: "Brabant Oost",
@@ -109,7 +109,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: persoonlijk16IdPlus)
 
-        // Mark - 9
+        // MARK: - Club 9
 
         let gestelIdPlus = OrganizationIdPlus(fullName: "Fotokring Sint-Michielsgestel",
                                               town: "Sint-Michielsgestel",
@@ -118,7 +118,7 @@ struct Level2Site: Site {
                                                                 organizationTypeEnum: club,
                                                                 idPlus: gestelIdPlus)
 
-        // Mark - 10
+        // MARK: - Club 10
 
         let persoonlijk03IdPlus = OrganizationIdPlus(fullName: "Persoonlijke Leden Drenthe - Vechtdal",
                                                      town: "Drenthe - Vechtdal",
