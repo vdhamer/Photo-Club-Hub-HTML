@@ -129,8 +129,19 @@ struct Level2Site: Site {
 
         self.moc = moc
 
-        let chosenClubIX: Int = 0 // roundabout way to avoid SwiftLint warnings about unused properties
-        let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8, club9, club10]
+        // MARK: - Club 11
+
+        let fcVeghelIdPlus = OrganizationIdPlus(fullName: "Fotoclub Veghel",
+                                                     town: "Veghel",
+                                                     nickname: "fcVeghel")
+        let club11: Organization = Organization.findCreateUpdate(context: moc,
+                                                                 organizationTypeEnum: club,
+                                                                 idPlus: fcVeghelIdPlus)
+
+        self.moc = moc
+
+        let chosenClubIX: Int = 9 // roundabout way to avoid SwiftLint warnings about unused properties
+        let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8, club9, club10, club11]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
         self.homePage = Members(moc: moc, club: club)

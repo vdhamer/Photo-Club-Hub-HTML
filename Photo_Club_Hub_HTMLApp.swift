@@ -148,6 +148,12 @@ extension PhotoClubHubHtmlApp {
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
+        // load current/former members of Fotoclub Veghel
+        _ = FotoclubVeghelMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader fcVeghel"),
+            isBeingTested: isBeingTested,
+            useOnlyInBundleFile: useOnlyInBundleFile)
+
     }
 
     static func makeBgContext(ctxName: String) -> NSManagedObjectContext {
