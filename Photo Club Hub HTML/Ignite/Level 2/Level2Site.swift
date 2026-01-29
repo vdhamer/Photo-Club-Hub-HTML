@@ -127,8 +127,6 @@ struct Level2Site: Site {
                                                                  organizationTypeEnum: club,
                                                                  idPlus: persoonlijk03IdPlus)
 
-        self.moc = moc
-
         // MARK: - Club 11
 
         let fcVeghelIdPlus = OrganizationIdPlus(fullName: "Fotoclub Veghel",
@@ -138,12 +136,30 @@ struct Level2Site: Site {
                                                                  organizationTypeEnum: club,
                                                                  idPlus: fcVeghelIdPlus)
 
-        self.moc = moc
+        // MARK: - Club 12
+
+        let ffcShot71IdPlus = OrganizationIdPlus(fullName: "FFC Shot71",
+                                                 town: "Berlicum",
+                                                 nickname: "ffcShot71")
+        let club12: Organization = Organization.findCreateUpdate(context: moc,
+                                                                 organizationTypeEnum: club,
+                                                                 idPlus: ffcShot71IdPlus)
+
+        // MARK: - Club 13
+
+        let fegGemertIdPlus = OrganizationIdPlus(fullName: "Foto Expressie Groep Gemert",
+                                                     town: "Gemert",
+                                                     nickname: "fegGemert")
+        let club13: Organization = Organization.findCreateUpdate(context: moc,
+                                                                 organizationTypeEnum: club,
+                                                                 idPlus: fegGemertIdPlus)
 
         let chosenClubIX: Int = 9 // roundabout way to avoid SwiftLint warnings about unused properties
-        let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8, club9, club10, club11]
+        let clubs = [club0, club1, club2, club3, club4, club5, club6, club7, club8, club9, club10,
+                     club11, club12, club13]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
+        self.moc = moc
         self.homePage = Members(moc: moc, club: club)
     }
 
