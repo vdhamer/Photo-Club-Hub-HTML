@@ -23,6 +23,7 @@ extension Members {
     // former: whether to list former members or current members
     // moc: use this CoreData Managed Object Context
     // club: for which club are we generating this?
+    //
     // return Int: count of returned members (can't directly count size of Ignite Table)
     // return Table: Ignite table containing rendering of requested members
     mutating func makeMembersTable(former: Bool,
@@ -306,7 +307,10 @@ extension Members {
             var results: (data: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
             results = URLSession.shared.synchronousDataTask(from: downloadURL)
             guard let data = results?.data else {
-                fatalError("Problems fetching thumbnail: \(results?.error?.localizedDescription ?? "")")
+                fatalError("""
+                           Problem downloading thumbnail \(downloadURL.absoluteString): \
+                           \(results?.error?.localizedDescription ?? "")
+                           """)
             }
 
             let image: CGImage = try CGImage.load(data: data) // SwiftImageReadWrite package
