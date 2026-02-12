@@ -340,7 +340,8 @@ extension Members {
 
         if start != nil {
             let end: Date = (end != nil) ? end! : Date.now // optional -> not optional
-            let dateInterval = DateInterval(start: start!, end: end)
+            let start: Date = ((start != nil) && (start! < Date.distantFuture)) ? start! : Date.now // if "9999-01-01"
+            let dateInterval = DateInterval(start: start, end: end)
             years = dateInterval.duration / (365.25 * 24 * 60 * 60)
         }
 
