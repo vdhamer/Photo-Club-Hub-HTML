@@ -30,6 +30,14 @@ extension Members {
                                    moc: NSManagedObjectContext,
                                    club: Organization) -> MakeMembersTableResult {
         do {
+
+            // Maps local thumbnail filenames (in /Assemts/images/) to the full remote path from which it was fetched.
+            // This dictionary is used to ensure that different remote paths all have unique local filenames.
+            // The key string is needed to check if a given candidate local filename is already in use.
+            // If so, another candidate local filename is checked until an available candidate filename is found.
+            // The value string is for checking if a used local filename happens to have the desired full remote path.
+            var localNmeToRemoteThumbnailPath: [String: String] = [:]
+
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
             let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
                                                    ascending: true)
