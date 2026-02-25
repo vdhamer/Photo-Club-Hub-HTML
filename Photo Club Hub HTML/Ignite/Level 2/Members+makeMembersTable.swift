@@ -20,23 +20,30 @@ let maxKeywordsPerMember: Int = 2
 
 extension Members {
 
-    // former: whether to list former members or current members
-    // moc: use this CoreData Managed Object Context
-    // club: for which club are we generating this?
+    // Builds and returns an Ignite HTML table of members (current or former) for a specific organization,
+    // along with a few counts.
     //
-    // return Int: count of returned members (can't directly count size of Ignite Table)
-    // return Table: Ignite table containing rendering of requested members
+    // input:
+    //   - former: whether to list former members or current members
+    //   - moc: use this CoreData Managed Object Context
+    //   - club: Organization whose members are being displayed.
+    //
+    // returns a struct containing
+    //   - table: Ignite table containing HTML rendering of requested members
+    //   - memberCount: number of members returned in table
+    //   - memberCountWithStartDate: number of returned members who have a non-nil membership start date
     mutating func makeMembersTable(former: Bool,
                                    moc: NSManagedObjectContext,
                                    club: Organization) -> MakeMembersTableResult {
         do {
 
-            // Maps local thumbnail filenames (in /Assemts/images/) to the full remote path from which it was fetched.
-            // This dictionary is used to ensure that different remote paths all have unique local filenames.
+            // Dictionary that maps local thumbnail filenames (in /Assets/images/foobar.jpg)
+            // to the full remote path from which it was downloaded.
+            // The dictionary ensures that different remote paths all have unique local filenames.
             // The key string is needed to check if a given candidate local filename is already in use.
-            // If so, another candidate local filename is checked until an available candidate filename is found.
+            // If it is, try another candidate local filename until an unused candidate filename is found.
             // The value string is for checking if a used local filename happens to have the desired full remote path.
-            var localNmeToRemoteThumbnailPath: [String: String] = [:]
+            var localNameToRemotePath: [String: String] = [:] // start off with empty dictionary
 
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
             let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
@@ -61,7 +68,8 @@ extension Members {
                                   fotobondMemberNumber: member.fotobondMemberNumber,
                                   roles: member.memberRolesAndStatus,
                                   portfolio: member.level3URL_,
-                                  thumbnail: member.featuredImageThumbnail
+                                  thumbnail: member.featuredImageThumbnail,
+                                  dictionary: &localNameToRemotePath
                         )
                     }
                 }
@@ -95,9 +103,8 @@ extension Members {
                                         fotobondMemberNumber: FotobondMemberNumber? = nil,
                                         roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
                                         portfolio: URL? = nil,
-                                        thumbnail: URL) -> Row {
-
-        downloadThumbnailToLocal(downloadURL: thumbnail)
+                                        thumbnail: URL,
+                                        dictionary: inout [String: String]) -> Row {
 
         return Row {
 
@@ -110,7 +117,7 @@ extension Members {
                                      familyName: photographer.familyName).replacingUTF8Diacritics,
                             target: portfolio ??
                                     URL(string: MemberPortfolio.emptyPortfolioURL) ??
-                                    URL(string: "https://www.google.com")! // in case emptoPortfolioURL const is broken
+                                    URL(string: "https://www.google.com")! // in case emptyPortfolioURL const is broken
                         )
                             .linkStyle(.hover)
                         if roles.status[.deceased] == true {
@@ -139,7 +146,7 @@ extension Members {
 
                         }
                     } .font(.title5) .padding(.none) .margin(0)
-                    Text {
+                    Text { // show how long the photographer was a member of this club
                         formatMembershipYears(start: membershipStartDate,
                                               end: membershipEndDate,
                                               isFormer: isFormerMember(roles: roles),
@@ -148,7 +155,7 @@ extension Members {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column(items: listPhotographerExpertises)
+            Column(items: listPhotographerExpertises) // expertise tags (can be empty array)
                 .verticalAlignment(.middle)
 
             if photographer.photographerWebsite == nil { // photographer's optional own website
@@ -167,8 +174,8 @@ extension Members {
             }
 
             Column { // clickable thumbnail of recent work
-                Image(lastPathComponent(fullUrl: thumbnail.absoluteString), // Ignite prepends /images/
-                      description: "clickable link to portfolio")
+                Image("/images/"+loadThumbnailToLocal(fullUrl: thumbnail, dictionary: &dictionary),
+                      description: "clickable link to portfolio") // Ignite prepends /images/
                     .resizable()
                     .cornerRadius(8)
                     .aspectRatio(.square, contentMode: .fill)
@@ -308,7 +315,7 @@ extension Members {
         return "/images/\(lastComponent)"
     }
 
-    private func downloadThumbnailToLocal(downloadURL: URL) { // for now this is synchronous
+    private func downloadThumbnailToLocal(downloadURL: URL, localFileName: String) { // for now this is synchronous
 
         do {
             // swiftlint:disable:next large_tuple
@@ -324,7 +331,6 @@ extension Members {
             let image: CGImage = try CGImage.load(data: data) // SwiftImageReadWrite package
             let jpegData: Data  = try image.representation.jpeg(scale: 1, compression: 0.65, excludeGPSData: true)
 
-            let lastComponent: String = downloadURL.lastPathComponent // e.g. "2023_FotogroepWaalre_001.jpg"
             let buildDirectoryString = NSHomeDirectory() // app's home directory for a sandboxed MacOS app
 
             // some extra steps to ensure the Assets/images subdirectory exists
@@ -333,8 +339,8 @@ extension Members {
                 fatalError("Error creating URL for \(imagesDirectoryString)") }
             try FileManager.default.createDirectory(at: imageDirUrl, withIntermediateDirectories: true, attributes: nil)
 
-            guard let imageUrl = URL(string: "\(imagesDirectoryString)\(lastComponent)") else {
-                fatalError("Error creating URL for \(imagesDirectoryString)\(lastComponent)")
+            guard let imageUrl = URL(string: "\(imagesDirectoryString)\(localFileName)") else { // TODO \\
+                fatalError("Error creating URL for \(imagesDirectoryString)\(localFileName)")
             }
             try jpegData.write(to: imageUrl)
             print("Wrote jpg to \(imageUrl)")
@@ -406,6 +412,46 @@ extension Members {
     private func toYear(date: Date) -> String {
         dateFormatter.dateFormat = "yyyy"
         return dateFormatter.string(from: date) // "2020"
+    }
+
+    private func loadThumbnailToLocal(fullUrl: URL, dictionary: inout [String: String]) -> String {
+        let newFileName = chooseLocalFileName(fullUrl: fullUrl, dictionary: &dictionary)
+        downloadThumbnailToLocal(downloadURL: fullUrl, localFileName: newFileName)
+        return newFileName
+    }
+
+    private func chooseLocalFileName(fullUrl: URL, dictionary: inout [String: String]) -> String {
+        // TODO move loadThumbnailToLocal() and dictionary to separate struct GenerateSuffix which has an initializer
+        let fileExtention: String = fullUrl.pathExtension
+        let baseFileName: String = fullUrl.deletingPathExtension().lastPathComponent
+        let remoteURLString: String = fullUrl.absoluteString
+
+        var count: Int = 1
+
+        while count <= 50 {
+            let newFileName: String
+            if count == 1 {
+                newFileName = baseFileName + ".\(fileExtention)" // no need to change name
+            } else {
+                newFileName = baseFileName + "_\(count).\(fileExtention)"
+            }
+
+            if dictionary[newFileName] == nil { // haven't seen this filename variant yet for this club
+                dictionary[newFileName] = remoteURLString
+                return newFileName // newFileName hasn't been used before for this club
+            } else {
+                if dictionary[newFileName] == remoteURLString {
+                    return newFileName
+                } else {
+                    count += 1
+                    continue
+                }
+            }
+        }
+
+        ifDebugFatalError("Error: could not generate unique local image filename.")
+        return baseFileName + "_" + "error"
+
     }
 
 }
