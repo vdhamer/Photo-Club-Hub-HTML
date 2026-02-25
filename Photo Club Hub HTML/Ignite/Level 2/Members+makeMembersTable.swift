@@ -339,7 +339,7 @@ extension Members {
                 fatalError("Error creating URL for \(imagesDirectoryString)") }
             try FileManager.default.createDirectory(at: imageDirUrl, withIntermediateDirectories: true, attributes: nil)
 
-            guard let imageUrl = URL(string: "\(imagesDirectoryString)\(localFileName)") else { // TODO \\
+            guard let imageUrl = URL(string: "\(imagesDirectoryString)\(localFileName)") else {
                 fatalError("Error creating URL for \(imagesDirectoryString)\(localFileName)")
             }
             try jpegData.write(to: imageUrl)
