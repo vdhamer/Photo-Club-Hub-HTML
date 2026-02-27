@@ -20,6 +20,8 @@ let maxKeywordsPerMember: Int = 2
 
 extension Members {
 
+    // MARK: - stays in this file TODO delete this MARK
+
     // Builds and returns an Ignite HTML table of members (current or former) for a specific organization,
     // along with a few counts.
     //
@@ -93,6 +95,8 @@ extension Members {
         }
 
     }
+
+    // MARK: - new file makeMemberRow
 
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
@@ -279,40 +283,46 @@ extension Members {
 
     }
 
-    private func customHint(localizedExpertiseResults: [LocalizedExpertiseResult]) -> String {
-        var hint: String = ""
+    // MARK: - new file Thumbnail
 
-        for localizedExpertiseResult in localizedExpertiseResults {
-            if localizedExpertiseResult.localizedExpertise != nil {
-                hint.append(getIconString(isSupported: true) + " " +
-                            localizedExpertiseResult.localizedExpertise!.name + " ")
+    private func loadThumbnailToLocal(fullUrl: URL, dictionary: inout [String: String]) -> String {
+        let newFileName = chooseLocalFileName(fullUrl: fullUrl, dictionary: &dictionary)
+        downloadThumbnailToLocal(downloadURL: fullUrl, localFileName: newFileName)
+        return newFileName
+    }
+
+    private func chooseLocalFileName(fullUrl: URL, dictionary: inout [String: String]) -> String {
+        // TODO move loadThumbnailToLocal() and dictionary to separate struct GenerateSuffix which has an initializer
+        let fileExtention: String = fullUrl.pathExtension
+        let baseFileName: String = fullUrl.deletingPathExtension().lastPathComponent
+        let remoteURLString: String = fullUrl.absoluteString
+
+        var count: Int = 1
+
+        while count <= 50 {
+            let newFileName: String
+            if count == 1 {
+                newFileName = baseFileName + ".\(fileExtention)" // no need to change name
             } else {
-                hint.append(getIconString(isSupported: true) + " " + localizedExpertiseResult.id + " ")
+                newFileName = baseFileName + "_\(count).\(fileExtention)"
+            }
+
+            if dictionary[newFileName] == nil { // haven't seen this filename variant yet for this club
+                dictionary[newFileName] = remoteURLString
+                return newFileName // newFileName hasn't been used before for this club
+            } else {
+                if dictionary[newFileName] == remoteURLString {
+                    return newFileName
+                } else {
+                    count += 1
+                    continue
+                }
             }
         }
 
-        return hint.trimmingCharacters(in: CharacterSet(charactersIn: " "))
-    }
+        ifDebugFatalError("Error: could not generate unique local image filename.")
+        return baseFileName + "_" + "error"
 
-    private func getIconString(isSupported: Bool) -> String {
-        let lerLists = LocalizedExpertiseResultLists(supportedList: [], temporaryList: [])
-        return isSupported ? lerLists.supported.icon : lerLists.temporary.icon
-    }
-
-    private func fullName(givenName: String,
-                          infixName: String = "",
-                          familyName: String) -> String {
-        if infixName.isEmpty {
-            return givenName + " " + familyName
-        } else {
-            return givenName + " " + infixName + " " + familyName
-        }
-    }
-
-    private func lastPathComponent(fullUrl: String) -> String {
-        let url = URL(string: fullUrl)
-        let lastComponent: String = url?.lastPathComponent ?? "error in lastPathComponent"
-        return "/images/\(lastComponent)"
     }
 
     private func downloadThumbnailToLocal(downloadURL: URL, localFileName: String) { // for now this is synchronous
@@ -350,6 +360,8 @@ extension Members {
         }
 
     }
+
+    // MARK: - new file Formatting
 
     private mutating func formatMembershipYears(start: Date?, end: Date?,
                                                 isFormer: Bool,
@@ -414,44 +426,36 @@ extension Members {
         return dateFormatter.string(from: date) // "2020"
     }
 
-    private func loadThumbnailToLocal(fullUrl: URL, dictionary: inout [String: String]) -> String {
-        let newFileName = chooseLocalFileName(fullUrl: fullUrl, dictionary: &dictionary)
-        downloadThumbnailToLocal(downloadURL: fullUrl, localFileName: newFileName)
-        return newFileName
+    private func fullName(givenName: String,
+                          infixName: String = "",
+                          familyName: String) -> String {
+        if infixName.isEmpty {
+            return givenName + " " + familyName
+        } else {
+            return givenName + " " + infixName + " " + familyName
+        }
     }
 
-    private func chooseLocalFileName(fullUrl: URL, dictionary: inout [String: String]) -> String {
-        // TODO move loadThumbnailToLocal() and dictionary to separate struct GenerateSuffix which has an initializer
-        let fileExtention: String = fullUrl.pathExtension
-        let baseFileName: String = fullUrl.deletingPathExtension().lastPathComponent
-        let remoteURLString: String = fullUrl.absoluteString
+    // MARK: - expertise rendering
 
-        var count: Int = 1
+    private func customHint(localizedExpertiseResults: [LocalizedExpertiseResult]) -> String {
+        var hint: String = ""
 
-        while count <= 50 {
-            let newFileName: String
-            if count == 1 {
-                newFileName = baseFileName + ".\(fileExtention)" // no need to change name
+        for localizedExpertiseResult in localizedExpertiseResults {
+            if localizedExpertiseResult.localizedExpertise != nil {
+                hint.append(getIconString(isSupported: true) + " " +
+                            localizedExpertiseResult.localizedExpertise!.name + " ")
             } else {
-                newFileName = baseFileName + "_\(count).\(fileExtention)"
-            }
-
-            if dictionary[newFileName] == nil { // haven't seen this filename variant yet for this club
-                dictionary[newFileName] = remoteURLString
-                return newFileName // newFileName hasn't been used before for this club
-            } else {
-                if dictionary[newFileName] == remoteURLString {
-                    return newFileName
-                } else {
-                    count += 1
-                    continue
-                }
+                hint.append(getIconString(isSupported: true) + " " + localizedExpertiseResult.id + " ")
             }
         }
 
-        ifDebugFatalError("Error: could not generate unique local image filename.")
-        return baseFileName + "_" + "error"
+        return hint.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+    }
 
+    private func getIconString(isSupported: Bool) -> String {
+        let lerLists = LocalizedExpertiseResultLists(supportedList: [], temporaryList: [])
+        return isSupported ? lerLists.supported.icon : lerLists.temporary.icon
     }
 
 }
