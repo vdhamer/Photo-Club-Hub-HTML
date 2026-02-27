@@ -20,8 +20,6 @@ let maxKeywordsPerMember: Int = 2
 
 extension Members {
 
-    // MARK: - stays in this file TODO delete this MARK
-
     // Builds and returns an Ignite HTML table of members (current or former) for a specific organization,
     // along with a few counts.
     //
