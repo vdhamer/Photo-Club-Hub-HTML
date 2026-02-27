@@ -19,8 +19,9 @@ let maxKeywordsPerMember: Int = 2
 
 extension Members {
 
-    // Builds and returns an Ignite HTML table of members (current or former) for a specific organization,
-    // along with a few counts.
+    // Builds and returns an Ignite HTML table with the members (current or former) of a specific club,
+    // along with a few counts. The table shows current, and optionally former members of the club.
+    // This files uses a lot of other extensions of Members to handle the details.
     //
     // input:
     //   - former: whether to list former members or current members
