@@ -314,6 +314,23 @@
         }
       }
     },
+    "From %@ %@" : {
+      "comment" : "Mouseover hint on cell containing start-end years",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "From %1$@ %2$@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lid sinds %1$@ %2$@"
+          }
+        }
+      }
+    },
     "From %@ to %@ (%@ years)%@" : {
       "comment" : "Mouseover hint on cell containing start-end years",
       "localizations" : {
@@ -327,23 +344,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lid van %1$@ t/m %2$@ (%3$@ jaar)%4$@"
-          }
-        }
-      }
-    },
-    "From %@%@" : {
-      "comment" : "Mouseover hint on cell containing start-end years",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "From %1$@%2$@"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lid sinds %1$@%2$@"
           }
         }
       }

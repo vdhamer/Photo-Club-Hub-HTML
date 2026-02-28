@@ -7,9 +7,11 @@
 
 import Foundation // for URL
 import Photo_Club_Hub_Data // for ifDebugFatalError()
-import AppKit // for CGImage
+import CoreGraphics // for CGImage
 
 extension Members {
+
+    private static let maxFilenameSuffixNumber: Int = 50 // generates a warning in Debug version if count is suspicious
 
     func loadThumbnailToLocal(fullUrl: URL, dictionary: inout [String: String]) -> String {
         let newFileName = chooseLocalFileName(fullUrl: fullUrl, dictionary: &dictionary)
@@ -18,19 +20,25 @@ extension Members {
     }
 
     private func chooseLocalFileName(fullUrl: URL, dictionary: inout [String: String]) -> String {
-        // TODO move loadThumbnailToLocal() and dictionary to separate struct GenerateSuffix which has an initializer
-        let fileExtention: String = fullUrl.pathExtension
+        let fileExtension: String = fullUrl.pathExtension
         let baseFileName: String = fullUrl.deletingPathExtension().lastPathComponent
         let remoteURLString: String = fullUrl.absoluteString
 
         var count: Int = 1
 
-        while count <= 50 {
+        while true { // assumes we eventually find an unused filename
+
+            if count > Members.maxFilenameSuffixNumber {
+                // is while-loop getting suspicious?
+                // only happens if club exceeds maxFilenameSuffixNumber members, and many of them use same filename
+                ifDebugFatalError("Error: could not generate unique local image filename.")
+            } // fatal error only occurs in Debug build
+
             let newFileName: String
             if count == 1 {
-                newFileName = baseFileName + ".\(fileExtention)" // no need to change name
+                newFileName = baseFileName + ".\(fileExtension)" // no need to change name
             } else {
-                newFileName = baseFileName + "_\(count).\(fileExtention)"
+                newFileName = baseFileName + "_\(count).\(fileExtension)"
             }
 
             if dictionary[newFileName] == nil { // haven't seen this filename variant yet for this club
@@ -45,9 +53,6 @@ extension Members {
                 }
             }
         }
-
-        ifDebugFatalError("Error: could not generate unique local image filename.")
-        return baseFileName + "_" + "error"
 
     }
 

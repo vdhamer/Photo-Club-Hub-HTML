@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		377407A92F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
+		377407AA2F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
+		377407AB2F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C912CE927D00054F87B /* Ignite */; };
+		377407AC2F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0DD92CEBD7B900EFBE87 /* Ignite */; };
+		377407AD2F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0EB12CEBDD6A00EFBE87 /* Ignite */; };
+		377407AE2F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0F8C2CEBE0F500EFBE87 /* Ignite */; };
 		D00FBE232CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */; };
 		D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */ = {isa = PBXBuildFile; productRef = D04594D12CD6CB5400A52BFB /* SwiftImageReadWrite */; };
 		D05E366B2DD2526C005697AC /* Photo Club Hub Data in Resources */ = {isa = PBXBuildFile; fileRef = D05E366A2DD2526C005697AC /* Photo Club Hub Data */; };
 		D05E36A72DD253A7005697AC /* Photo_Club_Hub_Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05E369E2DD253A7005697AC /* Photo_Club_Hub_Data.framework */; };
 		D06B8D502DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */; };
-		D099D0DF2DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
-		D099D0E02DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
-		D099D0E12DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C912CE927D00054F87B /* Ignite */; };
-		D099D0E22DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0DD92CEBD7B900EFBE87 /* Ignite */; };
-		D099D0E32DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0EB12CEBDD6A00EFBE87 /* Ignite */; };
 		D099D0E42DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0EB42CEBDE3500EFBE87 /* Ignite */; settings = {ATTRIBUTES = (Required, ); }; };
 		D09D24EE2DD3FADD00355740 /* Photo Club Hub Data in Frameworks */ = {isa = PBXBuildFile; productRef = D09D24ED2DD3FADD00355740 /* Photo Club Hub Data */; };
 		D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C942CE928650054F87B /* SwiftyJSON */; };
-		D0AD0F8D2CEBE0F500EFBE87 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0F8C2CEBE0F500EFBE87 /* Ignite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,15 +141,15 @@
 		D0E06C0D2C8C5ABC0025734B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				377407AE2F535BE100C9C116 /* Ignite in Frameworks */,
+				377407AD2F535BE100C9C116 /* Ignite in Frameworks */,
+				377407AC2F535BE100C9C116 /* Ignite in Frameworks */,
+				377407AB2F535BE100C9C116 /* Ignite in Frameworks */,
+				377407AA2F535BE100C9C116 /* Ignite in Frameworks */,
+				377407A92F535BE100C9C116 /* Ignite in Frameworks */,
 				D099D0E42DD25B7400FAA7C0 /* Ignite in Frameworks */,
-				D099D0E32DD25B7400FAA7C0 /* Ignite in Frameworks */,
 				D09D24EE2DD3FADD00355740 /* Photo Club Hub Data in Frameworks */,
-				D099D0E22DD25B7400FAA7C0 /* Ignite in Frameworks */,
-				D099D0E12DD25B7400FAA7C0 /* Ignite in Frameworks */,
-				D099D0E02DD25B7400FAA7C0 /* Ignite in Frameworks */,
-				D099D0DF2DD25B7400FAA7C0 /* Ignite in Frameworks */,
 				D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */,
-				D0AD0F8D2CEBE0F500EFBE87 /* Ignite in Frameworks */,
 				D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */,
 			);
 		};
@@ -295,7 +295,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					D05E369D2DD253A7005697AC = {
 						CreatedOnToolsVersion = 16.4;
@@ -482,6 +482,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-Data";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = macosx;
@@ -530,6 +531,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-Data";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = macosx;
@@ -548,6 +550,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
@@ -557,6 +560,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-DataTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = NO;
@@ -571,6 +575,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
@@ -580,6 +585,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-DataTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = NO;
@@ -595,6 +601,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
@@ -603,6 +610,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-HTMLTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -615,6 +623,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
@@ -623,6 +632,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vdHamer.Photo-Club-Hub-HTMLTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Photo Club Hub HTML.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Photo Club Hub HTML";
@@ -768,12 +778,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Photo Club Hub HTML/Photo_Club_Hub_HTML.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Photo Club Hub HTML/Preview Content\"";
+				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
@@ -806,12 +816,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Photo Club Hub HTML/Photo_Club_Hub_HTML.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Photo Club Hub HTML/Preview Content\"";
+				DEVELOPMENT_TEAM = YDEWPN9GZ6;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;

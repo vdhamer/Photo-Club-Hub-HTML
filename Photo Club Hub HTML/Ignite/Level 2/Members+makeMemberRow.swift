@@ -11,8 +11,14 @@ import Photo_Club_Hub_Data // for Photographer
 
 extension Members {
 
-    // generates an Ignite Row in an Ignite table
-    // swiftlint:disable:next function_body_length
+    // swiftlint:disable function_body_length
+
+    /// `Members.makeMemberRow` renders a single Ignite `Row` for a club member with:
+    /// - The photographer's name (clickable, navigates to the member's portfolio)
+    /// - Number of  years photographer was a member of this club (empty if data is unavailable). Shown below the name.
+    /// - Role/status badges (empty if data is not available of if member has no special role or status in this club)
+    /// - Personal website link (empty if there is no known personal website)
+    /// - Clickable thumbnail that navigates to the member's portfolio
     mutating func makeMemberRow(moc: NSManagedObjectContext,
                                 photographer: Photographer,
                                 membershipStartDate: Date?, // nil means app didn't receive a start date
@@ -108,6 +114,9 @@ extension Members {
 
         }
 
+        /// Returns the first applicable member status (excluding `.former` and `.current`).
+        /// - Parameter statusDictionary: A map of statuses to optional booleans (true means applicable).
+        /// - Returns: The first non-default status to display, or `nil` if none apply.
         func getMemberStatus(statusDictionary: [MemberStatus: Bool?]) -> MemberStatus? {
             for (status, applicable) in statusDictionary where applicable == true {
                 // don't display .former because it is shown in list containing only formers
@@ -118,6 +127,9 @@ extension Members {
             return nil
         }
 
+        /// Returns the first applicable member role.
+        /// - Parameter roleDictionary: A map of roles to optional booleans (true means applicable).
+        /// - Returns: The first role to display, or `nil` if none apply.
         func getMemberRole(roleDictionary: [MemberRole: Bool?]) -> MemberRole? {
             for (role, applicable) in roleDictionary where applicable == true {
                 return role
@@ -125,7 +137,14 @@ extension Members {
             return nil
         }
 
-        // Returns Ignite PageElement rendering the lists of official or unoffiical Expertise tags.
+        /// Renders a line of expertise tags as a `PageElement`.
+        /// Uses the provided localized expertise lists and the `isSupported` flag to select either the
+        /// supported (official) or temporary (nonstandard) list, then builds a text line with the proper icon,
+        /// names, delimiters, and optional hint.
+        /// - Parameters:
+        ///   - localizedExpertiseResultLists: Source of supported and temporary expertise results for the member.
+        ///   - isSupported: When `true`, renders the supported list; otherwise renders the temporary list.
+        /// - Returns: A `PageElement` containing the expertise line, or `nil` when there’s nothing to display.
         func generatePageElements(localizedExpertiseResultLists: LocalizedExpertiseResultLists, isSupported: Bool)
         -> PageElement? {
             let localizedExpertiseResultList = isSupported ? localizedExpertiseResultLists.supported :
@@ -177,6 +196,10 @@ extension Members {
             }
         }
 
+        /// Builds the expertise section for the member.
+        /// Combines supported and temporary (nonstandard) expertise lists into an array of `PageElement`s,
+        /// preserving their respective hints and icons.
+        /// - Returns: An array of `PageElement` items to render in the expertise column (which can be empty).
         func listPhotographerExpertises() -> [PageElement] { // defined inside makeMemberRow to access photographer
             var pageElements = [PageElement]()
 
@@ -195,5 +218,7 @@ extension Members {
         }
 
     }
+
+    // swiftlint:enable function_body_length
 
 }

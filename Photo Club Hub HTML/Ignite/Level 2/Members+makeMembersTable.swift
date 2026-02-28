@@ -28,7 +28,7 @@ extension Members {
     //   - moc: use this CoreData Managed Object Context
     //   - club: Organization whose members are being displayed.
     //
-    // returns a struct containing
+    // returns a MakeMembersTableResult struct containing:
     //   - table: Ignite table containing HTML rendering of requested members
     //   - memberCount: number of members returned in table
     //   - memberCountWithStartDate: number of returned members who have a non-nil membership start date

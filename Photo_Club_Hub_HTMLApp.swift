@@ -12,7 +12,7 @@ import Photo_Club_Hub_Data // for *MemberProvider struct
 
 @main
 struct PhotoClubHubHtmlApp: App {
-    static let includeXampleClubs: Bool = true // whether or not to include XmpleMin and XmpleMax clubs
+    static let includeTemplateClubs: Bool = true // whether or not to include XmpleMin and XmpleMax clubs
     static let persistenceController = PersistenceController.shared // for Core Data
 
     init() {
@@ -106,15 +106,15 @@ extension PhotoClubHubHtmlApp {
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        // load test member(s) of XampleMin. Club name starts with an X in order to be at end of list
-        _ = XampleMinMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader XampleMin"),
+        // load test member(s) of TemplateMin. Club name starts with an X in order to be at end of list
+        _ = TemplateMinMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader TemplateMin"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        // load test member(s) of XampleMax. Club name starts with an X in order to be at end of list
-        _ = XampleMaxMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader XampleMax"),
+        // load test member(s) of TemplateMax. Club name starts with an X in order to be at end of list
+        _ = TemplateMaxMembersProvider(
+            bgContext: makeBgContext(ctxName: "Level 2 loader TemplateMax"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 

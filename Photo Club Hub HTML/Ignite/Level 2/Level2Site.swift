@@ -57,21 +57,21 @@ struct Level2Site: Site {
 
         // MARK: - Club 3
 
-        let xampleMinIdPlus = OrganizationIdPlus(fullName: "Xample Club With Minimal Data",
+        let templateMinIdPlus = OrganizationIdPlus(fullName: "Template Club With Minimal Data",
                                                  town: "Amsterdam",
-                                                 nickname: "XampleMin")
+                                                 nickname: "TemplateMin")
         let club3: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
-                                                                idPlus: xampleMinIdPlus)
+                                                                idPlus: templateMinIdPlus)
 
         // MARK: - Club 4
 
-        let xampleMaxIdPlus = OrganizationIdPlus(fullName: "Xample Club With Maximal Data",
+        let templateMaxIdPlus = OrganizationIdPlus(fullName: "Template Club With Maximal Data",
                                                  town: "Rotterdam",
-                                                 nickname: "XampleMax")
+                                                 nickname: "TemplateMax")
         let club4: Organization = Organization.findCreateUpdate(context: moc,
                                                                 organizationTypeEnum: club,
-                                                                idPlus: xampleMaxIdPlus)
+                                                                idPlus: templateMaxIdPlus)
 
         // MARK: - Club 5
 
