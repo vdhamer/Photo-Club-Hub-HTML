@@ -97,7 +97,8 @@ extension Members {
             }
 
             Column { // clickable thumbnail of recent work
-                Image("/images/"+loadThumbnailToLocal(fullUrl: thumbnail, dictionary: &dictionary),
+                Image(thumbnail.absoluteString,
+//                Image("/images/"+loadThumbnailToLocal(fullUrl: thumbnail, dictionary: &dictionary), // TODO
                       description: "clickable link to portfolio") // Ignite prepends /images/
                 .resizable()
                 .cornerRadius(8)
