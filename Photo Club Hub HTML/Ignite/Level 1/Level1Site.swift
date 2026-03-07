@@ -14,8 +14,8 @@ struct Level1Site: Site {
 
     var name: String = "Clubs"
     // IMPORTANT: use https://www.fcDeGender.nl for localhost and use https://www.fcDeGender.nl/clubs/ for remote site
-    var url: URL = URL("http://www.fcDeGender.nl/clubs")
-//    var url: URL = URL("http://www.vdHamer.com/clubs/")
+//    var url: URL = URL("http://www.fcDeGender.nl/clubs")
+    var url: URL = URL("http://www.vdHamer.com/clubs/")
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
     let homePage: Clubs
