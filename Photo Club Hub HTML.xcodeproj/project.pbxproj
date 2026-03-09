@@ -70,6 +70,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		37343E612F5F368E00C6DE13 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Tests/Photo Club Hub HTMLTests/FotobondNumbersTest.swift",
+			);
+			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
+		};
 		D0B9D5012CC443D900B1541C /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -106,6 +113,9 @@
 		};
 		D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				37343E612F5F368E00C6DE13 /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */,
+			);
 			path = "Photo Club Hub HTML";
 			sourceTree = "<group>";
 		};
