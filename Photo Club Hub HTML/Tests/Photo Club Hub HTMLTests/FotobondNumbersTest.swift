@@ -33,9 +33,9 @@ struct FotobondNumbersDisplayTests {
 
     @Test
     func testInitializerReturnsNilWhenIdIsNil() {
-        let id: Int? = nil
+        let id: Int16? = nil
         let number = id.flatMap(FotobondClubNumber.init(id:))
-        #expect(number.isNil())
+        #expect(number == nil)
     }
 
     // MARK: - FotobondMemberNumber.display tests
@@ -60,8 +60,8 @@ struct FotobondNumbersDisplayTests {
 
     @Test
     func testMemberInitializerReturnsNilWhenIdIsNil() {
-        let id: Int? = nil
+        let id: Int32? = nil
         let number = id.flatMap(FotobondMemberNumber.init(id:))
-        #expect(number.isNil())
+        #expect(number == nil)
     }
 }
