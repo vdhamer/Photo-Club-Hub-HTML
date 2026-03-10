@@ -247,6 +247,17 @@
         }
       }
     },
+    "Build HTML" : {
+      "comment" : "Submenu for generating Level 0 ... Level 2 HTML pages",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build HTML"
+          }
+        }
+      }
+    },
     "Build Level 0 HTML" : {
       "comment" : "App button that generates HTML page listing all expertises",
       "localizations" : {

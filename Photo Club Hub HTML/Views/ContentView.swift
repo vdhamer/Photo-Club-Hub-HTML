@@ -129,28 +129,35 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
-                Button(String(localized: "Build Level 0 HTML",
-                              table: "PhotoClubHubHTML.SwiftUI",
-                              comment: "App button that generates HTML page listing all expertises")) {
-                    print("Generating Level 0")
-                    generateLevel0()
+                Menu {
+                    Button(String(localized: "Build Level 0 HTML",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "App button that generates HTML page listing all expertises")) {
+                        print("Generating Level 0")
+                        generateLevel0()
+                    }
+
+                    Button(String(localized: "Build Level 1 HTML",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "App button that generates HTML page listing all clubs")) {
+                        print("Generating Level 1")
+                        generateLevel1()
+                    }
+
+                    Button(String(localized: "Build Level 2 HTML",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "App button that generates HTML page listing all club members")) {
+                        print("Generating Level 2")
+                        generateLevel2()
+                    } .disabled(selectedClubIds.isEmpty || // no club selected
+                                hasMembers(context: viewContext,  // selected club has no members
+                                           clubID: [OrganizationID](selectedClubIds)[0]) == false)
+                } label: {
+                    Text(String(localized: "Build HTML",
+                         table: "PhotoClubHubHTML.SwiftUI",
+                         comment: "Submenu for generating Level 0 ... Level 2 HTML pages"))
                 }
 
-                Button(String(localized: "Build Level 1 HTML",
-                              table: "PhotoClubHubHTML.SwiftUI",
-                              comment: "App button that generates HTML page listing all clubs")) {
-                    print("Generating Level 1")
-                    generateLevel1()
-                }
-
-                Button(String(localized: "Build Level 2 HTML",
-                              table: "PhotoClubHubHTML.SwiftUI",
-                              comment: "App button that generates HTML page listing all club members")) {
-                    print("Generating Level 2")
-                    generateLevel2()
-                } .disabled(selectedClubIds.isEmpty || // no club selected
-                            hasMembers(context: viewContext,  // selected club has no members
-                                       clubID: [OrganizationID](selectedClubIds)[0]) == false)
            }
         }
     }
