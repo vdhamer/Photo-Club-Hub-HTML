@@ -13,6 +13,8 @@ import Photo_Club_Hub_Data // for Organization
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
+    @State private var useLocalThumbnails: Bool = false
+
     // MARK: - @FetchRequests to get list of Clubs
 
     static let clubOnlyPredicate = NSPredicate(format: "organizationType_.organizationTypeName_= %@",
@@ -128,6 +130,17 @@ struct ContentView: View {
         .padding()
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
+
+                Menu {
+                    Toggle(isOn: $useLocalThumbnails,
+                           label: { Text(String(localized: "Use local thumbnails",
+                                                table: "PhotoClubHubHTML.SwiftUI",
+                                                comment: "Toggle in Settings for copying thumbnails to local folder"))})
+                } label: {
+                    Text(String(localized: "Settings",
+                         table: "PhotoClubHubHTML.SwiftUI",
+                         comment: "Submenu for various settings"))
+                } .menuStyle(ButtonMenuStyle())
 
                 Menu {
                     Button(String(localized: "L0: expertises",

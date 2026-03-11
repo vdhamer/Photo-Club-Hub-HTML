@@ -399,6 +399,40 @@
           }
         }
       }
+    },
+    "Settings" : {
+      "comment" : "Submenu for various settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instellingen"
+          }
+        }
+      }
+    },
+    "Use local thumbnails" : {
+      "comment" : "Toggle in Settings for copying thumbnails to local folder",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use local thumbnails"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik lokale thumbnails"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
