@@ -130,24 +130,31 @@ struct ContentView: View {
             ToolbarItemGroup(placement: .primaryAction) {
 
                 Menu {
-                    Button(String(localized: "Build Level 0 HTML",
+                    Button(String(localized: "L0: expertises",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all expertises")) {
-                        print("Generating Level 0")
+                        print("Generating Level 0 expertises")
                         generateLevel0()
                     }
 
-                    Button(String(localized: "Build Level 1 HTML",
+                    Button(String(localized: "L1: clubs",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all clubs")) {
-                        print("Generating Level 1")
+                        print("Generating Level 1 clubs")
                         generateLevel1()
                     }
 
-                    Button(String(localized: "Build Level 2 HTML",
+                    Button(String(localized: "L1: museums",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "App button that generates HTML page listing all museums")) {
+                        print("Generating Level 1 museums")
+                        generateLevel1()
+                    } .disabled(true)
+
+                    Button(String(localized: "L2: member of club",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all club members")) {
-                        print("Generating Level 2")
+                        print("Generating Level 2 club members")
                         generateLevel2()
                     } .disabled(selectedClubIds.isEmpty || // no club selected
                                 hasMembers(context: viewContext,  // selected club has no members
@@ -156,7 +163,7 @@ struct ContentView: View {
                     Text(String(localized: "Build HTML",
                          table: "PhotoClubHubHTML.SwiftUI",
                          comment: "Submenu for generating Level 0 ... Level 2 HTML pages"))
-                }
+                } .menuStyle(ButtonMenuStyle())
 
            }
         }

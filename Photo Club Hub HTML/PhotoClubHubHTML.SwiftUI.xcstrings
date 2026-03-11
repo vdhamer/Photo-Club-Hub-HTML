@@ -255,56 +255,11 @@
             "state" : "translated",
             "value" : "Build HTML"
           }
-        }
-      }
-    },
-    "Build Level 0 HTML" : {
-      "comment" : "App button that generates HTML page listing all expertises",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Build Level 0 HTML"
-          }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Maak Level 0 HTML"
-          }
-        }
-      }
-    },
-    "Build Level 1 HTML" : {
-      "comment" : "App button that generates HTML page listing all clubs",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Build Level 1 HTML"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maak Level 1 HTML"
-          }
-        }
-      }
-    },
-    "Build Level 2 HTML" : {
-      "comment" : "App button that generates HTML page listing all club members",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Build Level 2 HTML"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maak Level 2 HTML"
+            "value" : "HTML pagina’s maken"
           }
         }
       }
@@ -322,6 +277,74 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Er zijn geen leden bekend voor de club %@"
+          }
+        }
+      }
+    },
+    "L0: expertises" : {
+      "comment" : "App button that generates HTML page listing all expertises",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L0: expertises"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L0: expertises"
+          }
+        }
+      }
+    },
+    "L1: clubs" : {
+      "comment" : "App button that generates HTML page listing all clubs",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L1: clubs"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L1: clubs"
+          }
+        }
+      }
+    },
+    "L1: museums" : {
+      "comment" : "App button that generates HTML page listing all museums",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L1: museums"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L1: musea"
+          }
+        }
+      }
+    },
+    "L2: member of club" : {
+      "comment" : "App button that generates HTML page listing all club members",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L2: member of club"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L2: ledenlijst club"
           }
         }
       }
