@@ -8,7 +8,7 @@
 import SwiftUI
 import Ignite
 import CoreData // for NSManagedObjectContext
-import Photo_Club_Hub_Data // for *MemberProvider struct
+import Photo_Club_Hub_Data // for OrganizationType
 
 @main
 struct PhotoClubHubHtmlApp: App {
