@@ -349,6 +349,40 @@
         }
       }
     },
+    "Option 2" : {
+      "comment" : "Dummy toggle in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Option 2"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optie 2"
+          }
+        }
+      }
+    },
+    "Option 3" : {
+      "comment" : "Dummy toggle in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Option 3"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Optie 3"
+          }
+        }
+      }
+    },
     "Photo Club Hub HTML" : {
       "comment" : "Name of this macOS app",
       "localizations" : {

@@ -5,15 +5,15 @@
 //  Created by Peter van den Hamer on 07/09/2024.
 //
 
-import SwiftUI
-import CoreData
-import CoreLocation // for CLLocationCoordinate2DMake
+import SwiftUI // this is a SwiftUI view
+import CoreData // for FetchRequest?
 import Photo_Club_Hub_Data // for Organization
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State private var useLocalThumbnails: Bool = false
+    @Binding var preferences: PreferencesStructHTML
+    @State private var localPreferences = PreferencesStructHTML.defaultValue // parameters for various Toggles()
 
     // MARK: - @FetchRequests to get list of Clubs
 
@@ -132,15 +132,26 @@ struct ContentView: View {
             ToolbarItemGroup(placement: .primaryAction) {
 
                 Menu {
-                    Toggle(isOn: $useLocalThumbnails,
+                    Toggle(isOn: $preferences.useLocalThumbnails,
                            label: { Text(String(localized: "Use local thumbnails",
                                                 table: "PhotoClubHubHTML.SwiftUI",
-                                                comment: "Toggle in Settings for copying thumbnails to local folder"))})
+                                                comment: "Toggle in Settings for copying thumbnails to local folder"))}
+                    )
+                    Toggle(isOn: $preferences.useOption2,
+                           label: { Text(String(localized: "Option 2",
+                                                table: "PhotoClubHubHTML.SwiftUI",
+                                                comment: "Dummy toggle in Settings"))}
+                    )
+                    Toggle(isOn: $preferences.useOption3,
+                           label: { Text(String(localized: "Option 3",
+                                                table: "PhotoClubHubHTML.SwiftUI",
+                                                comment: "Dummy toggle in Settings"))}
+                    )
                 } label: {
                     Text(String(localized: "Settings",
                          table: "PhotoClubHubHTML.SwiftUI",
                          comment: "Submenu for various settings"))
-                } .menuStyle(ButtonMenuStyle())
+                }
 
                 Menu {
                     Button(String(localized: "L0: expertises",
@@ -174,9 +185,9 @@ struct ContentView: View {
                                            clubID: [OrganizationID](selectedClubIds)[0]) == false)
                 } label: {
                     Text(String(localized: "Build HTML",
-                         table: "PhotoClubHubHTML.SwiftUI",
-                         comment: "Submenu for generating Level 0 ... Level 2 HTML pages"))
-                } .menuStyle(ButtonMenuStyle())
+                                table: "PhotoClubHubHTML.SwiftUI",
+                                comment: "Submenu for generating Level 0 ... Level 2 HTML pages"))
+                }
 
            }
         }
@@ -252,7 +263,11 @@ struct ContentView: View {
 
 }
 
-#Preview("ContentView") {
-    ContentView()
-        .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+struct ContentView_Previews: PreviewProvider {
+    @State static var preferences = PreferencesStructHTML.defaultValue
+
+    static var previews: some View {
+        ContentView(preferences: $preferences)
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    }
 }

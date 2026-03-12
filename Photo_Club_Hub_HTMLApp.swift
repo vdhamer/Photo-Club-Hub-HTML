@@ -12,6 +12,8 @@ import Photo_Club_Hub_Data // for OrganizationType
 
 @main
 struct PhotoClubHubHtmlApp: App {
+    @StateObject var model = PreferencesViewModelHTML()
+
     static let includeTemplateClubs: Bool = true // whether or not to include XmpleMin and XmpleMax clubs
     static let persistenceController = PersistenceController.shared // for Core Data
 
@@ -31,7 +33,7 @@ struct PhotoClubHubHtmlApp: App {
                       table: "PhotoClubHubHTML.SwiftUI",
                       comment: "Name of this macOS app"),
                id: "mainWindow") {
-            ContentView()
+            ContentView(preferences: $model.preferences)
                 .environment(\.managedObjectContext, Self.persistenceController.container.viewContext)
                 .onAppear {
                     Self.loadClubsAndMembers()
