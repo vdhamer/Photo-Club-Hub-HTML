@@ -332,19 +332,19 @@
         }
       }
     },
-    "L2: member of club" : {
+    "L2: club members" : {
       "comment" : "App button that generates HTML page listing all club members",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L2: member of club"
+            "value" : "L2: club members"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L2: ledenlijst club"
+            "value" : "L2: clubleden"
           }
         }
       }

@@ -26,7 +26,7 @@ struct Level2Site: Site {
     let club: OrganizationTypeEnum = OrganizationTypeEnum.club
 
     // swiftlint:disable:next function_body_length
-    init(moc: NSManagedObjectContext) {
+    init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
 
         // MARK: - Club 0
 
@@ -160,7 +160,7 @@ struct Level2Site: Site {
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
         self.moc = moc
-        self.homePage = Members(moc: moc, club: club)
+        self.homePage = Members(moc: moc, club: club, preferences: preferences)
     }
 
 }

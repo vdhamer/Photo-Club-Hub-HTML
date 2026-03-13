@@ -175,11 +175,11 @@ struct ContentView: View {
                         generateLevel1()
                     } .disabled(true)
 
-                    Button(String(localized: "L2: member of club",
+                    Button(String(localized: "L2: club members",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all club members")) {
                         print("Generating Level 2 club members")
-                        generateLevel2()
+                        generateLevel2(preferences: preferences)
                     } .disabled(selectedClubIds.isEmpty || // no club selected
                                 hasMembers(context: viewContext,  // selected club has no members
                                            clubID: [OrganizationID](selectedClubIds)[0]) == false)
@@ -242,7 +242,7 @@ struct ContentView: View {
         }
     }
 
-    private func generateLevel2() { // single club
+    private func generateLevel2(preferences: PreferencesStructHTML) { // single club
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level2.publishing"
@@ -250,7 +250,7 @@ struct ContentView: View {
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         bgContext.performAndWait { // generate website
-            let level2Site = Level2Site(moc: bgContext) // load data
+            let level2Site = Level2Site(moc: bgContext, preferences: preferences) // load data
             Task {
                 do {
                     try await level2Site.publish() // generate HTML

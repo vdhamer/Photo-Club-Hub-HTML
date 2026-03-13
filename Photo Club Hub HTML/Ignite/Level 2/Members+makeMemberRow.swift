@@ -19,15 +19,24 @@ extension Members {
     /// - Role/status badges (empty if data is not available of if member has no special role or status in this club)
     /// - Personal website link (empty if there is no known personal website)
     /// - Clickable thumbnail that navigates to the member's portfolio
-    mutating func makeMemberRow(moc: NSManagedObjectContext,
+    mutating func makeMemberRow(moc: NSManagedObjectContext, // some defaults are to reduce parametercount for SwiftLint
                                 photographer: Photographer,
-                                membershipStartDate: Date?, // nil means app didn't receive a start date
+                                membershipStartDate: Date? = nil, // nil means we don't know member's start date
                                 membershipEndDate: Date? = nil, // nil means photographer is still a member
                                 fotobondMemberNumber: FotobondMemberNumber? = nil,
                                 roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
                                 portfolio: URL? = nil,
                                 thumbnail: URL,
-                                dictionary: inout [String: String]) -> Row {
+                                fileNameDictionary: inout [String: String],
+                                preferences: PreferencesStructHTML) -> Row {
+
+        // `preferences.useLocalThumbnails` is owned by MainActor. `makeMemberRow` might be on a background thread.
+        // I am trying to avoid using `MainActor.assumeIsolated` (GPT-5 advice) because that could crash the app.
+        // So essentially I am taking a snapshot of the state of the `useLocalThumbnails` toggle.
+        // If the user changes it while makeMemberRow is executing, the change is ignored until the next row.
+        // After all, the user doesn't really know what to expect under these conditions: use true or false.
+        // Arguably you shouldn't be able to change these kind of settings while generating HTML.
+        let useLocalThumbnails = preferences.useLocalThumbnails
 
         return Row {
 
@@ -97,12 +106,22 @@ extension Members {
             }
 
             Column { // clickable thumbnail of recent work
-                Image(thumbnail.absoluteString,
-//                Image("/images/"+loadThumbnailToLocal(fullUrl: thumbnail, dictionary: &dictionary),
-                      description: "clickable link to portfolio") // Ignite prepends /images/
-                .resizable()
+                Group {
+                    if useLocalThumbnails {
+                        Image("/images/" +
+                              loadThumbnailToLocal(fullUrl: thumbnail,
+                                                   fileNameDictionary: &fileNameDictionary),
+                              description: "clickable link to portfolio") // Ignite prepends /images/
+                        .resizable()
+                        .aspectRatio(.square, contentMode: .fill)
+                    } else {
+                        Image(thumbnail.absoluteString,
+                              description: "clickable link to portfolio") // Ignite prepends /images/
+                        .resizable()
+                        .aspectRatio(.square, contentMode: .fill)
+                    }
+                }
                 .cornerRadius(8)
-                .aspectRatio(.square, contentMode: .fill)
                 .frame(width: 80)
                 .style("cursor: pointer")
                 .onClick {

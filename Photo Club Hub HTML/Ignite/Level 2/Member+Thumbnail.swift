@@ -13,13 +13,13 @@ extension Members {
 
     private static let maxFilenameSuffixNumber: Int = 50 // generates a warning in Debug version if count is suspicious
 
-    func loadThumbnailToLocal(fullUrl: URL, dictionary: inout [String: String]) -> String {
-        let newFileName = chooseLocalFileName(fullUrl: fullUrl, dictionary: &dictionary)
+    func loadThumbnailToLocal(fullUrl: URL, fileNameDictionary: inout [String: String]) -> String {
+        let newFileName = chooseLocalFileName(fullUrl: fullUrl, fileNameDictionary: &fileNameDictionary)
         downloadThumbnailToLocal(downloadURL: fullUrl, localFileName: newFileName)
         return newFileName
     }
 
-    private func chooseLocalFileName(fullUrl: URL, dictionary: inout [String: String]) -> String {
+    private func chooseLocalFileName(fullUrl: URL, fileNameDictionary: inout [String: String]) -> String {
         let fileExtension: String = fullUrl.pathExtension
         let baseFileName: String = fullUrl.deletingPathExtension().lastPathComponent
         let remoteURLString: String = fullUrl.absoluteString
@@ -41,11 +41,11 @@ extension Members {
                 newFileName = baseFileName + "_\(count).\(fileExtension)"
             }
 
-            if dictionary[newFileName] == nil { // haven't seen this filename variant yet for this club
-                dictionary[newFileName] = remoteURLString
+            if fileNameDictionary[newFileName] == nil { // haven't seen this filename variant yet for this club
+                fileNameDictionary[newFileName] = remoteURLString
                 return newFileName // newFileName hasn't been used before for this club
             } else {
-                if dictionary[newFileName] == remoteURLString {
+                if fileNameDictionary[newFileName] == remoteURLString {
                     return newFileName
                 } else {
                     count += 1

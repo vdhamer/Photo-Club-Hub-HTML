@@ -33,17 +33,17 @@ struct Members: StaticPage {
 
     // MARK: - init()
 
-    init(moc: NSManagedObjectContext, club: Organization) {
+    init(moc: NSManagedObjectContext, club: Organization, preferences: PreferencesStructHTML) {
         self.moc = moc
         self.club = club
         self.clubFullNameTown = club.fullNameTown
 
-        let makeTableResult = makeMembersTable(former: false, moc: moc, club: club)
+        let makeTableResult = makeMembersTable(former: false, moc: moc, club: club, preferences: preferences)
         currentMembersCount = makeTableResult.memberCount
         currentMembers = makeTableResult.table
         currentMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
         if showFormerMembers {
-            let makeTableResult = makeMembersTable(former: true, moc: moc, club: club)
+            let makeTableResult = makeMembersTable(former: true, moc: moc, club: club, preferences: preferences)
             formerMembersCount = makeTableResult.memberCount
             formerMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
             formerMembers = makeTableResult.table
