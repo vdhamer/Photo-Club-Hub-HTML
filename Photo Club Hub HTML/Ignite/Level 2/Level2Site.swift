@@ -21,9 +21,10 @@ struct Level2Site: Site {
     var author = "Peter van den Hamer"
     let homePage: Members
     var theme = MyTheme()
+    let club: OrganizationTypeEnum = OrganizationTypeEnum.club
 
     var moc: NSManagedObjectContext
-    let club: OrganizationTypeEnum = OrganizationTypeEnum.club
+    let preferences: PreferencesStructHTML
 
     // swiftlint:disable:next function_body_length
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
@@ -159,7 +160,10 @@ struct Level2Site: Site {
                      club11, club12, club13]
         let club = clubs[max(min(chosenClubIX, clubs.count - 1), 0)] // clip to array bounds in case index is wrong
 
+        // MARK: - Injected parameters
+
         self.moc = moc
+        self.preferences = preferences
         self.homePage = Members(moc: moc, club: club, preferences: preferences)
     }
 

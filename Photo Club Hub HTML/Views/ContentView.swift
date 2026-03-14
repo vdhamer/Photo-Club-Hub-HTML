@@ -135,17 +135,13 @@ struct ContentView: View {
                     Toggle(isOn: $preferences.useLocalThumbnails,
                            label: { Text(String(localized: "Use local thumbnails",
                                                 table: "PhotoClubHubHTML.SwiftUI",
-                                                comment: "Toggle in Settings for copying thumbnails to local folder"))}
+                                                comment: "Toggle to enable copying of thumbnails to a local folder"))}
                     )
-                    Toggle(isOn: $preferences.useOption2,
-                           label: { Text(String(localized: "Option 2",
+
+                    Toggle(isOn: $preferences.useLocalhost,
+                           label: { Text(String(localized: "Build for localhost",
                                                 table: "PhotoClubHubHTML.SwiftUI",
-                                                comment: "Dummy toggle in Settings"))}
-                    )
-                    Toggle(isOn: $preferences.useOption3,
-                           label: { Text(String(localized: "Option 3",
-                                                table: "PhotoClubHubHTML.SwiftUI",
-                                                comment: "Dummy toggle in Settings"))}
+                                                comment: "Toggle to generate output for localhost"))}
                     )
                 } label: {
                     Text(String(localized: "Settings",

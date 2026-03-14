@@ -247,6 +247,23 @@
         }
       }
     },
+    "Build for localhost" : {
+      "comment" : "Toggle to generate output for localhost",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Build for localhost"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik localhost"
+          }
+        }
+      }
+    },
     "Build HTML" : {
       "comment" : "Submenu for generating Level 0 ... Level 2 HTML pages",
       "localizations" : {
@@ -349,40 +366,6 @@
         }
       }
     },
-    "Option 2" : {
-      "comment" : "Dummy toggle in Settings",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Option 2"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Optie 2"
-          }
-        }
-      }
-    },
-    "Option 3" : {
-      "comment" : "Dummy toggle in Settings",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Option 3"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Optie 3"
-          }
-        }
-      }
-    },
     "Photo Club Hub HTML" : {
       "comment" : "Name of this macOS app",
       "localizations" : {
@@ -452,7 +435,7 @@
       }
     },
     "Use local thumbnails" : {
-      "comment" : "Toggle in Settings for copying thumbnails to local folder",
+      "comment" : "Toggle to enable copying of thumbnails to a local folder",
       "localizations" : {
         "en" : {
           "stringUnit" : {
