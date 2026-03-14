@@ -298,6 +298,40 @@
         }
       }
     },
+    "Done" : {
+      "comment" : "Button to close the settings popover",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sluiten"
+          }
+        }
+      }
+    },
+    "Host" : {
+      "comment" : "Label of picker for targetHost",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Host"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server voor website"
+          }
+        }
+      }
+    },
     "L0: expertises" : {
       "comment" : "App button that generates HTML page listing all expertises",
       "localizations" : {
@@ -417,19 +451,19 @@
         }
       }
     },
-    "Select the host to target when generating a website." : {
+    "Selects the host to target when generating a website." : {
       "comment" : "Hint about targetHost picker within Settings",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the host to target when generating a website."
+            "value" : "Selects the host to target when generating a website."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Server waar website voor gegenereerd wordt."
+            "value" : "Server waar website straks op gaat draaien."
           }
         }
       }
@@ -447,23 +481,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
-          }
-        }
-      }
-    },
-    "Target host" : {
-      "comment" : "Label of picker for targetHost",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Target host"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Server voor website"
           }
         }
       }

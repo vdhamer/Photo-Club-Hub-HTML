@@ -62,6 +62,7 @@ struct ContentView: View {
     // MARK: - Body of ContentView
 
     @State private var selectedClubIds: Set<OrganizationID> = []
+    @State private var showSettingsPopover: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -131,32 +132,51 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
-                Menu { // Settings
-                    Toggle(isOn: $preferences.useLocalThumbnails,
-                           label: { Text(String(localized: "Use local thumbnails",
-                                                table: "PhotoClubHubHTML.SwiftUI",
-                                                comment: "Toggle to enable copying of thumbnails to a local folder"))}
-                    )
-                    .help(String(localized: "App can optionally make a local copy of thumbnails to avoid hot-linking.",
-                                 table: "PhotoClubHubHTML.SwiftUI",
-                                 comment: "Usage hint for `Use local thumbnails`"))
-
-                    Picker(String(localized: "Target host",
-                                  table: "PhotoClubHubHTML.SwiftUI",
-                                  comment: "Label of picker for targetHost"),
-                           selection: $preferences.selectedHost) {
-                        ForEach(TargetHost.allCases, id: \.self) { host in
-                            Text(host.rawValue).tag(host)
-                        }
-                    }
-                    .pickerStyle(.inline)
-                    .help(String(localized: "Select the host to target when generating a website.",
-                                 table: "PhotoClubHubHTML.SwiftUI",
-                                 comment: "Hint about targetHost picker within Settings"))
+                Button {
+                    showSettingsPopover.toggle()
                 } label: {
                     Text(String(localized: "Settings",
-                         table: "PhotoClubHubHTML.SwiftUI",
-                         comment: "Submenu for various settings"))
+                                 table: "PhotoClubHubHTML.SwiftUI",
+                                 comment: "Submenu for various settings"))
+                }
+                .popover(isPresented: $showSettingsPopover, arrowEdge: .top) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Toggle(isOn: $preferences.useLocalThumbnails,
+                               label: {Text(String(localized: "Use local thumbnails",
+                                                   table: "PhotoClubHubHTML.SwiftUI",
+                                                   comment: "Toggle to enable copying of thumbnails to a local folder"))
+                        }
+                        )
+                        .help(String(localized: """
+                                                App can optionally make a local copy of thumbnails to avoid hot-linking.
+                                                """,
+                                     table: "PhotoClubHubHTML.SwiftUI",
+                                     comment: "Usage hint for `Use local thumbnails`"))
+
+                        Picker(String(localized: "Host",
+                                      table: "PhotoClubHubHTML.SwiftUI",
+                                      comment: "Label of picker for targetHost"),
+                               selection: $preferences.selectedHost) {
+                            ForEach(TargetHost.allCases, id: \.self) { host in
+                                Text(host.rawValue).tag(host)
+                            }
+                        }
+                        .pickerStyle(.inline)
+                        .help(String(localized: "Selects the host to target when generating a website.",
+                                     table: "PhotoClubHubHTML.SwiftUI",
+                                     comment: "Hint about targetHost picker within Settings"))
+
+                        HStack {
+                            Spacer()
+                            Button(String(localized: "Done",
+                                          table: "PhotoClubHubHTML.SwiftUI",
+                                          comment: "Button to close the settings popover")) {
+                                showSettingsPopover = false
+                            }
+                        }
+                    }
+                    .padding()
+                    .frame(minWidth: 320)
                 }
 
                 Menu {
