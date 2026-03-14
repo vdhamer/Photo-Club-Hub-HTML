@@ -38,11 +38,11 @@ class PreferencesViewModelHTML: ObservableObject {
 
 struct PreferencesStructHTML { // order in which they are shown on Preferences page
     var useLocalThumbnails: Bool
-    var useLocalhost: Bool
+    var selectedHost: TargetHost
 
     static let defaultValue = PreferencesStructHTML( // has to match order of declaration
         useLocalThumbnails: false,
-        useLocalhost: true
+        selectedHost: TargetHost.localhost
     )
 
 }

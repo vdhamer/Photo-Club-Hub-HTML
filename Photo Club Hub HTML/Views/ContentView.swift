@@ -131,18 +131,28 @@ struct ContentView: View {
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 
-                Menu {
+                Menu { // Settings
                     Toggle(isOn: $preferences.useLocalThumbnails,
                            label: { Text(String(localized: "Use local thumbnails",
                                                 table: "PhotoClubHubHTML.SwiftUI",
                                                 comment: "Toggle to enable copying of thumbnails to a local folder"))}
                     )
+                    .help(String(localized: "App can optionally make a local copy of thumbnails to avoid hot-linking.",
+                                 table: "PhotoClubHubHTML.SwiftUI",
+                                 comment: "Usage hint for `Use local thumbnails`"))
 
-                    Toggle(isOn: $preferences.useLocalhost,
-                           label: { Text(String(localized: "Build for localhost",
-                                                table: "PhotoClubHubHTML.SwiftUI",
-                                                comment: "Toggle to generate output for localhost"))}
-                    )
+                    Picker(String(localized: "Target host",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "Label of picker for targetHost"),
+                           selection: $preferences.selectedHost) {
+                        ForEach(TargetHost.allCases, id: \.self) { host in
+                            Text(host.rawValue).tag(host)
+                        }
+                    }
+                    .pickerStyle(.inline)
+                    .help(String(localized: "Select the host to target when generating a website.",
+                                 table: "PhotoClubHubHTML.SwiftUI",
+                                 comment: "Hint about targetHost picker within Settings"))
                 } label: {
                     Text(String(localized: "Settings",
                          table: "PhotoClubHubHTML.SwiftUI",

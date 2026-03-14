@@ -247,19 +247,19 @@
         }
       }
     },
-    "Build for localhost" : {
-      "comment" : "Toggle to generate output for localhost",
+    "App can optionally make a local copy of thumbnails to avoid hot-linking." : {
+      "comment" : "Usage hint for `Use local thumbnails`",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Build for localhost"
+            "value" : "App can optionally make a local copy of thumbnails to avoid hot-linking."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gebruik localhost"
+            "value" : "Desgewenst lokale kopie maken van thumbnail plaatjes."
           }
         }
       }
@@ -417,6 +417,23 @@
         }
       }
     },
+    "Select the host to target when generating a website." : {
+      "comment" : "Hint about targetHost picker within Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the host to target when generating a website."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server waar website voor gegenereerd wordt."
+          }
+        }
+      }
+    },
     "Settings" : {
       "comment" : "Submenu for various settings",
       "localizations" : {
@@ -430,6 +447,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
+          }
+        }
+      }
+    },
+    "Target host" : {
+      "comment" : "Label of picker for targetHost",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Target host"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server voor website"
           }
         }
       }

@@ -11,7 +11,7 @@
 /// Represents the alternative hosting environments for the generated HTML output.
 ///
 /// The raw value is the base URL string for that host.
-enum TargetHost: String, CaseIterable {
+enum TargetHost: String, Codable, CaseIterable {
     /// Peter van den Hamer's personal website.
     case vdHamer = "http://www.vdhamer.com"
     /// Fotoclub De Gender's public website.
