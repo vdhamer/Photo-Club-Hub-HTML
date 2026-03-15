@@ -16,18 +16,21 @@ struct Level2Site: Site {
     var name: String = "Leden" // set during init()
     // NOTE: https://www.fcDeGender.nl works for localhost, https://www.fcDeGender.nl/fgDeGender/ works for remote site
 //    var url: URL = URL("https://www.fcDeGender.nl/fgDeGender/")
-    var url: URL = URL("http://www.vdhamer.com")
+//    var url: URL = URL("http://www.vdhamer.com")
+    var url: URL
     var builtInIconsEnabled: BootstrapOptions = .localBootstrap
     var author = "Peter van den Hamer"
     let homePage: Members
     var theme = MyTheme()
-    let club: OrganizationTypeEnum = OrganizationTypeEnum.club
+    let clubType: OrganizationTypeEnum = OrganizationTypeEnum.club
 
     var moc: NSManagedObjectContext
     let preferences: PreferencesStructHTML
 
     // swiftlint:disable:next function_body_length
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
+        let hostString: StaticString = preferences.selectedHost.staticString
+        url = URL(hostString)
 
         // MARK: - Club 0
 
@@ -35,7 +38,7 @@ struct Level2Site: Site {
                                                 town: "Eindhoven",
                                                 nickname: "fgDeGender")
         let club0: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: deGenderIdPlus)
 
         // MARK: - Club 1
@@ -44,7 +47,7 @@ struct Level2Site: Site {
                                               town: "Waalre",
                                               nickname: "fgWaalre")
         let club1: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: waalreIdPlus)
 
         // MARK: - Club 2
@@ -53,7 +56,7 @@ struct Level2Site: Site {
                                                    town: "Veldhoven",
                                                    nickname: "fcBellusImago")
         let club2: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: bellusImagoIdPlus)
 
         // MARK: - Club 3
@@ -62,7 +65,7 @@ struct Level2Site: Site {
                                                  town: "Amsterdam",
                                                  nickname: "TemplateMin")
         let club3: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: templateMinIdPlus)
 
         // MARK: - Club 4
@@ -71,7 +74,7 @@ struct Level2Site: Site {
                                                  town: "Rotterdam",
                                                  nickname: "TemplateMax")
         let club4: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: templateMaxIdPlus)
 
         // MARK: - Club 5
@@ -80,7 +83,7 @@ struct Level2Site: Site {
                                                  town: "Eindhoven",
                                                  nickname: "fcEricamera")
         let club5: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: ericameraIdPlus)
 
         // MARK: - Club 6
@@ -89,7 +92,7 @@ struct Level2Site: Site {
                                                 town: "Oirschot",
                                                 nickname: "fgOirschot")
         let club6: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: oirschotIdPlus)
 
         // MARK: - Club 7
@@ -98,7 +101,7 @@ struct Level2Site: Site {
                                                  town: "Den Dungen",
                                                  nickname: "fcDenDungen")
         let club7: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: dendungenIdPlus)
 
         // MARK: - Club 8
@@ -107,7 +110,7 @@ struct Level2Site: Site {
                                                      town: "Brabant Oost",
                                                      nickname: "Persoonlijk16")
         let club8: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: persoonlijk16IdPlus)
 
         // MARK: - Club 9
@@ -116,7 +119,7 @@ struct Level2Site: Site {
                                               town: "Sint-Michielsgestel",
                                               nickname: "fkGestel")
         let club9: Organization = Organization.findCreateUpdate(context: moc,
-                                                                organizationTypeEnum: club,
+                                                                organizationTypeEnum: clubType,
                                                                 idPlus: gestelIdPlus)
 
         // MARK: - Club 10
@@ -125,7 +128,7 @@ struct Level2Site: Site {
                                                      town: "Drenthe - Vechtdal",
                                                      nickname: "Persoonlijk03")
         let club10: Organization = Organization.findCreateUpdate(context: moc,
-                                                                 organizationTypeEnum: club,
+                                                                 organizationTypeEnum: clubType,
                                                                  idPlus: persoonlijk03IdPlus)
 
         // MARK: - Club 11
@@ -134,7 +137,7 @@ struct Level2Site: Site {
                                                      town: "Veghel",
                                                      nickname: "fcVeghel")
         let club11: Organization = Organization.findCreateUpdate(context: moc,
-                                                                 organizationTypeEnum: club,
+                                                                 organizationTypeEnum: clubType,
                                                                  idPlus: fcVeghelIdPlus)
 
         // MARK: - Club 12
@@ -143,7 +146,7 @@ struct Level2Site: Site {
                                                  town: "Berlicum",
                                                  nickname: "ffcShot71")
         let club12: Organization = Organization.findCreateUpdate(context: moc,
-                                                                 organizationTypeEnum: club,
+                                                                 organizationTypeEnum: clubType,
                                                                  idPlus: ffcShot71IdPlus)
 
         // MARK: - Club 13
@@ -152,7 +155,7 @@ struct Level2Site: Site {
                                                      town: "Gemert",
                                                      nickname: "fegGemert")
         let club13: Organization = Organization.findCreateUpdate(context: moc,
-                                                                 organizationTypeEnum: club,
+                                                                 organizationTypeEnum: clubType,
                                                                  idPlus: fegGemertIdPlus)
 
         let chosenClubIX: Int = 11 // roundabout way to avoid SwiftLint warnings about unused properties

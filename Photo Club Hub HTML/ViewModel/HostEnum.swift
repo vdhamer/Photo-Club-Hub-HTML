@@ -14,8 +14,16 @@
 enum TargetHost: String, Codable, CaseIterable {
     /// Peter van den Hamer's personal website.
     case vdHamer = "http://www.vdhamer.com"
-    /// Fotoclub De Gender's public website.
+    /// Fotoclub De Gender's website.
     case fgDeGender = "https://www.fcDeGender.nl"
     /// Local development server, typically used during testing.
     case localhost = "http://localhost:8000"
+
+    var staticString: StaticString {
+        switch self {
+        case Self.vdHamer: return "http://www.vdhamer.com"
+        case Self.fgDeGender: return "https://www.fcDeGender.nl"
+        case Self.localhost: return "http://localhost:8000"
+        }
+    }
 }
