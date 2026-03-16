@@ -10,20 +10,20 @@
 
 /// Represents the alternative hosting environments for the generated HTML output.
 ///
-/// The raw value is the base URL string for that host.
+/// the `staticString` value is the base URL string for that host.
 enum TargetHost: String, Codable, CaseIterable {
     /// Peter van den Hamer's personal website.
-    case vdHamer = "http://www.vdhamer.com"
+    case vdHamer
     /// Fotoclub De Gender's website.
-    case fgDeGender = "https://www.fcDeGender.nl"
+    case fgDeGender
     /// Local development server, typically used during testing.
-    case localhost = "http://localhost:8000"
+    case localhost
 
     var staticString: StaticString {
         switch self {
-        case Self.vdHamer: return "http://www.vdhamer.com"
-        case Self.fgDeGender: return "https://www.fcDeGender.nl"
-        case Self.localhost: return "http://localhost:8000"
+            case Self.vdHamer: return "http://www.vdhamer.com"
+            case Self.fgDeGender: return "https://www.fcDeGender.nl"
+            case Self.localhost: return "http://localhost:8000"
         }
     }
 }
