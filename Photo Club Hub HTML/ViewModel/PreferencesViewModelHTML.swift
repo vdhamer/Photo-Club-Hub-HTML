@@ -36,11 +36,13 @@ class PreferencesViewModelHTML: ObservableObject {
     var preferences: PreferencesStructHTML = .defaultValue
 }
 
-struct PreferencesStructHTML { // order in which they are shown on Preferences page
+struct PreferencesStructHTML: Sendable { // order in which they are shown on Preferences page
+    var selectedClubNickname: String?
     var useLocalThumbnails: Bool
     var selectedHost: TargetHost
 
     static let defaultValue = PreferencesStructHTML( // has to match order of declaration
+        selectedClubNickname: nil,
         useLocalThumbnails: false,
         selectedHost: TargetHost.localhost
     )
@@ -56,5 +58,5 @@ extension String {
 
 extension PreferencesStructHTML: Codable {
 //    No code needed as long as all preferences are Codable.
-//    For trickier cases, so how it is done in Photo Club Hub's `PreferencesViewModel`
+//    For trickier cases, check how it is done in Photo Club Hub's `PreferencesViewModel`
 }

@@ -15,10 +15,12 @@ struct MembershipView: View {
 
     @FetchRequest var fetchRequestClubMembers: FetchedResults<MemberPortfolio> // filled during init()
     let club: Organization
+    @Binding var preferences: PreferencesStructHTML
 
-    init(club: Organization) {
+    init(club: Organization, preferences: Binding<PreferencesStructHTML>) {
         // this init() happens when the club gets shown (or almost shown) in the sidebar panel of a NavigationSplitView
         self.club = club
+        self._preferences = preferences
         // match sort order used in Members to generate HTML
         let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
         let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)
@@ -41,7 +43,9 @@ struct MembershipView: View {
                             .font(.title2)
                         Spacer()
                     }
-                } .frame(idealHeight: 750) // a bit of a hack to vertically align
+                }
+                    .frame(idealHeight: 750) // a bit of a hack to vertically align
+                    .onAppear { preferences.selectedClubNickname = nil }
             } else {
                 ForEach(fetchRequestClubMembers, id: \.self) { member in
                     HStack {
@@ -58,6 +62,7 @@ struct MembershipView: View {
                             .lineLimit(1)
                     }
                 }
+                .onAppear { preferences.selectedClubNickname = club.nickName }
             }
         }
     }
@@ -86,11 +91,13 @@ struct MembershipView: View {
 
 // MARK: - Preview
 
- #Preview {
-     @Previewable @Environment(\.managedObjectContext) var viewContext
-     let fgDeGender = Organization.addHardcodedFgDeGenderForPreview(context: viewContext)
-     MembershipView(club: fgDeGender)
- }
+ struct MembershipViewPreview: PreviewProvider {
+     @State static var preferences = PreferencesStructHTML.defaultValue
+
+     static var previews: some View {
+         MembershipView(club: Organization(), preferences: $preferences)
+     }
+}
 
 extension Organization {
 

@@ -298,6 +298,23 @@
         }
       }
     },
+    "Club nickname" : {
+      "comment" : "Label for the currently selected club in Settings",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Club nickname"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Club (korte naam)"
+          }
+        }
+      }
+    },
     "Done" : {
       "comment" : "Button to close the settings popover",
       "localizations" : {
@@ -400,6 +417,23 @@
         }
       }
     },
+    "No club selected" : {
+      "comment" : "Displayed instead of selectedClubNickname = nil",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No club selected"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen club geselecteerd"
+          }
+        }
+      }
+    },
     "Photo Club Hub HTML" : {
       "comment" : "Name of this macOS app",
       "localizations" : {
@@ -468,25 +502,26 @@
         }
       }
     },
-    "Settings" : {
+    "Settings…" : {
       "comment" : "Submenu for various settings",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Settings"
+            "value" : "Settings…"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Instellingen"
+            "value" : "Instellingen…"
           }
         }
       }
     },
     "Use local thumbnails" : {
       "comment" : "Toggle to enable copying of thumbnails to a local folder",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

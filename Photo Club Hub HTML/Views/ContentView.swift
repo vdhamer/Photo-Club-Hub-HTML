@@ -69,9 +69,8 @@ struct ContentView: View {
             NavigationSplitView {
                 List(allClubs, selection: $selectedClubIds) { club in
                     //                    ForEach(allClubs, id: \.self) { club in
-                    NavigationLink {
-                        MembershipView(club: club)
-                    } label: {
+                    NavigationLink { MembershipView(club: club, preferences: $preferences) }
+                    label: {
                         if club.members.isEmpty {
                             Text(club.fullName)
                                 .foregroundStyle(.gray) // was .placeholder
@@ -135,18 +134,28 @@ struct ContentView: View {
                 Button {
                     showSettingsPopover.toggle()
                 } label: {
-                    Text(String(localized: "Settings",
+                    Text(String(localized: "Settings…",
                                  table: "PhotoClubHubHTML.SwiftUI",
                                  comment: "Submenu for various settings"))
                 }
                 .popover(isPresented: $showSettingsPopover, arrowEdge: .top) {
                     VStack(alignment: .leading, spacing: 12) {
-                        Toggle(isOn: $preferences.useLocalThumbnails,
-                               label: {Text(String(localized: "Use local thumbnails",
-                                                   table: "PhotoClubHubHTML.SwiftUI",
-                                                   comment: "Toggle to enable copying of thumbnails to a local folder"))
+                        HStack {
+                            Spacer()
+                            if preferences.selectedClubNickname != nil {
+                                Text(String(localized: "Club nickname",
+                                            table: "PhotoClubHubHTML.SwiftUI",
+                                            comment: "Label for the currently selected club in Settings") + ": "
+                                     + preferences.selectedClubNickname!
+                                ) .font(.title3)
+                            } else {
+                                Text(String(localized: "No club selected",
+                                            table: "PhotoClubHubHTML.SwiftUI",
+                                            comment: "Displayed instead of selectedClubNickname = nil")
+                                ) .font(.title3) .foregroundStyle(.secondary)
+                            }
+                            Spacer()
                         }
-                        )
                         .help(String(localized: """
                                                 App can optionally make a local copy of thumbnails to avoid hot-linking.
                                                 """,
@@ -165,7 +174,6 @@ struct ContentView: View {
                         .help(String(localized: "Selects the host to target when generating a website.",
                                      table: "PhotoClubHubHTML.SwiftUI",
                                      comment: "Hint about targetHost picker within Settings"))
-
                         HStack {
                             Spacer()
                             Button(String(localized: "Done",
