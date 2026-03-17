@@ -5,6 +5,9 @@
 //  Created by Peter van den Hamer on 14/03/2026.
 //
 
+import Foundation // for URL
+import Photo_Club_Hub_Data // for Organization
+
 /// Use `TargetHost` to select which base URL to use when generating links and assets.
 /// The enum provides a small set of known environments (personal site, club site, local development).
 
@@ -21,9 +24,17 @@ enum TargetHost: String, Codable, CaseIterable {
 
     var staticString: StaticString {
         switch self {
-            case Self.vdHamer: return "http://www.vdhamer.com"
-            case Self.fgDeGender: return "https://www.fcDeGender.nl"
-            case Self.localhost: return "http://localhost:8000"
+        case Self.vdHamer: return "http://www.vdhamer.com"
+        case Self.fgDeGender: return "https://www.fcDeGender.nl"
+        case Self.localhost: return "http://localhost:8000"
+        }
+    }
+
+    func url(clubNickname: String) -> URL? {
+        switch self {
+        case Self.vdHamer: return URL(string: "http://www.vdhamer.com/\(clubNickname)")
+        case Self.fgDeGender: return URL(string: "https://www.fcDeGender.nl\(clubNickname)")
+        case Self.localhost: return URL(string: "http://localhost:8000")
         }
     }
 }
