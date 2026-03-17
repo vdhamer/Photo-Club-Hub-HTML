@@ -30,8 +30,8 @@ struct Level2Site: Site {
     // swiftlint:disable:next function_body_length
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         // hostString examples: "http://localhost:8000", "https://www.fcDeGender.nl", etc.
-        url = preferences.selectedHost.url(clubNickname: preferences.selectedClubNickname!) ??
-              URL(preferences.selectedHost.staticString) // TODO force unwrapping
+        url = preferences.selectedHost.url(clubNickname: preferences.selectedClubNickname) ??
+              URL(preferences.selectedHost.staticString)
 
         // MARK: - Club 0
 

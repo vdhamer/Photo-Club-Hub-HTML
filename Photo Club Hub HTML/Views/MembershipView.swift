@@ -21,7 +21,8 @@ struct MembershipView: View {
         // this init() happens when the club gets shown (or almost shown) in the sidebar panel of a NavigationSplitView
         self.club = club
         self._preferences = preferences
-        // match sort order used in Members to generate HTML
+
+        // Core Data stuff. Match sort order used in Members to generate HTML
         let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_, ascending: true)
         let sortDescriptor2 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.familyName_, ascending: true)
         let predicate = NSPredicate(format: "organization_ = %@", argumentArray: [club])
@@ -43,9 +44,8 @@ struct MembershipView: View {
                             .font(.title2)
                         Spacer()
                     }
-                }
-                    .frame(idealHeight: 750) // a bit of a hack to vertically align
-                    .onAppear { preferences.selectedClubNickname = nil }
+                 }
+                    .frame(idealHeight: 750) // a bit of a hack to get vertical alignment
             } else {
                 ForEach(fetchRequestClubMembers, id: \.self) { member in
                     HStack {
@@ -62,9 +62,10 @@ struct MembershipView: View {
                             .lineLimit(1)
                     }
                 }
-                .onAppear { preferences.selectedClubNickname = club.nickName }
             }
         }
+        .onAppear { preferences.selectedClubNickname = club.nickName } // first time
+        .onChange(of: club) { preferences.selectedClubNickname = club.nickName } // any subsequent change
     }
 
     private func infix(content: String?) -> String {

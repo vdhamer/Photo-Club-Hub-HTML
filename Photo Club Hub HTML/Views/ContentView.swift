@@ -142,18 +142,11 @@ struct ContentView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             Spacer()
-                            if preferences.selectedClubNickname != nil {
-                                Text(String(localized: "Club nickname",
-                                            table: "PhotoClubHubHTML.SwiftUI",
-                                            comment: "Label for the currently selected club in Settings") + ": "
-                                     + preferences.selectedClubNickname!
-                                ) .font(.title3)
-                            } else {
-                                Text(String(localized: "No club selected",
-                                            table: "PhotoClubHubHTML.SwiftUI",
-                                            comment: "Displayed instead of selectedClubNickname = nil")
-                                ) .font(.title3) .foregroundStyle(.secondary)
-                            }
+                            Text(String(localized: "Club nickname",
+                                        table: "PhotoClubHubHTML.SwiftUI",
+                                        comment: "Label for the currently selected club in Settings") + ": "
+                                 + preferences.selectedClubNickname
+                            ) .font(.title3)
                             Spacer()
                         }
                         .help(String(localized: """

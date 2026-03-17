@@ -37,12 +37,12 @@ class PreferencesViewModelHTML: ObservableObject {
 }
 
 struct PreferencesStructHTML: Sendable { // order in which they are shown on Preferences page
-    var selectedClubNickname: String?
+    var selectedClubNickname: String // if no club has ever been selected, we use "TemplateMin"
     var useLocalThumbnails: Bool
     var selectedHost: TargetHost
 
     static let defaultValue = PreferencesStructHTML( // has to match order of declaration
-        selectedClubNickname: nil,
+        selectedClubNickname: "TemplateMin",
         useLocalThumbnails: false,
         selectedHost: TargetHost.localhost
     )
