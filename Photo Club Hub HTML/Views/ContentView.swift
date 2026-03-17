@@ -185,21 +185,21 @@ struct ContentView: View {
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all expertises")) {
                         print("Generating Level 0 expertises")
-                        generateLevel0()
+                        generateLevel0(preferences: preferences)
                     }
 
                     Button(String(localized: "L1: clubs",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all clubs")) {
                         print("Generating Level 1 clubs")
-                        generateLevel1()
+                        generateLevel1(preferences: preferences)
                     }
 
                     Button(String(localized: "L1: museums",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all museums")) {
                         print("Generating Level 1 museums")
-                        generateLevel1()
+                        generateLevel1(preferences: preferences)
                     } .disabled(true)
 
                     Button(String(localized: "L2: club members",
@@ -231,7 +231,7 @@ struct ContentView: View {
         }
     }
 
-    private func generateLevel0() { // index with all expertises
+    private func generateLevel0(preferences: PreferencesStructHTML) { // index with all expertises
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level0.publishing"
@@ -239,7 +239,7 @@ struct ContentView: View {
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         bgContext.performAndWait { // generate website
-            let level0Site = Level0Site(moc: bgContext) // load data
+            let level0Site = Level0Site(moc: bgContext, preferences: preferences) // load data
             Task {
                 do {
                     try await level0Site.publish() // generate HTML
@@ -250,7 +250,7 @@ struct ContentView: View {
         }
     }
 
-    private func generateLevel1() { // index with all clubs
+    private func generateLevel1(preferences: PreferencesStructHTML) { // index with all clubs
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level1.publishing"
@@ -258,7 +258,7 @@ struct ContentView: View {
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         bgContext.performAndWait { // generate website
-            let level1Site = Level1Site(moc: bgContext) // load data
+            let level1Site = Level1Site(moc: bgContext, preferences: preferences) // load data
             Task {
                 do {
                     try await level1Site.publish() // generate HTML

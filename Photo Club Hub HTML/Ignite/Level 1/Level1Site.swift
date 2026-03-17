@@ -15,13 +15,17 @@ struct Level1Site: Site {
     var name: String = "Clubs"
     // IMPORTANT: use https://www.fcDeGender.nl for localhost and use https://www.fcDeGender.nl/clubs/ for remote site
 //    var url: URL = URL("http://www.fcDeGender.nl/clubs")
-    var url: URL = URL("http://www.vdHamer.com/clubs/")
+//    var url: URL = URL("http://www.vdHamer.com")
+    var url: URL
     var builtInIconsEnabled: BootstrapOptions = .none
     var author = "Peter van den Hamer"
     let homePage: Clubs
     var theme = MyTheme()
 
-   init(moc: NSManagedObjectContext) {
+    init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
+        url = preferences.selectedHost.url(directory: "clubs") ??
+              URL(preferences.selectedHost.staticString)
+
         self.homePage = Clubs(moc: moc)
     }
 

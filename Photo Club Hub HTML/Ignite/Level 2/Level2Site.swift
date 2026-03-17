@@ -17,7 +17,7 @@ struct Level2Site: Site {
     // NOTE: https://www.fcDeGender.nl works for localhost, https://www.fcDeGender.nl/fgDeGender/ works for remote site
 //    var url: URL = URL("https://www.fcDeGender.nl/fgDeGender/")
 //    var url: URL = URL("http://www.vdhamer.com")
-    var url: URL
+    let url: URL
     var builtInIconsEnabled: BootstrapOptions = .localBootstrap
     var author = "Peter van den Hamer"
     let homePage: Members
@@ -29,8 +29,8 @@ struct Level2Site: Site {
 
     // swiftlint:disable:next function_body_length
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        // hostString examples: "http://localhost:8000", "https://www.fcDeGender.nl", etc.
-        url = preferences.selectedHost.url(clubNickname: preferences.selectedClubNickname) ??
+        // examples: "http://localhost:8000", "https://www.fcDeGender.nl", etc.
+        url = preferences.selectedHost.url(directory: preferences.selectedClubNickname) ??
               URL(preferences.selectedHost.staticString)
 
         // MARK: - Club 0
