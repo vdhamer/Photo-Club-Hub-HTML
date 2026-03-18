@@ -149,6 +149,12 @@ struct ContentView: View {
                             ) .font(.title3)
                             Spacer()
                         }
+                        Toggle(isOn: $preferences.useLocalThumbnails,
+                               label: {Text(String(localized: "Copy thumbnails to local folder",
+                                                   table: "PhotoClubHubHTML.SwiftUI",
+                                                   comment: "Toggle to enable copying of thumbnails to a local folder"))
+                                }
+                        )
                         .help(String(localized: """
                                                 App can optionally make a local copy of thumbnails to avoid hot-linking.
                                                 """,

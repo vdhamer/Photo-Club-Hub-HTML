@@ -315,6 +315,23 @@
         }
       }
     },
+    "Copy thumbnails to local folder" : {
+      "comment" : "Toggle to enable copying of thumbnails to a local folder",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy thumbnails to local folder"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thumbnails naar locale folder kopieëren"
+          }
+        }
+      }
+    },
     "Done" : {
       "comment" : "Button to close the settings popover",
       "localizations" : {
