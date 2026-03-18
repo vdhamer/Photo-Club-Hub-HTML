@@ -247,23 +247,6 @@
         }
       }
     },
-    "App can optionally make a local copy of thumbnails to avoid hot-linking." : {
-      "comment" : "Usage hint for `Use local thumbnails`",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "App can optionally make a local copy of thumbnails to avoid hot-linking."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desgewenst lokale kopie maken van thumbnail plaatjes."
-          }
-        }
-      }
-    },
     "Build HTML" : {
       "comment" : "Submenu for generating Level 0 ... Level 2 HTML pages",
       "localizations" : {
@@ -515,6 +498,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen…"
+          }
+        }
+      }
+    },
+    "Tells app to make a local copy of remote thumbnails to reduce hot-linking." : {
+      "comment" : "Usage hint for `useLocalThumbnails` setting",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tells app to make a local copy of remote thumbnails to reduce hot-linking."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De app kan desgewenst URLs naar FeaturedImages vervangen door URL naar een locale kopie."
           }
         }
       }
