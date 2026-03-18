@@ -33,7 +33,7 @@ enum TargetHost: String, Codable, CaseIterable {
     func url(directory: String) -> URL? {
         switch self {
         case Self.vdHamer: return URL(string: "http://www.vdhamer.com/\(directory)")
-        case Self.fgDeGender: return URL(string: "https://www.fcDeGender.nl\(directory)")
+        case Self.fgDeGender: return URL(string: "https://www.fcDeGender.nl/\(directory)")
         case Self.localhost: return URL(string: "http://localhost:8000") // no directory
         }
     }
