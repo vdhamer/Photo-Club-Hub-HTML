@@ -28,7 +28,7 @@ This involves using a 3-level hierarchy of JSON files:
 The [iOS app](https://github.com/vdhamer/Photo-Club-Hub) reads the various levels of JSON data files
 and uses these to drive the user interface on an iPhone or iPad.
 This MacOS app reads the same JSON data files and converts them into static HTML pages,
-which can be viewed and traversed using a browser on any platforms (Android, Windows, MacOS, etc.). 
+which can be viewed and navigated using a browser on any platforms (Android, Windows, MacOS, etc.). 
 The generated HTML pages can be easily integrated into an existing (e.g. WordPress) website via links.
 
 Because the HTML pages are static, this app needs to be rerun whenever the displayed data needs updating. 
