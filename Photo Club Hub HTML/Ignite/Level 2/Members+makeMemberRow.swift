@@ -36,7 +36,7 @@ extension Members {
         // If the user changes it while makeMemberRow is executing, the change is ignored until the next row.
         // After all, the user doesn't really know what to expect under these conditions: use true or false.
         // Arguably you shouldn't be able to change these kind of settings while generating HTML.
-        let useLocalThumbnails = preferences.useLocalThumbnails
+        let useLocalThumbnails = preferences.useLocalThumbnails // not to be confused with using localhost
 
         return Row {
 
@@ -90,7 +90,7 @@ extension Members {
             Column(items: listPhotographerExpertises) // expertise tags (can be empty array)
                 .verticalAlignment(.middle)
 
-            if photographer.photographerWebsite == nil { // photographer's optional own website
+            if photographer.photographerWebsite == nil { // photographer's optional (non-club) website
                 Column { }
             } else {
                 Column {
