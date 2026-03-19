@@ -37,12 +37,13 @@ Because the HTML pages are static, this app needs to be rerun whenever the displ
 
 ![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
 
-The Generate menu at the top-right generates various pages:
-- A list of available expertise tags for photographers ("Level 0")
-- A list of clubs ("Levele 1")
-- A list of members for a selected club ("Level 2") 
+The `Build HTML` menu at the top-right generates various pages:
+- A list of available expertise tags for photographers ("L0: expertises")
+- A list of clubs ("L1: clubs")
+- A list of museums ("L1: museums"). This hasn't been implemented yet, so is disabled.
+- A list of members for a selected club ("L2: club members"). This is enabled after a suitable club is selected in the sidebar.
 
-During website generation here is no proper feedback yet to the user (but the generation takes less than a second).
+During website generation here is no proper feedback yet to the user (but the site is generated in less than a second).
 The path to the directory with the newly generated pages will resemble
 `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
 To move a copy of this directory to a remote server, use an FTP client like `Filezilla`.
