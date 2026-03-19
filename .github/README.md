@@ -25,7 +25,7 @@ This involves using a 3-level hierarchy of JSON files:
 2. decentral lists, each containing dozens of members per club, and
 3. decentral portfolios with dozens of selected images per club member.
 
-The [iOS app](https://github.com/vdhamer/Photo-Club-Hub) thus reads the various levels of JSON data files
+The [iOS app](https://github.com/vdhamer/Photo-Club-Hub) reads the various levels of JSON data files
 and uses these to drive the user interface on an iPhone or iPad.
 This MacOS app reads the same JSON data files and converts them into static HTML pages,
 which can be viewed and traversed using a browser on any platforms (Android, Windows, MacOS, etc.). 
