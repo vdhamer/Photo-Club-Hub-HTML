@@ -37,10 +37,16 @@ Because the HTML pages are static, this app needs to be rerun whenever the displ
 
 ![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
 
-Clicking on the buttons at the top generates the website. There is no proper feedback yet to the user.
+The Generate menu at the top-right generates various pages:
+- A list of available expertise tags for photographers ("Level 0")
+- A list of clubs ("Levele 1")
+- A list of members for a selected club ("Level 2") 
+
+During website generation here is no proper feedback yet to the user (but the generation takes less than a second).
 The path to the directory with the newly generated pages will resemble
 `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
-You can use an FTP client like `Filezilla` to copy the `Build` directory and its subdirectories to any HTTP server (e.g. a club's WordPress site).
+To move a copy of this directory to a remote server, use an FTP client like `Filezilla`.
+This app doesn't currently do this copying because it requires an address and an username/password required for FTP access.
 
 ## Comparing both apps
 
