@@ -48,6 +48,8 @@ During website generation here is no proper feedback yet to the user (but the si
 The path to the directory with the newly generated pages will resemble
 `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
 
+<img width="1177" height="830" alt="Screenshot 2026-03-20 at 10 44 02" src="https://github.com/user-attachments/assets/b1eb12e6-df16-4d9f-ad02-15d655c832fb" />
+
 In the `Settings...` menu you can select whether you want to generate this for a `localhost:8000` webserver or
 for a remote host. The app currently requires to copy the directory content to a remote host yourself. 
 For this you can use an FTP client like `Filezilla`. The FTP client will require you to know the remote address
