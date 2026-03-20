@@ -536,6 +536,40 @@
         }
       }
     },
+    "Tells app to display former members in extra table." : {
+      "comment" : "Usage hint for `showFormerMembers` setting",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tells app to display former members in extra table."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App toont eventuele ex-leden in een aparte tabel."
+          }
+        }
+      }
+    },
+    "Tells app to display Fotobond number of members when cursor hovers over membership years data." : {
+      "comment" : "Usage hint for `showFotobondMemberNumber` setting",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tells app to display Fotobond number of members when cursor hovers over membership years data."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App toont Fotobond nummer indien cursor lang boven lidmaatschapsperiode hangt."
+          }
+        }
+      }
+    },
     "Tells app to make a local copy of remote thumbnails to reduce hot-linking." : {
       "comment" : "Usage hint for `useLocalThumbnails` setting",
       "localizations" : {
