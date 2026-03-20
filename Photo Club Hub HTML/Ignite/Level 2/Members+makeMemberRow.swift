@@ -82,7 +82,8 @@ extension Members {
                         formatMembershipYears(start: membershipStartDate,
                                               end: membershipEndDate,
                                               isFormer: isFormerMember(roles: roles),
-                                              fotobondMemberNumber: fotobondMemberNumber)
+                                              fotobondMemberNumber: fotobondMemberNumber,
+                                              preferences: preferences)
                     } .font(.body) .padding(.none) .margin(0) .foregroundStyle(.gray)
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)

@@ -41,12 +41,14 @@ struct PreferencesStructHTML: Sendable { // order in which they are shown on Pre
     var useLocalThumbnails: Bool
     var selectedHost: TargetHost
     var showFormerMembers: Bool
+    var showFotobondMemberNumber: Bool
 
     static let defaultValue = PreferencesStructHTML( // has to match order of declaration
         selectedClubNickname: "TemplateMin",
         useLocalThumbnails: false,
         selectedHost: TargetHost.localhost,
-        showFormerMembers: false
+        showFormerMembers: false,
+        showFotobondMemberNumber: false
     )
 
 }

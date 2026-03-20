@@ -13,7 +13,8 @@ extension Members {
 
     mutating func formatMembershipYears(start: Date?, end: Date?,
                                         isFormer: Bool,
-                                        fotobondMemberNumber: FotobondMemberNumber?) -> Span {
+                                        fotobondMemberNumber: FotobondMemberNumber?,
+                                        preferences: PreferencesStructHTML) -> Span {
         var years = TimeInterval(0)
 
         if start != nil {
@@ -24,7 +25,7 @@ extension Members {
         }
 
         let fotobondString: String
-        if showFotobondMemberNumber, let fotobondMemberNumber {
+        if preferences.showFotobondMemberNumber, let fotobondMemberNumber {
             fotobondString = " Fotobond #\(String(fotobondMemberNumber.display))" // display 301046 as "0301046"
         } else {
             fotobondString = ""

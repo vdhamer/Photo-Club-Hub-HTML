@@ -171,11 +171,26 @@ struct ClubListView: View {
                                 }
                         )
                         .help(String(localized: """
-                                                Tells app to make a local copy of remote thumbnails \
-                                                to reduce hot-linking.
+                                                Tells app to display former members in extra table.
                                                 """,
                                      table: "PhotoClubHubHTML.SwiftUI",
-                                     comment: "Usage hint for `useLocalThumbnails` setting"))
+                                     comment: "Usage hint for `showFormerMembers` setting"))
+
+                        Toggle(isOn: $preferences.showFotobondMemberNumber,
+                               label: {Text(String(localized: "Show Fotobond (NL) membership numbers",
+                                                   table: "PhotoClubHubHTML.SwiftUI",
+                                                   comment: """
+                                                            Toggle to enable displaying of Fotobond (NL) \
+                                                            membership numbers of photographers
+                                                            """))
+                                }
+                        )
+                        .help(String(localized: """
+                                                Tells app to display Fotobond number of members when cursor \
+                                                hovers over membership years data.
+                                                """,
+                                     table: "PhotoClubHubHTML.SwiftUI",
+                                     comment: "Usage hint for `showFotobondMemberNumber` setting"))
 
                         HStack {
                             Spacer()

@@ -519,6 +519,23 @@
         }
       }
     },
+    "Show Fotobond (NL) membership numbers" : {
+      "comment" : "Toggle to enable displaying of Fotobond (NL) membership numbers of photographers",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Fotobond (NL) membership numbers"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toon Fotobond nummers van leden"
+          }
+        }
+      }
+    },
     "Tells app to make a local copy of remote thumbnails to reduce hot-linking." : {
       "comment" : "Usage hint for `useLocalThumbnails` setting",
       "localizations" : {
