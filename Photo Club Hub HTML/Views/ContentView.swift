@@ -176,6 +176,22 @@ struct ContentView: View {
                                      table: "PhotoClubHubHTML.SwiftUI",
                                      comment: "Usage hint for `useLocalThumbnails` setting"))
 
+                        Toggle(isOn: $preferences.showFormerMembers,
+                               label: {Text(String(localized: "Include former members",
+                                                   table: "PhotoClubHubHTML.SwiftUI",
+                                                   comment: """
+                                                            Toggle to enable displaying former club members \
+                                                            in extra table
+                                                            """))
+                                }
+                        )
+                        .help(String(localized: """
+                                                Tells app to make a local copy of remote thumbnails \
+                                                to reduce hot-linking.
+                                                """,
+                                     table: "PhotoClubHubHTML.SwiftUI",
+                                     comment: "Usage hint for `useLocalThumbnails` setting"))
+
                         HStack {
                             Spacer()
                             Button(String(localized: "Done",

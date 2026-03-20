@@ -349,6 +349,23 @@
         }
       }
     },
+    "Include former members" : {
+      "comment" : "Toggle to enable displaying former club members in extra table",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Include former members"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toon ook ex-leden"
+          }
+        }
+      }
+    },
     "L0: expertises" : {
       "comment" : "App button that generates HTML page listing all expertises",
       "localizations" : {

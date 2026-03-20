@@ -12,7 +12,6 @@ import Photo_Club_Hub_Data // for Organization
 
 struct Members: StaticPage {
     var title = "Leden"  // needed by the StaticPage protocol, but how do I localize it?
-    let showFormerMembers: Bool = false // suppresses generating and showing table for former members
     let showFotobondMemberNumber: Bool = false // suppresses showing Fotobond number of members
 
     private var currentMembers = Table {} // initialite to empty table, then fill during init()
@@ -42,7 +41,7 @@ struct Members: StaticPage {
         currentMembersCount = makeTableResult.memberCount
         currentMembers = makeTableResult.table
         currentMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
-        if showFormerMembers {
+        if preferences.showFormerMembers {
             let makeTableResult = makeMembersTable(former: true, moc: moc, club: club, preferences: preferences)
             formerMembersCount = makeTableResult.memberCount
             formerMembersCountWithStartDate = makeTableResult.memberCountWithStartDate
@@ -98,7 +97,7 @@ struct Members: StaticPage {
 
         // MARK: - former members
 
-        if showFormerMembers {
+        if formerMembersCount > 0 {
             Text {
                 Badge(String(localized: "\(formerMembersCount) former members",
                              table: "PhotoClubHubHTML.Ignite", comment: "Number of former members"))
