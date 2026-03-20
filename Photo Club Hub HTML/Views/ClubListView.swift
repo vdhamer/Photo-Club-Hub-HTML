@@ -67,22 +67,7 @@ struct ClubListView: View {
     var body: some View {
         VStack(alignment: .leading) {
             NavigationSplitView {
-                List(allClubs, selection: $selectedClubIds) { club in
-                    //                    ForEach(allClubs, id: \.self) { club in
-                    NavigationLink { MembershipView(club: club, preferences: $preferences) }
-                    label: {
-                        if club.members.isEmpty {
-                            Text(club.fullName)
-                                .foregroundStyle(.gray) // was .placeholder
-                                .font(.title2)
-                        } else {
-                            Text("\(club.fullName) (\(club.members.count))")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                                .foregroundStyle(.link)
-                        }
-                    }
-                }
+                ClubListSidebarView(preferences: $preferences, selectedClubIds: $selectedClubIds)
             }
 
             detail: {
