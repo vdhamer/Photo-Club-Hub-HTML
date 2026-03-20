@@ -33,7 +33,7 @@ struct PhotoClubHubHtmlApp: App {
                       table: "PhotoClubHubHTML.SwiftUI",
                       comment: "Name of this macOS app"),
                id: "mainWindow") {
-            ContentView(preferences: $model.preferences)
+            ClubListView(preferences: $model.preferences)
                 .environment(\.managedObjectContext, Self.persistenceController.container.viewContext)
                 .onAppear {
                     Self.loadClubsAndMembers()

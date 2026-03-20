@@ -9,7 +9,7 @@ import SwiftUI // this is a SwiftUI view
 import CoreData // for FetchRequest?
 import Photo_Club_Hub_Data // for Organization
 
-struct ContentView: View {
+struct ClubListView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @Binding var preferences: PreferencesStructHTML
@@ -319,7 +319,7 @@ struct ContentView_Previews: PreviewProvider {
     @State static var preferences = PreferencesStructHTML.defaultValue
 
     static var previews: some View {
-        ContentView(preferences: $preferences)
+        ClubListView(preferences: $preferences)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
