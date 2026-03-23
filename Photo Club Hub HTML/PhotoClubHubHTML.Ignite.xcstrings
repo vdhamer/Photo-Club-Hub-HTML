@@ -44,13 +44,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "The former member"
+                  "value" : "One recent former member"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "new",
-                  "value" : "%lld former members"
+                  "state" : "translated",
+                  "value" : "%lld recent former members"
                 }
               }
             }
@@ -62,13 +62,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "Een voormalig lid"
+                  "value" : "Een recent voormalig lid"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld voormalige leden"
+                  "value" : "%lld recent voormalige leden"
                 }
               }
             }
@@ -322,6 +322,12 @@
             "state" : "translated",
             "value" : "From %@ to %@ (%@ years).%@"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Van %@ t/m %@ (%@ jaren). %@"
+          }
         }
       }
     },
@@ -332,6 +338,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "From %@. %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sinds %@. %@"
           }
         }
       }

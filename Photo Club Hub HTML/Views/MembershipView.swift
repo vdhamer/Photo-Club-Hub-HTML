@@ -77,11 +77,17 @@ struct MembershipView: View {
 
     private func describeMember(member: MemberPortfolio) -> String {
         if member.isFormerMember {
+            let deceased = String(localized: "deceased",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "Textual indicator of a deceased person in app's UI")
+            let former = String(localized: "former member",
+                                table: "PhotoClubHubHTML.SwiftUI",
+                                comment: "Textual indicator of a former member in app's UI")
             var output = " ("
             if member.photographer.isDeceased {
-                output += "deceased "
+                output += deceased + " "
             }
-            output += "former member"
+            output += former
             output += ")"
             return output
         } else {

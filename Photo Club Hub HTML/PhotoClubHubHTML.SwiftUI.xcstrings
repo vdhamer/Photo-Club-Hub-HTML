@@ -281,19 +281,19 @@
         }
       }
     },
-    "Club nickname" : {
+    "Club %@ (nickname)" : {
       "comment" : "Label for the currently selected club in Settings",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Club nickname"
+            "value" : "Club %@ (nickname)"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Club (korte naam)"
+            "value" : "%@ (verkorte clubnaam)"
           }
         }
       }
@@ -315,6 +315,23 @@
         }
       }
     },
+    "deceased" : {
+      "comment" : "Textual indicator of a deceased person in app's UI",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "deceased"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "overleden"
+          }
+        }
+      }
+    },
     "Done" : {
       "comment" : "Button to close the settings popover",
       "localizations" : {
@@ -328,6 +345,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sluiten"
+          }
+        }
+      }
+    },
+    "former member" : {
+      "comment" : "Textual indicator of a former member in app's UI",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "former member"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "voormalig lid"
           }
         }
       }
@@ -531,7 +565,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toon Fotobond nummers van leden"
+            "value" : "Toon Fotobond lidmaatschapsnummers"
           }
         }
       }
