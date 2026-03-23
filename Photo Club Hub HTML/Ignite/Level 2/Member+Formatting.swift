@@ -41,18 +41,17 @@ extension Members {
             currentMembersTotalYears += years
             dateFormatter.dateFormat = "yyyy-MM-dd"
             let formattedStartDate = dateFormatter.string(from: start!)
+
             return Span(String(localized: "Member for past \(formatYears(years)) years",
                                table: "PhotoClubHubHTML.Ignite",
                                comment: "Membership duration for current members"))
-            .hint(text: String(localized:
-                               """
-                               From \(formattedStartDate) \(fotobondString)
-                               """,
+            .hint(text: String(localized: "From \(formattedStartDate) \(fotobondString)",
                                table: "PhotoClubHubHTML.Ignite",
                                comment: "Mouseover hint on cell containing start-end years"))
         } else { // if current member, displays "Member from YYYYY to YYYY"
             formerMembersTotalYears += years
             guard end != nil && start != nil else { return unknown }
+
             return Span(String(localized: "Member from \(toYear(date: start!)) to \(toYear(date: end!))",
                                table: "PhotoClubHubHTML.Ignite",
                                comment: "Membership duration for current members"))
