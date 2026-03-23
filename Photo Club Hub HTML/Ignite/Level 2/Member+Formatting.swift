@@ -45,7 +45,7 @@ extension Members {
             return Span(String(localized: "Member for past \(formatYears(years)) years",
                                table: "PhotoClubHubHTML.Ignite",
                                comment: "Membership duration for current members"))
-            .hint(text: String(localized: "From \(formattedStartDate) \(fotobondString)",
+            .hint(text: String(localized: "From \(formattedStartDate). \(fotobondString)",
                                table: "PhotoClubHubHTML.Ignite",
                                comment: "Mouseover hint on cell containing start date"))
         } else { // if current member, displays "Member from YYYYY to YYYY"
@@ -57,7 +57,7 @@ extension Members {
                                comment: "Membership duration for current members"))
             .hint(text: String(localized:
                                """
-                               From \(toYear(date: start!)) to \(toYear(date: end!)) (\(formatYears(years)) years)\
+                               From \(toYear(date: start!)) to \(toYear(date: end!)) (\(formatYears(years)) years).\
                                \(fotobondString)
                                """,
                                table: "PhotoClubHubHTML.Ignite",

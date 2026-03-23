@@ -314,36 +314,24 @@
         }
       }
     },
-    "From %@ %@" : {
-      "comment" : "Mouseover hint on cell containing start date",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "From %1$@ %2$@"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lid sinds %1$@ %2$@"
-          }
-        }
-      }
-    },
-    "From %@ to %@ (%@ years)%@" : {
+    "From %@ to %@ (%@ years).%@" : {
       "comment" : "Mouseover hint on cell containing start-end years",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "From %1$@ to %2$@ (%3$@ years)%4$@"
+            "state" : "translated",
+            "value" : "From %@ to %@ (%@ years).%@"
           }
-        },
-        "nl" : {
+        }
+      }
+    },
+    "From %@. %@" : {
+      "comment" : "Mouseover hint on cell containing start date",
+      "localizations" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lid van %1$@ t/m %2$@ (%3$@ jaar)%4$@"
+            "value" : "From %@. %@"
           }
         }
       }
@@ -421,14 +409,14 @@
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Member from %1$@ to %2$@"
+            "state" : "translated",
+            "value" : "Member from %@ to %@"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lid van %1$@ tot %2$@"
+            "value" : "Lid van %@ tot %@"
           }
         }
       }
