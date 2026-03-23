@@ -383,19 +383,19 @@
         }
       }
     },
-    "Include former members" : {
+    "Include recent former members" : {
       "comment" : "Toggle to enable displaying former club members in extra table",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Include former members"
+            "value" : "Include recent former members"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toon ook ex-leden"
+            "value" : "Toon ook recente voormalige leden"
           }
         }
       }

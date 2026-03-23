@@ -101,7 +101,7 @@ struct ClubListView: View {
                                      comment: "Usage hint for `useLocalThumbnails` setting"))
 
                         Toggle(isOn: $preferences.showFormerMembers,
-                               label: {Text(String(localized: "Include former members",
+                               label: {Text(String(localized: "Include recent former members",
                                                    table: "PhotoClubHubHTML.SwiftUI",
                                                    comment: """
                                                             Toggle to enable displaying former club members \
