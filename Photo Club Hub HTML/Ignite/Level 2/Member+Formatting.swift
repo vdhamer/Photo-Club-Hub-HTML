@@ -47,7 +47,7 @@ extension Members {
                                comment: "Membership duration for current members"))
             .hint(text: String(localized: "From \(formattedStartDate) \(fotobondString)",
                                table: "PhotoClubHubHTML.Ignite",
-                               comment: "Mouseover hint on cell containing start-end years"))
+                               comment: "Mouseover hint on cell containing start date"))
         } else { // if current member, displays "Member from YYYYY to YYYY"
             formerMembersTotalYears += years
             guard end != nil && start != nil else { return unknown }

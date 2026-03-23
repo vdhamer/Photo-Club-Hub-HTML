@@ -315,7 +315,7 @@
       }
     },
     "From %@ %@" : {
-      "comment" : "Mouseover hint on cell containing start-end years",
+      "comment" : "Mouseover hint on cell containing start date",
       "localizations" : {
         "en" : {
           "stringUnit" : {
