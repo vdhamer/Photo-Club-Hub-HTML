@@ -23,14 +23,14 @@ This MacOS app is comparable to the iOS app, but supports users with Android pho
 
 > The concept behind both apps is to provide a (central) portal to view images that are managed (locally) by individual photo clubs.
 
-The data rendered in both apps is organized as a 3-level hierarchy of data files (JSON):
+The data rendered in both apps is organized as a 4-level hierarchy of data files that each contain (JSON) lists of items:
 
-| Level | Typical number of files | Lists what? | Maintained | Data format |
+| Level | Typical number of files | Files are lists of | Files are maintained | Data format |
 | :-----------: | :-----------: | :-------: | :------: | :-------: |
-| 3 | 1000+ | Images | by each club | varies |
-| 2 | 100+| Club members | by each club | JSON |
-| 1 | 10+ | Clubs | Centrally | JSON |
-| 0 | dozens | Supported Expertise tags | Centrally | JSON |
+| 3 | 1000+ | Images per photographer | by each club | HTML |
+| 2 | 100+ | Members per club | by each club | JSON |
+| 1 | 10+ | Clubs | centrally | JSON |
+| 0 | dozens | Supported Expertise tags | centrally | JSON |
 
 ### How it works
 
