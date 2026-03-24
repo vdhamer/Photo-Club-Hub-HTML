@@ -26,7 +26,7 @@ This MacOS app is comparable to the iOS app, but supports users with Android pho
 The data rendered in both apps is organized as a 3-level hierarchy of data files (JSON):
 
 | Level | Typical number of files | Lists what? | Maintained | Data format |
-| ----------- | :-----------: | :-------: | ------ |
+| ----------- | :-----------: | :-------: | ------ | ------- |
 | 3 | 1000+ | Images | by each club | not JSON |
 | 2 | 100+| Club members | by each club | JSON |
 | 1 | 10+ | Clubs | Centrally | JSON |
