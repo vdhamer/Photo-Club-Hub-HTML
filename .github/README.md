@@ -13,31 +13,41 @@
 
 # Photo-Club-Hub-HTML
 
-This MacOS app generates static websites using [twostraws/ignite](https://github.com/twostraws/ignite).
-Photo Club Hub HTML is a companion to the [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub) iOS/iPadOS app.
-Both companion apps allow photography clubs to display photos made by their members.
+This MacOS app generates static websites. Internally this uses [twostraws/ignite](https://github.com/twostraws/ignite).
 
-> The concept behind both apps is to provide a _central_ portal to view images that are managed _locally_ by the individual photo clubs.
+Photo Club Hub HTML is a companion app to the [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub)
+app that runs on iOS and iPadOS.
+This MacOS app is for users with Android phones, PCs, MacOS, and more.
 
-This involves using a 3-level hierarchy of JSON files:
+Both versions of the app allow photography clubs to display photos made by their members.
 
-1. a central list with (someday hundreds of) participating clubs,
-2. decentral lists, each containing dozens of members per club, and
-3. decentral portfolios with dozens of selected images per club member.
+> The concept behind both apps is to provide a (central) portal to view images that are managed (locally) by individual photo clubs.
 
-The [iOS app](https://github.com/vdhamer/Photo-Club-Hub) reads the various levels of JSON data files
-and uses these to drive the user interface on an iPhone or iPad.
-This MacOS app reads the same JSON data files and converts them into static HTML pages,
-which can be viewed and navigated using a browser on any platform (Android, Windows, MacOS, etc.). 
-The generated HTML pages can be easily integrated into an existing (e.g. WordPress) website via links to the generated pages.
+The data rendered in both apps is organized as a 3-level hierarchy of JSON files:
 
-Because the HTML pages are static, this app needs to be rerun whenever the displayed data needs updating. 
+1. multiple (centrally managed) lists with dozens of someday hundreds of participating **clubs**,
+2. multiple (decentrally managed) lists, each containing dozens of **members** of one of the clubs, and
+3. multiple (decentrally managed) portfolios with dozens of selected **images** per club member.
+
+### How it works
+
+Technically the [iOS app](https://github.com/vdhamer/Photo-Club-Hub) downloads the required JSON data files
+at startup and uses these to drive the user interface on an iPhone or iPad. The iOS app also uses an internal database
+with the data from a previous session. This implies that you don't have to wait for the downloads to complete.
+
+The MacOS version of the app reads the same JSON data files at startup (no database this time)
+and converts them into static HTML pages.
+These generated HTML pages can be hosted on a website and then viewed and navigated using a browser on any platform. 
+The same pages can also be easily integrated into an existing (e.g. WordPress, Joombla)
+website by simply linking to the generated pages.
+
+Because the HTML pages are static, the app may need to be rerun whenever the displayed data needs updating. 
 
 ## Running the app
 
 ![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
 
-The `Build HTML` menu at the top-right allows you to generate various pages:
+The `Build HTML` menu at the top-right allows you to choose which kinds of HTML pages you need to generate:
 - A list of available expertise tags for photographers ("L0: expertises")
 - A list of clubs ("L1: clubs")
 - A list of museums ("L1: museums"). This hasn't been implemented yet, so is disabled.
