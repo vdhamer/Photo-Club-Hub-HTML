@@ -13,7 +13,7 @@
 
 # Photo-Club-Hub-HTML
 
-This MacOS app generates static websites. Internally this uses [twostraws/ignite](https://github.com/twostraws/ignite).
+This MacOS app generates static websites.
 
 Photo Club Hub HTML is a companion app to the [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub)
 app that runs on iOS and iPadOS.
@@ -32,11 +32,11 @@ The data rendered in both apps is organized as a 3-level hierarchy of JSON files
 ### How it works
 
 Technically the [iOS app](https://github.com/vdhamer/Photo-Club-Hub) downloads the required JSON data files
-at startup and uses these to drive the user interface on an iPhone or iPad. The iOS app also uses an internal database
-with the data from a previous session. This implies that you don't have to wait for the downloads to complete.
+at startup and uses these to drive the user interface on an iPhone or iPad. The iOS app uses an internal database
+containing the data encountered during the previous session to make sure you don't have to wait for the downloads to complete.
 
-The MacOS version of the app reads the same JSON data files at startup (no database this time)
-and converts them into static HTML pages.
+The MacOS version of the app reads the same JSON data files at startup (but without a database this time)
+and converts them into static HTML pages. The static HTML generation is implemented using [twostraws/ignite](https://github.com/twostraws/ignite).
 These generated HTML pages can be hosted on a website and then viewed and navigated using a browser on any platform. 
 The same pages can also be easily integrated into an existing (e.g. WordPress, Joombla)
 website by simply linking to the generated pages.
