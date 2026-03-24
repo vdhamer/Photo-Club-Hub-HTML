@@ -25,18 +25,18 @@ This MacOS app is comparable to the iOS app, but supports users with Android pho
 
 The data rendered in both apps is organized as a 4-level hierarchy of data files that each contain (JSON) lists of items:
 
-| Level | Typical number of files | Files are lists of | Files are maintained | Data format |
+| Level | Typical number of files | Files are lists of | Files are maintained | Input data format |
 | :-----------: | :-----------: | :-------: | :------: | :-------: |
-| 3 | 1000+ | Images per photographer | by the clubs | .html |
-| 2 | 100+ | Members per club | by the clubs | .level2.json |
-| 1 | 10+ | Clubs per region | centrally | .level1.json |
-| 0 | dozens | Supported Expertise tags | centrally | .level0.json |
+| 3 | 1000+ | **Images** per photographer | by the clubs | .html |
+| 2 | 100+ | **Members** per club | by the clubs | .level2.json |
+| 1 | 10+ | **Clubs** per region | centrally | .level1.json |
+| 0 | dozens | supported **Expertise** tags | centrally | .level0.json |
 
 ### How it works
 
 Technically the [iOS app](https://github.com/vdhamer/Photo-Club-Hub) downloads the required JSON data files
 at startup and uses these to drive the user interface on an iPhone or iPad. The iOS app uses an internal database
-containing the data encountered during the previous session to make sure you don't have to wait for the downloads to complete.
+containing the data encountered during the previous session to make sure you don't have to wait while the data is being updated.
 
 The MacOS version of the app reads the same JSON data files at startup (but without a database this time)
 and converts them into static HTML pages. The static HTML generation is implemented using [twostraws/ignite](https://github.com/twostraws/ignite).
