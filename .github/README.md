@@ -40,11 +40,12 @@ containing the data encountered during the previous session to make sure you don
 
 The MacOS version of the app reads the same JSON data files at startup (but without a database this time)
 and converts them into static HTML pages. The static HTML generation is implemented using [twostraws/ignite](https://github.com/twostraws/ignite).
-These generated HTML pages can be hosted on a website and then viewed and navigated using a browser on any platform. 
-The same pages can also be easily integrated into an existing (e.g. WordPress, Joombla)
-website by simply linking to the generated pages.
+These generated HTML pages can be hosted on a server and then viewed and navigated using a browser on any platform. 
+The same pages can simultaneously be integrated into an existing (e.g. WordPress, Joombla)
+website by simply linking from the existing pages to the newly generated pages.
 
-Because the HTML pages are static, the app may need to be rerun whenever the displayed data needs updating. 
+Because the HTML pages are static, the app may need to be rerun whenever the displayed data needs updating.
+In practice this should happen when the list of club members changes (say, at least once a year).
 
 ## Running the app
 
