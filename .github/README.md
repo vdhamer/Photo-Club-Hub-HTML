@@ -27,9 +27,9 @@ The data rendered in both apps is organized as a 4-level hierarchy of data files
 
 | Level | Typical number of files | Files are lists of | Files are maintained | Data format |
 | :-----------: | :-----------: | :-------: | :------: | :-------: |
-| 3 | 1000+ | Images per photographer | by each club | HTML |
-| 2 | 100+ | Members per club | by each club | JSON |
-| 1 | 10+ | Clubs | centrally | JSON |
+| 3 | 1000+ | Images per photographer | by the clubs | HTML |
+| 2 | 100+ | Members per club | by the clubs | JSON |
+| 1 | 10+ | Clubs per region | centrally | JSON |
 | 0 | dozens | Supported Expertise tags | centrally | JSON |
 
 ### How it works
