@@ -17,7 +17,7 @@ This MacOS app generates static websites that allow photography clubs to display
 
 Photo Club Hub HTML has a companion app named [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub)
 app that runs on iOS and iPadOS.
-This MacOS app is comparable to the iOS app, but supports users with Android phones, PCs, Macs, and lots of other platforms.
+This MacOS version of the app is functionally comparable to the iOS version, but supports users with Android phones, PCs, Macs, and lots of other platforms.
 
 ### Layers of data
 
