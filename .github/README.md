@@ -13,21 +13,24 @@
 
 # Photo-Club-Hub-HTML
 
-This MacOS app generates static websites.
+This MacOS app generates static websites that allow photography clubs to display photos made by their members.
 
-Photo Club Hub HTML is a companion app to the [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub)
+Photo Club Hub HTML has a companion app named [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub)
 app that runs on iOS and iPadOS.
-This MacOS app is for users with Android phones, PCs, MacOS, and more.
+This MacOS app is comparable to the iOS app, but supports users with Android phones, PCs, Macs, and lots of other platforms.
 
-Both versions of the app allow photography clubs to display photos made by their members.
+### Layers of data
 
 > The concept behind both apps is to provide a (central) portal to view images that are managed (locally) by individual photo clubs.
 
-The data rendered in both apps is organized as a 3-level hierarchy of JSON files:
+The data rendered in both apps is organized as a 3-level hierarchy of data files (JSON):
 
-1. multiple (centrally managed) lists with dozens of someday hundreds of participating **clubs**,
-2. multiple (decentrally managed) lists, each containing dozens of **members** of one of the clubs, and
-3. multiple (decentrally managed) portfolios with dozens of selected **images** per club member.
+| Level | Typical number of files | Lists what? | Maintained |
+| ----------- | :-----------: | :-------: | ------ |
+| 3 | 1000+ | Images | by each club |
+| 2 | 100+| Club members | by each club |
+| 1 | Central | 10+ | Photo clubs | Centrally |
+| 0 | Central | dozens | Expertise tags | Centrally |
 
 ### How it works
 
