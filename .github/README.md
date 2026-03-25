@@ -74,7 +74,7 @@ In the `Settings...` menu you can select whether you want to generate this for a
 for a remote host. The app currently requires you to copy the directory content to a remote host yourself. 
 For this you can use an FTP client like `Filezilla`. The FTP client will require you to know the remote address
 and the ftp credentials for that site. Once the directory content is on your remote server, you can view it in a 
-browser and link to it from an existing website.
+browser and optionally link to it from an existing website.
 
 ## Comparing both apps
 
