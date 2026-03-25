@@ -41,7 +41,7 @@ And **Clubs** are themselves organized hierarchically based on geography/organiz
 
 Technically the [iOS app](https://github.com/vdhamer/Photo-Club-Hub) downloads the required JSON data files
 at startup and uses these to drive the user interface on an iPhone or iPad. Furthermore, the iOS app uses an in-app database (Core Data)
-that persists the data encountered during previous sessions. This allows the app to display pretty up to date data
+that persists the data downloaded during previous sessions. This allows the app to display pretty up to date data
 while fetching the latest version of that data.
 
 The MacOS version of the app reads the exact same JSON data files at startup (but without persistent storage)
