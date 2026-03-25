@@ -95,7 +95,7 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Displays member portfolios | yes | yes |
 | Linkable member portfolios | partially✲ | yes |
 | Autoplay of portfolios | yes | yes |
-| Content updated | whenever club updates its data | whenever club updates its data |
+| Content updated | whenever club updates its data | whenever the data is regenerated |
 | Maps showing clubs | yes | - |
 | Languages | English, Dutch✲ | English, Dutch✲ |
 | Internal database | yes | - |
