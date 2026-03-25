@@ -124,24 +124,24 @@ The data being displayed on the individual HTML sites can get updated say 10 tim
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
 it is best to generate _static_ websites.
 This limits the hasstle to uploading a file to a directory and associated username/password.
-This should be easier and more robust than having custom server software that generates web pages on demand.
+This should be easier and more robust than having custom server software that generates web pages on request.
 
 **Ignite** allows us to create a tool in pure Swift 
-that generates the content of the static website without having to code HTML/CSS/Javascript.
-Swift is essentially a declarative higher-level description (`Result Builder`) that resembles data more than it resembles code.
+that generates the content of the static website without having to do HTML/CSS/Javascript coding.
+Ignite is essentially a declarative higher-level description (`Result Builder`) that resembles data more than it resembles code.
 
-## Why separate repo's?
+## Why have separate repo's?
 
 From a technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository
 with two (very) different targets that run on different platforms.
 
-We chose to split the code into multiple repos to lower the barrier to contribute to either app. That gives up two respos.
+We chose to split the code into multiple repos to lower the barrier to contribute to either app. That gives us two respos.
 But common code is being factored out into a package in order to eliminate duplication of large amounts of code.
-So there will soon be _three_ repositories in GitHub:
+So there will ultimately be _three_ repositories in GitHub:
 
 - Photo Club Hub (for iOS, interactive browing), 
 - Photo Club Hub HTML (for macOS, to generate static websites)
-- Photo Club Hub Data (used by both to merge fresh JSON data into the Core Data database)
+- Photo Club Hub Data (used by both to load and update JSON data into the Core Data database)
 
 ## Will 3 hierarchy levels be enough?
 
@@ -149,18 +149,19 @@ Initially there are only a handful of pilot clubs involved.
 Data for a hundred clubs at <1 kB each can be contained in a single `Level 1` file,
 especially when loaded in the background and cached using Core Data.
 
-To split up the `level1.json` file we _could_ allow the `root.level1.json` file to contain URL links to additional level1.json files.
-This could, for example, allow the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
-This would allow a user to choose whether or not to load data for particular branches in the tree.
+To split up the `level1.json` file we allow the `root.level1.json` file to contain URL links to additional level1.json files.
+This allows the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
+As a side benefit, this approach could allow a user to choose which banches of the level1 tree to load.
+This hasn't been implemented yet.
 
-Such extra level(s) of hierarchy should match the way the data and responsibilities are organized: 
+Extra Level 1 sublevels should match the way the data and responsibilities are organized: 
 essentially the tree structure forms a chain of trust. 
 A "rogue" or just non-club site will only be reachable if there is a chain of valid links between the default root and that site.
 Thus a site with questionable content (say `my cat photos`) can thus be isolated by removing a link.
 But it would still be reachable using its URL (path like `cats_and_more_cats/Berlin`).
-This is not a problem as long as hierarchy has a single root note and a single patch to any other node. 
+This is not a problem as long as the hierarchy has a single root node and a single path to any other node. 
 Conceivably both apps could someday allow an alternative root node to be selected for non-photo-club usages.
-For now this is only possible by a minor change to the source code.
+For now this is only possible by changing a constant in the source code.
 
 ## Roadmap
 
@@ -172,10 +173,10 @@ For now this is only possible by a minor change to the source code.
 - [x] factor out common code between both apps into a Swift Package Manager package (almost done)
 - [x] allow the user to select the club for which to generate the local site (currently hardcoded constant, almost done).
 - [x] generate a static site that can serve as index of supported clubs (Level 1 data).
-- [ ] generate index page listing photographers associated with a particiular expertise
+- [ ] generate index pages listing photographers associated with a particiular expertise
 - [ ] generate all clubs in bulk instead of one club at a time
 
-It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would be another repo.
+It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would require adding another repo.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
