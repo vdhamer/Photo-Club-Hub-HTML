@@ -50,7 +50,7 @@ These generated HTML pages can be hosted on a server and then viewed and navigat
 These generated HTML pages can also be integrated into an existing (e.g. WordPress, Joomla)
 website by simply linking from the existing pages to the newly generated pages.
 
-Because the HTML pages are static, the generator app should be rerun whenever the displayed data needs to be update.
+Because the HTML pages are static, the generator app should be rerun whenever the displayed data needs to be updated.
 In practice this will be at least once a year, for example when the list of club members changes.
 
 ## Running the app
