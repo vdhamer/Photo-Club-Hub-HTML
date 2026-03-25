@@ -60,7 +60,7 @@ In practice this will be at least once a year, for example when the list of club
 The `Build HTML` menu at the top-right allows you to choose which kinds of HTML pages you need to generate:
 - A list of available expertise tags for photographers ("L0: expertises")
 - A list of clubs ("L1: clubs")
-- A list of museums ("L1: museums"). This hasn't been implemented yet, so is disabled.
+- A list of museums ("L1: museums"). The data exists, but generation hasn't been implemented yet, so is disabled.
 - A list of members for a selected club ("L2: club members"). This is enabled after a suitable club is selected in the sidebar.
 
 During website generation here is no proper feedback yet to the user (but the site is generated in less than a second).
