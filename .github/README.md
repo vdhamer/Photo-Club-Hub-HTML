@@ -34,16 +34,20 @@ The data rendered in both apps is organized as a 4-level hierarchy of data files
 | 1 | 10+ | **Clubs** per region | centrally | .level1.json |
 | 0 | dozens | supported **Expertise** tags | centrally | .level0.json |
 
+Layers 1-3 form a tree structure: An **Image** belongs to one **Member** of one of the **Clubs**.
+And **Clubs** are themselves organized hierarchically based on geography/organization.
+
 ### How it works
 
 Technically the [iOS app](https://github.com/vdhamer/Photo-Club-Hub) downloads the required JSON data files
-at startup and uses these to drive the user interface on an iPhone or iPad. The iOS app uses an internal database
-containing the data encountered during the previous session to make sure you don't have to wait while the data is being updated.
+at startup and uses these to drive the user interface on an iPhone or iPad. Furthermore, the iOS app uses an in-app database (Core Data)
+that persists the data encountered during previous sessions. This allows the app to display pretty up to date data
+while fetching the latest version of that data.
 
-The MacOS version of the app reads the same JSON data files at startup (but without a database this time)
+The MacOS version of the app reads the exact same JSON data files at startup (but without persistent storage)
 and converts them into static HTML pages. The static HTML generation is implemented using [twostraws/ignite](https://github.com/twostraws/ignite).
-These generated HTML pages can be hosted on a server and then viewed and navigated using a browser on any platform. 
-The same pages can simultaneously be integrated into an existing (e.g. WordPress, Joombla)
+These generated HTML pages can be hosted on a server and then viewed and navigated using any browser on any platform. 
+These generated HTML pages can also be integrated into an existing (e.g. WordPress, Joomla)
 website by simply linking from the existing pages to the newly generated pages.
 
 Because the HTML pages are static, the app may need to be rerun whenever the displayed data needs updating.
