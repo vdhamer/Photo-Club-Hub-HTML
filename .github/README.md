@@ -34,7 +34,7 @@ The data rendered in both apps is organized as a 4-level hierarchy of data files
 | 1 | 10+ | **Clubs** per region | centrally | .level1.json |
 | 0 | dozens | supported **Expertise** tags | centrally | .level0.json |
 
-Layers 1-3 form a tree structure: An **Image** belongs to one **Member** of one of the **Clubs**.
+Layers 1-3 form a tree structure: an **Image** belongs to one **Member** of one of the **Clubs**.
 And **Clubs** are themselves organized hierarchically based on geography/organization.
 
 ### How it works
