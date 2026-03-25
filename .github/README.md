@@ -71,7 +71,7 @@ The path to the directory with the newly generated pages will resemble
 <img width="1177" height="830" alt="Screenshot 2026-03-23 at 17 15 43" src="https://github.com/user-attachments/assets/e39aa295-8560-492e-b869-ab3e8f3da376" />
 
 In the `Settings...` menu you can select whether you want to generate this for a `localhost:8000` webserver or
-for a remote host. The app currently requires to copy the directory content to a remote host yourself. 
+for a remote host. The app currently requires you to copy the directory content to a remote host yourself. 
 For this you can use an FTP client like `Filezilla`. The FTP client will require you to know the remote address
 and the ftp credentials for that site. Once the directory content is on your remote server, you can view it in a 
 browser and link to it from an existing website.
