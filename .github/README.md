@@ -23,7 +23,7 @@ the app generates cross-linked HTML pages (on a Mac) that can then be viewed on 
 
 ### Layers of data
 
-> The concept behind both apps is to provide a (central) portal to view images that are managed (locally) by individual photo clubs.
+> The concept behind both apps is to provide a (central) portal to view image portfolios that are managed by individual photo clubs.
 
 The data rendered in both apps is organized as a 4-level hierarchy of data files that each contain (JSON) lists of items:
 
