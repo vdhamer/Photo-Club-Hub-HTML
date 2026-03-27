@@ -21,7 +21,9 @@ This MacOS version of the app supports users with Android phones, PCs, Macs, and
 This version is functionally comparable to the iOS version (comparison below), but it works very differently:
 the app generates cross-linked HTML pages (on a Mac) that can then be viewed on e.g. an Android phone.
 
-### Layers of data
+### How it works
+
+#### The data model
 
 > The concept behind both apps is to provide a (central) portal to view image portfolios that are managed by individual photo clubs.
 
@@ -34,10 +36,12 @@ The data rendered in both apps is organized as a 4-level hierarchy of data files
 | 1 | 10+ | **Clubs** per region | centrally | .level1.json |
 | 0 | dozens | supported **Expertise** tags | centrally | .level0.json |
 
-Layers 1-3 form a tree structure: an **Image** belongs to one **Member** of one of the **Clubs**.
-And **Clubs** are themselves organized hierarchically based on geography/organization.
+Layers 1-3 form a tree structure: a club **Member** can show a portfolio containing multiple **Images**.
+A **Club** typically has a dozen or more Members.
+A photographer can be a member of one or more clubs.
+To simplify data management and data ownership, Clubs can also be organized into a tree structure (e.g. a node per country, district, etc).
 
-### How it works
+#### Loading data into the apps
 
 Technically the [iOS app](https://github.com/vdhamer/Photo-Club-Hub) downloads the required JSON data files
 at startup and uses these to drive the user interface on an iPhone or iPad. Furthermore, the iOS app uses an in-app database (Core Data)
