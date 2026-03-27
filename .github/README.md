@@ -44,7 +44,7 @@ To simplify data management and data ownership, Clubs can also be organized into
 #### Loading data into the apps
 
 Technically the [iOS app](https://github.com/vdhamer/Photo-Club-Hub) downloads the required JSON data files
-at startup and uses these to drive the user interface on an iPhone or iPad. Furthermore, the iOS app uses an in-app database (Core Data)
+at startup and uses these to populate the user interface on an iPhone or iPad. Furthermore, the iOS app uses an in-app database (Core Data)
 that persists the data downloaded during previous sessions. This allows the app to display pretty up to date data
 while fetching the latest version of that data.
 
