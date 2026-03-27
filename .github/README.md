@@ -23,7 +23,7 @@ the app generates cross-linked HTML pages (on a Mac) that can then be viewed on 
 
 ### How it works
 
-#### The data model
+#### The data model (logical)
 
 > The concept behind both apps is to provide a (central) portal to view image portfolios that are managed by individual photo clubs.
 
@@ -41,43 +41,51 @@ A **Club** typically has a dozen or more Members.
 A photographer can be a member of one or more clubs.
 To simplify data management and data ownership, Clubs can also be organized into a tree structure (e.g. a node per country, district, etc).
 
-#### Loading data into the apps
+#### Loading data (physical)
 
 Technically the [iOS app](https://github.com/vdhamer/Photo-Club-Hub) downloads the required JSON data files
-at startup and uses these to populate the user interface on an iPhone or iPad. Furthermore, the iOS app uses an in-app database (Core Data)
-that persists the data downloaded during previous sessions. This allows the app to display pretty up to date data
-while fetching the latest version of that data.
+at startup and uses these to populate the user interface on an iPhone or iPad. Furthermore, the iOS app uses an in-app database (currently Core Data)
+that persists the data downloaded during previous sessions. This allows the app to already display more or less up to date information
+while refreshing the information. Any changes to the information are propagated to the (SwiftUI) user interface. 
 
-The MacOS version of the app reads the exact same JSON data files at startup (but without persistent storage)
+The MacOS version of the app reads the same JSON data files at startup (but without persistent storage)
 and converts them into static HTML pages. The static HTML generation is implemented using [twostraws/ignite](https://github.com/twostraws/ignite).
-These generated HTML pages can be hosted on a server and then viewed and navigated using any browser on any platform. 
+These generated HTML pages can be hosted on any HTTP server and then viewed and navigated using a browser on any platform. 
 These generated HTML pages can also be integrated into an existing (e.g. WordPress, Joomla)
-website by simply linking from the existing pages to the newly generated pages.
+website by simple links from the existing pages or an existing menu to the newly generated pages.
 
-Because the HTML pages are static, the generator app should be rerun whenever the displayed data needs to be updated.
-In practice this will be at least once a year, for example when the list of club members changes.
+Because the HTML pages are static, the generator app should ideally be rerun whenever the club data is updated.
+This might be once a year or once a month, for example when the list of club members changes.
+This can replace similar updating to traditional (non-generated) web pages but - because the data comes
+from a single data source - there is no data copying with associated risk of errors.
 
 ## Running the app
 
+### Generation commands
+
 ![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
 
-The `Build HTML` menu at the top-right allows you to choose which kinds of HTML pages you need to generate:
+The `Build HTML` menu at the top-right allows you to choose which kinds of HTML pages to generate:
 - A list of available expertise tags for photographers ("L0: expertises")
 - A list of clubs ("L1: clubs")
-- A list of museums ("L1: museums"). The data exists, but generation hasn't been implemented yet, so is disabled.
-- A list of members for a selected club ("L2: club members"). This is enabled after a suitable club is selected in the sidebar.
+- A list of museums ("L1: museums"). The data exists, but HTML generation hasn't been implemented yet, so it is still disabled.
+- A list of members for a selected club ("L2: club members"). This requires selecting a club from the sidebar.
 
 During website generation here is no proper feedback yet to the user (but the site is generated in less than a second).
 
 The path to the directory with the newly generated pages will resemble
 `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
 
+### Hosting
+
 <img width="1177" height="830" alt="Screenshot 2026-03-23 at 17 15 43" src="https://github.com/user-attachments/assets/e39aa295-8560-492e-b869-ab3e8f3da376" />
 
-In the `Settings...` menu you can select whether you want to generate this for a `localhost:8000` webserver or
-for a remote host. The app currently requires you to copy the directory content to a remote host yourself. 
+In the `Settings...` menu you can select whether you want to generate this for a `localhost:8000` web server or
+for a remote host. 
+
+For a remote host, the app currently requires you to separately copy the generated directory content to that host. 
 For this you can use an FTP client like `Filezilla`. The FTP client will require you to know the remote address
-and the ftp credentials for that site. Once the directory content is on your remote server, you can view it in a 
+and the ftp credentials for that site. Once the directory content is copied to your remote server, you can view it in a 
 browser and optionally link to it from an existing website.
 
 ## Comparing both apps
