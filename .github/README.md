@@ -13,7 +13,7 @@
 
 # Photo-Club-Hub-HTML
 
-This MacOS app generates static websites that allow photography clubs to display the portfolios of their members.
+This MacOS app generates static websites that allow photography clubs to showcase the portfolios of their members.
 
 Photo Club Hub HTML has a companion app named [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub)
 that runs on iOS and iPadOS.
