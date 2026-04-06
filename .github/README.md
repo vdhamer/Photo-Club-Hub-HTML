@@ -74,7 +74,8 @@ The `Build HTML` menu at the top-right allows you to choose which kinds of HTML 
 During website generation here is no proper feedback yet to the user (but the site is generated in less than a second).
 
 The path to the directory with the newly generated pages will resemble
-`/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`.
+`/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`
+(where `library` is a hidden MacOS file: use Cmd/Shift . to see it in Finder).
 
 ### Hosting
 
