@@ -68,7 +68,7 @@
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld recent voormalige leden"
+                  "value" : "%lld recente voormalige leden"
                 }
               }
             }
