@@ -13,11 +13,11 @@
 
 # Photo-Club-Hub-HTML
 
-This MacOS app generates static websites that allow photography clubs to showcase the portfolios of their members.
+This macOS app generates static websites that allow photography clubs to showcase the portfolios of their members.
 
 Photo Club Hub HTML has a companion app named [vdhamer/Photo-Club-Hub](https://github.com/vdhamer/Photo-Club-Hub)
 for iOS and iPadOS.
-This MacOS version of the app supports users with Android phones, PCs, Macs, and many other platforms.
+This macOS version of the app supports users with Android phones, PCs, Macs, and many other platforms.
 This version is functionally comparable to the iOS version (comparison below), but it works very differently:
 the app generates cross-linked HTML pages (on a Mac) that can then be viewed on e.g. an Android phone.
 
@@ -48,7 +48,7 @@ at startup and uses these to populate the user interface on an iPhone or iPad. F
 that persists the data downloaded during previous sessions. This allows the app to already display more or less up to date information
 while refreshing the information. Any changes to the information are propagated to the (SwiftUI) user interface. 
 
-The MacOS version of the app reads the same JSON data files at startup (but without persistent storage)
+The macOS version of the app reads the same JSON data files at startup (but without persistent storage)
 and converts them into static HTML pages. The static HTML generation is implemented using [twostraws/ignite](https://github.com/twostraws/ignite).
 These generated HTML pages can be hosted on any HTTP server and then viewed and navigated using a browser on any platform. 
 These generated HTML pages can also be integrated into an existing (e.g. WordPress, Joomla)
@@ -63,7 +63,7 @@ from a single data source - there is no data copying with associated risk of err
 
 ### Generation commands
 
-![Screenshot of MacOS app](images/Screenshot_app.png "Screenshot of MacOS app")
+![Screenshot of macOS app](images/Screenshot_app.png "Screenshot of macOS app")
 
 The `Build HTML` menu at the top-right allows you to choose which kinds of HTML pages to generate:
 - A list of available expertise tags for photographers ("L0: expertises")
@@ -71,11 +71,11 @@ The `Build HTML` menu at the top-right allows you to choose which kinds of HTML 
 - A list of museums ("L1: museums"). The data exists, but HTML generation hasn't been implemented yet, so it is still disabled.
 - A list of members for a selected club ("L2: club members"). This requires selecting a club from the sidebar.
 
-During website generation here is no proper feedback yet to the user (but the site is generated in less than a second).
+During website generation there is no proper feedback yet to the user (but the site is generated in less than a second).
 
 The path to the directory with the newly generated pages will resemble
 `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`
-(where `library` is a hidden MacOS file: use Cmd/Shift . to see it in Finder).
+(where `library` is a hidden macOS file: use Cmd/Shift . to see it in Finder).
 
 ### Hosting
 
@@ -94,11 +94,11 @@ browser and optionally link to it from an existing website.
 ![App versus HTML comparison](images/Screenshot_comparison.png "side-by-side screenshots")
 
 This website generator serves as an alternative for the `Photo Club Hub` iOS app: 
-it allows users to view the images on devices running Android, Windows, MacOS, etc.
+it allows users to view the images on devices running Android, Windows, macOS, etc.
 
 | | Photo Club Hub | Photo Club Hub HTML |
 | ----------- | :-----------: | :-------: |
-| Runs on | iOS, iPadOS, (MacOS, VisionOS) | all major browsers |
+| Runs on | iOS, iPadOS, (macOS, VisionOS) | all major browsers |
 | Available via | [App Store](https://apps.apple.com/us/app/photo-club-hub/id1178324330) | URLs |
 | Mobile friendly | yes | yes |
 | Lists clubs | yes | yes |
@@ -123,20 +123,20 @@ it allows users to view the images on devices running Android, Windows, MacOS, e
 | Technology           | Description                 | Source |
 | -------------------- | --------------------------- | ------ |
 | [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator | Github (Paul Hudson) |
-| [SwiftUI](https://developer.apple.com/documentation/coredata) | UI framework | Apple |
+| [SwiftUI](https://developer.apple.com/documentation/swiftui) | UI framework | Apple |
 | [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework | Apple |
-| [SwiftyJSON/SwifyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing | Github |
+| [SwiftyJSON/SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing | Github |
 
 ## Static sites and Ignite
 
-This app runs on MacOS and generates a local directory with a few files and subdirectories (CSS, Javascript, image assets).
+This app runs on macOS and generates a local directory with a few files and subdirectories (CSS, Javascript, image assets).
 These are then copied over to a club's existing server via e.g. FTP.
 Technically the files simply need to be hosted on an HTTP server such as a club's existing WordPress site.
 
 The data being displayed on the individual HTML sites can get updated say 10 times per year.
 Because the update frequency is relatively low, and because the owners of the data are assumed to have limited "computer" expertise,
 it is best to generate _static_ websites.
-This limits the hasstle to uploading a file to a directory and associated username/password.
+This limits the hassle to uploading a file to a directory and associated username/password.
 This should be easier and more robust than having custom server software that generates web pages on request.
 
 **Ignite** allows us to create a tool in pure Swift 
@@ -148,7 +148,7 @@ Ignite is essentially a declarative higher-level description (`Result Builder`) 
 From a technical perspective, Photo Club Hub and Photo Club HTML _could_ have been implemented as a single repository
 with two (very) different targets that run on different platforms.
 
-We chose to split the code into multiple repos to lower the barrier to contribute to either app. That gives us two respos.
+We chose to split the code into multiple repos to lower the barrier to contribute to either app. That gives us two repos.
 But common code is being factored out into a package in order to eliminate duplication of large amounts of code.
 So there will ultimately be _three_ repositories in GitHub:
 
@@ -164,7 +164,7 @@ especially when loaded in the background and cached using Core Data.
 
 To split up the `level1.json` file we allow the `root.level1.json` file to contain URL links to additional level1.json files.
 This allows the root file to support a path like `root/Netherlands` or `root/Japan/Tokio`.
-As a side benefit, this approach could allow a user to choose which banches of the level1 tree to load.
+As a side benefit, this approach could allow a user to choose which branches of the level1 tree to load.
 This hasn't been implemented yet.
 
 Extra Level 1 sublevels should match the way the data and responsibilities are organized: 
@@ -186,7 +186,7 @@ For now this is only possible by changing a constant in the source code.
 - [x] factor out common code between both apps into a Swift Package Manager package (almost done)
 - [x] allow the user to select the club for which to generate the local site (currently hardcoded constant, almost done).
 - [x] generate a static site that can serve as index of supported clubs (Level 1 data).
-- [ ] generate index pages listing photographers associated with a particiular expertise
+- [ ] generate index pages listing photographers associated with a particular expertise
 - [ ] generate all clubs in bulk instead of one club at a time
 
 It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would require adding another repo.
