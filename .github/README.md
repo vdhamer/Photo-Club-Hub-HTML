@@ -75,7 +75,7 @@ During website generation there is no proper feedback yet to the user (but the s
 
 The path to the directory with the newly generated pages will resemble
 `/Users/peter/Library/Containers/com.vdHamer.Photo-Club-Hub-HTML/Data/Build`
-(where `library` is a hidden macOS file: use Cmd/Shift . to see it in Finder).
+(where `Library` is a hidden macOS file: use Cmd/Shift . to see it in Finder).
 
 ### Hosting
 
