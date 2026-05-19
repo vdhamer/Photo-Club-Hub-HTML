@@ -49,7 +49,10 @@ struct ClubListView: View {
         }
 
         .onAppear {
-            NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift MacOS StormViewer)
+            NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift macOS StormViewer)
+            // some Ignite forks may requires an Assets directory at NSHomeDirectory() when running as a sandboxed app
+            try? FileManager.default.createDirectory( at: URL(filePath: NSHomeDirectory()).appending(path: "Assets"),
+                                                      withIntermediateDirectories: true )
         }
         .frame(minWidth: 640, minHeight: 390)
         .padding()
@@ -208,8 +211,8 @@ struct ClubListView: View {
                 do {
                     try await level0Site.publish() // generate HTML
                 } catch {
-                    print(error.localizedDescription)
-                }
+                    ifDebugFatalError("Publishing of results of Level0Site() failed. Error: \(error)")
+                    print(error.localizedDescription)                }
             }
         }
     }
@@ -227,6 +230,7 @@ struct ClubListView: View {
                 do {
                     try await level1Site.publish() // generate HTML
                 } catch {
+                    ifDebugFatalError("Publishing of results of Level1Site() failed. Error: \(error)")
                     print(error.localizedDescription)
                 }
             }
@@ -246,6 +250,7 @@ struct ClubListView: View {
                 do {
                     try await level2Site.publish() // generate HTML
                 } catch {
+                    ifDebugFatalError("Publishing of results of Level2Site() failed. Error: \(error)")
                     print(error.localizedDescription)
                 }
             }
