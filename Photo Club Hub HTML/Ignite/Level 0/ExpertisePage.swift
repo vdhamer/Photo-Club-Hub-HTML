@@ -24,12 +24,15 @@ struct ExpertisePage: StaticPage {
         self.language = Photo_Club_Hub_Data.Language.find(context: moc, isoCode: language)
 
         self.expertiseID = expertiseID
-        self.expertise = nil // TODO: fetch by expertiseID per issue #182
-        self.title = expertiseID // TODO: localize per issue #182
+        let expertise = Expertise.find(context: moc, expertiseIdString: expertiseID)
+        self.expertiseLocal = expertise?.selectedLocalizedExpertise(isoCode: language).localizedExpertise?.name ??
+                              expertiseID // fallback is to show canonical string (e.g. for temporary Expertise)
+
+        self.title = expertiseLocal
     }
 
     func body(context: PublishingContext) -> [BlockElement] {
-        Text("\(expertiseID) expertise (\(languageID))")
+        Text("\(expertiseLocal) expertise (\(languageID))")
             .font(.title1)
             .horizontalAlignment(.center)
             .margin(.top, .extraLarge)
