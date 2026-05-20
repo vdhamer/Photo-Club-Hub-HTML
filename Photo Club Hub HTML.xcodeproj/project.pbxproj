@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3728D0DD2FBDE97B00E17112 /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 3728D0DB2FBDE97B00E17112 /* settings.json */; };
 		377407A92F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		377407AA2F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
 		377407AB2F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C912CE927D00054F87B /* Ignite */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		3715FB292E683FD800203775 /* Photo-Club-Hub-HTML-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Photo-Club-Hub-HTML-Info.plist"; sourceTree = "<group>"; };
+		3728D0DB2FBDE97B00E17112 /* settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = settings.json; sourceTree = "<group>"; };
 		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
 		D05E366A2DD2526C005697AC /* Photo Club Hub Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Photo Club Hub Data"; sourceTree = "<group>"; };
 		D05E369E2DD253A7005697AC /* Photo_Club_Hub_Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Photo_Club_Hub_Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +166,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3728D0DC2FBDE97B00E17112 /* .claude */ = {
+			isa = PBXGroup;
+			children = (
+				3728D0DB2FBDE97B00E17112 /* settings.json */,
+			);
+			path = .claude;
+			sourceTree = "<group>";
+		};
 		D05E36C62DD25449005697AC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +190,7 @@
 				D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 				D0B9D4FE2CC443D900B1541C /* .github */,
+				3728D0DC2FBDE97B00E17112 /* .claude */,
 				D05E36722DD252C5005697AC /* Photo Club Hub Data */,
 				D05E367F2DD252C5005697AC /* Photo Club Hub DataTests */,
 				D05E36C62DD25449005697AC /* Frameworks */,
@@ -372,6 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			files = (
 				D05E366B2DD2526C005697AC /* Photo Club Hub Data in Resources */,
+				3728D0DD2FBDE97B00E17112 /* settings.json in Resources */,
 				D06B8D502DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan in Resources */,
 			);
 		};
