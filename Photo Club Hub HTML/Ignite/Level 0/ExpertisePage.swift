@@ -12,11 +12,11 @@ import Photo_Club_Hub_Data // for Expertise
 struct ExpertisePage: StaticPage {
     let title: String // page title shown in browser tab
 
-    let expertiseID: String // English canonical ID, e.g. "Architecture"
-    let expertise: Expertise?
+    let expertiseID: String // canonical (English) ID, e.g. "Architecture"
+    let expertiseLocal: String // localized ID
 
     let languageID: String // ISO 639-1 code, e.g. "nl"
-    let language: Photo_Club_Hub_Data.Language? // qualified to avoid ambiguity with Ignite.Language
+    let language: Photo_Club_Hub_Data.Language? // qualified with Package name to avoid ambiguity with Ignite.Language
 
     // moc is reserved for photographer queries (issue #182)
     init(expertiseID: String, language: String, moc: NSManagedObjectContext) {

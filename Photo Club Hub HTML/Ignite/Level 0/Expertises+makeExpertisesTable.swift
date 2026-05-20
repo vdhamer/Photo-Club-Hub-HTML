@@ -32,7 +32,7 @@ extension Expertises {
             var expertises: [Expertise] = try moc.fetch(fetchRequest)
             if approved { // sort result in memory when there is a translation available
                 expertises.sort { lhs, rhs in
-                    return lhs.selectedLocalizedExpertise.name < rhs.selectedLocalizedExpertise.name
+                    return lhs.selectedLocalizedExpertise().name < rhs.selectedLocalizedExpertise().name
                 }
             }
 
@@ -67,7 +67,7 @@ extension Expertises {
                 let url: String = "https://www.fgDeGender.nl/\(expertise.id)"
                 Group {
                     Text {
-                        Link(String(expertise.isSupported ? "\(expertise.selectedLocalizedExpertise.name)" :
+                        Link(String(expertise.isSupported ? "\(expertise.selectedLocalizedExpertise().name)" :
                                                                String(expertise.id))
                              + String(" (\(PhotographerExpertise.count(context: moc, expertiseID: expertise.id))x)"),
                              target: url
@@ -83,7 +83,7 @@ extension Expertises {
                                table: "PhotoClubHubHTML.Ignite",
                                comment: "Shown for Expertises that are temporary.")
                     Span(
-                        String(expertise.selectedLocalizedExpertise.localizedExpertise?.usage ?? unapproved)
+                        String(expertise.selectedLocalizedExpertise().localizedExpertise?.usage ?? unapproved)
                     )
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
