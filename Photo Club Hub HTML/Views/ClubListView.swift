@@ -155,6 +155,21 @@ struct ClubListView: View {
                         generateLevel0(preferences: preferences)
                     }
 
+                    Button(String("L0: nl/Architecture expertise")) { // temporary intermediate step in #177
+                        generateSingleExpertiseLanguagePage(expertiseID: "Architecture",
+                                                            language: "nl", preferences: preferences)
+                    }
+                    Button(String("L0: nl/Drone expertise")) {
+                        generateSingleExpertiseLanguagePage(expertiseID: "Drone",
+                                                            language: "nl", preferences: preferences)
+                    }
+                    Button(String("L0: nl/City expertise")) {
+                        generateSingleExpertiseLanguagePage(expertiseID: "City",
+                                                            language: "nl", preferences: preferences)
+                    }
+
+                    Divider()
+
                     Button(String(localized: "L1: clubs",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all clubs")) {
@@ -169,6 +184,8 @@ struct ClubListView: View {
                         generateLevel1(preferences: preferences)
                     } .disabled(true)
 
+                    Divider()
+
                     Button(String(localized: "L2: club members",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all club members")) {
@@ -177,6 +194,7 @@ struct ClubListView: View {
                     } .disabled(selectedClubIds.isEmpty || // no club selected
                                 hasMembers(context: viewContext,  // selected club has no members
                                            clubID: [OrganizationID](selectedClubIds)[0]) == false)
+
                 } label: {
                     Text(String(localized: "Build HTML",
                                 table: "PhotoClubHubHTML.SwiftUI",
@@ -213,6 +231,30 @@ struct ClubListView: View {
                 } catch {
                     ifDebugFatalError("Publishing of results of Level0Site() failed. Error: \(error)")
                     print(error.localizedDescription)                }
+            }
+        }
+    }
+
+    private func generateSingleExpertiseLanguagePage(expertiseID: String,
+                                                     language: String,
+                                                     preferences: PreferencesStructHTML) {
+        print("Generating expertise page for expertise <\(expertiseID)> in language <\(language)>")
+        let bgContext = PersistenceController.shared.container.newBackgroundContext()
+        bgContext.name = "ExpertiseLanguagePage.publishing"
+        bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+        bgContext.automaticallyMergesChangesFromParent = true
+
+        bgContext.performAndWait {
+            let level0SingleExpertiseSite = ExpertisePageSite(expertiseID: expertiseID,
+                                                              language: language,
+                                                              moc: bgContext,
+                                                              preferences: preferences) // for selectedHost
+            Task {
+                do {
+                    try await level0SingleExpertiseSite.publish()
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
         }
     }

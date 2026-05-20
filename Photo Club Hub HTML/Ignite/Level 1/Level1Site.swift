@@ -12,15 +12,15 @@ import CoreData // for NSManagedObjectContext
 /// Defines the base URL, theme, metadata, and the Core Data–backed `Clubs` home page.
 struct Level1Site: Site {
 
-    var name: String = "Clubs"
+    let name: String = "Clubs"
     // IMPORTANT: use https://www.fcDeGender.nl for localhost and use https://www.fcDeGender.nl/clubs/ for remote site
 //    var url: URL = URL("http://www.fcDeGender.nl/clubs")
 //    var url: URL = URL("http://www.vdHamer.com")
-    var url: URL
-    var builtInIconsEnabled: BootstrapOptions = .none
-    var author = "Peter van den Hamer"
+    let url: URL
+    let builtInIconsEnabled: BootstrapOptions = .none
+    let author = "Peter van den Hamer"
     let homePage: Clubs
-    var theme = MyTheme()
+    let theme = MyTheme()
 
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         url = preferences.selectedHost.url(directory: "clubs") ??

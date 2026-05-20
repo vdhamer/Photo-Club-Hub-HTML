@@ -13,18 +13,18 @@ import Photo_Club_Hub_Data // for Organization
 
 struct Level2Site: Site {
 
-    var name: String = "Leden" // set during init()
+    let name: String = "Leden"
     // NOTE: https://www.fcDeGender.nl works for localhost, https://www.fcDeGender.nl/fgDeGender/ works for remote site
 //    var url: URL = URL("https://www.fcDeGender.nl/fgDeGender/")
 //    var url: URL = URL("http://www.vdhamer.com")
     let url: URL
-    var builtInIconsEnabled: BootstrapOptions = .localBootstrap
-    var author = "Peter van den Hamer"
+    let builtInIconsEnabled: BootstrapOptions = .localBootstrap
+    let author = "Peter van den Hamer"
     let homePage: Members
-    var theme = MyTheme()
+    let theme = MyTheme()
     let clubType: OrganizationTypeEnum = OrganizationTypeEnum.club
 
-    var moc: NSManagedObjectContext
+    let moc: NSManagedObjectContext
     let preferences: PreferencesStructHTML
 
     // swiftlint:disable:next function_body_length

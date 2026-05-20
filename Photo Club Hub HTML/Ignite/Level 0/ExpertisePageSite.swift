@@ -9,15 +9,15 @@ import Ignite // for Site
 import CoreData // for NSManagedObjectContext
 
 struct ExpertisePageSite: Site {
-    var name: String
-    var url: URL
-    var builtInIconsEnabled: BootstrapOptions = .none
-    var author = "Peter van den Hamer"
+    let name: String // used as og:site_name meta tag (shown by social media like Facebook when page is shared)
+    let url: URL
+    let builtInIconsEnabled: BootstrapOptions = .none
+    let author = "Peter van den Hamer"
     let homePage: ExpertisePage
-    var theme = MyTheme()
+    let theme = MyTheme()
 
     init(expertiseID: String, language: String, moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        name = "\(language)/\(expertiseID)"
+        name = "Expertise: " + expertiseID
         url = preferences.selectedHost.url(directory: "\(language)/\(expertiseID)") ??
               URL(preferences.selectedHost.staticString)
         homePage = ExpertisePage(expertiseID: expertiseID, language: language, moc: moc)

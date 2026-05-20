@@ -6,18 +6,17 @@
 //
 
 import Ignite // for Site
-
 import CoreData // for NSManagedObjectContext
 
 struct Level0Site: Site {
 
-    var name: String = "Expertises"
+    let name: String = "Expertises"
     // NOTE: http://www.fcDeGender.com works on localhost, http://www.fcDeGender.com/expertises works on remote site
-    var url: URL
-    var builtInIconsEnabled: BootstrapOptions = .none
-    var author = "Peter van den Hamer"
+    let url: URL
+    let builtInIconsEnabled: BootstrapOptions = .none
+    let author = "Peter van den Hamer"
     let homePage: Expertises
-    var theme = MyTheme()
+    let theme = MyTheme()
 
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         url = preferences.selectedHost.url(directory: "expertises") ??
