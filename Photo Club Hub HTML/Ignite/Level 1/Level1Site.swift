@@ -23,7 +23,7 @@ struct Level1Site: Site {
     let theme = MyTheme()
 
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        url = preferences.selectedHost.url(directory: "clubs") ??
+        url = preferences.selectedHost.url(forPath: "clubs") ??
               URL(preferences.selectedHost.staticString)
 
         self.homePage = Clubs(moc: moc)

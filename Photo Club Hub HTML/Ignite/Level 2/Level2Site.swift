@@ -30,7 +30,7 @@ struct Level2Site: Site {
     // swiftlint:disable:next function_body_length
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         // examples: "http://localhost:8000", "https://www.fcDeGender.nl", etc.
-        url = preferences.selectedHost.url(directory: preferences.selectedClubNickname) ??
+        url = preferences.selectedHost.url(forPath: preferences.selectedClubNickname) ??
               URL(preferences.selectedHost.staticString)
 
         // MARK: - Club 0

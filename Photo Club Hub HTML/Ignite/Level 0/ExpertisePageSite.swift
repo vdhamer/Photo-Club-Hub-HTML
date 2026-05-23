@@ -18,7 +18,7 @@ struct ExpertisePageSite: Site {
 
     init(expertiseID: String, language: String, moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         name = "Expertise: " + expertiseID
-        url = preferences.selectedHost.url(directory: "\(language)/\(expertiseID)") ??
+        url = preferences.selectedHost.url(forPath: "\(language)/\(expertiseID)") ??
               URL(preferences.selectedHost.staticString)
         homePage = ExpertisePage(expertiseID: expertiseID, language: language, moc: moc)
     }

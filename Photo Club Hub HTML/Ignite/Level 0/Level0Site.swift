@@ -19,7 +19,7 @@ struct Level0Site: Site {
     let theme = MyTheme()
 
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        url = preferences.selectedHost.url(directory: "expertises") ??
+        url = preferences.selectedHost.url(forPath: "expertises") ??
               URL(preferences.selectedHost.staticString)
 
         self.homePage = Expertises(moc: moc)
