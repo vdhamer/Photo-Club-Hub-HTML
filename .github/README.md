@@ -186,7 +186,7 @@ For now this is only possible by changing a constant in the source code.
 - [x] factor out common code between both apps into a Swift Package Manager package (almost done)
 - [x] allow the user to select the club for which to generate the local site (currently hardcoded constant, almost done).
 - [x] generate a static site that can serve as index of supported clubs (Level 1 data).
-- [ ] generate index pages listing photographers associated with a particular expertise
+- [x] generate index pages listing photographers associated with a particular expertise
 - [ ] generate all clubs in bulk instead of one club at a time
 
 It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would require adding another repo.
