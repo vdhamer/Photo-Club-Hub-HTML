@@ -16,12 +16,10 @@ struct ExpertisePage: StaticPage {
     let expertiseLocal: String // localized ID
 
     let languageID: String // ISO 639-1 code, e.g. "nl"
-    let language: Photo_Club_Hub_Data.Language? // qualified with Package name to avoid ambiguity with Ignite.Language
 
     // moc is reserved for photographer queries (issue #182)
     init(expertiseID: String, language: String, moc: NSManagedObjectContext) {
         self.languageID = language
-        self.language = Photo_Club_Hub_Data.Language.find(context: moc, isoCode: language)
 
         self.expertiseID = expertiseID
         let expertise = Expertise.find(context: moc, expertiseIdString: expertiseID)
