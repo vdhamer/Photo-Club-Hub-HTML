@@ -1,5 +1,5 @@
 //
-//  Expertises.swift
+//  ExpertisesPage.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 10/10/2025.
@@ -18,6 +18,17 @@ struct ExpertisesPage: StaticPage {
 
     private var temporaryExpertisesTable = Table {} // initialite to empty table, then fill during init()
     private var temporaryExpertiseCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
+
+    static func relativePath(languageID: String, expertiseID: String? = nil) -> String {
+        if let expertiseID {
+            return "\(languageID)/expertises/\(expertiseID)"
+        } else {
+            return "\(languageID)/expertises/"
+        }
+    }
+
+    var path: String { Self.relativePath(languageID: "nl") }
+    var description: String { "List of expertises with description and some statistics" }
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
 

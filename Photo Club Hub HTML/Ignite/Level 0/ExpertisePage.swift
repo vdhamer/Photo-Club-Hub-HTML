@@ -15,7 +15,7 @@ struct ExpertisePage: StaticPage {
     let expertiseID: String // canonical (English) ID, e.g. "Architecture"
     let expertiseLocal: String // localized ID
 
-    var path: String { "/\(languageID)/expertises/\(expertiseID)" } // e.g. "/en/expertises/Architecture/"
+    var path: String { "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: expertiseID))" }
     var description: String { "List of photographers with \(expertiseLocal) expertise" }
 
     let languageID: String // ISO 639-1 code, e.g. "nl"

@@ -219,10 +219,11 @@ struct ClubListView: View {
             let level0Site = Level0Site(moc: bgContext, preferences: preferences) // load data
             Task {
                 do {
-                    try await level0Site.publish() // generate HTML
+                    try await level0Site.publish(buildDirectoryPath: ExpertisesPage.relativePath(languageID: "nl"))
                 } catch {
                     ifDebugFatalError("Publishing of results of Level0Site() failed. Error: \(error)")
-                    print(error.localizedDescription)                }
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -243,7 +244,8 @@ struct ClubListView: View {
                                                               preferences: preferences) // for selectedHost
             Task {
                 do {
-                    try await level0SingleExpertiseSite.publish()
+                    try await level0SingleExpertiseSite.publish(buildDirectoryPath:
+                        ExpertisesPage.relativePath(languageID: language, expertiseID: expertiseID))
                 } catch {
                     print(error.localizedDescription)
                 }
