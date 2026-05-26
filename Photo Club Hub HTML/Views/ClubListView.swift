@@ -156,6 +156,7 @@ struct ClubListView: View {
                     }
 
                     SingleExpertiseExampleMenuItems { expertiseID, language in
+                        print("Generating a single expertise page")
                         generateSingleExpertiseLanguagePage(expertiseID: expertiseID,
                                                             language: language, preferences: preferences)
                     }
@@ -219,7 +220,8 @@ struct ClubListView: View {
             let level0Site = Level0Site(moc: bgContext, preferences: preferences) // load data
             Task {
                 do {
-                    try await level0Site.publish(buildDirectoryPath: ExpertisesPage.relativePath(languageID: "nl"))
+//                  try await level0Site.publish(buildDirectoryPath: ExpertisesPage.relativePath(languageID: "nl")) TODO
+                    try await level0Site.publish() // generate HTML
                 } catch {
                     ifDebugFatalError("Publishing of results of Level0Site() failed. Error: \(error)")
                     print(error.localizedDescription)
@@ -245,7 +247,7 @@ struct ClubListView: View {
             Task {
                 do {
                     try await level0SingleExpertiseSite.publish(buildDirectoryPath:
-                        ExpertisesPage.relativePath(languageID: language, expertiseID: expertiseID))
+                        "Build/" + ExpertisesPage.relativePath(languageID: language, expertiseID: expertiseID))
                 } catch {
                     print(error.localizedDescription)
                 }
