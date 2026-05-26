@@ -7,6 +7,7 @@
 
 import Ignite // for Site
 import CoreData // for NSManagedObjectContext
+import Photo_Club_Hub_Data // for Expertise, Language
 
 struct Level0Site: Site {
 
@@ -15,7 +16,7 @@ struct Level0Site: Site {
     let url: URL
     let builtInIconsEnabled: BootstrapOptions = .none
     let author = "Peter van den Hamer"
-    let homePage: Expertises
+    let homePage: ExpertisesPage
     let theme = MyTheme()
 
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {

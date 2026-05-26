@@ -14,7 +14,7 @@ struct MakeExpertisesTableResult {
     let expertiseCount: Int
 }
 
-extension Expertises {
+extension ExpertisesPage {
 
     // moc: use this CoreData Managed Object Context
     // expertise: for which expertise are we doing this?

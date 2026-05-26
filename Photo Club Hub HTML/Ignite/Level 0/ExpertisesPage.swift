@@ -7,8 +7,9 @@
 
 import Ignite // for StaticPage
 import CoreData // for ManagedObjectContext
+import Photo_Club_Hub_Data // for language codes
 
-struct Expertises: StaticPage {
+struct ExpertisesPage: StaticPage {
     var title = "Expertises"  // needed by the StaticPage protocol, but how do I localize it?
     let showTemporaryExpertises: Bool = true // suppresses generating and showing table for temporary Expertises
 
