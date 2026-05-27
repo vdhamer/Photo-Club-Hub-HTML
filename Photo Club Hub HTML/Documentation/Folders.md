@@ -1,14 +1,14 @@
-## Folder structure of generated output side
+## Folder structure of generated output site
 
 Build/
     nl/ // for Dutch website pages, is there a home page??
         clubs/ // clubs/ itself contains HTML version of <filename>.level2.json files, filtered to only show clubs
             fcVeghel/ // lists all (current and optionally former) members of fcVeghel
                 portfolios/ // optional portfolio when generated using Lightroom plug-in
-            fgDeGender/ // idem for all other clubs hossted on this site
+            fgDeGender/ // idem for all other clubs hosted on this site
                 portfolios/ // optional portfolio when generated using Lightroom plug-in
         expertises/ // contains HTML version of root.level0.json files in one language
-            Abstract/ // contains index of club members with the Abstract expertise
+            Abstract/ // contains index of club members with the Abstract expertise tag
             Architecture/ // idem for all (both supported and temporary expertises) other expertises
         expositions/ // future extension (doesn't exist yet)
         museums/ // contains HTML version of <filename>.level2.json files, filtered to only show museums
@@ -16,10 +16,10 @@ Build/
         clubs/ // clubs/ itself contains HTML version of <filename>.level2.json files, filtered to only show clubs
             fcVeghel/ // lists all (current and optionally former) members of fcVeghel
                 portfolios/ // optional portfolio when generated using Lightroom plug-in
-            fgDeGender/ // idem for all other clubs hossted on this site
+            fgDeGender/ // idem for all other clubs hosted on this site
                 portfolios/ // optional portfolio when generated using Lightroom plug-in
         expertises/ // contains HTML version of root.level0.json files in one language
-            Abstract/ // contains index of club members with the Abstract expertise
+            Abstract/ // contains index of club members with the Abstract expertise tag
             Architecture/ // idem for all (both supported and temporary expertises) other expertises
         expositions/ // future extension (doesn't exist yet)
         museums/ // contains HTML version of <filename>.level2.json files, filtered to only show museums
