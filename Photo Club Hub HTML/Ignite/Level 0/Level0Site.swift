@@ -16,7 +16,7 @@ struct Level0Site: Site {
     let url: URL
     let builtInIconsEnabled: BootstrapOptions = .none
     let author = "Peter van den Hamer"
-    let homePage: ExpertisesPage
+    let homePage: RootPage
     let theme = MyTheme()
 
     private let precomputedPages: [any StaticPage] // precomputed to avoid Core Data queries on wrong threads
@@ -25,7 +25,7 @@ struct Level0Site: Site {
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         url = preferences.selectedHost.url(forPath: "expertises") ?? URL(preferences.selectedHost.staticString)
 
-        self.homePage = ExpertisesPage(moc: moc) // in future this should change from Site to Page
+        self.homePage = RootPage()
 
         let expertiseFetch: NSFetchRequest<Expertise> = Expertise.fetchRequest()
         expertiseFetch.sortDescriptors = [NSSortDescriptor(key: "id_", ascending: true)]
@@ -37,7 +37,7 @@ struct Level0Site: Site {
         let languages = (try? moc.fetch(languageFetch)) ?? []
         if languages.isEmpty { ifDebugFatalError("No languages found in Level0Site.init()") }
 
-        var pages: [any StaticPage] = [] // start empty
+        var pages: [any StaticPage] = [ExpertisesPage(moc: moc)] // start with top level page listing all Expertises
         for language in languages {
             for expertise in expertises where LocalizedExpertise.exists(context: moc,
                                                                         expertiseID: expertise.id,
