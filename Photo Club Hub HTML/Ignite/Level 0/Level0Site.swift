@@ -37,8 +37,9 @@ struct Level0Site: Site {
         let languages = (try? moc.fetch(languageFetch)) ?? []
         if languages.isEmpty { ifDebugFatalError("No languages found in Level0Site.init()") }
 
-        var pages: [any StaticPage] = [ExpertisesPage(moc: moc)] // start with top level page listing all Expertises
+        var pages: [any StaticPage] = []
         for language in languages {
+            pages.append(ExpertisesPage(moc: moc, language: language.isoCode.lowercased()))
             for expertise in expertises where LocalizedExpertise.exists(context: moc,
                                                                         expertiseID: expertise.id,
                                                                         languageIsoCode: language.isoCode) {

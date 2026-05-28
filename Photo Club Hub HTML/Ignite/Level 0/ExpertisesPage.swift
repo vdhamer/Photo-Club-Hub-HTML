@@ -10,6 +10,8 @@ import CoreData // for ManagedObjectContext
 import Photo_Club_Hub_Data // for language codes
 
 struct ExpertisesPage: StaticPage {
+    let languageID: String // ISO 639-1 code, e.g. "nl"
+
     var title = "Expertises"  // needed by the StaticPage protocol, but how do I localize it?
     let showTemporaryExpertises: Bool = true // suppresses generating and showing table for temporary Expertises
 
@@ -27,20 +29,22 @@ struct ExpertisesPage: StaticPage {
         }
     }
 
-    var path: String { "/\(Self.relativePath(languageID: "nl"))" }
+    var path: String { "/\(Self.relativePath(languageID: languageID))" }
     var description: String { "List of expertises with description and some statistics" }
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
 
     // MARK: - init()
 
-    init(moc: NSManagedObjectContext) {
-        let makeApprovedTableResult = makeExpertisesTable(approved: true, moc: moc)
+    init(moc: NSManagedObjectContext, language: String) {
+        self.languageID = language
+
+        let makeApprovedTableResult = makeExpertisesTable(approved: true, languageID: language, moc: moc)
         approvedExpertisesTable = makeApprovedTableResult.table
         approvedExpertiseCount = makeApprovedTableResult.expertiseCount
 
         if showTemporaryExpertises {
-            let makeTemporaryTableResult = makeExpertisesTable(approved: false, moc: moc)
+            let makeTemporaryTableResult = makeExpertisesTable(approved: false, languageID: language, moc: moc)
             temporaryExpertisesTable = makeTemporaryTableResult.table
             temporaryExpertiseCount = makeTemporaryTableResult.expertiseCount
         }

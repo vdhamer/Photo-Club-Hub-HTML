@@ -220,7 +220,6 @@ struct ClubListView: View {
             let level0Site = Level0Site(moc: bgContext, preferences: preferences) // load data
             Task {
                 do {
-//                  try await level0Site.publish(buildDirectoryPath: ExpertisesPage.relativePath(languageID: "nl")) TODO
                     try await level0Site.publish() // generate HTML
                 } catch {
                     ifDebugFatalError("Publishing of results of Level0Site() failed. Error: \(error)")

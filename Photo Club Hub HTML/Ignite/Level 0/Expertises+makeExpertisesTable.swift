@@ -20,7 +20,9 @@ extension ExpertisesPage {
     // expertise: for which expertise are we doing this?
     // return Int: count of returned members (can't directly count size of Ignite Table)
     // return Table: Ignite table containing rendering of requested members
-    mutating func makeExpertisesTable(approved: Bool, moc: NSManagedObjectContext) -> MakeExpertisesTableResult {
+    mutating func makeExpertisesTable(approved: Bool,
+                                      languageID: String,
+                                      moc: NSManagedObjectContext) -> MakeExpertisesTableResult {
         do {
             // allow coredata
             let sortDescriptors = approved ? [] : [NSSortDescriptor(keyPath: \Expertise.id_, ascending: true)]
@@ -32,14 +34,15 @@ extension ExpertisesPage {
             var expertises: [Expertise] = try moc.fetch(fetchRequest)
             if approved { // sort result in memory when there is a translation available
                 expertises.sort { lhs, rhs in
-                    return lhs.selectedLocalizedExpertise().name < rhs.selectedLocalizedExpertise().name
+                    return lhs.selectedLocalizedExpertise(isoCode: languageID).name <
+                           rhs.selectedLocalizedExpertise(isoCode: languageID).name
                 }
             }
 
             return MakeExpertisesTableResult(
                 table: Table {
                     for expertise in expertises {
-                        makeExpertiseRow(moc: moc, expertise: expertise)
+                        makeExpertiseRow(moc: moc, expertise: expertise, languageID: languageID)
                     }
                 }
                 header: {
@@ -59,16 +62,19 @@ extension ExpertisesPage {
     }
 
     // generates an Ignite Row in an Ignite table
-    private mutating func makeExpertiseRow(moc: NSManagedObjectContext, expertise: Expertise) -> Row {
+    private mutating func makeExpertiseRow(moc: NSManagedObjectContext,
+                                           expertise: Expertise,
+                                           languageID: String) -> Row {
 
         return Row {
 
             Column { // localized name
-                let url: String = "https://www.fgDeGender.nl/\(expertise.id)"
+                let url: String = "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: expertise.id))/"
                 Group {
                     Text {
-                        Link(String(expertise.isSupported ? "\(expertise.selectedLocalizedExpertise().name)" :
-                                                               String(expertise.id))
+                        Link(String(expertise.isSupported ?
+                                    "\(expertise.selectedLocalizedExpertise(isoCode: languageID).name)" :
+                                    String(expertise.id))
                              + String(" (\(PhotographerExpertise.count(context: moc, expertiseID: expertise.id))x)"),
                              target: url
                         )
@@ -83,7 +89,8 @@ extension ExpertisesPage {
                                table: "PhotoClubHubHTML.Ignite",
                                comment: "Shown for Expertises that are temporary.")
                     Span(
-                        String(expertise.selectedLocalizedExpertise().localizedExpertise?.usage ?? unapproved)
+                        String(expertise.selectedLocalizedExpertise(isoCode: languageID).localizedExpertise?.usage
+                               ?? unapproved)
                     )
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
