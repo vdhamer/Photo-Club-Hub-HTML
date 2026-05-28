@@ -13,9 +13,6 @@ import CoreData // for NSManagedObjectContext
 struct Level1Site: Site {
 
     let name: String = "Clubs"
-    // IMPORTANT: use https://www.fcDeGender.nl for localhost and use https://www.fcDeGender.nl/clubs/ for remote site
-//    var url: URL = URL("http://www.fcDeGender.nl/clubs")
-//    var url: URL = URL("http://www.vdHamer.com")
     let url: URL
     let builtInIconsEnabled: BootstrapOptions = .none
     let author = "Peter van den Hamer"
