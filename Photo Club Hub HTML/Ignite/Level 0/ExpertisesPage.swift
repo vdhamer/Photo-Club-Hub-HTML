@@ -27,7 +27,7 @@ struct ExpertisesPage: StaticPage {
         }
     }
 
-    var path: String { Self.relativePath(languageID: "nl") }
+    var path: String { "/\(Self.relativePath(languageID: "nl"))" }
     var description: String { "List of expertises with description and some statistics" }
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
