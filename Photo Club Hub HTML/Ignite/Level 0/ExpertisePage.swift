@@ -37,5 +37,7 @@ struct ExpertisePage: StaticPage {
             .font(.title1)
             .horizontalAlignment(.center)
             .margin(.top, .extraLarge)
+
+        FooterText(languageID: languageID)
     }
 }

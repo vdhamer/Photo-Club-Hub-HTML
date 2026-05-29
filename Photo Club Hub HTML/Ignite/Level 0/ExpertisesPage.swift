@@ -92,6 +92,8 @@ struct ExpertisesPage: StaticPage {
                 .horizontalAlignment(.center)
 
         }
+
+        FooterText(languageID: languageID)
     }
 
 }
