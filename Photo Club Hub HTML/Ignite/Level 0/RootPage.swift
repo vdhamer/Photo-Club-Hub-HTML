@@ -5,6 +5,7 @@
 //  Created by Peter van den Hamer on 27/05/2026.
 //
 
+import Foundation // for Bundle
 import Ignite // for StaticPage
 
 struct RootPage: StaticPage { // `path` intentionally omitted: Ignite always writes the homePage to index.html
@@ -29,5 +30,22 @@ struct RootPage: StaticPage { // `path` intentionally omitted: Ignite always wri
         }
             .font(.title1)
             .horizontalAlignment(.center)
+
+        let textDevLang = String(localized: "Select your language preference.",
+                                 table: "PhotoClubHubHTML.Ignite", // String shown in system language preference
+                                 comment: "Language picker for the landing page")
+        let textEnglish = String(localized: "Select your language preference.",
+                                 table: "PhotoClubHubHTML.Ignite",
+                                 bundle: Bundle.forLanguage("en"),
+                                 comment: "Language picker for the landing page")
+
+        Group {
+            if textDevLang != textEnglish {
+                Text {textDevLang}
+            }
+            Text { textEnglish }
+        }
+        .horizontalAlignment(.center)
+        .padding(.vertical, .large)
     }
 }

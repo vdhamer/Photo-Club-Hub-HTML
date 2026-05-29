@@ -569,6 +569,23 @@
         }
       }
     },
+    "Select your language preference." : {
+      "comment" : "Language picker for the landing page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select your language preference."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kies de gewenste taal."
+          }
+        }
+      }
+    },
     "Stats" : {
       "comment" : "Button linking to page with statistics",
       "localizations" : {
