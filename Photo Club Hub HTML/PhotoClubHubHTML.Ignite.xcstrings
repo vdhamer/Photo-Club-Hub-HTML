@@ -485,7 +485,7 @@
       }
     },
     "Photo Club Hub" : {
-      "comment" : "For footer that says 'This page was last updated on ... by ...'",
+      "comment" : "The app name itself is localized here.'",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -621,7 +621,7 @@
       }
     },
     "This page is part of the %@ network and was last updated on %@ %@." : {
-      "comment" : "Timestamp at bottom of static HTML page showing when page was generate",
+      "comment" : "Timestamp at bottom of static HTML page showing whether page may be oudated.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
