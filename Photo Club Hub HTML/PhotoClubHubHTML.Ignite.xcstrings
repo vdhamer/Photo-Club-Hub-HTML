@@ -247,7 +247,7 @@
       }
     },
     "Expertises" : {
-      "comment" : "Button linking to Expertise list page",
+      "comment" : "Button linking to Expertise list page\nTitle of the Expertises index HTML page",
       "localizations" : {
         "en" : {
           "stringUnit" : {

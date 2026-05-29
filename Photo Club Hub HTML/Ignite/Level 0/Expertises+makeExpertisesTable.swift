@@ -47,11 +47,17 @@ extension ExpertisesPage {
                 }
                 header: {
                     String(localized: "Expertise",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for exertise name column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for exertise name column.")
                     String(localized: "Description",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for the description column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for the description column.")
                     String(localized: "Idenfifier",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for the ID column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for the ID column.")
                 },
                 expertiseCount: expertises.count
             )

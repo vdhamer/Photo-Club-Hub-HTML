@@ -10,9 +10,15 @@ import CoreData // for ManagedObjectContext
 import Photo_Club_Hub_Data // for language codes
 
 struct ExpertisesPage: StaticPage {
-    let languageID: String // ISO 639-1 code, e.g. "nl"
 
-    var title = "Expertises"  // needed by the StaticPage protocol, but how do I localize it?
+    let languageID: String // ISO 639-1 code, e.g. "nl"
+    var title: String { // needed by the StaticPage protocol
+        String(localized: "Expertises",
+               table: "PhotoClubHubHTML.Ignite",
+               bundle: Bundle.forLanguage(languageID),
+               comment: "Title of the Expertises index HTML page")
+    }
+
     let showTemporaryExpertises: Bool = true // suppresses generating and showing table for temporary Expertises
 
     private var approvedExpertisesTable = Table {} // initialite to empty table, then fill during init()
@@ -59,6 +65,7 @@ struct ExpertisesPage: StaticPage {
         Text {
             Badge(String(localized: "\(approvedExpertiseCount) approved expertise tags",
                          table: "PhotoClubHubHTML.Ignite",
+                         bundle: Bundle.forLanguage(languageID),
                          comment: "Title badge at top of Expertises HTML index page"))
             .badgeStyle(.subtleBordered)
             .role(.success)
@@ -80,6 +87,7 @@ struct ExpertisesPage: StaticPage {
             Text {
                 Badge(String(localized: "\(temporaryExpertiseCount) temporary expertise tags",
                              table: "PhotoClubHubHTML.Ignite",
+                             bundle: Bundle.forLanguage(languageID),
                              comment: "Title badge at top of Expertises HTML index page"))
                 .badgeStyle(.subtleBordered)
                 .role(.info)
