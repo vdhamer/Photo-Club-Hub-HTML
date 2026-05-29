@@ -8,7 +8,7 @@
 import Foundation // for Date, TimeZone
 import Ignite // for BlockElement, Alert
 
-/// An Ignite localized footer Alert showing the page's affiliation to Photo Club Hub and showing the creation timestamp.
+/// An Ignite localized footer showing the page's affiliation to Photo Club Hub and showing the creation timestamp.
 ///
 /// Conforms to `BlockElement` so it can be placed directly inside a page's `@BlockElementBuilder body()` method.
 /// A localized HTML page provides the required `languageID`when generating this FooterText.
@@ -18,7 +18,7 @@ struct FooterText: BlockElement {
     /// Claude came up with solution:
     /// Required by `PageElement` (via `BlockElement`). `FooterText` never applies CSS modifiers,
     /// so the getter returns a fresh default value borrowed from another element — the only way to
-    /// obtain a `CoreAttributes` value outside the Ignite module, whose initializer is internal (at least in Ignite 0.6)
+    /// obtain a `CoreAttributes` value outside the Ignite module, whose initializer is internal (in Ignite 0.6)
     /// The setter is intentionally discarded because mutations would be lost anyway (no stored backing).
     var attributes: CoreAttributes { get { Text("").attributes } set { _ = newValue } }
 

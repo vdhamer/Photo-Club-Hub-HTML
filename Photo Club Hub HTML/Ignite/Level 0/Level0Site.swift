@@ -39,7 +39,7 @@ struct Level0Site: Site {
 
         var pages: [any StaticPage] = []
         for language in languages {
-            pages.append(ExpertisesPage(moc: moc, language: language.isoCode.lowercased()))
+            var childPageCount = 0
             for expertise in expertises where LocalizedExpertise.exists(context: moc,
                                                                         expertiseID: expertise.id,
                                                                         languageIsoCode: language.isoCode) {
@@ -47,6 +47,10 @@ struct Level0Site: Site {
                 pages.append(ExpertisePage(expertiseID: expertise.id,
                                            language: language.isoCode.lowercased(),
                                            moc: moc))
+                childPageCount += 1
+            }
+            if childPageCount > 0 { // no index page if there is nothing at all to see there
+                pages.append(ExpertisesPage(moc: moc, language: language.isoCode.lowercased()))
             }
         }
         self.precomputedPages = pages

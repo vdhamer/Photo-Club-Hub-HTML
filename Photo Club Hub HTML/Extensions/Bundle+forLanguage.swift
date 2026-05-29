@@ -14,7 +14,7 @@ extension Bundle {
     /// Use this instead of `locale:` in `String(localized:)` when generating multilingual
     /// static HTML pages. Unlike `locale:`, which only affects number/date formatting,
     /// passing the language-specific bundle forces the correct translation to be loaded
-    /// regardless of the development computer's language setting (determine in system settings and adjustable per app in Scheme).
+    /// regardless of the development computer's language setting..
     ///
     /// - Parameter languageID: An ISO 639-1 language code (e.g. `"nl"`, `"en"`, `"de"`).
     ///   Must match the name of a `.lproj` directory compiled into the app bundle.
