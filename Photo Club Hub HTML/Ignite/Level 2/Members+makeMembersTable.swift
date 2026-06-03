@@ -38,14 +38,6 @@ extension Members {
                                    preferences: PreferencesStructHTML) -> MakeMembersTableResult {
         do {
 
-            // A dictionary that maps local thumbnail filenames (in /Assets/images/foobar.jpg)
-            // to the full remote path from which it was downloaded.
-            // The dictionary ensures that different remote paths all have unique local filenames.
-            // The key string is needed to check if a given candidate local filename is already in use.
-            // If it is, try another candidate local filename until an unused candidate filename is found.
-            // The value string is for checking if a used local filename happens to have the desired full remote path.
-            var localNameToRemotePath: [String: String] = [:] // start off with empty dictionary content
-
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
             let sortDescriptor1 = NSSortDescriptor(keyPath: \MemberPortfolio.photographer_?.givenName_,
                                                    ascending: true)
@@ -70,7 +62,6 @@ extension Members {
                                       roles: member.memberRolesAndStatus,
                                       portfolio: member.level3URL_,
                                       thumbnail: member.featuredImageThumbnail,
-                                      fileNameDictionary: &localNameToRemotePath,
                                       preferences: preferences
                         )
                     }

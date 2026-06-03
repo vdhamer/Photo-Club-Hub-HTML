@@ -27,7 +27,6 @@ extension Members {
                                 roles: MemberRolesAndStatus = MemberRolesAndStatus(roles: [:], status: [:]),
                                 portfolio: URL? = nil,
                                 thumbnail: URL,
-                                fileNameDictionary: inout [String: String],
                                 preferences: PreferencesStructHTML) -> Row {
 
         // `preferences.useLocalThumbnails` is owned by MainActor. `makeMemberRow` might be on a background thread.
@@ -110,8 +109,7 @@ extension Members {
                 Group {
                     if useLocalThumbnails {
                         Image("/images/" +
-                              loadThumbnailToLocal(fullUrl: thumbnail,
-                                                   fileNameDictionary: &fileNameDictionary),
+                              loadThumbnailToLocal(fullUrl: thumbnail),
                               description: "clickable link to portfolio") // Ignite prepends /images/
                         .resizable()
                         .aspectRatio(.square, contentMode: .fill)
