@@ -18,6 +18,23 @@
         }
       }
     },
+    "%@ expertise (%lldx)" : {
+      "comment" : "Heading at top of ExpertisePage showing expertise name and photographer count",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ expertise (%2$lldx)"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ expertise (%2$lldx)"
+          }
+        }
+      }
+    },
     "%lld approved expertise tags" : {
       "comment" : "Title badge at top of Expertises HTML index page",
       "localizations" : {
@@ -450,6 +467,23 @@
         }
       }
     },
+    "Missing usage description for %@" : {
+      "comment" : "Missing usage warning displayed near top op ExpertisePage",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing usage description for expertise %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expertise heeft geen Nederlandstalige omschrijving."
+          }
+        }
+      }
+    },
     "Name" : {
       "comment" : "HTML table header for member's name column.",
       "localizations" : {
@@ -616,6 +650,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deze ex-leden zijn gemiddeld %@ jaar lid."
+          }
+        }
+      }
+    },
+    "There is no description for %@ because it is an unsupported expertise." : {
+      "comment" : "Missing usage description for an expertise",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no description for %@ because it is an unsupported expertise."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ heeft geen omschrijving omdat deze expertise (nog) niet ondersteund wordt."
           }
         }
       }
