@@ -21,17 +21,14 @@ struct ClubListSidebarView: View {
 
     var body: some View {
         List(allClubs, selection: $selectedClubIds) { club in
-            NavigationLink { MembershipView(club: club, preferences: $preferences) } label: {
-                if club.members.isEmpty {
-                    Text(club.fullName)
-                        .foregroundStyle(.gray)
-                        .font(.title2)
-                } else {
-                    Text("\(club.fullName) (\(club.members.count))")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundStyle(.link)
-                }
+            if club.members.isEmpty {
+                Text(club.fullName)
+                    .foregroundStyle(.secondary)
+                    .font(.title2)
+            } else {
+                Text("\(club.fullName) (\(club.members.count))")
+                    .font(.title2)
+                    .fontWeight(.bold)
             }
         }
     }
