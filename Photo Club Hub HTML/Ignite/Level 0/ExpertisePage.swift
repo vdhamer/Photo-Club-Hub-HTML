@@ -7,8 +7,16 @@
 
 import Ignite // for StaticPage (note: this imports Ignite.Language which is not Photo_Club_Hub_Data.Language)
 import CoreData // for NSManagedObjectContext
-import Photo_Club_Hub_Data // for Expertise
+import Photo_Club_Hub_Data // for Expertise, Photographer, MemberPortfolio
 
+/// An Ignite `StaticPage` that renders a single expertise tag's page.
+///
+/// Each page lists all photographers who have been tagged with a specific expertise (e.g. "Architecture"),
+/// grouped by photographer. For each photographer, a row of clickable thumbnail images is shown —
+/// one per club membership — each linking to the photographer's portfolio.
+///
+/// One `ExpertisePage` is generated per (expertise, language) combination by `ExpertisePageSite`.
+/// The page path is derived from `ExpertisesPage.relativePath(languageID:expertiseID:)`.
 struct ExpertisePage: StaticPage {
     let title: String // page title shown in browser tab
 
