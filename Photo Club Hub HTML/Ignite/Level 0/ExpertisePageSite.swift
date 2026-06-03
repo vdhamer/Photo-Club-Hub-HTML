@@ -21,6 +21,6 @@ struct ExpertisePageSite: Site {
         url = preferences.selectedHost.url(forPath: ExpertisesPage.relativePath(
             languageID: language,
             expertiseID: expertiseID)) ?? URL(preferences.selectedHost.staticString)
-        homePage = ExpertisePage(expertiseID: expertiseID, language: language, moc: moc)
+        homePage = ExpertisePage(expertiseID: expertiseID, language: language, moc: moc, preferences: preferences)
     }
 }
