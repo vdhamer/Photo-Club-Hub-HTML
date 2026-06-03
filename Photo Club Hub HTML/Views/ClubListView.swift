@@ -36,10 +36,15 @@ struct ClubListView: View {
             }
 
             detail: {
-                Text(String(localized: "Please select a club in the sidebar.",
-                            table: "PhotoClubHubHTML.SwiftUI",
-                            comment: "Message displayed when no club is selected"))
-                .font(.title2)
+                if let clubId = selectedClubIds.first,
+                   let club = try? Organization.find(context: viewContext, organizationID: clubId) {
+                    MembershipView(club: club, preferences: $preferences)
+                } else {
+                    Text(String(localized: "Please select a club in the sidebar.",
+                                table: "PhotoClubHubHTML.SwiftUI", // in System language as this is SwiftUI UI code
+                                comment: "Message displayed when no club is selected"))
+                        .font(.title2)
+                }
             }
             .navigationSplitViewColumnWidth(min: 300, ideal: 400, max: 600)
             .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
