@@ -18,40 +18,37 @@ import Photo_Club_Hub_Data // for Expertise, Photographer, MemberPortfolio
 /// One `ExpertisePage` is generated per (expertise, language) combination by `ExpertisePageSite`.
 /// The page path is derived from `ExpertisesPage.relativePath(languageID:expertiseID:)`.
 struct ExpertisePage: StaticPage {
-    let title: String // page title shown in browser tab
+    var title: String { snapshot.localizedName } // page title shown in browser tab
 
     let expertiseID: String // canonical (=English) ID, e.g. "Architecture"
-
-    // Plain-String snapshots taken on the moc's queue during init.
-    // Reason: Ignite calls `description` and `body` from another queue, so reading
-    // NSManagedObject properties there can crash with name_ == nil.
-    let localizedName: String        // localized name (e.g. "Architectuur") or expertiseID ("Architecture") as fallback
-    let localizedUsage: String?      // localized usage instructions for the expertise, nil if unavailable
-    let hasLocalizedExpertise: Bool  // whether a LocalizedExpertise record exists for the specified language
+    let languageID: String  // ISO 639-1 code, e.g. "nl"
 
     // example for path value: "/en/expertises/Architecture" or "/nl/expertises/Architecture" - not "../Archtectuur"
     var path: String { "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: expertiseID))" }
     // description populates the meta-tag called "name" in the HTML header
-    var description: String { "List of photographers with \(localizedName) expertise" }
-
-    let languageID: String // ISO 639-1 code, e.g. "nl"
-
-    // MARK: - define array of photographerRows, so queries can happen on original thread and readering on another
+    var description: String { "List of photographers with \(snapshot.localizedName) expertise" }
 
     private struct MembershipCell {
-        let clubName: String
-        let portfolioURL: URL?
-        let clubPageURL: URL? // links to the club's membership list page
+        let clubName: String // clubs full name
+        let portfolioURL: URL? // links to portfolio on clubs own site
+        let clubPageURL: URL? // links to the club's membership list page on this stie
         let thumbnailSrc: String // either "/images/foo.jpg" (local) or "https://..." (remote)
     }
 
     private struct PhotographerRow {
-        let name: String
-        let isDeceased: Bool
-        let membershipCells: [MembershipCell]
+        let name: String // name of photographer
+        let isDeceased: Bool // still reachable?
+        let membershipCells: [MembershipCell] // clubs that the photographer is or was associated with
     }
 
-    private let photographerRows: [PhotographerRow]
+    private struct Snapshot {
+        let localizedName: String // of Expertise tag
+        let localizedUsage: String? // when to use Expertise tag
+        let hasLocalizedExpertise: Bool // `temporary` expertises don't have translations
+        let photographerRows: [PhotographerRow] // list of photographers with this expertise
+    }
+
+    private let snapshot: Snapshot
 
     // MARK: - init()
 
