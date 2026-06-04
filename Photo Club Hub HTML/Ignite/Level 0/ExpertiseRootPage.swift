@@ -1,5 +1,5 @@
 //
-//  RootPage.swift
+//  ExpertiseRootPage.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 27/05/2026.
