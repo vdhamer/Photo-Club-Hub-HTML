@@ -8,7 +8,7 @@
 import Foundation // for Bundle
 import Ignite // for StaticPage
 
-struct RootPage: StaticPage { // `path` intentionally omitted: Ignite always writes the homePage to index.html
+struct ExpertiseRootPage: StaticPage { // `path` intentionally omitted: Ignite always writes the homePage to index.html
     var title = "Photo Club Hub"
     var description: String { "Photo Club Hub website" }
 
