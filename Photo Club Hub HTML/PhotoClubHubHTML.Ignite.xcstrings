@@ -468,7 +468,7 @@
       }
     },
     "Missing usage description for %@" : {
-      "comment" : "Missing-usage-warning shown near top op ExpertisePage",
+      "comment" : "Missing usage warning near top op ExpertisePage",
       "localizations" : {
         "en" : {
           "stringUnit" : {

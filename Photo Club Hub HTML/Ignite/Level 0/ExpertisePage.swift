@@ -29,13 +29,34 @@ struct ExpertisePage: StaticPage {
     let localizedUsage: String?      // localized usage instructions for the expertise, nil if unavailable
     let hasLocalizedExpertise: Bool  // whether a LocalizedExpertise record exists for the specified language
 
+    // example for path value: "/en/expertises/Architecture" or "/nl/expertises/Architecture" - not "../Archtectuur"
     var path: String { "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: expertiseID))" }
-    var description: String { "List of photographers with \(expertiseLocal) expertise" }
+    // description populates the meta-tag called "name" in the HTML header
+    var description: String { "List of photographers with \(localizedName) expertise" }
 
     let languageID: String // ISO 639-1 code, e.g. "nl"
 
-    // moc is reserved for photographer queries (issue #182)
-    init(expertiseID: String, language: String, moc: NSManagedObjectContext) {
+    // MARK: - define array of photographerRows, so queries can happen on original thread and readering on another
+
+    private struct MembershipCell {
+        let clubName: String
+        let portfolioURL: URL?
+        let clubPageURL: URL? // links to the club's membership list page
+        let thumbnailSrc: String // either "/images/foo.jpg" (local) or "https://..." (remote)
+    }
+
+    private struct PhotographerRow {
+        let name: String
+        let isDeceased: Bool
+        let membershipCells: [MembershipCell]
+    }
+
+    private let photographerRows: [PhotographerRow]
+
+    // MARK: - init()
+
+    // moc is used for Photographer queries to Core Data
+    init(expertiseID: String, language: String, moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         self.languageID = language
 
         self.expertiseID = expertiseID
