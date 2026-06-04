@@ -9,7 +9,7 @@ import Ignite // for StaticPage (note: this imports Ignite.Language which is not
 import CoreData // for NSManagedObjectContext
 import Photo_Club_Hub_Data // for Expertise, Photographer, MemberPortfolio
 
-/// An Ignite `StaticPage` that renders a single expertise tag's page.
+/// An Ignite `StaticPage` that renders a single expertise tag's page in a single language.
 ///
 /// Each page lists all photographers who have been tagged with a specific expertise (e.g. "Architecture"),
 /// grouped by photographer. For each photographer, a row of clickable thumbnail images is shown —
@@ -20,8 +20,14 @@ import Photo_Club_Hub_Data // for Expertise, Photographer, MemberPortfolio
 struct ExpertisePage: StaticPage {
     let title: String // page title shown in browser tab
 
-    let expertiseID: String // canonical (English) ID, e.g. "Architecture"
-    let expertiseLocal: String // localized ID
+    let expertiseID: String // canonical (=English) ID, e.g. "Architecture"
+
+    // Plain-String snapshots taken on the moc's queue during init.
+    // Reason: Ignite calls `description` and `body` from another queue, so reading
+    // NSManagedObject properties there can crash with name_ == nil.
+    let localizedName: String        // localized name (e.g. "Architectuur") or expertiseID ("Architecture") as fallback
+    let localizedUsage: String?      // localized usage instructions for the expertise, nil if unavailable
+    let hasLocalizedExpertise: Bool  // whether a LocalizedExpertise record exists for the specified language
 
     var path: String { "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: expertiseID))" }
     var description: String { "List of photographers with \(expertiseLocal) expertise" }
