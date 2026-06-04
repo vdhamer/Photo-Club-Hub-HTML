@@ -52,17 +52,66 @@ struct ExpertisePage: StaticPage {
 
     // MARK: - init()
 
-    // moc is used for Photographer queries to Core Data
     init(expertiseID: String, language: String, moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         self.languageID = language
-
         self.expertiseID = expertiseID
-        let expertise = Expertise.find(context: moc, expertiseIdString: expertiseID)
-        self.expertiseLocal = expertise?.selectedLocalizedExpertise(isoCode: language).localizedExpertise?.name ??
-                              expertiseID // fallback is to show canonical string (e.g. for temporary Expertise)
-
-        self.title = expertiseLocal
+        // fill snapshot now to avoid accessing @MainActor-isolated `preferences` on a background thread
+        self.snapshot = Self.makeSnapshot(expertiseID: expertiseID, language: language,
+                                          moc: moc, useLocalThumbnails: preferences.useLocalThumbnails)
     }
+
+    // All Core Data reads happen inside performAndWait so managed objects are touched
+    // only on the moc's queue. Plain-value snapshots are returned for safe use on any thread.
+    private static func makeSnapshot(expertiseID: String,
+                                     language: String,
+                                     moc: NSManagedObjectContext, useLocalThumbnails: Bool) -> Snapshot {
+        moc.performAndWait {
+            let expertise = Expertise.find(context: moc, expertiseIdString: expertiseID)
+            let localizedExpertise = expertise?.selectedLocalizedExpertise(isoCode: language).localizedExpertise
+
+            let fetchRequest: NSFetchRequest<PhotographerExpertise> = PhotographerExpertise.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "expertise_.id_ = %@", expertiseID)
+            let photographerExpertises = (try? moc.fetch(fetchRequest)) ?? []
+
+            let sortedPhotographers = photographerExpertises
+                .map { $0.photographer }
+                .sorted { $0.fullNameFirstLast < $1.fullNameFirstLast }
+
+            let rows: [PhotographerRow] = sortedPhotographers.map { photographer in
+                let sortedMemberships = photographer.memberships
+                    .sorted { $0.organization.fullNameTown < $1.organization.fullNameTown }
+
+                let membershipCells: [MembershipCell] = sortedMemberships.map { membership in
+                    let thumbnailSrc: String
+                    if useLocalThumbnails {
+                        let localName = loadThumbnailToLocal(fullUrl: membership.featuredImageThumbnail)
+                        thumbnailSrc = "/images/" + localName
+                    } else {
+                        thumbnailSrc = membership.featuredImageThumbnail.absoluteString
+                    }
+                    return MembershipCell(
+                        clubName: membership.organization.fullNameTown,
+                        portfolioURL: membership.level3URL_,
+                        clubPageURL: membership.organization.level2URLDir,
+                        thumbnailSrc: thumbnailSrc
+                    )
+                }
+
+                return PhotographerRow(
+                    name: photographer.fullNameFirstLast,
+                    isDeceased: photographer.isDeceased,
+                    membershipCells: membershipCells
+                )
+            }
+
+            return Snapshot(localizedName: localizedExpertise?.name ?? expertiseID,
+                            localizedUsage: localizedExpertise?.usage,
+                            hasLocalizedExpertise: localizedExpertise != nil,
+                            photographerRows: rows)
+        }
+    }
+
+    // MARK: - Ignite body()
 
     func body(context: PublishingContext) -> [BlockElement] {
         Text("\(expertiseLocal) expertise (\(languageID))")
