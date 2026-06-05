@@ -125,62 +125,70 @@ struct ExpertisePage: StaticPage {
             .margin(.top, .extraLarge)
 
         // sub-title (showing description of how the Expertise is supposed to be interpreted)
+        expertiseDescriptionText()
+
+        for row in snapshot.photographerRows { // generate row-by-row
+            photographerRow(for: row)
+        }
+
+        // info about when the page was generated
+        FooterText(languageID: languageID)
+    }
+
+    // MARK: - Row and cell views
+
+    private func expertiseDescriptionText() -> Text {
         if snapshot.hasLocalizedExpertise {
             if let usage = snapshot.localizedUsage {
-                Text(usage)
+                return Text(usage)
                     .horizontalAlignment(.center)
             } else {
-                Text(String(localized: "Missing usage description for \(snapshot.localizedName)",
-                            table: "PhotoClubHubHTML.Ignite",
-                            bundle: Bundle.forLanguage(languageID),
-                            comment: "Missing usage warning near top op ExpertisePage"))
+                return Text(String(localized: "Missing usage description for \(snapshot.localizedName)",
+                                   table: "PhotoClubHubHTML.Ignite",
+                                   bundle: Bundle.forLanguage(languageID),
+                                   comment: "Missing usage warning near top op ExpertisePage"))
                     .horizontalAlignment(.center)
             }
         } else {
-            Text(String(localized: "There is no description for \(expertiseID) because it is an unsupported expertise.",
+             return Text(String(
+                        localized: "There is no description for \(expertiseID) because it is an unsupported expertise.",
                         table: "PhotoClubHubHTML.Ignite",
                         bundle: Bundle.forLanguage(languageID),
                         comment: "Missing usage description for an expertise"))
                 .horizontalAlignment(.center)
         }
-
-        // generate row-by-row
-        for photographerRow in snapshot.photographerRows {
-            Group {
-                Text {
-                    Span(photographerRow.name)
-                    if photographerRow.isDeceased {
-                        Badge(MemberStatus.deceased.displayName)
-                            .badgeStyle(.default)
-                            .role(.secondary)
-                            .margin(.leading, 10)
-                    }
-                }
-                .font(.title5)
-                .margin(.top, .medium)
-                .margin(.bottom, .small)
-
-                Group {
-                    // iterate over clubs the photographer has some relationship with
-                    for membershipCell in photographerRow.membershipCells {
-                        membershipCellView(for: membershipCell)
-                    }
-                }
-                .style("display: flex", "flex-direction: row", "overflow-x: auto", "gap: 12px", "padding-bottom: 8px")
-            }
-            .padding()
-            .background(Color(hex: "#F8F9FA")) // Bootstrap gray-100 aka near-white
-            .cornerRadius(8)
-            .style("border: 1px solid #DEE2E6") // Bootstrap "gray-300" as used for borders of various sorts
-            .margin(.bottom, .medium)
-        }
-
-        FooterText(languageID: languageID)
     }
 
-    // MARK: - Cell views
+    private func photographerRow(for row: PhotographerRow) -> Group {
+        Group {
+            Text {
+                Span(row.name)
+                if row.isDeceased {
+                    Badge(MemberStatus.deceased.displayName)
+                        .badgeStyle(.default)
+                        .role(.secondary)
+                        .margin(.leading, 10)
+                }
+            }
+            .font(.title5)
+            .margin(.top, .medium)
+            .margin(.bottom, .small)
 
-    private func membershipCellView(for cell: MembershipCell) -> Group {
+            Group {
+                for cell in row.membershipCells {
+                    membershipCell(for: cell)
+                }
+            }
+            .style("display: flex", "flex-direction: row", "overflow-x: auto", "gap: 12px", "padding-bottom: 8px")
+        }
+        .padding()
+        .background(Color(hex: "#F8F9FA")) // Bootstrap gray-100 aka near-white
+        .cornerRadius(8)
+        .style("border: 1px solid #DEE2E6") // Bootstrap gray-300 standard border color
+        .margin(.bottom, .medium)
+    }
+
+    private func membershipCell(for cell: MembershipCell) -> Group {
         let thumbnailWidth = 175
         let cellPadding = 8
         let cellBorderWidth = 1
