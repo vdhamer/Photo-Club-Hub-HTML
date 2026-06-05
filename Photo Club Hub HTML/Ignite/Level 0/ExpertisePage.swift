@@ -15,7 +15,7 @@ import Photo_Club_Hub_Data // for Expertise, Photographer, MemberPortfolio
 /// grouped by photographer. For each photographer, a row of clickable thumbnail images is shown —
 /// one per club membership — each linking to the photographer's portfolio.
 ///
-/// One `ExpertisePage` is generated per (expertise, language) combination by `ExpertisePageSite`.
+/// One `ExpertisePage` is generated per (expertise, language) combination by `Level0Site`.
 /// The page path is derived from `ExpertisesPage.relativePath(languageID:expertiseID:)`.
 struct ExpertisePage: StaticPage {
     var title: String { snapshot.localizedName } // page title shown in browser tab
@@ -31,7 +31,7 @@ struct ExpertisePage: StaticPage {
     private struct MembershipCell {
         let clubName: String // clubs full name
         let portfolioURL: URL? // links to portfolio on clubs own site
-        let clubPageURL: URL? // links to the club's membership list page on this stie
+        let clubPageURL: URL? // links to the club's membership list page on this site
         let thumbnailSrc: String // either "/images/foo.jpg" (local) or "https://..." (remote)
     }
 
@@ -213,6 +213,6 @@ struct ExpertisePage: StaticPage {
         }
         .style("width: \(cellWidth)px", "text-align: center", "flex-shrink: 0",
                "background-color: #FFFFFF", "border-radius: 6px", "padding: \(cellPadding)px",
-               "border: 1px solid #DEE2E6")
+               "border: \(cellBorderWidth)px solid #DEE2E6")
     }
 }
