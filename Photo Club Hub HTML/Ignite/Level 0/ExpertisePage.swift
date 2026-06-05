@@ -115,12 +115,6 @@ struct ExpertisePage: StaticPage {
 
     func body(context: PublishingContext) -> [BlockElement] {
 
-        // layout constants
-        let thumbnailWidth = 175
-        let cellPadding = 8
-        let cellBorderWidth = 1
-        let cellWidth = thumbnailWidth + 2 * cellPadding + 2 * cellBorderWidth // Bootstrap border-box calculation
-
         // page title (showing which Expertise this page is about)
         Text(String(localized: "\(snapshot.localizedName) expertise (\(snapshot.photographerRows.count)x)",
                     table: "PhotoClubHubHTML.Ignite",
@@ -167,37 +161,9 @@ struct ExpertisePage: StaticPage {
                 .margin(.bottom, .small)
 
                 Group {
-                    // interate over clubs the photographer is associated with
+                    // iterate over clubs the photographer has some relationship with
                     for membershipCell in photographerRow.membershipCells {
-                        Group {
-                            Image(membershipCell.thumbnailSrc, description: "portfolio thumbnail")
-                                .resizable()
-                                .aspectRatio(.square, contentMode: .fill)
-                                .cornerRadius(8)
-                                .frame(width: thumbnailWidth)
-                                .cursor(.pointer)
-                                .onClick { // image is a link to portfolio
-                                    let safePortfolio = membershipCell.portfolioURL
-                                        ?? URL(string: MemberPortfolio.emptyPortfolioURL)
-                                        ?? URL(string: "https://www.google.com")!
-                                    CustomAction("window.location.href=\"\(safePortfolio)\";")
-                                }
-
-                            Text(membershipCell.clubName) // this serves as a caption
-                                .font(.body)
-                                .horizontalAlignment(.center)
-                                .margin(0)
-                                .padding(0)
-                                .cursor(.pointer)
-                                .onClick { // caption is a link to club
-                                    if let clubPageURL = membershipCell.clubPageURL {
-                                        CustomAction("window.location.href=\"\(clubPageURL)\";")
-                                    }
-                                }
-                        }
-                        .style("width: \(cellWidth)px", "text-align: center", "flex-shrink: 0",
-                               "background-color: #FFFFFF", "border-radius: 6px", "padding: \(cellPadding)px",
-                               "border: 1px solid #DEE2E6")
+                        membershipCellView(for: membershipCell)
                     }
                 }
                 .style("display: flex", "flex-direction: row", "overflow-x: auto", "gap: 12px", "padding-bottom: 8px")
@@ -210,5 +176,43 @@ struct ExpertisePage: StaticPage {
         }
 
         FooterText(languageID: languageID)
+    }
+
+    // MARK: - Cell views
+
+    private func membershipCellView(for cell: MembershipCell) -> Group {
+        let thumbnailWidth = 175
+        let cellPadding = 8
+        let cellBorderWidth = 1
+        let cellWidth = thumbnailWidth + 2 * cellPadding + 2 * cellBorderWidth
+        return Group {
+            Image(cell.thumbnailSrc, description: "portfolio thumbnail")
+                .resizable()
+                .aspectRatio(.square, contentMode: .fill)
+                .cornerRadius(8)
+                .frame(width: thumbnailWidth)
+                .cursor(.pointer)
+                .onClick { // image links to portfolio
+                    let safePortfolio = cell.portfolioURL
+                        ?? URL(string: MemberPortfolio.emptyPortfolioURL)
+                        ?? URL(string: "https://www.google.com")!
+                    CustomAction("window.location.href=\"\(safePortfolio)\";")
+                }
+
+            Text(cell.clubName) // caption links to club page
+                .font(.body)
+                .horizontalAlignment(.center)
+                .margin(0)
+                .padding(0)
+                .cursor(.pointer)
+                .onClick {
+                    if let clubPageURL = cell.clubPageURL {
+                        CustomAction("window.location.href=\"\(clubPageURL)\";")
+                    }
+                }
+        }
+        .style("width: \(cellWidth)px", "text-align: center", "flex-shrink: 0",
+               "background-color: #FFFFFF", "border-radius: 6px", "padding: \(cellPadding)px",
+               "border: 1px solid #DEE2E6")
     }
 }
