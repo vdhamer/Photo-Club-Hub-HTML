@@ -53,7 +53,6 @@ private let isBeingTested = false // these are being loaded to get the data into
 
 extension PhotoClubHubHtmlApp {
 
-    // swiftlint:disable:next function_body_length
     static private func loadClubsAndMembers() {
         let useOnlyInBundleFile: Bool = false
 
@@ -65,17 +64,41 @@ extension PhotoClubHubHtmlApp {
         // Clear CoreData database for simplicity and to trigger initConstants()
         Model.deleteAllCoreDataObjects(viewContext: viewContext)
 
-	// MARK: - Level 0
+        // Start Level 1 and Level 2 loaders only after Level 0's bgContext saves.
+        // Why: Level 2 loaders call Expertise.findCreateUpdateUndefSupported(), which inserts new
+        // Expertise rows with isSupported=false (the Core Data default) when their fetch finds none.
+        // The Expertise entity has a uniqueness constraint on id_, so concurrent inserts by Level 0
+        // (isSupported=true) and Level 2 (isSupported=false) conflict on save. With the
+        // mergeByPropertyObjectTrump policy, the second-saving context's in-memory value wins per
+        // property — so Level 2's false silently overwrites Level 0's true, leaving Level-0-defined
+        // expertises marked as "temporary" instead of "supported".
+
+        // MARK: - Level 0
 
         // load list of Expertises and Languages from root.Level0.json file
+        let level0Context = makeBgContext(ctxName: "Level 0 loader")
+        let level0Group = DispatchGroup()
+
+        level0Group.enter()
         _ = Level0JsonReader(
-            bgContext: makeBgContext(ctxName: "Level 0 loader"),
+            bgContext: level0Context,
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
+        // A second perform{} on the same serial bgContext queue runs only after Level0JsonReader's
+        // internal perform{} (including its save()) completes.
+        level0Context.perform { level0Group.leave() }
+
+        level0Group.notify(queue: .main) {
+            loadLevel1AndLevel2(useOnlyInBundleFile: useOnlyInBundleFile)
+        }
+    }
+
+    // swiftlint:disable:next function_body_length
+    nonisolated static private func loadLevel1AndLevel2(useOnlyInBundleFile: Bool) {
 
         // MARK: - Level 1
 
-	// load list of photo clubs and museums from root.Level1.json file
+        // load list of photo clubs and museums from root.Level1.json file
         _ = Level1JsonReader(
             bgContext: makeBgContext(ctxName: "Level 1 loader for root"),
             fileName: "root_",
@@ -169,7 +192,7 @@ extension PhotoClubHubHtmlApp {
             useOnlyInBundleFile: useOnlyInBundleFile)
     }
 
-    static func makeBgContext(ctxName: String) -> NSManagedObjectContext {
+    nonisolated static func makeBgContext(ctxName: String) -> NSManagedObjectContext {
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = ctxName
