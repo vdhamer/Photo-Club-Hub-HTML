@@ -29,7 +29,7 @@ struct ExpertisePage: StaticPage {
     var description: String { "List of photographers with \(snapshot.localizedName) expertise" }
 
     private struct MembershipCell {
-        let clubName: String // clubs full name
+        let roleDescriptionOfClubTown: String // e.g. "Member of Fotoclub Klik, Eindhoven"
         let portfolioURL: URL? // links to portfolio on clubs own site
         let clubPageURL: URL? // links to the club's membership list page on this site
         let thumbnailSrc: String // either "/images/foo.jpg" (local) or "https://..." (remote)
@@ -90,7 +90,7 @@ struct ExpertisePage: StaticPage {
                         thumbnailSrc = membership.featuredImageThumbnail.absoluteString
                     }
                     return MembershipCell(
-                        clubName: membership.organization.fullNameTown,
+                        roleDescriptionOfClubTown: membership.roleDescriptionOfClubTown,
                         portfolioURL: membership.level3URL_,
                         clubPageURL: membership.organization.level2URLDir,
                         thumbnailSrc: thumbnailSrc
@@ -207,7 +207,7 @@ struct ExpertisePage: StaticPage {
                     CustomAction("window.location.href=\"\(safePortfolio)\";")
                 }
 
-            Text(cell.clubName) // caption links to club page
+            Text(cell.roleDescriptionOfClubTown) // caption links to club page
                 .font(.body)
                 .horizontalAlignment(.center)
                 .margin(0)
