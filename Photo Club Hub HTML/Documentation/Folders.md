@@ -1,5 +1,6 @@
 ## Folder structure of generated output site
 
+```
 Build/
     nl/ // Dutch pages; no language-level home page (nl/ is just a container)
         clubs/ // Level 1 output: index page listing all clubs, linking to each club's Level 2 page (not yet generated at this path)
@@ -24,6 +25,7 @@ Build/
         expositions/ // future extension (doesn't exist yet)
         museums/ // future: Level 1 output for museums, analogous to clubs/
     xx/ // other languages in the future go here
+```
 
 Notes:
 - this is the to-be folder structure. The as-is structure is still quite different.
