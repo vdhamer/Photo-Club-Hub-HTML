@@ -196,6 +196,7 @@ struct ExpertisePage: StaticPage {
         let cellWidth = thumbnailWidth + 2 * cellPadding + 2 * cellBorderWidth
         return Group {
             Image(cell.thumbnailSrc, description: "portfolio thumbnail")
+                .lazy() // remote thumbnails must not block page load
                 .resizable()
                 .aspectRatio(.square, contentMode: .fill)
                 .cornerRadius(8)

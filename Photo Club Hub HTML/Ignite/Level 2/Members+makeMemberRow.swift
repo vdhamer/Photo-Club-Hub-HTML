@@ -116,6 +116,7 @@ extension Members {
                     } else {
                         Image(thumbnail.absoluteString,
                               description: "clickable link to portfolio") // Ignite prepends /images/
+                        .lazy() // remote thumbnails must not block page load
                         .resizable()
                         .aspectRatio(.square, contentMode: .fill)
                     }
