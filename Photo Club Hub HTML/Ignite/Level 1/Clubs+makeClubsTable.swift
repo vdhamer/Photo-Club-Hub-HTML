@@ -160,7 +160,7 @@ extension Clubs {
         for role in roles {
             for definedRole in MemberRole.allCases {
                 if role.key==definedRole && role.value==true {
-                    return definedRole.displayName.capitalized // was table: "PhotoClubHubHTML.Ignite"
+                    return definedRole.displayNameForAppUI.capitalized // was table: "PhotoClubHubHTML.Ignite"
                 }
             }
         }

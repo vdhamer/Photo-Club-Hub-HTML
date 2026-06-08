@@ -90,7 +90,8 @@ struct ExpertisePage: StaticPage {
                         thumbnailSrc = membership.featuredImageThumbnail.absoluteString
                     }
                     return MembershipCell(
-                        roleDescriptionOfClubTown: membership.roleDescriptionOfClubTown,
+                        roleDescriptionOfClubTown: membership.roleDescriptionOfClubTown(
+                            languageBundle: Bundle.photoClubHubDataModuleForLanguage(language)),
                         portfolioURL: membership.level3URL_,
                         clubPageURL: membership.organization.level2URLDir,
                         thumbnailSrc: thumbnailSrc
@@ -164,7 +165,7 @@ struct ExpertisePage: StaticPage {
             Text {
                 Span(row.name)
                 if row.isDeceased {
-                    Badge(MemberStatus.deceased.displayName)
+                    Badge(MemberStatus.deceased.displayNameForAppUI)
                         .badgeStyle(.default)
                         .role(.secondary)
                         .margin(.leading, 10)
