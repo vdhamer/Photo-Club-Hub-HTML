@@ -24,10 +24,10 @@ Build/
             Architecture/ // idem for all (both supported and temporary) other expertises
         expositions/ // future extension (doesn't exist yet)
         museums/ // future: Level 1 output for museums, analogous to clubs/
-    xx/ // other languages in the future go here
+    xx/ // future languages go here
 ```
 
 Notes:
-- this is the to-be folder structure. The as-is structure is still quite different.
+- this is the to-be folder structure. The as-is structure is different, but migrating to this.
 - Club directories are currently distributed across http://vdhamer.com and https://fcdegender.nl.
-- In principle, any club may decide to host its own data on any server (e.g. the one with its website).
+- In principle, any club may decide to host its own data on any server (e.g. the server holding its website).
