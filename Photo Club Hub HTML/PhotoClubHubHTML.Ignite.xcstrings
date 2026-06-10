@@ -451,7 +451,7 @@
       }
     },
     "Members" : {
-      "comment" : "HTML page title for the Members page (shown in browser tab)\nHTML table header for member count column.",
+      "comment" : "HTML page title (shown in browser tab) for the Members page\nHTML table header for member count column.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
