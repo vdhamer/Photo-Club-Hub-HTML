@@ -19,7 +19,8 @@ Build/                        // index.html contains (temporary) language select
 │   │   ├── Abstract/         // Level 0 output: index of club members with the Abstract expertise tag
 │   │   └── Architecture/
 │   ├── expositions/          // reserved for future extension: index of past and future expositions
-│   └── museums/              // reserved for future extension: Level 1 museums list
+│   ├── museums/              // reserved for future extension: Level 1 museums list
+│   └── statistics/           // reserved for future extension: number of clubs, etc.
 ├── en/
 │   ├── clubs/
 │   │   ├── fcVeghel/
@@ -37,7 +38,8 @@ Build/                        // index.html contains (temporary) language select
 │   │   ├── Abstract/
 │   │   └── Architecture/
 │   ├── expositions/
-│   └── museums/
+│   ├── museums/
+│   └── statistics/
 └── de/
 ```
 
