@@ -35,7 +35,7 @@ extension Members {
         // If the user changes it while makeMemberRow is executing, the change is ignored until the next row.
         // After all, the user doesn't really know what to expect under these conditions: use true or false.
         // Arguably you shouldn't be able to change these kind of settings while generating HTML.
-        let useLocalThumbnails = preferences.useLocalThumbnails // not to be confused with using localhost
+        let useLocalThumbnails = preferences.useLocalThumbnails // not to be confused with using localhost
 
         return Row {
 
@@ -97,6 +97,7 @@ extension Members {
                     Span(
                         Link( String(localized: "Website",
                                      table: "PhotoClubHubHTML.Ignite",
+                                     bundle: languageBundle,
                                      comment: "Clickable link to photographer's website"),
                               target: photographer.photographerWebsite!.absoluteString)
                         .linkStyle(.hover)
@@ -164,7 +165,7 @@ extension Members {
         /// - Parameters:
         ///   - localizedExpertiseResultLists: Source of supported and temporary expertise results for the member.
         ///   - isSupported: When `true`, renders the supported list; otherwise renders the temporary list.
-        /// - Returns: A `PageElement` containing the expertise line, or `nil` when there’s nothing to display.
+        /// - Returns: A `PageElement` containing the expertise line, or `nil` when there's nothing to display.
         func generatePageElements(localizedExpertiseResultLists: LocalizedExpertiseResultLists, isSupported: Bool)
         -> PageElement? {
             let localizedExpertiseResultList = isSupported ? localizedExpertiseResultLists.supported :
@@ -190,6 +191,7 @@ extension Members {
                         .margin(5)
                         .hint(text: String(localized: "Unofficial expertise. It has no translations yet.",
                                            table: "PhotoClubHubHTML.Ignite",
+                                           bundle: languageBundle,
                                            comment: "Hint for expertise without localization"))
                 } else {
                     return Text(string)
@@ -198,6 +200,7 @@ extension Members {
                         .margin(5)
                         .hint(text: String(localized: "Expertises: \(customHint)",
                                            table: "PhotoClubHubHTML.Ignite",
+                                           bundle: languageBundle,
                                            comment: "Hint when providing too many expertises"))
                 }
             } else {
