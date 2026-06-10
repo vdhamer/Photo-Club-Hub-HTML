@@ -11,8 +11,22 @@ import SwiftImageReadWrite // for image format conversion
 import Photo_Club_Hub_Data // for Organization
 
 struct Members: StaticPage {
-    var title = "Leden"  // needed by the StaticPage protocol, but how do I localize it?
+    var title: String {
+        String(localized: "Members",
+               table: "PhotoClubHubHTML.Ignite",
+               bundle: languageBundle,
+               comment: "HTML page title (shown in browser tab) for the Members page")
+    }
     let showFotobondMemberNumber: Bool = false // suppresses showing Fotobond number of members
+
+    let languageID: String  // ISO 639-1 code, e.g. "nl"
+    let clubNickname: String // used to build the page path, e.g. "fgWaalre"
+    let languageBundle: Bundle // derived from languageID; internal so extensions in this module can access it
+
+    static func relativePath(languageID: String, clubNickname: String) -> String {
+        "\(languageID)/clubs/\(clubNickname)" // should match Photo Club Hub HTML/Documentation/Folders.md
+    }
+    var path: String { "/\(Self.relativePath(languageID: languageID, clubNickname: clubNickname))" }
 
     private var currentMembers = Table {} // initialite to empty table, then fill during init()
     private var formerMembers = Table {} // same story
@@ -32,10 +46,13 @@ struct Members: StaticPage {
 
     // MARK: - init()
 
-    init(moc: NSManagedObjectContext, club: Organization, preferences: PreferencesStructHTML) {
+    init(moc: NSManagedObjectContext, club: Organization, languageID: String, preferences: PreferencesStructHTML) {
         self.moc = moc
         self.club = club
         self.clubFullNameTown = club.fullNameTown
+        self.languageID = languageID
+        self.clubNickname = club.nickName
+        self.languageBundle = Bundle.forLanguage(languageID)
 
         let makeTableResult = makeMembersTable(former: false, moc: moc, club: club, preferences: preferences)
         currentMembersCount = makeTableResult.memberCount
@@ -62,7 +79,9 @@ struct Members: StaticPage {
 
         Text {
             Badge(String(localized: "Current members of \(clubFullNameTown)",
-                         table: "PhotoClubHubHTML.Ignite", comment: "Title badge at top of Members HTML page"))
+                         table: "PhotoClubHubHTML.Ignite",
+                         bundle: languageBundle,
+                         comment: "Title badge at top of Members HTML page"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
         }
@@ -82,6 +101,7 @@ struct Members: StaticPage {
                              years.
                              """,
                              table: "PhotoClubHubHTML.Ignite",
+                             bundle: languageBundle,
                              comment: "Table footnote showing average years of membership of all members."
                 )} .horizontalAlignment(.center)
             }
@@ -100,7 +120,9 @@ struct Members: StaticPage {
         if formerMembersCount > 0 {
             Text {
                 Badge(String(localized: "\(formerMembersCount) former members",
-                             table: "PhotoClubHubHTML.Ignite", comment: "Number of former members"))
+                             table: "PhotoClubHubHTML.Ignite",
+                             bundle: languageBundle,
+                             comment: "Number of former members"))
                 .badgeStyle(.subtleBordered)
                 .role(.secondary)
             }
@@ -114,12 +136,13 @@ struct Members: StaticPage {
             if formerMembersTotalYears > 0 && formerMembersCount > 0 {
                 Alert {
                     Text { String(localized:
-                    """
-                    The listed ex-members were members of this club for, on average, \
-                    \(formatYears(formerMembersTotalYears/Double(formerMembersCountWithStartDate))) \
-                    years.
-                    """,
+                                  """
+                                  The listed ex-members were members of this club for, on average, \
+                                  \(formatYears(formerMembersTotalYears/Double(formerMembersCountWithStartDate))) \
+                                  years.
+                                  """,
                                   table: "PhotoClubHubHTML.Ignite",
+                                  bundle: languageBundle,
                                   comment: "Footer for former members table")
                     } .horizontalAlignment(.center)
                 }
@@ -135,91 +158,109 @@ struct Members: StaticPage {
 
     }
 
-}
+    // MARK: - NavigationBar
 
-func navigationBar() -> NavigationBar {
-    NavigationBar(
-            logo: Button(label: {
-                Image("/images/AppIcon/AppIcon.png", description: "App icon")
-                    .resizable()
-                    .frame(width: 40)
-                    .padding(.trailing, 15)
-                String(localized: "Photo Club Hub network", table: "PhotoClubHubHTML.Ignite",
-                       comment: "Mentioned at start of navigation bar")
-            })
-            .role(.secondary)
-            .buttonSize(.small)
-    ) { // items:
+    private func navigationBar() -> NavigationBar {
+        NavigationBar(
+                logo: Button(label: {
+                    Image("/images/AppIcon.png", description: "App icon")
+                        .resizable()
+                        .frame(width: 40)
+                        .padding(.trailing, 15)
+                    String(localized: "Photo Club Hub network",
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: languageBundle,
+                           comment: "Mentioned at start of navigation bar")
+                })
+                .role(.secondary)
+                .buttonSize(.small)
+        ) { // items:
 
-        Link(String(localized: "Photo clubs", table: "PhotoClubHubHTML.Ignite",
-                    comment: "Button linking to Clubs page"),
-             target: URL("https://www.fcDeGender.nl/clubs"))
-        .linkStyle(.hover)
-        .role(.primary)
-
-        Link(String(localized: "Photo Museums", table: "PhotoClubHubHTML.Ignite",
-                    comment: "Button linking to Museums list page"),
-             target: URL("https://www.fcDeGender.nl/museums"))
-        .linkStyle(.hover)
-        .role(.primary)
-
-        Link(String(localized: "Expertises", table: "PhotoClubHubHTML.Ignite",
-                    comment: "Button linking to Expertise list page"),
-             target: URL("https://www.fcDeGender.nl/expertises"))
-        .linkStyle(.hover)
-        .role(.primary)
-
-        Link(String(localized: "Stats", table: "PhotoClubHubHTML.Ignite",
-                    comment: "Button linking to page with statistics"),
-             target: URL("https://www.fcDeGender.nl/statistics"))
-        .linkStyle(.hover)
-        .role(.primary)
-
-        documentationDropdown()
-
-    }
-       .navigationItemAlignment(.trailing)
-       .navigationBarStyle(.light)
-       .position(.fixedBottom)
-       .background(.antiqueWhite.opacity(0.75))
-}
-
-private func documentationDropdown() -> NavigationItem {
-    Dropdown(String(localized: "Documentation", table: "PhotoClubHubHTML.Ignite",
-                    comment: "Menu item for downdrop with links to documentation")) {
-        Link("Photo Club Hub",
-             target: URL("""
-                         https://github.com/vdhamer/\
-                         Photo-Club-Hub/blob/main/.github/\
-                         README.md#photo-club-hub
-                         """))
-            .linkStyle(.button)
-            .buttonSize(.small)
-            .role(.secondary)
-
-        Link("Photo Club Hub HTML",
-             target: URL("""
-                         https://github.com/vdhamer/\
-                         Photo-Club-Hub-HTML/blob/main/.github/\
-                         README.md#photo-club-hub-html"
-                         """))
-            .linkStyle(.button)
-            .buttonSize(.small)
-            .role(.secondary)
-
-        Link(String(localized: "FAQ", table: "PhotoClubHubHTML.Ignite",
-                    comment: "Button linking to Dutch language FAQ for Photo Club Hub"),
-             target: URL("https://tinyurl.com/fchFAQnl"))
-            .linkStyle(.button)
+            Link(String(localized: "Photo clubs",
+                        table: "PhotoClubHubHTML.Ignite",
+                        bundle: languageBundle,
+                        comment: "Button linking to Clubs page"),
+                 target: "/\(languageID)/clubs")
+            .linkStyle(.hover)
             .role(.primary)
 
-        Link(String(localized: "IgniteLink", table: "PhotoClubHubHTML.Ignite",
-                    comment: "Menu item for documentation about twostraws/Ignite"),
-             target: URL("https://swiftpackageindex.com/twostraws/Ignite"))
-            .linkStyle(.button)
-            .buttonSize(.small)
-            .role(.secondary)
+            Link(String(localized: "Photo Museums",
+                        table: "PhotoClubHubHTML.Ignite",
+                        bundle: languageBundle,
+                        comment: "Button linking to Museums list page"),
+                 target: "/\(languageID)/museums")
+            .linkStyle(.hover)
+            .role(.primary)
+
+            Link(String(localized: "Expertises",
+                        table: "PhotoClubHubHTML.Ignite",
+                        bundle: languageBundle,
+                        comment: "Button linking to Expertise list page"),
+                 target: "/\(ExpertisesPage.relativePath(languageID: languageID))")
+            .linkStyle(.hover)
+            .role(.primary)
+
+            Link(String(localized: "Stats",
+                        table: "PhotoClubHubHTML.Ignite",
+                        bundle: languageBundle,
+                        comment: "Button linking to page with statistics"),
+                 target: "/\(languageID)/statistics")
+            .linkStyle(.hover)
+            .role(.primary)
+
+            documentationDropdown()
+
+        }
+           .navigationItemAlignment(.trailing)
+           .navigationBarStyle(.light)
+           .position(.fixedBottom)
+           .background(.antiqueWhite.opacity(0.75))
     }
+
+    private func documentationDropdown() -> NavigationItem {
+        Dropdown(String(localized: "Documentation",
+                        table: "PhotoClubHubHTML.Ignite",
+                        bundle: languageBundle,
+                        comment: "Menu item for downdrop with links to documentation")) {
+            Link("Photo Club Hub",
+                 target: URL("""
+                             https://github.com/vdhamer/\
+                             Photo-Club-Hub/blob/main/.github/\
+                             README.md#photo-club-hub
+                             """))
+                .linkStyle(.button)
+                .buttonSize(.small)
+                .role(.secondary)
+
+            Link("Photo Club Hub HTML",
+                 target: URL("""
+                             https://github.com/vdhamer/\
+                             Photo-Club-Hub-HTML/blob/main/.github/\
+                             README.md#photo-club-hub-html"
+                             """))
+                .linkStyle(.button)
+                .buttonSize(.small)
+                .role(.secondary)
+
+            Link(String(localized: "FAQ",
+                        table: "PhotoClubHubHTML.Ignite",
+                        bundle: languageBundle,
+                        comment: "Button linking to Dutch language FAQ for Photo Club Hub"),
+                 target: URL("https://tinyurl.com/fchFAQnl"))
+                .linkStyle(.button)
+                .role(.primary)
+
+            Link(String(localized: "IgniteLink",
+                        table: "PhotoClubHubHTML.Ignite",
+                        bundle: languageBundle,
+                        comment: "Menu item for documentation about twostraws/Ignite"),
+                 target: URL("https://swiftpackageindex.com/twostraws/Ignite"))
+                .linkStyle(.button)
+                .buttonSize(.small)
+                .role(.secondary)
+        }
+    }
+
 }
 
 func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
