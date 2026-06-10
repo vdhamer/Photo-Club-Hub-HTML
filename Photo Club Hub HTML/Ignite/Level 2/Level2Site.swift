@@ -167,6 +167,10 @@ struct Level2Site: Site {
         let languages = (try? moc.fetch(languageFetch)) ?? []
         if languages.isEmpty {
             ifDebugFatalError("No languages found in Level2Site()")
+        } else {
+            for language in languages where language.isoCode != language.isoCode.lowercased() { // just a safety guard
+                    ifDebugFatalError("Bad isoCode (not lowercase): \(language.isoCode)")
+            }
         }
 
         // MARK: - Get all expertises
