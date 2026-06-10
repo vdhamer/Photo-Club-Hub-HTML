@@ -1,33 +1,46 @@
 ## Folder structure of generated output site
 
 ```
-Build/
-    nl/ // Dutch pages; no language-level home page (nl/ is just a container)
-        clubs/ // Level 1 output: index page listing all clubs, linking to each club's Level 2 page (not yet generated at this path)
-            fcVeghel/ // Level 2 output: lists all (current and optionally former) members of fcVeghel
-                portfolios/ // optional portfolio when generated using Lightroom plug-in
-            fgDeGender/ // idem for all other clubs hosted on this site
-                portfolios/ // optional portfolio when generated using Lightroom plug-in
-        expertises/ // Level 0 output: index page listing all expertises, linking to each ExpertisePage
-            Abstract/ // Level 0 output: index of club members with the Abstract expertise tag
-            Architecture/ // idem for all (both supported and temporary) other expertises
-        expositions/ // future extension (doesn't exist yet)
-        museums/ // future: Level 1 output for museums, analogous to clubs/
-    en/ // English pages; no language-level home page (en/ is just a container)
-        clubs/ // Level 1 output: index page listing all clubs, linking to each club's Level 2 page (not yet generated at this path)
-            fcVeghel/ // Level 2 output: lists all (current and optionally former) members of fcVeghel
-                portfolios/ // optional portfolio when generated using Lightroom plug-in
-            fgDeGender/ // idem for all other clubs hosted on this site
-                portfolios/ // optional portfolio when generated using Lightroom plug-in
-        expertises/ // Level 0 output: index page listing all expertises, linking to each ExpertisePage
-            Abstract/ // Level 0 output: index of club members with the Abstract expertise tag
-            Architecture/ // idem for all (both supported and temporary) other expertises
-        expositions/ // future extension (doesn't exist yet)
-        museums/ // future: Level 1 output for museums, analogous to clubs/
-    xx/ // future languages go here
+Build/                        // index.html contains (temporary) language selector
+├── nl/                       // Dutch branch; no index.html file
+│   ├── clubs/                // Level 1 output: index page listing all clubs
+│   │   ├── fcVeghel/         // Level 2 output: index page lists all current/former club members (and maybe expo's)
+│   │   │   └── portfolios/   // optional portfolio directory made by LR plugin
+│   │   │       ├── John_Doe/ // one subdirectory per club member, named after the member
+│   │   │       └── Jane_Doe/
+│   │   └── fgDeGender/
+│   │       ├── portfolios/
+│   │       │   ├── John_Doe/
+│   │       │   └── Jane_Doe/
+│   │       └── expositions/  // reserved for future extension: no index.html file
+│   │           ├── Expo2025/ // portfolio with all images displayed at one particular exposition
+│   │           └── Expo2026/
+│   ├── expertises/           // Level 0 output: index page listing all expertises
+│   │   ├── Abstract/         // Level 0 output: index of club members with the Abstract expertise tag
+│   │   └── Architecture/
+│   ├── expositions/          // reserved for future extension: index of past and future expositions
+│   └── museums/              // reserved for future extension: Level 1 museums list
+├── en/
+│   ├── clubs/
+│   │   ├── fcVeghel/
+│   │   │   └── portfolios/
+│   │   │       ├── John_Doe/
+│   │   │       └── Jane_Doe/
+│   │   └── fgDeGender/
+│   │       ├── portfolios/
+│   │       │   ├── John_Doe/
+│   │       │   └── Jane_Doe/
+│   │       └── expositions/
+│   │           ├── Expo2025/
+│   │           └── Expo2026/
+│   ├── expertises/
+│   │   ├── Abstract/
+│   │   └── Architecture/
+│   ├── expositions/
+│   └── museums/
+└── de/
 ```
 
 Notes:
-- this is the to-be folder structure. The as-is structure is different, but migrating to this.
 - Club directories are currently distributed across http://vdhamer.com and https://fcdegender.nl.
 - In principle, any club may decide to host its own data on any server (e.g. the server holding its website).
