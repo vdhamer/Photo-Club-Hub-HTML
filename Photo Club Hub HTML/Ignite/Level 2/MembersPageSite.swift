@@ -25,8 +25,7 @@ struct MembersPageSite: Site {
     let homePage: ExpertiseRootPage // placeholder; homePage always writes to Build/index.html
     let theme = MyTheme()
 
-    private let precomputedPages: [any StaticPage]
-    var pages: [any StaticPage] { return precomputedPages }
+    let pages: [any StaticPage] // precomputed to avoid Core Data queries on wrong threads
 
     /// Builds the set of member pages for the selected club across all languages.
     ///
@@ -49,21 +48,21 @@ struct MembersPageSite: Site {
         let languages = (try? moc.fetch(languageFetch)) ?? []
         if languages.isEmpty { ifDebugFatalError("No languages found in MembersPageSite.init()") }
 
-        var pages: [any StaticPage] = []
+        var pageList: [any StaticPage] = []
         if let club = try? Organization.find(context: moc, nickname: preferences.selectedClubNickname) {
             for language in languages {
                 if language.isoCode != language.isoCode.lowercased() {
                     ifDebugFatalError("Bad isoCode (not lowercase): \(language.isoCode)")
                 }
-                pages.append(Members(moc: moc,
-                                     club: club,
-                                     languageID: language.isoCode,
-                                     preferences: preferences))
+                pageList.append(Members(moc: moc,
+                                        club: club,
+                                        languageID: language.isoCode,
+                                        preferences: preferences))
             }
         } else {
             ifDebugFatalError("Club '\(preferences.selectedClubNickname)' not found in MembersPageSite.init()")
         }
-        self.precomputedPages = pages
+        self.pages = pageList
     }
 
 }
