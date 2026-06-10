@@ -162,6 +162,7 @@ struct Level2Site: Site {
         self.preferences = preferences
 
         // MARK: - Get all languages
+
         let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
         languageFetch.sortDescriptors = [NSSortDescriptor(key: "isoCode_", ascending: true)] // for determinism only
         let languages = (try? moc.fetch(languageFetch)) ?? []
@@ -174,6 +175,7 @@ struct Level2Site: Site {
         }
 
         // MARK: - Get all expertises
+
         let expertiseFetch: NSFetchRequest<Expertise> = Expertise.fetchRequest()
         expertiseFetch.sortDescriptors = [NSSortDescriptor(key: "id_", ascending: true)]
         let expertises = (try? moc.fetch(expertiseFetch)) ?? []
