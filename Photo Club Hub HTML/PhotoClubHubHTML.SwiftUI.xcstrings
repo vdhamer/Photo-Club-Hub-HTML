@@ -349,17 +349,6 @@
         }
       }
     },
-    "expertise" : {
-      "comment" : "Word 'expertise' used in temporary test button labels",
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "expertise"
-          }
-        }
-      }
-    },
     "former member" : {
       "comment" : "Textual indicator of a former member in app's UI",
       "localizations" : {
