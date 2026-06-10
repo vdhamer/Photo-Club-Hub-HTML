@@ -208,7 +208,7 @@ struct Members: StaticPage {
             .linkStyle(.hover)
             .role(.primary)
 
-            documentationDropdown()
+            documentationDropdown().dropup()
 
         }
            .navigationItemAlignment(.trailing)
@@ -217,7 +217,7 @@ struct Members: StaticPage {
            .background(.antiqueWhite.opacity(0.75))
     }
 
-    private func documentationDropdown() -> NavigationItem {
+    private func documentationDropdown() -> Dropdown {
         Dropdown(String(localized: "Documentation",
                         table: "PhotoClubHubHTML.Ignite",
                         bundle: languageBundle,
