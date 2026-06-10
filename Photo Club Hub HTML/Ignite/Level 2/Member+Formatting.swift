@@ -33,6 +33,7 @@ extension Members {
 
         let unknown = Span(String(localized: "-",
                                   table: "PhotoClubHubHTML.Ignite",
+                                  bundle: languageBundle,
                                   comment: "Shown in member table when start date unavailable"))
 
         if isFormer == false { // if current member, displays "Member for NN.N years"
@@ -44,9 +45,11 @@ extension Members {
 
             return Span(String(localized: "Member for past \(formatYears(years)) years",
                                table: "PhotoClubHubHTML.Ignite",
+                               bundle: languageBundle,
                                comment: "Membership duration for current members"))
             .hint(text: String(localized: "From \(formattedStartDate). \(fotobondString)",
                                table: "PhotoClubHubHTML.Ignite",
+                               bundle: languageBundle,
                                comment: "Mouseover hint on cell containing start date"))
         } else { // if current member, displays "Member from YYYYY to YYYY"
             formerMembersTotalYears += years
@@ -54,6 +57,7 @@ extension Members {
 
             return Span(String(localized: "Member from \(toYear(date: start!)) to \(toYear(date: end!))",
                                table: "PhotoClubHubHTML.Ignite",
+                               bundle: languageBundle,
                                comment: "Membership duration for current members"))
             .hint(text: String(localized:
                                """
@@ -61,12 +65,13 @@ extension Members {
                                \(fotobondString)
                                """,
                                table: "PhotoClubHubHTML.Ignite",
+                               bundle: languageBundle,
                                comment: "Mouseover hint on cell containing start-end years"))
         }
     }
 
     func formatYears(_ years: Double) -> String {
-        String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
+        String(format: "%.1f", locale: Locale(identifier: languageID), years) // returns e.g. "12.3" or "12,3"
     }
 
     private func toYear(date: Date) -> String {
