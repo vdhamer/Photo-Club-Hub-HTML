@@ -24,6 +24,8 @@ struct Level2Site: Site {
     let moc: NSManagedObjectContext
     let preferences: PreferencesStructHTML
 
+    let pages: [any StaticPage] // precomputed to avoid Core Data queries on wrong threads
+
     // swiftlint:disable:next function_body_length
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         // examples: "http://localhost:8000", "https://www.fcDeGender.nl", etc.
@@ -159,16 +161,39 @@ struct Level2Site: Site {
         self.moc = moc
         self.preferences = preferences
 
-        do {
-            let club: Organization = try Organization.find(context: moc, nickname: preferences.selectedClubNickname)
-            self.homePage = Members(moc: moc, club: club, preferences: preferences)
-        } catch {
-            if let club = try? Organization.find(context: moc, nickname: "TemplateMin") {
-                self.homePage = Members(moc: moc, club: club, preferences: preferences)
-            } else {
-                self.homePage = Members(moc: moc, club: club0, preferences: preferences)
-            }
+        // MARK: - Get all languages
+        let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
+        languageFetch.sortDescriptors = [NSSortDescriptor(key: "isoCode_", ascending: true)] // for determinism only
+        let languages = (try? moc.fetch(languageFetch)) ?? []
+        if languages.isEmpty {
+            ifDebugFatalError("No languages found in Level2Site()")
         }
+
+        // MARK: - Get all expertises
+        let expertiseFetch: NSFetchRequest<Expertise> = Expertise.fetchRequest()
+        expertiseFetch.sortDescriptors = [NSSortDescriptor(key: "id_", ascending: true)]
+        let expertises = (try? moc.fetch(expertiseFetch)) ?? []
+        if expertises.isEmpty {
+            ifDebugFatalError("No expertises found in Level2Site()")
+        }
+
+        let club: Organization = (try? Organization.find(context: moc, nickname: preferences.selectedClubNickname))
+                               ?? (try? Organization.find(context: moc, nickname: "TemplateMin"))
+                               ?? club0
+
+        let homeLanguageID = languages.first?.isoCode ?? "nl"
+        self.homePage = Members(moc: moc, club: club, languageID: homeLanguageID, preferences: preferences)
+
+        // Only generate a Members page for a language if that language has at least one expertise translation.
+        // This keeps Level 2 output in sync with Level 0 —
+        // you won't get a German club page unless there is at least one German expertise label to show.
+        var pageList: [any StaticPage] = []
+        for language in languages where expertises.contains(
+            where: { LocalizedExpertise.exists(context: moc, expertiseID: $0.id, languageIsoCode: language.isoCode) }
+        ) {
+            pageList.append(Members(moc: moc, club: club, languageID: language.isoCode, preferences: preferences))
+        }
+        self.pages = pageList
     }
 
 }
