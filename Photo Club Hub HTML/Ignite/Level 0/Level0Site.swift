@@ -32,8 +32,7 @@ struct Level0Site: Site {
     let homePage: ExpertiseRootPage
     let theme = MyTheme()
 
-    private let precomputedPages: [any StaticPage] // precomputed to avoid Core Data queries on wrong threads
-    var pages: [any StaticPage] { return precomputedPages }
+    let pages: [any StaticPage] // precomputed to avoid Core Data queries on wrong threads
 
     /// Builds the full set of pages for the Level 0 site.
     ///
@@ -64,7 +63,7 @@ struct Level0Site: Site {
         let languages = (try? moc.fetch(languageFetch)) ?? []
         if languages.isEmpty { ifDebugFatalError("No languages found in Level0Site.init()") }
 
-        var pages: [any StaticPage] = []
+        var pageList: [any StaticPage] = []
         for language in languages { // de, en, fr, ... nl
             if language.isoCode != language.isoCode.lowercased() { // just a guard because violation → obscure behaviour
                 ifDebugFatalError("Bad isoCode (not lowercase): \(language.isoCode)")
@@ -76,15 +75,15 @@ struct Level0Site: Site {
             guard languageHasTranslations else { continue } // no ExpertisesPage for languages without any translations
 
             for expertise in expertises { // create pages for (language1,expertise1), (language1,expertise2), etc.
-                pages.append(ExpertisePage(expertiseID: expertise.id,
-                                           language: language.isoCode,
-                                           moc: moc,
-                                           preferences: preferences))
+                pageList.append(ExpertisePage(expertiseID: expertise.id,
+                                              language: language.isoCode,
+                                              moc: moc,
+                                              preferences: preferences))
             }
-            pages.append(ExpertisesPage(moc: moc,
-                                        language: language.isoCode)) // links to all expertises in a particular language
+            pageList.append(ExpertisesPage(moc: moc,
+                                           language: language.isoCode)) // links to all expertises in specified language
         }
-        self.precomputedPages = pages
+        self.pages = pageList
     }
 
 }
