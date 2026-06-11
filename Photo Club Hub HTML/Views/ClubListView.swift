@@ -260,17 +260,14 @@ struct ClubListView: View {
         }
     }
 
-    /// Generates one Level 2 HTML page per language for the currently selected club.
+    /// Generates one Level 2 HTML page for each (club × language) combination.
     ///
-    /// The selected club is identified by `preferences.selectedClubNickname`, which `MembershipView`
-    /// keeps up to date via `.onAppear` and `.onChange(of: club)` whenever the sidebar selection changes.
-    ///
-    /// Delegates to `MembersPageSite`, which fetches all languages from CoreData and creates one
-    /// `Members` page per language — but only for languages that have at least one `LocalizedExpertise`
-    /// translation (keeping Level 2 output consistent with the Level 0 expertise pages).
+    /// Delegates to `Level2Site`, which fetches all clubs and all languages from CoreData and creates
+    /// one `Members` page per combination — but only for languages that have at least one
+    /// `LocalizedExpertise` translation (keeping Level 2 output consistent with Level 0 expertise pages).
     /// All CoreData reads happen inside `performAndWait` on a dedicated background context;
     /// Ignite's `publish()` is then called asynchronously via a `Task`.
-    private func generateLevel2(preferences: PreferencesStructHTML) { // selected club × all languages
+    private func generateLevel2(preferences: PreferencesStructHTML) { // all clubs × all languages
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level2.publishing"
@@ -278,12 +275,12 @@ struct ClubListView: View {
         bgContext.automaticallyMergesChangesFromParent = true
 
         bgContext.performAndWait {
-            let membersPageSite = MembersPageSite(moc: bgContext, preferences: preferences)
+            let level2Site = Level2Site(moc: bgContext, preferences: preferences)
             Task {
                 do {
-                    try await membersPageSite.publish()
+                    try await level2Site.publish()
                 } catch {
-                    ifDebugFatalError("Publishing of results of MembersPageSite() failed. Error: \(error)")
+                    ifDebugFatalError("Publishing of results of Level2Site() failed. Error: \(error)")
                     print(error.localizedDescription)
                 }
             }
@@ -292,14 +289,8 @@ struct ClubListView: View {
 
 }
 
-// This preview doesn't work yet. Sorry.
 #Preview {
-    struct Wrapper: View {
-        @State var preferences = PreferencesStructHTML.defaultValue
-        var body: some View {
-            ClubListView(preferences: $preferences)
-                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-        }
-    }
-    return Wrapper()
+    @Previewable @State var preferences = PreferencesStructHTML.defaultValue
+    ClubListView(preferences: $preferences)
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 }
