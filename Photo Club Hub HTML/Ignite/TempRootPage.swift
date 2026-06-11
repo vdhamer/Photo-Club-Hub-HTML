@@ -1,5 +1,5 @@
 //
-//  ExpertiseRootPage.swift
+//  TempRootPage.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 27/05/2026.
@@ -8,9 +8,13 @@
 import Foundation // for Bundle
 import Ignite // for StaticPage
 
-struct ExpertiseRootPage: StaticPage { // `path` intentionally omitted: Ignite always writes the homePage to index.html
+struct TempRootPage: StaticPage { // `path` intentionally omitted: Ignite always writes the homePage to index.html
     var title = "Photo Club Hub"
     var description: String { "Photo Club Hub website" }
+
+    /// Maps a languageID (e.g. "nl", "en") to the relative path the language link should point to.
+    /// Injected so each Site (Level 0, Level 2, ...) can target a different landing page.
+    let relativePath: (_ languageID: String) -> String
 
     func body(context: PublishingContext) -> [BlockElement] {
         Text("Photo Club Hub")
@@ -19,13 +23,13 @@ struct ExpertiseRootPage: StaticPage { // `path` intentionally omitted: Ignite a
             .margin(.vertical, .extraLarge)
 
         Text {
-            Link("🇳🇱 (NL)", target: "/\(ExpertisesPage.relativePath(languageID: "nl"))")
+            Link("🇳🇱 (NL)", target: "/\(relativePath("nl"))")
                 .linkStyle(.hover)
         }
             .font(.title1)
             .horizontalAlignment(.center)
         Text {
-            Link("🇬🇧 (EN)", target: "/\(ExpertisesPage.relativePath(languageID: "en"))")
+            Link("🇬🇧 (EN)", target: "/\(relativePath("en"))")
                 .linkStyle(.hover)
         }
             .font(.title1)
