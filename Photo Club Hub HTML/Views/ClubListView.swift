@@ -183,9 +183,7 @@ struct ClubListView: View {
                                   comment: "App button that generates HTML page listing all club members")) {
                         print("Generating Level 2 club members")
                         generateLevel2(preferences: preferences)
-                    } .disabled(selectedClubIds.isEmpty || // no club selected
-                                hasMembers(context: viewContext,  // selected club has no members
-                                           clubID: [OrganizationID](selectedClubIds)[0]) == false)
+                    }
 
                 } label: {
                     Text(String(localized: "Build HTML",
@@ -194,17 +192,6 @@ struct ClubListView: View {
                 }
 
            }
-        }
-    }
-
-    // find club based on fullNameTown identifier and check if it has members
-    private func hasMembers(context: NSManagedObjectContext, clubID: OrganizationID) -> Bool {
-        do {
-            let result: Bool
-            try result = Organization.find(context: context, organizationID: clubID).members.isEmpty == false
-            return result
-        } catch {
-            return false // if find(context:organizationID) can't find the club
         }
     }
 
