@@ -67,7 +67,6 @@ struct Level2Site: Site {
                 continue
             }
 
-            ifDebugPrint("list of \(clubs.count) clubs: \(clubs)")
             for club in clubs {
                 guard club.members.isEmpty == false else { continue } // skip clubs with no known members
                 pageList.append(Members(moc: moc,
