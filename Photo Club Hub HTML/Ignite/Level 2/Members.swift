@@ -156,6 +156,8 @@ struct Members: StaticPage {
 
         }
 
+        FooterText(languageID: languageID)
+
     }
 
     // MARK: - NavigationBar
