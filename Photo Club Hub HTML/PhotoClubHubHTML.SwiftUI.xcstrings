@@ -281,23 +281,6 @@
         }
       }
     },
-    "Club %@ (nickname)" : {
-      "comment" : "Label for the currently selected club in Settings",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Club %@ (nickname)"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ (verkorte clubnaam)"
-          }
-        }
-      }
-    },
     "Copy thumbnails to local folder" : {
       "comment" : "Toggle to enable copying of thumbnails to a local folder",
       "localizations" : {

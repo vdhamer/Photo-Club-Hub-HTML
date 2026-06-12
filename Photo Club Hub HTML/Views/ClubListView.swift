@@ -73,14 +73,6 @@ struct ClubListView: View {
                 }
                 .popover(isPresented: $showSettingsPopover, arrowEdge: .top) {
                     VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Spacer()
-                            Text(String(localized: "Club \(preferences.selectedClubNickname) (nickname)",
-                                        table: "PhotoClubHubHTML.SwiftUI",
-                                        comment: "Label for the currently selected club in Settings")
-                            ) .font(.title3)
-                            Spacer()
-                        }
 
                         Picker(String(localized: "Host",
                                       table: "PhotoClubHubHTML.SwiftUI",
@@ -147,6 +139,7 @@ struct ClubListView: View {
                                 showSettingsPopover = false
                             }
                         }
+
                     }
                     .padding()
                     .frame(minWidth: 320)
