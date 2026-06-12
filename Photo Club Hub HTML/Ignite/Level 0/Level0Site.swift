@@ -51,6 +51,7 @@ struct Level0Site: Site {
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         url = preferences.selectedHost.url(forPath: "expertises") ?? URL(preferences.selectedHost.staticString)
 
+        // inject a function defining where the root page language links navigate to
         self.homePage = TempRootPage(relativePath: { ExpertisesPage.relativePath(languageID: $0) })
 
         let expertiseFetch: NSFetchRequest<Expertise> = Expertise.fetchRequest()

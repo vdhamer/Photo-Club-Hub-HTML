@@ -36,9 +36,9 @@ struct Level2Site: Site {
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         url = URL(preferences.selectedHost.staticString)
 
-        // TODO: replace with the Level 2 (club members) landing-page path once determined
+        // inject a function defining where the root page language links navigate to
         self.homePage = TempRootPage(relativePath: { languageID in
-            ExpertisesPage.relativePath(languageID: languageID) })
+            ExpertisesPage.relativePath(languageID: languageID) }) // TODO this is answer for Level 0, not Level 2
 
         let clubType: String = OrganizationTypeEnum.club.rawValue // constant
         let clubsFetch: NSFetchRequest<Organization> = Organization.fetchRequest()
