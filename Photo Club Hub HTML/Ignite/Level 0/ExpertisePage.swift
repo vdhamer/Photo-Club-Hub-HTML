@@ -116,6 +116,10 @@ struct ExpertisePage: StaticPage {
 
     func body(context: PublishingContext) -> [BlockElement] {
 
+        // MARK: - NavBar at bottom of screen
+
+        SiteNavigationBar(languageID: languageID)
+
         // page title (showing which Expertise this page is about)
         Text(String(localized: "\(snapshot.localizedName) expertise (\(snapshot.photographerRows.count)x)",
                     table: "PhotoClubHubHTML.Ignite",

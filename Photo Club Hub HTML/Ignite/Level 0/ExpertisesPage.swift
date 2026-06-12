@@ -60,6 +60,10 @@ struct ExpertisesPage: StaticPage {
 
     func body(context: PublishingContext) -> [BlockElement] {
 
+        // MARK: - NavBar at bottom of screen
+
+        SiteNavigationBar(languageID: languageID)
+
         // MARK: - approved Expertises
 
         Text {

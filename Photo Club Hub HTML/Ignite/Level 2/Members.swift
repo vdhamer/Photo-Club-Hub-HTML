@@ -73,7 +73,7 @@ struct Members: StaticPage {
 
         // MARK: - Links
 
-        navigationBar()
+        SiteNavigationBar(languageID: languageID)
 
         // MARK: - current members
 
@@ -158,109 +158,6 @@ struct Members: StaticPage {
 
         FooterText(languageID: languageID)
 
-    }
-
-    // MARK: - NavigationBar
-
-    private func navigationBar() -> NavigationBar {
-        NavigationBar(
-                logo: Button(label: {
-                    Image("/images/AppIcon.png", description: "App icon")
-                        .resizable()
-                        .frame(width: 40)
-                        .padding(.trailing, 15)
-                    String(localized: "Photo Club Hub network",
-                           table: "PhotoClubHubHTML.Ignite",
-                           bundle: languageBundle,
-                           comment: "Mentioned at start of navigation bar")
-                })
-                .role(.secondary)
-                .buttonSize(.small)
-        ) { // items:
-
-            Link(String(localized: "Photo clubs",
-                        table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
-                        comment: "Button linking to Clubs page"),
-                 target: "/\(languageID)/clubs")
-            .linkStyle(.hover)
-            .role(.primary)
-
-            Link(String(localized: "Photo Museums",
-                        table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
-                        comment: "Button linking to Museums list page"),
-                 target: "/\(languageID)/museums")
-            .linkStyle(.hover)
-            .role(.primary)
-
-            Link(String(localized: "Expertises",
-                        table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
-                        comment: "Button linking to Expertise list page"),
-                 target: "/\(ExpertisesPage.relativePath(languageID: languageID))")
-            .linkStyle(.hover)
-            .role(.primary)
-
-            Link(String(localized: "Stats",
-                        table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
-                        comment: "Button linking to page with statistics"),
-                 target: "/\(languageID)/statistics")
-            .linkStyle(.hover)
-            .role(.primary)
-
-            documentationDropdown().dropup()
-
-        }
-           .navigationItemAlignment(.trailing)
-           .navigationBarStyle(.light)
-           .position(.fixedBottom)
-           .background(.antiqueWhite.opacity(0.75))
-    }
-
-    private func documentationDropdown() -> Dropdown {
-        Dropdown(String(localized: "Documentation",
-                        table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
-                        comment: "Menu item for downdrop with links to documentation")) {
-            Link("Photo Club Hub",
-                 target: URL("""
-                             https://github.com/vdhamer/\
-                             Photo-Club-Hub/blob/main/.github/\
-                             README.md#photo-club-hub
-                             """))
-                .linkStyle(.button)
-                .buttonSize(.small)
-                .role(.secondary)
-
-            Link("Photo Club Hub HTML",
-                 target: URL("""
-                             https://github.com/vdhamer/\
-                             Photo-Club-Hub-HTML/blob/main/.github/\
-                             README.md#photo-club-hub-html"
-                             """))
-                .linkStyle(.button)
-                .buttonSize(.small)
-                .role(.secondary)
-
-            Link(String(localized: "FAQ",
-                        table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
-                        comment: "Button linking to Dutch language FAQ for Photo Club Hub"),
-                 target: URL("https://tinyurl.com/fchFAQnl"))
-                .linkStyle(.button)
-                .role(.primary)
-
-            Link(String(localized: "IgniteLink",
-                        table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
-                        comment: "Menu item for documentation about twostraws/Ignite"),
-                 target: URL("https://swiftpackageindex.com/twostraws/Ignite"))
-                .linkStyle(.button)
-                .buttonSize(.small)
-                .role(.secondary)
-        }
     }
 
 }

@@ -1,5 +1,5 @@
 //
-//  Clubs+makeTable.swift
+//  ClubsPage+makeClubsTable.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 15/02/2025.
@@ -14,15 +14,17 @@ struct MakeClubsTableResult {
     let clubsCount: Int
 }
 
-extension Clubs {
+extension ClubsPage {
 
     /// Builds the clubs table from Core Data.
     ///
     /// Fetches `Organization` entities of type `.club`, sorted by town and name,
     /// and returns an Ignite `Table` plus the number of clubs returned.
-    /// - Parameter moc: The Core Data managed object context used for fetching.
+    /// - Parameters:
+    ///   - moc: The Core Data managed object context used for fetching.
+    ///   - languageID: ISO 639-1 language code used for localization and internal link paths.
     /// - Returns: `MakeClubsTableResult` containing the rendered table and club count.
-    mutating func makeClubsTable(moc: NSManagedObjectContext) -> MakeClubsTableResult {
+    mutating func makeClubsTable(moc: NSManagedObjectContext, languageID: String) -> MakeClubsTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
             let sortDescriptor1 = NSSortDescriptor(keyPath: \Organization.town_, ascending: true)
@@ -38,25 +40,36 @@ extension Clubs {
             return MakeClubsTableResult(
                 table: Table {
                     for club in clubs {
-                        makeClubRow(moc: moc, club: club)
+                        makeClubRow(moc: moc, club: club, languageID: languageID)
                     }
                 }
                 header: {
                     String(localized: "Town",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for town column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for town column.")
                     String(localized: "Club name",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for club name column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for club name column.")
                     String(localized: "Members",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for member count column.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for member count column.")
                     String(localized: "Club website",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for clubs website link.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for clubs website link.")
                     String(localized: "Fotobond #",
                            table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
                            comment: "HTML table header for club's identifier in Fotobond.")
                     String(localized: "JSON",
-                           table: "PhotoClubHubHTML.Ignite", comment: "HTML table header for link to JSON input file.")
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for link to JSON input file.")
                 },
-                clubsCount: -1234
+                clubsCount: clubs.count
             )
         } catch {
             fatalError("Failed to fetch clubs: \(error)")
@@ -66,7 +79,7 @@ extension Clubs {
 
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
-    private mutating func makeClubRow(moc: NSManagedObjectContext, club: Organization) -> Row {
+    private mutating func makeClubRow(moc: NSManagedObjectContext, club: Organization, languageID: String) -> Row {
 
         return Row { // Ignite Row
 
@@ -79,15 +92,15 @@ extension Clubs {
             } .verticalAlignment(.middle)
 
             Column { // club name
-                let membershipListURL: URL? = club.level2URLDir
+                let membershipListPath: String? = club.members.isEmpty ? nil :
+                    Members.relativePath(languageID: languageID, clubNickname: club.nickName)
                 Group {
-                    if !club.members.isEmpty, membershipListURL != nil {
+                    if let membershipListPath {
                         Text {
                             Link(String(club.fullName.replacingUTF8Diacritics),
-                                 target: membershipListURL!
+                                 target: "/\(membershipListPath)"
                             )
                             .linkStyle(.hover)
-                            // .hint(text: membershipListURL!.absoluteString) // not robust in old version of Ignite
                         } .font(.title5) .padding(.none) .margin(0)
                     } else {
                         club.fullName.replacingUTF8Diacritics
@@ -96,10 +109,11 @@ extension Clubs {
             } .verticalAlignment(.middle)
 
             Column { // member count for this club
-                let url: String = "http://www.vdhamer.com/\(club.nickName)"
+                let membershipListPath = Members.relativePath(languageID: languageID, clubNickname: club.nickName)
                 if !club.members.isEmpty {
                     Span(
-                        Link(String("\(club.members.filter { !$0.isFormerMember }.count)"), target: url)
+                        Link(String("\(club.members.filter { !$0.isFormerMember }.count)"),
+                             target: "/\(membershipListPath)")
                             .linkStyle(.hover)
                     )
                 }
@@ -113,7 +127,6 @@ extension Clubs {
                                     comment: "Unicode globe symbol in cells in club website column"),
                              target: club.organizationWebsite!)
                         .linkStyle(.hover)
-                        // .hint(text: club.organizationWebsite!.absoluteString) // not robust in old version of Ignite
                     } .font(.title5) .padding(.none) .margin(0)
                 }
             } .verticalAlignment(.middle)
