@@ -227,6 +227,7 @@ extension Members {
             var pageElements = [PageElement]()
 
             let localizedExpertiseResultsLists = LocalizedExpertiseResultLists(moc: moc,
+                                                                               isoCode: languageID,
                                                                                photographer.photographerExpertises)
 
             let standard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,
