@@ -93,6 +93,23 @@
         }
       }
     },
+    "%lld photo clubs" : {
+      "comment" : "Title badge at top of Clubs HTML index page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo clubs (%lld×)"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoclubs (%1$lld×)"
+          }
+        }
+      }
+    },
     "%lld temporary expertise tags" : {
       "comment" : "Title badge at top of Expertises HTML index page",
       "localizations" : {
@@ -553,7 +570,7 @@
       }
     },
     "Photo clubs" : {
-      "comment" : "Button linking to Clubs page\nTitle badge at top of Clubs HTML index page",
+      "comment" : "Button linking to Clubs page\nTitle of the Clubs index HTML page",
       "localizations" : {
         "en" : {
           "stringUnit" : {
