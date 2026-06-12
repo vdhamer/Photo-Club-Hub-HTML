@@ -29,7 +29,7 @@ struct Level0Site: Site {
     let url: URL
     let builtInIconsEnabled: BootstrapOptions = .none
     let author = "Peter van den Hamer"
-    let homePage: ExpertiseRootPage
+    let homePage: TempRootPage
     let theme = MyTheme()
 
     let pages: [any StaticPage] // precomputed to avoid Core Data queries on wrong threads
@@ -51,7 +51,8 @@ struct Level0Site: Site {
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         url = preferences.selectedHost.url(forPath: "expertises") ?? URL(preferences.selectedHost.staticString)
 
-        self.homePage = ExpertiseRootPage()
+        // inject a function defining where the root page language links navigate to
+        self.homePage = TempRootPage(relativePath: { ExpertisesPage.relativePath(languageID: $0) })
 
         let expertiseFetch: NSFetchRequest<Expertise> = Expertise.fetchRequest()
         expertiseFetch.sortDescriptors = [NSSortDescriptor(key: "id_", ascending: true)]

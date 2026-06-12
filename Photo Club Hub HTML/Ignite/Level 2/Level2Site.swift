@@ -19,7 +19,7 @@ struct Level2Site: Site {
     let url: URL // The base URL for the site
     let builtInIconsEnabled: BootstrapOptions = .localBootstrap
     let author = "Peter van den Hamer"
-    let homePage: ExpertiseRootPage // temporary placeholder; homePage always writes to Build/index.html
+    let homePage: TempRootPage // temporary placeholder; homePage always writes to Build/index.html
     let theme = MyTheme()
 
     let pages: [any StaticPage] // precomputed to avoid Core Data queries on wrong thread
@@ -36,7 +36,9 @@ struct Level2Site: Site {
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
         url = URL(preferences.selectedHost.staticString)
 
-        self.homePage = ExpertiseRootPage() // temporary
+        // inject a function defining where the root page language links navigate to
+        self.homePage = TempRootPage(relativePath: { languageID in
+            ExpertisesPage.relativePath(languageID: languageID) }) // TODO this is answer for Level 0, not Level 2
 
         let clubType: String = OrganizationTypeEnum.club.rawValue // constant
         let clubsFetch: NSFetchRequest<Organization> = Organization.fetchRequest()
