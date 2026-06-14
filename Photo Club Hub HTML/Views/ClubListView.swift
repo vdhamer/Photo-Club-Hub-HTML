@@ -150,7 +150,7 @@ struct ClubListView: View {
                     Button(String(localized: "Entire website",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates all levels of website at once")) {
-                        print("Generating entire website")
+                        print("Generating Level 0, Level 1 and Level 2")
                         generateLevelAll(preferences: preferences)
                     }
 
