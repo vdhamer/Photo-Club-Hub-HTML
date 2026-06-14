@@ -18,7 +18,7 @@ struct LevelAllSite: Site {
 
     let name = "Photo Club Hub"
     let url: URL
-    let builtInIconsEnabled: BootstrapOptions = .localBootstrap // matches Level2Site (member pages)
+    let builtInIconsEnabled: BootstrapOptions = .none // no Bootstrap icons used; expertise markers are emoji
     let author = "Peter van den Hamer"
     let homePage: TempRootPage
     let theme = MyTheme()

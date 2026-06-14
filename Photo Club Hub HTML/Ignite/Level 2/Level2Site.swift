@@ -17,7 +17,7 @@ struct Level2Site: Site {
 
     let name: String = "Club members" // not too important: used in RSS and social media platforms
     let url: URL // The base URL for the site
-    let builtInIconsEnabled: BootstrapOptions = .localBootstrap
+    let builtInIconsEnabled: BootstrapOptions = .none // no Bootstrap icons used; expertise markers are emoji
     let author = "Peter van den Hamer"
     let homePage: TempRootPage // temporary placeholder; homePage always writes to Build/index.html
     let theme = MyTheme()
