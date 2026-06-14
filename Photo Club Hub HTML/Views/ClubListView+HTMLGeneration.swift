@@ -14,7 +14,7 @@ extension ClubListView {
 
     @discardableResult
     func generateLevel0(preferences: PreferencesStructHTML,
-                        publish: Bool = true) -> [any Ignite.StaticPage] { // index with all Expertises
+                        publish: Bool = true) -> [any Ignite::StaticPage] { // index with all Expertises (Swift 6.4)
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level0.publishing"
@@ -64,7 +64,7 @@ extension ClubListView {
 
     @discardableResult
     func generateLevel1(preferences: PreferencesStructHTML,
-                        publish: Bool = true) -> [any Ignite.StaticPage] { // index with all clubs
+                        publish: Bool = true) -> [any Ignite::StaticPage] { // index with all clubs (Swift 6.4 syntax)
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level1.publishing"
@@ -96,7 +96,7 @@ extension ClubListView {
     /// Ignite's `publish()` is then called asynchronously via a `Task`.
     @discardableResult
     func generateLevel2(preferences: PreferencesStructHTML,
-                        publish: Bool = true) -> [any Ignite.StaticPage] { // all clubs × all languages
+                        publish: Bool = true) -> [any Ignite::StaticPage] { // all clubs × all languages (Swift 6.4)
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level2.publishing"

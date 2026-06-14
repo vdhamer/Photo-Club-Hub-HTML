@@ -248,7 +248,7 @@
       }
     },
     "Build HTML" : {
-      "comment" : "Submenu for generating one or more levels of the HTML pages",
+      "comment" : "Submenu for generating Level 0 ... Level 2 HTML pages",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -334,6 +334,7 @@
     },
     "Entire website" : {
       "comment" : "App menu command that generates the full website in a single publish",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
