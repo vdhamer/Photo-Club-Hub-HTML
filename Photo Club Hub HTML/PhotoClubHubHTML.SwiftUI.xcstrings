@@ -247,11 +247,8 @@
         }
       }
     },
-    "All: full website" : {
-      "comment" : "App button that generates the full website in a single publish"
-    },
     "Build HTML" : {
-      "comment" : "Submenu for generating Level 0 ... Level 2 HTML pages",
+      "comment" : "Submenu for generating one or more levels of the HTML pages",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -331,6 +328,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sluiten"
+          }
+        }
+      }
+    },
+    "Entire website" : {
+      "comment" : "App menu command that generates the full website in a single publish",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entire website"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volledige website"
           }
         }
       }
