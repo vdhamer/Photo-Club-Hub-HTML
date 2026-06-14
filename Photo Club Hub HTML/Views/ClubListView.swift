@@ -208,31 +208,6 @@ struct ClubListView: View {
         }
     }
 
-    private func generateSingleExpertiseLanguagePage(expertiseID: String,
-                                                     language: String,
-                                                     preferences: PreferencesStructHTML) {
-        print("Generating expertise page for expertise <\(expertiseID)> in language <\(language)>")
-        let bgContext = PersistenceController.shared.container.newBackgroundContext()
-        bgContext.name = "ExpertiseLanguagePage.publishing"
-        bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-        bgContext.automaticallyMergesChangesFromParent = true
-
-        bgContext.performAndWait {
-            let level0SingleExpertiseSite = ExpertisePageSite(expertiseID: expertiseID,
-                                                              language: language,
-                                                              moc: bgContext,
-                                                              preferences: preferences) // for selectedHost
-            Task {
-                do {
-                    try await level0SingleExpertiseSite.publish(buildDirectoryPath:
-                        "Build/" + ExpertisesPage.relativePath(languageID: language, expertiseID: expertiseID))
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
-
     private func generateLevel1(preferences: PreferencesStructHTML) { // index with all clubs
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
