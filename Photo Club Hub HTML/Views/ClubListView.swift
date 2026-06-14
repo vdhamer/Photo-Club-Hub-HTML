@@ -146,6 +146,16 @@ struct ClubListView: View {
                 }
 
                 Menu {
+
+                    Button(String(localized: "Entire website",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "App button that generates all levels of website at once")) {
+                        print("Generating entire website")
+                        generateLevelAll(preferences: preferences)
+                    }
+
+                    Divider()
+
                     Button(String(localized: "L0: expertises",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates HTML page listing all expertises")) {

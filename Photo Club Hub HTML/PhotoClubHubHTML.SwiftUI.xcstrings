@@ -333,8 +333,7 @@
       }
     },
     "Entire website" : {
-      "comment" : "App menu command that generates the full website in a single publish",
-      "extractionState" : "stale",
+      "comment" : "App button that generates all levels of website at once",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -344,7 +343,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Volledige website"
           }
         }
