@@ -151,7 +151,7 @@ struct ClubListView: View {
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates all levels of website at once")) {
                         print("Generating Level 0, Level 1 and Level 2")
-                        generateLevelAll(preferences: preferences)
+                        generateAllLevels(preferences: preferences)
                     }
 
                     Divider()

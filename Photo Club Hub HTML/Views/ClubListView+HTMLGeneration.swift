@@ -99,7 +99,7 @@ extension ClubListView {
     /// Each level's pages are built (with publishing bypassed) and concatenated into one `LevelAllSite`,
     /// which is published exactly once — so Ignite's `clearBuildFolder()` runs once and no level clobbers
     /// another's output. See issue #215.
-    func generateLevelAll(preferences: PreferencesStructHTML) {
+    func generateAllLevels(preferences: PreferencesStructHTML) {
         // Build each level's pages without publishing (sequential for now;
         // a later ticket can parallelize with a TaskGroup).
         let level0Pages = generateLevel0(preferences: preferences, publish: false)
