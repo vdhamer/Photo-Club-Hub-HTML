@@ -12,12 +12,14 @@ import Photo_Club_Hub_Data // for Organization
 
 extension ClubListView {
 
+    // MARK: - page generation for individual levels
+
     @discardableResult
     func generateLevel0(preferences: PreferencesStructHTML,
                         publish: Bool = true) -> [any Ignite::StaticPage] { // index with all Expertises (Swift 6.4)
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
-        bgContext.name = "Level0.publishing"
+        bgContext.name = "Level0.generation"
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
@@ -42,7 +44,7 @@ extension ClubListView {
                         publish: Bool = true) -> [any Ignite::StaticPage] { // index with all clubs (Swift 6.4 syntax)
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
-        bgContext.name = "Level1.publishing"
+        bgContext.name = "Level1.generation"
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
@@ -74,7 +76,7 @@ extension ClubListView {
                         publish: Bool = true) -> [any Ignite::StaticPage] { // all clubs × all languages (Swift 6.4)
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
-        bgContext.name = "Level2.publishing"
+        bgContext.name = "Level2.generation"
         bgContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         bgContext.automaticallyMergesChangesFromParent = true
 
@@ -93,6 +95,8 @@ extension ClubListView {
             return level2Site.pages
         }
     }
+
+    // MARK: - page generation for complete site
 
     /// Generates the full website in a single `publish()` so that all three levels coexist in `Build/`.
     ///
