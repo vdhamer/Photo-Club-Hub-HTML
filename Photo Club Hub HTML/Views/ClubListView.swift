@@ -206,7 +206,7 @@ struct ClubListView: View {
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         bgContext.performAndWait { // generate website
-            let level0Site = Level0Site(moc: bgContext, preferences: preferences) // load data
+            let level0Site = Level0Pages(moc: bgContext, preferences: preferences) // load data
             Task {
                 do {
                     try await level0Site.publish() // generate HTML
@@ -226,7 +226,7 @@ struct ClubListView: View {
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         bgContext.performAndWait { // generate website
-            let level1Site = Level1Site(moc: bgContext, preferences: preferences) // load data
+            let level1Site = Level1Pages(moc: bgContext, preferences: preferences) // load data
             Task {
                 do {
                     try await level1Site.publish() // generate HTML
@@ -253,7 +253,7 @@ struct ClubListView: View {
         bgContext.automaticallyMergesChangesFromParent = true
 
         bgContext.performAndWait {
-            let level2Site = Level2Site(moc: bgContext, preferences: preferences)
+            let level2Site = Level2Pages(moc: bgContext, preferences: preferences)
             Task {
                 do {
                     try await level2Site.publish()

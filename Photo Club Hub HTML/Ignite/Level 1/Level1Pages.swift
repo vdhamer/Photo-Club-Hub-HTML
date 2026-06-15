@@ -12,8 +12,8 @@ import Photo_Club_Hub_Data // for Language, LocalizedExpertise
 /// Ignite `Site` that generates a per-language index of photo clubs at `/{lang}/clubs/`.
 ///
 /// One `ClubsPage` is generated for each language that has at least one `LocalizedExpertise` translation,
-/// mirroring the guard used by `Level0Site` and `Level2Site`.
-struct Level1Site: Site {
+/// mirroring the guard used by `Level0Pages` and `Level2Pages`.
+struct Level1Pages: Site {
 
     let name: String = "Clubs"
     let url: URL

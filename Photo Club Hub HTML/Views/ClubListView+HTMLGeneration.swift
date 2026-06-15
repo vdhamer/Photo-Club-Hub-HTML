@@ -24,18 +24,18 @@ extension ClubListView {
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         return bgContext.performAndWait { // generate website
-            let level0Site = Level0Site(moc: bgContext, preferences: preferences) // load data
+            let level0Pages = Level0Pages(moc: bgContext, preferences: preferences) // load data
             if publish {
                 Task {
                     do {
-                        try await level0Site.publish() // generate HTML
+                        try await level0Pages.publish() // generate HTML
                     } catch {
                         ifDebugFatalError("Publishing of results of Level0Site() failed. Error: \(error)")
                         print(error.localizedDescription)
                     }
                 }
             }
-            return level0Site.pages
+            return level0Pages.pages
         }
     }
 
@@ -49,18 +49,18 @@ extension ClubListView {
         bgContext.automaticallyMergesChangesFromParent = true // to push ObjectTypes to bgContext?
 
         return bgContext.performAndWait { // generate website
-            let level1Site = Level1Site(moc: bgContext, preferences: preferences) // load data
+            let level1Pages = Level1Pages(moc: bgContext, preferences: preferences) // load data
             if publish {
                 Task {
                     do {
-                        try await level1Site.publish() // generate HTML
+                        try await level1Pages.publish() // generate HTML
                     } catch {
                         ifDebugFatalError("Publishing of results of Level1Site() failed. Error: \(error)")
                         print(error.localizedDescription)
                     }
                 }
             }
-            return level1Site.pages
+            return level1Pages.pages
         }
     }
 
@@ -81,18 +81,18 @@ extension ClubListView {
         bgContext.automaticallyMergesChangesFromParent = true
 
         return bgContext.performAndWait {
-            let level2Site = Level2Site(moc: bgContext, preferences: preferences)
+            let level2Pages = Level2Pages(moc: bgContext, preferences: preferences)
             if publish {
                 Task {
                     do {
-                        try await level2Site.publish()
+                        try await level2Pages.publish()
                     } catch {
                         ifDebugFatalError("Publishing of results of Level2Site() failed. Error: \(error)")
                         print(error.localizedDescription)
                     }
                 }
             }
-            return level2Site.pages
+            return level2Pages.pages
         }
     }
 

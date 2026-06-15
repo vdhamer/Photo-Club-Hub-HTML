@@ -13,7 +13,7 @@ import Photo_Club_Hub_Data // for Organization, Language
 ///
 /// All pages are precomputed inside `init` (called within `bgContext.performAndWait`) so that all CoreData
 /// reads happen on the correct queue before Ignite renders on its own cooperative queue.
-struct Level2Site: Site {
+struct Level2Pages: Site {
 
     let name: String = "Club members" // not too important: used in RSS and social media platforms
     let url: URL // The base URL for the site

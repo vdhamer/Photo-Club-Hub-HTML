@@ -27,7 +27,7 @@ struct LevelAllSite: Site {
 
     init(pages: [any StaticPage], preferences: PreferencesStructHTML) {
         url = URL(preferences.selectedHost.staticString)
-        // single landing page; its language buttons link to /<lang>/clubs/ (same as Level1Site)
+        // single landing page; its language buttons link to /<lang>/clubs/ (same as Level1Pages)
         homePage = TempRootPage(relativePath: { ClubsPage.relativePath(languageID: $0) })
         self.pages = pages
     }

@@ -21,7 +21,7 @@ import Photo_Club_Hub_Data // for Expertise, Language
 /// queue, and any Core Data access from there would violate `NSManagedObjectContext`'s
 /// single-queue contract. By doing all fetches during `init` — which `LevelXListView` calls inside
 /// `bgContext.performAndWait { }` — every NSManagedObject read happens on the moc's queue.
-struct Level0Site: Site {
+struct Level0Pages: Site {
 
     let name: String = "Expertises"
     // URL: local host example http://www.fcDeGender.com
