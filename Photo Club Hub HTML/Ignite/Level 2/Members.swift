@@ -17,7 +17,6 @@ struct Members: StaticPage {
                bundle: languageBundle,
                comment: "HTML page title (shown in browser tab) for the Members page")
     }
-    let showFotobondMemberNumber: Bool = false // suppresses showing Fotobond number of members
 
     let languageID: String  // ISO 639-1 code, e.g. "nl"
     let clubNickname: String // used to build the page path, e.g. "fgWaalre"
