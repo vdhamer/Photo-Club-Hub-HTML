@@ -14,7 +14,6 @@ import Photo_Club_Hub_Data // for OrganizationType
 struct PhotoClubHubHtmlApp: App {
     @StateObject var model = PreferencesViewModelHTML()
 
-    static let includeTemplateClubs: Bool = true // whether or not to include XmpleMin and XmpleMax clubs
     static let persistenceController = PersistenceController.shared // for Core Data
 
     init() {
