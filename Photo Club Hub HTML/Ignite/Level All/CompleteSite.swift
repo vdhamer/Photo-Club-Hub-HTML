@@ -1,5 +1,5 @@
 //
-//  LevelAllSite.swift
+//  CompleteSite.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 14/06/2026.
@@ -23,7 +23,7 @@ struct PageGroup {
 /// as labeled `PageGroup`s; the only page this site owns is the shared landing page. Because
 /// `publish()` is called exactly once, Ignite's `clearBuildFolder()` runs once and the levels don't
 /// clobber each other's output pages.
-struct LevelAllSite: Site {
+struct CompleteSite: Site {
 
     let name = "Photo Club Hub"
     let url: URL

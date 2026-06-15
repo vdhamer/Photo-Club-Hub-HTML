@@ -117,7 +117,7 @@ extension ClubListView {
         ]
 
         // Single publish: one landing page + the labeled groups → one clearBuildFolder, no clobbering.
-        let allSite = LevelAllSite(pageGroups: pageGroups, preferences: preferences)
+        let allSite = CompleteSite(pageGroups: pageGroups, preferences: preferences)
         Task {
             do {
                 try await allSite.publish()
