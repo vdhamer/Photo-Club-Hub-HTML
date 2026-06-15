@@ -105,14 +105,19 @@ extension ClubListView {
     /// another's output. See issue #215.
     func generateAllLevels(preferences: PreferencesStructHTML) {
         // Build each level's pages without publishing (sequential for now;
-        // a later ticket can parallelize with a TaskGroup).
-        let level0Pages = generateLevel0(preferences: preferences, publish: false)
-        let level1Pages = generateLevel1(preferences: preferences, publish: false)
-        let level2Pages = generateLevel2(preferences: preferences, publish: false)
+        // a later ticket can parallelize with a TaskGroup). Keep them as labeled groups so the
+        // per-level structure stays visible into LevelAllSite (#217).
+        let pageGroups: [PageGroup] = [
+            PageGroup(label: "Level 0 – Expertises",
+                      pages: generateLevel0(preferences: preferences, publish: false)),
+            PageGroup(label: "Level 1 – Clubs",
+                      pages: generateLevel1(preferences: preferences, publish: false)),
+            PageGroup(label: "Level 2 – Members",
+                      pages: generateLevel2(preferences: preferences, publish: false))
+        ]
 
-        // Single publish: one landing page + the three page arrays → one clearBuildFolder, no clobbering.
-        let allSite = LevelAllSite(pages: level0Pages + level1Pages + level2Pages,
-                                   preferences: preferences)
+        // Single publish: one landing page + the labeled groups → one clearBuildFolder, no clobbering.
+        let allSite = LevelAllSite(pageGroups: pageGroups, preferences: preferences)
         Task {
             do {
                 try await allSite.publish()
