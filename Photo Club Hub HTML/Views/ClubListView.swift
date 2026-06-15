@@ -20,7 +20,7 @@ struct ClubListView: View {
     static let clubOnlyPredicate = NSPredicate(format: "organizationType_.organizationTypeName_= %@",
                                                argumentArray: [OrganizationTypeEnum.club.rawValue])
     static let allPredicate = NSPredicate(format: "TRUEPREDICATE")
-    static let nonePredicate = NSPredicate(format: "FALSEPREDICATE")
+    static let nonePredicate = NSPredicate(format: "FALSEPREDICATE") // not currently used
 
     // MARK: - @FetchRequests to get lists and get counts
 
