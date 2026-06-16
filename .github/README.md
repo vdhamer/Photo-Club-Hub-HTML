@@ -189,6 +189,7 @@ For now this is only possible by changing a constant in the source code.
 - [x] generate index pages listing photographers associated with a particular expertise
 - [x] generate all clubs in bulk instead of one club at a time
 - [ ] generate index of museums
+- [ ] implement Photo Club Hub Data as a separate GitHub repository
 
 It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would require adding another repo.
 
