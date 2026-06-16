@@ -28,8 +28,7 @@ struct MembershipView: View {
         let predicate = NSPredicate(format: "organization_ = %@", argumentArray: [club])
         // https://www.youtube.com/watch?v=O4043RVjCGU HackingWithSwift session on dynamic Core Data fetch requests:
         _fetchRequestClubMembers = FetchRequest<MemberPortfolio>(sortDescriptors: [sortDescriptor1, sortDescriptor2],
-                                                                 predicate: predicate,
-                                                                 animation: .bouncy(duration: 1))
+                                                                 predicate: predicate)
     }
 
     var body: some View {
@@ -98,35 +97,29 @@ struct MembershipView: View {
 
 // MARK: - Preview
 
- struct MembershipViewPreview: PreviewProvider {
-     @State static var preferences = PreferencesStructHTML.defaultValue
-
-     static var previews: some View {
-         MembershipView(club: Organization(), preferences: $preferences)
-     }
+#Preview {
+    @Previewable @State var preferences = PreferencesStructHTML.defaultValue
+    let viewContext = PersistenceController.preview.container.viewContext
+    let club = Organization.addHardcodedFgDeGenderForPreview(context: viewContext)
+    MembershipView(club: club, preferences: $preferences)
+        .environment(\.managedObjectContext, viewContext)
 }
 
 extension Organization {
 
-     private static func addFGdeGender(context: NSManagedObjectContext) -> Organization {
-        withAnimation {
-            let fgDeGenderIDPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
-                                                      town: "Eindhoven",
-                                                      nickname: "FGdeGender")
-
-            let fgDeGender = Organization.findCreateUpdate(context: context, // foreground
-                                                           organizationTypeEnum: OrganizationTypeEnum.club,
-                                                           idPlus: fgDeGenderIDPlus)
-            do {
-                try context.save()
-                return fgDeGender
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use
-                // this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+    private static func addFGdeGender(context: NSManagedObjectContext) -> Organization {
+        let fgDeGenderIDPlus = OrganizationIdPlus(fullName: "Fotogroep de Gender",
+                                                  town: "Eindhoven",
+                                                  nickname: "FGdeGender")
+        let fgDeGender = Organization.findCreateUpdate(context: context,
+                                                       organizationTypeEnum: OrganizationTypeEnum.club,
+                                                       idPlus: fgDeGenderIDPlus)
+        do {
+            try context.save()
+            return fgDeGender
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
     }
 
