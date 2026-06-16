@@ -53,13 +53,6 @@ struct PreferencesStructHTML: Sendable { // order in which they are shown on Pre
 
 }
 
-extension String {
-    func predicateOrAppend(suffix: String) -> String {
-        guard self != "" else { return suffix }
-        return self + " OR " + suffix
-    }
-}
-
 extension PreferencesStructHTML: Codable {
 //    No code needed as long as all preferences are Codable.
 //    For trickier cases, check how it is done in Photo Club Hub's `PreferencesViewModel`
