@@ -190,6 +190,7 @@ For now this is only possible by changing a constant in the source code.
 - [x] generate all clubs in bulk instead of one club at a time
 - [ ] generate index of museums
 - [ ] implement Photo Club Hub Data as a separate GitHub repository
+- [ ] generate statistics page
 
 It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would require adding another repo.
 
