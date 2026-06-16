@@ -187,7 +187,8 @@ For now this is only possible by changing a constant in the source code.
 - [x] allow the user to select the club for which to generate the local site (currently hardcoded constant, almost done).
 - [x] generate a static site that can serve as index of supported clubs (Level 1 data).
 - [x] generate index pages listing photographers associated with a particular expertise
-- [x] generate all clubs in bulk instead of one club at a time
+- [x] generate entire site in bulk instead of one page/section at a time
+- [x] generate all pages in Dutch and English (prepared for more languages)
 - [ ] generate index of museums
 - [ ] implement Photo Club Hub Data as a separate GitHub repository
 - [ ] generate statistics page
