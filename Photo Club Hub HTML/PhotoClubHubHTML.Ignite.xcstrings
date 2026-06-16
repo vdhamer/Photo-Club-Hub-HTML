@@ -518,6 +518,23 @@
         }
       }
     },
+    "No usage description available." : {
+      "comment" : "Hint for a supported expertise that lacks a usage description",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No usage description available."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De toelichting bij deze expertise ontbreekt."
+          }
+        }
+      }
+    },
     "Own website" : {
       "comment" : "HTML table header for member's own website column.",
       "localizations" : {

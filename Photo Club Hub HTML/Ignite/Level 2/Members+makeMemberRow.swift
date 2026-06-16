@@ -158,63 +158,74 @@ extension Members {
             return nil
         }
 
-        /// Renders a line of expertise tags as a `PageElement`.
+        /// Renders a list of expertise tags as a `PageElement`.
         /// Uses the provided localized expertise lists and the `isSupported` flag to select either the
         /// supported (official) or temporary (nonstandard) list, then builds a text line with the proper icon,
         /// names, delimiters, and optional hint.
+        ///
         /// - Parameters:
         ///   - localizedExpertiseResultLists: Source of supported and temporary expertise results for the member.
         ///   - isSupported: When `true`, renders the supported list; otherwise renders the temporary list.
         /// - Returns: A `PageElement` containing the expertise line, or `nil` when there's nothing to display.
         func generatePageElements(localizedExpertiseResultLists: LocalizedExpertiseResultLists, isSupported: Bool)
-        -> PageElement? {
+                -> PageElement? {
+
+            // decide which of the two lists to generate PageElements for
             let localizedExpertiseResultList = isSupported ? localizedExpertiseResultLists.supported :
-            localizedExpertiseResultLists.temporary
+                                                             localizedExpertiseResultLists.temporary
             guard !localizedExpertiseResultList.list.isEmpty else { return nil } // nothing to display
 
-            var hint: String?
-            var customHint: String = ""
-            var string = localizedExpertiseResultLists.getIconString(isSupported: isSupported) // line starts with icon
+            // Each expertise name is an Ignite Link to its per-language ExpertisePage (#187).
+            // The icon and the delimiters between names stay as plain text.
+            // languageID matches the page containing the link, so the link target is shown in the same language.
+            return Text {
+                // start with the suitable icon String
+                localizedExpertiseResultLists.getIconString(isSupported: isSupported)
 
-            for localizedExpertiseResult in localizedExpertiseResultList.list {
-                string.append(" " + localizedExpertiseResult.name
-                              + localizedExpertiseResult.delimiterToAppend)
-                hint = localizedExpertiseResult.localizedExpertise?.usage
-                customHint = localizedExpertiseResult.customHint ?? ""
+                for result in localizedExpertiseResultList.list {
+                    " " // space between icon and e.g. "Abstract", or between "Abstract" and "Architecture"
+                    let localizedExpertiseResult = result.name
+                    let hint = decideHint(isSupported: isSupported,
+                                          hint: result.localizedExpertise?.usage,
+                                          customHint: result.customHint ?? "")
+                    if result.isNavigable {
+                        let target = "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: result.id))/"
+                        Link(localizedExpertiseResult, target: target)
+                            .linkStyle(.hover)
+                            .hint(text: hint)
+                    } else {  // synthetic entries (e.g. too-many-expertises overflow warning) are not linked to pages
+                        Span(localizedExpertiseResult)
+                            .hint(text: hint)
+                    }
+                    result.delimiterToAppend
+                }
             }
+                .horizontalAlignment(.leading)
+                .padding(.none)
+                .margin(5)
+        }
 
+        func decideHint(isSupported: Bool, hint: String?, customHint: String) -> String {
             if !isSupported {
                 if hint == nil && customHint == "" {
-                    return Text(string)
-                        .horizontalAlignment(.leading)
-                        .padding(.none)
-                        .margin(5)
-                        .hint(text: String(localized: "Unofficial expertise. It has no translations yet.",
-                                           table: "PhotoClubHubHTML.Ignite",
-                                           bundle: languageBundle,
-                                           comment: "Hint for expertise without localization"))
-                } else {
-                    return Text(string)
-                        .horizontalAlignment(.leading)
-                        .padding(.none)
-                        .margin(5)
-                        .hint(text: String(localized: "Expertises: \(customHint)",
-                                           table: "PhotoClubHubHTML.Ignite",
-                                           bundle: languageBundle,
-                                           comment: "Hint when providing too many expertises"))
+                    return String(localized: "Unofficial expertise. It has no translations yet.",
+                                  table: "PhotoClubHubHTML.Ignite",
+                                  bundle: languageBundle,
+                                  comment: "Hint for expertise without localization")
+                } else { // the overflow "Too many expertises" warning: its customHint lists the member's expertises
+                    return String(localized: "Expertises: \(customHint)",
+                                  table: "PhotoClubHubHTML.Ignite",
+                                  bundle: languageBundle,
+                                  comment: "Hint when providing too many expertises")
                 }
-            } else {
-                if hint != nil {
-                    return Text(string)
-                        .horizontalAlignment(.leading)
-                        .padding(.none)
-                        .margin(5)
-                        .hint(text: hint!)
-                } else {
-                    return Text(string)
-                        .horizontalAlignment(.leading)
-                        .padding(.none)
-                        .margin(5)
+            } else { // if supported expertise
+                if hint != nil { // supported, with usage description → just show that description
+                    return hint!
+                } else { // it is supported, but doesn't have a usage description
+                    return String(localized: "No usage description available.",
+                                  table: "PhotoClubHubHTML.Ignite",
+                                  bundle: languageBundle,
+                                  comment: "Hint for a supported expertise that lacks a usage description")
                 }
             }
         }
@@ -224,7 +235,7 @@ extension Members {
         /// preserving their respective hints and icons.
         /// - Returns: An array of `PageElement` items to render in the expertise column (which can be empty).
         func listPhotographerExpertises() -> [PageElement] { // defined inside makeMemberRow to access photographer
-            var pageElements = [PageElement]()
+            var pageElements = [PageElement]() // holds output
 
             let localizedExpertiseResultsLists = LocalizedExpertiseResultLists(moc: moc,
                                                                                isoCode: languageID,
