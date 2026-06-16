@@ -97,6 +97,18 @@ struct MembershipView: View {
 
 // MARK: - Preview
 
+// KNOWN ISSUE: this preview crashes (confirmed on macOS 26.5.1 + Xcode 26.6, and Xcode 27.0 beta 1).
+// Root cause is an Apple toolchain bug, NOT this code. Bisecting with live renders showed:
+//   - `Text(...)`, `List { Text }`, and reading CoreData attributes all preview fine.
+//   - Rendering this view crashes the moment its body touches `@FetchRequest`/`FetchedResults`
+//     (crashes even when the club has zero members, i.e. the ForEach is never iterated).
+// The crash is a SIGSEGV inside Swift Concurrency's dynamic main-actor isolation check
+// (swift_task_isCurrentExecutor -> isMainExecutor -> swift_getObjectType -> objc_msgSend).
+// Under the normal app this check passes; under the Previews JIT runtime (XOJITExecutor) the
+// executor identity is invalid and it faults. Triggered by SWIFT_STRICT_CONCURRENCY=complete /
+// Swift 6 + @FetchRequest. Any view in this target using @FetchRequest will crash in Previews.
+// Toggling SWIFT_UPCOMING_FEATURE_DYNAMIC_ACTOR_ISOLATION made no difference.
+// The preview below is correct and should start working once Apple fixes the Previews bug.
 #Preview {
     @Previewable @State var preferences = PreferencesStructHTML.defaultValue
     let viewContext = PersistenceController.preview.container.viewContext
