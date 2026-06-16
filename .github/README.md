@@ -191,6 +191,7 @@ For now this is only possible by changing a constant in the source code.
 - [x] generate all pages in Dutch and English (prepared for more languages)
 - [ ] generate index of museums
 - [ ] implement Photo Club Hub Data as a separate GitHub repository
+- [ ] migrate to current version of [twostraws/Ignite](https://github.com/twostraws/Ignite) 
 - [ ] generate statistics page
 
 It would be nice to have an app for data enty/editing (rather than editing JSON files), but that would require adding another repo.
