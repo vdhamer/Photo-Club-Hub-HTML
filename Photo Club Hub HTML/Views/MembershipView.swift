@@ -144,11 +144,10 @@ extension Organization {
             fotobondMemberNumber: FotobondMemberNumber(id: 1620090),
             membershipStartDate: "2016-04-01".extractDate(),
             membershipEndDate: nil)
-        let hansKrüsemannMem = MemberPortfolio.findCreateUpdate(bgContext: context,
-                                                                organization: fgDeGender,
-                                                                photographer: hansKrüsemannPho,
-                                                                optionalFields: hansKrüsemannOpt)
-        hansKrüsemannMem.refreshFirstImage()
+        _ = MemberPortfolio.findCreateUpdate(bgContext: context,
+                                             organization: fgDeGender,
+                                             photographer: hansKrüsemannPho,
+                                             optionalFields: hansKrüsemannOpt)
 
         let jelleVanDeVoortPN = PersonName(givenName: "Jelle", infixName: "van de", familyName: "Voort")
         let jelleVanDeVoortPho = Photographer.findCreateUpdate(context: context,
@@ -160,11 +159,10 @@ extension Organization {
             fotobondMemberNumber: FotobondMemberNumber(id: 1620103),
             membershipStartDate: "2020-01-01".extractDate(),
             membershipEndDate: nil)
-        let jelleVanDeVoortMem = MemberPortfolio.findCreateUpdate(bgContext: context,
-                                                                organization: fgDeGender,
-                                                                photographer: jelleVanDeVoortPho,
-                                                                optionalFields: jelleVanDeVoortOpt)
-        jelleVanDeVoortMem.refreshFirstImage()
+        _ = MemberPortfolio.findCreateUpdate(bgContext: context,
+                                             organization: fgDeGender,
+                                             photographer: jelleVanDeVoortPho,
+                                             optionalFields: jelleVanDeVoortOpt)
 
         let peterVanDenHamerPN = PersonName(givenName: "Peter", infixName: "van den", familyName: "Hamer")
         let peterVanDenHamerPho = Photographer.findCreateUpdate(context: context,
@@ -179,11 +177,10 @@ extension Organization {
             fotobondMemberNumber: FotobondMemberNumber(id: 1620110),
             membershipStartDate: "2024-01-01".extractDate(),
             membershipEndDate: nil)
-        let peterVanDenHamerMem = MemberPortfolio.findCreateUpdate(bgContext: context,
-                                                                organization: fgDeGender,
-                                                                photographer: peterVanDenHamerPho,
-                                                                optionalFields: peterVanDenHamerOpt)
-        peterVanDenHamerMem.refreshFirstImage()
+        _ = MemberPortfolio.findCreateUpdate(bgContext: context,
+                                             organization: fgDeGender,
+                                             photographer: peterVanDenHamerPho,
+                                             optionalFields: peterVanDenHamerOpt)
         return fgDeGender
     }
 
