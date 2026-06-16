@@ -188,7 +188,7 @@ For now this is only possible by changing a constant in the source code.
 - [x] generate a static site that can serve as index of supported clubs (Level 1 data).
 - [x] generate index pages listing photographers associated with a particular expertise
 - [x] generate entire site in bulk instead of one level or club at a time
-- [x] generate all pages in Dutch and English (prepared for more languages)
+- [x] generate all pages in Dutch and English (and provisioned for additional languages)
 - [ ] generate index of museums
 - [ ] implement Photo Club Hub Data as a separate GitHub repository
 - [ ] migrate to current version of [twostraws/Ignite](https://github.com/twostraws/Ignite) 
