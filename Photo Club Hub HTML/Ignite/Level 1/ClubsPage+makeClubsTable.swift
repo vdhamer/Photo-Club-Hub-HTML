@@ -153,35 +153,4 @@ extension ClubsPage {
 
     }
 
-    private func fullName(givenName: String,
-                          infixName: String = "",
-                          familyName: String) -> String {
-        if infixName.isEmpty {
-            return givenName + " " + familyName
-        } else {
-            return givenName + " " + infixName + " " + familyName
-        }
-    }
-
-    private func lastPathComponent(fullUrl: String) -> String {
-        let url = URL(string: fullUrl)
-        let lastComponent: String = url?.lastPathComponent ?? "error in lastPathComponent"
-        return "/images/\(lastComponent)"
-    }
-
-    private func describe(roles: [MemberRole: Bool?]) -> String {
-        for role in roles {
-            for definedRole in MemberRole.allCases {
-                if role.key==definedRole && role.value==true {
-                    return definedRole.displayNameForAppUI.capitalized // was table: "PhotoClubHubHTML.Ignite"
-                }
-            }
-        }
-        return ""
-    }
-
-    func formatYears(_ years: Double) -> String {
-        String(format: "%.1f", locale: Locale(identifier: "nl_NL"), years) // "1,2"
-    }
-
 }
