@@ -27,6 +27,7 @@ struct CompleteSite: Site {
 
     let name = "Photo Club Hub"
     let url: URL
+    var favicon: URL? { URL(string: "/favicon.png") }
     let builtInIconsEnabled: BootstrapOptions = .none // no Bootstrap icons used; expertise markers are emoji
     let author = "Peter van den Hamer"
     let homePage: TempRootPage

@@ -56,15 +56,11 @@ struct ClubListView: View {
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift macOS StormViewer)
             // Ignite's publish() copies Assets/ from NSHomeDirectory() to Build/; create the directory up front
-            let assetsImagesURL = URL(filePath: NSHomeDirectory()).appending(path: "Assets/images")
+            let assetsURL = URL(filePath: NSHomeDirectory()).appending(path: "Assets")
+            let assetsImagesURL = assetsURL.appending(path: "images")
             try? FileManager.default.createDirectory(at: assetsImagesURL, withIntermediateDirectories: true)
-            // AppIcon.png is a bundled resource; copy it once into Assets/images/ so publish() picks it up
-            if let source = Bundle.main.url(forResource: "AppIcon", withExtension: "png") {
-                let destination = assetsImagesURL.appending(path: "AppIcon.png")
-                if !FileManager.default.fileExists(atPath: destination.path()) {
-                    try? FileManager.default.copyItem(at: source, to: destination)
-                }
-            }
+            copyBundleResource(named: "AppIcon", extension: "png", to: assetsImagesURL)
+            copyBundleResource(named: "favicon", extension: "png", to: assetsURL)
         }
         .frame(minWidth: 640, minHeight: 390)
         .padding()
@@ -203,6 +199,13 @@ struct ClubListView: View {
 
            }
         }
+    }
+
+    private func copyBundleResource(named name: String, extension ext: String, to directory: URL) {
+        guard let source = Bundle.main.url(forResource: name, withExtension: ext) else { return }
+        let destination = directory.appending(path: "\(name).\(ext)")
+        guard !FileManager.default.fileExists(atPath: destination.path()) else { return }
+        try? FileManager.default.copyItem(at: source, to: destination)
     }
 
 }
