@@ -55,9 +55,16 @@ struct ClubListView: View {
 
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift macOS StormViewer)
-            // some Ignite forks may requires an Assets directory at NSHomeDirectory() when running as a sandboxed app
-            try? FileManager.default.createDirectory( at: URL(filePath: NSHomeDirectory()).appending(path: "Assets"),
-                                                      withIntermediateDirectories: true )
+            // Ignite's publish() copies Assets/ from NSHomeDirectory() to Build/; create the directory up front
+            let assetsImagesURL = URL(filePath: NSHomeDirectory()).appending(path: "Assets/images")
+            try? FileManager.default.createDirectory(at: assetsImagesURL, withIntermediateDirectories: true)
+            // AppIcon.png is a bundled resource; copy it once into Assets/images/ so publish() picks it up
+            if let source = Bundle.main.url(forResource: "AppIcon", withExtension: "png") {
+                let destination = assetsImagesURL.appending(path: "AppIcon.png")
+                if !FileManager.default.fileExists(atPath: destination.path()) {
+                    try? FileManager.default.copyItem(at: source, to: destination)
+                }
+            }
         }
         .frame(minWidth: 640, minHeight: 390)
         .padding()
