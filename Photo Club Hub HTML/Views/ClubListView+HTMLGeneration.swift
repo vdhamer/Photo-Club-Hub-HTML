@@ -110,7 +110,7 @@ extension ClubListView {
         let pageGroups: [PageGroup] = [
             PageGroup(label: "Level 0 – Expertises",
                       pages: generateLevel0(preferences: preferences, publish: false)),
-            PageGroup(label: "Level 1 – Clubs",
+            PageGroup(label: "Level 1 – Organizations",
                       pages: generateLevel1(preferences: preferences, publish: false)),
             PageGroup(label: "Level 2 – Members",
                       pages: generateLevel2(preferences: preferences, publish: false))

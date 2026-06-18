@@ -50,7 +50,7 @@ struct CompleteSite: Site {
     init(pageGroups: [PageGroup], preferences: PreferencesStructHTML) {
         url = URL(preferences.selectedHost.staticString)
         // single landing page; its language buttons link to /<lang>/clubs/ (same as Level1Pages)
-        homePage = TempRootPage(relativePath: { ClubsPage.relativePath(languageID: $0) })
+        homePage = TempRootPage(relativePath: { OrganizationsPage.relativePath(languageID: $0) })
         self.pageGroups = pageGroups
         pages = pageGroups.flatMap(\.pages) // Site protocol expects [any StaticPage] that needs publishing
     }

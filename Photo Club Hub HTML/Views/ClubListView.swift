@@ -180,7 +180,7 @@ struct ClubListView: View {
                                   comment: "App button that generates HTML page listing all museums")) {
                         print("Generating Level 1 museums")
                         generateLevel1(preferences: preferences)
-                    } .disabled(true)
+                    }
 
                     Divider()
 

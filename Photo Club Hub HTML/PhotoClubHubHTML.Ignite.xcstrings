@@ -110,6 +110,23 @@
         }
       }
     },
+    "%lld photo museums" : {
+      "comment" : "Title badge at top of Museums HTML index page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo museums (%lld×)"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotomusea (%1$lld×)"
+          }
+        }
+      }
+    },
     "%lld temporary expertise tags" : {
       "comment" : "Title badge at top of Expertises HTML index page",
       "localizations" : {
@@ -501,6 +518,40 @@
         }
       }
     },
+    "Museum website" : {
+      "comment" : "HTML table header for museum website link.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Museum website"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Museum website"
+          }
+        }
+      }
+    },
+    "Museum name" : {
+      "comment" : "HTML table header for museum name column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Museum name"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Museumnaam"
+          }
+        }
+      }
+    },
     "Name" : {
       "comment" : "HTML table header for member's name column.",
       "localizations" : {
@@ -604,7 +655,7 @@
       }
     },
     "Photo Museums" : {
-      "comment" : "Button linking to Museums list page",
+      "comment" : "Button linking to Museums list page\nTitle of the Museums index HTML page",
       "localizations" : {
         "en" : {
           "stringUnit" : {

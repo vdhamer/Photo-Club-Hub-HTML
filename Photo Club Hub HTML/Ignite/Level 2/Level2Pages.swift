@@ -37,7 +37,8 @@ struct Level2Pages: Site {
         url = URL(preferences.selectedHost.staticString)
 
         // inject a function defining where the RootPage language links navigate to
-        self.homePage = TempRootPage(relativePath: { languageID in ClubsPage.relativePath(languageID: languageID) })
+        self.homePage = TempRootPage(relativePath: { languageID in
+            OrganizationsPage.relativePath(languageID: languageID) })
 
         let clubType: String = OrganizationTypeEnum.club.rawValue // constant
         let clubsFetch: NSFetchRequest<Organization> = Organization.fetchRequest()

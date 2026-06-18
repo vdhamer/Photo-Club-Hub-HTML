@@ -1,5 +1,5 @@
 //
-//  OrganizationPage.swift
+//  OrganizationsPage.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 06/09/2024.
@@ -12,10 +12,10 @@ import Photo_Club_Hub_Data // for OrganizationTypeEnum
 /// Static page that lists photo clubs or museums as an HTML table.
 /// Builds this table from Core Data within the init()
 /// and renders it using Ignite blocks when body() is called by Ignite.
-struct OrganizationPage: StaticPage {
+struct OrganizationsPage: StaticPage {
 
+    let organizationType: OrganizationTypeEnum // .club or .museum
     let languageID: String // ISO 639-1 code, e.g. "nl"
-    let organizationType: OrganizationTypeEnum // e.g. .club or .museum
 
     var title: String { // needed by the StaticPage protocol
         switch organizationType {
@@ -47,11 +47,11 @@ struct OrganizationPage: StaticPage {
 
     // MARK: - init()
 
-    init(moc: NSManagedObjectContext, language: String, organizationType: OrganizationTypeEnum = .club) {
+    init(moc: NSManagedObjectContext, organizationType: OrganizationTypeEnum, language: String) {
         self.languageID = language
         self.organizationType = organizationType
         let bundle = Bundle.forLanguage(language)
-        let result = makeClubsTable(moc: moc, languageID: language)
+        let result = makeOrgTable(moc: moc, organizationType: organizationType, languageID: language)
         clubsTable = result.table
         count = result.organizationsCount
         switch organizationType {
