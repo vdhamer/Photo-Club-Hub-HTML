@@ -11,19 +11,24 @@ import Photo_Club_Hub_Data // for Organization
 
 struct MakeClubsTableResult {
     let table: Table // Table is an Ignite Table
-    let clubsCount: Int
+    let organizationsCount: Int // count of clubs or museums
 }
 
 extension ClubsPage {
 
-    /// Builds the clubs table from Core Data.
+    /// Builds organizations tables from the records in Core Data.
     ///
-    /// Fetches `Organization` entities of type `.club`, sorted by town and name,
-    /// and returns an Ignite `Table` plus the number of clubs returned.
+    /// Fetches `Organization` entities matching `organizationType`, sorted by town and name,
+    /// and returns an Ignite `Table` plus the number of organizations found.
+    ///
+    /// Members and Fotobond# columns are irrelevant and thus suppressed for Museums.
+    /// The distinction between current and former Members is also irrelevant for Museums
+    /// (because there are no members).
+    ///
     /// - Parameters:
     ///   - moc: The Core Data managed object context used for fetching.
     ///   - languageID: ISO 639-1 language code used for localization and internal link paths.
-    /// - Returns: `MakeClubsTableResult` containing the rendered table and club count.
+    /// - Returns: `MakeClubsTableResult` containing the rendered table and number of found Organizations.
     mutating func makeClubsTable(moc: NSManagedObjectContext, languageID: String) -> MakeClubsTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
@@ -34,13 +39,13 @@ extension ClubsPage {
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
 
             fetchRequest.predicate = NSPredicate(format: "organizationType_.organizationTypeName_ = %@",
-                                                 argumentArray: [OrganizationTypeEnum.club.rawValue])
-            let clubs: [Organization] = try moc.fetch(fetchRequest)
+                                                 argumentArray: [organizationType.rawValue])
+            let organizations: [Organization] = try moc.fetch(fetchRequest)
 
             return MakeClubsTableResult(
                 table: Table {
-                    for club in clubs {
-                        makeClubRow(moc: moc, club: club, languageID: languageID)
+                    for org in organizations {
+                        makeClubRow(moc: moc, club: org, languageID: languageID)
                     }
                 }
                 header: {
@@ -48,31 +53,42 @@ extension ClubsPage {
                            table: "PhotoClubHubHTML.Ignite",
                            bundle: Bundle.forLanguage(languageID),
                            comment: "HTML table header for town column.")
-                    String(localized: "Club name",
-                           table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
-                           comment: "HTML table header for club name column.")
-                    String(localized: "Members",
-                           table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
-                           comment: "HTML table header for member count column.")
+                    if organizationType == .museum {
+                        String(localized: "Museum name",
+                               table: "PhotoClubHubHTML.Ignite",
+                               bundle: Bundle.forLanguage(languageID),
+                               comment: "HTML table header for museum name column.")
+                    } else {
+                        String(localized: "Club name",
+                               table: "PhotoClubHubHTML.Ignite",
+                               bundle: Bundle.forLanguage(languageID),
+                               comment: "HTML table header for club name column.")
+                    }
+                    if organizationType == .club {
+                        String(localized: "Members",
+                               table: "PhotoClubHubHTML.Ignite",
+                               bundle: Bundle.forLanguage(languageID),
+                               comment: "HTML table header for member count column.")
+                    }
                     String(localized: "Club website",
                            table: "PhotoClubHubHTML.Ignite",
                            bundle: Bundle.forLanguage(languageID),
                            comment: "HTML table header for clubs website link.")
-                    String(localized: "Fotobond #",
-                           table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
-                           comment: "HTML table header for club's identifier in Fotobond.")
+                    if organizationType == .club {
+                        String(localized: "Fotobond #",
+                               table: "PhotoClubHubHTML.Ignite",
+                               bundle: Bundle.forLanguage(languageID),
+                               comment: "HTML table header for club's identifier in Fotobond.")
+                    }
                     String(localized: "JSON",
                            table: "PhotoClubHubHTML.Ignite",
                            bundle: Bundle.forLanguage(languageID),
                            comment: "HTML table header for link to JSON input file.")
                 },
-                clubsCount: clubs.count
+                count: organizations.count
             )
         } catch {
-            fatalError("Failed to fetch clubs: \(error)")
+            fatalError("Failed to fetch organizations: \(error)")
         }
 
     }
@@ -91,9 +107,9 @@ extension ClubsPage {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // club name
-                let membershipListPath: String? = club.members.isEmpty ? nil :
-                    Members.relativePath(languageID: languageID, clubNickname: club.nickName)
+            Column { // club/museum name
+                let membershipListPath: String? = (organizationType == .club && !club.members.isEmpty) ?
+                    Members.relativePath(languageID: languageID, clubNickname: club.nickName) : nil
                 Group {
                     if let membershipListPath {
                         Text {
@@ -108,16 +124,18 @@ extension ClubsPage {
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
-            Column { // member count for this club
-                let membershipListPath = Members.relativePath(languageID: languageID, clubNickname: club.nickName)
-                if !club.members.isEmpty {
-                    Span(
-                        Link(String("\(club.members.filter { !$0.isFormerMember }.count)"),
-                             target: "/\(membershipListPath)")
-                            .linkStyle(.hover)
-                    )
-                }
-            } .verticalAlignment(.middle)
+            if organizationType == .club {
+                Column { // member count for this club
+                    let membershipListPath = Members.relativePath(languageID: languageID, clubNickname: club.nickName)
+                    if !club.members.isEmpty {
+                        Span(
+                            Link(String("\(club.members.filter { !$0.isFormerMember }.count)"),
+                                 target: "/\(membershipListPath)")
+                                .linkStyle(.hover)
+                        )
+                    }
+                } .verticalAlignment(.middle)
+            }
 
             Column { // website
                 if club.organizationWebsite != nil {
@@ -131,15 +149,17 @@ extension ClubsPage {
                 }
             } .verticalAlignment(.middle)
 
-            Column { // Fotobond
-                if let fotobondClubNumber = club.fotobondClubNumber {
-                    String(fotobondClubNumber.display) // Int16 301 is displayed as 0301, nil is displayed as "-"
-                } else {
-                    String("-")
+            if organizationType == .club {
+                Column { // Fotobond
+                    if let fotobondClubNumber = club.fotobondClubNumber {
+                        String(fotobondClubNumber.display) // Int16 301 is displayed as 0301, nil is displayed as "-"
+                    } else {
+                        String("-")
+                    }
                 }
+                    .verticalAlignment(.middle)
+                    .margin(.leading, 10)
             }
-                .verticalAlignment(.middle)
-                .margin(.leading, 10)
 
             Column { // JSON
                 if !club.members.isEmpty {
