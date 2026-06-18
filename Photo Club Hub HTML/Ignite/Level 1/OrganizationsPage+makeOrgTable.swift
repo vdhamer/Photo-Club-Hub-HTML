@@ -1,5 +1,5 @@
 //
-//  OrganizationPage+makeClubsTable.swift
+//  OrganizationsPage+makeOrgTable.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 15/02/2025.
@@ -14,7 +14,9 @@ struct MakeClubsTableResult {
     let organizationsCount: Int // count of clubs or museums
 }
 
-extension OrganizationPage {
+extension OrganizationsPage {
+
+    // swiftlint:disable function_body_length
 
     /// Builds organizations tables from the records in Core Data.
     ///
@@ -29,7 +31,9 @@ extension OrganizationPage {
     ///   - moc: The Core Data managed object context used for fetching.
     ///   - languageID: ISO 639-1 language code used for localization and internal link paths.
     /// - Returns: `MakeClubsTableResult` containing the rendered table and number of found Organizations.
-    mutating func makeClubsTable(moc: NSManagedObjectContext, languageID: String) -> MakeClubsTableResult {
+    mutating func makeOrgTable(moc: NSManagedObjectContext,
+                               organizationType: OrganizationTypeEnum,
+                               languageID: String) -> MakeClubsTableResult {
         do {
             // match sort order used in MembershipView to generate MembershipView SwiftUI view
             let sortDescriptor1 = NSSortDescriptor(keyPath: \Organization.town_, ascending: true)
@@ -101,6 +105,7 @@ extension OrganizationPage {
         }
 
     }
+    // swiftlint:enable function_body_length
 
     // generates an Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
