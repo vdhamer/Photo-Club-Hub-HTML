@@ -9,14 +9,14 @@ import Ignite // for Site
 import CoreData // for NSManagedObjectContext
 import Photo_Club_Hub_Data // for Language, LocalizedExpertise
 
-/// Ignite `Site` that generates per-language index pages for photo clubs and museums.
+/// Ignite `Site` that generates per-language index pages for both photo clubs and museums.
 ///
-/// One `ClubsPage` is generated per organization type (`.club`, `.museum`) for each language
-/// that has at least one `LocalizedExpertise` translation.
+/// One `OrganizationsPage` is generated per OrganizationType (`.club`, `.museum`) for
+/// every language that has at least one `LocalizedExpertise` translation.
 struct Level1Pages: Site {
 
     let name: String = "Clubs"
-    let url: URL
+    let url: URL // required by the Ignite `Site` protocol
     let builtInIconsEnabled: BootstrapOptions = .none
     let author = "Peter van den Hamer"
     let homePage: TempRootPage
@@ -25,10 +25,10 @@ struct Level1Pages: Site {
     let pages: [any StaticPage] // precomputed to avoid Core Data queries on wrong thread
 
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        url = URL(preferences.selectedHost.staticString)
+        url = URL(preferences.selectedHost.staticString) // e.g. "http://localhost:8000" or "https://www.fcdegender.nl"
 
         // inject a function defining where the RootPage language links navigate to
-        self.homePage = TempRootPage(relativePath: { ClubsPage.relativePath(languageID: $0) })
+        self.homePage = TempRootPage(relativePath: { OrganizationsPage.relativePath(languageID: $0) })
 
         // get list of all language records in CoreData
         let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
@@ -50,8 +50,8 @@ struct Level1Pages: Site {
                 continue // don't append languages without localized expertises
             }
 
-            pageList.append(ClubsPage(moc: moc, language: language.isoCode, organizationType: .club))
-            pageList.append(ClubsPage(moc: moc, language: language.isoCode, organizationType: .museum))
+            pageList.append(OrganizationsPage(moc: moc, organizationType: .club, language: language.isoCode))
+            pageList.append(OrganizationsPage(moc: moc, organizationType: .museum, language: language.isoCode))
         }
 
         if pageList.isEmpty { ifDebugFatalError("No languages found in Level1Site.init()") }

@@ -1,5 +1,5 @@
 //
-//  ClubsPage+makeClubsTable.swift
+//  OrganizationPage+makeClubsTable.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 15/02/2025.
@@ -14,7 +14,7 @@ struct MakeClubsTableResult {
     let organizationsCount: Int // count of clubs or museums
 }
 
-extension ClubsPage {
+extension OrganizationPage {
 
     /// Builds organizations tables from the records in Core Data.
     ///
@@ -70,22 +70,31 @@ extension ClubsPage {
                                bundle: Bundle.forLanguage(languageID),
                                comment: "HTML table header for member count column.")
                     }
-                    String(localized: "Club website",
-                           table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
-                           comment: "HTML table header for clubs website link.")
+                    if organizationType == .museum {
+                        String(localized: "Museum website",
+                               table: "PhotoClubHubHTML.Ignite",
+                               bundle: Bundle.forLanguage(languageID),
+                               comment: "HTML table header for museum website link.")
+                    } else {
+                        String(localized: "Club website",
+                               table: "PhotoClubHubHTML.Ignite",
+                               bundle: Bundle.forLanguage(languageID),
+                               comment: "HTML table header for clubs website link.")
+                    }
                     if organizationType == .club {
                         String(localized: "Fotobond #",
                                table: "PhotoClubHubHTML.Ignite",
                                bundle: Bundle.forLanguage(languageID),
                                comment: "HTML table header for club's identifier in Fotobond.")
                     }
-                    String(localized: "JSON",
-                           table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
-                           comment: "HTML table header for link to JSON input file.")
+                    if organizationType == .club {
+                        String(localized: "JSON",
+                               table: "PhotoClubHubHTML.Ignite",
+                               bundle: Bundle.forLanguage(languageID),
+                               comment: "HTML table header for link to JSON input file.")
+                    }
                 },
-                count: organizations.count
+                organizationsCount: organizations.count
             )
         } catch {
             fatalError("Failed to fetch organizations: \(error)")
@@ -161,13 +170,15 @@ extension ClubsPage {
                     .margin(.leading, 10)
             }
 
-            Column { // JSON
-                if !club.members.isEmpty {
-                    let url: String =
-                        "https://github.com/vdhamer/Photo-Club-Hub/blob/main/JSON/\(club.nickName).level2.json"
-                    Link(String("json"), target: url)
-                }
-            } .verticalAlignment(.middle)
+            if organizationType == .club {
+                Column { // JSON
+                    if !club.members.isEmpty {
+                        let url: String =
+                            "https://github.com/vdhamer/Photo-Club-Hub/blob/main/JSON/\(club.nickName).level2.json"
+                        Link(String("json"), target: url)
+                    }
+                } .verticalAlignment(.middle)
+            }
 
         }
 

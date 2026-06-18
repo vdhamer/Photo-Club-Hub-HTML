@@ -1,5 +1,5 @@
 //
-//  ClubsPage.swift
+//  OrganizationPage.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 06/09/2024.
@@ -12,7 +12,7 @@ import Photo_Club_Hub_Data // for OrganizationTypeEnum
 /// Static page that lists photo clubs or museums as an HTML table.
 /// Builds this table from Core Data within the init()
 /// and renders it using Ignite blocks when body() is called by Ignite.
-struct ClubsPage: StaticPage {
+struct OrganizationPage: StaticPage {
 
     let languageID: String // ISO 639-1 code, e.g. "nl"
     let organizationType: OrganizationTypeEnum // e.g. .club or .museum
@@ -53,15 +53,15 @@ struct ClubsPage: StaticPage {
         let bundle = Bundle.forLanguage(language)
         let result = makeClubsTable(moc: moc, languageID: language)
         clubsTable = result.table
-        count = result.count
+        count = result.organizationsCount
         switch organizationType {
         case .museum:
-            badgeLabel = String(localized: "\(result.count) photo museums",
+            badgeLabel = String(localized: "\(result.organizationsCount) photo museums",
                                table: "PhotoClubHubHTML.Ignite",
                                bundle: bundle,
                                comment: "Title badge at top of Museums HTML index page")
         default:
-            badgeLabel = String(localized: "\(result.count) photo clubs",
+            badgeLabel = String(localized: "\(result.organizationsCount) photo clubs",
                                table: "PhotoClubHubHTML.Ignite",
                                bundle: bundle,
                                comment: "Title badge at top of Clubs HTML index page")
