@@ -7,7 +7,6 @@
 
 import SwiftUI
 import CoreData
-import CoreLocation // for CLLocationCoordinate2DMake
 import Photo_Club_Hub_Data // for Organization and PersonName
 
 struct MembershipView: View {
