@@ -131,13 +131,13 @@ extension PhotoClubHubHtmlApp {
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        // load test member(s) of TemplateMin. Club name starts with an X in order to be at end of list
+        // load test member(s) of TemplateMin.
         _ = TemplateMinMembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader TemplateMin"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
-        // load test member(s) of TemplateMax. Club name starts with an X in order to be at end of list
+        // load test member(s) of TemplateMax.
         _ = TemplateMaxMembersProvider(
             bgContext: makeBgContext(ctxName: "Level 2 loader TemplateMax"),
             isBeingTested: isBeingTested,
