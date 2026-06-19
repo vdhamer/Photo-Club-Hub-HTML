@@ -790,6 +790,23 @@
         }
       }
     },
+    "Country" : {
+      "comment" : "HTML table header for country column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Country"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Land"
+          }
+        }
+      }
+    },
     "Town" : {
       "comment" : "HTML table header for town column.",
       "localizations" : {
