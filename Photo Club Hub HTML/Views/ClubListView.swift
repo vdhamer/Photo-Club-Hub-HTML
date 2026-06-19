@@ -159,38 +159,6 @@ struct ClubListView: View {
 
                     Divider()
 
-                    Button(String(localized: "L0: expertises",
-                                  table: "PhotoClubHubHTML.SwiftUI",
-                                  comment: "App button that generates HTML page listing all expertises")) {
-                        print("Generating Level 0 expertises")
-                        generateLevel0(preferences: preferences)
-                    }
-
-                    Divider()
-
-                    Button(String(localized: "L1: clubs",
-                                  table: "PhotoClubHubHTML.SwiftUI",
-                                  comment: "App button that generates HTML page listing all clubs")) {
-                        print("Generating Level 1 clubs")
-                        generateLevel1(preferences: preferences)
-                    }
-
-                    Button(String(localized: "L1: museums",
-                                  table: "PhotoClubHubHTML.SwiftUI",
-                                  comment: "App button that generates HTML page listing all museums")) {
-                        print("Generating Level 1 museums")
-                        generateLevel1(preferences: preferences)
-                    }
-
-                    Divider()
-
-                    Button(String(localized: "L2: club members",
-                                  table: "PhotoClubHubHTML.SwiftUI",
-                                  comment: "App button that generates HTML page listing all club members")) {
-                        print("Generating Level 2 club members")
-                        generateLevel2(preferences: preferences)
-                    }
-
                 } label: {
                     Text(String(localized: "Build HTML",
                                 table: "PhotoClubHubHTML.SwiftUI",
