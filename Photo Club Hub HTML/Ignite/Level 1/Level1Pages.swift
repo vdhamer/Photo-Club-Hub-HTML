@@ -32,22 +32,16 @@ struct Level1Pages: Site {
 
         // get list of all language records in CoreData
         let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
+        languageFetch.predicate = NSPredicate(format: "localizedExpertises_.@count > 0")
         languageFetch.sortDescriptors = [NSSortDescriptor(key: "isoCode_", ascending: true)] // for determinism
-        let languages = (try? moc.fetch(languageFetch)) ?? [] // below, we check indirectly if there are >0 languages
+        let languages = (try? moc.fetch(languageFetch)) ?? []
+        print("Generating Level 1 pages for languages: \(languages.map(\.isoCode))")
 
         var pageList: [any StaticPage] = []
 
         for language in languages {
             if language.isoCode != language.isoCode.lowercased() {
                 ifDebugFatalError("Bad isoCode (not lowercase): \(language.isoCode)")
-            }
-
-            guard LocalizedExpertise.exists(context: moc, languageIsoCode: language.isoCode) else {
-                print("""
-                      Will not generate clubs/museums pages for \(language.isoCode.uppercased()) \
-                      because there are no expertise translations in \(language.languageNameEN_ ?? language.isoCode).
-                      """)
-                continue // don't append languages without localized expertises
             }
 
             pageList.append(OrganizationsPage(moc: moc, organizationType: .club, language: language.isoCode))
