@@ -7,7 +7,7 @@
 
 import SwiftUI // this is a SwiftUI view
 import CoreData // for FetchRequest?
-import Photo_Club_Hub_Data // for Organization
+import Photo_Club_Hub_Data // for Organization, deleteAllCoreDataObjects
 
 struct ClubListView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -150,17 +150,31 @@ struct ClubListView: View {
 
                 Menu {
 
-                    Button(String(localized: "Entire website",
+                    Button(String(localized: "Generate",
                                   table: "PhotoClubHubHTML.SwiftUI",
-                                  comment: "App button that generates all levels of website at once")) {
-                        print("Generating Level 0, Level 1 and Level 2")
+                                  comment: "App button that generates all website pages")) {
+                        print("Action: Generating website")
                         generateAllLevels(preferences: preferences)
                     }
 
                     Divider()
 
+                    Button(String(localized: "Clear database",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "App button that clears internal database content")) {
+                        print("Action: Clear database")
+                        Model.deleteAllCoreDataObjects(viewContext: viewContext, scope: .all)
+                    }
+
+                    Button(String(localized: "Fill database",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "App button that loads JSON data into the internal database")) {
+                        print("Action: Fill database")
+                        PhotoClubHubHtmlApp.loadClubsAndMembers()
+                    }
+
                 } label: {
-                    Text(String(localized: "Build HTML",
+                    Text(String(localized: "Actions",
                                 table: "PhotoClubHubHTML.SwiftUI",
                                 comment: "Submenu for generating Level 0 ... Level 2 HTML pages"))
                 }

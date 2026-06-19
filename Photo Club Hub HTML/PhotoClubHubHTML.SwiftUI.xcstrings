@@ -349,6 +349,23 @@
         }
       }
     },
+    "Fill database" : {
+      "comment" : "App button that loads JSON data into the internal database",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fill database"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Database vullen"
+          }
+        }
+      }
+    },
     "former member" : {
       "comment" : "Textual indicator of a former member in app's UI",
       "localizations" : {
@@ -367,7 +384,7 @@
       }
     },
     "Generate" : {
-      "comment" : "App button that generates all levels of website",
+      "comment" : "App button that generates all website pages",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -413,23 +430,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon ook recente voormalige leden"
-          }
-        }
-      }
-    },
-    "Load database" : {
-      "comment" : "App button that loads internal database content",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Load database"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Database laden"
           }
         }
       }
