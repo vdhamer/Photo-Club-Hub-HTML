@@ -281,6 +281,23 @@
         }
       }
     },
+    "Clear database" : {
+      "comment" : "App button that clears internal database content",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear database"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Database wissen"
+          }
+        }
+      }
+    },
     "Copy thumbnails to local folder" : {
       "comment" : "Toggle to enable copying of thumbnails to a local folder",
       "localizations" : {
@@ -350,7 +367,7 @@
       }
     },
     "Generate" : {
-      "comment" : "App button that generates all levels of website at once",
+      "comment" : "App button that generates all levels of website",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -360,7 +377,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Website maken"
           }
         }
@@ -396,6 +413,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon ook recente voormalige leden"
+          }
+        }
+      }
+    },
+    "Load database" : {
+      "comment" : "App button that loads internal database content",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Load database"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Database laden"
           }
         }
       }
