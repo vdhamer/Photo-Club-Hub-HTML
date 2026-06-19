@@ -60,20 +60,17 @@ struct Level0Pages: Site {
         if expertises.isEmpty { ifDebugFatalError("No expertises found in Level0Site.init()") }
 
         let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
+        languageFetch.predicate = NSPredicate(format: "localizedExpertises_.@count > 0")
         languageFetch.sortDescriptors = [NSSortDescriptor(key: "isoCode_", ascending: true)]
         let languages = (try? moc.fetch(languageFetch)) ?? []
         if languages.isEmpty { ifDebugFatalError("No languages found in Level0Site.init()") }
+        print("Generating Level 0 pages for languages: \(languages.map(\.isoCode))")
 
         var pageList: [any StaticPage] = []
-        for language in languages { // de, en, fr, ... nl
+        for language in languages {
             if language.isoCode != language.isoCode.lowercased() { // just a guard because violation → obscure behaviour
-                ifDebugFatalError("Bad isoCode (not lowercase): \(language.isoCode)")
+                ifDebugFatalError("isoCode for language should be in lowercase. It isn't: \(language.isoCode)")
             }
-
-            let languageHasTranslations = expertises.contains(where: { // result is a Bool
-                LocalizedExpertise.exists(context: moc, expertiseID: $0.id, languageIsoCode: language.isoCode)
-            })
-            guard languageHasTranslations else { continue } // no ExpertisesPage for languages without any translations
 
             for expertise in expertises { // create pages for (language1,expertise1), (language1,expertise2), etc.
                 pageList.append(ExpertisePage(expertiseID: expertise.id,
