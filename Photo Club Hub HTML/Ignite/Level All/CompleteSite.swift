@@ -14,7 +14,7 @@ import Photo_Club_Hub_Data // for ClubsPage.relativePath language target
 /// Extensible beyond the current levels — e.g. with a future "Level 1 -  Museums" group is just another value.
 struct PageGroup {
     let label: String // e.g. "Level 0 - Expertises"
-    let pages: [any StaticPage] // to hold all the pages in the PageGroup (e.g. for 30 expertises x 2 languages)
+    let pages: [any StaticPage] // to hold all the pages in the PageGroup (e.g. for 30 expertises × 2 languages)
 }
 
 /// Single Ignite `Site` published once so all three levels' pages coexist in one `Build/` tree (#215).
