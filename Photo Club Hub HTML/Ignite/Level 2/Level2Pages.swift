@@ -52,21 +52,15 @@ struct Level2Pages: Site {
         let clubs = (try? moc.fetch(clubsFetch)) ?? []
 
         let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
+        languageFetch.predicate = NSPredicate(format: "localizedExpertises_.@count > 0")
         languageFetch.sortDescriptors = [NSSortDescriptor(key: "isoCode_", ascending: true)] // determinism only
         let languages = (try? moc.fetch(languageFetch)) ?? []
+        print("Generating Level 2 pages for languages: \(languages.map(\.isoCode))")
 
         var pageList: [any StaticPage] = [] // we build the output here
         for language in languages {
             if language.isoCode != language.isoCode.lowercased() {
                 ifDebugFatalError("Bad isoCode (not lowercase): \(language.isoCode)")
-            }
-
-            guard LocalizedExpertise.exists(context: moc, languageIsoCode: language.isoCode) else {
-                print("""
-                      Will not generate club pages for \(language.isoCode.uppercased()) \
-                      because there are no expertise translations in \(language.languageNameEN_ ?? language.isoCode).
-                      """)
-                continue
             }
 
             for club in clubs {
