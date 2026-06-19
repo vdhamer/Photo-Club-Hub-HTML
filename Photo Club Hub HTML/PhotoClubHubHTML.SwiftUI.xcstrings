@@ -247,19 +247,19 @@
         }
       }
     },
-    "Build HTML" : {
+    "Actions" : {
       "comment" : "Submenu for generating Level 0 ... Level 2 HTML pages",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Build HTML"
+            "value" : "Actions"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "HTML pagina’s maken"
+            "value" : "Acties"
           }
         }
       }
@@ -332,23 +332,6 @@
         }
       }
     },
-    "Entire website" : {
-      "comment" : "App button that generates all levels of website at once",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Entire website"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Volledige website"
-          }
-        }
-      }
-    },
     "former member" : {
       "comment" : "Textual indicator of a former member in app's UI",
       "localizations" : {
@@ -362,6 +345,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "voormalig lid"
+          }
+        }
+      }
+    },
+    "Generate" : {
+      "comment" : "App button that generates all levels of website at once",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate website"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Website maken"
           }
         }
       }
@@ -396,74 +396,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon ook recente voormalige leden"
-          }
-        }
-      }
-    },
-    "L0: expertises" : {
-      "comment" : "App button that generates HTML page listing all expertises",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L0: expertises"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L0: expertises"
-          }
-        }
-      }
-    },
-    "L1: clubs" : {
-      "comment" : "App button that generates HTML page listing all clubs",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L1: clubs"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L1: clubs"
-          }
-        }
-      }
-    },
-    "L1: museums" : {
-      "comment" : "App button that generates HTML page listing all museums",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L1: museums"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L1: musea"
-          }
-        }
-      }
-    },
-    "L2: club members" : {
-      "comment" : "App button that generates HTML page listing all club members",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L2: club members"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "L2: clubleden"
           }
         }
       }
