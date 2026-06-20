@@ -62,7 +62,7 @@ extension PhotoClubHubHtmlApp {
         viewContext.shouldDeleteInaccessibleFaults = true
 
         // Clear CoreData database for simplicity and to trigger initConstants()
-        Model.deleteAllCoreDataObjects(viewContext: viewContext)
+        Model.deleteCoreDataObjects(viewContext: viewContext, deleteScope: .standard)
 
         // Start Level 1 and Level 2 loaders only after Level 0's bgContext saves.
         // Why: Level 2 loaders call Expertise.findCreateUpdateUndefSupported(), which inserts new
