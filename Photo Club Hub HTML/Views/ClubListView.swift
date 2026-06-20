@@ -163,7 +163,7 @@ struct ClubListView: View {
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that clears internal database content")) {
                         print("Action: Clear database")
-                        Model.deleteCoreDataObjects(viewContext: viewContext, deleteScope: .all)
+                        Model.deleteCoreDataObjects(viewContext: viewContext, deletionScope: .all)
                     }
 
                     Button(String(localized: "Fill database",
