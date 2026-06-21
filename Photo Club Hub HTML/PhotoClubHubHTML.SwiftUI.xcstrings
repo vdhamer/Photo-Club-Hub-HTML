@@ -587,8 +587,22 @@
         }
       }
     },
-    "Translate Town & Country" : {
-      "comment" : "Button that reverse-geocodes Town/Country for all Organizations"
+    "Translate Country & Town" : {
+      "comment" : "Button that reverse-geocodes Town/Country for all Organizations",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translate Country & Town"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vertaal Land & Stad namen"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
