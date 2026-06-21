@@ -5,6 +5,7 @@
 //  Created by Peter van den Hamer on 15/02/2025.
 //
 
+import Foundation // for Locale and String.compare(_:locale:)
 import Ignite // for Table
 import CoreData // for NSSortDescriptor
 import Photo_Club_Hub_Data // for Organization
@@ -23,6 +24,9 @@ extension OrganizationsPage {
     /// Fetches `Organization` entities matching `organizationType`, sorted by town and name,
     /// and returns an Ignite `Table` plus the number of organizations found.
     ///
+    /// For museums: Country and Town columns show geocoded localized names using the `LocalizedAddress` table.
+    /// Rows are sorted in-memory by localized Country → Town → Name using the page's locale.
+    ///
     /// Members and Fotobond# columns are irrelevant and thus suppressed for Museums.
     /// The distinction between current and former Members is also irrelevant for Museums
     /// (because there are no members).
@@ -35,24 +39,57 @@ extension OrganizationsPage {
                                organizationType: OrganizationTypeEnum,
                                languageID: String) -> MakeClubsTableResult {
         do {
-            // match sort order used in MembershipView to generate MembershipView SwiftUI view
-            let sortDescriptor1 = NSSortDescriptor(keyPath: \Organization.town_, ascending: true)
-            let sortDescriptor2 = NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)
-
             let fetchRequest: NSFetchRequest<Organization> = Organization.fetchRequest()
-            fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+
+            // All organization types: unsorted fetch -> sorted in-memory below by localCountry → localTown → Name
 
             fetchRequest.predicate = NSPredicate(format: "organizationType_.organizationTypeName_ = %@",
                                                  argumentArray: [organizationType.rawValue])
-            let organizations: [Organization] = try moc.fetch(fetchRequest)
+            var organizations: [Organization] = try moc.fetch(fetchRequest)
+
+            // Fetch Language entity for this page (used for LocalizedAddress lookup and sorting)
+            let langRequest: NSFetchRequest<Photo_Club_Hub_Data.Language> =
+                Photo_Club_Hub_Data.Language.fetchRequest()
+            langRequest.predicate = NSPredicate(format: "isoCode_ = %@", languageID.lowercased())
+            let language: Photo_Club_Hub_Data.Language? = (try? moc.fetch(langRequest))?.first
+
+            // Sort in-memory by localized Country → Town → Name using the page's locale.
+            // Organizations without a LocalizedAddress (empty-string fallback) sort to the top.
+            if let language {
+                let locale = Locale(identifier: languageID)
+                organizations.sort { lhs, rhs in
+                    let addrLhs = lhs.localizedAddress(for: language)
+                    let addrRhs = rhs.localizedAddress(for: language)
+
+                    let countryLhs = addrLhs?.localizedCountry_ ?? ""
+                    let countryRhs = addrRhs?.localizedCountry_ ?? ""
+                    let countryOrder = countryLhs.compare(countryRhs, locale: locale)
+                    if countryOrder != .orderedSame { // decided based on localized Country string
+                        return countryOrder == .orderedAscending
+                    }
+
+                    let townLhs = addrLhs?.localizedTown_ ?? ""
+                    let townRhs = addrRhs?.localizedTown_ ?? ""
+                    let townOrder = townLhs.compare(townRhs, locale: locale)
+                    if townOrder != .orderedSame { // decided based on localized Town string
+                        return townOrder == .orderedAscending
+                    }
+
+                    return lhs.fullName.compare(rhs.fullName, locale: locale) == .orderedAscending
+                }
+            }
 
             return MakeClubsTableResult(
                 table: Table {
                     for org in organizations {
-                        makeClubRow(moc: moc, club: org, languageID: languageID)
+                        makeClubRow(moc: moc, club: org, language: language, languageID: languageID)
                     }
                 }
                 header: {
+                    String(localized: "Country",
+                           table: "PhotoClubHubHTML.Ignite",
+                           bundle: Bundle.forLanguage(languageID),
+                           comment: "HTML table header for country column.")
                     String(localized: "Town",
                            table: "PhotoClubHubHTML.Ignite",
                            bundle: Bundle.forLanguage(languageID),
@@ -107,17 +144,38 @@ extension OrganizationsPage {
     }
     // swiftlint:enable function_body_length
 
-    // generates an Ignite Row in an Ignite table
+    // generates single Ignite Row in an Ignite table
     // swiftlint:disable:next function_body_length
-    private mutating func makeClubRow(moc: NSManagedObjectContext, club: Organization, languageID: String) -> Row {
+    private mutating func makeClubRow(moc: NSManagedObjectContext,
+                                      club: Organization,
+                                      language: Photo_Club_Hub_Data.Language?,
+                                      languageID: String) -> Row {
 
         return Row { // Ignite Row
 
-            Column { // town
+            Column { // country
+                // Compute displayCountry outside the Group{} builder to satisfy the result builder
+                let displayCountry: String = {
+                    guard let language, let addr = club.localizedAddress(for: language)
+                    else { return "" }
+                    return addr.localizedCountry_ ?? ""
+                }()
                 Group {
-                    Span(
-                        String("\(club.town)".replacingUTF8Diacritics)
-                    )
+                    Span(displayCountry)
+                } .horizontalAlignment(.leading) .padding(.none) .margin(0)
+            } .verticalAlignment(.middle)
+
+            Column { // town
+                // Compute displayTown outside the Group{} builder to satisfy the result builder
+                let displayTown: String = {
+                    guard organizationType == .museum,
+                          let language,
+                          let addr = club.localizedAddress(for: language)
+                    else { return String("\(club.town)".replacingUTF8Diacritics) }
+                    return addr.localizedTown_ ?? String("\(club.town)".replacingUTF8Diacritics)
+                }()
+                Group {
+                    Span(displayTown)
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
 
