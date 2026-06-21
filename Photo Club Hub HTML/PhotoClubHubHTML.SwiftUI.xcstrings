@@ -247,6 +247,17 @@
         }
       }
     },
+    "◼ %lld translated locations" : {
+      "comment" : "Count of how many organizations have been geolocated",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %lld vertaalde locaties"
+          }
+        }
+      }
+    },
     "Actions" : {
       "comment" : "Submenu for generating Level 0 ... Level 2 HTML pages",
       "localizations" : {
@@ -593,13 +604,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Translate Country & Town"
+            "value" : "Translate locaations"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vertaal Land & Stad namen"
+            "value" : "Vertaal locaties"
           }
         }
       }
