@@ -41,6 +41,11 @@ struct RecordsFooterView: View {
         predicate: ClubListView.allPredicate)
     private var allPhotographerExpertises: FetchedResults<PhotographerExpertise>
 
+    @FetchRequest(
+        sortDescriptors: [],
+        predicate: LocalizedAddress.allPredicate)
+    private var allLocalizedAddresses: FetchedResults<LocalizedAddress>
+
     // MARK: - Body of RecordsFooterView
 
     var body: some View {
@@ -67,6 +72,9 @@ struct RecordsFooterView: View {
             Text("◼ \(allPhotographerExpertises.count) expertise tags assigned",
                  tableName: "PhotoClubHubHTML.SwiftUI",
                  comment: "Count of how often expertises have been assigned to photographers")
+            Text("◼ \(allLocalizedAddresses.count) translated locations",
+                 tableName: "PhotoClubHubHTML.SwiftUI",
+                 comment: "Count of how many organizations have been geolocated")
         }
         .foregroundStyle(.secondary)
         .frame(minWidth: 900, minHeight: 15)
