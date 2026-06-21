@@ -586,6 +586,9 @@
           }
         }
       }
+    },
+    "Translate Town & Country" : {
+      "comment" : "Button that reverse-geocodes Town/Country for all Organizations"
     }
   },
   "version" : "1.0"
