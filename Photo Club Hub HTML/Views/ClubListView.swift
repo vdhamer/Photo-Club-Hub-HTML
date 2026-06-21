@@ -197,7 +197,7 @@ struct ClubListView: View {
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "Button that reverse-geocodes Town/Country for all Organizations")) {
                         print("Action: Translating Town & Country")
-                        Task { await geocodeOrganizationAddresses() }
+                        Task { await OrganizationGeocoder().geocodeChangedAddresses() }
                     }
 
                 } label: {

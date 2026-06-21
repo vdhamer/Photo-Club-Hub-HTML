@@ -135,7 +135,7 @@ extension ClubListView {
             // on the next generate (see issue #219).
             // These columns may be only partially filled, but fil eventually.
             // CoreData is used as a cache to prevent unnecessary calls to the server.
-            await geocodeOrganizationAddresses()
+            await OrganizationGeocoder().geocodeChangedAddresses()
         }
     }
 
