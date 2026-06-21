@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ClubListView.swift
 //  Photo Club Hub HTML
 //
 //  Created by Peter van den Hamer on 07/09/2024.
@@ -9,6 +9,22 @@ import SwiftUI // this is a SwiftUI view
 import CoreData // for FetchRequest?
 import Photo_Club_Hub_Data // for Organization, deleteAllCoreDataObjects
 
+/// The app's root content view: a `NavigationSplitView` listing photo clubs alongside a detail pane,
+/// plus the toolbar that drives the static-site generation workflow.
+///
+/// Layout:
+/// - **Sidebar**: `ClubListSidebarView` shows the list of clubs and tracks the selection in `selectedClubIds`.
+/// - **Detail**: `MembershipView` for the selected club, or a placeholder prompt when nothing is selected.
+/// - **Footer**: `RecordsFooterView` shows database/translation statistics below a divider.
+///
+/// The toolbar exposes two controls:
+/// - **Settings…**: a popover binding the shared ``PreferencesStructHTML`` (target host, local thumbnails,
+///   former members, Fotobond numbers).
+/// - **Actions**: a menu to Generate the website, Clear/Fill the CoreData database, and reverse-geocode
+///   localized Town & Country (issue #219).
+///
+/// On appear it disables window tabbing and pre-creates the `NSHomeDirectory()/Assets` directory (with a
+/// bundled app icon and favicon) so Ignite's `publish()` can copy assets into `Build/`.
 struct ClubListView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
