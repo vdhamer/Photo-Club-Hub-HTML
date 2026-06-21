@@ -19,8 +19,11 @@ struct ClubListView: View {
 
     static let clubOnlyPredicate = NSPredicate(format: "organizationType_.organizationTypeName_= %@",
                                                argumentArray: [OrganizationTypeEnum.club.rawValue])
-    static let allPredicate = NSPredicate(format: "TRUEPREDICATE")
-    static let nonePredicate = NSPredicate(format: "FALSEPREDICATE") // not currently used
+
+    // computed (not stored) so each access returns a fresh NSPredicate: NSPredicate isn't Sendable,
+    // so a `static let` would be rejected under Swift 6 strict concurrency checking
+    static var allPredicate: NSPredicate { NSPredicate(format: "TRUEPREDICATE") }
+    static var nonePredicate: NSPredicate { NSPredicate(format: "FALSEPREDICATE") } // not currently used
 
     // MARK: - @FetchRequests to get lists and get counts
 
@@ -171,6 +174,14 @@ struct ClubListView: View {
                                   comment: "App button that loads JSON data into the internal database")) {
                         print("Action: Fill database")
                         PhotoClubHubHtmlApp.loadClubsAndMembers()
+                    }
+
+                    // Temporary: manually trigger reverse-geocoding of localized Town & Country (issue #219).
+                    Button(String(localized: "Translate Country & Town",
+                                  table: "PhotoClubHubHTML.SwiftUI",
+                                  comment: "Button that reverse-geocodes Town/Country for all Organizations")) {
+                        print("Action: Translating Town & Country")
+                        Task { await geocodeOrganizationAddresses() }
                     }
 
                 } label: {
