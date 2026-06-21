@@ -132,8 +132,8 @@ extension ClubListView {
             // It is slow (~5 min) due to throttling at the employed geolocation server.
             // So it runs automatically after publishing rather than blocking it.
             // Its LocalizedAddress rows show up as the localized Country/Town columns
-            // on the next generate (see issue #219).
-            // These columns may be only partially filled, but fil eventually.
+            // on the next generate.
+            // These columns may be only partially filled, but fill eventually.
             // CoreData is used as a cache to prevent unnecessary calls to the server.
             await OrganizationGeocoder().geocodeChangedAddresses()
         }

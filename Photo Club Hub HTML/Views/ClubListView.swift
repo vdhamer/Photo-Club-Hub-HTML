@@ -21,7 +21,7 @@ import Photo_Club_Hub_Data // for Organization, deleteAllCoreDataObjects
 /// - **Settings…**: a popover binding the shared ``PreferencesStructHTML`` (target host, local thumbnails,
 ///   former members, Fotobond numbers).
 /// - **Actions**: a menu to Generate the website, Clear/Fill the CoreData database, and reverse-geocode
-///   localized Town & Country (issue #219).
+///   localized Town & Country.
 ///
 /// On appear it disables window tabbing and pre-creates the `NSHomeDirectory()/Assets` directory (with a
 /// bundled app icon and favicon) so Ignite's `publish()` can copy assets into `Build/`.
@@ -192,7 +192,7 @@ struct ClubListView: View {
                         PhotoClubHubHtmlApp.loadClubsAndMembers()
                     }
 
-                    // Temporary: manually trigger reverse-geocoding of localized Town & Country (issue #219).
+                    // Manually trigger reverse-geocoding of localized Town & Country.
                     Button(String(localized: "Translate Country & Town",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "Button that reverse-geocodes Town/Country for all Organizations")) {
