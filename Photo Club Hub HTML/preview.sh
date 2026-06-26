@@ -38,8 +38,11 @@ echo "   at http://localhost:$PORT (HTTP/1.1 keep-alive). Press Ctrl-C to stop."
 # Open the browser once the server is actually listening.
 ( sleep 1; open "http://localhost:$PORT" ) &
 
-cd "$DIR"
-exec python3 -c 'import sys
+# Pass the absolute dir to the handler (don't cd): the handler resolves it per
+# request, so a `generate website` that deletes and recreates Build/ won't leave
+# the server stuck on a now-gone working directory (os.getcwd() FileNotFoundError).
+exec python3 -c 'import sys, functools
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler as Handler
 Handler.protocol_version = "HTTP/1.1"   # persistent connections — no close-after-each
-ThreadingHTTPServer(("", int(sys.argv[1])), Handler).serve_forever()' "$PORT"
+handler = functools.partial(Handler, directory=sys.argv[2])
+ThreadingHTTPServer(("", int(sys.argv[1])), handler).serve_forever()' "$PORT" "$DIR"
