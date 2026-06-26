@@ -31,7 +31,7 @@ struct ExpertisePage: StaticPage {
     private struct MembershipCell {
         let roleDescriptionOfClubTown: String // e.g. "Member of Fotoclub Klik, Eindhoven"
         let portfolioURL: URL? // links to portfolio on clubs own site
-        let clubPageURL: URL? // links to the club's membership list page on this site
+        let clubPagePath: String // on-site path to the club's membership list page, e.g. "/nl/clubs/fgDeGender"
         let thumbnailSrc: String // either "/images/foo.jpg" (local) or "https://..." (remote)
     }
 
@@ -93,7 +93,8 @@ struct ExpertisePage: StaticPage {
                         roleDescriptionOfClubTown: membership.roleDescriptionOfClubTown(
                             languageBundle: Bundle.photoClubHubDataModuleForLanguage(language)),
                         portfolioURL: membership.level3URL_,
-                        clubPageURL: membership.organization.level2URLDir,
+                        clubPagePath: "/" + Members.relativePath(languageID: language,
+                                                                 clubNickname: membership.organization.nickName),
                         thumbnailSrc: thumbnailSrc
                     )
                 }
@@ -220,9 +221,7 @@ struct ExpertisePage: StaticPage {
                 .padding(0)
                 .cursor(.pointer)
                 .onClick {
-                    if let clubPageURL = cell.clubPageURL {
-                        CustomAction("window.location.href=\"\(clubPageURL)\";")
-                    }
+                    CustomAction("window.location.href=\"\(cell.clubPagePath)\";")
                 }
         }
         .style("width: \(cellWidth)px", "text-align: center", "flex-shrink: 0",
