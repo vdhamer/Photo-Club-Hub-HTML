@@ -33,9 +33,6 @@
             reference = "container:Photo Club Hub HTML.xctestplan"
             default = "YES">
          </TestPlanReference>
-         <TestPlanReference
-            reference = "container:Photo Club Hub HTML.xctestplan">
-         </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
@@ -46,17 +43,6 @@
                BlueprintIdentifier = "D06B8D452DA48F3200547A05"
                BuildableName = "Photo Club Hub HTMLTests.xctest"
                BlueprintName = "Photo Club Hub HTMLTests"
-               ReferencedContainer = "container:Photo Club Hub HTML.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D05E36A52DD253A7005697AC"
-               BuildableName = "Photo Club Hub DataTests.xctest"
-               BlueprintName = "Photo Club Hub DataTests"
                ReferencedContainer = "container:Photo Club Hub HTML.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -125,6 +111,9 @@
             isEnabled = "YES">
          </AdditionalOption>
       </AdditionalOptions>
+      <MetalAPIValidationSettings
+         isEnabled = "No">
+      </MetalAPIValidationSettings>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
