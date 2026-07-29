@@ -114,6 +114,15 @@
 			path = .claude;
 			sourceTree = "<group>";
 		};
+		3792FF83301AAC6600DC6B88 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				37D5D45A301A729500C8F3BA /* SwiftyJSON.xcodeproj */,
+				37D5D42D301A729500C8F3BA /* Example.xcodeproj */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		37D5D45D301A729500C8F3BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +158,7 @@
 				D05E367F2DD252C5005697AC /* Photo Club Hub DataTests */,
 				D05E36C62DD25449005697AC /* Frameworks */,
 				D0E06C112C8C5ABC0025734B /* Products */,
+				3792FF83301AAC6600DC6B88 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};

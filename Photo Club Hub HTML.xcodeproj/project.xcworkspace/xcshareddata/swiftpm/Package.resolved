@@ -1,51 +1,43 @@
 {
-  "originHash" : "2e9f79ea3777646ccf7a45effcf62c30caf08d7c2713ea66dc377f5aa6330fb3",
-  "pins" : [
-    {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser.git",
-      "state" : {
-        "revision" : "6a52f3251125d74daf04fcbd5e6f08a75d074382",
-        "version" : "1.8.2"
+  "object": {
+    "pins": [
+      {
+        "package": "swift-argument-parser",
+        "repositoryURL": "https://github.com/apple/swift-argument-parser.git",
+        "state": {
+          "branch": null,
+          "revision": "6a52f3251125d74daf04fcbd5e6f08a75d074382",
+          "version": "1.8.2"
+        }
+      },
+      {
+        "package": "cmark-gfm",
+        "repositoryURL": "https://github.com/swiftlang/swift-cmark.git",
+        "state": {
+          "branch": "gfm",
+          "revision": "0101bf2c6ff6a218f93150f340fe5ccf76d9f3aa",
+          "version": null
+        }
+      },
+      {
+        "package": "swift-markdown",
+        "repositoryURL": "https://github.com/swiftlang/swift-markdown.git",
+        "state": {
+          "branch": "main",
+          "revision": "27b7fc1a19068bcea3d2072db0ce86360d1400ed",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftImageReadWrite",
+        "repositoryURL": "https://github.com/dagronf/SwiftImageReadWrite",
+        "state": {
+          "branch": null,
+          "revision": "42ace2412279f18bc264bc306e96b51c36e12a33",
+          "version": "1.9.2"
+        }
       }
-    },
-    {
-      "identity" : "swift-cmark",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-cmark.git",
-      "state" : {
-        "branch" : "gfm",
-        "revision" : "0101bf2c6ff6a218f93150f340fe5ccf76d9f3aa"
-      }
-    },
-    {
-      "identity" : "swift-markdown",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-markdown.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "27b7fc1a19068bcea3d2072db0ce86360d1400ed"
-      }
-    },
-    {
-      "identity" : "swiftimagereadwrite",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dagronf/SwiftImageReadWrite",
-      "state" : {
-        "revision" : "42ace2412279f18bc264bc306e96b51c36e12a33",
-        "version" : "1.9.2"
-      }
-    },
-    {
-      "identity" : "swiftyjson",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SwiftyJSON/SwiftyJSON",
-      "state" : {
-        "revision" : "af76cf3ef710b6ca5f8c05f3a31307d44a3c5828",
-        "version" : "5.0.2"
-      }
-    }
-  ],
-  "version" : 3
+    ]
+  },
+  "version": 1
 }
