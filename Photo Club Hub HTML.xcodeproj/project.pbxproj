@@ -37,6 +37,8 @@
 /* Begin PBXFileReference section */
 		3715FB292E683FD800203775 /* Photo-Club-Hub-HTML-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Photo-Club-Hub-HTML-Info.plist"; sourceTree = "<group>"; };
 		3728D0DB2FBDE97B00E17112 /* settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = settings.json; sourceTree = "<group>"; };
+		37D5D42D301A729500C8F3BA /* Example.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Example.xcodeproj; sourceTree = "<group>"; };
+		37D5D45A301A729500C8F3BA /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyJSON.xcodeproj; sourceTree = "<group>"; };
 		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
 		D05E366A2DD2526C005697AC /* Photo Club Hub Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Photo Club Hub Data"; sourceTree = "<group>"; };
 		D06B8D4F2DA48F6E00547A05 /* Photo Club Hub HTML.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Photo Club Hub HTML.xctestplan"; sourceTree = "<group>"; };
@@ -110,6 +112,20 @@
 				3728D0DB2FBDE97B00E17112 /* settings.json */,
 			);
 			path = .claude;
+			sourceTree = "<group>";
+		};
+		37D5D45D301A729500C8F3BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37D5D45F301A729500C8F3BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		D05E36C62DD25449005697AC /* Frameworks */ = {
@@ -214,6 +230,16 @@
 			preferredProjectObjectVersion = 90;
 			productRefGroup = D0E06C112C8C5ABC0025734B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 37D5D45D301A729500C8F3BA /* Products */;
+					ProjectRef = 37D5D42D301A729500C8F3BA /* Example.xcodeproj */;
+				},
+				{
+					ProductGroup = 37D5D45F301A729500C8F3BA /* Products */;
+					ProjectRef = 37D5D45A301A729500C8F3BA /* SwiftyJSON.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */,
