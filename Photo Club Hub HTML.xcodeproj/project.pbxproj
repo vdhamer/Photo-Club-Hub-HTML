@@ -67,11 +67,6 @@
 			path = "Photo Club Hub Data";
 			sourceTree = "<group>";
 		};
-		D05E367F2DD252C5005697AC /* Photo Club Hub DataTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Photo Club Hub DataTests";
-			sourceTree = "<group>";
-		};
 		D0B9D4FE2CC443D900B1541C /* .github */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -155,7 +150,6 @@
 				D0B9D4FE2CC443D900B1541C /* .github */,
 				3728D0DC2FBDE97B00E17112 /* .claude */,
 				D05E36722DD252C5005697AC /* Photo Club Hub Data */,
-				D05E367F2DD252C5005697AC /* Photo Club Hub DataTests */,
 				D05E36C62DD25449005697AC /* Frameworks */,
 				D0E06C112C8C5ABC0025734B /* Products */,
 				3792FF83301AAC6600DC6B88 /* Recovered References */,
