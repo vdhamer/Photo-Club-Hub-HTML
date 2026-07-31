@@ -22,11 +22,11 @@ struct ClubListSidebarView: View {
     var body: some View {
         List(allClubs, selection: $selectedClubIds) { club in
             if club.members.isEmpty {
-                Text(club.fullName)
+                Text(verbatim: club.fullName)
                     .foregroundStyle(.secondary)
                     .font(.title2)
             } else {
-                Text("\(club.fullName) (\(club.members.count))")
+                Text(verbatim: "\(club.fullName) (\(club.members.count))")
                     .font(.title2)
                     .fontWeight(.bold)
             }
