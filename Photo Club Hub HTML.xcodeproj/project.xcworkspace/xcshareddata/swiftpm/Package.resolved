@@ -1,6 +1,15 @@
 {
-  "originHash" : "2e9f79ea3777646ccf7a45effcf62c30caf08d7c2713ea66dc377f5aa6330fb3",
+  "originHash" : "a450021e5f552eaca9519949d5884aa0e1bda59f834eebfa617e67d3185e3788",
   "pins" : [
+    {
+      "identity" : "photo-club-hub-data",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vdhamer/Photo-Club-Hub-Data",
+      "state" : {
+        "revision" : "cfa9497580c2fe8d72221de915804b2ff46b74ac",
+        "version" : "2.11.0"
+      }
+    },
     {
       "identity" : "swift-argument-parser",
       "kind" : "remoteSourceControl",

@@ -6,12 +6,14 @@ A macOS app that loads photo club membership data into CoreData and then generat
 
 ## Repo relationships
 
-This repo (`Photo Club Hub HTML`) and the companion iOS app (`Photo Club Hub`) are **two separate git repos** that share a single Swift Package called `Photo Club Hub Data`. The Data package currently lives inside this repo at `Photo Club Hub Data/` and is embedded directly in the Xcode project. It is planned to become a standalone GitHub repo that both apps depend on, and will eventually replace a large portion of the existing Photo Club Hub (iOS) repo's own code. Until that migration happens, changes to the Data package must remain compatible with the iOS app as it stands today.
+This repo (`Photo Club Hub HTML`), the companion iOS app (`Photo Club Hub`) and the shared Swift Package (`Photo Club Hub Data`) are **three separate git repos**. The Data package was extracted from this repo in #232 and now lives at [vdhamer/Photo-Club-Hub-Data](https://github.com/vdhamer/Photo-Club-Hub-Data); this repo consumes it as a normal remote SwiftPM dependency, `.upToNextMinor(from: "2.11.0")`. There is no `Photo Club Hub Data/` directory here any more, and no test target — the package's 86 tests run in the package repo's own CI.
+
+The iOS app has not adopted the package yet (vdhamer/Photo-Club-Hub#769) and still carries its own copy of the code, which the package is eventually meant to replace. So changes made in the package repo must still remain compatible with the iOS app as it stands today.
 
 ## Key dependencies
 
 - **Ignite** — used as a **local fork** at `../../Ignite` (relative to the project root), not from upstream. Prefer fixing issues in this repo; only change the Ignite fork when the change serves as an intentional reminder of an upstream issue.
-- **Photo Club Hub Data** — the embedded Swift Package containing CoreData model, JSON loaders, and all club-specific `MembersProvider` files.
+- **Photo Club Hub Data** — remote Swift Package containing the CoreData model, JSON loaders, and all club-specific `MembersProvider` files. It carries a build-tool plugin that compiles the `.xcdatamodeld`, so `xcodebuild` needs `-skipPackagePluginValidation` or it fails at "Validate plug-in". The Xcode GUI asks for plugin trust once instead. Edits to the package are made in its own repo and reach this one via a version bump.
 
 ## CoreData loading architecture
 

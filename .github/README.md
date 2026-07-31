@@ -15,11 +15,10 @@
 
 This macOS app generates static websites that allow photography clubs to showcase the portfolios of their members.
 
-Photo Club Hub HTML has a companion app named [Photo Club Hub](https://github.com/vdhamer/Photo-Club-Hub)
-that runs on iOS and iPadOS.
+Photo Club Hub HTML has a companion app named [Photo Club Hub](https://github.com/vdhamer/Photo-Club-Hub) that runs on iOS and iPadOS.
 This macOS version of the app supports users with Android phones, PCs, Macs, and many other platforms.
 This version is functionally comparable to the iOS version (comparison below), but it works very differently:
-the app generates cross-linked HTML pages (on a Mac) that can then be viewed on e.g. an Android phone.
+the app generates cross-linked HTML pages (on a Mac) that can then be viewed on pretty much any computer or mobile device.
 
 ### How it works
 
@@ -149,12 +148,12 @@ From a technical perspective, Photo Club Hub and Photo Club HTML _could_ have be
 with two (very) different targets that run on different platforms.
 
 We chose to split the code into multiple repos to lower the barrier to contribute to either app. That gives us two repos.
-But common code is being factored out into a package in order to eliminate duplication of large amounts of code.
-So there will ultimately be _three_ repositories in GitHub:
+Furthermore common code was factored out into a package in order to eliminate duplication of large amounts of code.
+So there are _three_ repositories in GitHub:
 
-- Photo Club Hub (for iOS, interactive browing), 
-- Photo Club Hub HTML (for macOS, to generate static websites)
-- Photo Club Hub Data (used by both to load and update JSON data into the Core Data database)
+- [Photo Club Hub](https://github.com/vdhamer/Photo-Club-Hub) (for iOS, interactive browing), 
+- [Photo Club Hub HTML](https://github.com/vdhamer/Photo-Club-Hub-HTML) (for macOS, to generate static websites)
+- [Photo Club Hub Data](https://github.com/vdhamer/Photo-Club-Hub-Data) (used by both to load and update JSON data into the Core Data database)
 
 ## Will 3 hierarchy levels be enough?
 
@@ -189,8 +188,8 @@ For now this is only possible by changing a constant in the source code.
 - [x] generate index pages listing photographers associated with a particular expertise
 - [x] generate entire site in bulk instead of one level or club at a time
 - [x] generate all pages in Dutch and English (and provisioned for additional languages)
+- [x] implement Photo Club Hub Data as a separate GitHub repository
 - [ ] generate index of museums
-- [ ] implement Photo Club Hub Data as a separate GitHub repository
 - [ ] migrate to current version of [twostraws/Ignite](https://github.com/twostraws/Ignite) 
 - [ ] generate statistics page
 
