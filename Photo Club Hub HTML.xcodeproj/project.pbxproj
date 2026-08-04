@@ -503,7 +503,7 @@
 			repositoryURL = "https://github.com/vdhamer/Photo-Club-Hub-Data";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 2.12.0;
+				minimumVersion = 2.11.3;
 			};
 		};
 		D04353FC2CE9268800B08C31 /* XCRemoteSwiftPackageReference "SwiftImageReadWrite" */ = {
