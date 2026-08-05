@@ -13,6 +13,7 @@ import Photo_Club_Hub_Data // for OrganizationType
 @main
 struct PhotoClubHubHtmlApp: App {
     @StateObject var model = PreferencesViewModelHTML()
+    @Environment(\.openWindow) private var openWindow: OpenWindowAction
 
     static let persistenceController = PersistenceController.shared // for Core Data
 
@@ -38,14 +39,37 @@ struct PhotoClubHubHtmlApp: App {
                     guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else { return }
                     Self.loadClubsAndMembers()
                }
+                // Quit on main window close: macOS keeps a windowless app running by default, and an
+                // open auxiliary window (e.g. About) would otherwise keep it alive after the main
+                // window is gone.
+                .onDisappear {
+                    NSApp.terminate(nil)
+                }
         }
         .commands {
+            CommandGroup(replacing: .appInfo) {
+                Button {
+                    openWindow(id: "about")
+                } label: {
+                    Text("About Photo Club Hub HTML",
+                         tableName: "PhotoClubHubHTML.SwiftUI",
+                         comment: "Menu item that opens the About window")
+                }
+            }
             CommandGroup(replacing: .newItem) { }
             CommandGroup(replacing: .undoRedo) { }
             CommandGroup(replacing: .help) { }
             CommandGroup(replacing: .systemServices) { }
             CommandGroup(replacing: .pasteboard) { } // Suppresses Apple Intelligence's Writing Tools in the menu
         }
+
+        Window(String(localized: "About Photo Club Hub HTML",
+                      table: "PhotoClubHubHTML.SwiftUI",
+                      comment: "Menu item that opens the About window"),
+               id: "about") {
+            AboutView()
+        }
+        .windowResizability(.contentSize)
     }
 }
 
