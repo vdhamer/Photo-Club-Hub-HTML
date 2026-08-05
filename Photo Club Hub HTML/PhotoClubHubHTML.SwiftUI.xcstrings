@@ -682,6 +682,57 @@
           }
         }
       }
+    },
+    "N/A" : {
+      "comment" : "Stands in for the build number, which the Data library doesn't have",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "N/A"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "n.v.t."
+          }
+        }
+      }
+    },
+    "GitHub" : {
+      "comment" : "Label for the link to this app's source code repository",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub"
+          }
+        }
+      }
+    },
+    "Repository owner" : {
+      "comment" : "Label for the name of the person owning the repository",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repository owner"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archief eigenaar"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

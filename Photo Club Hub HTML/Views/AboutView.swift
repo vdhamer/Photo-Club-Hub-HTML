@@ -34,9 +34,10 @@ struct AboutView: View {
                 versionRow(title: String(localized: "Library version",
                                          table: "PhotoClubHubHTML.SwiftUI",
                                          comment: "Label for the Photo Club Hub Data package's version"),
-                           value: "\(PhotoClubHubDataVersion.semver) (N/A)")
+                           value: "\(PhotoClubHubDataVersion.semver) (\(noBuildNumber))")
                 HStack {
-                    Text(verbatim: "Github")
+                    Text("GitHub", tableName: "PhotoClubHubHTML.SwiftUI",
+                         comment: "Label for the link to this app's source code repository")
                     Spacer()
                     Link(destination: URL(string: "https://github.com/vdhamer/Photo-Club-Hub-HTML")!) {
                         Text(verbatim: "vdhamer/Photo-Club-Hub-HTML")
@@ -44,7 +45,9 @@ struct AboutView: View {
                     }
                 }
                 HStack {
-                    Text(verbatim: "Repository owner")
+                    Text("Repository owner",
+                         tableName: "PhotoClubHubHTML.SwiftUI",
+                         comment: "Label for the name of the person owning the repository")
                     Spacer()
                     Text(verbatim: "Peter van den Hamer")
                         .foregroundStyle(.secondary)
@@ -63,6 +66,11 @@ struct AboutView: View {
         }
         .padding(24)
         .frame(width: 320)
+    }
+
+    private var noBuildNumber: String {
+        String(localized: "N/A", table: "PhotoClubHubHTML.SwiftUI",
+               comment: "Stands in for the build number, which the Data library doesn't have")
     }
 
     private func versionRow(title: String, value: String) -> some View {
