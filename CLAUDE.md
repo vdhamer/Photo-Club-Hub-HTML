@@ -23,15 +23,13 @@ Data loads in three sequential levels:
 - **Level 1** (`Level1JsonReader`): loads `PhotoClub` / `Museum` records. May run concurrently with Level 2.
 - **Level 2** (one `MembersProvider` per club): loads member portfolios. Runs concurrently with other Level 2 loaders, but **only after Level 0 has saved**.
 
-The sequencing lives in `PhotoClubHubHtmlApp.loadLevels0To2()`, which `await`s each reader's `static load()` in turn and runs the 14 Level 2 club loaders in a `withTaskGroup`. Level 1 is awaited before Level 2 for simplicity only — the package permits the overlap. The task group also makes the function return only once every loader has finished, so the Fill database menu item and any website generation after it see a complete database.
+**The sequencing is not in this app.** It lives in `LevelLoader.loadAllLevels()` in the Photo Club Hub Data package ([Data#12](https://github.com/vdhamer/Photo-Club-Hub-Data/issues/12)), which awaits Level 0 to completion, then Level 1, then runs the 14 Level 2 club loaders in a task group, and returns only once the last one has finished. Both apps used to implement this themselves, with two different concurrency models and covered by neither app's tests; the package owns the model, so it owns the invariant.
 
-That function deliberately mirrors `PhotoClubHubApp.loadLevels0To2()` in the iOS app. Both are scheduled to be replaced by a package-level entry point ([Photo-Club-Hub-Data#12](https://github.com/vdhamer/Photo-Club-Hub-Data/issues/12)); keeping them structurally identical reduces that to a call-site swap in each app, so prefer changing them together.
+What remains here is `PhotoClubHubHtmlApp.loadClubsAndMembers()`: configure the view context, wipe the database, then one call to `LevelLoader.loadAllLevels()`. Because that call returns only when the pass is complete, the Fill database menu item and any website generation after it see a complete database. Do not reintroduce a level-by-level sequence here — changing the order is a package change, with `LevelLoaderTest` asserting it.
 
-**Why Level 0 must precede Level 2:** `Expertise` has a CoreData uniqueness constraint on `id_`. Level 0 creates expertises with `isSupported=true`; Level 2's `findCreateUpdateUndefSupported()` creates them with the CoreData default `isSupported=false`. With `mergeByPropertyObjectTrump`, whichever context saves second wins per property — so concurrent saves corrupt the `isSupported` flag.
+**Why Level 0 must precede Level 2:** `Expertise` has a CoreData uniqueness constraint on `id_`. Level 0 creates expertises with `isSupported=true`; Level 2's `findCreateUpdateUndefSupported()` leaves new rows at the CoreData default `isSupported=false`. Two contexts inserting the same expertise never see each other's unsaved row, so the collision is settled by the merge policy and the flag can end up wrong.
 
-All background contexts use:
-- `mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump`
-- `automaticallyMergesChangesFromParent = true`
+Background contexts for loading are created by the package, which sets `mergeByPropertyStoreTrump` and `automaticallyMergesChangesFromParent = true` on them. This app no longer chooses — it previously used `mergeByPropertyObjectTrump` while the iOS app used StoreTrump, and neither app's choice was ever tested. The view context in this app still uses `mergeByPropertyObjectTrump`.
 
 ## Ignite gotchas
 
