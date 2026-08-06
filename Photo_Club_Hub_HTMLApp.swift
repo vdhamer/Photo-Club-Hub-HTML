@@ -35,9 +35,9 @@ struct PhotoClubHubHtmlApp: App {
                id: "mainWindow") {
             ClubListView(preferences: $model.preferences)
                 .environment(\.managedObjectContext, Self.persistenceController.container.viewContext)
-                .onAppear {
+                .task {
                     guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else { return }
-                    Self.loadClubsAndMembers()
+                    await Self.loadClubsAndMembers()
                }
                 // Quit on main window close: macOS keeps a windowless app running by default, and an
                 // open auxiliary window (e.g. About) would otherwise keep it alive after the main
@@ -77,8 +77,7 @@ private let isBeingTested = false // these are being loaded to get the data into
 
 extension PhotoClubHubHtmlApp {
 
-    static func loadClubsAndMembers() {
-        let useOnlyInBundleFile: Bool = false
+    static func loadClubsAndMembers() async {
 
         let viewContext = persistenceController.container.viewContext // "associated with the main application queue"
         viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump

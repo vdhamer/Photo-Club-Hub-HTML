@@ -20,10 +20,12 @@ The iOS app has since adopted the package (vdhamer/Photo-Club-Hub#769): its load
 Data loads in three sequential levels:
 
 - **Level 0** (`Level0JsonReader`): loads `Expertise` and `Language` records from `root.level0.json`. Must complete and **save** before Level 2 starts.
-- **Level 1** (`Level1JsonReader`): loads `PhotoClub` / `Museum` records. Runs concurrently with Level 2.
+- **Level 1** (`Level1JsonReader`): loads `PhotoClub` / `Museum` records. May run concurrently with Level 2.
 - **Level 2** (one `MembersProvider` per club): loads member portfolios. Runs concurrently with other Level 2 loaders, but **only after Level 0 has saved**.
 
-The sequencing is enforced in `Photo_Club_Hub_HTMLApp.swift` using a `DispatchGroup` on the Level 0 background context's serial queue. Level 1 and Level 2 start together from `level0Group.notify(queue: .main)`.
+The sequencing lives in `PhotoClubHubHtmlApp.loadLevels0To2()`, which `await`s each reader's `static load()` in turn and runs the 14 Level 2 club loaders in a `withTaskGroup`. Level 1 is awaited before Level 2 for simplicity only — the package permits the overlap. The task group also makes the function return only once every loader has finished, so the Fill database menu item and any website generation after it see a complete database.
+
+That function deliberately mirrors `PhotoClubHubApp.loadLevels0To2()` in the iOS app. Both are scheduled to be replaced by a package-level entry point ([Photo-Club-Hub-Data#12](https://github.com/vdhamer/Photo-Club-Hub-Data/issues/12)); keeping them structurally identical reduces that to a call-site swap in each app, so prefer changing them together.
 
 **Why Level 0 must precede Level 2:** `Expertise` has a CoreData uniqueness constraint on `id_`. Level 0 creates expertises with `isSupported=true`; Level 2's `findCreateUpdateUndefSupported()` creates them with the CoreData default `isSupported=false`. With `mergeByPropertyObjectTrump`, whichever context saves second wins per property — so concurrent saves corrupt the `isSupported` flag.
 
@@ -49,7 +51,7 @@ Three things must be in place for `site.publish()` to work from the sandboxed ap
 
 - Prefer `let` over `var` wherever Swift allows it.
 - No Combine — use Swift async/await for any new asynchronous work.
-- The existing loader pipeline uses `bgContext.perform {}` (closure-based, not async); avoid refactoring it without coordinating with the iOS app.
+- The package's loader pipeline is internally closure-based (`bgContext.perform {}`); avoid refactoring that without coordinating with the iOS app. This app calls it through the readers' `async static load()` wrappers, which is the supported async entry point.
 - Default to no comments; only add one when the WHY is non-obvious.
 
 ## Planning & process live in GitHub, not local files

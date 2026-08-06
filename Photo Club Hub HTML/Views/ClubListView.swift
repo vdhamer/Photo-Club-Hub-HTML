@@ -189,7 +189,7 @@ struct ClubListView: View {
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that loads JSON data into the internal database")) {
                         print("Action: Fill database")
-                        PhotoClubHubHtmlApp.loadClubsAndMembers()
+                        Task { await PhotoClubHubHtmlApp.loadClubsAndMembers() }
                     }
 
                     // Manually trigger reverse-geocoding of localized Town & Country.
