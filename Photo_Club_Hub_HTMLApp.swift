@@ -35,10 +35,6 @@ struct PhotoClubHubHtmlApp: App {
                id: "mainWindow") {
             ClubListView(preferences: $model.preferences)
                 .environment(\.managedObjectContext, Self.persistenceController.container.viewContext)
-                .task {
-                    guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else { return }
-                    await Self.loadClubsAndMembers()
-               }
                 // Quit on main window close: macOS keeps a windowless app running by default, and an
                 // open auxiliary window (e.g. About) would otherwise keep it alive after the main
                 // window is gone.
@@ -87,132 +83,137 @@ extension PhotoClubHubHtmlApp {
         // Clear CoreData database for simplicity and to trigger initConstants()
         Model.deleteCoreDataObjects(viewContext: viewContext, deletionScope: .standard)
 
-        // Start Level 1 and Level 2 loaders only after Level 0's bgContext saves.
-        // Why: Level 2 loaders call Expertise.findCreateUpdateUndefSupported(), which inserts new
-        // Expertise rows with isSupported=false (the Core Data default) when their fetch finds none.
-        // The Expertise entity has a uniqueness constraint on id_, so concurrent inserts by Level 0
-        // (isSupported=true) and Level 2 (isSupported=false) conflict on save. With the
-        // mergeByPropertyObjectTrump policy, the second-saving context's in-memory value wins per
-        // property — so Level 2's false silently overwrites Level 0's true, leaving Level-0-defined
-        // expertises marked as "temporary" instead of "supported".
+        await loadLevels0To2()
+    }
+
+    /// Runs one complete load pass: Level 0, then Level 1, then every Level 2 club loader concurrently.
+    ///
+    /// **Why Level 0 is awaited first.** This ordering is required, not stylistic. `Expertise` has a Core Data
+    /// uniqueness constraint on `id_`. Level 0 creates expertises with `isSupported=true`, while Level 2's
+    /// `findCreateUpdateUndefSupported()` creates them with the default `isSupported=false`. The contexts merge
+    /// by property (see `makeBgContext`), so a Level 2 save racing Level 0 can leave the flag wrong.
+    ///
+    /// Level 1 is awaited too, but only for simplicity: the package allows Level 1 and Level 2 to overlap, so
+    /// this call site is stricter than strictly necessary.
+    ///
+    /// The `withTaskGroup` makes this function return only after every club loader has finished, so a caller
+    /// can treat "the load pass is over" as a fact — which is what lets the Fill database menu item and the
+    /// website generation that follows it see a complete database.
+    ///
+    /// Deliberately mirrors `PhotoClubHubApp.loadLevels0To2()` in the iOS app: the two are scheduled to be
+    /// replaced by a single package-level entry point (vdhamer/Photo-Club-Hub-Data#12), and keeping them
+    /// structurally identical reduces that to a call-site swap in each app.
+    nonisolated static func loadLevels0To2() async { // swiftlint:disable:this function_body_length
+
+        let useOnlyInBundleFile = false
 
         // MARK: - Level 0
 
         // load list of Expertises and Languages from root.Level0.json file
-        let level0Context = makeBgContext(ctxName: "Level 0 loader")
-        let level0Group = DispatchGroup()
-
-        level0Group.enter()
-        _ = Level0JsonReader(
-            bgContext: level0Context,
+        await Level0JsonReader.load(
+            bgContext: makeBgContext(ctxName: "Level 0 loader"),
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
-        // A second perform{} on the same serial bgContext queue runs only after Level0JsonReader's
-        // internal perform{} (including its save()) completes.
-        level0Context.perform { level0Group.leave() }
-
-        level0Group.notify(queue: .main) {
-            loadLevel1AndLevel2(useOnlyInBundleFile: useOnlyInBundleFile)
-        }
-    }
-
-    // swiftlint:disable:next function_body_length
-    nonisolated static private func loadLevel1AndLevel2(useOnlyInBundleFile: Bool) {
 
         // MARK: - Level 1
 
-        // load list of photo clubs and museums from root.Level1.json file
-        _ = Level1JsonReader(
-            bgContext: makeBgContext(ctxName: "Level 1 loader for root"),
-            fileName: "root_",
+        // Load list of organizations from root_.Level1.json file (which Includes additional Level 1 child files).
+        let fileName = "root_"
+        await Level1JsonReader.load(
+            bgContext: makeBgContext(ctxName: "Level 1 loader for \(fileName)"),
+            fileName: fileName,
             isBeingTested: isBeingTested,
             useOnlyInBundleFile: useOnlyInBundleFile)
 
         // MARK: - Level 2
 
-        // load current/former members of Fotogroep De Gender
-        _ = FotogroepDeGenderMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fgDeGender"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of Fotogroep Waalre
-        _ = FotogroepWaalreMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fgWaalre"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of Fotoclub Bellus Imago
-        _ = FotoclubBellusImagoMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fcBellusImago"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of Fotogroep Oirschot
-        _ = FotogroepOirschotMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fgOirschot"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load test member(s) of TemplateMin.
-        _ = TemplateMinMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader TemplateMin"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load test member(s) of TemplateMax.
-        _ = TemplateMaxMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader TemplateMax"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of container for Persoonlijke members of Fotobond (in region 16)
-        _ = Persoonlijk16MembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk16"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of Fotoclub Ericamera
-        _ = FotoclubEricameraMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fcEricamera"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of Fotoclub Den Dungen
-        _ = FotoclubDenDungenMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fcDenDungen"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of Fotokring Sint-Michielsgestel
-        _ = FotokringStMichielsgestelMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fkGestel"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of container for Persoonlijke members of Fotobond (in region 03)
-        _ = Persoonlijk03MembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk03"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of Fotoclub Veghel
-        _ = FotoclubVeghelMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fcVeghel"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of container for FFC Shot71 (in region 16)
-        _ = FFCShot71MembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader ffcShot71"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
-
-        // load current/former members of container for FFC Shot71 (in region 16)
-        _ = FEGGemertMembersProvider(
-            bgContext: makeBgContext(ctxName: "Level 2 loader fegGemert"),
-            isBeingTested: isBeingTested,
-            useOnlyInBundleFile: useOnlyInBundleFile)
+        // Load all clubs with Level 2 files concurrently within one load pass.
+        await withTaskGroup(of: Void.self) { group in
+            group.addTask {
+                await FotogroepDeGenderMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fgDeGender"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FotogroepWaalreMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fgWaalre"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FotoclubBellusImagoMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fcBellusImago"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FotogroepOirschotMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fgOirschot"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await TemplateMinMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader TemplateMin"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await TemplateMaxMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader TemplateMax"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await Persoonlijk16MembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk16"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FotoclubEricameraMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fcEricamera"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FotoclubDenDungenMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fcDenDungen"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FotokringStMichielsgestelMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fkGestel"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await Persoonlijk03MembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader Persoonlijk03"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FotoclubVeghelMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fcVeghel"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FFCShot71MembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader ffcShot71"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+            group.addTask {
+                await FEGGemertMembersProvider.load(
+                    bgContext: makeBgContext(ctxName: "Level 2 loader fegGemert"),
+                    isBeingTested: isBeingTested,
+                    useOnlyInBundleFile: useOnlyInBundleFile)
+            }
+        }
     }
 
     nonisolated static func makeBgContext(ctxName: String) -> NSManagedObjectContext {
