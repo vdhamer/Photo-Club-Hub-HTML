@@ -47,6 +47,7 @@ struct ClubListView: View {
 
     @State private var selectedClubIds: Set<OrganizationID> = []
     @State private var showSettingsPopover: Bool = false
+    @State private var isLoadingDatabase: Bool = false // drives the "Fill database" command's spinner
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -71,7 +72,22 @@ struct ClubListView: View {
             Divider()
             RecordsFooterView()
         }
-
+        .task {
+            // Auto-load once at launch (skipped in Previews); reuses the Fill database spinner.
+            guard ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" else { return }
+            isLoadingDatabase = true
+            await PhotoClubHubHtmlApp.loadClubsAndMembers()
+            isLoadingDatabase = false
+        }
+        .overlay {
+            if isLoadingDatabase {
+                ProgressView(String(localized: "Loading database…",
+                                    table: "PhotoClubHubHTML.SwiftUI",
+                                    comment: "Spinner label shown while the database is being filled"))
+                    .padding()
+                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+            }
+        }
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift macOS StormViewer)
             // Ignite's publish() copies Assets/ from NSHomeDirectory() to Build/; create the directory up front
@@ -189,7 +205,11 @@ struct ClubListView: View {
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that loads JSON data into the internal database")) {
                         print("Action: Fill database")
-                        Task { await PhotoClubHubHtmlApp.loadClubsAndMembers() }
+                        Task {
+                            isLoadingDatabase = true
+                            await PhotoClubHubHtmlApp.loadClubsAndMembers()
+                            isLoadingDatabase = false
+                        }
                     }
 
                     // Manually trigger reverse-geocoding of localized Town & Country.
