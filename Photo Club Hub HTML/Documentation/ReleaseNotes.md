@@ -9,6 +9,7 @@ TO-DO
 USER-FACING
 
 * Filling the database — at launch and via the Actions ▸ Fill database menu item — now shows a progress spinner, and finishes only once every club has finished loading. Previously the loaders were fire-and-forget, so there was no moment at which the load was known to be complete.
+- About - app now has an About window showing versioning information.
 
 STRUCTURAL
 
