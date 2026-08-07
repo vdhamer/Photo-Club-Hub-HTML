@@ -24,7 +24,8 @@ extension OrganizationsPage {
     /// Fetches `Organization` entities matching `organizationType`, sorted by town and name,
     /// and returns an Ignite `Table` plus the number of organizations found.
     ///
-    /// For museums: Country and Town columns show geocoded localized names using the `LocalizedAddress` table.
+    /// Country and Town columns show geocoded localized names using the `LocalizedAddress` table,
+    /// falling back to the JSON-provided town when a language or its `LocalizedAddress` row is missing.
     /// Rows are sorted in-memory by localized Country → Town → Name using the page's locale.
     ///
     /// Members and Fotobond# columns are irrelevant and thus suppressed for Museums.
@@ -168,8 +169,7 @@ extension OrganizationsPage {
             Column { // town
                 // Compute displayTown outside the Group{} builder to satisfy the result builder
                 let displayTown: String = {
-                    guard organizationType == .museum,
-                          let language,
+                    guard let language,
                           let addr = club.localizedAddress(for: language)
                     else { return String("\(club.town)".replacingUTF8Diacritics) }
                     return addr.localizedTown_ ?? String("\(club.town)".replacingUTF8Diacritics)
