@@ -6,9 +6,11 @@ A macOS app that loads photo club membership data into CoreData and then generat
 
 ## Repo relationships
 
-This repo (`Photo Club Hub HTML`), the companion iOS app (`Photo Club Hub`) and the shared Swift Package (`Photo Club Hub Data`) are **three separate git repos**. The Data package was extracted from this repo in #232 and now lives at [vdhamer/Photo-Club-Hub-Data](https://github.com/vdhamer/Photo-Club-Hub-Data); this repo consumes it as a normal remote SwiftPM dependency, `.upToNextMinor(from: "2.11.3")` — deliberately narrow, so the requirement is bumped by hand each time the release train moves to a new minor. There is no `Photo Club Hub Data/` directory here any more, and no test target — the package's 86 tests run in the package repo's own CI.
+This repo (`Photo Club Hub HTML`), the companion iOS app (`Photo Club Hub`) and the shared Swift Package (`Photo Club Hub Data`) are **three separate git repos**. The Data package was extracted from this repo in #232 and now lives at [vdhamer/Photo-Club-Hub-Data](https://github.com/vdhamer/Photo-Club-Hub-Data); this repo consumes it as a normal remote SwiftPM dependency, `.upToNextMinor(from: "2.11.4")` — deliberately narrow, so the requirement is bumped by hand each time the release train moves to a new minor. There is no `Photo Club Hub Data/` directory here any more, and no test target — the package's 86 tests run in the package repo's own CI.
 
-The iOS app has since adopted the package (vdhamer/Photo-Club-Hub#769): its loaders and club `MembersProvider`s now come from the package rather than a duplicated copy. Unlike this repo, it consumes the package as a **local** path reference (`../Photo-Club-Hub-Data`) rather than a version tag — so package changes reach it immediately, including uncommitted ones, while this repo only sees them after a version bump and a resolve.
+The iOS app has since adopted the package (vdhamer/Photo-Club-Hub#769): its loaders and club `MembersProvider`s now come from the package rather than a duplicated copy. Since vdhamer/Photo-Club-Hub#809 it consumes the package the same way this repo does — a remote dependency, `.upToNextMinor(from: "2.11.4")` — so both apps see package changes only after a tag and a resolve. It previously used a **local** path reference (`../Photo-Club-Hub-Data`), which picked up uncommitted edits immediately but left releases building untagged code.
+
+Both apps therefore use the same override while co-developing app and package: add a local checkout of the package to that app's `.xcworkspace` — a personal workspace, git-ignored in both repos — and Xcode shadows the remote dependency with it. Remove it to return to the resolved tag. Do **not** use *Add Package Dependencies ▸ Add Local…*, which writes an `XCLocalSwiftPackageReference` into `project.pbxproj` and silently puts untagged package code into release builds. The same working tree can back the override in both workspaces at once, so a package edit reaches both apps immediately — and breaks both at once if it does not compile.
 
 ## Key dependencies
 
@@ -50,14 +52,11 @@ Three things must be in place for `site.publish()` to work from the sandboxed ap
 - Prefer `let` over `var` wherever Swift allows it.
 - No Combine — use Swift async/await for any new asynchronous work.
 - The package's loader pipeline is internally closure-based (`bgContext.perform {}`); avoid refactoring that without coordinating with the iOS app. This app calls it through the readers' `async static load()` wrappers, which is the supported async entry point.
-- Default to no comments; only add one when the WHY is non-obvious.
 
 ## Planning & process live in GitHub, not local files
 
-GitHub is the technical and process source of truth across the Photo Club Hub repos
-(Photo-Club-Hub, Photo-Club-Hub-Data, Photo-Club-Hub-HTML). Implementation plans, design
-rationale, and follow-up work belong in **GitHub issues**, not in local `.md` files — the
-maintainer and other contributors do not read local planning files.
+GitHub is the technical and process source of truth across the Photo Club Hub repos (Photo-Club-Hub, Photo-Club-Hub-Data, Photo-Club-Hub-HTML).
+Implementation plans, design rationale, and follow-up work belong in **GitHub issues**, not in local `.md` files — the maintainer and other contributors do not read local planning files.
 
 - When you produce a plan or capture follow-up work, write it into the relevant GitHub issue
   (create one if needed) and make that issue self-sufficient: code sketches, file paths,

@@ -35,6 +35,7 @@
 /* Begin PBXFileReference section */
 		3715FB292E683FD800203775 /* Photo-Club-Hub-HTML-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Photo-Club-Hub-HTML-Info.plist"; sourceTree = "<group>"; };
 		3728D0DB2FBDE97B00E17112 /* settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = settings.json; sourceTree = "<group>"; };
+		27FDC883F3754316AA7496F6 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CLAUDE.md; sourceTree = "<group>"; };
 		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -111,6 +112,7 @@
 				3715FB292E683FD800203775 /* Photo-Club-Hub-HTML-Info.plist */,
 				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
+				27FDC883F3754316AA7496F6 /* CLAUDE.md */,
 				D0B9D4FE2CC443D900B1541C /* .github */,
 				3728D0DC2FBDE97B00E17112 /* .claude */,
 				D05E36C62DD25449005697AC /* Frameworks */,
@@ -503,7 +505,7 @@
 			repositoryURL = "https://github.com/vdhamer/Photo-Club-Hub-Data";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 2.11.3;
+				minimumVersion = 2.11.4;
 			};
 		};
 		D04353FC2CE9268800B08C31 /* XCRemoteSwiftPackageReference "SwiftImageReadWrite" */ = {
