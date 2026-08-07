@@ -20,7 +20,7 @@ The iOS app has since adopted the package (vdhamer/Photo-Club-Hub#769): its load
 Data loads in three sequential levels:
 
 - **Level 0** (`Level0JsonReader`): loads `Expertise` and `Language` records from `root.level0.json`. Must complete and **save** before Level 2 starts.
-- **Level 1** (`Level1JsonReader`): loads `PhotoClub` / `Museum` records. May run concurrently with Level 2.
+- **Level 1** (`Level1JsonReader`): loads `PhotoClub` / `Museum` records. May run concurrently with Level 2. The tree starts at `root_.level1.json` (with the underscore), which only pulls in `clubsNL` and `museums` via Includes — **not** `root.level1.json`, a legacy flat file that no current code path loads but that pre-2.9.0 app versions still fetch from GitHub. See the Data package's CLAUDE.md and vdhamer/Photo-Club-Hub#676.
 - **Level 2** (one `MembersProvider` per club): loads member portfolios. Runs concurrently with other Level 2 loaders, but **only after Level 0 has saved**.
 
 **The sequencing is not in this app.** It lives in `LevelLoader.loadAllLevels()` in the Photo Club Hub Data package ([Data#12](https://github.com/vdhamer/Photo-Club-Hub-Data/issues/12)), which awaits Level 0 to completion, then Level 1, then runs the 14 Level 2 club loaders in a task group, and returns only once the last one has finished. Both apps used to implement this themselves, with two different concurrency models and covered by neither app's tests; the package owns the model, so it owns the invariant.
