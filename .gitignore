@@ -132,3 +132,10 @@ iOSInjectionProject/
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,swift,xcode
+
+# Personal workspace used to shadow the remote Photo-Club-Hub-Data dependency with a
+# local checkout while co-developing (vdhamer/Photo-Club-Hub#809). Deliberately not
+# committed: adding the package to the workspace writes a local path into
+# contents.xcworkspacedata, which would break any machine that lacks that folder.
+# Nothing else needs the workspace — other machines build from the .xcodeproj directly.
+/Photo Club Hub HTML.xcworkspace/
