@@ -140,6 +140,7 @@
 				D0E06C0E2C8C5ABC0025734B /* Resources */,
 				D08D83972C8C7E630069D0CE /* Run SwiftLint */,
 				D05E36B62DD253A7005697AC /* Embed Frameworks */,
+				37F1B33BE9F7440DBEFEF213 /* Run GateAndStamp script */,
 			);
 			buildRules = (
 			);
@@ -215,6 +216,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		37F1B33BE9F7440DBEFEF213 /* Run GateAndStamp script */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run GateAndStamp script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "script=\"$PROJECT_DIR/scripts/gate-and-stamp.sh\"\ntest -x \"$script\" || { echo \"error: missing or not executable: $script\"; exit 1; }\n\"$script\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D08D83972C8C7E630069D0CE /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;

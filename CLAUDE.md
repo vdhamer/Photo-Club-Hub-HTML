@@ -6,11 +6,31 @@ A macOS app that loads photo club membership data into CoreData and then generat
 
 ## Repo relationships
 
-This repo (`Photo Club Hub HTML`), the companion iOS app (`Photo Club Hub`) and the shared Swift Package (`Photo Club Hub Data`) are **three separate git repos**. The Data package was extracted from this repo in #232 and now lives at [vdhamer/Photo-Club-Hub-Data](https://github.com/vdhamer/Photo-Club-Hub-Data); this repo consumes it as a normal remote SwiftPM dependency, `.upToNextMinor(from: "2.11.4")` — deliberately narrow, so the requirement is bumped by hand each time the release train moves to a new minor. There is no `Photo Club Hub Data/` directory here any more, and no test target — the package's 86 tests run in the package repo's own CI.
+This repo (`Photo Club Hub HTML`), the companion iOS app (`Photo Club Hub`) and the shared Swift Package (`Photo Club Hub Data`) are **three separate git repos**. The Data package was extracted from this repo in #232 and now lives at [vdhamer/Photo-Club-Hub-Data](https://github.com/vdhamer/Photo-Club-Hub-Data); this repo consumes it as a normal remote SwiftPM dependency, `.upToNextMajor(from: "3.0.0")` (see *Version numbers* below). There is no `Photo Club Hub Data/` directory here any more, and no test target — the package's 86 tests run in the package repo's own CI.
 
-The iOS app has since adopted the package (vdhamer/Photo-Club-Hub#769): its loaders and club `MembersProvider`s now come from the package rather than a duplicated copy. Since vdhamer/Photo-Club-Hub#809 it consumes the package the same way this repo does — a remote dependency, `.upToNextMinor(from: "2.11.4")` — so both apps see package changes only after a tag and a resolve. It previously used a **local** path reference (`../Photo-Club-Hub-Data`), which picked up uncommitted edits immediately but left releases building untagged code.
+The iOS app has since adopted the package (vdhamer/Photo-Club-Hub#769): its loaders and club `MembersProvider`s now come from the package rather than a duplicated copy. Since vdhamer/Photo-Club-Hub#809 it consumes the package the same way this repo does — a remote dependency, `.upToNextMajor(from: "3.0.0")` — so both apps see package changes only after a tag and a resolve. It previously used a **local** path reference (`../Photo-Club-Hub-Data`), which picked up uncommitted edits immediately but left releases building untagged code.
 
 Both apps therefore use the same override while co-developing app and package: add a local checkout of the package to that app's `.xcworkspace` — a personal workspace, git-ignored in both repos — and Xcode shadows the remote dependency with it. Remove it to return to the resolved tag. Do **not** use *Add Package Dependencies ▸ Add Local…*, which writes an `XCLocalSwiftPackageReference` into `project.pbxproj` and silently puts untagged package code into release builds. The same working tree can back the override in both workspaces at once, so a package edit reaches both apps immediately — and breaks both at once if it does not compile.
+
+## Version numbers
+
+This app's `MARKETING_VERSION` is a **label**: what a bump means is the maintainer's call, and it
+promises nothing to the other two repos. `CURRENT_PROJECT_VERSION` is pinned at 100 and does not
+move, because this app is not distributed through App Store Connect — nothing enforces a rising
+build number, and the `GitCommitHash` and `BuildDate` stamps written by the *Run GateAndStamp
+script* phase already tell builds apart. If the app is ever distributed, the build number starts
+behaving like the iOS app's.
+
+The Data package is the opposite — its version is a **contract**, in plain semantic versioning, with
+MAJOR reserved for changes that break consumers. This app pins `.upToNextMajor(from: "3.0.0")`, so a
+breaking package release can never arrive unasked: raising the floor is a deliberate edit here and in
+the iOS app.
+
+The three repos were aligned at 3.0.0 once, when the old "release train" — a shared version prefix
+with the compatibility boundary at the second position — was dropped in favour of ordinary semver.
+**They float apart from then on**; matching numbers prove nothing and are not maintained. Full
+description in vdhamer/Photo-Club-Hub's `Photo Club Hub/Documentation/ReleaseProcess.md`; the
+reasoning is in vdhamer/Photo-Club-Hub#808.
 
 ## Key dependencies
 
