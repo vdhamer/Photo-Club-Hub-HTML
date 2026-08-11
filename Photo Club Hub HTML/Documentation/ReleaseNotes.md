@@ -1,6 +1,6 @@
 TO-DO
 
-* Generated website still needs one page per club/language combination
+* Update ReleaseNotes to 3.0.0
 
 ---------------------------------------------------------------------------
 
