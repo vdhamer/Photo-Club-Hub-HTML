@@ -258,6 +258,23 @@
         }
       }
     },
+    "?" : {
+      "comment" : "Stands in for the build date or commit when absent",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "?"
+          }
+        }
+      }
+    },
     "About Photo Club Hub HTML" : {
       "comment" : "Menu item that opens the About window",
       "localizations" : {
@@ -288,6 +305,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acties"
+          }
+        }
+      }
+    },
+    "Built" : {
+      "comment" : "Label for the date and time this app was built",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Built"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebouwd"
           }
         }
       }
@@ -339,6 +373,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sluiten"
+          }
+        }
+      }
+    },
+    "Commit" : {
+      "comment" : "Label for the git commit this app was built from",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commit"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commit"
           }
         }
       }

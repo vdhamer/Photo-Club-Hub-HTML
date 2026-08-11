@@ -31,6 +31,14 @@ struct AboutView: View {
                                          table: "PhotoClubHubHTML.SwiftUI",
                                          comment: "Label for this app's own marketing version and build number"),
                            value: Bundle.main.fullVersion)
+                versionRow(title: String(localized: "Built",
+                                         table: "PhotoClubHubHTML.SwiftUI",
+                                         comment: "Label for the date and time this app was built"),
+                           value: Bundle.main.buildDate ?? noStamp)
+                versionRow(title: String(localized: "Commit",
+                                         table: "PhotoClubHubHTML.SwiftUI",
+                                         comment: "Label for the git commit this app was built from"),
+                           value: Bundle.main.gitCommit ?? noStamp)
                 versionRow(title: String(localized: "Library version",
                                          table: "PhotoClubHubHTML.SwiftUI",
                                          comment: "Label for the Photo Club Hub Data package's version"),
@@ -71,6 +79,11 @@ struct AboutView: View {
     private var noBuildNumber: String {
         String(localized: "N/A", table: "PhotoClubHubHTML.SwiftUI",
                comment: "Stands in for the build number, which the Data library doesn't have")
+    }
+
+    private var noStamp: String {
+        String(localized: "?", table: "PhotoClubHubHTML.SwiftUI",
+               comment: "Stands in for the build date or commit when absent")
     }
 
     private func versionRow(title: String, value: String) -> some View {
