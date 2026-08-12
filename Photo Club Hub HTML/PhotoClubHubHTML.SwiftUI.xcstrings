@@ -1,6 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "?" : {
+      "comment" : "Stands in for the build date or commit when absent",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "?"
+          }
+        }
+      }
+    },
     "◼ %lld club memberships" : {
       "comment" : "Count of members in database",
       "localizations" : {
@@ -250,27 +267,16 @@
     "◼ %lld translated locations" : {
       "comment" : "Count of how many organizations have been geolocated",
       "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "◼ %lld vertaalde locaties"
-          }
-        }
-      }
-    },
-    "?" : {
-      "comment" : "Stands in for the build date or commit when absent",
-      "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "?"
+            "value" : "◼ %lld translated locations"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "?"
+            "value" : "◼ %lld vertaalde locaties"
           }
         }
       }
@@ -611,6 +617,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "n.v.t."
+          }
+        }
+      }
+    },
+    "Output folder" : {
+      "comment" : "Label for the folder that the generated website is written to",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Output folder"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uitvoermap"
           }
         }
       }

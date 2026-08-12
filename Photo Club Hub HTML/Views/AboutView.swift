@@ -60,6 +60,25 @@ struct AboutView: View {
                     Text(verbatim: "Peter van den Hamer")
                         .foregroundStyle(.secondary)
                 }
+                HStack {
+                    Text("Output folder",
+                         tableName: "PhotoClubHubHTML.SwiftUI",
+                         comment: "Label for the folder that the generated website is written to")
+                        .fixedSize() // the path truncates, the label shouldn't
+                    Spacer(minLength: 8)
+                    Button {
+                        SiteOutput.revealInFinder()
+                    } label: {
+                        // head truncation keeps the informative tail (…/Data/Build) visible in a 320pt window
+                        Text(verbatim: outputPath)
+                            .lineLimit(1)
+                            .truncationMode(.head)
+                            .foregroundStyle(.link)
+                    }
+                    .buttonStyle(.plain)
+                    .layoutPriority(1) // claim the row's spare width before the Spacer does
+                    .help(outputPath)
+                }
             }
 
             HStack {
@@ -74,6 +93,12 @@ struct AboutView: View {
         }
         .padding(24)
         .frame(width: 320)
+    }
+
+    // Not tilde-abbreviated: in a sandboxed app NSHomeDirectory() *is* the container, so "~" would
+    // collapse the whole path and then mean something else in Finder or Terminal.
+    private var outputPath: String {
+        SiteOutput.buildDirectory.path(percentEncoded: false)
     }
 
     private var noBuildNumber: String {
