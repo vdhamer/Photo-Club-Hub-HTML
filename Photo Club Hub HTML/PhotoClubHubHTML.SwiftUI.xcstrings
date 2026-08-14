@@ -349,6 +349,23 @@
         }
       }
     },
+    "Cannot preview the website" : {
+      "comment" : "Title of the alert shown when the Preview Server could not be started",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot preview the website."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan de website niet tonen."
+          }
+        }
+      }
+    },
     "Clear database" : {
       "comment" : "App button that clears internal database content",
       "localizations" : {
@@ -621,6 +638,40 @@
         }
       }
     },
+    "No free port found in the %lld ports starting at %lld." : {
+      "comment" : "Error shown when every candidate port for the preview server is occupied",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No free port found in the %lld ports from %lld upwards."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen vrije poort gevonden in de %lld poorten vanaf poort %lld."
+          }
+        }
+      }
+    },
+    "OK" : {
+      "comment" : "Button that dismisses an alert when website preview failed",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
     "Output folder" : {
       "comment" : "Label for the folder that the generated website is written to",
       "localizations" : {
@@ -668,6 +719,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kies één van de clubs in het zijpaneel om hier de leden te zien."
+          }
+        }
+      }
+    },
+    "Preview website" : {
+      "comment" : "App button that previews generated website in a browser",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview website"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website bekijken"
           }
         }
       }
@@ -804,6 +872,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "De app kan desgewenst URLs naar FeaturedImages vervangen door URL naar een locale kopie."
+          }
+        }
+      }
+    },
+    "That port is already in use." : {
+      "comment" : "Error shown when the preview server cannot claim a port",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That port is already in use."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Die poort is al bezet."
+          }
+        }
+      }
+    },
+    "The preview server could not start: %@" : {
+      "comment" : "Error shown when the preview server fails for a reason other than a busy port",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The preview server could not start: %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De server voor het bekijken van de website kon niet starten: %@"
+          }
+        }
+      }
+    },
+    "There is no generated website yet. Use Actions ▸ Generate website first." : {
+      "comment" : "Error shown when previewing before the website has been generated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no generated website yet. Use Actions ▸ Generate website first."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is nog geen website gemaakt. Gebruik eerst Acties ▸ Website maken."
           }
         }
       }
