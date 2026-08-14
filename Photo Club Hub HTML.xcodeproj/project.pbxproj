@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37066154302E792500865D60 /* FlyingFox in Frameworks */ = {isa = PBXBuildFile; productRef = 37066153302E792500865D60 /* FlyingFox */; };
+		37066156302E792500865D60 /* FlyingSocks in Frameworks */ = {isa = PBXBuildFile; productRef = 37066155302E792500865D60 /* FlyingSocks */; };
 		3728D0DD2FBDE97B00E17112 /* settings.json in Resources */ = {isa = PBXBuildFile; fileRef = 3728D0DB2FBDE97B00E17112 /* settings.json */; };
 		377407A92F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D014A99B2C9DC50200ED412D /* Ignite */; };
 		377407AA2F535BE100C9C116 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D08191F92CBADF760034D19E /* Ignite */; };
@@ -18,7 +20,6 @@
 		D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */ = {isa = PBXBuildFile; productRef = D04594D12CD6CB5400A52BFB /* SwiftImageReadWrite */; };
 		D099D0E42DD25B7400FAA7C0 /* Ignite in Frameworks */ = {isa = PBXBuildFile; productRef = D0AD0EB42CEBDE3500EFBE87 /* Ignite */; settings = {ATTRIBUTES = (Required, ); }; };
 		D09D24EE2DD3FADD00355740 /* Photo Club Hub Data in Frameworks */ = {isa = PBXBuildFile; productRef = D09D24ED2DD3FADD00355740 /* Photo Club Hub Data */; };
-		D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = D09D9C942CE928650054F87B /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,16 +77,17 @@
 		D0E06C0D2C8C5ABC0025734B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				37066154302E792500865D60 /* FlyingFox in Frameworks */,
 				377407AE2F535BE100C9C116 /* Ignite in Frameworks */,
 				377407AD2F535BE100C9C116 /* Ignite in Frameworks */,
 				377407AC2F535BE100C9C116 /* Ignite in Frameworks */,
 				377407AB2F535BE100C9C116 /* Ignite in Frameworks */,
 				377407AA2F535BE100C9C116 /* Ignite in Frameworks */,
 				377407A92F535BE100C9C116 /* Ignite in Frameworks */,
+				37066156302E792500865D60 /* FlyingSocks in Frameworks */,
 				D099D0E42DD25B7400FAA7C0 /* Ignite in Frameworks */,
 				D09D24EE2DD3FADD00355740 /* Photo Club Hub Data in Frameworks */,
 				D04594D22CD6CB5400A52BFB /* SwiftImageReadWrite in Frameworks */,
-				D09D9C952CE928650054F87B /* SwiftyJSON in Frameworks */,
 			);
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -154,12 +156,13 @@
 				D08191F92CBADF760034D19E /* Ignite */,
 				D04594D12CD6CB5400A52BFB /* SwiftImageReadWrite */,
 				D09D9C912CE927D00054F87B /* Ignite */,
-				D09D9C942CE928650054F87B /* SwiftyJSON */,
 				D0AD0DD92CEBD7B900EFBE87 /* Ignite */,
 				D0AD0EB12CEBDD6A00EFBE87 /* Ignite */,
 				D0AD0EB42CEBDE3500EFBE87 /* Ignite */,
 				D0AD0F8C2CEBE0F500EFBE87 /* Ignite */,
 				D09D24ED2DD3FADD00355740 /* Photo Club Hub Data */,
+				37066153302E792500865D60 /* FlyingFox */,
+				37066155302E792500865D60 /* FlyingSocks */,
 			);
 			productName = "Photo Club Hub HTML";
 			productReference = D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */;
@@ -192,9 +195,9 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D04353FC2CE9268800B08C31 /* XCRemoteSwiftPackageReference "SwiftImageReadWrite" */,
-				D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				D0AD0F8B2CEBE0F500EFBE87 /* XCLocalSwiftPackageReference "../../Ignite" */,
 				37C0DA7A301AAC6600DC6B88 /* XCRemoteSwiftPackageReference "Photo-Club-Hub-Data" */,
+				37066152302E792500865D60 /* XCRemoteSwiftPackageReference "FlyingFox" */,
 			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = D0E06C112C8C5ABC0025734B /* Products */;
@@ -514,6 +517,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		37066152302E792500865D60 /* XCRemoteSwiftPackageReference "FlyingFox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swhitty/FlyingFox";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.27.1;
+			};
+		};
 		37C0DA7A301AAC6600DC6B88 /* XCRemoteSwiftPackageReference "Photo-Club-Hub-Data" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vdhamer/Photo-Club-Hub-Data";
@@ -530,17 +541,19 @@
 				minimumVersion = 1.9.2;
 			};
 		};
-		D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		37066153302E792500865D60 /* FlyingFox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37066152302E792500865D60 /* XCRemoteSwiftPackageReference "FlyingFox" */;
+			productName = FlyingFox;
+		};
+		37066155302E792500865D60 /* FlyingSocks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 37066152302E792500865D60 /* XCRemoteSwiftPackageReference "FlyingFox" */;
+			productName = FlyingSocks;
+		};
 		D014A99B2C9DC50200ED412D /* Ignite */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Ignite;
@@ -561,11 +574,6 @@
 		D09D9C912CE927D00054F87B /* Ignite */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Ignite;
-		};
-		D09D9C942CE928650054F87B /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D09D9C932CE928650054F87B /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
 		};
 		D0AD0DD92CEBD7B900EFBE87 /* Ignite */ = {
 			isa = XCSwiftPackageProductDependency;
