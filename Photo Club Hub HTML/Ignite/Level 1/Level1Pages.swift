@@ -25,7 +25,7 @@ struct Level1Pages: Site {
     let pages: [any StaticPage] // precomputed to avoid Core Data queries on wrong thread
 
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        url = URL(preferences.selectedHost.staticString) // e.g. "http://localhost:8000" or "https://www.fcdegender.nl"
+        url = preferences.selectedHost.baseURL // e.g. "http://localhost:8000" or "https://www.fcdegender.nl"
 
         // inject a function defining where the RootPage language links navigate to
         self.homePage = TempRootPage(relativePath: { OrganizationsPage.relativePath(languageID: $0) })

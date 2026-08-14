@@ -34,7 +34,7 @@ struct Level2Pages: Site {
     ///   - moc: A `NSManagedObjectContext` whose queue this initializer must be called on.
     ///   - preferences: User settings; fields control display options and url of target host.
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        url = URL(preferences.selectedHost.staticString)
+        url = preferences.selectedHost.baseURL // e.g. "http://localhost:8000" or "https://www.fcdegender.nl"
 
         // inject a function defining where the RootPage language links navigate to
         self.homePage = TempRootPage(relativePath: { languageID in

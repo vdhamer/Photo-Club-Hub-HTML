@@ -49,7 +49,8 @@ struct Level0Pages: Site {
     ///     caller is responsible for wrapping the call in `performAndWait` (or equivalent).
     ///   - preferences: User settings; currently used to pick the target host for absolute URLs.
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        url = preferences.selectedHost.url(forPath: "expertises") ?? URL(preferences.selectedHost.staticString)
+        // url set to e.g. "http://localhost:8000" or "https://www.fcdegender.nl"
+        url = preferences.selectedHost.url(forPath: "expertises") ?? preferences.selectedHost.baseURL
 
         // inject a function defining where the root page language links navigate to
         self.homePage = TempRootPage(relativePath: { ExpertisesPage.relativePath(languageID: $0) })
