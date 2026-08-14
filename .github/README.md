@@ -124,7 +124,10 @@ it allows users to view the images on devices running Android, Windows, macOS, e
 | [twostraws/Ignite](https://github.com/twostraws/ignite.git) | static website generator | Github (Paul Hudson) |
 | [SwiftUI](https://developer.apple.com/documentation/swiftui) | UI framework | Apple |
 | [Core Data](https://developer.apple.com/documentation/coredata) | data storage framework | Apple |
-| [SwiftyJSON/SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing | Github |
+| [vdhamer/Photo-Club-Hub-Data](https://github.com/vdhamer/Photo-Club-Hub-Data.git) | Core Data model and JSON loaders shared with the iOS app | Github (vdhamer) |
+| [SwiftyJSON/SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON.git) | JSON parsing, used via the Photo-Club-Hub-Data package rather than directly | Github |
+| [dagronf/SwiftImageReadWrite](https://github.com/dagronf/SwiftImageReadWrite.git) | image loading and format conversion for thumbnails | Github |
+| [swhitty/FlyingFox](https://github.com/swhitty/FlyingFox.git) | HTTP server used to preview the generated site | Github (Simon Whitty) |
 
 ## Static sites and Ignite
 
