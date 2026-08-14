@@ -1,6 +1,15 @@
 {
-  "originHash" : "a450021e5f552eaca9519949d5884aa0e1bda59f834eebfa617e67d3185e3788",
+  "originHash" : "a2db0670ac4a0aca7bd69a2cc98fa75fa7abba1033d5dfc7f991e76d27b6741c",
   "pins" : [
+    {
+      "identity" : "flyingfox",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swhitty/FlyingFox",
+      "state" : {
+        "revision" : "4e246d3fb515bd2069e5c169abdc75808b90548f",
+        "version" : "0.27.1"
+      }
+    },
     {
       "identity" : "photo-club-hub-data",
       "kind" : "remoteSourceControl",
