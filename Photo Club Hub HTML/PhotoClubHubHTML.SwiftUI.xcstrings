@@ -350,7 +350,7 @@
       }
     },
     "Cannot preview the website" : {
-      "comment" : "Title of the alert shown when the Preview Server could not be started",
+      "comment" : "Title of the alert shown when the preview server could not be started",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -706,25 +706,25 @@
         }
       }
     },
-    "Please select a club in the sidebar." : {
+    "Please select a club in the sidebar (on the left)." : {
       "comment" : "Message displayed when no club is selected",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please select a club in the sidebar."
+            "value" : "Please select a club in the sidebar (on the left)."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kies één van de clubs in het zijpaneel om hier de leden te zien."
+            "value" : "Kies één van de clubs in het linker zijpaneel om hier de clubleden te zien."
           }
         }
       }
     },
     "Preview website" : {
-      "comment" : "App button that previews generated website in a browser",
+      "comment" : "App button that serves the generated website and opens a browser",
       "localizations" : {
         "en" : {
           "stringUnit" : {
