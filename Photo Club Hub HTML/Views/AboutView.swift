@@ -60,25 +60,27 @@ struct AboutView: View {
                     Text(verbatim: "Peter van den Hamer")
                         .foregroundStyle(.secondary)
                 }
-                HStack {
+                // Unlike the other rows this one puts its value on its own line: the path is ~78
+                // characters, so no window width fits it beside a label, and truncating it hid the part
+                // that identifies the folder. Wrapped over the full width it stays complete.
+                VStack(alignment: .leading, spacing: 2) {
                     Text("Output folder",
                          tableName: "PhotoClubHubHTML.SwiftUI",
                          comment: "Label for the folder that the generated website is written to")
-                        .fixedSize() // the path truncates, the label shouldn't
-                    Spacer(minLength: 8)
                     Button {
                         SiteOutput.revealInFinder()
                     } label: {
-                        // head truncation keeps the informative tail (…/Data/Build) visible in a 320pt window
                         Text(verbatim: outputPath)
-                            .lineLimit(1)
-                            .truncationMode(.head)
+                            .font(.caption)
+                            .multilineTextAlignment(.trailing) // right-aligned like every other value
+                            .fixedSize(horizontal: false, vertical: true) // wrap instead of truncating
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                             .foregroundStyle(.link)
                     }
                     .buttonStyle(.plain)
-                    .layoutPriority(1) // claim the row's spare width before the Spacer does
                     .help(outputPath)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
 
             HStack {
