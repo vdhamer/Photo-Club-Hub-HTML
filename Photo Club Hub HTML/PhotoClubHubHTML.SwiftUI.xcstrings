@@ -315,6 +315,23 @@
         }
       }
     },
+    "Allow previewing on other devices too" : {
+      "comment" : "Toggle to let the preview website be opened from phones and other computers on the same network",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow previewing on other devices too"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geef andere apparaten op LAN toegang tot de test website"
+          }
+        }
+      }
+    },
     "Built" : {
       "comment" : "Label for the date and time this app was built",
       "localizations" : {
@@ -464,6 +481,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sluiten"
+          }
+        }
+      }
+    },
+    "Enables a phone, tablet or other computer on the same LAN to openthe preview." : {
+      "comment" : "Usage hint for `allowRemotePreview` setting",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enables a phone, tablet or other computer on the same LAN to openthe preview."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lets a phone, tablet or another computer on the same network open the preview,"
           }
         }
       }
