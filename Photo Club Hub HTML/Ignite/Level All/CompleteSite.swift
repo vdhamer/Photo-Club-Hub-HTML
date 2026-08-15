@@ -48,7 +48,7 @@ struct CompleteSite: Site {
     ///   - preferences: Site-wide settings; `selectedHost` supplies the deployment base URL, and the
     ///     landing page's language buttons follow the same `/<lang>/clubs/` scheme as `Level1Pages`.
     init(pageGroups: [PageGroup], preferences: PreferencesStructHTML) {
-        url = URL(preferences.selectedHost.staticString)
+        url = preferences.selectedHost.baseURL
         // single landing page; its language buttons link to /<lang>/clubs/ (same as Level1Pages)
         homePage = TempRootPage(relativePath: { OrganizationsPage.relativePath(languageID: $0) })
         self.pageGroups = pageGroups
