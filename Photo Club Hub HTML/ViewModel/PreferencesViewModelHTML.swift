@@ -2,7 +2,7 @@
 //  PreferencesViewModelHTML.swift
 //  Photo Club Hub HTML
 //
-//  Created by Peter van den Hamer on 12/03/2026.
+//  Created by Peter van den Hamer on 12/03/2026. Significant changes by Claude Code around 01/08/2026
 //
 
 import CoreData // for NSManagedObject
@@ -42,18 +42,56 @@ struct PreferencesStructHTML: Sendable { // order in which they are shown on Pre
     var selectedHost: TargetHost
     var showFormerMembers: Bool
     var showFotobondMemberNumber: Bool
+    var allowRemotePreview: Bool
 
     static let defaultValue = PreferencesStructHTML( // has to match order of declaration
         selectedClubNickname: "TemplateMin",
         useLocalThumbnails: false,
         selectedHost: TargetHost.localhost,
         showFormerMembers: false,
-        showFotobondMemberNumber: false
+        showFotobondMemberNumber: isRunningInDutch, // Fotobond is a Dutch federation (defaults to off when != NL)
+        allowRemotePreview: false // loopback-only preview until asked otherwise: see ``PreviewServer``
     )
+
+    /// Whether the app's user interface is currently running in Dutch.
+    ///
+    /// `Bundle.main.preferredLocalizations.first` is the localization macOS actually picked for this app — the
+    /// language the user is reading. `Locale.current` is the wrong question: it follows region and formatting
+    /// preferences, and routinely disagrees. This app's own scheme is the example, launching with
+    /// `-AppleLanguages (en)` alongside `-AppleLocale en_NL`.
+    ///
+    /// This only decides the *default*. Once the user sets the toggle either way, their choice is stored and
+    /// wins from then on, whatever language the app runs in.
+    static var isRunningInDutch: Bool {
+        Bundle.main.preferredLocalizations.first?.hasPrefix("nl") ?? false
+    }
 
 }
 
 extension PreferencesStructHTML: Codable {
-//    No code needed as long as all preferences are Codable.
-//    For trickier cases, check how it is done in Photo Club Hub's `PreferencesViewModel`
+
+    /// Decodes leniently: a key that an older stored copy lacks falls back to its default rather than failing
+    /// the decode.
+    ///
+    /// This is not defensiveness for its own sake. `Published+UserDefaults` decodes with `try?` and falls back
+    /// to ``defaultValue`` on *any* error, and Swift's synthesized decoding ignores a property's default value
+    /// when the key is missing — so without this, adding one preference would silently reset every other one
+    /// the first time the new build ran. Encoding stays synthesized.
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let fallback = Self.defaultValue
+
+        selectedClubNickname = try container.decodeIfPresent(String.self, forKey: .selectedClubNickname)
+            ?? fallback.selectedClubNickname
+        useLocalThumbnails = try container.decodeIfPresent(Bool.self, forKey: .useLocalThumbnails)
+            ?? fallback.useLocalThumbnails
+        selectedHost = try container.decodeIfPresent(TargetHost.self, forKey: .selectedHost)
+            ?? fallback.selectedHost
+        showFormerMembers = try container.decodeIfPresent(Bool.self, forKey: .showFormerMembers)
+            ?? fallback.showFormerMembers
+        showFotobondMemberNumber = try container.decodeIfPresent(Bool.self, forKey: .showFotobondMemberNumber)
+            ?? fallback.showFotobondMemberNumber
+        allowRemotePreview = try container.decodeIfPresent(Bool.self, forKey: .allowRemotePreview)
+            ?? fallback.allowRemotePreview
+    }
 }
