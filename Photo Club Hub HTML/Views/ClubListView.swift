@@ -6,7 +6,6 @@
 //
 
 import SwiftUI // this is a SwiftUI view
-import CoreData // for FetchRequest?
 import Photo_Club_Hub_Data // for Organization, deleteAllCoreDataObjects
 
 /// The app's root content view: a `NavigationSplitView` listing photo clubs alongside a detail pane,
