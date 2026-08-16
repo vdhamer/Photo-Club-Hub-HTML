@@ -24,8 +24,7 @@ import Photo_Club_Hub_Data // for Expertise, Language
 struct Level0Pages: Site {
 
     let name: String = "Expertises"
-    // URL: local host example http://www.fcDeGender.com
-    // URL: remote host example: http://www.fcDeGender.com/expertises
+    // e.g. "http://localhost:8000" when previewing, "https://www.fcDeGender.nl/expertises" when published
     let url: URL
     let builtInIconsEnabled: BootstrapOptions = .none
     let author = "Peter van den Hamer"
@@ -49,8 +48,7 @@ struct Level0Pages: Site {
     ///     caller is responsible for wrapping the call in `performAndWait` (or equivalent).
     ///   - preferences: User settings; currently used to pick the target host for absolute URLs.
     init(moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        // url set to e.g. "http://localhost:8000" or "https://www.fcdegender.nl"
-        url = preferences.selectedHost.url(forPath: "expertises") ?? preferences.selectedHost.baseURL
+        url = preferences.selectedHost.url(forPath: "expertises")
 
         // inject a function defining where the root page language links navigate to
         self.homePage = TempRootPage(relativePath: { ExpertisesPage.relativePath(languageID: $0) })
