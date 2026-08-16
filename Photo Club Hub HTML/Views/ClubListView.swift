@@ -17,10 +17,12 @@ import Photo_Club_Hub_Data // for Organization, deleteAllCoreDataObjects
 /// - **Footer**: `RecordsFooterView` shows database/translation statistics below a divider.
 ///
 /// The toolbar exposes two controls:
-/// - **Settings…**: a popover binding the shared ``PreferencesStructHTML`` (target host, local thumbnails,
-///   former members, Fotobond numbers).
-/// - **Actions**: a menu to Generate the website, Clear/Fill the CoreData database, and reverse-geocode
-///   localized Town & Country.
+/// - **Settings…**: a popover, ``SettingsPopoverView``, binding the shared ``PreferencesStructHTML``.
+/// - **Actions**: a menu to Generate the website, and preview it in a browser (``previewWebsiteButton``),
+///   Clear/Fill the CoreData database, and reverse-geocode localized Town & Country.
+///
+/// Only the parts SwiftUI requires to sit here are here: the website generation lives in
+/// `ClubListView+HTMLGeneration.swift`, and the preview command in `ClubListView+WebsitePreview.swift`.
 ///
 /// On appear it disables window tabbing and pre-creates the `NSHomeDirectory()/Assets` directory (with a
 /// bundled app icon and favicon) so Ignite's `publish()` can copy assets into `Build/`.
@@ -47,6 +49,8 @@ struct ClubListView: View {
     @State private var selectedClubIds: Set<OrganizationID> = []
     @State private var showSettingsPopover: Bool = false
     @State private var isLoadingDatabase: Bool = false // drives the "Fill database" command's spinner
+    // Can't be private because ClubListView+WebsitePreview.swift writes it when the preview command fails.
+    @State var previewError: String? // non-nil while the "Preview website" failure alert is up
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -59,7 +63,7 @@ struct ClubListView: View {
                    let club = try? Organization.find(context: viewContext, organizationID: clubId) {
                     MembershipView(club: club, preferences: $preferences)
                 } else {
-                    Text(String(localized: "Please select a club in the sidebar.",
+                    Text(String(localized: "Please select a club in the sidebar (on the left).",
                                 table: "PhotoClubHubHTML.SwiftUI", // in System language as this is SwiftUI UI code
                                 comment: "Message displayed when no club is selected"))
                         .font(.title2)
@@ -87,6 +91,7 @@ struct ClubListView: View {
                     .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
             }
         }
+        .websitePreviewSupport(error: $previewError, allowRemotePreview: preferences.allowRemotePreview)
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift macOS StormViewer)
             // Ignite's publish() copies Assets/ from NSHomeDirectory() to Build/; create the directory up front
@@ -109,77 +114,7 @@ struct ClubListView: View {
                                  comment: "Submenu for various settings"))
                 }
                 .popover(isPresented: $showSettingsPopover, arrowEdge: .top) {
-                    VStack(alignment: .leading, spacing: 12) {
-
-                        Picker(String(localized: "Host",
-                                      table: "PhotoClubHubHTML.SwiftUI",
-                                      comment: "Label of picker for targetHost"),
-                               selection: $preferences.selectedHost) {
-                            ForEach(TargetHost.allCases, id: \.self) { host in
-                                Text(host.rawValue).tag(host)
-                            }
-                        }
-                        .pickerStyle(.inline)
-                        .help(String(localized: "Selects the host to target when generating a website.",
-                                     table: "PhotoClubHubHTML.SwiftUI",
-                                     comment: "Hint about targetHost picker within Settings"))
-
-                        Toggle(isOn: $preferences.useLocalThumbnails,
-                               label: {Text(String(localized: "Copy thumbnails to local folder",
-                                                   table: "PhotoClubHubHTML.SwiftUI",
-                                                   comment: "Toggle to enable copying of thumbnails to a local folder"))
-                                }
-                        )
-                        .help(String(localized: """
-                                                Tells app to make a local copy of remote thumbnails \
-                                                to reduce hot-linking.
-                                                """,
-                                     table: "PhotoClubHubHTML.SwiftUI",
-                                     comment: "Usage hint for `useLocalThumbnails` setting"))
-
-                        Toggle(isOn: $preferences.showFormerMembers,
-                               label: {Text(String(localized: "Include recent former members",
-                                                   table: "PhotoClubHubHTML.SwiftUI",
-                                                   comment: """
-                                                            Toggle to enable displaying former club members \
-                                                            in extra table
-                                                            """))
-                                }
-                        )
-                        .help(String(localized: """
-                                                Tells app to display former members in extra table.
-                                                """,
-                                     table: "PhotoClubHubHTML.SwiftUI",
-                                     comment: "Usage hint for `showFormerMembers` setting"))
-
-                        Toggle(isOn: $preferences.showFotobondMemberNumber,
-                               label: {Text(String(localized: "Show Fotobond (NL) membership numbers",
-                                                   table: "PhotoClubHubHTML.SwiftUI",
-                                                   comment: """
-                                                            Toggle to enable displaying of Fotobond (NL) \
-                                                            membership numbers of photographers
-                                                            """))
-                                }
-                        )
-                        .help(String(localized: """
-                                                Tells app to display Fotobond number of members when cursor \
-                                                hovers over membership years data.
-                                                """,
-                                     table: "PhotoClubHubHTML.SwiftUI",
-                                     comment: "Usage hint for `showFotobondMemberNumber` setting"))
-
-                        HStack {
-                            Spacer()
-                            Button(String(localized: "Done",
-                                          table: "PhotoClubHubHTML.SwiftUI",
-                                          comment: "Button to close the settings popover")) {
-                                showSettingsPopover = false
-                            }
-                        }
-
-                    }
-                    .padding()
-                    .frame(minWidth: 320)
+                    SettingsPopoverView(preferences: $preferences, isPresented: $showSettingsPopover)
                 }
 
                 Menu {
@@ -190,6 +125,8 @@ struct ClubListView: View {
                         print("Action: Generating website")
                         generateAllLevels(preferences: preferences)
                     }
+
+                    previewWebsiteButton
 
                     Divider()
 
