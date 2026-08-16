@@ -502,19 +502,19 @@
         }
       }
     },
-    "Enables a phone, tablet or other computer on the same LAN to openthe preview." : {
+    "Enables a phone, tablet or other computer on the same LAN to open the preview." : {
       "comment" : "Usage hint for `allowRemotePreview` setting",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enables a phone, tablet or other computer on the same LAN to openthe preview."
+            "value" : "Enables a phone, tablet or other computer on the same LAN to open the preview."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lets a phone, tablet or another computer on the same network open the preview,"
+            "value" : "Geeft een telefoon, tablet of andere computer op hetzelfde LAN toegang tot de lokaal-gehoste website."
           }
         }
       }

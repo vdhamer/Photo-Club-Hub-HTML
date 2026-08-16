@@ -18,11 +18,11 @@ import Photo_Club_Hub_Data // for Organization, deleteAllCoreDataObjects
 ///
 /// The toolbar exposes two controls:
 /// - **Settings…**: a popover, ``SettingsPopoverView``, binding the shared ``PreferencesStructHTML``.
-/// - **Actions**: a menu to Generate the website, and preview it in a browser (``previewWebsiteButton``),
+/// - **Actions**: a menu to Generate the website, and preview it in a browser (``PreviewWebsiteButton``),
 ///   Clear/Fill the CoreData database, and reverse-geocode localized Town & Country.
 ///
 /// Only the parts SwiftUI requires to sit here are here: the website generation lives in
-/// `ClubListView+HTMLGeneration.swift`, and the preview command in `ClubListView+WebsitePreview.swift`.
+/// `ClubListView+HTMLGeneration.swift`, and the preview command in `WebsitePreview.swift`.
 ///
 /// On appear it disables window tabbing and pre-creates the `NSHomeDirectory()/Assets` directory (with a
 /// bundled app icon and favicon) so Ignite's `publish()` can copy assets into `Build/`.
@@ -49,8 +49,7 @@ struct ClubListView: View {
     @State private var selectedClubIds: Set<OrganizationID> = []
     @State private var showSettingsPopover: Bool = false
     @State private var isLoadingDatabase: Bool = false // drives the "Fill database" command's spinner
-    // Can't be private because ClubListView+WebsitePreview.swift writes it when the preview command fails.
-    @State var previewError: String? // non-nil while the "Preview website" failure alert is up
+    @State private var previewError: String? // non-nil while the "Preview website" failure alert is up
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -126,7 +125,7 @@ struct ClubListView: View {
                         generateAllLevels(preferences: preferences)
                     }
 
-                    previewWebsiteButton
+                    PreviewWebsiteButton(preferences: preferences, error: $previewError)
 
                     Divider()
 
