@@ -434,6 +434,23 @@
         }
       }
     },
+    "Content" : {
+      "comment" : "Header of the Settings section with toggles about what appears on the generated pages",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Content"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhoud"
+          }
+        }
+      }
+    },
     "Copy thumbnails to local folder" : {
       "comment" : "Toggle to enable copying of thumbnails to a local folder",
       "localizations" : {
@@ -583,6 +600,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Server voor website"
+          }
+        }
+      }
+    },
+    "Hosting" : {
+      "comment" : "Header of the Settings section with settings about where the generated website is served from",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Hosting"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hosting"
           }
         }
       }
@@ -979,5 +1013,5 @@
       }
     }
   },
-  "version" : "1.0"
+  "version" : "1.3"
 }
