@@ -27,7 +27,7 @@ enum SiteOutput {
     }
 
     /// The port the built-in preview server tries first, and the one `TargetHost.localhost` bakes into the
-    /// generated site. Matches `preview.sh`'s default and Ignite's own `ignite run --port` default.
+    /// generated site. Matches Ignite's own `ignite run --port` default.
     static let defaultPreviewPort: UInt16 = 8000
 
     /// This Mac's Bonjour name, for previews that another device has to reach.

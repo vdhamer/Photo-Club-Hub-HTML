@@ -38,7 +38,7 @@ import FlyingSocks // for sockaddr_in.inet(ip4:port:), SocketError
 /// `directory`.
 ///
 /// Otherwise the server runs until the app exits, at which point the OS closes the listening socket and every
-/// open connection — the same lifetime `preview.sh` has in a terminal. The only thing that stops it earlier is
+/// open connection; there is no command that stops it sooner. The only thing that stops it earlier is
 /// a change to that setting: #247's server had no `stop()` at all, but a preference the user can flip has to
 /// take effect when it is flipped, which is what ``applyRemoteAccess(_:directory:)`` is for.
 actor PreviewServer {
@@ -77,10 +77,10 @@ actor PreviewServer {
     /// Starting is idempotent *for a given `allowRemoteAccess`*: calling this again while the server runs on the
     /// address asked for returns the port already bound, without rebinding. Asking for the other address stops
     /// the listener and binds again, because the alternative is a preference that appears to do nothing
-    /// until the next launch. When `preferredPort` is occupied — typically by a stray `preview.sh` — the next
-    /// free port is used instead. That costs nothing a preview cares about: only the site's SEO metadata
-    /// (`rel="canonical"`, `og:url`, `sitemap.xml`) carries the port baked in at generation time, while
-    /// every navigational link is root-relative.
+    /// until the next launch. When `preferredPort` is occupied — by anything else on this Mac already listening
+    /// there — the next free port is used instead. That costs nothing a preview cares about: only the site's
+    /// SEO metadata (`rel="canonical"`, `og:url`, `sitemap.xml`) carries the port baked in at generation time,
+    /// while every navigational link is root-relative.
     ///
     /// - Parameters:
     ///   - preferredPort: The port to try first, normally ``SiteOutput/defaultPreviewPort``.

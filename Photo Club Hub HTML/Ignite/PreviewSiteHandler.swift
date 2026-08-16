@@ -22,10 +22,10 @@ import UniformTypeIdentifiers // for UTType
 /// what the containment check in ``resolve(_:)`` is for, with dot segments covered again as defence in depth.
 ///
 /// Everything after resolution is FlyingFox's: file streaming, `Content-Length`, `ETag`/`Last-Modified`
-/// with 304 handling, and HTTP/1.1 persistent connections. That last one is not a refinement —
-/// `preview.sh` exists in this repo because `ignite run` serves via `python3 -m http.server`, which speaks
-/// HTTP/1.0 and closes after every response; Safari then reuses a pooled connection the server has already
-/// closed and stalls ~29 s before retrying.
+/// with 304 handling, and HTTP/1.1 persistent connections. That last one is not a refinement — it is why
+/// `ignite run --preview` is not used here at all. It serves via `python3 -m http.server`, which speaks
+/// HTTP/1.0 and closes the connection after every response; Safari then reuses a pooled connection the
+/// server has already closed, gets 0 bytes back, and stalls ~29 s before retrying.
 struct PreviewSiteHandler: HTTPHandler {
 
     /// The directory to serve. Paths are resolved against it per request, never cached: a *Generate*
