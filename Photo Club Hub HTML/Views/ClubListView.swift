@@ -49,6 +49,8 @@ struct ClubListView: View {
     @State private var selectedClubIds: Set<OrganizationID> = []
     @State private var showSettingsPopover: Bool = false
     @State private var isLoadingDatabase: Bool = false // drives the "Fill database" command's spinner
+    @State private var isGeneratingWebsite: Bool = false // drives the "Generate" command's spinner
+    @State private var generationOutcome: WebsiteGenerationOutcome? // non-nil while the "Generate" alert is up
     @State private var previewError: String? // non-nil while the "Preview website" failure alert is up
 
     var body: some View {
@@ -82,14 +84,21 @@ struct ClubListView: View {
             isLoadingDatabase = false
         }
         .overlay {
+            // Only one of these can be up: Generate is started by hand, and the launch-time fill has finished
+            // long before a menu can be opened. The order is just a tie-break, not a policy.
             if isLoadingDatabase {
-                ProgressView(String(localized: "Loading database…",
-                                    table: "PhotoClubHubHTML.SwiftUI",
-                                    comment: "Spinner label shown while the database is being filled"))
-                    .padding()
-                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+                spinner(String(localized: "Loading database…",
+                               table: "PhotoClubHubHTML.SwiftUI",
+                               comment: "Spinner label shown while the database is being filled"))
+            } else if isGeneratingWebsite {
+                spinner(String(localized: "Generating website…",
+                               table: "PhotoClubHubHTML.SwiftUI",
+                               comment: "Spinner label shown while the website is being generated"))
             }
         }
+        .websiteGenerationSupport(outcome: $generationOutcome, // custom view modifier
+                                  preferences: preferences,
+                                  previewError: $previewError)
         .websitePreviewSupport(error: $previewError, allowRemotePreview: preferences.allowRemotePreview)
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift macOS StormViewer)
@@ -122,7 +131,7 @@ struct ClubListView: View {
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that generates all website pages")) {
                         print("Action: Generating website")
-                        generateAllLevels(preferences: preferences)
+                        generateWebsite()
                     }
 
                     PreviewWebsiteButton(preferences: preferences, error: $previewError)
@@ -162,6 +171,38 @@ struct ClubListView: View {
                 }
 
            }
+        }
+    }
+
+    /// The overlay both long-running commands put up, so they cannot drift apart in style.
+    private func spinner(_ label: String) -> some View {
+        ProgressView(label)
+            .padding()
+            .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    /// Runs *Actions ▸ Generate*: spinner up, publish, report, then the slow geocoding tail unattended.
+    ///
+    /// The alert is raised when `publishAllLevels` returns — the moment the site is on disk — and not when this
+    /// task ends, because reverse-geocoding runs on for about five minutes after that (#246).
+    ///
+    /// `@MainActor` is what lets the `Task` write the two `@State`s. It does not put the generating on the main
+    /// thread: `publishAllLevels` is `nonisolated`, so the `performAndWait` work inside it stays off the main
+    /// thread and the spinner keeps spinning.
+    @MainActor
+    private func generateWebsite() {
+        Task {
+            isGeneratingWebsite = true // before the first generateLevelN, which blocks its thread once started
+            let outcome: WebsiteGenerationOutcome
+            do {
+                outcome = .succeeded(pageCount: try await publishAllLevels(preferences: preferences))
+            } catch {
+                outcome = .failed(reason: error.localizedDescription)
+            }
+            isGeneratingWebsite = false // spinner down first: the alert should not appear on top of it
+            generationOutcome = outcome
+
+            await geocodeAfterGeneration() // kicks of background task (which may be empty, or take minutes)
         }
     }
 

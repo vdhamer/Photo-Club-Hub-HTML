@@ -10,7 +10,11 @@ import CoreData // for FetchRequest?
 import Photo_Club_Hub_Data // for Organization
 @preconcurrency import Ignite // for StaticPage; SwiftUI symbols that clash with Ignite are qualified as SwiftUI.<Type>
 
-extension ClubListView {
+// Everything here is `nonisolated`, and that is load-bearing rather than tidiness. `View` is `@MainActor`, so
+// without it these methods inherit the main actor — and `generateLevelN` block their thread inside
+// `performAndWait`, which would mean generating the site on the main thread with the window frozen and the
+// progress spinner unable to draw a single frame (#246).
+nonisolated extension ClubListView {
 
     // MARK: - page generation for individual levels
 
@@ -105,38 +109,54 @@ extension ClubListView {
     /// Each level's pages are built (with publishing bypassed) and concatenated into one `LevelAllSite`,
     /// which is published exactly once — so Ignite's `clearBuildFolder()` runs once and no level clobbers
     /// another's output. See issue #215.
-    func generateAllLevels(preferences: PreferencesStructHTML) {
-        Task {
-            // Build each level's pages without publishing (sequential for now;
-            // a later ticket can parallelize with a TaskGroup). Keep them as labeled groups so the
-            // per-level structure stays visible into LevelAllSite (#217).
-            let pageGroups: [PageGroup] = [
-                PageGroup(label: "Level 0 – Expertises",
-                          pages: generateLevel0(preferences: preferences, publishImmediately: false)),
-                PageGroup(label: "Level 1 – Organizations",
-                          pages: generateLevel1(preferences: preferences, publishImmediately: false)),
-                PageGroup(label: "Level 2 – Members",
-                          pages: generateLevel2(preferences: preferences, publishImmediately: false))
-            ]
+    ///
+    /// Returning only when `publish()` has returned is the point: it lets the caller take its spinner down and
+    /// raise the completion alert at the moment the site is on disk. The reverse-geocoding that used to follow
+    /// inline is ``geocodeAfterGeneration()``, kept separate for that reason (#246).
+    ///
+    /// Being `async` in a `nonisolated` extension is what keeps this off the main actor even though its caller
+    /// is on it (SE-0338) — see the note above the extension for why that matters here.
+    ///
+    /// - Returns: how many pages were written, the landing page included.
+    /// - Throws: whatever Ignite's `publish()` throws. Unlike the per-level generators above, this does not
+    ///   `ifDebugFatalError`: the failure is shown in an alert, and trapping in a debug build would stop the
+    ///   alert ever being seen.
+    func publishAllLevels(preferences: PreferencesStructHTML) async throws -> Int {
+        // Build each level's pages without publishing (sequential for now;
+        // a later ticket can parallelize with a TaskGroup). Keep them as labeled groups so the
+        // per-level structure stays visible into LevelAllSite (#217).
+        let pageGroups: [PageGroup] = [
+            PageGroup(label: "Level 0 – Expertises",
+                      pages: generateLevel0(preferences: preferences, publishImmediately: false)),
+            PageGroup(label: "Level 1 – Organizations",
+                      pages: generateLevel1(preferences: preferences, publishImmediately: false)),
+            PageGroup(label: "Level 2 – Members",
+                      pages: generateLevel2(preferences: preferences, publishImmediately: false))
+        ]
 
-            // Single publish: one landing page + the labeled groups → one clearBuildFolder, no clobbering.
-            let allSite = CompleteSite(pageGroups: pageGroups, preferences: preferences)
-            do {
-                try await allSite.publish()
-            } catch {
-                ifDebugFatalError("Publishing of results of LevelAllSite() failed. Error: \(error)")
-                print(error.localizedDescription)
-            }
+        // Single publish: one landing page + the labeled groups → one clearBuildFolder, no clobbering.
+        let allSite = CompleteSite(pageGroups: pageGroups, preferences: preferences)
+        try await allSite.publish()
 
-            // Geocoding depends on the Organization data as loaded in Levels 1 and.
-            // It is slow (~5 min) due to throttling at the employed geolocation server.
-            // So it runs automatically after publishing rather than blocking it.
-            // Its LocalizedAddress rows show up as the localized Country/Town columns
-            // on the next generate.
-            // These columns may be only partially filled, but fill eventually.
-            // CoreData is used as a cache to prevent unnecessary calls to the server.
-            await OrganizationGeocoder().geocodeChangedAddresses()
-        }
+        // Counted from what was handed to CompleteSite rather than by listing Build/, which also holds css/,
+        // images/ and the feed. The 1 is the landing page CompleteSite owns and adds to the groups' pages.
+        return pageGroups.reduce(1) { $0 + $1.pages.count }
+    }
+
+    /// Reverse-geocodes the addresses that changed, after a generate has finished.
+    ///
+    /// Geocoding depends on the Organization data as loaded in Levels 1 and 2.
+    /// It is slow (~5 min) due to throttling at the employed geolocation server.
+    /// So it runs after publishing rather than blocking it.
+    /// Its LocalizedAddress rows show up as the localized Country/Town columns
+    /// on the next generate.
+    /// These columns may be only partially filled, but fill eventually.
+    /// CoreData is used as a cache to prevent unnecessary calls to the server.
+    ///
+    /// Deliberately unreported: the running record counter in `RecordsFooterView` already moves while this
+    /// works, and the results are persisted, so there is nothing the user has to wait for or act on (#246).
+    func geocodeAfterGeneration() async {
+        await OrganizationGeocoder().geocodeChangedAddresses()
     }
 
 }

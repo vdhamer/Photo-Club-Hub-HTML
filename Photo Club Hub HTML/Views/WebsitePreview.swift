@@ -36,29 +36,39 @@ struct PreviewWebsiteButton: View {
     var body: some View {
         Button(String(localized: "Preview website",
                       table: "PhotoClubHubHTML.SwiftUI",
-                      comment: "App button that serves the generated website and opens a browser")) {
+                      comment: "App menu button that serves the generated website and opens a browser")) {
             print("Action: Previewing website")
-            previewWebsite()
+            Task {
+                do {
+                    try await WebsitePreview.open(preferences: preferences)
+                } catch {
+                    self.error = error.localizedDescription // raises the alert instead of only printing
+                }
+            }
         }
     }
+
+}
+
+/// Starting the preview, as a free-standing call rather than something only the menu item can do.
+///
+/// The *Generate* completion alert offers the same command (#246), and both callers have to reach the same
+/// ``PreviewServer/shared`` — two entry points that each started their own server would fight over the port.
+enum WebsitePreview {
 
     /// Starts the preview server if it isn't already running, then opens a browser on the port it bound.
     ///
     /// The bound port can differ from the default when something else on this Mac is already listening there;
     /// the browser follows the server rather than the setting, so the fallback is not a broken link.
-    /// Failures land in the alert instead of only on the console.
-    private func previewWebsite() {
-        Task {
-            do {
-                let allowRemoteAccess = preferences.allowRemotePreview
-                let port = try await PreviewServer.shared.start(preferredPort: SiteOutput.defaultPreviewPort,
-                                                               directory: SiteOutput.buildDirectory,
-                                                               allowRemoteAccess: allowRemoteAccess)
-                NSWorkspace.shared.open(SiteOutput.previewURL(port: port, allowRemoteAccess: allowRemoteAccess))
-            } catch {
-                self.error = error.localizedDescription
-            }
-        }
+    ///
+    /// - Throws: ``PreviewServerError`` when there is nothing to serve yet or no port could be bound. Callers
+    ///   are expected to surface that in an alert: a console message is invisible in a release build.
+    static func open(preferences: PreferencesStructHTML) async throws {
+        let allowRemoteAccess = preferences.allowRemotePreview
+        let port = try await PreviewServer.shared.start(preferredPort: SiteOutput.defaultPreviewPort,
+                                                       directory: SiteOutput.buildDirectory,
+                                                       allowRemoteAccess: allowRemoteAccess)
+        NSWorkspace.shared.open(SiteOutput.previewURL(port: port, allowRemoteAccess: allowRemoteAccess))
     }
 
 }
