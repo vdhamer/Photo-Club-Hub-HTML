@@ -234,7 +234,7 @@ enum PreviewServerError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .siteNotGenerated:
-            String(localized: "There is no generated website yet. Use Actions ▸ Generate website first.",
+            String(localized: "There is no generated website yet. Use Actions → Generate website first.",
                    table: "PhotoClubHubHTML.SwiftUI",
                    comment: "Error shown when previewing before the website has been generated")
         case .portInUse:

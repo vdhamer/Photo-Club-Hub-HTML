@@ -1075,19 +1075,23 @@
         }
       }
     },
+    "There is no generated website yet. Use Actions → Generate website first." : {
+      "comment" : "Error shown when previewing before the website has been generated"
+    },
     "There is no generated website yet. Use Actions ▸ Generate website first." : {
       "comment" : "Error shown when previewing before the website has been generated",
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There is no generated website yet. Use Actions ▸ Generate website first."
+            "value" : "There is no generated website yet. Use Actions → Generate website first."
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Er is nog geen website gemaakt. Gebruik eerst Acties ▸ Website maken."
+            "state" : "needs_review",
+            "value" : "Er is nog geen website gemaakt. Gebruik eerst Acties → Website maken."
           }
         }
       }

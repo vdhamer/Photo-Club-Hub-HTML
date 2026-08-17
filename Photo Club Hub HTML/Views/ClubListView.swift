@@ -181,7 +181,7 @@ struct ClubListView: View {
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
     }
 
-    /// Runs *Actions ▸ Generate*: spinner up, publish, report, then the slow geocoding tail unattended.
+    /// Runs *Actions → Generate*: spinner up, publish, report, then the slow geocoding tail unattended.
     ///
     /// The alert is raised when `publishAllLevels` returns — the moment the site is on disk — and not when this
     /// task ends, because reverse-geocoding runs on for about five minutes after that (#246).

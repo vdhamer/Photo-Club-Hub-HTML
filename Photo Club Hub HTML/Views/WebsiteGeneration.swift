@@ -7,7 +7,7 @@
 
 import SwiftUI // for View
 
-/// The feedback half of *Actions ▸ Generate*: what a run produced, and the alert that reports it (#246).
+/// The feedback half of *Actions → Generate*: what a run produced, and the alert that reports it (#246).
 ///
 /// Kept out of ``ClubListView`` for the same reason ``PreviewWebsiteButton`` is (#249) — the command that
 /// raises this alert lives in a `Menu` that disappears the moment it is used, so the alert has to be hosted
@@ -108,7 +108,7 @@ private struct WebsiteGenerationSupport: ViewModifier {
 
 extension View {
 
-    /// Hosts the alert that reports the result of *Actions ▸ Generate*. Apply to a view that lives as long as
+    /// Hosts the alert that reports the result of *Actions → Generate*. Apply to a view that lives as long as
     /// the window, not to the menu item — and alongside
     /// ``SwiftUI/View/websitePreviewSupport(error:allowRemotePreview:)``, whose alert this one's
     /// *Preview website* button reports into.
