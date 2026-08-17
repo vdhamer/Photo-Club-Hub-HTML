@@ -18,6 +18,47 @@
         }
       }
     },
+    "%lld pages were generated." : {
+      "comment" : "Alert message stating how many pages were generated",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld page was generated."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld pages were generated."
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Er is %lld pagina aangemaakt."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Er zijn %lld pagina’s aangemaakt."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "◼ %lld club memberships" : {
       "comment" : "Count of members in database",
       "localizations" : {
@@ -366,6 +407,23 @@
         }
       }
     },
+    "Cannot generate the website" : {
+      "comment" : "Title of the alert shown when generating the website failed",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cannot generate the website."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kan de website niet maken."
+          }
+        }
+      }
+    },
     "Cannot preview the website" : {
       "comment" : "Title of the alert shown when the preview server could not be started",
       "localizations" : {
@@ -401,7 +459,7 @@
       }
     },
     "Close" : {
-      "comment" : "Button to close the About window",
+      "comment" : "Button that dismisses an alert when website preview failed\nButton to close the About window",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -566,6 +624,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Website maken"
+          }
+        }
+      }
+    },
+    "Generating website…" : {
+      "comment" : "Spinner label shown while the website is being generated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generating website…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website wordt gemaakt…"
           }
         }
       }
@@ -792,7 +867,7 @@
       }
     },
     "Preview website" : {
-      "comment" : "App button that serves the generated website and opens a browser",
+      "comment" : "App menu button that serves the generated website and opens a browser",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -876,6 +951,17 @@
         }
       }
     },
+    "Show as files (in Finder)" : {
+      "comment" : "Alert button that reveals the generated website in the Finder",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als bestanden (in Finder) bekijken"
+          }
+        }
+      }
+    },
     "Show Fotobond (NL) membership numbers" : {
       "comment" : "Toggle to enable displaying of Fotobond (NL) membership numbers of photographers",
       "localizations" : {
@@ -889,6 +975,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon Fotobond lidmaatschapsnummers"
+          }
+        }
+      }
+    },
+    "Show website preview" : {
+      "comment" : "App button that serves the generated website and opens a browser",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Als website (in browser) bekijken"
           }
         }
       }
@@ -1008,6 +1105,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertaal locaties"
+          }
+        }
+      }
+    },
+    "Website generated" : {
+      "comment" : "Title of the alert shown when the website has been generated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website generated."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Website is klaar."
           }
         }
       }
