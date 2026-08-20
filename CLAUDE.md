@@ -15,11 +15,15 @@ Both apps therefore use the same override while co-developing app and package: a
 ## Version numbers
 
 This app's `MARKETING_VERSION` is a **label**: what a bump means is the maintainer's call, and it
-promises nothing to the other two repos. `CURRENT_PROJECT_VERSION` is pinned at 100 and does not
-move, because this app is not distributed through App Store Connect — nothing enforces a rising
-build number, and the `GitCommitHash` and `BuildDate` stamps written by the *Run GateAndStamp
-script* phase already tell builds apart. If the app is ever distributed, the build number starts
-behaving like the iOS app's.
+promises nothing to the other two repos. `CURRENT_PROJECT_VERSION` behaves like the iOS app's: it
+rises once per upload and never falls, because this app is heading for distribution through App
+Store Connect, which refuses a build number it has already seen. It starts at **1000** — four
+digits, so an HTML build number reads at a glance as a build number rather than as a version, the
+same way the iOS app's does. Anything below that belongs to the era before distribution and reached
+nobody. Each upload is tagged `b<number>`, and the *Run GateAndStamp script* phase refuses to
+archive a number whose tag already exists, that being the bump not having happened. The loop the
+numbers move in is the iOS one: `Photo Club Hub HTML/Documentation/ReleaseProcess.md` names what is
+specific to this repo and links on to the document itself, which lives in the iOS repo.
 
 The Data package is the opposite — its version is a **contract**, in plain semantic versioning, with
 MAJOR reserved for changes that break consumers. This app pins `.upToNextMajor(from: "3.0.0")`, so a
@@ -29,8 +33,8 @@ the iOS app.
 The three repos were aligned at 3.0.0 once, when the old "release train" — a shared version prefix
 with the compatibility boundary at the second position — was dropped in favour of ordinary semver.
 **They float apart from then on**; matching numbers prove nothing and are not maintained. Full
-description in vdhamer/Photo-Club-Hub's `Photo Club Hub/Documentation/ReleaseProcess.md`; the
-reasoning is in vdhamer/Photo-Club-Hub#808.
+description in the release process document reached via
+`Photo Club Hub HTML/Documentation/ReleaseProcess.md`; the reasoning is in vdhamer/Photo-Club-Hub#808.
 
 ## Key dependencies
 
