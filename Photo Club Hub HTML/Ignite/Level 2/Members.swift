@@ -38,16 +38,14 @@ struct Members: StaticPage {
 
     let dateFormatter = DateFormatter()
 
-    private var moc: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-    // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
-    private var club: Organization
-    private var clubFullNameTown: String // duplicates info in club, but String is sendable and Organization isn't
+    // Neither the context nor the Organization is stored. This page is handed to Ignite's async `publish()`,
+    // and both are non-`Sendable`, so they stay `init` parameters and what `body()` needs from the club is
+    // copied out as a String while the context's queue still owns it (#255).
+    private var clubFullNameTown: String
 
     // MARK: - init()
 
     init(moc: NSManagedObjectContext, club: Organization, languageID: String, preferences: PreferencesStructHTML) {
-        self.moc = moc
-        self.club = club
         self.clubFullNameTown = club.fullNameTown
         self.languageID = languageID
         self.clubNickname = club.nickName
