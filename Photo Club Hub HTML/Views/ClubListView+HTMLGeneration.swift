@@ -19,8 +19,7 @@ nonisolated extension ClubListView {
     // MARK: - page generation for individual levels
 
     @discardableResult
-    func generateLevel0(preferences: PreferencesStructHTML,
-                        publishImmediately: Bool = true) -> [any Ignite::StaticPage] { // "::" requires Swift 6.4
+    func generateLevel0(preferences: PreferencesStructHTML) -> [any Ignite::StaticPage] { // "::" needs Swift 6.4
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level0.generation"
@@ -29,25 +28,12 @@ nonisolated extension ClubListView {
 
         return bgContext.performAndWait { // generate website
             let level0Pages = Level0Pages(moc: bgContext, preferences: preferences) // actual loading of the data
-
-            if publishImmediately {
-                Task {
-                    do {
-                        try await level0Pages.publish() // generate HTML
-                    } catch {
-                        ifDebugFatalError("Publishing of results of Level0Site() failed. Error: \(error)")
-                        print(error.localizedDescription)
-                    }
-                }
-            }
-
             return level0Pages.pages
         }
     }
 
     @discardableResult
-    func generateLevel1(preferences: PreferencesStructHTML,
-                        publishImmediately: Bool = true) -> [any Ignite::StaticPage] { // '::' requires Swift 6.4
+    func generateLevel1(preferences: PreferencesStructHTML) -> [any Ignite::StaticPage] { // '::' needs Swift 6.4
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level1.generation"
@@ -56,16 +42,6 @@ nonisolated extension ClubListView {
 
         return bgContext.performAndWait { // generate website
             let level1Pages = Level1Pages(moc: bgContext, preferences: preferences) // load data
-            if publishImmediately {
-                Task {
-                    do {
-                        try await level1Pages.publish() // generate HTML
-                    } catch {
-                        ifDebugFatalError("Publishing of results of Level1Site() failed. Error: \(error)")
-                        print(error.localizedDescription)
-                    }
-                }
-            }
             return level1Pages.pages
         }
     }
@@ -75,11 +51,10 @@ nonisolated extension ClubListView {
     /// Delegates to `Level2Site`, which fetches all clubs and all languages from CoreData and creates
     /// one `Members` page per combination — but only for languages that have at least one
     /// `LocalizedExpertise` translation (keeping Level 2 output consistent with Level 0 expertise pages).
-    /// All CoreData reads happen inside `performAndWait` on a dedicated background context;
-    /// Ignite's `publish()` is then called asynchronously via a `Task`.
+    /// All CoreData reads happen inside `performAndWait` on a dedicated background context.
+    /// Publishing is not done here: ``publishAllLevels(preferences:)`` collects levels 0-2 and publishes them once.
     @discardableResult
-    func generateLevel2(preferences: PreferencesStructHTML,
-                        publishImmediately: Bool = true) -> [any Ignite::StaticPage] { // "::" syntac requires Swift 6.4
+    func generateLevel2(preferences: PreferencesStructHTML) -> [any Ignite::StaticPage] { // "::" needs Swift 6.4
 
         let bgContext = PersistenceController.shared.container.newBackgroundContext()
         bgContext.name = "Level2.generation"
@@ -88,16 +63,6 @@ nonisolated extension ClubListView {
 
         return bgContext.performAndWait {
             let level2Pages = Level2Pages(moc: bgContext, preferences: preferences)
-            if publishImmediately {
-                Task {
-                    do {
-                        try await level2Pages.publish()
-                    } catch {
-                        ifDebugFatalError("Publishing of results of Level2Site() failed. Error: \(error)")
-                        print(error.localizedDescription)
-                    }
-                }
-            }
             return level2Pages.pages
         }
     }
@@ -127,11 +92,11 @@ nonisolated extension ClubListView {
         // per-level structure stays visible into LevelAllSite (#217).
         let pageGroups: [PageGroup] = [
             PageGroup(label: "Level 0 – Expertises",
-                      pages: generateLevel0(preferences: preferences, publishImmediately: false)),
+                      pages: generateLevel0(preferences: preferences)),
             PageGroup(label: "Level 1 – Organizations",
-                      pages: generateLevel1(preferences: preferences, publishImmediately: false)),
+                      pages: generateLevel1(preferences: preferences)),
             PageGroup(label: "Level 2 – Members",
-                      pages: generateLevel2(preferences: preferences, publishImmediately: false))
+                      pages: generateLevel2(preferences: preferences))
         ]
 
         // Single publish: one landing page + the labeled groups → one clearBuildFolder, no clobbering.
