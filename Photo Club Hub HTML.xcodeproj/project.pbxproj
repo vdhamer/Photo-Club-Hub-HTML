@@ -42,6 +42,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		37DA871E3037A5630064E3AA /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Documentation/Folders.md,
+				Documentation/Notes.txt,
+				Documentation/ReleaseNotes.md,
+				Documentation/ReleaseProcess.md,
+			);
+			target = D0E06C0F2C8C5ABC0025734B /* Photo Club Hub HTML */;
+		};
 		D0B9D5012CC443D900B1541C /* Exceptions for ".github" folder in "Photo Club Hub HTML" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -68,6 +78,9 @@
 		};
 		D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				37DA871E3037A5630064E3AA /* Exceptions for "Photo Club Hub HTML" folder in "Photo Club Hub HTML" target */,
+			);
 			path = "Photo Club Hub HTML";
 			sourceTree = "<group>";
 		};
@@ -420,9 +433,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Photo Club Hub HTML/Photo_Club_Hub_HTML.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Photo Club Hub HTML/Preview Content\"";
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
@@ -434,6 +448,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Photo-Club-Hub-HTML-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -459,9 +474,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Photo Club Hub HTML/Photo_Club_Hub_HTML.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 100;
+				CURRENT_PROJECT_VERSION = 1000;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Photo Club Hub HTML/Preview Content\"";
 				DEVELOPMENT_TEAM = YDEWPN9GZ6;
@@ -473,6 +489,7 @@
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Photo-Club-Hub-HTML-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
