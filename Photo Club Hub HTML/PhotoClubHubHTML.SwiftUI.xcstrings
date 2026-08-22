@@ -476,7 +476,7 @@
       }
     },
     "Commit" : {
-      "comment" : "Label for the git commit this app was built from",
+      "comment" : "Label for a git commit, used for this app and for the Data package",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -488,6 +488,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Commit"
+          }
+        }
+      }
+    },
+    "Committed" : {
+      "comment" : "Label for when the Data package's commit was made",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Committed"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gecommit"
           }
         }
       }
@@ -505,6 +522,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inhoud"
+          }
+        }
+      }
+    },
+    "Copied" : {
+      "comment" : "Button label right after the About information was copied",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copied"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gekopieerd"
+          }
+        }
+      }
+    },
+    "Copy" : {
+      "comment" : "Button that copies everything this window shows to the clipboard",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieer"
           }
         }
       }
@@ -696,23 +747,6 @@
         }
       }
     },
-    "HTML app version" : {
-      "comment" : "Label for this app's own marketing version and build number",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HTML app version"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "HTML app versie"
-          }
-        }
-      }
-    },
     "Include recent former members" : {
       "comment" : "Toggle to enable displaying former club members in extra table",
       "localizations" : {
@@ -726,23 +760,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon ook recente voormalige leden"
-          }
-        }
-      }
-    },
-    "Library version" : {
-      "comment" : "Label for the Photo Club Hub Data package's version",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Library version"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Data module versie"
           }
         }
       }
@@ -765,7 +782,7 @@
       }
     },
     "N/A" : {
-      "comment" : "Stands in for the build number, which the Data library doesn't have",
+      "comment" : "Stands in for the library commit when there is none to show",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -828,6 +845,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Uitvoermap"
+          }
+        }
+      }
+    },
+    "Paths" : {
+      "comment" : "Header over the repository link and the output folder",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paths"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paden"
+          }
+        }
+      }
+    },
+    "Photo Club Hub Data" : {
+      "comment" : "Name of the Data package this app is built against",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo Club Hub Data"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fotoclub Hub Data"
           }
         }
       }
@@ -896,23 +947,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gevonden:"
-          }
-        }
-      }
-    },
-    "Repository owner" : {
-      "comment" : "Label for the name of the person owning the repository",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Repository owner"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Archief eigenaar"
           }
         }
       }
@@ -1076,22 +1110,12 @@
       }
     },
     "There is no generated website yet. Use Actions → Generate website first." : {
-      "comment" : "Error shown when previewing before the website has been generated"
-    },
-    "There is no generated website yet. Use Actions ▸ Generate website first." : {
       "comment" : "Error shown when previewing before the website has been generated",
-      "extractionState" : "stale",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "There is no generated website yet. Use Actions → Generate website first."
-          }
-        },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Er is nog geen website gemaakt. Gebruik eerst Acties → Website maken."
+            "state" : "translated",
+            "value" : "Gebruik eerst Acties → Genereren om de website aan te maken."
           }
         }
       }
@@ -1109,6 +1133,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertaal locaties"
+          }
+        }
+      }
+    },
+    "Version" : {
+      "comment" : "Label for a version number, used for this app and for the Data package",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versie"
           }
         }
       }
