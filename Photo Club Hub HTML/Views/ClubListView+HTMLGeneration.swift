@@ -140,6 +140,10 @@ nonisolated extension ClubListView {
 
         // Counted from what was handed to CompleteSite rather than by listing Build/, which also holds css/,
         // images/ and the feed. The 1 is the landing page CompleteSite owns and adds to the groups' pages.
+        //
+        // One total, not a per-level breakdown: the labels above would make one nearly free, but the record
+        // counter in RecordsFooterView is where per-level numbers already live, and a second set in the
+        // completion alert would only duplicate them or quietly disagree (#246).
         return pageGroups.reduce(1) { $0 + $1.pages.count }
     }
 
