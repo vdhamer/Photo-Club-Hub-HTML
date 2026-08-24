@@ -1,5 +1,5 @@
 {
-  "originHash" : "a2db0670ac4a0aca7bd69a2cc98fa75fa7abba1033d5dfc7f991e76d27b6741c",
+  "originHash" : "99410b89300bd24f6f674f7c78c101dcdcd2bacfb2db76d67fec4c24bee93fe4",
   "pins" : [
     {
       "identity" : "flyingfox",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vdhamer/Photo-Club-Hub-Data",
       "state" : {
-        "revision" : "5813872e7e945e8d602f157c396178d8be51a632",
-        "version" : "3.0.0"
+        "revision" : "132515de0b03033aa758b2a4f6a4c132955ae137",
+        "version" : "3.0.1"
       }
     },
     {
