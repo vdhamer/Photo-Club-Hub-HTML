@@ -35,14 +35,14 @@ fi
 
 hash=$(git -C "$PROJECT_DIR" rev-parse HEAD) # stamps: on every build
 test -z "$dirty" || hash="$hash-dirty"
-# The stamps go into a file owned by this script, never into the built Info.plist. 
+# The stamps go into a file owned by this script, never into the built Info.plist.
 # Xcode owns that one: it regenerates it from the target's INFOPLIST_FILE at a moment determined by the build system.
-# Ssince this phase declares no inputs or outputs, there is nothing ordering the two. 
-# On a clean build the regeneration happens first and the stamps survive; 
+# Since this phase declares no inputs or outputs, there is nothing ordering the two.
+# On a clean build the regeneration happens first and the stamps survive;
 # on every incremental build afterwards it happens a few milliseconds later and silently discards them (#822).
-# Nothing else in the build produces BuildStamp.plist, and code signing runs after this phase, 
+# Nothing else in the build produces BuildStamp.plist, and code signing runs after this phase,
 # so what is written here is what ships.
-# The resources folder is the app bundle itself on Photo Club Hub (iOS) 
+# The resources folder is the app bundle itself on Photo Club Hub (iOS)
 # and Contents/Resources on Photo Club Hub HTML (macOS); the build setting covers both.
 stampDir="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 test -d "$stampDir" || { echo "error: no resources folder at $stampDir"; exit 1; }
@@ -84,7 +84,7 @@ else
   done
 fi
 
-# The pin names a commit but not when it was made, and that is what separates "the library moved last week" 
+# The pin names a commit but not when it was made, and that is what separates "the library moved last week"
 # from "it has been stable for a year". Only git knows, so ask the checkout SwiftPM made,
 # which is a full clone. Asking for this exact revision self-validates: a missing or wrong checkout
 # simply has no such commit. Unlike BuildDate above, %cI is strict ISO 8601 with a UTC offset, so it
