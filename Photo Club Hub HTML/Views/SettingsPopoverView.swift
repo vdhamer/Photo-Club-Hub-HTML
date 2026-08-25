@@ -17,7 +17,7 @@ import SwiftUI // this is a SwiftUI view
 /// The rows sit in two `Section`s — *Hosting* (how the site is served) and *Content* (what appears on the
 /// pages) — in a `Form` styled `.grouped`, i.e. the same containers a macOS Settings pane uses. A `Form` is
 /// what makes section headers headers at all: outside a `Form` or a `List`, `Section` renders its header as
-/// ordinary text. `doneButton` stays outside the `Form`, or it would become a third, unlabelled section.
+/// ordinary text. `doneButton` stays outside the `Form`, or it would become a third, unlabeled section.
 ///
 /// The section fill is the system's and is left alone. It cannot be restyled anyway —
 /// `.scrollContentBackground(.hidden)`, a darker `.background` and `.listRowBackground` are all ignored, and

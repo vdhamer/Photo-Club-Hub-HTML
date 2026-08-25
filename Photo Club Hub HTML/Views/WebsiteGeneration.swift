@@ -33,7 +33,7 @@ private struct WebsiteGenerationSupport: ViewModifier {
     /// Non-nil while the alert is up. Owned by the hosting view, which sets it when a generate finishes.
     @Binding var outcome: WebsiteGenerationOutcome?
 
-    /// Needed only by the *Preview website* button, which honours `allowRemotePreview` like the menu item does.
+    /// Needed only by the *Preview website* button, which honors `allowRemotePreview` like the menu item does.
     let preferences: PreferencesStructHTML
 
     /// Where a failure to start the preview server goes: the alert that

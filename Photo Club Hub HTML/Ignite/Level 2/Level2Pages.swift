@@ -42,7 +42,7 @@ struct Level2Pages: Site {
 
         let clubType: String = OrganizationTypeEnum.club.rawValue // constant
         let clubsFetch: NSFetchRequest<Organization> = Organization.fetchRequest()
-        // The fetch `.predicate` filters out non-club (now: Museum) organisations.
+        // The fetch `.predicate` filters out non-club (now: Museum) organizations.
         // These would also be filtered out below when we generate pages for only Organizations
         // with at least one Member because Museums are not allowed to have Members.
         // But it is included here for clarity, safety (e.g. if new OrganizationTypes are added), and performance.

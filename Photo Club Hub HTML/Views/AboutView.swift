@@ -32,7 +32,7 @@ struct AboutView: View {
                 // The right/trailing one is about the Photo Club Hub Data package.
                 // The extra width this costs is needed anyway to display paths (a bit further down).
                 HStack(alignment: .top, spacing: 24) {
-                    labelledGroup(appName) {
+                    labeledGroup(appName) {
                         versionRow(versionLabel, value: Bundle.main.fullVersion,
                                    missing: noStamp, isIdentifier: true)
                         versionRow(commitLabel, value: Bundle.main.gitCommit,
@@ -42,7 +42,7 @@ struct AboutView: View {
                                    value: Bundle.main.buildDate, missing: noStamp)
                     }
 
-                    labelledGroup(dataPackageName) {
+                    labeledGroup(dataPackageName) {
                         versionRow(versionLabel, value: Bundle.main.libraryVersion,
                                    missing: noStamp, isIdentifier: true)
                         versionRow(commitLabel, value: Bundle.main.libraryCommit,
@@ -53,7 +53,7 @@ struct AboutView: View {
                     }
                 }
 
-                labelledGroup(Text("Paths", tableName: "PhotoClubHubHTML.SwiftUI",
+                labeledGroup(Text("Paths", tableName: "PhotoClubHubHTML.SwiftUI",
                                    comment: "Header over the repository link and the output folder")) {
                     HStack {
                         Text("GitHub", tableName: "PhotoClubHubHTML.SwiftUI",
@@ -136,7 +136,7 @@ struct AboutView: View {
     // Every label here is a `Text` built from a literal at the point of use, not a `String` from
     // `String(localized:)`. Both localize, but only the `Text` form resolves through the SwiftUI
     // environment, and the rows that used the `String` form showed up as untranslated (and, with the
-    // scheme's "Show non-localized strings" on, in capitals) while every neighbouring row did not.
+    // scheme's "Show non-localized strings" on, in capitals) while every neighboring row did not.
     private var noStamp: Text {
         Text("?", tableName: "PhotoClubHubHTML.SwiftUI",
              comment: "Stands in for the build date or commit when absent")
@@ -161,7 +161,7 @@ struct AboutView: View {
     }
 
     //
-    private func labelledGroup<Rows: View>(_ header: Text, @ViewBuilder rows: () -> Rows) -> some View {
+    private func labeledGroup<Rows: View>(_ header: Text, @ViewBuilder rows: () -> Rows) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             sectionHeader(header)
             rows()
@@ -169,7 +169,7 @@ struct AboutView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    // Grey rather than black, and a size up from the rows: a header that is quieter in colour but
+    // Gray rather than black, and a size up from the rows: a header that is quieter in color but
     // larger in size reads as a heading without competing with the values it introduces.
     private func sectionHeader(_ title: Text) -> some View {
         title
@@ -223,7 +223,7 @@ struct AboutView: View {
         .buttonStyle(.automatic)
     }
 
-    // No icon on Close: macOS dialog buttons are labelled in words, and there is no conventional
+    // No icon on Close: macOS dialog buttons are labeled in words, and there is no conventional
     // glyph for dismissing a window the way there is for copying to the clipboard.
     private var buttonWidth: CGFloat { 96 }
 

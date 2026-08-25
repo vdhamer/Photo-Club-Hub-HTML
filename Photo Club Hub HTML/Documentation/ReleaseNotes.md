@@ -14,7 +14,7 @@ USER-FACING
 STRUCTURAL
 
 * Level 0 → Level 1 → Level 2 sequencing moved from `DispatchGroup` plus `notify(queue: .main)` to async/await, so the app stopped using a second concurrency model alongside the iOS app's.
-* All fourteen club loaders now call their awaitable `static load()` rather than the fire-and-forget initialisers.
+* All fourteen club loaders now call their awaitable `static load()` rather than the fire-and-forget initializers.
 * The sequencing then moved out of this app entirely: `loadClubsAndMembers()` is now a call to `LevelLoader.loadAllLevels()` (Data#12). `loadLevels0To2()`, the fourteen-club list and this app's `makeBgContext` are gone — 136 fewer lines in `Photo_Club_Hub_HTMLApp.swift`. The background contexts' merge policy is now the package's choice rather than this app's, which ends a silent disagreement with the iOS app about it.
 * Built using v2.11.4 of the Photo Club Hub Data package.
 

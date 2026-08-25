@@ -19,7 +19,7 @@ import UniformTypeIdentifiers // for UTType
 /// Dot segments are *not* the reason. FlyingFox standardizes those away in `HTTPDecoder` before any handler
 /// runs — the fix for swhitty/FlyingFox#24 — so `..` never reaches ``resolve(_:)``. What the decoder cannot
 /// do is resolve symlinks, because only this handler knows the root they would have to stay under. That is
-/// what the containment check in ``resolve(_:)`` is for, with dot segments covered again as defence in depth.
+/// what the containment check in ``resolve(_:)`` is for, with dot segments covered again as defense in depth.
 ///
 /// Everything after resolution is FlyingFox's: file streaming, `Content-Length`, `ETag`/`Last-Modified`
 /// with 304 handling, and HTTP/1.1 persistent connections. That last one is not a refinement — it is why
@@ -79,7 +79,7 @@ struct PreviewSiteHandler: HTTPHandler {
     /// FlyingFox has its own MIME lookup, but keeps it internal, so this stays here.
     private static func contentType(of url: URL) -> String {
         // Ignite emits .rss and .xml, which UTType maps to text/xml and application/xml respectively;
-        // both are fine for a browser. Anything unrecognised falls back to a byte stream.
+        // both are fine for a browser. Anything unrecognized falls back to a byte stream.
         guard let type = UTType(filenameExtension: url.pathExtension),
               let mime = type.preferredMIMEType else { return "application/octet-stream" }
         return type.conforms(to: .text) || type == .html ? "\(mime); charset=utf-8" : mime

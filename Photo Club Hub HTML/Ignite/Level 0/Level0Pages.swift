@@ -67,7 +67,7 @@ struct Level0Pages: Site {
 
         var pageList: [any StaticPage] = []
         for language in languages {
-            if language.isoCode != language.isoCode.lowercased() { // just a guard because violation → obscure behaviour
+            if language.isoCode != language.isoCode.lowercased() { // just a guard because violation → obscure behavior
                 ifDebugFatalError("isoCode for language should be in lowercase. It isn't: \(language.isoCode)")
             }
 
