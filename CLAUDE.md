@@ -79,8 +79,10 @@ Three things must be in place for `site.publish()` to work from the sandboxed ap
 
 ## Planning & process live in GitHub, not local files
 
-GitHub is the technical and process source of truth across the Photo Club Hub repos (Photo-Club-Hub, Photo-Club-Hub-Data, Photo-Club-Hub-HTML).
-Implementation plans, design rationale, and follow-up work belong in **GitHub issues**, not in local `.md` files — the maintainer and other contributors do not read local planning files.
+GitHub is the technical and process source of truth across the Photo Club Hub repos
+(Photo-Club-Hub, Photo-Club-Hub-Data, Photo-Club-Hub-HTML). Implementation plans, design
+rationale, and follow-up work belong in **GitHub issues**, not in local `.md` files — the
+maintainer and other contributors do not read local planning files.
 
 - When you produce a plan or capture follow-up work, write it into the relevant GitHub issue
   (create one if needed) and make that issue self-sufficient: code sketches, file paths,
