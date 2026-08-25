@@ -37,6 +37,7 @@
 		27FDC883F3754316AA7496F6 /* CLAUDE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CLAUDE.md; sourceTree = "<group>"; };
 		3715FB292E683FD800203775 /* Photo-Club-Hub-HTML-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Photo-Club-Hub-HTML-Info.plist"; sourceTree = "<group>"; };
 		3728D0DB2FBDE97B00E17112 /* settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = settings.json; sourceTree = "<group>"; };
+		3779AE34303D964C00211A2A /* gate-and-stamp.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gate-and-stamp.sh"; sourceTree = "<group>"; };
 		D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_Club_Hub_HTMLApp.swift; sourceTree = "<group>"; };
 		D0E06C102C8C5ABC0025734B /* Photo Club Hub HTML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Club Hub HTML.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -114,6 +115,14 @@
 			path = .claude;
 			sourceTree = "<group>";
 		};
+		3779AE35303D964C00211A2A /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				3779AE34303D964C00211A2A /* gate-and-stamp.sh */,
+			);
+			path = scripts;
+			sourceTree = "<group>";
+		};
 		D05E36C62DD25449005697AC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +133,7 @@
 		D0E06C072C8C5ABC0025734B = {
 			isa = PBXGroup;
 			children = (
+				3779AE35303D964C00211A2A /* scripts */,
 				3715FB292E683FD800203775 /* Photo-Club-Hub-HTML-Info.plist */,
 				D00FBDE22CC6C35000017C24 /* Photo_Club_Hub_HTMLApp.swift */,
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
