@@ -220,5 +220,5 @@ It would be nice to have an app for data enty/editing (rather than editing JSON 
 [discussions-shield]: https://img.shields.io/github/discussions/vdhamer/Photo-Club-Hub-HTML?style=plastic&color=orange
 [discussions-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/discussions
 
-[license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub?style=plastic 
-[license-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/.github/LICENSE.md
+[license-shield]: https://img.shields.io/github/license/vdhamer/Photo-Club-Hub-HTML?style=plastic
+[license-url]: https://github.com/vdhamer/Photo-Club-Hub-HTML/blob/main/LICENSE.md
