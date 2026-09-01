@@ -56,6 +56,12 @@ extension OrganizationsPage {
 
             // Sort in-memory by localized Country → Town → Name using the page's locale.
             // Organizations without a LocalizedAddress (empty-string fallback) sort to the top.
+            //
+            // The keys below read `localizedCountry_` / `localizedTown_` directly rather than through
+            // `Organization.localizedCountry(for:)`, which the displayed cells now use. That is deliberate:
+            // the accessor answers "Country?" for a missing row, which would collate among the C's and
+            // scatter the un-reverseGeocoded organizations through the table instead of grouping them where they
+            // can be seen at a glance. Display string and sort key are different questions here.
             if let language {
                 let locale = Locale(identifier: languageID)
                 organizations.sort { lhs, rhs in
@@ -157,9 +163,8 @@ extension OrganizationsPage {
             Column { // country
                 // Compute displayCountry outside the Group{} builder to satisfy the result builder
                 let displayCountry: String = {
-                    guard let language, let addr = club.localizedAddress(for: language)
-                    else { return "" }
-                    return addr.localizedCountry_ ?? ""
+                    guard let language else { return "" } // no Language row for this page's language
+                    return club.localizedCountry(for: language) // "Country?" until the pair is geocoded
                 }()
                 Group {
                     Span(displayCountry)
@@ -169,10 +174,11 @@ extension OrganizationsPage {
             Column { // town
                 // Compute displayTown outside the Group{} builder to satisfy the result builder
                 let displayTown: String = {
-                    guard let language,
-                          let addr = club.localizedAddress(for: language)
+                    // The row is only tested for existence: diacritics are stripped from the JSON-supplied
+                    // fallback but deliberately kept on a geocoded name, so the two branches stay apart.
+                    guard let language, club.localizedAddress(for: language) != nil
                     else { return String("\(club.town)".replacingUTF8Diacritics) }
-                    return addr.localizedTown_ ?? String("\(club.town)".replacingUTF8Diacritics)
+                    return club.localizedTown(for: language)
                 }()
                 Group {
                     Span(displayTown)

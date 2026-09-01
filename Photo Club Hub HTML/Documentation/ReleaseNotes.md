@@ -4,6 +4,19 @@ TO-DO
 
 ---------------------------------------------------------------------------
 
+### 3.0.0 (GitHub commit ???????) ??-??-2026
+
+USER-FACING
+
+* The Country column of the club table now reads "Country?" for an organization whose address has not been reverse-geocoded yet, where it was previously blank. Those rows still sort to the top rather than among the C's, so they stay visible as a group: the displayed string and the sort key are deliberately different questions (Photo-Club-Hub#827).
+
+STRUCTURAL
+
+* The Country and Town cells read `Organization.localizedCountry(for:)` and `localizedTown(for:)` instead of reaching past them to the underscored `localizedCountry_` / `localizedTown_`. The fallback for a missing `LocalizedAddress` row now lives in the package, shared with the iOS app, rather than being spelled out at each call site. The Town cell keeps its own diacritic handling, which applies to the JSON-supplied name but deliberately not to a geocoded one, so it still tests for the row rather than reading through the accessor alone.
+* Built using v3.2.0 of the Photo Club Hub Data package.
+
+---------------------------------------------------------------------------
+
 ### 2.11.3 (GitHub commit ecf3d67) 07-08-2026
 
 USER-FACING
