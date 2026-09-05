@@ -1,6 +1,18 @@
 #!/bin/sh
 # Invoked by the "Run GateAndStamp script" build phase; not meant to be run by hand.
 #
+# TWO COPIES, KEPT BYTE-IDENTICAL. This file exists twice, once in each app repo:
+#   Photo-Club-Hub/scripts/release/gate-and-stamp.sh   (iOS)
+#   Photo-Club-Hub-HTML/scripts/gate-and-stamp.sh      (macOS)
+# The paths differ because the two repos organise scripts/ differently; the contents
+# must not. A weekly GitHub Action fetches both and fails if they differ:
+#   Photo-Club-Hub-Data/.github/workflows/weekly-sweep.yml (Mondays, job gate-and-stamp-in-sync)
+# It lives in the Data package because that is the only repo both apps depend on, so a
+# check about the pair belongs to neither half. Design: vdhamer/Photo-Club-Hub-Data#23.
+#
+# So: edit this file in both repos in the same sitting, or Monday goes red. If the two
+# ever need to diverge for real, delete that job and say why in the same commit.
+#
 #   Gates  (archiving only) refuse a dirty or unpushed working tree.
 #   Stamps (every build)    write GitCommitHash, BuildDate, LibraryVersion, LibraryRevision and
 #                           LibraryCommitDate into a custom BuildStamp.plist inside the built app.
