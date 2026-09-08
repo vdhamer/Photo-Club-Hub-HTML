@@ -212,6 +212,23 @@
         }
       }
     },
+    "Country" : {
+      "comment" : "HTML table header for country column.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Country"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Land"
+          }
+        }
+      }
+    },
     "Current members of %@" : {
       "comment" : "Title badge at top of Members HTML page",
       "localizations" : {
@@ -518,23 +535,6 @@
         }
       }
     },
-    "Museum website" : {
-      "comment" : "HTML table header for museum website link.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Museum website"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Museum website"
-          }
-        }
-      }
-    },
     "Museum name" : {
       "comment" : "HTML table header for museum name column.",
       "localizations" : {
@@ -548,6 +548,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Museumnaam"
+          }
+        }
+      }
+    },
+    "Museum website" : {
+      "comment" : "HTML table header for museum website link.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Museum website"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Museum website"
           }
         }
       }
@@ -705,23 +722,6 @@
         }
       }
     },
-    "Stats" : {
-      "comment" : "Button linking to page with statistics",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stats"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Statistieken"
-          }
-        }
-      }
-    },
     "The listed ex-members were members of this club for, on average, %@ years." : {
       "comment" : "Footer for former members table",
       "localizations" : {
@@ -786,23 +786,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deze pagina is onderdeel van het %1$@ netwerk en is gegenereerd op %2$@ %3$@."
-          }
-        }
-      }
-    },
-    "Country" : {
-      "comment" : "HTML table header for country column.",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Country"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Land"
           }
         }
       }

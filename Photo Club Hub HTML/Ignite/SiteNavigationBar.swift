@@ -65,13 +65,11 @@ struct SiteNavigationBar: BlockElement {
             .linkStyle(.hover)
             .role(.primary)
 
-            Link(String(localized: "Stats",
-                        table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
-                        comment: "Button linking to page with statistics"),
-                 target: "/\(languageID)/statistics")
-            .linkStyle(.hover)
-            .role(.primary)
+            // No Stats item: the page it linked to, /<lang>/statistics, is not generated, so the
+            // menu offered a 404 on every page (HTML#263). Restore this when a StatisticsPage
+            // exists, and take its target from `StatisticsPage.relativePath(languageID:)` rather
+            // than a literal, the way every other item here does. A hardcoded path is what let
+            // this point at nothing in the first place.
 
             documentationDropdown(languageBundle: languageBundle).dropup()
 
