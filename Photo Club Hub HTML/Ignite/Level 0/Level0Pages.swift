@@ -24,7 +24,7 @@ import Photo_Club_Hub_Data // for Expertise, Language
 struct Level0Pages: Site {
 
     let name: String = "Expertises"
-    // e.g. "http://localhost:8000" when previewing, "https://www.fcDeGender.nl/expertises" when published
+    // e.g. "http://localhost:8000" when previewing, "https://www.fcDeGender.nl/hub/nl/expertises" when published
     let url: URL
     let builtInIconsEnabled: BootstrapOptions = .none
     let author = "Peter van den Hamer"
