@@ -2,15 +2,15 @@
 //  CompleteSite.swift
 //  Photo Club Hub HTML
 //
-//  Created by Peter van den Hamer on 14/06/2026.
+//  Created by Claude Code under guidance of Peter van den Hamer on 14/06/2026.
 //
 
-import Ignite // for Site
-import Foundation // for URL
+import Ignite              // for Site
+import Foundation          // for URL
 import Photo_Club_Hub_Data // for ClubsPage.relativePath language target
 
-/// A labeled group of pre-built pages, kept separate so the per-level
-/// structure stays visible inside `LevelAllSite` and can be reported on (page counts per page group).
+/// A labeled group of pre-built pages, kept separate so the per-level structure stays visible inside `LevelAllSite`
+/// and can be reported on (page counts per page group).
 /// Extensible beyond the current levels — e.g. with a future "Level 1 -  Museums" group is just another value.
 struct PageGroup {
     let label: String // e.g. "Level 0 - Expertises"
@@ -19,7 +19,7 @@ struct PageGroup {
 
 /// Single Ignite `Site` published once so all three levels' pages coexist in one `Build/` tree (#215).
 ///
-/// Pages are supplied pre-built by the caller (the Level 0/1/2 generators with the publishing step bypassed)
+/// Pages are supplied pre-built by the caller (the Level 0/1/2 generators with bypassing of the publishing step)
 /// as labeled `PageGroup`s; the only page this site owns is the shared landing page. Because
 /// `publish()` is called exactly once, Ignite's `clearBuildFolder()` runs once and the levels don't
 /// clobber each other's output pages.
@@ -48,7 +48,14 @@ struct CompleteSite: Site {
     ///   - preferences: Site-wide settings; `selectedHost` supplies the deployment base URL, and the
     ///     landing page's language buttons follow the same `/<lang>/clubs/` scheme as `Level1Pages`.
     init(pageGroups: [PageGroup], preferences: PreferencesStructHTML) {
-        url = preferences.selectedHost.baseURL
+        // Published into a subdirectory rather than at the host's root, the way Level 0 already uses
+        // `url(forPath: "expertises")`. The published hosts serve this app's output from inside a site
+        // that is not ours: at the root, this site's `index.html`, `robots.txt`, `sitemap.xml` and
+        // `favicon.png` would land beside — and in the case of `index.html` ahead of — the host site's
+        // own. `url(forPath:)` deliberately ignores the path for `.localhost`, whose document root *is*
+        // the generated site, so previewing is unaffected. Changing "hub" changes every published URL,
+        // including ones already printed on paper (HTML#260).
+        url = preferences.selectedHost.url(forPath: "hub")
         // single landing page; its language buttons link to /<lang>/clubs/ (same as Level1Pages)
         homePage = TempRootPage(relativePath: { OrganizationsPage.relativePath(languageID: $0) })
         self.pageGroups = pageGroups

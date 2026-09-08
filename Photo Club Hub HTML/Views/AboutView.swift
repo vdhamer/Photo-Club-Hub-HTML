@@ -2,7 +2,7 @@
 //  AboutView.swift
 //  Photo Club Hub HTML
 //
-//  Created by Claude Code guided by Peter van den Hamer on 05/08/2026.
+//  Created by Claude Code under guidance of Peter van den Hamer on 05/08/2026.
 //
 
 import SwiftUI
