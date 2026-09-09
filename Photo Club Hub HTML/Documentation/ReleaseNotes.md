@@ -18,7 +18,7 @@ STRUCTURAL
 
 * The Country and Town cells read `Organization.localizedCountry(for:)` and `localizedTown(for:)` instead of reaching past them to the underscored `localizedCountry_` / `localizedTown_`. The fallback for a missing `LocalizedAddress` row now lives in the package, shared with the iOS app, rather than being spelled out at each call site. The Town cell keeps its own diacritic handling, which applies to the JSON-supplied name but deliberately not to a geocoded one, so it still tests for the row rather than reading through the accessor alone.
 * The sitemap fix lives in the **Ignite fork** (`Sources/Ignite/Publishing/SiteMapGenerator.swift`), not in this repo, because the file is produced entirely inside Ignite with no seam this app could override. It escapes `&`, `<` and `>` before interpolation rather than percent-encoding the path, deliberately: `&` is legal in a URL path segment (RFC 3986 sub-delims), so the generated links were always correct and only the XML was wrong — escaping leaves every link byte-identical. A regression test came with it (`Tests/IgniteTests/SiteMapGeneratorTests.swift`), asserting that the output *parses* as XML rather than merely containing the right substring. **The bug is still present in upstream Ignite as of September 2026**, so an Ignite update has to carry this change forward rather than assume it arrived; the fork's own comment says so at the call site.
-* Built using v3.2.0 of the Photo Club Hub Data package.
+* Built using v3.3.0 of the Photo Club Hub Data package.
 
 KNOWN ISSUES
 
