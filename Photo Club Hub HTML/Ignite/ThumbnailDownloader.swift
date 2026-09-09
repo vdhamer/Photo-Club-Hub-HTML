@@ -50,7 +50,12 @@ func loadThumbnailToLocal(fullUrl: URL) -> String {
 }
 
 private func chooseLocalFileName(fullUrl: URL) -> String {
-    let fileExtension: String = fullUrl.pathExtension
+    // Always `jpg`, because `downloadThumbnailToLocal` always writes JPEG whatever the source was.
+    // Taking the extension from the remote URL instead produced names that lied about their contents:
+    // `.png` files holding JPEG bytes, and — for a source URL with no extension at all, like
+    // `https://picsum.photos/200` — the extensionless `200.`, which FileZilla then uploaded in ASCII
+    // mode and corrupted, because FTP clients pick binary or text by file extension (#267).
+    let fileExtension = "jpg"
     let baseFileName: String = fullUrl.deletingPathExtension().lastPathComponent
     let remoteURLString: String = fullUrl.absoluteString
 
