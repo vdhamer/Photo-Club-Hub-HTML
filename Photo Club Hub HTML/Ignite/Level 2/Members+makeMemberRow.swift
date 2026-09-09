@@ -108,9 +108,8 @@ extension Members {
 
             Column { // clickable thumbnail of recent work
                 Group {
-                    if useLocalThumbnails {
-                        Image("/images/" +
-                              loadThumbnailToLocal(fullUrl: thumbnail),
+                    if useLocalThumbnails, let localName = loadThumbnailToLocal(fullUrl: thumbnail) {
+                        Image("/images/" + localName,
                               description: "clickable link to portfolio") // Ignite prepends /images/
                         .resizable()
                         .aspectRatio(.square, contentMode: .fill)

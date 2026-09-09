@@ -31,8 +31,12 @@ private let maxFilenameSuffixNumber: Int = 100 // generates a fatalerror in Debu
 private let registryLock = NSLock() // protects localNameRegistry and downloadURLs from race conditions
 nonisolated(unsafe) private var localNameRegistry: [String: String] = [:] // [local filename: remote file path]
 nonisolated(unsafe) private var downloadedURLs: Set<String> = [] // saves all handled remote file paths
+nonisolated(unsafe) private var failedURLs: Set<String> = [] // remote paths whose download did not produce a file
 
-func loadThumbnailToLocal(fullUrl: URL) -> String {
+/// The local filename to reference, or `nil` when no local copy exists — the caller then falls back to the
+/// remote URL, which is what it would have emitted with `useLocalThumbnails` switched off. Returning the
+/// name regardless would point the page at a file that was never written: a 404 on our own server (#265).
+func loadThumbnailToLocal(fullUrl: URL) -> String? {
     // Lock only for the filename reservation; the downloading is not protected from early browser opening of FTPing.
     var shouldDownload = false
     let chosenLocalFileName: String = registryLock.withLock {
@@ -44,9 +48,15 @@ func loadThumbnailToLocal(fullUrl: URL) -> String {
     }
     // Currently (1-Jun-2026) there is no guarantee that the download finishes before testing or use (issue #203).
     if shouldDownload { // prevent multiple downloads from same fullUrl
-        downloadThumbnailToLocal(downloadURL: fullUrl, localFileName: chosenLocalFileName)
+        guard downloadThumbnailToLocal(downloadURL: fullUrl, localFileName: chosenLocalFileName) else {
+            registryLock.withLock { _ = failedURLs.insert(fullUrl.absoluteString) }
+            return nil
+        }
+        return chosenLocalFileName
     }
-    return chosenLocalFileName
+    // Seen before: the same URL must give the same answer every time, so a failed first attempt keeps failing
+    // rather than being retried once per reference — a host that is down would otherwise cost a timeout per page.
+    return registryLock.withLock { failedURLs.contains(fullUrl.absoluteString) } ? nil : chosenLocalFileName
 }
 
 private func chooseLocalFileName(fullUrl: URL) -> String {
@@ -90,17 +100,20 @@ private func chooseLocalFileName(fullUrl: URL) -> String {
     }
 }
 
-private func downloadThumbnailToLocal(downloadURL: URL, localFileName: String) { // for now this is synchronous
+/// Returns whether a local file was written. A failure is loud in Debug and survivable in Release:
+/// a club's server being unreachable costs one thumbnail, not the generation run (#265).
+private func downloadThumbnailToLocal(downloadURL: URL, localFileName: String) -> Bool { // for now this is synchronous
 
     do {
         // swiftlint:disable:next large_tuple
         var results: (data: Data?, urlResponse: URLResponse?, error: (any Error)?)? = (nil, nil, nil)
         results = URLSession.shared.synchronousDataTask(from: downloadURL)
-        guard let data = results?.data else {
-            fatalError("""
-                       Problem downloading thumbnail \(downloadURL.absoluteString): \
-                       \(results?.error?.localizedDescription ?? "")
-                       """)
+        guard let data = results?.data else { // no response at all: DNS failure, refused connection, or timeout
+            ifDebugFatalError("""
+                              Problem downloading thumbnail \(downloadURL.absoluteString): \
+                              \(results?.error?.localizedDescription ?? "<No description>")
+                              """)
+            return false // failed
         }
 
         let image: CGImage = try CGImage.load(data: data) // SwiftImageReadWrite package
@@ -118,10 +131,11 @@ private func downloadThumbnailToLocal(downloadURL: URL, localFileName: String) {
         let imageUrl = imageDirUrl.appendingPathComponent(localFileName)
         try jpegData.write(to: imageUrl)
         print("Wrote jpg to \(imageUrl)")
-    } catch {
+        return true // success
+    } catch { // includes the common case of a 404, whose error page arrives as data that will not decode
         ifDebugFatalError("Problem in jpegData.write in downloadThumbnailToLocal for " +
                           "(\(downloadURL.absoluteString)): \(error)")
-        return
+        return false // failed
     }
 
 }

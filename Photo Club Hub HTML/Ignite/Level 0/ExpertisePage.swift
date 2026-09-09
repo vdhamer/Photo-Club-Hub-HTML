@@ -83,8 +83,10 @@ struct ExpertisePage: StaticPage {
 
                 let membershipCells: [MembershipCell] = sortedMemberships.map { membership in
                     let thumbnailSrc: String
-                    if useLocalThumbnails {
-                        let localName = loadThumbnailToLocal(fullUrl: membership.featuredImageThumbnail)
+                    // A nil local name means the download failed, so fall back to the remote URL rather than
+                    // point the page at a file that was never written (#265).
+                    if useLocalThumbnails, 
+                       let localName = loadThumbnailToLocal(fullUrl: membership.featuredImageThumbnail) {
                         thumbnailSrc = "/images/" + localName
                     } else {
                         thumbnailSrc = membership.featuredImageThumbnail.absoluteString
