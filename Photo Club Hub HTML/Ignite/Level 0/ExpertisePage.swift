@@ -85,7 +85,7 @@ struct ExpertisePage: StaticPage {
                     let thumbnailSrc: String
                     // A nil local name means the download failed, so fall back to the remote URL rather than
                     // point the page at a file that was never written (#265).
-                    if useLocalThumbnails, 
+                    if useLocalThumbnails,
                        let localName = loadThumbnailToLocal(fullUrl: membership.featuredImageThumbnail) {
                         thumbnailSrc = "/images/" + localName
                     } else {
