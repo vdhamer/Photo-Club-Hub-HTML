@@ -105,13 +105,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3728D0DC2FBDE97B00E17112 /* .claude */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = .claude;
-			sourceTree = "<group>";
-		};
 		3779AE35303D964C00211A2A /* scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +129,6 @@
 				D0E06C122C8C5ABC0025734B /* Photo Club Hub HTML */,
 				27FDC883F3754316AA7496F6 /* CLAUDE.md */,
 				D0B9D4FE2CC443D900B1541C /* .github */,
-				3728D0DC2FBDE97B00E17112 /* .claude */,
 				D05E36C62DD25449005697AC /* Frameworks */,
 				D0E06C112C8C5ABC0025734B /* Products */,
 			);
