@@ -26,6 +26,34 @@ enum SiteOutput {
         URL(filePath: NSHomeDirectory()).appending(path: "Build")
     }
 
+    /// Returns whether the site currently in ``buildDirectory`` was generated for ``TargetHost/localhost``.
+    ///
+    /// Only a localhost build can be previewed. The published hosts serve this app's output from a subdirectory, so
+    /// their pages link root-relative *with* that prefix (`/hub/css/…`, `/hub/nl/clubs/`), while the preview
+    /// server's document root is `Build/` itself, which has no `hub/` directory: the stylesheet and every link
+    /// would come back 404.
+    ///
+    /// Read from the **build** rather than from the Settings, because the two can disagree: generate for localhost,
+    /// then switch the target, and what is on disk is still previewable. `sitemap.xml` records the targeted host
+    /// in every `<loc>`, and it survives a relaunch.
+    ///
+    /// Post-generation **reverse geocoding** does not change the answer. It writes to Core Data,
+    /// for the next generate, and never touches `Build/`, so there is no reason to withhold the preview while it runs.
+    ///
+    /// Returns `false` when there is no build or no readable sitemap, which also covers a generate that failed after
+    /// `publish()` had already cleared the directory.
+    static func isGeneratedForLocalhost() -> Bool {
+        let sitemap = buildDirectory.appending(path: "sitemap.xml")
+        guard let text = try? String(contentsOf: sitemap, encoding: .utf8),
+              let start = text.range(of: "<loc>"),
+              let end = text.range(of: "</loc>", range: start.upperBound..<text.endIndex) else {
+            return false
+        }
+        let firstLocation = text[start.upperBound..<end.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let generatedHost = URL(string: firstLocation)?.host() else { return false }
+        return generatedHost == TargetHost.localhost.baseURL.host()
+    }
+
     /// The port the built-in preview server tries first, and the one `TargetHost.localhost` bakes into the
     /// generated site. Matches Ignite's own `ignite run --port` default.
     static let defaultPreviewPort: UInt16 = 8000

@@ -52,6 +52,7 @@ struct ClubListView: View {
     @State private var isGeneratingWebsite: Bool = false // drives the "Generate" command's spinner
     @State private var generationOutcome: WebsiteGenerationOutcome? // non-nil while the "Generate" alert is up
     @State private var previewError: String? // non-nil while the "Preview website" failure alert is up
+    @State private var canPreviewWebsite = false // Build/ holds a localhost build: SiteOutput.isGeneratedForLocalhost()
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -98,10 +99,12 @@ struct ClubListView: View {
         }
         .websiteGenerationSupport(outcome: $generationOutcome, // custom view modifier
                                   preferences: preferences,
+                                  canPreviewWebsite: canPreviewWebsite,
                                   previewError: $previewError)
         .websitePreviewSupport(error: $previewError, allowRemotePreview: preferences.allowRemotePreview)
         .onAppear {
             NSWindow.allowsAutomaticWindowTabbing = false // disable tab bar (HackingWithSwift macOS StormViewer)
+            canPreviewWebsite = SiteOutput.isGeneratedForLocalhost() // the build survives a relaunch
             // Ignite's publish() copies Assets/ from NSHomeDirectory() to Build/; create the directory up front
             let assetsURL = URL(filePath: NSHomeDirectory()).appending(path: "Assets")
             let assetsImagesURL = assetsURL.appending(path: "images")
@@ -134,7 +137,9 @@ struct ClubListView: View {
                         generateWebsite()
                     }
 
-                    PreviewWebsiteButton(preferences: preferences, error: $previewError)
+                    PreviewWebsiteButton(preferences: preferences,
+                                         canPreviewWebsite: canPreviewWebsite, // true if dealing with localhost
+                                         error: $previewError)
 
                     Divider()
 
@@ -186,13 +191,14 @@ struct ClubListView: View {
     /// The alert is raised when `publishAllLevels` returns — the moment the site is on disk — and not when this
     /// task ends, because reverse-geocoding runs on for about five minutes after that (#246).
     ///
-    /// `@MainActor` is what lets the `Task` write the two `@State`s. It does not put the generating on the main
+    /// `@MainActor` is what lets the `Task` write its `@State`s. It does not put the generating on the main
     /// thread: `publishAllLevels` is `nonisolated`, so the `performAndWait` work inside it stays off the main
     /// thread and the spinner keeps spinning.
     @MainActor
     private func generateWebsite() {
         Task {
             isGeneratingWebsite = true // before the first generateLevelN, which blocks its thread once started
+            canPreviewWebsite = false // publish() clears Build/ before rewriting it
             let outcome: WebsiteGenerationOutcome
             do {
                 outcome = .succeeded(pageCount: try await publishAllLevels(preferences: preferences))
@@ -201,6 +207,8 @@ struct ClubListView: View {
             }
             isGeneratingWebsite = false // spinner down first: the alert should not appear on top of it
             generationOutcome = outcome
+            // The build is final here, success or failure. Geocoding below writes only to Core Data.
+            canPreviewWebsite = SiteOutput.isGeneratedForLocalhost()
 
             await geocodeAfterGeneration() // kicks of background task (which may be empty, or take minutes)
         }

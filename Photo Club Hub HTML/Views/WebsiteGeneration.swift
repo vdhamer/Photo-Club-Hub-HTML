@@ -36,6 +36,9 @@ private struct WebsiteGenerationSupport: ViewModifier {
     /// Needed only by the *Preview website* button, which honors `allowRemotePreview` like the menu item does.
     let preferences: PreferencesStructHTML
 
+    /// Whether the site on disk can be previewed, shared with the menu item so both entry points follow one rule.
+    let canPreviewWebsite: Bool
+
     /// Where a failure to start the preview server goes: the alert that
     /// ``SwiftUI/View/websitePreviewSupport(error:allowRemotePreview:)`` already hosts.
     /// Raising it from here is safe because this alert has dismissed by the time the button's action runs.
@@ -65,6 +68,10 @@ private struct WebsiteGenerationSupport: ViewModifier {
                                         set: { if !$0 { outcome = nil } }),
                    presenting: outcome) { outcome in
                 if case .succeeded = outcome {
+                    // Offered but disabled unless the site on disk can be previewed, rather than hidden: the
+                    // button is worth seeing, because its absence would read as "previewing is gone" rather
+                    // than "previewing does not apply to this build". Why only a localhost build qualifies is
+                    // explained at `SiteOutput.isGeneratedForLocalhost()`, which `canPreviewWebsite` reflects.
                     Button(String(localized: "Show website preview",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "App button that serves the generated website and opens a browser")) {
@@ -76,6 +83,7 @@ private struct WebsiteGenerationSupport: ViewModifier {
                             }
                         }
                     }
+                    .disabled(!canPreviewWebsite)
 
                     Button(String(localized: "Show as files (in Finder)",
                                   table: "PhotoClubHubHTML.SwiftUI",
@@ -114,8 +122,12 @@ extension View {
     /// *Preview website* button reports into.
     func websiteGenerationSupport(outcome: Binding<WebsiteGenerationOutcome?>,
                                   preferences: PreferencesStructHTML,
+                                  canPreviewWebsite: Bool,
                                   previewError: Binding<String?>) -> some View {
-        modifier(WebsiteGenerationSupport(outcome: outcome, preferences: preferences, previewError: previewError))
+        modifier(WebsiteGenerationSupport(outcome: outcome,
+                                          preferences: preferences,
+                                          canPreviewWebsite: canPreviewWebsite,
+                                          previewError: previewError))
     }
 
 }
@@ -141,6 +153,7 @@ extension View {
     .frame(width: 320, height: 120)
     .websiteGenerationSupport(outcome: $outcome,
                               preferences: PreferencesStructHTML.defaultValue,
+                              canPreviewWebsite: SiteOutput.isGeneratedForLocalhost(),
                               previewError: $previewError)
 }
 
@@ -158,5 +171,6 @@ extension View {
     .frame(width: 320, height: 120)
     .websiteGenerationSupport(outcome: $outcome,
                               preferences: PreferencesStructHTML.defaultValue,
+                              canPreviewWebsite: SiteOutput.isGeneratedForLocalhost(),
                               previewError: $previewError)
 }

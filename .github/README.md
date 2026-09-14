@@ -83,6 +83,9 @@ The path to the directory with the newly generated pages will resemble
 In the `Settings...` menu you can select whether you want to generate this for a `localhost:8000` web server or
 for a remote host. 
 
+*Preview website* only works for a site generated for `localhost:8000`; after generating for a remote host,
+generate again for localhost to preview.
+
 For a remote host, the app currently requires you to separately copy the generated directory content to that host. 
 For this you can use an FTP client like `Filezilla`. The FTP client will require you to know the remote address
 and the ftp credentials for that site. Once the directory content is copied to your remote server, you can view it in a 

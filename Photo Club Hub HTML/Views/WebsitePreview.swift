@@ -29,6 +29,11 @@ struct PreviewWebsiteButton: View {
 
     let preferences: PreferencesStructHTML
 
+    /// Whether the site on disk can be previewed at all. Owned by the view hosting the menu, which refreshes it
+    /// when the window appears and around each generate. ``SiteOutput/isGeneratedForLocalhost()`` explains why the
+    /// build decides this rather than the Settings.
+    let canPreviewWebsite: Bool
+
     /// Set when the server could not be started, which raises the alert hosted by
     /// ``SwiftUI/View/websitePreviewSupport(error:allowRemotePreview:)``.
     @Binding var error: String?
@@ -46,6 +51,7 @@ struct PreviewWebsiteButton: View {
                 }
             }
         }
+        .disabled(!canPreviewWebsite)
     }
 
 }
