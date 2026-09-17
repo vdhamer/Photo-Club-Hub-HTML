@@ -30,11 +30,9 @@ struct Level1Pages: Site {
         // inject a function defining where the RootPage language links navigate to
         self.homePage = TempRootPage(relativePath: { OrganizationsPage.relativePath(languageID: $0) })
 
-        // get list of all language records in CoreData
-        let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
-        languageFetch.predicate = NSPredicate(format: "localizedExpertises_.@count > 0")
-        languageFetch.sortDescriptors = [NSSortDescriptor(key: "isoCode_", ascending: true)] // for determinism
-        let languages = (try? moc.fetch(languageFetch)) ?? []
+        // The Data package knows which languages the project supports, so the generated pages and the
+        // geocoder always work with the same set (Data#57). Sorted by ISO code, just to be deterministic.
+        let languages = Photo_Club_Hub_Data.Language.supportedLanguages(context: moc)
         print("Generating Level 1 pages for languages: \(languages.map(\.isoCode))")
 
         var pageList: [any StaticPage] = []

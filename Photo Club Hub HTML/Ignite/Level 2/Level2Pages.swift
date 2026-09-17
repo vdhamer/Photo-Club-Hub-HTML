@@ -51,10 +51,9 @@ struct Level2Pages: Site {
         clubsFetch.sortDescriptors = [NSSortDescriptor(key: "nickName_", ascending: true)] // determinism only
         let clubs = (try? moc.fetch(clubsFetch)) ?? []
 
-        let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
-        languageFetch.predicate = NSPredicate(format: "localizedExpertises_.@count > 0")
-        languageFetch.sortDescriptors = [NSSortDescriptor(key: "isoCode_", ascending: true)] // determinism only
-        let languages = (try? moc.fetch(languageFetch)) ?? []
+        // The Data package knows which languages the project supports, so the generated pages and the
+        // geocoder always work with the same set (Data#57). Sorted by ISO code, just to be deterministic.
+        let languages = Photo_Club_Hub_Data.Language.supportedLanguages(context: moc)
         print("Generating Level 2 pages for languages: \(languages.map(\.isoCode))")
 
         var pageList: [any StaticPage] = [] // we build the output here

@@ -58,10 +58,9 @@ struct Level0Pages: Site {
         let expertises = (try? moc.fetch(expertiseFetch)) ?? [] // get all expertises
         if expertises.isEmpty { ifDebugFatalError("No expertises found in database in Level0Site.init()") }
 
-        let languageFetch: NSFetchRequest<Photo_Club_Hub_Data.Language> = Photo_Club_Hub_Data.Language.fetchRequest()
-        languageFetch.predicate = NSPredicate(format: "localizedExpertises_.@count > 0")
-        languageFetch.sortDescriptors = [NSSortDescriptor(key: "isoCode_", ascending: true)]
-        let languages = (try? moc.fetch(languageFetch)) ?? []
+        // The Data package knows which languages the project supports, so the generated pages and the
+        // geocoder always work with the same set (Data#57). Sorted by ISO code, just to be deterministic.
+        let languages = Photo_Club_Hub_Data.Language.supportedLanguages(context: moc)
         if languages.isEmpty { ifDebugFatalError("No languages found in Level0Site.init()") }
         print("Generating Level 0 pages for languages: \(languages.map(\.isoCode))")
 
