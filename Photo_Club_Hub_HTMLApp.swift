@@ -71,12 +71,12 @@ struct PhotoClubHubHtmlApp: App {
 
 extension PhotoClubHubHtmlApp {
 
-    /// Wipes the database and rebuilds it from the JSON files, returning only once the last club has loaded.
+    /// Clears the member data and reloads the JSON files, returning only once the last club has loaded.
     ///
     /// The ordering *within* a pass — Level 0 awaited to completion before any Level 2 loader starts, because of
     /// the uniqueness constraint on `Expertise.id_` — belongs to `LevelLoader` in the Photo Club Hub Data
     /// package, along with the merge policy it depends on and the list of clubs (Data#12). What stays here is
-    /// this app's own decision to start every pass from an empty database.
+    /// this app's own decision to clear the member data before every pass.
     static func loadClubsAndMembers() async {
 
         let viewContext = persistenceController.container.viewContext // "associated with the main application queue"
@@ -84,7 +84,8 @@ extension PhotoClubHubHtmlApp {
         viewContext.undoManager = nil // nil by default on iOS
         viewContext.shouldDeleteInaccessibleFaults = true
 
-        // Clear CoreData database for simplicity and to trigger initConstants()
+        // Clear the member data before reloading. The .standard scope keeps Organization, OrganizationType,
+        // Language and LocalizedAddress, so their rows survive and nothing needs re-seeding.
         Model.deleteCoreDataObjects(viewContext: viewContext, deletionScope: .standard)
 
         await LevelLoader.loadAllLevels()
