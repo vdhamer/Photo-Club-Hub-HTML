@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vdhamer/Photo-Club-Hub-Data",
       "state" : {
-        "revision" : "3daae314ec679f0d3d8f14d59180a3a8d3f39f15",
-        "version" : "3.4.0"
+        "revision" : "ca6e962c7fb1bbb109842692e60374b48b27f617",
+        "version" : "3.5.0"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/swiftlang/swift-cmark.git",
       "state" : {
         "branch" : "gfm",
-        "revision" : "7898f1b3e4befeecee56cb4a3bc8eebd2cb63219"
+        "revision" : "0c8947bbd58c491c54aae114aca40621cddc8357"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/swiftlang/swift-markdown.git",
       "state" : {
         "branch" : "main",
-        "revision" : "27b7fc1a19068bcea3d2072db0ce86360d1400ed"
+        "revision" : "75e3df1d7b664ef3c96595de36c243b98599b3bc"
       }
     },
     {
