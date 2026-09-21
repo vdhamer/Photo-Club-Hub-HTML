@@ -1,6 +1,88 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld have no translation available and keep showing “Town?” or “Country?”." : {
+      "comment" : "Alert sentence: translations that will stay as placeholders",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld has no translation available and keeps showing “Town?” or “Country?”."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld have no translation available and keep showing “Town?” or “Country?”."
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Voor %lld is geen vertaling beschikbaar; daar blijft “Town?” of “Country?” staan."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Voor %lld is geen vertaling beschikbaar; daar blijft “Town?” of “Country?” staan."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld town/country translations are still on their way: see the counter at the bottom of the window." : {
+      "comment" : "Alert sentence: translations still being fetched after generating",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld town/country translation is still on its way: see the counter at the bottom of the window."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld town/country translations are still on their way: see the counter at the bottom of the window."
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Er is nog %lld vertaling van plaats/land onderweg: zie de teller onderaan het venster."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Er zijn nog %lld vertalingen van plaats/land onderweg: zie de teller onderaan het venster."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "?" : {
       "comment" : "Stands in for the build date or commit when absent",
       "localizations" : {
