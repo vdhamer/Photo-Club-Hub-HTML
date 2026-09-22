@@ -53,7 +53,18 @@ struct RecordsFooterView: View {
 
     // MARK: - Body of RecordsFooterView
 
+    /// Recounted on every run of body. What makes body run again while the geocoder works is the fetch of
+    /// `allLocalizedAddresses`: every LocalizedAddress row the geocoder adds or updates changes that fetch, and
+    /// reading it here makes sure SwiftUI counts this view as depending on it. Counting the rows themselves would
+    /// not do: a club with changed coordinates keeps its old row but needs a new one.
+    private var geocodingCounts: GeocodingCounts {
+        _ = allLocalizedAddresses.count
+        return LocalizedAddress.geocodingCounts(context: viewContext)
+    }
+
     var body: some View {
+        let geocoding = geocodingCounts // one count per run of body
+
         HStack(alignment: .center) {
             Text("Records found:",
                  tableName: "PhotoClubHubHTML.SwiftUI",
@@ -77,17 +88,52 @@ struct RecordsFooterView: View {
             Text("◼ \(allPhotographerExpertises.count) expertise tags assigned",
                  tableName: "PhotoClubHubHTML.SwiftUI",
                  comment: "Count of how often expertises have been assigned to photographers")
-            Text("◼ \(allLocalizedAddresses.count) translated locations",
-                 tableName: "PhotoClubHubHTML.SwiftUI",
-                 comment: "Count of how many organizations have been geolocated")
+            translatedLocations(geocoding)
         }
         .foregroundStyle(.secondary)
         .frame(minWidth: 900, minHeight: 15)
+    }
+
+    /// How far translating the town and country of every (organization × language) combination has got.
+    ///
+    /// - ⏳ "257 of 294 locations translated" while a sweep is running.
+    /// - ⚠️ "2 of 294 locations untranslated" when the only gaps are stored "Town?"/"Country?" answers, which are
+    ///   never asked again. The ⚠️ means what it means in the Generate alert (#271), whose sentence is the tooltip.
+    /// - "294 locations translated" when nothing is missing.
+    /// - "100 of 294 locations translated", without a symbol, when combinations without an answer remain and no
+    ///   sweep is running: they were either not asked yet (new clubs before the next Generate) or failed during
+    ///   the last sweep, and only the geocoder knows which, while it runs.
+    @ViewBuilder
+    private func translatedLocations(_ geocoding: GeocodingCounts) -> some View {
+        if isTranslating {
+            Text("◼ ⏳ \(geocoding.completed) of \(geocoding.total) locations translated",
+                 tableName: "PhotoClubHubHTML.SwiftUI",
+                 comment: "Footer while town/country translations are being fetched: done so far, of all")
+        } else if geocoding.waiting > 0 {
+            Text("◼ \(geocoding.completed) of \(geocoding.total) locations translated",
+                 tableName: "PhotoClubHubHTML.SwiftUI",
+                 comment: "Footer when some town/country translations are missing and none are being fetched")
+        } else if geocoding.onErrorPlaceholders > 0 {
+            Text("◼ ⚠️ \(geocoding.onErrorPlaceholders) of \(geocoding.total) locations untranslated",
+                 tableName: "PhotoClubHubHTML.SwiftUI",
+                 comment: "Footer when the only missing town/country translations are ones that cannot be translated")
+                .help(String(localized: """
+                                 \(geocoding.onErrorPlaceholders) locations cannot be translated \
+                                 and will continue to show “Town?” or “Country?”.
+                                 """,
+                             table: "PhotoClubHubHTML.SwiftUI",
+                             comment: "Alert sentence: translations that will stay as placeholders"))
+        } else {
+            Text("◼ \(geocoding.total) locations translated",
+                 tableName: "PhotoClubHubHTML.SwiftUI",
+                 comment: "Footer when every organization has its town/country translated in every language")
+        }
     }
 }
 
 // MARK: - Preview of view
 
-#Preview { // this preview actually works ;-)
-    RecordsFooterView()
+#Preview {
+    RecordsFooterView(isTranslating: false)
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
 }
