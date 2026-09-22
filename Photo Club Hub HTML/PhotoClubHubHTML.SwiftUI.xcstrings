@@ -1,88 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%lld have no translation available and keep showing “Town?” or “Country?”." : {
-      "comment" : "Alert sentence: translations that will stay as placeholders",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld has no translation available and keeps showing “Town?” or “Country?”."
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld have no translation available and keep showing “Town?” or “Country?”."
-                }
-              }
-            }
-          }
-        },
-        "nl" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Voor %lld is geen vertaling beschikbaar; daar blijft “Town?” of “Country?” staan."
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Voor %lld is geen vertaling beschikbaar; daar blijft “Town?” of “Country?” staan."
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "%lld town/country translations are still on their way: see the counter at the bottom of the window." : {
-      "comment" : "Alert sentence: translations still being fetched after generating",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld town/country translation is still on its way: see the counter at the bottom of the window."
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld town/country translations are still on their way: see the counter at the bottom of the window."
-                }
-              }
-            }
-          }
-        },
-        "nl" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Er is nog %lld vertaling van plaats/land onderweg: zie de teller onderaan het venster."
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Er zijn nog %lld vertalingen van plaats/land onderweg: zie de teller onderaan het venster."
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "?" : {
       "comment" : "Stands in for the build date or commit when absent",
       "localizations" : {
@@ -96,6 +14,88 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "?"
+          }
+        }
+      }
+    },
+    "%lld locations are still being translated. Keep the app open and generate again when the ⏳ at the bottom of the window is gone." : {
+      "comment" : "Alert sentence: translations still being fetched after generating",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld location is still being translated. Keep the app open and generate again when the ⏳ at the bottom of the window is gone."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld locations are still being translated. Keep the app open and generate again when the ⏳ at the bottom of the window is gone."
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld locatie wordt nog vertaald. Laat de app open en genereer opnieuw als de ⏳ onderaan het venster verdwenen is."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld locaties worden nog vertaald. Laat de app open en genereer opnieuw als de ⏳ onderaan het venster verdwenen is."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "%lld locations cannot be translated and will continue to show “Town?” or “Country?”." : {
+      "comment" : "Alert sentence: translations that will stay as placeholders",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld location cannot be translated and will continue to show “Town?” or “Country?”."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld locations cannot be translated and will continue to show “Town?” or “Country?”."
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld locatie kan niet worden vertaald; daar blijft “Town?” of “Country?” staan."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld locaties kunnen niet worden vertaald; daar blijft “Town?” of “Country?” staan."
+                }
+              }
+            }
           }
         }
       }
@@ -305,6 +305,64 @@
         }
       }
     },
+    "◼ %lld locations translated" : {
+      "comment" : "Footer when every organization has its town/country translated in every language",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "◼ %lld location translated"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "◼ %lld locations translated"
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "◼ %lld locatie vertaald"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "◼ %lld locaties vertaald"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "◼ %lld of %lld locations translated" : {
+      "comment" : "Footer when some town/country translations are missing and none are being fetched",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %1$lld of %2$lld locations translated"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ %1$lld van %2$lld locaties vertaald"
+          }
+        }
+      }
+    },
     "◼ %lld other organizations" : {
       "comment" : "Count of non-clubs in database Organization table",
       "localizations" : {
@@ -387,19 +445,36 @@
         }
       }
     },
-    "◼ %lld translated locations" : {
-      "comment" : "Count of how many organizations have been geolocated",
+    "◼ ⏳ %lld of %lld locations translated" : {
+      "comment" : "Footer while town/country translations are being fetched: done so far, of all",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "◼ %lld translated locations"
+            "value" : "◼ ⏳ %1$lld of %2$lld locations translated"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "◼ %lld vertaalde locaties"
+            "value" : "◼ ⏳ %1$lld van %2$lld locaties vertaald"
+          }
+        }
+      }
+    },
+    "◼ ⚠️ %lld of %lld locations untranslated" : {
+      "comment" : "Footer when the only missing town/country translations are ones that cannot be translated",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ ⚠️ %1$lld of %2$lld locations untranslated"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "◼ ⚠️ %1$lld van %2$lld locaties onvertaald"
           }
         }
       }
@@ -434,6 +509,47 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acties"
+          }
+        }
+      }
+    },
+    "All %lld locations are translated." : {
+      "comment" : "Alert sentence: every town/country translation is in place",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "The %lld location is translated."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "All %lld locations are translated."
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "De %lld locatie is vertaald."
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Alle %lld locaties zijn vertaald."
+                }
+              }
+            }
           }
         }
       }
@@ -1070,6 +1186,12 @@
     "Show as files (in Finder)" : {
       "comment" : "Alert button that reveals the generated website in the Finder",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show as files (in Finder)"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1098,6 +1220,12 @@
     "Show website preview" : {
       "comment" : "App button that serves the generated website and opens a browser",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show website preview"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1194,6 +1322,12 @@
     "There is no generated website yet. Use Actions → Generate website first." : {
       "comment" : "Error shown when previewing before the website has been generated",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no generated website yet. Use Actions → Generate website first."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1202,13 +1336,13 @@
         }
       }
     },
-    "Translate Country & Town" : {
+    "Translate locations" : {
       "comment" : "Button that reverse-geocodes Town/Country for all Organizations",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Translate locaations"
+            "value" : "Translate locations"
           }
         },
         "nl" : {
