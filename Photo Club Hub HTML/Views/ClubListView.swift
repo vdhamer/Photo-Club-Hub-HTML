@@ -50,7 +50,7 @@ struct ClubListView: View {
     @State private var showSettingsPopover: Bool = false
     @State private var isLoadingDatabase: Bool = false // drives the "Fill database" command's spinner
     @State private var isGeneratingWebsite: Bool = false // drives the "Generate" command's spinner
-    @State private var generationOutcome: WebsiteGenerationOutcome? // non-nil while the "Generate" alert is up
+    @State private var generationOutcome: WebsiteGenerationOutcomeEnum? // non-nil while the "Generate" alert is up
     @State private var previewError: String? // non-nil while the "Preview website" failure alert is up
     @State private var canPreviewWebsite = false // Build/ holds a localhost build: SiteOutput.isGeneratedForLocalhost()
 
@@ -202,7 +202,7 @@ struct ClubListView: View {
         Task {
             isGeneratingWebsite = true // before the first generateLevelN, which blocks its thread once started
             canPreviewWebsite = false // publish() clears Build/ before rewriting it
-            let outcome: WebsiteGenerationOutcome
+            let outcome: WebsiteGenerationOutcomeEnum
             do {
                 outcome = try await publishAllLevels(preferences: preferences)
             } catch {
