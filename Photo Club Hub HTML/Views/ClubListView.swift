@@ -14,7 +14,7 @@ import Photo_Club_Hub_Data // for Organization, deleteAllCoreDataObjects
 /// Layout:
 /// - **Sidebar**: `ClubListSidebarView` shows the list of clubs and tracks the selection in `selectedClubIds`.
 /// - **Detail**: `MembershipView` for the selected club, or a placeholder prompt when nothing is selected.
-/// - **Footer**: `RecordsFooterView` shows database/translation statistics below a divider.
+/// - **Footer**: `RecordsFooterView` shows stats below a divider, including progress of the town/country translation.
 ///
 /// The toolbar exposes two controls:
 /// - **Settings…**: a popover, ``SettingsPopoverView``, binding the shared ``PreferencesStructHTML``.
@@ -54,6 +54,9 @@ struct ClubListView: View {
     @State private var previewError: String? // non-nil while the "Preview website" failure alert is up
     @State private var canPreviewWebsite = false // Build/ holds a localhost build: SiteOutput.isGeneratedForLocalhost()
 
+    @State private var runningSweepsCountTemp = 0 // geocoding sweeps in progress; a count because two can overlap (#271)
+    private var isTranslating: Bool { runningSweepsCountTemp > 0 }
+
     var body: some View {
         VStack(alignment: .leading) {
             NavigationSplitView {
@@ -75,7 +78,7 @@ struct ClubListView: View {
             .navigationSplitViewStyle(.balanced) // don't see a difference between .balanced and .prominentDetail
 
             Divider()
-            RecordsFooterView()
+            RecordsFooterView(isTranslating: isTranslating)
         }
         .task {
             // Auto-load once at launch (skipped in Previews); reuses the Fill database spinner.
@@ -162,11 +165,11 @@ struct ClubListView: View {
                     }
 
                     // Manually trigger reverse-geocoding of localized Town & Country.
-                    Button(String(localized: "Translate Country & Town",
+                    Button(String(localized: "Translate locations",
                                   table: "PhotoClubHubHTML.SwiftUI",
                                   comment: "Button that reverse-geocodes Town/Country for all Organizations")) {
                         print("Action: Translating Town & Country")
-                        Task { await OrganizationGeocoder().geocodeChangedAddresses() }
+                        Task { await translateTownsAndCountries() }
                     }
 
                 } label: {
@@ -201,7 +204,7 @@ struct ClubListView: View {
             canPreviewWebsite = false // publish() clears Build/ before rewriting it
             let outcome: WebsiteGenerationOutcome
             do {
-                outcome = .succeeded(pageCount: try await publishAllLevels(preferences: preferences))
+                outcome = try await publishAllLevels(preferences: preferences)
             } catch {
                 outcome = .failed(reason: error.localizedDescription)
             }
@@ -210,8 +213,26 @@ struct ClubListView: View {
             // The build is final here, success or failure. Geocoding below writes only to Core Data.
             canPreviewWebsite = SiteOutput.isGeneratedForLocalhost()
 
-            await geocodeAfterGeneration() // kicks of background task (which may be empty, or take minutes)
+            await translateTownsAndCountries() // may have nothing to do, or may take minutes
         }
+    }
+
+    /// Reverse-geocodes the organizations whose town and country are not yet translated, and keeps
+    /// ``RecordsFooterView`` informed about whether that is still going on.
+    ///
+    /// Used after *Generate* and by *Translate locations*. It can be slow (about 10–20 on an empty store)
+    /// because the geocoding server is throttled, so after a Generate it runs once the
+    /// alert is up rather than before publishing. Its `LocalizedAddress` rows become the localized Country and
+    /// Town columns on the next Generate. CoreData acts as the cache that keeps the server from being asked again.
+    ///
+    /// The database cannot tell whether a sweep is running: the geocoder's work list lives in memory. Hence the
+    /// count kept here, which the footer shows as a ⏳ in front of "257 of 294 locations translated" (#271). A count
+    /// rather than a Bool, because the two callers can overlap.
+    /// Once geocoding goes through the Data package's queue (HTML#258), its status can replace this count.
+    private func translateTownsAndCountries() async {
+        runningSweepsCountTemp += 1
+        await OrganizationGeocoder().geocodeChangedAddresses()
+        runningSweepsCountTemp -= 1
     }
 
     private func copyBundleResource(named name: String, extension ext: String, to directory: URL) {
