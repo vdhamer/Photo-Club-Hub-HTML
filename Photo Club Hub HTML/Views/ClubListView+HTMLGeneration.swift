@@ -77,16 +77,29 @@ nonisolated extension ClubListView {
     ///
     /// Returning only when `publish()` has returned is the point: it lets the caller take its spinner down and
     /// raise the completion alert at the moment the site is on disk. The reverse-geocoding that used to follow
-    /// inline is ``geocodeAfterGeneration()``, kept separate for that reason (#246).
+    /// inline is `translateTownsAndCountries()` in ClubListView, kept separate for that reason (#246).
     ///
     /// Being `async` in a `nonisolated` extension is what keeps this off the main actor even though its caller
     /// is on it (SE-0338) — see the note above the extension for why that matters here.
     ///
-    /// - Returns: how many pages were written, the landing page included.
+    /// The translation counts are taken before any page is built. A sweep that is still running (from an earlier
+    /// Generate, or from *Translate locations*) can add rows while the pages are being built, and adding is
+    /// the only change possible. When counted **before**, the alert can at worst report a translation as on its way that
+    /// a later level's pages already got. When counted **after**, it could report as present a translation that arrived
+    /// too late for the pages, and say "All … locations are translated" about a site that lacks some (#271).
+    ///
+    /// - Returns: the `.succeeded` outcome for the completion alert: how many pages were written, the landing
+    ///   page included, and how many town/country translations those pages hold (`completed`), still lack
+    ///   (`waiting`) or show as "Town?" or "Country?" (`placeholders`). A failure is the throw, not a returned
+    ///   `.failed`.
     /// - Throws: whatever Ignite's `publish()` throws. Unlike the per-level generators above, this does not
     ///   `ifDebugFatalError`: the failure is shown in an alert, and trapping in a debug build would stop the
     ///   alert ever being seen.
-    func publishAllLevels(preferences: PreferencesStructHTML) async throws -> Int {
+    func publishAllLevels(preferences: PreferencesStructHTML) async throws -> WebsiteGenerationOutcomeEnum {
+        // Counted before any page is built, not after: see the note on translation counts above.
+        let geocoding = LocalizedAddress.geocodingCounts( // own context: the view context belongs to the main actor
+            context: PersistenceController.shared.container.newBackgroundContext())
+
         // Build each level's pages without publishing (sequential for now;
         // a later ticket can parallelize with a TaskGroup). Keep them as labeled groups so the
         // per-level structure stays visible into LevelAllSite (#217).
@@ -109,23 +122,10 @@ nonisolated extension ClubListView {
         // One total, not a per-level breakdown: the labels above would make one nearly free, but the record
         // counter in RecordsFooterView is where per-level numbers already live, and a second set in the
         // completion alert would only duplicate them or quietly disagree (#246).
-        return pageGroups.reduce(1) { $0 + $1.pages.count }
-    }
-
-    /// Reverse-geocodes the addresses that changed, after a generate has finished.
-    ///
-    /// Geocoding depends on the Organization data as loaded in Levels 1 and 2.
-    /// It is slow (~5 min) due to throttling at the employed geolocation server.
-    /// So it runs after publishing rather than blocking it.
-    /// Its LocalizedAddress rows show up as the localized Country/Town columns
-    /// on the next generate.
-    /// These columns may be only partially filled, but fill eventually.
-    /// CoreData is used as a cache to prevent unnecessary calls to the server.
-    ///
-    /// Deliberately unreported: the running record counter in `RecordsFooterView` already moves while this
-    /// works, and the results are persisted, so there is nothing the user has to wait for or act on (#246).
-    func geocodeAfterGeneration() async {
-        await OrganizationGeocoder().geocodeChangedAddresses()
+        return .succeeded(pageCount: pageGroups.reduce(1) { $0 + $1.pages.count },
+                          completed: geocoding.completed,
+                          waiting: geocoding.waiting,
+                          placeholders: geocoding.onErrorPlaceholders)
     }
 
 }
