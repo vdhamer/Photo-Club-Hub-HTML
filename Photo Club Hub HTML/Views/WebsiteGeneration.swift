@@ -27,7 +27,8 @@ enum WebsiteGenerationOutcomeEnum: Equatable {
     /// `completed` is how many were translated;
     /// `waiting` how many the published site lacks (at most);
     /// `placeholders` how many it shows as "Town?" or "Country?" for good.
-    /// Plain `Ints` rather than the package struct itself, whose initializer is not public, so the previews could not build one.
+    /// Plain `Ints` rather than the package struct itself,
+    /// whose initializer is not public, so the previews could not build one.
     case succeeded(pageCount: Int, completed: Int, waiting: Int, placeholders: Int)
 
     /// Failed = publishing threw. `reason` is `localizedDescription`, shown verbatim.

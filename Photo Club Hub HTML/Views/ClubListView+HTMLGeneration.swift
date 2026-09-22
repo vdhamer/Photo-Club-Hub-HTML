@@ -84,7 +84,7 @@ nonisolated extension ClubListView {
     ///
     /// The translation counts are taken before any page is built. A sweep that is still running (from an earlier
     /// Generate, or from *Translate locations*) can add rows while the pages are being built, and adding is
-    /// the only change possible. When counted **before**, the alert can at worst report a translation as on its way that
+    /// the only change possible. When counted **before**, the alert could report a translation as on its way that
     /// a later level's pages already got. When counted **after**, it could report as present a translation that arrived
     /// too late for the pages, and say "All … locations are translated" about a site that lacks some (#271).
     ///

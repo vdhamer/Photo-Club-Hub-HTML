@@ -54,7 +54,7 @@ struct ClubListView: View {
     @State private var previewError: String? // non-nil while the "Preview website" failure alert is up
     @State private var canPreviewWebsite = false // Build/ holds a localhost build: SiteOutput.isGeneratedForLocalhost()
 
-    @State private var runningSweepsCountTemp = 0 // geocoding sweeps in progress; a count because two can overlap (#271)
+    @State private var runningSweepsCountTemp = 0 // geocoding sweeps in progress; Int because two can overlap (#271)
     private var isTranslating: Bool { runningSweepsCountTemp > 0 }
 
     var body: some View {

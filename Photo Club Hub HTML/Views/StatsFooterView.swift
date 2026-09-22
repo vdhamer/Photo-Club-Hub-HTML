@@ -11,6 +11,11 @@ import Photo_Club_Hub_Data // for Organization
 // MARK: - @FetchRequests to get lists and get counts
 
 struct RecordsFooterView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
+    /// A geocoding sweep is in progress, as counted by ``ClubListView``, which starts them: show the ⏳.
+    let isTranslating: Bool
+
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Organization.fullName_, ascending: true)],
         predicate: ClubListView.allPredicate)
@@ -44,7 +49,7 @@ struct RecordsFooterView: View {
     @FetchRequest(
         sortDescriptors: [],
         predicate: LocalizedAddress.allPredicate)
-    private var allLocalizedAddresses: FetchedResults<LocalizedAddress>
+    private var allLocalizedAddresses: FetchedResults<LocalizedAddress> // not shown: makes body re-run, see below
 
     // MARK: - Body of RecordsFooterView
 
