@@ -79,6 +79,7 @@ struct ClubListView: View {
 
             Divider()
             RecordsFooterView(isTranslating: isTranslating)
+                .padding([.horizontal, .bottom])
         }
         .task {
             // Auto-load once at launch (skipped in Previews); reuses the Fill database spinner.
@@ -115,8 +116,9 @@ struct ClubListView: View {
             copyBundleResource(named: "AppIcon", extension: "png", to: assetsImagesURL)
             copyBundleResource(named: "favicon", extension: "png", to: assetsURL)
         }
+        // No .padding() here: the split view must touch the toolbar. Its lists reserve room under the toolbar for
+        // the scroll-edge blur, so any inset above them shows up as a gap plus a blurred band (macOS 27).
         .frame(minWidth: 640, minHeight: 390)
-        .padding()
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
 

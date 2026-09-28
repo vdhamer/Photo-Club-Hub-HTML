@@ -14,6 +14,7 @@ USER-FACING
 * The generated `sitemap.xml` is now well-formed XML, so search engines can read it. A path holding a literal `&` was written into `<loc>` unescaped, and there is exactly one such path: the expertise whose canonical `idString` is `Black & white`. Because a crawler accepts or rejects a sitemap as a whole rather than skipping the offending entry, that single character cost the site all 105 of its entries, and had done so for as long as the file has been generated (HTML#260 found it while checking a publish).
 
 * Members with no portfolio photo now show a placeholder that a browser will actually load. The Data package returned an `http://`-only URL for them, which browsers drop on a site served over https (vdhamer/Photo-Club-Hub-Data#52, HTML#264). The image is square now as well, so the 1:1 cell no longer crops and upscales it.
+* On macOS 27 the app window no longer shows a white strip and a blurred band between the toolbar and the lists. The club and member lists now run up to the toolbar and scroll underneath it. The cause was a `.padding()` around the whole window content: it had been there since 2024 and was harmless until macOS 27, whose lists reserve room under the toolbar for the scroll-edge blur. With the lists pushed down by the padding, that reserved room appeared as a blurred band in mid-window. Only the footer is padded now.
 
 STRUCTURAL
 
