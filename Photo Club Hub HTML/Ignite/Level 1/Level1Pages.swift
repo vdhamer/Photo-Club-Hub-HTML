@@ -42,8 +42,14 @@ struct Level1Pages: Site {
                 ifDebugFatalError("Bad isoCode (not lowercase): \(language.isoCode)")
             }
 
-            pageList.append(OrganizationsPage(moc: moc, organizationType: .club, language: language.isoCode))
-            pageList.append(OrganizationsPage(moc: moc, organizationType: .museum, language: language.isoCode))
+            pageList.append(OrganizationsPage(moc: moc,
+                                              organizationType: .club,
+                                              language: language.isoCode,
+                                              showFormerMembers: preferences.showFormerMembers))
+            pageList.append(OrganizationsPage(moc: moc,
+                                              organizationType: .museum,
+                                              language: language.isoCode,
+                                              showFormerMembers: false)) // museums have no members
         }
 
         if pageList.isEmpty { ifDebugFatalError("No languages found in Level1Site.init()") }

@@ -16,6 +16,8 @@ struct OrganizationsPage: StaticPage {
 
     let organizationType: OrganizationTypeEnum // .club or .museum
     let languageID: String // ISO 639-1 code, e.g. "nl"
+    // used when deciding which clubs have members pages. To avoid totally empty pages. See `Members.hasMembersPage`
+    let showFormerMembers: Bool
 
     var title: String { // needed by the StaticPage protocol
         switch organizationType {
