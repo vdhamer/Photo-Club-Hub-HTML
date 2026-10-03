@@ -186,7 +186,8 @@ extension OrganizationsPage {
             } .verticalAlignment(.middle)
 
             Column { // club/museum name
-                let membershipListPath: String? = (organizationType == .club && !club.members.isEmpty) ?
+                let hasMembersPage = Members.hasMembersPage(club: club, showFormerMembers: showFormerMembers)
+                let membershipListPath: String? = (organizationType == .club && hasMembersPage) ?
                     Members.relativePath(languageID: languageID, clubNickname: club.nickName) : nil
                 Group {
                     if let membershipListPath {
@@ -205,7 +206,7 @@ extension OrganizationsPage {
             if organizationType == .club {
                 Column { // member count for this club
                     let membershipListPath = Members.relativePath(languageID: languageID, clubNickname: club.nickName)
-                    if !club.members.isEmpty {
+                    if Members.hasMembersPage(club: club, showFormerMembers: showFormerMembers) {
                         Span(
                             Link(String("\(club.members.filter { !$0.isFormerMember }.count)"),
                                  target: "/\(membershipListPath)")
