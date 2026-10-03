@@ -12,7 +12,18 @@ The iOS app has since adopted the package (vdhamer/Photo-Club-Hub#769): its load
 
 Both apps are opened as their `.xcodeproj`, **without a workspace**. Workspaces were used for a while and dropped in both repos: with both a project and a workspace level, edits too easily land at the wrong one. Package changes reach the apps through a tag and a resolve.
 
-A workspace is only a temporary stopgap, for when the remote package cannot be fetched (e.g. GitHub unreachable): adding a local checkout of the package to a git-ignored `.xcworkspace` makes Xcode shadow the remote dependency with it. That is **not** equivalent to the pinned version: the workspace builds whatever the package's working tree holds (untagged commits, uncommitted edits), while the project builds the tag in `Package.resolved`. Remove the workspace as soon as the remote works again: delete it, reopen the `.xcodeproj`, resolve package versions, and check that `Package.resolved` is unchanged. Do **not** use *Add Package Dependencies → Add Local…*, which writes an `XCLocalSwiftPackageReference` into `project.pbxproj` and silently puts untagged package code into release builds.
+When the remote package cannot be fetched (e.g. GitHub unreachable), the stopgap is a **SwiftPM mirror**, the same in both apps: a git-ignored file at `Photo Club Hub HTML.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/configuration/mirrors.json` that redirects the package URL to a local clone:
+
+```json
+{"object":[{"mirror":"<absolute path to the Photo-Club-Hub-Data clone>",
+            "original":"https://github.com/vdhamer/Photo-Club-Hub-Data"}],"version":1}
+```
+
+Xcode and `xcodebuild` then resolve from the clone's git history and check out the commit pinned in `Package.resolved`, so the build is the exact pinned version. The clone's working tree is ignored: uncommitted edits and untagged commits do not reach the app, and a new package version still needs a tag (locally, until it can be pushed). The file holds an absolute path on one Mac, which is why it is never committed. Delete it as soon as the remote works again, resolve package versions, and check that `Package.resolved` is unchanged.
+
+A temporary workspace that adds the local package was used for this before, and is no longer the stopgap: it builds the package's working tree rather than the pinned tag, rewrites the package repo's own `Package.resolved`, and brings back the project-versus-workspace confusion described above.
+
+Do **not** use *Add Package Dependencies → Add Local…*, which writes an `XCLocalSwiftPackageReference` into `project.pbxproj` and silently puts untagged package code into release builds.
 
 ## Version numbers
 
