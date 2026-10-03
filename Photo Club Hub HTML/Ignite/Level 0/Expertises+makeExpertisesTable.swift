@@ -49,7 +49,7 @@ extension ExpertisesPage {
                     String(localized: "Expertise",
                            table: "PhotoClubHubHTML.Ignite",
                            bundle: Bundle.forLanguage(languageID),
-                           comment: "HTML table header for exertise name column.")
+                           comment: "HTML table header for expertise name column.")
                     String(localized: "Description",
                            table: "PhotoClubHubHTML.Ignite",
                            bundle: Bundle.forLanguage(languageID),
@@ -91,12 +91,13 @@ extension ExpertisesPage {
 
             Column { // description
                 Group {
-                    let unapproved = String(localized: "This expertise tag is not approved yet.",
+                    let noDescription = String(localized: "This expertise has no description yet.",
                                table: "PhotoClubHubHTML.Ignite",
-                               comment: "Shown for Expertises that are temporary.")
+                               bundle: Bundle.forLanguage(languageID), // the page's language, not the Mac's
+                               comment: "Shown in the description column for an expertise that has no usage text.")
                     Span(
                         String(expertise.selectedLocalizedExpertise(isoCode: languageID).localizedExpertise?.usage
-                               ?? unapproved)
+                               ?? noDescription)
                     )
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)
             } .verticalAlignment(.middle)
