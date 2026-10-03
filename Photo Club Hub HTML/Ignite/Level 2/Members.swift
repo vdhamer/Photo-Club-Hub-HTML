@@ -159,6 +159,20 @@ struct Members: StaticPage {
 
 }
 
+extension Members {
+
+    /// Whether the site gives `club` a members page, and links to it from the club list: only if the page would list
+    /// someone, meaning a current member, or a former one providing that former members are shown.
+    /// A club whose only listed member has left (fegGemert, Oct 2026) would otherwise get a link,
+    /// a count of 0, and a page with an empty table.
+    static func hasMembersPage(club: Organization, showFormerMembers: Bool) -> Bool {
+        let hasCurrentMembers = club.members.contains { $0.isFormerMember == false }
+        let hasFormerMembers = club.members.contains { $0.isFormerMember }
+        return hasCurrentMembers || (showFormerMembers && hasFormerMembers)
+    }
+
+}
+
 func isFormerMember(roles: MemberRolesAndStatus) -> Bool {
     let status: [MemberStatus: Bool?] = roles.status
     let isFormer: Bool? = status[MemberStatus.former] ?? false // handle missing entry for .former
