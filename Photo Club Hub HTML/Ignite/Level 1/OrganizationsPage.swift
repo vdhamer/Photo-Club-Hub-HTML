@@ -49,9 +49,11 @@ struct OrganizationsPage: StaticPage {
 
     // MARK: - init()
 
-    init(moc: NSManagedObjectContext, organizationType: OrganizationTypeEnum, language: String) {
+    init(moc: NSManagedObjectContext, organizationType: OrganizationTypeEnum, language: String,
+         showFormerMembers: Bool) {
         self.languageID = language
         self.organizationType = organizationType
+        self.showFormerMembers = showFormerMembers
         let bundle = Bundle.forLanguage(language)
         let result = makeOrgTable(moc: moc, organizationType: organizationType, languageID: language)
         clubsTable = result.table

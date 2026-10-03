@@ -63,7 +63,10 @@ struct Level2Pages: Site {
             }
 
             for club in clubs {
-                guard club.members.isEmpty == false else { continue } // skip clubs with no known members
+                // skip generating pages for clubs if page would show zero members
+                guard Members.hasMembersPage(club: club, showFormerMembers: preferences.showFormerMembers) else {
+                    continue
+                }
                 pageList.append(Members(moc: moc,
                                         club: club,
                                         languageID: language.isoCode,
