@@ -281,7 +281,7 @@
       }
     },
     "Expertise" : {
-      "comment" : "HTML table header for exertise name column.",
+      "comment" : "HTML table header for expertise name column.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -756,8 +756,8 @@
         }
       }
     },
-    "This expertise tag is not approved yet." : {
-      "comment" : "Shown for Expertises that are temporary.",
+    "This expertise has no description yet." : {
+      "comment" : "Shown in the description column for a temporary expertise.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
