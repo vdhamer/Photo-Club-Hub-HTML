@@ -757,7 +757,7 @@
       }
     },
     "This expertise has no description yet." : {
-      "comment" : "Shown in the description column for a temporary expertise.",
+      "comment" : "Shown in the description column for an expertise that has no usage text.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
