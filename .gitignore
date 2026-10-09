@@ -139,8 +139,3 @@ iOSInjectionProject/
 # contents.xcworkspacedata, which would break any machine that lacks that folder.
 # Nothing else needs the workspace — other machines build from the .xcodeproj directly.
 /Photo Club Hub HTML.xcworkspace/
-
-# SwiftPM mirror used while GitHub cannot serve Photo-Club-Hub-Data: it points the package URL
-# at a local clone, so Xcode resolves the pinned tag from there. It holds an absolute path on
-# one Mac, so it is never right in origin. Delete the file once GitHub works again.
-/Photo Club Hub HTML.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/configuration/mirrors.json
