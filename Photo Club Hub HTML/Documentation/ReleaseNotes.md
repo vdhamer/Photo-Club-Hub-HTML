@@ -30,6 +30,7 @@ KNOWN ISSUES
 DOCUMENTATION
 
 * `Level0Pages.swift`: the comment giving the published location of the expertises pages now says `/hub/nl/expertises` instead of the pre-migration path.
+* `CLAUDE.md` names the fourth repo, Photo-Club-Hub-Project, for project-wide work (Photo-Club-Hub-Project#1).
 
 ---------------------------------------------------------------------------
 
