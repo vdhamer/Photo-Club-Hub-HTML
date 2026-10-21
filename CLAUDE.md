@@ -10,6 +10,8 @@ This repo (`Photo Club Hub HTML`), the companion iOS app (`Photo Club Hub`) and 
 
 The iOS app has since adopted the package (vdhamer/Photo-Club-Hub#769): its loaders and club `MembersProvider`s now come from the package rather than a duplicated copy. Since vdhamer/Photo-Club-Hub#809 it consumes the package the same way this repo does — a remote dependency, `.upToNextMajor(from: "3.0.0")` — so both apps see package changes only after a tag and a resolve. It previously used a **local** path reference (`../Photo-Club-Hub-Data`), which picked up uncommitted edits immediately but left releases building untagged code.
 
+Project-wide work lives in a fourth repo, [vdhamer/Photo-Club-Hub-Project](https://github.com/vdhamer/Photo-Club-Hub-Project): non-code tickets (written `Project#N`), the roadmap and its `scripts/roadmap/`, and the dashboard (Discussion #14).
+
 Both apps are opened as their `.xcodeproj`, **without a workspace**. Workspaces were used for a while and dropped in both repos: with both a project and a workspace level, edits too easily land at the wrong one. Package changes reach the apps through a tag and a resolve.
 
 When the remote package cannot be fetched (e.g. GitHub unreachable), the stopgap is a **SwiftPM mirror**, the same in both apps: a file at `Photo Club Hub HTML.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/configuration/mirrors.json` that redirects the package URL to a local clone:
