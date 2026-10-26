@@ -28,7 +28,7 @@ enum TargetHost: String, Codable, CaseIterable {
     var baseURL: URL {
         switch self {
         case Self.vdHamer: return URL(string: "http://www.vdhamer.com")!
-        case Self.fgDeGender: return URL(string: "https://www.fcDeGender.nl")!
+        case Self.fgDeGender: return URL(string: "https://www.fcdegender.nl")!
         // Deliberately the loopback form: what gets written into the generated site's `rel="canonical"`,
         // `og:url` and `sitemap.xml` should not carry the name of whichever Mac happened to generate it.
         case Self.localhost: return SiteOutput.previewURL(port: SiteOutput.defaultPreviewPort,
