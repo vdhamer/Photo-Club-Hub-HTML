@@ -36,7 +36,13 @@ struct Members: StaticPage {
     private var formerMembersCount: Int = 0 // updated in makeTable(), Table doesn't support Table.count
     private var formerMembersCountWithStartDate: Int = 0
 
-    let dateFormatter = DateFormatter()
+    // Membership dates hold a calendar day as midnight GMT, so the generated site doesn't depend on
+    // the time zone of the Mac that generates it. "2020-01-01" would otherwise print as 2019 west of GMT.
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeZone = .gmt
+        return formatter
+    }()
 
     // Neither the context nor the Organization is stored. This page is handed to Ignite's async `publish()`,
     // and both are non-`Sendable`, so they stay `init` parameters and what `body()` needs from the club is
