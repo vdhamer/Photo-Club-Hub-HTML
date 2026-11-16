@@ -76,12 +76,15 @@ extension ExpertisesPage {
 
             Column { // localized name
                 let url: String = "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: expertise.id))/"
+                let count: Int = PhotographerExpertise.count(context: moc, expertiseID: expertise.id)
+                let nonBreakingSpace: String = "\u{202F}" // Unicode non-breaking (narrow width) space
+                let multiplicationX = "×" // a typography thing
                 Group {
                     Text {
                         Link(String(expertise.isSupported ?
                                     "\(expertise.selectedLocalizedExpertise(isoCode: languageID).name)" :
                                     String(expertise.id))
-                             + String(" (\(PhotographerExpertise.count(context: moc, expertiseID: expertise.id))x)"),
+                             + String(" (\(count)\(nonBreakingSpace)\(multiplicationX))"),
                              target: url
                         )
                         .linkStyle(.hover)

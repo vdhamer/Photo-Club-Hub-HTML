@@ -124,7 +124,11 @@ struct ExpertisePage: StaticPage {
         SiteNavigationBar(languageID: languageID)
 
         // page title (showing which Expertise this page is about)
-        Text(String(localized: "\(snapshot.localizedName) expertise (\(snapshot.photographerRows.count)x)",
+        // The narrow no-break space (\u{202F}) and the multiplication sign (×) stay literal here rather than in
+        // `let`s as in makeExpertisesTable: interpolating them would turn them into %@ arguments of the
+        // localization key, and the translations in PhotoClubHubHTML.Ignite.xcstrings could no longer match it.
+        let count: Int = snapshot.photographerRows.count
+        Text(String(localized: "\(snapshot.localizedName) expertise (\(count)\u{202F}×)",
                     table: "PhotoClubHubHTML.Ignite",
                     bundle: Bundle.forLanguage(languageID),
                     comment: "Heading at top of ExpertisePage showing expertise name and photographer count"))

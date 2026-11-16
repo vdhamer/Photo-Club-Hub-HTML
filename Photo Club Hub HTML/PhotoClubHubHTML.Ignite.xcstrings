@@ -18,19 +18,19 @@
         }
       }
     },
-    "%@ expertise (%lldx)" : {
+    "%@ expertise (%lld\u202F×)" : {
       "comment" : "Heading at top of ExpertisePage showing expertise name and photographer count",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@ expertise (%2$lldx)"
+            "value" : "%1$@ expertise (%2$lld\u202F×)"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%1$@ expertise (%2$lldx)"
+            "value" : "%1$@ expertise (%2$lld\u202F×)"
           }
         }
       }
@@ -99,13 +99,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Photo clubs (%lld×)"
+            "value" : "Photo clubs (%lld\u202F×)"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fotoclubs (%1$lld×)"
+            "value" : "Fotoclubs (%1$lld\u202F×)"
           }
         }
       }
@@ -116,13 +116,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Photo museums (%lld×)"
+            "value" : "Photo museums (%lld\u202F×)"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fotomusea (%1$lld×)"
+            "value" : "Fotomusea (%1$lld\u202F×)"
           }
         }
       }
