@@ -101,7 +101,7 @@ struct SiteNavigationBar: BlockElement {
                  target: URL("""
                              https://github.com/vdhamer/\
                              Photo-Club-Hub-HTML/blob/main/.github/\
-                             README.md#photo-club-hub-html"
+                             README.md#photo-club-hub-html
                              """))
                 .linkStyle(.button)
                 .buttonSize(.small)
