@@ -176,7 +176,9 @@ struct ExpertisePage: StaticPage {
             Text {
                 Span(row.name)
                 if row.isDeceased {
-                    Badge(MemberStatus.deceased.displayNameForAppUI)
+                    Badge(MemberStatus.deceased.displayNameForHTML(
+                        languageBundle: Bundle.photoClubHubDataModuleForLanguage(languageID)
+                    ))
                         .badgeStyle(.default)
                         .role(.secondary)
                         .margin(.leading, 10)

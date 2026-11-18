@@ -37,6 +37,8 @@ extension Members {
         // Arguably you shouldn't be able to change these kind of settings while generating HTML.
         let useLocalThumbnails = preferences.useLocalThumbnails // not to be confused with using localhost
 
+        let dataBundle = Bundle.photoClubHubDataModuleForLanguage(languageID) // role/status words in page language
+
         return Row {
 
             Column { // member's name with any role & status badges
@@ -52,7 +54,7 @@ extension Members {
                         )
                         .linkStyle(.hover)
                         if roles.status[.deceased] == true {
-                            Badge(MemberStatus.deceased.displayNameForAppUI)
+                            Badge(MemberStatus.deceased.displayNameForHTML(languageBundle: dataBundle))
                                 .badgeStyle(.default)
                                 .role(.secondary)
                                 .margin(.leading, 10)
@@ -61,7 +63,7 @@ extension Members {
                             let statusDict: [MemberStatus: Bool?] = rolesAndStatus.status
                             let memberStatus: MemberStatus? = getMemberStatus(statusDictionary: statusDict)
                             if let memberStatus {
-                                Badge(memberStatus.displayNameForAppUI)
+                                Badge(memberStatus.displayNameForHTML(languageBundle: dataBundle))
                                     .badgeStyle(.subtleBordered)
                                     .role(.success)
                                     .margin(.leading, 10)
@@ -69,7 +71,7 @@ extension Members {
                             let rolesDict: [MemberRole: Bool?] = rolesAndStatus.roles
                             let memberRole: MemberRole? = getMemberRole(roleDictionary: rolesDict)
                             if let memberRole {
-                                Badge(memberRole.displayNameForAppUI)
+                                Badge(memberRole.displayNameForHTML(languageBundle: dataBundle))
                                     .badgeStyle(.subtleBordered)
                                     .role(.success)
                                     .margin(.leading, 10)
