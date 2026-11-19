@@ -203,6 +203,12 @@ It would be nice to have an app for data enty/editing (rather than editing JSON 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Contributing
+
+Help is welcome, with code and without. [CONTRIBUTING.md](CONTRIBUTING.md) lists where to start and how to build the app.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [stable-version]: https://img.shields.io/github/v/release/vdhamer/Photo-Club-Hub-HTML?style=plastic&color=violet
