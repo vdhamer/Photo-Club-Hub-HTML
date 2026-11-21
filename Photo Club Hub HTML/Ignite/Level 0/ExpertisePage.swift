@@ -77,6 +77,10 @@ struct ExpertisePage: StaticPage {
                 .map { $0.photographer }
                 .sorted { $0.fullNameFirstLast < $1.fullNameFirstLast }
 
+            // The page's language sets both the words and the club's town in each caption (Data#99).
+            // Module name needed: Ignite also has a `Language`.
+            let pageLanguage = Photo_Club_Hub_Data.Language.find(context: moc, isoCode: language)
+
             let rows: [PhotographerRow] = sortedPhotographers.map { photographer in
                 let sortedMemberships = photographer.memberships
                     .sorted { $0.organization.fullNameTown < $1.organization.fullNameTown }
@@ -92,8 +96,7 @@ struct ExpertisePage: StaticPage {
                         thumbnailSrc = membership.featuredImageThumbnail.absoluteString
                     }
                     return MembershipCell(
-                        roleDescriptionOfClubTown: membership.roleDescriptionOfClubTown(
-                            languageBundle: Bundle.photoClubHubDataModuleForLanguage(language)),
+                        roleDescriptionOfClubTown: membership.roleDescriptionOfClubTown(language: pageLanguage),
                         portfolioURL: membership.level3URL_,
                         clubPagePath: "/" + Members.relativePath(languageID: language,
                                                                  clubNickname: membership.organization.nickName),
