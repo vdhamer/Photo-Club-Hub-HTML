@@ -34,7 +34,7 @@ struct ClubListSidebarView: View {
     }
 }
 
-#Preview("Club Sidebar") { // doesn't work, would need to check detailed logging
+#Preview("Club Sidebar") {
     // Provide preview state for bindings
     @Previewable @State var preferences = PreferencesStructHTML.defaultValue
 

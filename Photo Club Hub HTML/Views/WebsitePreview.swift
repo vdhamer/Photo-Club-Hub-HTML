@@ -161,8 +161,7 @@ extension View {
 }
 
 // Shows the failure alert, which in the app only appears when the server cannot bind a port — awkward to
-// provoke by hand, and unreachable via ``ClubListView``'s own preview because that pulls in @FetchRequest
-// views, which crash in Previews in this target (see the note in MembershipView.swift).
+// provoke by hand.
 //
 // Nothing here touches ``PreviewServer``: `allowRemotePreview` is a constant, so the `onChange` never fires.
 // The strings are deliberately verbatim — preview scaffolding does not belong in the string catalog.

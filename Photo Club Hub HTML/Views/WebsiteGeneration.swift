@@ -181,8 +181,7 @@ extension View {
 }
 
 // Both faces of the alert, which are otherwise awkward to reach: the success one needs a full generate, and
-// the failure one needs publish() to throw. Unreachable via ``ClubListView``'s own preview because that pulls
-// in @FetchRequest views, which crash in Previews in this target (see the note in MembershipView.swift).
+// the failure one needs publish() to throw.
 //
 // The buttons are live: Show in Finder opens the real container, and Preview website starts the real server.
 // The strings on the buttons below are deliberately verbatim — preview scaffolding is not localized.
