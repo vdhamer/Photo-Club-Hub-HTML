@@ -21,10 +21,10 @@ struct ExpertisePage: StaticPage {
     var title: String { snapshot.localizedName } // page title shown in browser tab
 
     let expertiseID: String // canonical (=English) ID, e.g. "Architecture"
-    let languageID: String  // ISO 639-1 code, e.g. "nl"
+    let pageLanguageID: String  // ISO 639-1 code, e.g. "nl"
 
     // example for path value: "/en/expertises/Architecture" or "/nl/expertises/Architecture" - not "../Archtectuur"
-    var path: String { "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: expertiseID))" }
+    var path: String { "/\(ExpertisesPage.relativePath(languageID: pageLanguageID, expertiseID: expertiseID))" }
     // description populates the meta-tag called "name" in the HTML header
     var description: String { "List of photographers with \(snapshot.localizedName) expertise" }
 
@@ -52,22 +52,22 @@ struct ExpertisePage: StaticPage {
 
     // MARK: - init()
 
-    init(expertiseID: String, language: String, moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
-        self.languageID = language
+    init(expertiseID: String, pageLanguageID: String, moc: NSManagedObjectContext, preferences: PreferencesStructHTML) {
+        self.pageLanguageID = pageLanguageID
         self.expertiseID = expertiseID
         // fill snapshot now to avoid accessing @MainActor-isolated `preferences` on a background thread
-        self.snapshot = Self.makeSnapshot(expertiseID: expertiseID, language: language,
+        self.snapshot = Self.makeSnapshot(expertiseID: expertiseID, pageLanguageID: pageLanguageID,
                                           moc: moc, useLocalThumbnails: preferences.useLocalThumbnails)
     }
 
     // All Core Data reads happen inside performAndWait so managed objects are touched
     // only on the moc's queue. Plain-value snapshots are returned for safe use on any thread.
     private static func makeSnapshot(expertiseID: String,
-                                     language: String,
+                                     pageLanguageID: String,
                                      moc: NSManagedObjectContext, useLocalThumbnails: Bool) -> Snapshot {
         moc.performAndWait {
             let expertise = Expertise.find(context: moc, expertiseIdString: expertiseID)
-            let localizedExpertise = expertise?.selectedLocalizedExpertise(isoCode: language).localizedExpertise
+            let localizedExpertise = expertise?.selectedLocalizedExpertise(isoCode: pageLanguageID).localizedExpertise
 
             let fetchRequest: NSFetchRequest<PhotographerExpertise> = PhotographerExpertise.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "expertise_.id_ = %@", expertiseID)
@@ -79,7 +79,7 @@ struct ExpertisePage: StaticPage {
 
             // The page's language sets both the words and the club's town in each caption (Data#99).
             // Module name needed: Ignite also has a `Language`.
-            let pageLanguage = Photo_Club_Hub_Data.Language.find(context: moc, isoCode: language)
+            let pageLanguage = Photo_Club_Hub_Data.Language.find(context: moc, isoCode: pageLanguageID)
 
             let rows: [PhotographerRow] = sortedPhotographers.map { photographer in
                 let sortedMemberships = photographer.memberships
@@ -98,7 +98,7 @@ struct ExpertisePage: StaticPage {
                     return MembershipCell(
                         roleDescriptionOfClubTown: membership.roleDescriptionOfClubTown(language: pageLanguage),
                         portfolioURL: membership.level3URL_,
-                        clubPagePath: "/" + Members.relativePath(languageID: language,
+                        clubPagePath: "/" + Members.relativePath(languageID: pageLanguageID,
                                                                  clubNickname: membership.organization.nickName),
                         thumbnailSrc: thumbnailSrc
                     )
@@ -124,7 +124,7 @@ struct ExpertisePage: StaticPage {
 
         // MARK: - NavBar at bottom of screen
 
-        SiteNavigationBar(languageID: languageID)
+        SiteNavigationBar(pageLanguageID: pageLanguageID)
 
         // page title (showing which Expertise this page is about)
         // The narrow no-break space (\u{202F}) and the multiplication sign (×) stay literal here rather than in
@@ -133,7 +133,7 @@ struct ExpertisePage: StaticPage {
         let count: Int = snapshot.photographerRows.count
         Text(String(localized: "\(snapshot.localizedName) expertise (\(count)\u{202F}×)",
                     table: "PhotoClubHubHTML.Ignite",
-                    bundle: Bundle.forLanguage(languageID),
+                    bundle: Bundle.forLanguage(pageLanguageID),
                     comment: "Heading at top of ExpertisePage showing expertise name and photographer count"))
             .font(.title1)
             .horizontalAlignment(.center)
@@ -147,7 +147,7 @@ struct ExpertisePage: StaticPage {
         }
 
         // info about when the page was generated
-        FooterText(languageID: languageID)
+        FooterText(pageLanguageID: pageLanguageID)
     }
 
     // MARK: - Row and cell views
@@ -160,7 +160,7 @@ struct ExpertisePage: StaticPage {
             } else {
                 return Text(String(localized: "Missing usage description for \(snapshot.localizedName)",
                                    table: "PhotoClubHubHTML.Ignite",
-                                   bundle: Bundle.forLanguage(languageID),
+                                   bundle: Bundle.forLanguage(pageLanguageID),
                                    comment: "Missing usage warning near top op ExpertisePage"))
                     .horizontalAlignment(.center)
             }
@@ -168,7 +168,7 @@ struct ExpertisePage: StaticPage {
              return Text(String(
                         localized: "There is no description for \(expertiseID) because it is an unsupported expertise.",
                         table: "PhotoClubHubHTML.Ignite",
-                        bundle: Bundle.forLanguage(languageID),
+                        bundle: Bundle.forLanguage(pageLanguageID),
                         comment: "Missing usage description for an expertise"))
                 .horizontalAlignment(.center)
         }
@@ -180,7 +180,7 @@ struct ExpertisePage: StaticPage {
                 Span(row.name)
                 if row.isDeceased {
                     Badge(MemberStatus.deceased.displayNameForHTML(
-                        languageBundle: Bundle.photoClubHubDataModuleForLanguage(languageID)
+                        languageBundle: Bundle.photoClubHubDataModuleForLanguage(pageLanguageID)
                     ))
                         .badgeStyle(.default)
                         .role(.secondary)

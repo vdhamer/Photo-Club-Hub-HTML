@@ -34,11 +34,11 @@ extension OrganizationsPage {
     ///
     /// - Parameters:
     ///   - moc: The Core Data managed object context used for fetching.
-    ///   - languageID: ISO 639-1 language code used for localization and internal link paths.
+    ///   - pageLanguageID: ISO 639-1 language code used for localization and internal link paths.
     /// - Returns: `MakeClubsTableResult` containing the rendered table and number of found Organizations.
     mutating func makeOrgTable(moc: NSManagedObjectContext,
                                organizationType: OrganizationTypeEnum,
-                               languageID: String) -> MakeClubsTableResult {
+                               pageLanguageID: String) -> MakeClubsTableResult {
         do {
             let fetchRequest: NSFetchRequest<Organization> = Organization.fetchRequest()
 
@@ -51,8 +51,8 @@ extension OrganizationsPage {
             // Fetch Language entity for this page (used for LocalizedAddress lookup and sorting)
             let langRequest: NSFetchRequest<Photo_Club_Hub_Data.Language> =
                 Photo_Club_Hub_Data.Language.fetchRequest()
-            langRequest.predicate = NSPredicate(format: "isoCode_ = %@", languageID.lowercased())
-            let language: Photo_Club_Hub_Data.Language? = (try? moc.fetch(langRequest))?.first
+            langRequest.predicate = NSPredicate(format: "isoCode_ = %@", pageLanguageID.lowercased())
+            let pageLanguage: Photo_Club_Hub_Data.Language? = (try? moc.fetch(langRequest))?.first
 
             // Sort in-memory by localized Country → Town → Name using the page's locale.
             // Organizations without a LocalizedAddress (empty-string fallback) sort to the top.
@@ -62,11 +62,11 @@ extension OrganizationsPage {
             // the accessor answers "Country?" for a missing row, which would collate among the C's and
             // scatter the un-reverseGeocoded organizations through the table instead of grouping them where they
             // can be seen at a glance. Display string and sort key are different questions here.
-            if let language {
-                let locale = Locale(identifier: languageID)
+            if let pageLanguage {
+                let locale = Locale(identifier: pageLanguageID)
                 organizations.sort { lhs, rhs in
-                    let addrLhs = lhs.localizedAddress(for: language)
-                    let addrRhs = rhs.localizedAddress(for: language)
+                    let addrLhs = lhs.localizedAddress(for: pageLanguage)
+                    let addrRhs = rhs.localizedAddress(for: pageLanguage)
 
                     let countryLhs = addrLhs?.localizedCountry_ ?? ""
                     let countryRhs = addrRhs?.localizedCountry_ ?? ""
@@ -89,56 +89,56 @@ extension OrganizationsPage {
             return MakeClubsTableResult(
                 table: Table {
                     for org in organizations {
-                        makeClubRow(moc: moc, club: org, language: language, languageID: languageID)
+                        makeClubRow(moc: moc, club: org, pageLanguage: pageLanguage, pageLanguageID: pageLanguageID)
                     }
                 }
                 header: {
                     String(localized: "Country",
                            table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
+                           bundle: Bundle.forLanguage(pageLanguageID),
                            comment: "HTML table header for country column.")
                     String(localized: "Town",
                            table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
+                           bundle: Bundle.forLanguage(pageLanguageID),
                            comment: "HTML table header for town column.")
                     if organizationType == .museum {
                         String(localized: "Museum name",
                                table: "PhotoClubHubHTML.Ignite",
-                               bundle: Bundle.forLanguage(languageID),
+                               bundle: Bundle.forLanguage(pageLanguageID),
                                comment: "HTML table header for museum name column.")
                     } else {
                         String(localized: "Club name",
                                table: "PhotoClubHubHTML.Ignite",
-                               bundle: Bundle.forLanguage(languageID),
+                               bundle: Bundle.forLanguage(pageLanguageID),
                                comment: "HTML table header for club name column.")
                     }
                     if organizationType == .club {
                         String(localized: "Members",
                                table: "PhotoClubHubHTML.Ignite",
-                               bundle: Bundle.forLanguage(languageID),
+                               bundle: Bundle.forLanguage(pageLanguageID),
                                comment: "HTML table header for member count column.")
                     }
                     if organizationType == .museum {
                         String(localized: "Museum website",
                                table: "PhotoClubHubHTML.Ignite",
-                               bundle: Bundle.forLanguage(languageID),
+                               bundle: Bundle.forLanguage(pageLanguageID),
                                comment: "HTML table header for museum website link.")
                     } else {
                         String(localized: "Club website",
                                table: "PhotoClubHubHTML.Ignite",
-                               bundle: Bundle.forLanguage(languageID),
+                               bundle: Bundle.forLanguage(pageLanguageID),
                                comment: "HTML table header for clubs website link.")
                     }
                     if organizationType == .club {
                         String(localized: "Fotobond #",
                                table: "PhotoClubHubHTML.Ignite",
-                               bundle: Bundle.forLanguage(languageID),
+                               bundle: Bundle.forLanguage(pageLanguageID),
                                comment: "HTML table header for club's identifier in Fotobond.")
                     }
                     if organizationType == .club {
                         String(localized: "JSON",
                                table: "PhotoClubHubHTML.Ignite",
-                               bundle: Bundle.forLanguage(languageID),
+                               bundle: Bundle.forLanguage(pageLanguageID),
                                comment: "HTML table header for link to JSON input file.")
                     }
                 },
@@ -155,16 +155,16 @@ extension OrganizationsPage {
     // swiftlint:disable:next function_body_length
     private mutating func makeClubRow(moc: NSManagedObjectContext,
                                       club: Organization,
-                                      language: Photo_Club_Hub_Data.Language?,
-                                      languageID: String) -> Row {
+                                      pageLanguage: Photo_Club_Hub_Data.Language?,
+                                      pageLanguageID: String) -> Row {
 
         return Row { // Ignite Row
 
             Column { // country
                 // Compute displayCountry outside the Group{} builder to satisfy the result builder
                 let displayCountry: String = {
-                    guard let language else { return "" } // no Language row for this page's language
-                    return club.localizedCountry(for: language) // "Country?" until the pair is geocoded
+                    guard let pageLanguage else { return "" } // no Language row for this page's language
+                    return club.localizedCountry(for: pageLanguage) // "Country?" until the pair is geocoded
                 }()
                 Group {
                     Span(displayCountry)
@@ -176,9 +176,9 @@ extension OrganizationsPage {
                 let displayTown: String = {
                     // The row is only tested for existence: diacritics are stripped from the JSON-supplied
                     // fallback but deliberately kept on a geocoded name, so the two branches stay apart.
-                    guard let language, club.localizedAddress(for: language) != nil
+                    guard let pageLanguage, club.localizedAddress(for: pageLanguage) != nil
                     else { return String("\(club.town)".replacingUTF8Diacritics) }
-                    return club.localizedTown(for: language)
+                    return club.localizedTown(for: pageLanguage)
                 }()
                 Group {
                     Span(displayTown)
@@ -188,7 +188,7 @@ extension OrganizationsPage {
             Column { // club/museum name
                 let hasMembersPage = Members.hasMembersPage(club: club, showFormerMembers: showFormerMembers)
                 let membershipListPath: String? = (organizationType == .club && hasMembersPage) ?
-                    Members.relativePath(languageID: languageID, clubNickname: club.nickName) : nil
+                    Members.relativePath(languageID: pageLanguageID, clubNickname: club.nickName) : nil
                 Group {
                     if let membershipListPath {
                         Text {
@@ -205,7 +205,8 @@ extension OrganizationsPage {
 
             if organizationType == .club {
                 Column { // member count for this club
-                    let membershipListPath = Members.relativePath(languageID: languageID, clubNickname: club.nickName)
+                    let membershipListPath = Members.relativePath(languageID: pageLanguageID,
+                                                                  clubNickname: club.nickName)
                     if Members.hasMembersPage(club: club, showFormerMembers: showFormerMembers) {
                         Span(
                             Link(String("\(club.members.filter { !$0.isFormerMember }.count)"),

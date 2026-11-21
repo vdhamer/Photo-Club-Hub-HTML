@@ -11,11 +11,11 @@ import Photo_Club_Hub_Data // for language codes
 
 struct ExpertisesPage: StaticPage {
 
-    let languageID: String // ISO 639-1 code, e.g. "nl"
+    let pageLanguageID: String // ISO 639-1 code, e.g. "nl"
     var title: String { // needed by the StaticPage protocol
         String(localized: "Expertises",
                table: "PhotoClubHubHTML.Ignite",
-               bundle: Bundle.forLanguage(languageID),
+               bundle: Bundle.forLanguage(pageLanguageID),
                comment: "Title of the Expertises index HTML page")
     }
 
@@ -35,22 +35,23 @@ struct ExpertisesPage: StaticPage {
         }
     }
 
-    var path: String { "/\(Self.relativePath(languageID: languageID))" }
+    var path: String { "/\(Self.relativePath(languageID: pageLanguageID))" }
     var description: String { "List of expertises with description and some statistics" }
 
     // code using moc is executed via moc.performAndWait() and ends up running on the main thread (#1)
 
     // MARK: - init()
 
-    init(moc: NSManagedObjectContext, language: String) {
-        self.languageID = language
+    init(moc: NSManagedObjectContext, pageLanguageID: String) {
+        self.pageLanguageID = pageLanguageID
 
-        let makeApprovedTableResult = makeExpertisesTable(approved: true, languageID: language, moc: moc)
+        let makeApprovedTableResult = makeExpertisesTable(approved: true, pageLanguageID: pageLanguageID, moc: moc)
         approvedExpertisesTable = makeApprovedTableResult.table
         approvedExpertiseCount = makeApprovedTableResult.expertiseCount
 
         if showTemporaryExpertises {
-            let makeTemporaryTableResult = makeExpertisesTable(approved: false, languageID: language, moc: moc)
+            let makeTemporaryTableResult = makeExpertisesTable(approved: false, pageLanguageID: pageLanguageID,
+                                                               moc: moc)
             temporaryExpertisesTable = makeTemporaryTableResult.table
             temporaryExpertiseCount = makeTemporaryTableResult.expertiseCount
         }
@@ -62,14 +63,14 @@ struct ExpertisesPage: StaticPage {
 
         // MARK: - NavBar at bottom of screen
 
-        SiteNavigationBar(languageID: languageID)
+        SiteNavigationBar(pageLanguageID: pageLanguageID)
 
         // MARK: - approved Expertises
 
         Text {
             Badge(String(localized: "\(approvedExpertiseCount) approved expertise tags",
                          table: "PhotoClubHubHTML.Ignite",
-                         bundle: Bundle.forLanguage(languageID),
+                         bundle: Bundle.forLanguage(pageLanguageID),
                          comment: "Title badge at top of Expertises HTML index page"))
             .badgeStyle(.subtleBordered)
             .role(.success)
@@ -91,7 +92,7 @@ struct ExpertisesPage: StaticPage {
             Text {
                 Badge(String(localized: "\(temporaryExpertiseCount) temporary expertise tags",
                              table: "PhotoClubHubHTML.Ignite",
-                             bundle: Bundle.forLanguage(languageID),
+                             bundle: Bundle.forLanguage(pageLanguageID),
                              comment: "Title badge at top of Expertises HTML index page"))
                 .badgeStyle(.subtleBordered)
                 .role(.info)
@@ -105,7 +106,7 @@ struct ExpertisesPage: StaticPage {
 
         }
 
-        FooterText(languageID: languageID)
+        FooterText(pageLanguageID: pageLanguageID)
     }
 
 }

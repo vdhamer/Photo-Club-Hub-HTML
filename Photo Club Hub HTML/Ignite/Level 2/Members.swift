@@ -14,18 +14,18 @@ struct Members: StaticPage {
     var title: String {
         String(localized: "Members",
                table: "PhotoClubHubHTML.Ignite",
-               bundle: languageBundle,
+               bundle: pageLanguageBundle,
                comment: "HTML page title (shown in browser tab) for the Members page")
     }
 
-    let languageID: String  // ISO 639-1 code, e.g. "nl"
+    let pageLanguageID: String  // ISO 639-1 code, e.g. "nl"
     let clubNickname: String // used to build the page path, e.g. "fgWaalre"
-    let languageBundle: Bundle // derived from languageID; internal so extensions in this module can access it
+    let pageLanguageBundle: Bundle // derived from pageLanguageID; internal so extensions in this module can access it
 
     static func relativePath(languageID: String, clubNickname: String) -> String {
         "\(languageID)/clubs/\(clubNickname)" // should match Photo Club Hub HTML/Documentation/Folders.md
     }
-    var path: String { "/\(Self.relativePath(languageID: languageID, clubNickname: clubNickname))" }
+    var path: String { "/\(Self.relativePath(languageID: pageLanguageID, clubNickname: clubNickname))" }
 
     private var currentMembers = Table {} // initialite to empty table, then fill during init()
     private var formerMembers = Table {} // same story
@@ -51,11 +51,11 @@ struct Members: StaticPage {
 
     // MARK: - init()
 
-    init(moc: NSManagedObjectContext, club: Organization, languageID: String, preferences: PreferencesStructHTML) {
+    init(moc: NSManagedObjectContext, club: Organization, pageLanguageID: String, preferences: PreferencesStructHTML) {
         self.clubFullNameTown = club.fullNameTown
-        self.languageID = languageID
+        self.pageLanguageID = pageLanguageID
         self.clubNickname = club.nickName
-        self.languageBundle = Bundle.forLanguage(languageID)
+        self.pageLanguageBundle = Bundle.forLanguage(pageLanguageID)
 
         let makeTableResult = makeMembersTable(former: false, moc: moc, club: club, preferences: preferences)
         currentMembersCount = makeTableResult.memberCount
@@ -76,14 +76,14 @@ struct Members: StaticPage {
 
         // MARK: - Links
 
-        SiteNavigationBar(languageID: languageID)
+        SiteNavigationBar(pageLanguageID: pageLanguageID)
 
         // MARK: - current members
 
         Text {
             Badge(String(localized: "Current members of \(clubFullNameTown)",
                          table: "PhotoClubHubHTML.Ignite",
-                         bundle: languageBundle,
+                         bundle: pageLanguageBundle,
                          comment: "Title badge at top of Members HTML page"))
                 .badgeStyle(.subtleBordered)
                 .role(.success)
@@ -104,7 +104,7 @@ struct Members: StaticPage {
                              years.
                              """,
                              table: "PhotoClubHubHTML.Ignite",
-                             bundle: languageBundle,
+                             bundle: pageLanguageBundle,
                              comment: "Table footnote showing average years of membership of all members."
                 )} .horizontalAlignment(.center)
             }
@@ -124,7 +124,7 @@ struct Members: StaticPage {
             Text {
                 Badge(String(localized: "\(formerMembersCount) former members",
                              table: "PhotoClubHubHTML.Ignite",
-                             bundle: languageBundle,
+                             bundle: pageLanguageBundle,
                              comment: "Number of former members"))
                 .badgeStyle(.subtleBordered)
                 .role(.secondary)
@@ -145,7 +145,7 @@ struct Members: StaticPage {
                                   years.
                                   """,
                                   table: "PhotoClubHubHTML.Ignite",
-                                  bundle: languageBundle,
+                                  bundle: pageLanguageBundle,
                                   comment: "Footer for former members table")
                     } .horizontalAlignment(.center)
                 }
@@ -159,7 +159,7 @@ struct Members: StaticPage {
 
         }
 
-        FooterText(languageID: languageID)
+        FooterText(pageLanguageID: pageLanguageID)
 
     }
 

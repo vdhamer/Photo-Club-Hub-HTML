@@ -21,7 +21,7 @@ extension ExpertisesPage {
     // return Int: count of returned members (can't directly count size of Ignite Table)
     // return Table: Ignite table containing rendering of requested members
     mutating func makeExpertisesTable(approved: Bool,
-                                      languageID: String,
+                                      pageLanguageID: String,
                                       moc: NSManagedObjectContext) -> MakeExpertisesTableResult {
         do {
             // allow coredata
@@ -34,29 +34,29 @@ extension ExpertisesPage {
             var expertises: [Expertise] = try moc.fetch(fetchRequest)
             if approved { // sort result in memory when there is a translation available
                 expertises.sort { lhs, rhs in
-                    return lhs.selectedLocalizedExpertise(isoCode: languageID).name <
-                           rhs.selectedLocalizedExpertise(isoCode: languageID).name
+                    return lhs.selectedLocalizedExpertise(isoCode: pageLanguageID).name <
+                           rhs.selectedLocalizedExpertise(isoCode: pageLanguageID).name
                 }
             }
 
             return MakeExpertisesTableResult(
                 table: Table {
                     for expertise in expertises {
-                        makeExpertiseRow(moc: moc, expertise: expertise, languageID: languageID)
+                        makeExpertiseRow(moc: moc, expertise: expertise, pageLanguageID: pageLanguageID)
                     }
                 }
                 header: {
                     String(localized: "Expertise",
                            table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
+                           bundle: Bundle.forLanguage(pageLanguageID),
                            comment: "HTML table header for expertise name column.")
                     String(localized: "Description",
                            table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
+                           bundle: Bundle.forLanguage(pageLanguageID),
                            comment: "HTML table header for the description column.")
                     String(localized: "Idenfifier",
                            table: "PhotoClubHubHTML.Ignite",
-                           bundle: Bundle.forLanguage(languageID),
+                           bundle: Bundle.forLanguage(pageLanguageID),
                            comment: "HTML table header for the ID column.")
                 },
                 expertiseCount: expertises.count
@@ -70,19 +70,20 @@ extension ExpertisesPage {
     // generates an Ignite Row in an Ignite table
     private mutating func makeExpertiseRow(moc: NSManagedObjectContext,
                                            expertise: Expertise,
-                                           languageID: String) -> Row {
+                                           pageLanguageID: String) -> Row {
 
         return Row {
 
             Column { // localized name
-                let url: String = "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: expertise.id))/"
+                let url: String =
+                    "/\(ExpertisesPage.relativePath(languageID: pageLanguageID, expertiseID: expertise.id))/"
                 let count: Int = PhotographerExpertise.count(context: moc, expertiseID: expertise.id)
                 let nonBreakingSpace: String = "\u{202F}" // Unicode non-breaking (narrow width) space
                 let multiplicationX = "×" // a typography thing
                 Group {
                     Text {
                         Link(String(expertise.isSupported ?
-                                    "\(expertise.selectedLocalizedExpertise(isoCode: languageID).name)" :
+                                    "\(expertise.selectedLocalizedExpertise(isoCode: pageLanguageID).name)" :
                                     String(expertise.id))
                              + String(" (\(count)\(nonBreakingSpace)\(multiplicationX))"),
                              target: url
@@ -96,10 +97,10 @@ extension ExpertisesPage {
                 Group {
                     let noDescription = String(localized: "This expertise has no description yet.",
                                table: "PhotoClubHubHTML.Ignite",
-                               bundle: Bundle.forLanguage(languageID), // the page's language, not the Mac's
+                               bundle: Bundle.forLanguage(pageLanguageID), // the page's language, not the Mac's
                                comment: "Shown in the description column for an expertise that has no usage text.")
                     Span(
-                        String(expertise.selectedLocalizedExpertise(isoCode: languageID).localizedExpertise?.usage
+                        String(expertise.selectedLocalizedExpertise(isoCode: pageLanguageID).localizedExpertise?.usage
                                ?? noDescription)
                     )
                 } .horizontalAlignment(.leading) .padding(.none) .margin(0)

@@ -11,9 +11,9 @@ import Ignite // for BlockElement, Alert
 /// An Ignite localized footer showing the page's affiliation to Photo Club Hub and showing the creation timestamp.
 ///
 /// Conforms to `BlockElement` so it can be placed directly inside a page's `@BlockElementBuilder body()` method.
-/// A localized HTML page provides the required `languageID`when generating this FooterText.
+/// A localized HTML page provides the required `pageLanguageID`when generating this FooterText.
 struct FooterText: BlockElement {
-    let languageID: String // ISO 639-1 code, e.g. "nl" — selects the translation bundle
+    let pageLanguageID: String // ISO 639-1 code, e.g. "nl" — selects the translation bundle
 
     /// Claude came up with solution:
     /// Required by `PageElement` (via `BlockElement`). `FooterText` never applies CSS modifiers,
@@ -30,11 +30,11 @@ struct FooterText: BlockElement {
         let timezone = TimeZone.current
         let timezoneCode = timezone.abbreviation() ?? ""
         let timestamp: String = Date.now.formatted(
-            Date.FormatStyle(date: .abbreviated, time: .shortened, locale: Locale(identifier: languageID))
+            Date.FormatStyle(date: .abbreviated, time: .shortened, locale: Locale(identifier: pageLanguageID))
         )
         let appName = String(localized: "Photo Club Hub",
                              table: "PhotoClubHubHTML.Ignite",
-                             bundle: Bundle.forLanguage(languageID),
+                             bundle: Bundle.forLanguage(pageLanguageID),
                              comment: "The app name itself is localized here.'")
 
         let alert = Alert {
@@ -44,7 +44,7 @@ struct FooterText: BlockElement {
                                   and was last updated on \(timestamp) \(timezoneCode).
                                   """,
                        table: "PhotoClubHubHTML.Ignite",
-                       bundle: Bundle.forLanguage(languageID),
+                       bundle: Bundle.forLanguage(pageLanguageID),
                        comment: "Timestamp at bottom of static HTML page showing whether page may be oudated.")
             }
             .horizontalAlignment(.center)

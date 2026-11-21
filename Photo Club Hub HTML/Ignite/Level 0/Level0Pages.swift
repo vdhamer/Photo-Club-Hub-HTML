@@ -72,12 +72,12 @@ struct Level0Pages: Site {
 
             for expertise in expertises { // create pages for (language1,expertise1), (language1,expertise2), etc.
                 pageList.append(ExpertisePage(expertiseID: expertise.id,
-                                              language: language.isoCode,
+                                              pageLanguageID: language.isoCode,
                                               moc: moc,
                                               preferences: preferences))
             }
-            pageList.append(ExpertisesPage(moc: moc,
-                                           language: language.isoCode)) // links to all expertises in specified language
+            pageList.append(ExpertisesPage(moc: moc, // links to all expertises in specified language
+                                           pageLanguageID: language.isoCode))
         }
         self.pages = pageList
     }

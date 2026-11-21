@@ -13,7 +13,7 @@ import Foundation // for Bundle
 /// Conforms to `BlockElement` so it can be placed directly inside a page's `body()` method,
 /// mirroring the pattern used by `FooterText`.
 struct SiteNavigationBar: BlockElement {
-    let languageID: String // ISO 639-1 code, e.g. "nl" — selects the translation bundle
+    let pageLanguageID: String // ISO 639-1 code, e.g. "nl" — selects the translation bundle
 
     /// Required by `PageElement` (via `BlockElement`). `SiteNavigationBar` never applies CSS modifiers,
     /// so the getter returns a fresh default value borrowed from another element — the only way to
@@ -25,7 +25,7 @@ struct SiteNavigationBar: BlockElement {
     var columnWidth: ColumnWidth = .automatic
 
     func render(context: PublishingContext) -> String {
-        let languageBundle = Bundle.forLanguage(languageID)
+        let pageLanguageBundle = Bundle.forLanguage(pageLanguageID)
         let navBar = NavigationBar(
                 logo: Button(label: {
                     Image("/images/AppIcon.png", description: "App icon")
@@ -34,7 +34,7 @@ struct SiteNavigationBar: BlockElement {
                         .padding(.trailing, 15)
                     String(localized: "Photo Club Hub network",
                            table: "PhotoClubHubHTML.Ignite",
-                           bundle: languageBundle,
+                           bundle: pageLanguageBundle,
                            comment: "Mentioned at start of navigation bar")
                 })
                 .role(.secondary)
@@ -43,25 +43,25 @@ struct SiteNavigationBar: BlockElement {
 
             Link(String(localized: "Photo clubs",
                         table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
+                        bundle: pageLanguageBundle,
                         comment: "Button linking to Clubs page"),
-                 target: "/\(languageID)/clubs")
+                 target: "/\(pageLanguageID)/clubs")
             .linkStyle(.hover)
             .role(.primary)
 
             Link(String(localized: "Photo Museums",
                         table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
+                        bundle: pageLanguageBundle,
                         comment: "Button linking to Museums list page"),
-                 target: "/\(languageID)/museums")
+                 target: "/\(pageLanguageID)/museums")
             .linkStyle(.hover)
             .role(.primary)
 
             Link(String(localized: "Expertises",
                         table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
+                        bundle: pageLanguageBundle,
                         comment: "Button linking to Expertise list page"),
-                 target: "/\(ExpertisesPage.relativePath(languageID: languageID))")
+                 target: "/\(ExpertisesPage.relativePath(languageID: pageLanguageID))")
             .linkStyle(.hover)
             .role(.primary)
 
@@ -71,7 +71,7 @@ struct SiteNavigationBar: BlockElement {
             // than a literal, the way every other item here does. A hardcoded path is what let
             // this point at nothing in the first place.
 
-            documentationDropdown(languageBundle: languageBundle).dropup()
+            documentationDropdown(pageLanguageBundle: pageLanguageBundle).dropup()
 
         }
            .navigationItemAlignment(.trailing)
@@ -82,10 +82,10 @@ struct SiteNavigationBar: BlockElement {
         return navBar.render(context: context)
     }
 
-    private func documentationDropdown(languageBundle: Bundle) -> Dropdown {
+    private func documentationDropdown(pageLanguageBundle: Bundle) -> Dropdown {
         Dropdown(String(localized: "Documentation",
                         table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
+                        bundle: pageLanguageBundle,
                         comment: "Menu item for downdrop with links to documentation")) {
             Link("Photo Club Hub",
                  target: URL("""
@@ -109,7 +109,7 @@ struct SiteNavigationBar: BlockElement {
 
             Link(String(localized: "FAQ",
                         table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
+                        bundle: pageLanguageBundle,
                         comment: "Button linking to Dutch language FAQ for Photo Club Hub"),
                  target: URL("https://tinyurl.com/fchFAQnl"))
                 .linkStyle(.button)
@@ -117,7 +117,7 @@ struct SiteNavigationBar: BlockElement {
 
             Link(String(localized: "IgniteLink",
                         table: "PhotoClubHubHTML.Ignite",
-                        bundle: languageBundle,
+                        bundle: pageLanguageBundle,
                         comment: "Menu item for documentation about twostraws/Ignite"),
                  target: URL("https://swiftpackageindex.com/twostraws/Ignite"))
                 .linkStyle(.button)

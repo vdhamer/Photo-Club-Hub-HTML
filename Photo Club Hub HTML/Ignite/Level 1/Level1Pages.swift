@@ -44,11 +44,11 @@ struct Level1Pages: Site {
 
             pageList.append(OrganizationsPage(moc: moc,
                                               organizationType: .club,
-                                              language: language.isoCode,
+                                              pageLanguageID: language.isoCode,
                                               showFormerMembers: preferences.showFormerMembers))
             pageList.append(OrganizationsPage(moc: moc,
                                               organizationType: .museum,
-                                              language: language.isoCode,
+                                              pageLanguageID: language.isoCode,
                                               showFormerMembers: false)) // museums have no members
         }
 

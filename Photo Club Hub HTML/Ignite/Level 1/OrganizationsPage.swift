@@ -15,7 +15,7 @@ import Photo_Club_Hub_Data // for OrganizationTypeEnum
 struct OrganizationsPage: StaticPage {
 
     let organizationType: OrganizationTypeEnum // .club or .museum
-    let languageID: String // ISO 639-1 code, e.g. "nl"
+    let pageLanguageID: String // ISO 639-1 code, e.g. "nl"
     // used when deciding which clubs have members pages. To avoid totally empty pages. See `Members.hasMembersPage`
     let showFormerMembers: Bool
 
@@ -24,12 +24,12 @@ struct OrganizationsPage: StaticPage {
         case .museum:
             String(localized: "Photo Museums",
                    table: "PhotoClubHubHTML.Ignite",
-                   bundle: Bundle.forLanguage(languageID),
+                   bundle: Bundle.forLanguage(pageLanguageID),
                    comment: "Title of the Museums index HTML page")
         default:
             String(localized: "Photo clubs",
                    table: "PhotoClubHubHTML.Ignite",
-                   bundle: Bundle.forLanguage(languageID),
+                   bundle: Bundle.forLanguage(pageLanguageID),
                    comment: "Title of the Clubs index HTML page")
         }
     }
@@ -45,17 +45,17 @@ struct OrganizationsPage: StaticPage {
         }
     }
 
-    var path: String { "/\(Self.relativePath(languageID: languageID, organizationType: organizationType))" }
+    var path: String { "/\(Self.relativePath(languageID: pageLanguageID, organizationType: organizationType))" }
 
     // MARK: - init()
 
-    init(moc: NSManagedObjectContext, organizationType: OrganizationTypeEnum, language: String,
+    init(moc: NSManagedObjectContext, organizationType: OrganizationTypeEnum, pageLanguageID: String,
          showFormerMembers: Bool) {
-        self.languageID = language
+        self.pageLanguageID = pageLanguageID
         self.organizationType = organizationType
         self.showFormerMembers = showFormerMembers
-        let bundle = Bundle.forLanguage(language)
-        let result = makeOrgTable(moc: moc, organizationType: organizationType, languageID: language)
+        let bundle = Bundle.forLanguage(pageLanguageID)
+        let result = makeOrgTable(moc: moc, organizationType: organizationType, pageLanguageID: pageLanguageID)
         clubsTable = result.table
         count = result.organizationsCount
         switch organizationType {
@@ -76,7 +76,7 @@ struct OrganizationsPage: StaticPage {
 
     func body(context: PublishingContext) -> [BlockElement] {
 
-        SiteNavigationBar(languageID: languageID)
+        SiteNavigationBar(pageLanguageID: pageLanguageID)
 
         Text {
             Badge(badgeLabel)
@@ -90,7 +90,7 @@ struct OrganizationsPage: StaticPage {
             .tableBorder(true)
             .horizontalAlignment(.center)
 
-        FooterText(languageID: languageID)
+        FooterText(pageLanguageID: pageLanguageID)
     }
 
 }

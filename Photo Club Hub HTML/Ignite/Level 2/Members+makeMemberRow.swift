@@ -37,7 +37,7 @@ extension Members {
         // Arguably you shouldn't be able to change these kind of settings while generating HTML.
         let useLocalThumbnails = preferences.useLocalThumbnails // not to be confused with using localhost
 
-        let dataBundle = Bundle.photoClubHubDataModuleForLanguage(languageID) // role/status words in page language
+        let dataBundle = Bundle.photoClubHubDataModuleForLanguage(pageLanguageID) // role/status words in page language
 
         return Row {
 
@@ -99,7 +99,7 @@ extension Members {
                     Span(
                         Link( String(localized: "Website",
                                      table: "PhotoClubHubHTML.Ignite",
-                                     bundle: languageBundle,
+                                     bundle: pageLanguageBundle,
                                      comment: "Clickable link to photographer's website"),
                               target: photographer.photographerWebsite!.absoluteString)
                         .linkStyle(.hover)
@@ -178,7 +178,7 @@ extension Members {
 
             // Each expertise name is an Ignite Link to its per-language ExpertisePage (#187).
             // The icon and the delimiters between names stay as plain text.
-            // languageID matches the page containing the link, so the link target is shown in the same language.
+            // pageLanguageID matches the page containing the link, so the link target is shown in the same language.
             return Text {
                 // start with the suitable icon String
                 localizedExpertiseResultLists.getIconString(isSupported: isSupported)
@@ -190,7 +190,8 @@ extension Members {
                                           hint: result.localizedExpertise?.usage,
                                           customHint: result.customHint ?? "")
                     if result.isNavigable {
-                        let target = "/\(ExpertisesPage.relativePath(languageID: languageID, expertiseID: result.id))/"
+                        let target =
+                            "/\(ExpertisesPage.relativePath(languageID: pageLanguageID, expertiseID: result.id))/"
                         Link(localizedExpertiseResult, target: target)
                             .linkStyle(.hover)
                             .hint(text: hint)
@@ -211,12 +212,12 @@ extension Members {
                 if hint == nil && customHint == "" {
                     return String(localized: "Unofficial expertise. It has no translations yet.",
                                   table: "PhotoClubHubHTML.Ignite",
-                                  bundle: languageBundle,
+                                  bundle: pageLanguageBundle,
                                   comment: "Hint for expertise without localization")
                 } else { // the overflow "Too many expertises" warning: its customHint lists the member's expertises
                     return String(localized: "Expertises: \(customHint)",
                                   table: "PhotoClubHubHTML.Ignite",
-                                  bundle: languageBundle,
+                                  bundle: pageLanguageBundle,
                                   comment: "Hint when providing too many expertises")
                 }
             } else { // if supported expertise
@@ -225,7 +226,7 @@ extension Members {
                 } else { // it is supported, but doesn't have a usage description
                     return String(localized: "No usage description available.",
                                   table: "PhotoClubHubHTML.Ignite",
-                                  bundle: languageBundle,
+                                  bundle: pageLanguageBundle,
                                   comment: "Hint for a supported expertise that lacks a usage description")
                 }
             }
@@ -239,7 +240,7 @@ extension Members {
             var pageElements = [PageElement]() // holds output
 
             let localizedExpertiseResultsLists = LocalizedExpertiseResultLists(moc: moc,
-                                                                               isoCode: languageID,
+                                                                               isoCode: pageLanguageID,
                                                                                photographer.photographerExpertises)
 
             let standard = generatePageElements(localizedExpertiseResultLists: localizedExpertiseResultsLists,

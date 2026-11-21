@@ -69,7 +69,7 @@ struct Level2Pages: Site {
                 }
                 pageList.append(Members(moc: moc,
                                         club: club,
-                                        languageID: language.isoCode,
+                                        pageLanguageID: language.isoCode,
                                         preferences: preferences))
             }
         } // outer loop for languages
